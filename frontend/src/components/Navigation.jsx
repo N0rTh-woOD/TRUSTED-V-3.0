@@ -63,6 +63,40 @@ const Navigation = () => {
                 </Link>
               );
             })}
+            
+            {isAdmin && (
+              <Link
+                to="/admin"
+                data-testid="nav-admin"
+                className="px-4 py-2 rounded-sm font-mono text-xs uppercase tracking-wider flex items-center gap-2 transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-muted/50"
+              >
+                <Shield className="w-4 h-4" />
+                <span className="hidden md:inline">Admin</span>
+              </Link>
+            )}
+            
+            {isAuthenticated ? (
+              <Button
+                data-testid="logout-btn"
+                onClick={handleLogout}
+                variant="ghost"
+                size="sm"
+                className="ml-2 px-4 py-2 rounded-sm font-mono text-xs uppercase tracking-wider"
+              >
+                <LogOut className="w-4 h-4 md:mr-2" />
+                <span className="hidden md:inline">Logout</span>
+              </Button>
+            ) : (
+              <Button
+                data-testid="login-btn"
+                onClick={() => navigate("/login")}
+                variant="outline"
+                size="sm"
+                className="ml-2 px-4 py-2 rounded-sm font-mono text-xs uppercase tracking-wider"
+              >
+                Login
+              </Button>
+            )}
           </div>
         </div>
       </div>
