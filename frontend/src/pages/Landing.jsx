@@ -176,10 +176,10 @@ const Landing = () => {
             <h2 className="font-mono font-bold uppercase tracking-tight text-3xl md:text-4xl text-foreground/90 mb-6">
               Ready to Build?
             </h2>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
-              Start your RISC-V project today with AI-powered guidance and intelligent automation.
+            <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
+              Start your RISC-V project today with AI-powered guidance and interactive configuration.
             </p>
-            <Link to="/chat">
+            <Link to="/builder">
               <Button 
                 data-testid="get-started-cta-btn"
                 className="rounded-sm font-mono uppercase tracking-wider text-xs h-12 px-8 shadow-[0_0_10px_rgba(183,65,14,0.3)] hover:shadow-[0_0_20px_rgba(183,65,14,0.5)] transition-all duration-300"
