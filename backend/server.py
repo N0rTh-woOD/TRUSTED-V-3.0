@@ -367,7 +367,7 @@ async def init_sample_data():
                 "version": "0.3.0",
                 "description": "Modern async Rust framework for embedded systems, optimized for RISC-V",
                 "compatible_cores": ["RISC-V E31", "RISC-V Single Core 32-bit", "RISC-V Dual Core 64-bit"],
-                "logo_url": null
+                "logo_url": None
             },
             {
                 "id": str(uuid.uuid4()),
@@ -376,7 +376,7 @@ async def init_sample_data():
                 "version": "2.1.0",
                 "description": "Real-Time Interrupt-driven Concurrency framework for Rust on RISC-V",
                 "compatible_cores": ["RISC-V E31", "RISC-V Single Core 32-bit"],
-                "logo_url": null
+                "logo_url": None
             },
             {
                 "id": str(uuid.uuid4()),
@@ -385,7 +385,7 @@ async def init_sample_data():
                 "version": "5.0.2",
                 "description": "Open source IoT operating system with comprehensive middleware components",
                 "compatible_cores": ["RISC-V E31", "RISC-V Single Core 32-bit", "RISC-V Dual Core 64-bit", "RISC-V Quad Core 64-bit"],
-                "logo_url": null
+                "logo_url": None
             }
         ]
         await db.middleware.insert_many(sample_middleware)
