@@ -1,16 +1,30 @@
-import { Link, useLocation } from "react-router-dom";
-import { Cpu, MessageSquare, Package, FolderGit2, Download } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Cpu, Zap, Package, FolderGit2, Download, LogOut, Shield } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
   
-  const navItems = [
+  const publicNavItems = [
     { path: "/", label: "Home", icon: Cpu },
-    { path: "/chat", label: "AI Chat", icon: MessageSquare },
     { path: "/hardware", label: "Hardware", icon: Package },
-    { path: "/projects", label: "Projects", icon: FolderGit2 },
     { path: "/ide", label: "IDE", icon: Download },
   ];
+  
+  const authNavItems = [
+    { path: "/builder", label: "Builder", icon: Zap },
+    { path: "/my-projects", label: "My Projects", icon: FolderGit2 },
+  ];
+  
+  const navItems = isAuthenticated ? [...publicNavItems, ...authNavItems] : publicNavItems;
+  
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
   
   return (
     <nav className="border-b border-border/40 bg-background/80 backdrop-blur-md sticky top-0 z-50">
