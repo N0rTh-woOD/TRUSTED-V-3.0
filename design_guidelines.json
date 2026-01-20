@@ -1,0 +1,151 @@
+{
+  "identity": {
+    "name": "E1: The Anti-AI Designer",
+    "archetype": "The Hard Tech Architect",
+    "vibe": "Industrial, Precision, Terminal-Chic, Rust-Centric",
+    "principles": [
+      "Fusion over Imitation: Mix Swiss Grid with Terminal Aesthetics.",
+      "Content is King: Data density is a feature, not a bug.",
+      "Contrast: High contrast for code readability; subtle contrast for hierarchy.",
+      "No Gradients: Use solid colors and 1px borders. Gradients are for marketing, not engineering."
+    ]
+  },
+  "typography": {
+    "primary_font": "Inter",
+    "secondary_font": "JetBrains Mono",
+    "google_fonts_import": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap",
+    "usage": {
+      "headings": "font-mono tracking-tight font-bold uppercase text-foreground/90",
+      "body": "font-sans text-base leading-relaxed text-muted-foreground",
+      "code": "font-mono text-sm bg-muted/50 p-1 rounded-sm text-primary",
+      "labels": "font-mono text-xs uppercase tracking-widest text-muted-foreground/70"
+    }
+  },
+  "colors": {
+    "theme_strategy": "Dark Mode First (The 'Terminal' Look)",
+    "palette": {
+      "primary": {
+        "name": "Rust Oxide",
+        "hex": "#B7410E",
+        "tailwind": "bg-[#B7410E] text-white hover:bg-[#B7410E]/90"
+      },
+      "secondary": {
+        "name": "Electric Cyan",
+        "hex": "#00E5FF",
+        "tailwind": "text-[#00E5FF] border-[#00E5FF]/30"
+      },
+      "background": {
+        "name": "Deep Void",
+        "hex": "#0A0A0B",
+        "tailwind": "bg-[#0A0A0B]"
+      },
+      "surface": {
+        "name": "Panel Grey",
+        "hex": "#18181B",
+        "tailwind": "bg-[#18181B] border-[#27272A]"
+      }
+    },
+    "shadcn_variables": {
+      "dark": {
+        "--background": "240 10% 4%",
+        "--foreground": "0 0% 98%",
+        "--card": "240 10% 6%",
+        "--card-foreground": "0 0% 98%",
+        "--popover": "240 10% 6%",
+        "--popover-foreground": "0 0% 98%",
+        "--primary": "14 80% 40%",
+        "--primary-foreground": "0 0% 98%",
+        "--secondary": "190 90% 50%",
+        "--secondary-foreground": "240 10% 4%",
+        "--muted": "240 5% 15%",
+        "--muted-foreground": "240 5% 65%",
+        "--accent": "240 5% 15%",
+        "--accent-foreground": "0 0% 98%",
+        "--destructive": "0 62.8% 30.6%",
+        "--destructive-foreground": "0 0% 98%",
+        "--border": "240 5% 20%",
+        "--input": "240 5% 20%",
+        "--ring": "14 80% 40%",
+        "--radius": "0.25rem"
+      }
+    }
+  },
+  "layout_strategy": {
+    "container": "max-w-[1600px] mx-auto px-6 md:px-12",
+    "spacing": {
+      "section_gap": "py-24",
+      "element_gap": "gap-6"
+    },
+    "grid_system": {
+      "dashboard": "grid grid-cols-12 gap-4",
+      "card_grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    },
+    "modes": {
+      "marketing": "Asymmetric 'Tetris' Grid. Use col-span-8 for hero, col-span-4 for details.",
+      "dashboard": "Dense 'Bento' Grid. 100% width utilization. No jagged bottoms."
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "rounded-sm font-mono uppercase tracking-wider text-xs h-10 px-6 shadow-[0_0_10px_rgba(183,65,14,0.3)] hover:shadow-[0_0_20px_rgba(183,65,14,0.5)] transition-all duration-300",
+      "secondary": "rounded-sm font-mono border border-border hover:bg-muted/50 hover:text-foreground transition-colors"
+    },
+    "cards": {
+      "style": "bg-card border border-border/50 rounded-sm hover:border-primary/50 transition-colors duration-300",
+      "content": "p-6 flex flex-col gap-4"
+    },
+    "inputs": {
+      "style": "bg-muted/20 border-border/50 font-mono text-sm focus:ring-1 focus:ring-primary rounded-sm h-11"
+    },
+    "navigation": {
+      "style": "border-b border-border/40 bg-background/80 backdrop-blur-md sticky top-0 z-50"
+    }
+  },
+  "visual_enhancers": {
+    "borders": "1px solid border-border/40. Use 'border-r' on grid items to create a technical table look.",
+    "shadows": "None or very subtle ambient glow for active states only.",
+    "textures": "Use a subtle 'scanline' or 'noise' overlay on the background to give it a hardware feel.",
+    "animations": {
+      "hover": "translate-y-[-2px] duration-200 ease-out",
+      "load": "animate-in fade-in slide-in-from-bottom-4 duration-500"
+    }
+  },
+  "image_urls": {
+    "hero_background": {
+      "url": "https://images.unsplash.com/photo-1762279388956-1c098163a2a8?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Abstract neon digital landscape",
+      "category": "background"
+    },
+    "hardware_showcase": {
+      "url": "https://images.unsplash.com/photo-1562408590-e32931084e23?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Blue circuit board macro",
+      "category": "hardware"
+    },
+    "ide_preview": {
+      "url": "https://images.unsplash.com/photo-1743862558369-5dcea79ccbff?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Mechanical keyboard and code",
+      "category": "developer"
+    },
+    "data_flow": {
+      "url": "https://images.unsplash.com/photo-1760112783563-514867b4c2ed?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Glowing neon streaks",
+      "category": "abstract"
+    }
+  },
+  "instructions_to_main_agent": [
+    "1. SETUP: Install 'JetBrains Mono' font immediately.",
+    "2. THEME: Force Dark Mode by default. The app should feel like a sophisticated IDE.",
+    "3. LAYOUT: Use the 'Bento' grid for the Hardware Selection Dashboard. It must look dense and data-rich.",
+    "4. COMPONENTS: Customize Shadcn components to have sharp edges (rounded-sm) and thinner borders.",
+    "5. COLOR: Use the Rust Orange (#B7410E) sparingly for primary actions (Generate, Download, Deploy). Do not overuse it.",
+    "6. DATA: When displaying hardware specs, use a monospace font in a table layout with visible grid lines.",
+    "7. MICRO-INTERACTIONS: Add hover states to every interactive element. Buttons should glow slightly on hover."
+  ],
+  "universal_guidelines": [
+    "Do not use gradients for backgrounds. Use solid dark colors.",
+    "Ensure all text has sufficient contrast (WCAG AA).",
+    "Use 'sonner' for all toast notifications.",
+    "All interactive elements must have 'data-testid'.",
+    "Mobile responsiveness is mandatory. Stack grids on mobile."
+  ]
+}
