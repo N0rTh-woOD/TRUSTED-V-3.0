@@ -11,6 +11,9 @@ class RISCVPlatformTester:
         self.tests_run = 0
         self.tests_passed = 0
         self.session_id = f"test-session-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+        self.auth_token = None
+        self.test_user_email = f"testuser_{datetime.now().strftime('%H%M%S')}@test.com"
+        self.admin_token = None
 
     def run_test(self, name, method, endpoint, expected_status, data=None, headers=None):
         """Run a single API test"""
