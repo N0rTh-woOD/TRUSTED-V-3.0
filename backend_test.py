@@ -116,11 +116,103 @@ class RISCVPlatformTester:
         
         return success
 
+    def test_auth_endpoints(self):
+        """Test authentication endpoints"""
+        print("\n" + "="*50)
+        print("TESTING AUTHENTICATION ENDPOINTS")
+        print("="*50)
+        
+        # Test user registration
+        register_data = {
+            "email": self.test_user_email,
+            "username": f"testuser_{datetime.now().strftime('%H%M%S')}",
+            "password": "testpass123"
+        }
+        
+        success, register_response = self.run_test(
+            "User Registration",
+            "POST",
+            "auth/register",
+            200,
+            data=register_data
+        )
+        
+        if success and isinstance(register_response, dict):
+            self.auth_token = register_response.get('access_token')
+            print(f"   Registration successful, token received: {bool(self.auth_token)}")
+            print(f"   User info: {register_response.get('user', {})}")
+        
+        # Test user login with same credentials
+        login_data = {
+            "email": self.test_user_email,
+            "password": "testpass123"
+        }
+        
+        login_success, login_response = self.run_test(
+            "User Login",
+            "POST",
+            "auth/login",
+            200,
+            data=login_data
+        )
+        
+        if login_success and isinstance(login_response, dict):
+            login_token = login_response.get('access_token')
+            print(f"   Login successful, token received: {bool(login_token)}")
+        
+        # Test admin login
+        admin_login_data = {
+            "email": "admin@rvrust.com",
+            "password": "admin123"
+        }
+        
+        admin_success, admin_response = self.run_test(
+            "Admin Login",
+            "POST",
+            "auth/login",
+            200,
+            data=admin_login_data
+        )
+        
+        if admin_success and isinstance(admin_response, dict):
+            self.admin_token = admin_response.get('access_token')
+            print(f"   Admin login successful, token received: {bool(self.admin_token)}")
+            print(f"   Admin user: {admin_response.get('user', {})}")
+        
+        # Test /auth/me endpoint with user token
+        if self.auth_token:
+            auth_headers = {
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.auth_token}'
+            }
+            
+            me_success, me_response = self.run_test(
+                "Get Current User Info",
+                "GET",
+                "auth/me",
+                200,
+                headers=auth_headers
+            )
+            
+            if me_success:
+                print(f"   Current user info: {me_response}")
+        
+        return success and login_success and admin_success
+
     def test_chat_endpoints(self):
-        """Test AI chat functionality"""
+        """Test AI chat functionality (requires authentication)"""
         print("\n" + "="*50)
         print("TESTING AI CHAT ENDPOINTS")
         print("="*50)
+        
+        if not self.auth_token:
+            print("❌ No auth token available, skipping chat tests")
+            return False
+        
+        auth_headers = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {self.auth_token}'
+        }
         
         # Test chat with IoT project request
         chat_message = "I need a RISC-V board for an IoT project with WiFi connectivity and low power consumption"
@@ -132,22 +224,24 @@ class RISCVPlatformTester:
             data={
                 "message": chat_message,
                 "session_id": self.session_id
-            }
+            },
+            headers=auth_headers
         )
         
         if success:
             print(f"   AI Response length: {len(chat_response.get('response', ''))}")
-            if chat_response.get('detected_hardware'):
-                print(f"   Detected hardware: {chat_response['detected_hardware']}")
-            if chat_response.get('detected_middleware'):
-                print(f"   Detected middleware: {chat_response['detected_middleware']}")
+            if chat_response.get('suggested_hardware'):
+                print(f"   Suggested hardware: {len(chat_response['suggested_hardware'])} items")
+            if chat_response.get('suggested_middleware'):
+                print(f"   Suggested middleware: {len(chat_response['suggested_middleware'])} items")
         
         # Test chat history
         history_success, history_data = self.run_test(
             "Get Chat History",
             "GET",
             f"chat/history/{self.session_id}",
-            200
+            200,
+            headers=auth_headers
         )
         
         if history_success and isinstance(history_data, dict):
