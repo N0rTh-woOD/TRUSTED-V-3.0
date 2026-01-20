@@ -62,7 +62,7 @@ const Landing = () => {
               and generate production-ready Rust projects in minutes.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/chat">
+              <Link to="/builder">
                 <Button 
                   data-testid="start-building-btn"
                   className="rounded-sm font-mono uppercase tracking-wider text-xs h-12 px-8 shadow-[0_0_10px_rgba(183,65,14,0.3)] hover:shadow-[0_0_20px_rgba(183,65,14,0.5)] transition-all duration-300"
