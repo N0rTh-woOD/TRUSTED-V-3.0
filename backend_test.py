@@ -492,8 +492,10 @@ def main():
         tester.test_hardware_endpoints,
         tester.test_middleware_endpoints,
         tester.test_ide_downloads_endpoints,
+        tester.test_auth_endpoints,
         tester.test_chat_endpoints,
         tester.test_project_endpoints,
+        tester.test_admin_endpoints,
     ]
     
     for test_func in tests:
