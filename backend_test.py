@@ -251,28 +251,67 @@ class RISCVPlatformTester:
         return success
 
     def test_project_endpoints(self):
-        """Test project-related endpoints"""
+        """Test project-related endpoints (requires authentication)"""
         print("\n" + "="*50)
         print("TESTING PROJECT ENDPOINTS")
         print("="*50)
         
+        if not self.auth_token:
+            print("❌ No auth token available, skipping project tests")
+            return False
+        
+        auth_headers = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {self.auth_token}'
+        }
+        
         # Test get all projects (should be empty initially)
         success, projects_data = self.run_test(
-            "Get All Projects",
+            "Get User Projects",
             "GET",
             "projects",
-            200
+            200,
+            headers=auth_headers
         )
         
         if success:
             print(f"   Found {len(projects_data)} projects")
         
+        # Get hardware ID for project creation
+        hw_success, hardware_data = self.run_test(
+            "Get Hardware for Project",
+            "GET",
+            "hardware",
+            200
+        )
+        
+        if not hw_success or not hardware_data:
+            print("❌ Cannot get hardware data for project creation")
+            return False
+        
+        hardware_id = hardware_data[0]['id']
+        
+        # Get middleware ID for project creation
+        mw_success, middleware_data = self.run_test(
+            "Get Middleware for Project",
+            "GET",
+            "middleware",
+            200
+        )
+        
+        if not mw_success or not middleware_data:
+            print("❌ Cannot get middleware data for project creation")
+            return False
+        
+        middleware_id = middleware_data[0]['id']
+        
         # Test create a new project
         project_data = {
             "name": "Test IoT Project",
             "description": "A test project for IoT with WiFi",
-            "hardware_id": "test-hardware-id",
-            "middleware_ids": ["test-middleware-id"],
+            "hardware_id": hardware_id,
+            "middleware_ids": [middleware_id],
+            "peripherals": ["GPIO", "WiFi"],
             "requirements": "IoT project with WiFi connectivity"
         }
         
@@ -281,10 +320,123 @@ class RISCVPlatformTester:
             "POST",
             "projects",
             200,
-            data=project_data
+            data=project_data,
+            headers=auth_headers
         )
         
-        return success
+        if create_success:
+            project_id = created_project.get('id')
+            print(f"   Created project ID: {project_id}")
+            print(f"   Project versions: {len(created_project.get('versions', []))}")
+            
+            # Test project update (should create new version)
+            update_data = {
+                "peripherals": ["GPIO", "WiFi", "UART"]
+            }
+            
+            update_success, updated_project = self.run_test(
+                "Update Project (Auto-versioning)",
+                "PUT",
+                f"projects/{project_id}",
+                200,
+                data=update_data,
+                headers=auth_headers
+            )
+            
+            if update_success:
+                print(f"   Updated project versions: {len(updated_project.get('versions', []))}")
+            
+            # Test project download
+            download_success, download_response = self.run_test(
+                "Download Project",
+                "GET",
+                f"projects/{project_id}/download/1",
+                200,
+                headers=auth_headers
+            )
+            
+            if download_success:
+                print(f"   Download response: {download_response.get('message', 'No message')}")
+        
+        return success and create_success
+
+    def test_admin_endpoints(self):
+        """Test admin-only endpoints"""
+        print("\n" + "="*50)
+        print("TESTING ADMIN ENDPOINTS")
+        print("="*50)
+        
+        if not self.admin_token:
+            print("❌ No admin token available, skipping admin tests")
+            return False
+        
+        admin_headers = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {self.admin_token}'
+        }
+        
+        # Test admin stats
+        stats_success, stats_data = self.run_test(
+            "Get Admin Stats",
+            "GET",
+            "admin/stats",
+            200,
+            headers=admin_headers
+        )
+        
+        if stats_success:
+            print(f"   Stats: {stats_data}")
+        
+        # Test get all users
+        users_success, users_data = self.run_test(
+            "Get All Users",
+            "GET",
+            "admin/users",
+            200,
+            headers=admin_headers
+        )
+        
+        if users_success:
+            print(f"   Total users: {len(users_data)}")
+        
+        # Test create hardware (admin only)
+        new_hardware = {
+            "name": "Test Board",
+            "manufacturer": "Test Corp",
+            "core": "RISC-V Test Core",
+            "clock_speed": "100 MHz",
+            "memory": "1 MB",
+            "flash": "1 MB",
+            "peripherals": [{"name": "GPIO", "type": "Digital", "interface": "8 pins"}],
+            "description": "Test hardware board"
+        }
+        
+        hw_create_success, hw_response = self.run_test(
+            "Create Hardware (Admin)",
+            "POST",
+            "admin/hardware",
+            200,
+            data=new_hardware,
+            headers=admin_headers
+        )
+        
+        if hw_create_success:
+            hw_id = hw_response.get('id')
+            print(f"   Created hardware ID: {hw_id}")
+            
+            # Test delete the created hardware
+            delete_success, delete_response = self.run_test(
+                "Delete Hardware (Admin)",
+                "DELETE",
+                f"admin/hardware/{hw_id}",
+                200,
+                headers=admin_headers
+            )
+            
+            if delete_success:
+                print(f"   Hardware deleted: {delete_response.get('message')}")
+        
+        return stats_success and users_success
 
     def test_ide_downloads_endpoints(self):
         """Test IDE downloads endpoints"""
