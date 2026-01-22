@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Package, Download, Clock, FolderGit2 } from "lucide-react";
+import { Loader2, Package, Download, Clock, FolderGit2, Plus } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
@@ -39,9 +39,7 @@ const MyProjects = () => {
     try {
       const response = await axios.get(
         `${API}/projects/${projectId}/download/${version}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.info(response.data.message);
     } catch (error) {
@@ -59,40 +57,43 @@ const MyProjects = () => {
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)]">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-12">
-        <div className="flex items-center justify-between mb-8">
+    <div className="min-h-[calc(100vh-4rem)] bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex items-center justify-between mb-10">
           <div>
-            <h1 className="font-mono font-bold uppercase tracking-tight text-3xl md:text-4xl text-foreground/90 mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
               My Projects
             </h1>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-lg">
               Manage your RISC-V projects and versions
             </p>
           </div>
           <Button
             data-testid="new-project-btn"
             onClick={() => navigate("/builder")}
-            className="rounded-sm font-mono uppercase tracking-wider text-xs h-10 px-6 shadow-[0_0_10px_rgba(183,65,14,0.3)] hover:shadow-[0_0_20px_rgba(183,65,14,0.5)] transition-all duration-300"
+            className="h-11 px-6 shadow-lg shadow-primary/25"
           >
+            <Plus className="w-4 h-4 mr-2" />
             New Project
           </Button>
         </div>
 
         {projects.length === 0 ? (
-          <Card className="bg-card border border-border/50 rounded-sm">
-            <CardContent className="p-12 text-center">
-              <FolderGit2 className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="font-mono font-bold uppercase text-lg text-foreground/90 mb-2">
+          <Card className="bg-card border border-border">
+            <CardContent className="p-16 text-center">
+              <div className="w-16 h-16 rounded-xl bg-muted flex items-center justify-center mx-auto mb-6">
+                <FolderGit2 className="w-8 h-8 text-muted-foreground" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">
                 No Projects Yet
               </h3>
-              <p className="text-muted-foreground mb-6">
-                Start building with the Smart Project Builder
+              <p className="text-muted-foreground mb-8 max-w-sm mx-auto">
+                Start building with the Smart Project Builder to create your first RISC-V project
               </p>
               <Button
                 data-testid="start-building-btn"
                 onClick={() => navigate("/builder")}
-                className="rounded-sm font-mono uppercase tracking-wider text-xs h-10 px-6 shadow-[0_0_10px_rgba(183,65,14,0.3)] hover:shadow-[0_0_20px_rgba(183,65,14,0.5)] transition-all duration-300"
+                className="h-11 px-8 shadow-lg shadow-primary/25"
               >
                 Start Building
               </Button>
@@ -104,19 +105,19 @@ const MyProjects = () => {
               <Card
                 key={project.id}
                 data-testid={`project-card-${project.id}`}
-                className="bg-card border border-border/50 rounded-sm hover:border-primary/50 transition-colors duration-300"
+                className="bg-card border border-border hover:border-primary/50 transition-colors"
               >
-                <CardHeader className="border-b border-border/40 p-6">
+                <CardHeader className="p-6 border-b border-border">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h3 className="font-mono font-bold uppercase tracking-tight text-lg text-foreground/90 mb-1">
+                      <h3 className="text-xl font-semibold text-foreground mb-1">
                         {project.name}
                       </h3>
                       <p className="text-sm text-muted-foreground">
                         {project.description}
                       </p>
                     </div>
-                    <Badge variant="secondary" className="font-mono text-xs">
+                    <Badge variant="secondary">
                       {project.versions.length}{" "}
                       {project.versions.length === 1 ? "Version" : "Versions"}
                     </Badge>
@@ -129,22 +130,20 @@ const MyProjects = () => {
                       <div
                         key={index}
                         data-testid={`version-${index}`}
-                        className="flex items-center justify-between p-4 rounded-sm bg-muted/20 border border-border/40"
+                        className="flex items-center justify-between p-4 rounded-lg bg-muted/50 border border-border"
                       >
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center">
+                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                             <Package className="w-5 h-5 text-primary" />
                           </div>
                           <div>
-                            <p className="font-mono text-sm font-bold text-foreground/90">
+                            <p className="font-medium text-foreground">
                               Version {version.version}
                             </p>
                             <div className="flex items-center gap-2 text-xs text-muted-foreground">
                               <Clock className="w-3 h-3" />
                               <span>
-                                {new Date(
-                                  version.generated_at
-                                ).toLocaleString()}
+                                {new Date(version.generated_at).toLocaleString()}
                               </span>
                             </div>
                           </div>
@@ -152,12 +151,9 @@ const MyProjects = () => {
 
                         <Button
                           data-testid={`download-btn-${index}`}
-                          onClick={() =>
-                            handleDownload(project.id, version.version)
-                          }
+                          onClick={() => handleDownload(project.id, version.version)}
                           variant="outline"
                           size="sm"
-                          className="rounded-sm font-mono uppercase tracking-wider text-xs"
                         >
                           <Download className="w-4 h-4 mr-2" />
                           Download
