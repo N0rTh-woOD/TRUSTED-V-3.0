@@ -462,6 +462,111 @@ async def init_sample_data():
             }
         ]
         await db.ide_downloads.insert_many(sample_ide)
+        
+        # Add software components
+        software_count = await db.software_components.count_documents({})
+        if software_count == 0:
+            sample_software = [
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "SiFive HiFive1 BSP",
+                    "type": "BSP",
+                    "version": "2.0.0",
+                    "description": "Board Support Package for SiFive HiFive1 Rev B development board",
+                    "compatible_cores": ["RISC-V E31"],
+                    "compatible_hardware": [],
+                    "features": ["GPIO drivers", "UART support", "SPI/I2C drivers", "Clock configuration"],
+                    "documentation_url": "https://sifive.com/boards/hifive1",
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "ESP-IDF RISC-V SDK",
+                    "type": "SDK",
+                    "version": "5.1.2",
+                    "description": "Espressif IoT Development Framework for ESP32-C3 RISC-V chips",
+                    "compatible_cores": ["RISC-V Single Core 32-bit"],
+                    "compatible_hardware": [],
+                    "features": ["WiFi stack", "BLE stack", "FreeRTOS integration", "OTA updates"],
+                    "download_url": "https://github.com/espressif/esp-idf",
+                    "documentation_url": "https://docs.espressif.com/projects/esp-idf",
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "riscv-rust-quickstart",
+                    "type": "SDK",
+                    "version": "1.0.0",
+                    "description": "Rust embedded development template for RISC-V microcontrollers",
+                    "compatible_cores": ["RISC-V E31", "RISC-V Single Core 32-bit"],
+                    "compatible_hardware": [],
+                    "features": ["Cargo build system", "Probe-rs debugger support", "Memory layout templates"],
+                    "download_url": "https://github.com/riscv-rust/riscv-rust-quickstart",
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "U-Boot RISC-V",
+                    "type": "Bootloader",
+                    "version": "2024.01",
+                    "description": "Universal Boot Loader for RISC-V platforms, supports SBI and Linux boot",
+                    "compatible_cores": ["RISC-V Quad Core 64-bit", "RISC-V Dual Core 64-bit"],
+                    "compatible_hardware": [],
+                    "features": ["SBI support", "Linux boot", "Device tree support", "Network boot"],
+                    "download_url": "https://source.denx.de/u-boot/u-boot",
+                    "documentation_url": "https://u-boot.readthedocs.io",
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "OpenSBI",
+                    "type": "Bootloader",
+                    "version": "1.4",
+                    "description": "RISC-V Open Source Supervisor Binary Interface implementation",
+                    "compatible_cores": ["RISC-V Quad Core 64-bit", "RISC-V Dual Core 64-bit"],
+                    "compatible_hardware": [],
+                    "features": ["M-mode firmware", "S-mode support", "Domain support", "HSM extension"],
+                    "download_url": "https://github.com/riscv-software-src/opensbi",
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "PLIC Driver",
+                    "type": "Driver",
+                    "version": "1.0.0",
+                    "description": "Platform-Level Interrupt Controller driver for RISC-V",
+                    "compatible_cores": ["RISC-V E31", "RISC-V Single Core 32-bit", "RISC-V Dual Core 64-bit", "RISC-V Quad Core 64-bit"],
+                    "compatible_hardware": [],
+                    "features": ["Interrupt routing", "Priority management", "Context switching"],
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "embedded-hal",
+                    "type": "Library",
+                    "version": "1.0.0",
+                    "description": "Hardware abstraction layer for embedded systems in Rust",
+                    "compatible_cores": ["RISC-V E31", "RISC-V Single Core 32-bit", "RISC-V Dual Core 64-bit"],
+                    "compatible_hardware": [],
+                    "features": ["GPIO traits", "SPI traits", "I2C traits", "Timer traits", "PWM traits"],
+                    "download_url": "https://crates.io/crates/embedded-hal",
+                    "documentation_url": "https://docs.rs/embedded-hal",
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "VisionFive 2 BSP",
+                    "type": "BSP",
+                    "version": "3.0.0",
+                    "description": "Board Support Package for StarFive VisionFive 2 SBC",
+                    "compatible_cores": ["RISC-V Quad Core 64-bit"],
+                    "compatible_hardware": [],
+                    "features": ["Linux kernel support", "GPU drivers", "Camera drivers", "Audio subsystem"],
+                    "download_url": "https://github.com/starfive-tech/VisionFive2",
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                }
+            ]
+            await db.software_components.insert_many(sample_software)
 
 @app.on_event("startup")
 async def startup_event():
