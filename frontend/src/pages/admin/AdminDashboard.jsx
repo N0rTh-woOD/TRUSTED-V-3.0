@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Loader2, Package, Layers, Users, FolderGit2, ArrowRight } from "lucide-react";
+import { Loader2, Package, Layers, Download, Database, ArrowRight, Settings } from "lucide-react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -39,33 +39,40 @@ const AdminDashboard = () => {
   }
 
   const statCards = [
-    { label: "Hardware", value: stats?.hardware || 0, icon: Package, color: "text-primary" },
-    { label: "Middleware", value: stats?.middleware || 0, icon: Layers, color: "text-blue-500" },
-    { label: "Users", value: stats?.users || 0, icon: Users, color: "text-green-500" },
-    { label: "Projects", value: stats?.projects || 0, icon: FolderGit2, color: "text-amber-500" },
+    { label: "Hardware Boards", value: stats?.hardware || 0, icon: Package, color: "text-primary" },
+    { label: "RTOS/Middleware", value: stats?.middleware || 0, icon: Layers, color: "text-blue-500" },
+    { label: "Software Components", value: stats?.software_components || 0, icon: Database, color: "text-green-500" },
+    { label: "IDE Downloads", value: stats?.ide_downloads || 0, icon: Download, color: "text-amber-500" },
   ];
 
   const adminSections = [
     {
-      title: "Hardware Management",
-      description: "Add, edit, and remove RISC-V hardware boards from the catalog",
+      title: "Hardware Database",
+      description: "Manage RISC-V development boards, microcontrollers, and their specifications",
       icon: Package,
       link: "/admin/hardware",
       count: stats?.hardware || 0,
     },
     {
-      title: "Middleware Management",
-      description: "Manage RTOS, frameworks, and middleware components",
+      title: "RTOS & Middleware",
+      description: "Manage real-time operating systems, async frameworks, and middleware",
       icon: Layers,
       link: "/admin/middleware",
       count: stats?.middleware || 0,
     },
     {
-      title: "User Management",
-      description: "View and manage platform users and their permissions",
-      icon: Users,
-      link: "/admin/users",
-      count: stats?.users || 0,
+      title: "Software Components",
+      description: "Manage BSPs, SDKs, Drivers, Bootloaders, and Libraries",
+      icon: Database,
+      link: "/admin/software",
+      count: stats?.software_components || 0,
+    },
+    {
+      title: "IDE Downloads",
+      description: "Manage IDE versions and download links for different platforms",
+      icon: Download,
+      link: "/admin/ide",
+      count: stats?.ide_downloads || 0,
     },
   ];
 
@@ -77,7 +84,7 @@ const AdminDashboard = () => {
             Admin Dashboard
           </h1>
           <p className="text-muted-foreground text-lg">
-            Manage platform content and users
+            Manage platform databases and content
           </p>
         </div>
 
@@ -107,15 +114,34 @@ const AdminDashboard = () => {
           })}
         </div>
 
+        {/* Software Component Types Breakdown */}
+        {stats?.software_by_type && (
+          <Card className="bg-card border border-border mb-8">
+            <CardHeader className="p-6 pb-4">
+              <h3 className="font-semibold text-foreground">Software Components by Type</h3>
+            </CardHeader>
+            <CardContent className="p-6 pt-0">
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+                {Object.entries(stats.software_by_type).map(([type, count]) => (
+                  <div key={type} className="bg-muted/50 rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-foreground">{count}</p>
+                    <p className="text-xs text-muted-foreground">{type}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Management Sections */}
-        <h2 className="text-xl font-semibold text-foreground mb-4">Management</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <h2 className="text-xl font-semibold text-foreground mb-4">Database Management</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {adminSections.map((section) => {
             const Icon = section.icon;
             return (
               <Link key={section.link} to={section.link}>
                 <Card
-                  data-testid={`admin-section-${section.title.toLowerCase().replace(' ', '-')}`}
+                  data-testid={`admin-section-${section.title.toLowerCase().replace(/\s+/g, '-')}`}
                   className="bg-card border border-border hover:border-primary/50 hover:shadow-lg transition-all h-full group"
                 >
                   <CardHeader className="p-6 pb-4">
