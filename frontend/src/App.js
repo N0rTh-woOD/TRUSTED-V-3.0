@@ -19,9 +19,9 @@ import AdminUsers from "@/pages/admin/AdminUsers";
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="risc-v-theme">
+    <ThemeProvider defaultTheme="light" storageKey="risc-v-theme">
       <AuthProvider>
-        <div className="App dark min-h-screen bg-background">
+        <div className="App min-h-screen bg-background">
           <BrowserRouter>
             <Navigation />
             <Routes>
