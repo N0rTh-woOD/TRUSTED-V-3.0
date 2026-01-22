@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
-    isAuthenticated: !!user,
+    isAuthenticated: !!token && !!user,
     isAdmin: user?.is_admin || false,
   };
 
