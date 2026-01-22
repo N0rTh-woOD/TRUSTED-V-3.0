@@ -12,8 +12,9 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Loader2, Plus, Edit, Trash2, Package } from "lucide-react";
+import { Loader2, Plus, Edit, Trash2, Package, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -121,21 +122,25 @@ const AdminHardware = () => {
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)]">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-12">
+    <div className="min-h-[calc(100vh-4rem)] bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="font-mono font-bold uppercase tracking-tight text-3xl text-foreground/90 mb-2">
+            <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Admin
+            </Link>
+            <h1 className="text-3xl font-bold text-foreground mb-2">
               Hardware Management
             </h1>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground">
               Manage RISC-V development boards
             </p>
           </div>
           <Button
             data-testid="add-hardware-btn"
             onClick={handleAdd}
-            className="rounded-sm font-mono uppercase tracking-wider text-xs h-10 px-6 shadow-[0_0_10px_rgba(183,65,14,0.3)] hover:shadow-[0_0_20px_rgba(183,65,14,0.5)] transition-all duration-300"
+            className="h-11 px-6 shadow-lg shadow-primary/25"
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Hardware
@@ -147,17 +152,19 @@ const AdminHardware = () => {
             <Card
               key={hw.id}
               data-testid={`hardware-item-${hw.id}`}
-              className="bg-card border border-border/50 rounded-sm"
+              className="bg-card border border-border"
             >
-              <CardHeader className="border-b border-border/40 p-6">
+              <CardHeader className="p-6 pb-4 border-b border-border">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <Package className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Package className="w-5 h-5 text-primary" />
+                    </div>
                     <div>
-                      <h3 className="font-mono font-bold text-base text-foreground/90">
+                      <h3 className="font-semibold text-foreground">
                         {hw.name}
                       </h3>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-sm text-muted-foreground">
                         {hw.manufacturer}
                       </p>
                     </div>
@@ -168,7 +175,6 @@ const AdminHardware = () => {
                       onClick={() => handleEdit(hw)}
                       variant="outline"
                       size="sm"
-                      className="rounded-sm"
                     >
                       <Edit className="w-4 h-4" />
                     </Button>
@@ -177,7 +183,7 @@ const AdminHardware = () => {
                       onClick={() => handleDelete(hw.id)}
                       variant="outline"
                       size="sm"
-                      className="rounded-sm text-destructive"
+                      className="text-destructive hover:text-destructive"
                     >
                       <Trash2 className="w-4 h-4" />
                     </Button>
@@ -188,24 +194,24 @@ const AdminHardware = () => {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Core:</span>
-                    <span className="font-mono text-foreground">{hw.core}</span>
+                    <span className="font-medium text-foreground">{hw.core}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Speed:</span>
-                    <span className="font-mono text-foreground">{hw.clock_speed}</span>
+                    <span className="font-medium text-foreground">{hw.clock_speed}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Memory:</span>
-                    <span className="font-mono text-foreground">{hw.memory}</span>
+                    <span className="font-medium text-foreground">{hw.memory}</span>
                   </div>
                   {hw.price && (
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Price:</span>
-                      <span className="font-mono text-primary">{hw.price}</span>
+                      <span className="font-medium text-primary">{hw.price}</span>
                     </div>
                   )}
                 </div>
-                <div className="mt-3 flex flex-wrap gap-2">
+                <div className="mt-4 flex flex-wrap gap-2">
                   {hw.peripherals.slice(0, 3).map((p, i) => (
                     <Badge key={i} variant="secondary" className="text-xs">
                       {p.name}
@@ -224,143 +230,101 @@ const AdminHardware = () => {
 
         {/* Add/Edit Dialog */}
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
-          <DialogContent className="max-w-2xl bg-card border border-border/50 rounded-sm">
+          <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle className="font-mono font-bold uppercase tracking-tight text-xl">
+              <DialogTitle className="text-xl font-semibold">
                 {editingHardware ? "Edit Hardware" : "Add Hardware"}
               </DialogTitle>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
-                    Name *
-                  </label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Name *</label>
                   <Input
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="SiFive HiFive1"
-                    className="bg-muted/20 border-border/50 rounded-sm"
                   />
                 </div>
-                <div>
-                  <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
-                    Manufacturer *
-                  </label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Manufacturer *</label>
                   <Input
                     value={formData.manufacturer}
-                    onChange={(e) =>
-                      setFormData({ ...formData, manufacturer: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, manufacturer: e.target.value })}
                     placeholder="SiFive"
-                    className="bg-muted/20 border-border/50 rounded-sm"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
-                    Core *
-                  </label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Core *</label>
                   <Input
                     value={formData.core}
                     onChange={(e) => setFormData({ ...formData, core: e.target.value })}
                     placeholder="RISC-V E31"
-                    className="bg-muted/20 border-border/50 rounded-sm"
                   />
                 </div>
-                <div>
-                  <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
-                    Clock Speed *
-                  </label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Clock Speed *</label>
                   <Input
                     value={formData.clock_speed}
-                    onChange={(e) =>
-                      setFormData({ ...formData, clock_speed: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, clock_speed: e.target.value })}
                     placeholder="320 MHz"
-                    className="bg-muted/20 border-border/50 rounded-sm"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-3 gap-4">
-                <div>
-                  <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
-                    Memory *
-                  </label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Memory *</label>
                   <Input
                     value={formData.memory}
                     onChange={(e) => setFormData({ ...formData, memory: e.target.value })}
                     placeholder="16 KB"
-                    className="bg-muted/20 border-border/50 rounded-sm"
                   />
                 </div>
-                <div>
-                  <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
-                    Flash *
-                  </label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Flash *</label>
                   <Input
                     value={formData.flash}
                     onChange={(e) => setFormData({ ...formData, flash: e.target.value })}
                     placeholder="4 MB"
-                    className="bg-muted/20 border-border/50 rounded-sm"
                   />
                 </div>
-                <div>
-                  <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
-                    Price
-                  </label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Price</label>
                   <Input
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                     placeholder="$59"
-                    className="bg-muted/20 border-border/50 rounded-sm"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
-                  Description *
-                </label>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Description *</label>
                 <Input
                   value={formData.description}
-                  onChange={(e) =>
-                    setFormData({ ...formData, description: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Arduino-compatible dev board..."
-                  className="bg-muted/20 border-border/50 rounded-sm"
                 />
               </div>
 
-              <div>
-                <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
-                  Image URL
-                </label>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Image URL</label>
                 <Input
                   value={formData.image_url}
-                  onChange={(e) =>
-                    setFormData({ ...formData, image_url: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
                   placeholder="https://..."
-                  className="bg-muted/20 border-border/50 rounded-sm"
                 />
               </div>
             </div>
             <DialogFooter>
-              <Button
-                variant="outline"
-                onClick={() => setShowDialog(false)}
-                className="rounded-sm"
-              >
+              <Button variant="outline" onClick={() => setShowDialog(false)}>
                 Cancel
               </Button>
-              <Button
-                onClick={handleSave}
-                className="rounded-sm font-mono uppercase tracking-wider text-xs"
-              >
+              <Button onClick={handleSave}>
                 Save
               </Button>
             </DialogFooter>

@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Users, Trash2, Shield } from "lucide-react";
+import { Loader2, Users, Trash2, Shield, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -57,33 +58,37 @@ const AdminUsers = () => {
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)]">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-12">
+    <div className="min-h-[calc(100vh-4rem)] bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <h1 className="font-mono font-bold uppercase tracking-tight text-3xl text-foreground/90 mb-2">
+          <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Admin
+          </Link>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
             User Management
           </h1>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground">
             View and manage platform users
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4">
+        <div className="space-y-4">
           {users.map((user) => (
             <Card
               key={user.id}
               data-testid={`user-item-${user.id}`}
-              className="bg-card border border-border/50 rounded-sm"
+              className="bg-card border border-border"
             >
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center">
-                      <Users className="w-6 h-6 text-primary" />
+                    <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center">
+                      <Users className="w-6 h-6 text-green-500" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-mono font-bold text-base text-foreground/90">
+                        <h3 className="font-semibold text-foreground">
                           {user.username}
                         </h3>
                         {user.is_admin && (
@@ -99,7 +104,7 @@ const AdminUsers = () => {
                         )}
                       </div>
                       <p className="text-sm text-muted-foreground">{user.email}</p>
-                      <p className="text-xs text-muted-foreground/70 mt-1">
+                      <p className="text-xs text-muted-foreground mt-1">
                         Joined: {new Date(user.created_at).toLocaleDateString()}
                       </p>
                     </div>
@@ -111,7 +116,7 @@ const AdminUsers = () => {
                       onClick={() => handleDelete(user.id)}
                       variant="outline"
                       size="sm"
-                      className="rounded-sm text-destructive"
+                      className="text-destructive hover:text-destructive"
                     >
                       <Trash2 className="w-4 h-4 mr-2" />
                       Delete
@@ -124,10 +129,10 @@ const AdminUsers = () => {
         </div>
 
         {users.length === 0 && (
-          <Card className="bg-card border border-border/50 rounded-sm">
-            <CardContent className="p-12 text-center">
+          <Card className="bg-card border border-border">
+            <CardContent className="p-16 text-center">
               <Users className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">No users found</p>
+              <p className="text-muted-foreground text-lg">No users found</p>
             </CardContent>
           </Card>
         )}
