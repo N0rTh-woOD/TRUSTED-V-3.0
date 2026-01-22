@@ -108,11 +108,53 @@ class Middleware(BaseModel):
 
 class MiddlewareCreate(BaseModel):
     name: str
-    type: str
+    type: str  # RTOS, BSP, SDK, Driver, Bootloader, Framework
     version: str
     description: str
     compatible_cores: List[str]
+    compatible_hardware: List[str] = []  # Specific hardware IDs
     logo_url: Optional[str] = None
+    download_url: Optional[str] = None
+    documentation_url: Optional[str] = None
+
+# Software Component Categories
+COMPONENT_TYPES = ["RTOS", "BSP", "SDK", "Driver", "Bootloader", "Framework", "Library"]
+
+class SoftwareComponent(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    type: str  # One of COMPONENT_TYPES
+    version: str
+    description: str
+    compatible_cores: List[str] = []
+    compatible_hardware: List[str] = []  # Hardware IDs
+    features: List[str] = []
+    logo_url: Optional[str] = None
+    download_url: Optional[str] = None
+    documentation_url: Optional[str] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class SoftwareComponentCreate(BaseModel):
+    name: str
+    type: str
+    version: str
+    description: str
+    compatible_cores: List[str] = []
+    compatible_hardware: List[str] = []
+    features: List[str] = []
+    logo_url: Optional[str] = None
+    download_url: Optional[str] = None
+    documentation_url: Optional[str] = None
+
+# User Account Update Models
+class UserProfileUpdate(BaseModel):
+    username: Optional[str] = None
+    email: Optional[EmailStr] = None
+
+class UserPasswordChange(BaseModel):
+    current_password: str
+    new_password: str
 
 class BSP(BaseModel):
     model_config = ConfigDict(extra="ignore")
