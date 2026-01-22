@@ -10,11 +10,12 @@ Build an AI coding platform for Embedded systems with RISC-V centric using RUST 
 4. **Interactive UI**: Visual cards for hardware, checkboxes for middleware
 5. **Project Versioning**: Download generated projects as versioned ZIP files
 6. **Hardware Catalog**: Comprehensive catalog of supported RISC-V hardware
-7. **Admin Panel**: Manage hardware, middleware, and users
+7. **Admin Panel**: Manage hardware, software components databases (NOT user management)
+8. **User Self-Service**: Users manage their own accounts, projects, and versions
 
 ## User Personas
 - **Embedded Developer**: Needs to quickly set up RISC-V projects with proper hardware/software combinations
-- **Admin**: Manages platform content including hardware catalog and middleware options
+- **Admin**: Manages platform databases (hardware, software components, IDE downloads)
 
 ## Tech Stack
 - **Backend**: FastAPI, MongoDB, JWT Authentication
@@ -27,37 +28,40 @@ Build an AI coding platform for Embedded systems with RISC-V centric using RUST 
 
 ### ✅ Completed (Jan 22, 2025)
 
+#### UI Redesign
+- Implemented Bosch-inspired corporate design (Primary: #005691)
+- Light theme with white/gray backgrounds
+- Clean Inter typography, professional card layouts
+- Mobile responsive navigation
+
 #### Authentication System
 - JWT-based user authentication
 - User registration and login flows
 - Admin role support
-- Protected routes for authenticated users
+- Protected routes
 
-#### Admin Panel
-- Dashboard with stats (Hardware, Middleware, Users, Projects)
-- Hardware Management (CRUD operations)
-- Middleware Management (CRUD operations)  
-- User Management (view/delete users)
+#### Admin Panel (Database Management)
+- **Dashboard**: Stats for Hardware, Middleware, Software Components, IDE Downloads
+- **Hardware Management**: CRUD operations for RISC-V boards
+- **Middleware Management**: CRUD for RTOS, frameworks
+- **Software Components**: NEW - BSP, SDK, Driver, Bootloader, Library management
+  - Filter by component type
+  - Color-coded type badges
+- **IDE Downloads**: NEW - Manage IDE versions for different platforms
+- **NO User Management** - users manage their own accounts
+
+#### User Account Settings (NEW)
+- Profile editing (username, email)
+- Password change
+- Project statistics dashboard
+- Account deletion with confirmation
 
 #### Main Application Pages
 - Landing page with features showcase
-- Hardware Catalog with search functionality
+- Hardware Catalog with search
 - IDE Downloads page
-- Smart Project Builder (UI placeholder with AI chat interface)
+- Smart Project Builder (placeholder)
 - My Projects page
-
-#### UI Redesign (Jan 22, 2025)
-- Implemented Bosch-inspired corporate design
-- Primary color: #005691 (Bosch Blue)
-- Light theme with white/gray backgrounds
-- Clean, minimal layouts
-- Inter font for typography
-- Mobile responsive navigation
-
-### 🔧 Login Navigation Fix (Jan 22, 2025)
-- Fixed login flow timing issue
-- Navigation to /builder works correctly after login
-- Auth state properly synchronized
 
 ---
 
@@ -86,14 +90,9 @@ Build an AI coding platform for Embedded systems with RISC-V centric using RUST 
    - Intelligent hardware recommendations
 
 ### P3 - Future Enhancements
-1. **Notification System**
-   - Alert users when changes require hardware/software updates
-
-2. **IDE Download Functionality**
-   - Host and serve actual IDE binaries
-
-3. **Backend Refactoring**
-   - Split server.py into modular routers (auth, admin, projects)
+1. **Notification System** - Alert users when changes require updates
+2. **IDE Download Functionality** - Host actual IDE binaries
+3. **Backend Refactoring** - Split server.py into modular routers
 
 ---
 
@@ -124,34 +123,24 @@ Build an AI coding platform for Embedded systems with RISC-V centric using RUST 
   "description": "string",
   "image_url": "string",
   "price": "string",
-  "peripherals": [{"name": "string", "interface": "string"}]
+  "peripherals": [{"name": "string", "type": "string", "interface": "string"}]
 }
 ```
 
-### Middleware Collection
+### Software Components Collection (NEW)
 ```json
 {
   "id": "string",
   "name": "string",
-  "type": "string",
+  "type": "RTOS|BSP|SDK|Driver|Bootloader|Framework|Library",
   "version": "string",
   "description": "string",
-  "compatible_cores": ["string"]
-}
-```
-
-### Projects Collection
-```json
-{
-  "id": "string",
-  "user_id": "string",
-  "name": "string",
-  "description": "string",
-  "hardware_id": "string",
-  "middleware_ids": ["string"],
-  "peripherals": ["string"],
-  "requirements": "string",
-  "versions": [{"version": "number", "generated_at": "datetime"}]
+  "compatible_cores": ["string"],
+  "compatible_hardware": ["string"],
+  "features": ["string"],
+  "download_url": "string",
+  "documentation_url": "string",
+  "created_at": "datetime"
 }
 ```
 
@@ -164,28 +153,25 @@ Build an AI coding platform for Embedded systems with RISC-V centric using RUST 
 - `POST /api/auth/login` - Login user
 - `GET /api/auth/me` - Get current user
 
+### User Account (Self-Service)
+- `PUT /api/account/profile` - Update profile
+- `PUT /api/account/password` - Change password
+- `DELETE /api/account` - Delete own account
+- `GET /api/account/projects/stats` - Get project statistics
+
 ### Public
 - `GET /api/hardware` - List all hardware
 - `GET /api/middleware` - List all middleware
-- `GET /api/middleware/compatible/{core}` - Get compatible middleware for core
+- `GET /api/software-components` - List software components (with optional type filter)
+- `GET /api/component-types` - Get valid component types
 - `GET /api/ide-downloads` - List IDE downloads
 
-### Protected (User)
-- `POST /api/chat` - AI chat endpoint
-- `GET /api/projects` - Get user's projects
-- `POST /api/projects` - Create new project
-- `GET /api/projects/{id}/download/{version}` - Download project
-
-### Admin
+### Admin (Database Management)
 - `GET /api/admin/stats` - Get platform stats
-- `GET /api/admin/users` - List all users
-- `DELETE /api/admin/users/{id}` - Delete user
-- `POST /api/admin/hardware` - Create hardware
-- `PUT /api/admin/hardware/{id}` - Update hardware
-- `DELETE /api/admin/hardware/{id}` - Delete hardware
-- `POST /api/admin/middleware` - Create middleware
-- `PUT /api/admin/middleware/{id}` - Update middleware
-- `DELETE /api/admin/middleware/{id}` - Delete middleware
+- Hardware CRUD: POST/PUT/DELETE `/api/admin/hardware`
+- Middleware CRUD: POST/PUT/DELETE `/api/admin/middleware`
+- Software Components CRUD: POST/PUT/DELETE `/api/admin/software-components`
+- IDE Downloads CRUD: POST/PUT/DELETE `/api/admin/ide-downloads`
 
 ---
 
@@ -193,11 +179,8 @@ Build an AI coding platform for Embedded systems with RISC-V centric using RUST 
 - **Admin**: admin@rvrust.com / admin123
 - **Standard User**: Create via registration
 
----
-
 ## Key Files
 - `/app/backend/server.py` - All backend APIs
 - `/app/frontend/src/App.js` - Frontend routes
-- `/app/frontend/src/index.css` - Design theme variables
-- `/app/frontend/src/contexts/AuthContext.jsx` - Auth state management
-- `/app/frontend/src/pages/SmartProjectBuilder.jsx` - Main builder UI
+- `/app/frontend/src/pages/admin/AdminSoftware.jsx` - Software components management
+- `/app/frontend/src/pages/AccountSettings.jsx` - User account settings
