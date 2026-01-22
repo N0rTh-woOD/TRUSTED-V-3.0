@@ -7,8 +7,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import {
   Loader2,
   Send,
@@ -16,9 +14,7 @@ import {
   User,
   Cpu,
   Package,
-  Download,
   Save,
-  Check,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -31,19 +27,16 @@ const SmartProjectBuilder = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [sessionId] = useState(
-    () =>
-      `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+    () => `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   );
   const messagesEndRef = useRef(null);
 
-  // Project configuration
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [selectedHardware, setSelectedHardware] = useState(null);
   const [selectedMiddleware, setSelectedMiddleware] = useState([]);
   const [selectedPeripherals, setSelectedPeripherals] = useState([]);
 
-  // Data
   const [hardware, setHardware] = useState([]);
   const [middleware, setMiddleware] = useState([]);
   const [suggestedHardware, setSuggestedHardware] = useState([]);
@@ -55,7 +48,7 @@ const SmartProjectBuilder = () => {
       {
         role: "assistant",
         content:
-          "Welcome to the **Smart Project Builder**! 🎯\n\nI'll help you configure the perfect RISC-V project.\n\n**Tell me about your project:**\n• What are you building? (IoT device, edge AI, industrial controller, etc.)\n• What features do you need? (WiFi, camera, display, sensors, etc.)\n• Any performance requirements?\n\nI'll analyze your needs and suggest the best hardware and middleware!",
+          "Welcome to the Smart Project Builder!\n\nI'll help you configure the perfect RISC-V project.\n\nTell me about your project:\n• What are you building? (IoT device, edge AI, industrial controller, etc.)\n• What features do you need? (WiFi, camera, display, sensors, etc.)\n• Any performance requirements?\n\nI'll analyze your needs and suggest the best hardware and middleware!",
         timestamp: new Date().toISOString(),
       },
     ]);
@@ -114,13 +107,8 @@ const SmartProjectBuilder = () => {
     try {
       const response = await axios.post(
         `${API}/chat`,
-        {
-          message: input,
-          session_id: sessionId,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { message: input, session_id: sessionId },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       const aiMessage = {
@@ -131,7 +119,6 @@ const SmartProjectBuilder = () => {
 
       setMessages((prev) => [...prev, aiMessage]);
 
-      // Update suggested hardware
       if (response.data.suggested_hardware) {
         setSuggestedHardware(response.data.suggested_hardware);
       }
@@ -178,7 +165,7 @@ const SmartProjectBuilder = () => {
     }
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${API}/projects`,
         {
           name: projectName,
@@ -191,9 +178,7 @@ const SmartProjectBuilder = () => {
             .map((m) => m.content)
             .join("\n"),
         },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       toast.success("Project saved successfully!");
@@ -204,16 +189,19 @@ const SmartProjectBuilder = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex">
+    <div className="min-h-[calc(100vh-4rem)] flex bg-background">
       {/* AI Chat Sidebar */}
-      <div className="w-[400px] border-r border-border/40 flex flex-col bg-card/30">
-        <div className="p-6 border-b border-border/40">
-          <h2 className="font-mono font-bold uppercase tracking-tight text-lg text-foreground/90">
-            AI Assistant
-          </h2>
-          <p className="text-xs text-muted-foreground mt-1">
-            Describe your requirements
-          </p>
+      <div className="w-[380px] border-r border-border flex flex-col bg-card">
+        <div className="p-5 border-b border-border">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Bot className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h2 className="font-semibold text-foreground">AI Assistant</h2>
+              <p className="text-xs text-muted-foreground">Describe your requirements</p>
+            </div>
+          </div>
         </div>
 
         {/* Chat Messages */}
@@ -222,31 +210,29 @@ const SmartProjectBuilder = () => {
             <div
               key={index}
               data-testid={`message-${msg.role}-${index}`}
-              className={`flex gap-3 ${
-                msg.role === "user" ? "justify-end" : "justify-start"
-              }`}
+              className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
               {msg.role === "assistant" && (
-                <div className="w-8 h-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Bot className="w-4 h-4 text-primary" />
                 </div>
               )}
 
               <div
-                className={`max-w-[280px] ${
+                className={`max-w-[280px] rounded-lg p-3 ${
                   msg.role === "user"
                     ? "bg-primary text-primary-foreground"
-                    : "bg-muted/50"
-                } rounded-sm p-3`}
+                    : "bg-muted"
+                }`}
               >
-                <div className="text-xs leading-relaxed whitespace-pre-wrap">
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">
                   {msg.content}
-                </div>
+                </p>
               </div>
 
               {msg.role === "user" && (
-                <div className="w-8 h-8 rounded-sm bg-secondary/10 border border-secondary/30 flex items-center justify-center flex-shrink-0">
-                  <User className="w-4 h-4 text-secondary" />
+                <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                  <User className="w-4 h-4 text-muted-foreground" />
                 </div>
               )}
             </div>
@@ -254,10 +240,10 @@ const SmartProjectBuilder = () => {
 
           {loading && (
             <div className="flex gap-3 justify-start">
-              <div className="w-8 h-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Bot className="w-4 h-4 text-primary" />
               </div>
-              <div className="bg-muted/50 rounded-sm p-3">
+              <div className="bg-muted rounded-lg p-3">
                 <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
               </div>
             </div>
@@ -267,7 +253,7 @@ const SmartProjectBuilder = () => {
         </div>
 
         {/* Chat Input */}
-        <div className="p-4 border-t border-border/40">
+        <div className="p-4 border-t border-border">
           <div className="flex gap-2">
             <Input
               data-testid="chat-input"
@@ -276,14 +262,14 @@ const SmartProjectBuilder = () => {
               onKeyPress={handleKeyPress}
               placeholder="Describe your project..."
               disabled={loading}
-              className="bg-muted/20 border-border/50 font-mono text-xs focus:ring-1 focus:ring-primary rounded-sm h-10"
+              className="h-10"
             />
             <Button
               data-testid="send-message-btn"
               onClick={sendMessage}
               disabled={loading || !input.trim()}
               size="sm"
-              className="rounded-sm font-mono h-10 px-4"
+              className="h-10 px-4"
             >
               <Send className="w-4 h-4" />
             </Button>
@@ -292,17 +278,17 @@ const SmartProjectBuilder = () => {
       </div>
 
       {/* Main Configuration Area */}
-      <div className="flex-1 overflow-y-auto">
-        <div className="max-w-[1200px] mx-auto p-8">
+      <div className="flex-1 overflow-y-auto bg-muted/30">
+        <div className="max-w-5xl mx-auto p-8">
           {/* Project Details */}
           <div className="mb-8">
-            <h1 className="font-mono font-bold uppercase tracking-tight text-3xl text-foreground/90 mb-4">
+            <h1 className="text-3xl font-bold text-foreground mb-6">
               Configure Your Project
             </h1>
 
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div>
-                <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">
                   Project Name
                 </label>
                 <Input
@@ -310,11 +296,11 @@ const SmartProjectBuilder = () => {
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
                   placeholder="My RISC-V Project"
-                  className="bg-muted/20 border-border/50 font-mono text-sm focus:ring-1 focus:ring-primary rounded-sm h-10"
+                  className="h-11"
                 />
               </div>
-              <div>
-                <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">
                   Description
                 </label>
                 <Input
@@ -322,24 +308,28 @@ const SmartProjectBuilder = () => {
                   value={projectDescription}
                   onChange={(e) => setProjectDescription(e.target.value)}
                   placeholder="IoT sensor node with WiFi"
-                  className="bg-muted/20 border-border/50 font-mono text-sm focus:ring-1 focus:ring-primary rounded-sm h-10"
+                  className="h-11"
                 />
               </div>
             </div>
           </div>
 
           {/* Hardware Selection */}
-          <Card className="bg-card border border-border/50 rounded-sm mb-6">
-            <CardHeader className="border-b border-border/40 p-6">
-              <h3 className="font-mono font-bold uppercase tracking-tight text-base text-foreground/90 flex items-center gap-2">
-                <Cpu className="w-5 h-5 text-primary" />
-                Select Hardware Board
-              </h3>
-              {suggestedHardware.length > 0 && (
-                <p className="text-xs text-muted-foreground mt-1">
-                  AI suggested: {suggestedHardware.map((h) => h.name).join(", ")}
-                </p>
-              )}
+          <Card className="bg-card border border-border mb-6">
+            <CardHeader className="p-6 pb-4 border-b border-border">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Cpu className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">Select Hardware Board</h3>
+                  {suggestedHardware.length > 0 && (
+                    <p className="text-xs text-muted-foreground">
+                      AI suggested: {suggestedHardware.map((h) => h.name).join(", ")}
+                    </p>
+                  )}
+                </div>
+              </div>
             </CardHeader>
             <CardContent className="p-6">
               <RadioGroup
@@ -350,17 +340,14 @@ const SmartProjectBuilder = () => {
                 }}
               >
                 <div className="grid grid-cols-2 gap-4">
-                  {(suggestedHardware.length > 0
-                    ? suggestedHardware
-                    : hardware
-                  ).map((hw) => (
+                  {(suggestedHardware.length > 0 ? suggestedHardware : hardware).map((hw) => (
                     <div
                       key={hw.id}
                       data-testid={`hardware-card-${hw.id}`}
-                      className={`relative border rounded-sm p-4 cursor-pointer transition-all duration-200 ${
+                      className={`relative border rounded-lg p-4 cursor-pointer transition-all ${
                         selectedHardware?.id === hw.id
-                          ? "border-primary bg-primary/5 shadow-[0_0_10px_rgba(183,65,14,0.2)]"
-                          : "border-border/50 hover:border-primary/50"
+                          ? "border-primary bg-primary/5 shadow-md"
+                          : "border-border hover:border-primary/50"
                       }`}
                       onClick={() => handleHardwareSelect(hw)}
                     >
@@ -371,7 +358,7 @@ const SmartProjectBuilder = () => {
                       />
 
                       {hw.image_url && (
-                        <div className="w-full h-32 mb-3 rounded-sm overflow-hidden bg-muted">
+                        <div className="w-full h-28 mb-3 rounded-lg overflow-hidden bg-muted">
                           <img
                             src={hw.image_url}
                             alt={hw.name}
@@ -380,32 +367,26 @@ const SmartProjectBuilder = () => {
                         </div>
                       )}
 
-                      <h4 className="font-mono font-bold text-sm text-foreground/90 mb-1">
+                      <h4 className="font-semibold text-sm text-foreground mb-1">
                         {hw.name}
                       </h4>
-                      <p className="text-xs text-muted-foreground mb-2">
+                      <p className="text-xs text-muted-foreground mb-3">
                         {hw.manufacturer}
                       </p>
 
-                      <div className="space-y-1 text-xs">
+                      <div className="space-y-1.5 text-xs">
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">Core:</span>
-                          <span className="font-mono text-foreground">
-                            {hw.core}
-                          </span>
+                          <span className="font-medium text-foreground">{hw.core}</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">Speed:</span>
-                          <span className="font-mono text-foreground">
-                            {hw.clock_speed}
-                          </span>
+                          <span className="font-medium text-foreground">{hw.clock_speed}</span>
                         </div>
                         {hw.price && (
                           <div className="flex justify-between">
                             <span className="text-muted-foreground">Price:</span>
-                            <span className="font-mono text-primary">
-                              {hw.price}
-                            </span>
+                            <span className="font-medium text-primary">{hw.price}</span>
                           </div>
                         )}
                       </div>
@@ -418,15 +399,19 @@ const SmartProjectBuilder = () => {
 
           {/* Middleware Selection */}
           {selectedHardware && (
-            <Card className="bg-card border border-border/50 rounded-sm mb-6">
-              <CardHeader className="border-b border-border/40 p-6">
-                <h3 className="font-mono font-bold uppercase tracking-tight text-base text-foreground/90 flex items-center gap-2">
-                  <Package className="w-5 h-5 text-primary" />
-                  Select Middleware
-                </h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Compatible with {selectedHardware.core}
-                </p>
+            <Card className="bg-card border border-border mb-6">
+              <CardHeader className="p-6 pb-4 border-b border-border">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Package className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">Select Middleware</h3>
+                    <p className="text-xs text-muted-foreground">
+                      Compatible with {selectedHardware.core}
+                    </p>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="space-y-3">
@@ -434,10 +419,10 @@ const SmartProjectBuilder = () => {
                     <div
                       key={mw.id}
                       data-testid={`middleware-item-${mw.id}`}
-                      className={`border rounded-sm p-4 cursor-pointer transition-all duration-200 ${
+                      className={`border rounded-lg p-4 cursor-pointer transition-all ${
                         selectedMiddleware.includes(mw.id)
                           ? "border-primary bg-primary/5"
-                          : "border-border/50 hover:border-primary/50"
+                          : "border-border hover:border-primary/50"
                       }`}
                       onClick={() => handleMiddlewareToggle(mw.id)}
                     >
@@ -449,7 +434,7 @@ const SmartProjectBuilder = () => {
                         />
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
-                            <h4 className="font-mono font-bold text-sm text-foreground/90">
+                            <h4 className="font-semibold text-sm text-foreground">
                               {mw.name}
                             </h4>
                             <Badge variant="secondary" className="text-xs">
@@ -473,11 +458,9 @@ const SmartProjectBuilder = () => {
 
           {/* Peripherals */}
           {selectedHardware && (
-            <Card className="bg-card border border-border/50 rounded-sm mb-6">
-              <CardHeader className="border-b border-border/40 p-6">
-                <h3 className="font-mono font-bold uppercase tracking-tight text-base text-foreground/90">
-                  Customize Peripherals
-                </h3>
+            <Card className="bg-card border border-border mb-6">
+              <CardHeader className="p-6 pb-4 border-b border-border">
+                <h3 className="font-semibold text-foreground">Customize Peripherals</h3>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="grid grid-cols-3 gap-3">
@@ -485,23 +468,21 @@ const SmartProjectBuilder = () => {
                     <div
                       key={index}
                       data-testid={`peripheral-${index}`}
-                      className={`border rounded-sm p-3 cursor-pointer transition-all duration-200 ${
+                      className={`border rounded-lg p-3 cursor-pointer transition-all ${
                         selectedPeripherals.includes(peripheral.name)
                           ? "border-primary bg-primary/5"
-                          : "border-border/50 hover:border-primary/50"
+                          : "border-border hover:border-primary/50"
                       }`}
                       onClick={() => handlePeripheralToggle(peripheral.name)}
                     >
                       <div className="flex items-start gap-2">
                         <Checkbox
                           checked={selectedPeripherals.includes(peripheral.name)}
-                          onCheckedChange={() =>
-                            handlePeripheralToggle(peripheral.name)
-                          }
+                          onCheckedChange={() => handlePeripheralToggle(peripheral.name)}
                           className="mt-0.5"
                         />
                         <div>
-                          <p className="font-mono text-xs font-bold text-foreground/90">
+                          <p className="text-xs font-medium text-foreground">
                             {peripheral.name}
                           </p>
                           <p className="text-xs text-muted-foreground">
@@ -522,7 +503,7 @@ const SmartProjectBuilder = () => {
               <Button
                 data-testid="save-project-btn"
                 onClick={handleSaveProject}
-                className="rounded-sm font-mono uppercase tracking-wider text-xs h-11 px-8 shadow-[0_0_10px_rgba(183,65,14,0.3)] hover:shadow-[0_0_20px_rgba(183,65,14,0.5)] transition-all duration-300"
+                className="h-11 px-8 shadow-lg shadow-primary/25"
               >
                 <Save className="w-4 h-4 mr-2" />
                 Save & Generate

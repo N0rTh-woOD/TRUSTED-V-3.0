@@ -3,7 +3,7 @@ import axios from "axios";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Loader2, Cpu, Zap, HardDrive, Layers } from "lucide-react";
+import { Loader2, Cpu, Zap, HardDrive, Layers, Search } from "lucide-react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -43,24 +43,27 @@ const HardwareCatalog = () => {
   }
   
   return (
-    <div className="min-h-[calc(100vh-4rem)]">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-12">
+    <div className="min-h-[calc(100vh-4rem)] bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="font-mono font-bold uppercase tracking-tight text-3xl md:text-4xl text-foreground/90 mb-2">
+        <div className="mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
             Hardware Catalog
           </h1>
-          <p className="text-muted-foreground text-sm mb-6">
+          <p className="text-muted-foreground text-lg mb-6">
             Browse our curated collection of RISC-V development boards
           </p>
           
-          <Input
-            data-testid="hardware-search-input"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by name, manufacturer, or core..."
-            className="max-w-md bg-muted/20 border-border/50 font-mono text-sm focus:ring-1 focus:ring-primary rounded-sm h-11"
-          />
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Input
+              data-testid="hardware-search-input"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search by name, manufacturer, or core..."
+              className="pl-10 h-11"
+            />
+          </div>
         </div>
         
         {/* Hardware Grid */}
@@ -69,65 +72,65 @@ const HardwareCatalog = () => {
             <Card 
               key={hw.id}
               data-testid={`hardware-card-${hw.id}`}
-              className="bg-card border border-border/50 rounded-sm hover:border-primary/50 transition-colors duration-300"
+              className="bg-card border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300"
             >
-              <CardHeader className="border-b border-border/40 p-6">
+              <CardHeader className="p-6 pb-4">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-mono font-bold uppercase tracking-tight text-lg text-foreground/90 mb-1">
+                    <h3 className="text-xl font-semibold text-foreground mb-1">
                       {hw.name}
                     </h3>
                     <p className="text-sm text-muted-foreground">{hw.manufacturer}</p>
                   </div>
-                  <div className="w-10 h-10 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center">
-                    <Cpu className="w-5 h-5 text-primary" />
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Cpu className="w-6 h-6 text-primary" />
                   </div>
                 </div>
               </CardHeader>
               
-              <CardContent className="p-6 space-y-4">
+              <CardContent className="p-6 pt-0 space-y-4">
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {hw.description}
                 </p>
                 
                 {/* Specs Grid */}
-                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border/40">
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border">
                   <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground/70 uppercase tracking-widest font-mono">
-                      <Cpu className="w-3 h-3" />
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
+                      <Cpu className="w-3.5 h-3.5" />
                       <span>Core</span>
                     </div>
-                    <p className="text-sm font-mono text-foreground">{hw.core}</p>
+                    <p className="text-sm font-medium text-foreground">{hw.core}</p>
                   </div>
                   
                   <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground/70 uppercase tracking-widest font-mono">
-                      <Zap className="w-3 h-3" />
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
+                      <Zap className="w-3.5 h-3.5" />
                       <span>Speed</span>
                     </div>
-                    <p className="text-sm font-mono text-foreground">{hw.clock_speed}</p>
+                    <p className="text-sm font-medium text-foreground">{hw.clock_speed}</p>
                   </div>
                   
                   <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground/70 uppercase tracking-widest font-mono">
-                      <Layers className="w-3 h-3" />
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
+                      <Layers className="w-3.5 h-3.5" />
                       <span>Memory</span>
                     </div>
-                    <p className="text-sm font-mono text-foreground">{hw.memory}</p>
+                    <p className="text-sm font-medium text-foreground">{hw.memory}</p>
                   </div>
                   
                   <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground/70 uppercase tracking-widest font-mono">
-                      <HardDrive className="w-3 h-3" />
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
+                      <HardDrive className="w-3.5 h-3.5" />
                       <span>Flash</span>
                     </div>
-                    <p className="text-sm font-mono text-foreground">{hw.flash}</p>
+                    <p className="text-sm font-medium text-foreground">{hw.flash}</p>
                   </div>
                 </div>
                 
                 {/* Peripherals */}
-                <div className="pt-4 border-t border-border/40">
-                  <p className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-3">
+                <div className="pt-4 border-t border-border">
+                  <p className="text-xs text-muted-foreground font-medium mb-3">
                     Peripherals
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -135,8 +138,8 @@ const HardwareCatalog = () => {
                       <Badge 
                         key={index}
                         data-testid={`peripheral-${index}`}
-                        variant="secondary" 
-                        className="font-mono text-xs"
+                        variant="secondary"
+                        className="text-xs"
                       >
                         {peripheral.name}
                       </Badge>
@@ -149,8 +152,9 @@ const HardwareCatalog = () => {
         </div>
         
         {filteredHardware.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">No hardware found matching your search.</p>
+          <div className="text-center py-16">
+            <Cpu className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <p className="text-muted-foreground text-lg">No hardware found matching your search.</p>
           </div>
         )}
       </div>
