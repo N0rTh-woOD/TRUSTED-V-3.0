@@ -30,26 +30,28 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-6">
-      <Card className="w-full max-w-md bg-card border border-border/50 rounded-sm">
-        <CardHeader className="border-b border-border/40 p-6">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-sm bg-primary flex items-center justify-center shadow-[0_0_10px_rgba(183,65,14,0.3)]">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 bg-muted/30">
+      <Card className="w-full max-w-md bg-card border border-border shadow-xl">
+        <CardHeader className="space-y-4 p-8 pb-6">
+          <div className="flex items-center justify-center">
+            <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/25">
               <Cpu className="w-7 h-7 text-primary-foreground" />
             </div>
           </div>
-          <h2 className="font-mono font-bold uppercase tracking-tight text-2xl text-center text-foreground/90">
-            Sign In
-          </h2>
-          <p className="text-sm text-muted-foreground text-center mt-2">
-            Access your RISC-V projects
-          </p>
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-foreground">
+              Welcome Back
+            </h2>
+            <p className="text-sm text-muted-foreground mt-2">
+              Sign in to access your RISC-V projects
+            </p>
+          </div>
         </CardHeader>
 
-        <CardContent className="p-6">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
+        <CardContent className="p-8 pt-0">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-foreground">
                 Email
               </label>
               <Input
@@ -58,13 +60,13 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="your@email.com"
-                className="bg-muted/20 border-border/50 font-mono text-sm focus:ring-1 focus:ring-primary rounded-sm h-11"
+                placeholder="you@example.com"
+                className="h-11"
               />
             </div>
 
-            <div>
-              <label className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-2 block">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-foreground">
                 Password
               </label>
               <Input
@@ -73,8 +75,8 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                placeholder="••••••••"
-                className="bg-muted/20 border-border/50 font-mono text-sm focus:ring-1 focus:ring-primary rounded-sm h-11"
+                placeholder="Enter your password"
+                className="h-11"
               />
             </div>
 
@@ -82,10 +84,10 @@ const Login = () => {
               data-testid="login-btn"
               type="submit"
               disabled={loading}
-              className="w-full rounded-sm font-mono uppercase tracking-wider text-xs h-11 shadow-[0_0_10px_rgba(183,65,14,0.3)] hover:shadow-[0_0_20px_rgba(183,65,14,0.5)] transition-all duration-300"
+              className="w-full h-11 text-base font-medium shadow-lg shadow-primary/25"
             >
               {loading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
                 "Sign In"
               )}
@@ -98,16 +100,16 @@ const Login = () => {
               <Link
                 to="/register"
                 data-testid="register-link"
-                className="text-primary hover:underline font-mono"
+                className="text-primary hover:underline font-medium"
               >
-                Sign Up
+                Create Account
               </Link>
             </p>
           </div>
 
-          <div className="mt-4 pt-4 border-t border-border/40 text-center">
-            <p className="text-xs text-muted-foreground/70">
-              Demo: admin@rvrust.com / admin123
+          <div className="mt-6 pt-6 border-t border-border">
+            <p className="text-xs text-muted-foreground text-center">
+              Demo credentials: admin@rvrust.com / admin123
             </p>
           </div>
         </CardContent>
