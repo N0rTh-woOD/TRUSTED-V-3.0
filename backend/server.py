@@ -855,6 +855,169 @@ async def get_chat_history(session_id: str, current_user: dict = Depends(get_cur
     
     return {"messages": messages}
 
+# User Account Management (Self-service)
+@api_router.put("/account/profile")
+async def update_user_profile(update_data: UserProfileUpdate, current_user: dict = Depends(get_current_user)):
+    update_fields = {}
+    
+    if update_data.username:
+        update_fields["username"] = update_data.username
+    
+    if update_data.email:
+        # Check if email already exists
+        existing = await db.users.find_one({"email": update_data.email, "id": {"$ne": current_user["id"]}})
+        if existing:
+            raise HTTPException(status_code=400, detail="Email already in use")
+        update_fields["email"] = update_data.email
+    
+    if update_fields:
+        await db.users.update_one({"id": current_user["id"]}, {"$set": update_fields})
+    
+    updated_user = await db.users.find_one({"id": current_user["id"]}, {"_id": 0, "password_hash": 0})
+    return updated_user
+
+@api_router.put("/account/password")
+async def change_password(password_data: UserPasswordChange, current_user: dict = Depends(get_current_user)):
+    # Get full user with password hash
+    user = await db.users.find_one({"id": current_user["id"]})
+    
+    if not verify_password(password_data.current_password, user["password_hash"]):
+        raise HTTPException(status_code=400, detail="Current password is incorrect")
+    
+    new_hash = get_password_hash(password_data.new_password)
+    await db.users.update_one({"id": current_user["id"]}, {"$set": {"password_hash": new_hash}})
+    
+    return {"message": "Password changed successfully"}
+
+@api_router.delete("/account")
+async def delete_own_account(current_user: dict = Depends(get_current_user)):
+    # Delete user's projects
+    await db.projects.delete_many({"user_id": current_user["id"]})
+    # Delete user's chat messages
+    await db.chat_messages.delete_many({"user_id": current_user["id"]})
+    # Delete user account
+    await db.users.delete_one({"id": current_user["id"]})
+    
+    return {"message": "Account deleted successfully"}
+
+@api_router.get("/account/projects/stats")
+async def get_user_project_stats(current_user: dict = Depends(get_current_user)):
+    projects = await db.projects.find({"user_id": current_user["id"]}, {"_id": 0}).to_list(1000)
+    
+    total_projects = len(projects)
+    total_versions = sum(len(p.get("versions", [])) for p in projects)
+    
+    # Get unique hardware and middleware used
+    hardware_ids = set()
+    middleware_ids = set()
+    for p in projects:
+        hardware_ids.add(p.get("hardware_id"))
+        middleware_ids.update(p.get("middleware_ids", []))
+    
+    return {
+        "total_projects": total_projects,
+        "total_versions": total_versions,
+        "unique_hardware_used": len(hardware_ids),
+        "unique_middleware_used": len(middleware_ids)
+    }
+
+# Delete user's own project
+@api_router.delete("/projects/{project_id}")
+async def delete_project(project_id: str, current_user: dict = Depends(get_current_user)):
+    result = await db.projects.delete_one({"id": project_id, "user_id": current_user["id"]})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Project not found")
+    return {"message": "Project deleted successfully"}
+
+# Software Components CRUD (Admin)
+@api_router.get("/software-components")
+async def get_software_components(component_type: Optional[str] = None):
+    query = {}
+    if component_type:
+        query["type"] = component_type
+    components = await db.software_components.find(query, {"_id": 0}).to_list(1000)
+    return components
+
+@api_router.get("/software-components/compatible/{hardware_id}")
+async def get_compatible_software(hardware_id: str):
+    hardware = await db.hardware.find_one({"id": hardware_id}, {"_id": 0})
+    if not hardware:
+        raise HTTPException(status_code=404, detail="Hardware not found")
+    
+    core = hardware.get("core", "")
+    components = await db.software_components.find({
+        "$or": [
+            {"compatible_cores": core},
+            {"compatible_hardware": hardware_id}
+        ]
+    }, {"_id": 0}).to_list(1000)
+    return components
+
+@api_router.post("/admin/software-components", response_model=SoftwareComponent)
+async def create_software_component(component_data: SoftwareComponentCreate, current_user: dict = Depends(get_current_admin_user)):
+    if component_data.type not in COMPONENT_TYPES:
+        raise HTTPException(status_code=400, detail=f"Invalid type. Must be one of: {COMPONENT_TYPES}")
+    
+    component = SoftwareComponent(**component_data.model_dump())
+    component_dict = component.model_dump()
+    component_dict['created_at'] = component_dict['created_at'].isoformat()
+    await db.software_components.insert_one(component_dict)
+    return component
+
+@api_router.put("/admin/software-components/{component_id}", response_model=SoftwareComponent)
+async def update_software_component(component_id: str, component_data: SoftwareComponentCreate, current_user: dict = Depends(get_current_admin_user)):
+    existing = await db.software_components.find_one({"id": component_id})
+    if not existing:
+        raise HTTPException(status_code=404, detail="Component not found")
+    
+    if component_data.type not in COMPONENT_TYPES:
+        raise HTTPException(status_code=400, detail=f"Invalid type. Must be one of: {COMPONENT_TYPES}")
+    
+    update_data = component_data.model_dump()
+    await db.software_components.update_one({"id": component_id}, {"$set": update_data})
+    
+    updated = await db.software_components.find_one({"id": component_id}, {"_id": 0})
+    if isinstance(updated.get('created_at'), str):
+        updated['created_at'] = datetime.fromisoformat(updated['created_at'])
+    return updated
+
+@api_router.delete("/admin/software-components/{component_id}")
+async def delete_software_component(component_id: str, current_user: dict = Depends(get_current_admin_user)):
+    result = await db.software_components.delete_one({"id": component_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Component not found")
+    return {"message": "Component deleted successfully"}
+
+# Admin - IDE Management
+@api_router.post("/admin/ide-downloads", response_model=IDEDownload)
+async def create_ide_download(ide_data: dict, current_user: dict = Depends(get_current_admin_user)):
+    ide = IDEDownload(**ide_data)
+    ide_dict = ide.model_dump()
+    await db.ide_downloads.insert_one(ide_dict)
+    return ide
+
+@api_router.put("/admin/ide-downloads/{ide_id}", response_model=IDEDownload)
+async def update_ide_download(ide_id: str, ide_data: dict, current_user: dict = Depends(get_current_admin_user)):
+    existing = await db.ide_downloads.find_one({"id": ide_id})
+    if not existing:
+        raise HTTPException(status_code=404, detail="IDE download not found")
+    
+    await db.ide_downloads.update_one({"id": ide_id}, {"$set": ide_data})
+    updated = await db.ide_downloads.find_one({"id": ide_id}, {"_id": 0})
+    return updated
+
+@api_router.delete("/admin/ide-downloads/{ide_id}")
+async def delete_ide_download(ide_id: str, current_user: dict = Depends(get_current_admin_user)):
+    result = await db.ide_downloads.delete_one({"id": ide_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="IDE download not found")
+    return {"message": "IDE download deleted successfully"}
+
+# Get component types
+@api_router.get("/component-types")
+async def get_component_types():
+    return {"types": COMPONENT_TYPES}
+
 # Include the router in the main app
 app.include_router(api_router)
 
