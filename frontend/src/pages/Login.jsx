@@ -19,12 +19,16 @@ const Login = () => {
     setLoading(true);
 
     try {
-      await login(email, password);
-      toast.success("Welcome back!");
-      navigate("/builder");
+      const result = await login(email, password);
+      if (result && result.access_token) {
+        toast.success("Welcome back!");
+        // Use setTimeout to ensure state updates are processed before navigation
+        setTimeout(() => {
+          navigate("/builder", { replace: true });
+        }, 100);
+      }
     } catch (error) {
       toast.error(error.response?.data?.detail || "Invalid credentials");
-    } finally {
       setLoading(false);
     }
   };
