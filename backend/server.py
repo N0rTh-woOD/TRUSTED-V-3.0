@@ -831,14 +831,25 @@ async def delete_user(user_id: str, current_user: dict = Depends(get_current_adm
 async def get_admin_stats(current_user: dict = Depends(get_current_admin_user)):
     hardware_count = await db.hardware.count_documents({})
     middleware_count = await db.middleware.count_documents({})
+    software_count = await db.software_components.count_documents({})
     users_count = await db.users.count_documents({})
     projects_count = await db.projects.count_documents({})
+    ide_count = await db.ide_downloads.count_documents({})
+    
+    # Get counts by software component type
+    software_by_type = {}
+    for ctype in COMPONENT_TYPES:
+        count = await db.software_components.count_documents({"type": ctype})
+        software_by_type[ctype] = count
     
     return {
         "hardware": hardware_count,
         "middleware": middleware_count,
+        "software_components": software_count,
+        "software_by_type": software_by_type,
         "users": users_count,
-        "projects": projects_count
+        "projects": projects_count,
+        "ide_downloads": ide_count
     }
 
 # Chat history
