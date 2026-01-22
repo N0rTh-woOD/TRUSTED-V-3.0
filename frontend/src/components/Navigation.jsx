@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Cpu, Zap, Package, FolderGit2, Download, LogOut, Shield, Menu, X } from "lucide-react";
+import { Cpu, Zap, Package, FolderGit2, Download, LogOut, Shield, Menu, X, Settings } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -19,6 +19,7 @@ const Navigation = () => {
   const authNavItems = [
     { path: "/builder", label: "Builder", icon: Zap },
     { path: "/my-projects", label: "My Projects", icon: FolderGit2 },
+    { path: "/account", label: "Account", icon: Settings },
   ];
   
   const navItems = isAuthenticated ? [...publicNavItems, ...authNavItems] : publicNavItems;
