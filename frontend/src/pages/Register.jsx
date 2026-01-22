@@ -20,12 +20,15 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await register(email, username, password);
-      toast.success("Account created successfully!");
-      navigate("/builder");
+      const result = await register(email, username, password);
+      if (result && result.access_token) {
+        toast.success("Account created successfully!");
+        setTimeout(() => {
+          navigate("/builder", { replace: true });
+        }, 100);
+      }
     } catch (error) {
       toast.error(error.response?.data?.detail || "Registration failed");
-    } finally {
       setLoading(false);
     }
   };
