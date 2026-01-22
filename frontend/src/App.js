@@ -12,10 +12,12 @@ import SmartProjectBuilder from "@/pages/SmartProjectBuilder";
 import HardwareCatalog from "@/pages/HardwareCatalog";
 import MyProjects from "@/pages/MyProjects";
 import IDEDownloads from "@/pages/IDEDownloads";
+import AccountSettings from "@/pages/AccountSettings";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import AdminHardware from "@/pages/admin/AdminHardware";
 import AdminMiddleware from "@/pages/admin/AdminMiddleware";
-import AdminUsers from "@/pages/admin/AdminUsers";
+import AdminSoftware from "@/pages/admin/AdminSoftware";
+import AdminIDE from "@/pages/admin/AdminIDE";
 
 function App() {
   return (
@@ -47,6 +49,14 @@ function App() {
                 }
               />
               <Route
+                path="/account"
+                element={
+                  <ProtectedRoute>
+                    <AccountSettings />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path="/admin"
                 element={
                   <AdminRoute>
@@ -71,10 +81,18 @@ function App() {
                 }
               />
               <Route
-                path="/admin/users"
+                path="/admin/software"
                 element={
                   <AdminRoute>
-                    <AdminUsers />
+                    <AdminSoftware />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/ide"
+                element={
+                  <AdminRoute>
+                    <AdminIDE />
                   </AdminRoute>
                 }
               />
