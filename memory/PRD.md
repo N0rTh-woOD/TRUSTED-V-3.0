@@ -34,6 +34,26 @@ Build an AI coding platform for Embedded systems with RISC-V centric using RUST 
 
 ### ✅ Completed (Jan 22, 2025)
 
+#### Smart Project Builder (NEW - AI Code Generation)
+- **4-Step Workflow**: Describe → Hardware → Software → Generate
+- **AI Code Generation**: Uses Gemini 3 Flash via Emergent LLM Key
+- **Generated Files**: Complete Rust project structure
+  - Cargo.toml with dependencies
+  - memory.x linker script for selected hardware
+  - .cargo/config.toml for target configuration
+  - src/main.rs with peripheral initialization
+  - src/lib.rs with board configuration
+  - src/drivers/ with GPIO, UART drivers
+  - README.md with setup instructions
+- **ZIP Download**: Downloadable project packages
+- **Project Versioning**: Track iterations as requirements change
+
+#### Admin LLM Configuration (NEW)
+- Configure AI provider (Gemini, OpenAI, Anthropic)
+- Select model (Gemini 3 Flash, GPT-5.2, Claude Sonnet 4.5, etc.)
+- Choose API key type (Emergent Key or Custom)
+- Stored in database for easy switching
+
 #### UI Redesign
 - Implemented Bosch-inspired corporate design (Primary: #005691)
 - Light theme with white/gray backgrounds
