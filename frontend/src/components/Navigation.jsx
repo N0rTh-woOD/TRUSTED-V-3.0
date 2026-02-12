@@ -40,7 +40,7 @@ const Navigation = () => {
             </div>
             <div className="flex flex-col">
               <span className="font-semibold text-base text-foreground tracking-tight">
-                RV-RUST
+                TrusteD-V
               </span>
               <span className="text-[10px] text-muted-foreground -mt-0.5 hidden sm:block">
                 RISC-V Development Platform

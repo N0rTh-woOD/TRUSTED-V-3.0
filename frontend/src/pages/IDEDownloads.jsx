@@ -63,7 +63,7 @@ const IDEDownloads = () => {
             IDE Downloads
           </h1>
           <p className="text-muted-foreground text-lg">
-            Download the complete RISC-V Rust Studio IDE for your platform
+            Download the complete TrusteD-V Studio IDE for your platform
           </p>
         </div>
         
@@ -76,7 +76,7 @@ const IDEDownloads = () => {
               </div>
               <div className="flex-1">
                 <h3 className="text-xl font-semibold text-foreground mb-2">
-                  RISC-V Rust Studio
+                  TrusteD-V Studio
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   A complete integrated development environment tailored for RISC-V embedded systems development with Rust. 

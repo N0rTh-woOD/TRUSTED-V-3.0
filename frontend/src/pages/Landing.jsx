@@ -227,7 +227,7 @@ const Landing = () => {
               <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
                 <Cpu className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-semibold text-foreground">RV-RUST</span>
+              <span className="font-semibold text-foreground">TrusteD-V</span>
             </div>
             <p className="text-sm text-muted-foreground">
               RISC-V Embedded Development Platform
