@@ -1530,6 +1530,323 @@ async def get_chat_history(session_id: str, current_user: dict = Depends(get_cur
     
     return {"messages": messages}
 
+# LLM Settings Management (Admin)
+@api_router.get("/admin/llm-settings")
+async def get_llm_settings_endpoint(current_user: dict = Depends(get_current_admin_user)):
+    settings = await get_llm_settings()
+    # Don't expose custom API key
+    if settings.get("custom_api_key"):
+        settings["custom_api_key"] = "***configured***"
+    return settings
+
+@api_router.put("/admin/llm-settings")
+async def update_llm_settings_endpoint(
+    settings_update: LLMSettingsUpdate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    update_data = settings_update.model_dump()
+    update_data["id"] = "llm_settings"
+    update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
+    update_data["updated_by"] = current_user["id"]
+    
+    await db.llm_settings.update_one(
+        {"id": "llm_settings"},
+        {"$set": update_data},
+        upsert=True
+    )
+    
+    # Return settings without exposing key
+    result = update_data.copy()
+    if result.get("custom_api_key"):
+        result["custom_api_key"] = "***configured***"
+    
+    return {"message": "LLM settings updated successfully", "settings": result}
+
+@api_router.get("/llm-providers")
+async def get_available_llm_providers():
+    """Get list of available LLM providers and models"""
+    return {
+        "providers": [
+            {
+                "id": "gemini",
+                "name": "Google Gemini",
+                "models": [
+                    {"id": "gemini-3-flash-preview", "name": "Gemini 3 Flash (Recommended)"},
+                    {"id": "gemini-3-pro-preview", "name": "Gemini 3 Pro"},
+                    {"id": "gemini-2.5-pro", "name": "Gemini 2.5 Pro"},
+                    {"id": "gemini-2.5-flash", "name": "Gemini 2.5 Flash"},
+                ]
+            },
+            {
+                "id": "openai",
+                "name": "OpenAI",
+                "models": [
+                    {"id": "gpt-5.2", "name": "GPT-5.2"},
+                    {"id": "gpt-5.1", "name": "GPT-5.1"},
+                    {"id": "gpt-4o", "name": "GPT-4o"},
+                ]
+            },
+            {
+                "id": "anthropic",
+                "name": "Anthropic",
+                "models": [
+                    {"id": "claude-sonnet-4-5-20250929", "name": "Claude Sonnet 4.5"},
+                    {"id": "claude-4-sonnet-20250514", "name": "Claude 4 Sonnet"},
+                    {"id": "claude-opus-4-5-20251101", "name": "Claude Opus 4.5"},
+                ]
+            }
+        ]
+    }
+
+# Project Generation Endpoints
+@api_router.post("/projects/generate")
+async def generate_project(
+    request: ProjectGenerationRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Generate a new RISC-V Rust project with AI-powered code generation"""
+    
+    # Fetch hardware details
+    hardware = await db.hardware.find_one({"id": request.hardware_id}, {"_id": 0})
+    if not hardware:
+        raise HTTPException(status_code=404, detail="Hardware not found")
+    
+    # Fetch middleware details
+    middleware = []
+    for mw_id in request.middleware_ids:
+        mw = await db.middleware.find_one({"id": mw_id}, {"_id": 0})
+        if mw:
+            middleware.append(mw)
+    
+    # Fetch software components
+    software = []
+    for sw_id in request.software_component_ids:
+        sw = await db.software_components.find_one({"id": sw_id}, {"_id": 0})
+        if sw:
+            software.append(sw)
+    
+    # Generate code using LLM
+    generated_files = await generate_code_with_llm(
+        project_name=request.name,
+        description=request.description,
+        hardware=hardware,
+        middleware=middleware,
+        software=software,
+        peripherals=request.peripherals,
+        additional_requirements=request.additional_requirements
+    )
+    
+    # Generate template files
+    cargo_toml = get_cargo_toml_template(request.name, hardware, middleware, software)
+    memory_x = get_memory_x_template(hardware)
+    cargo_config = get_cargo_config_template(hardware)
+    build_rs = get_build_rs_template()
+    
+    # Generate README
+    readme = f'''# {request.name}
+
+{request.description}
+
+## Hardware Configuration
+
+- **Board:** {hardware.get("name", "Unknown")}
+- **Manufacturer:** {hardware.get("manufacturer", "Unknown")}
+- **Core:** {hardware.get("core", "RISC-V")}
+- **Clock Speed:** {hardware.get("clock_speed", "Unknown")}
+- **Memory:** {hardware.get("memory", "Unknown")}
+- **Flash:** {hardware.get("flash", "Unknown")}
+
+## Peripherals
+
+{chr(10).join(["- " + p for p in request.peripherals]) if request.peripherals else "None configured"}
+
+## Middleware
+
+{chr(10).join(["- " + m.get("name", "") + " v" + m.get("version", "") for m in middleware]) if middleware else "None"}
+
+## Building
+
+```bash
+# Install Rust and the RISC-V target
+rustup target add riscv32imac-unknown-none-elf
+
+# Build the project
+cargo build --release
+```
+
+## Flashing
+
+Refer to your hardware documentation for flashing instructions.
+
+---
+Generated by TrusteD-V Platform
+'''
+
+    # Check if project already exists for this user with the same name
+    existing_project = await db.projects.find_one({
+        "user_id": current_user["id"],
+        "name": request.name
+    }, {"_id": 0})
+    
+    if existing_project:
+        # Update existing project with new version
+        project_id = existing_project["id"]
+        current_version = len(existing_project.get("versions", []))
+        new_version = current_version + 1
+        
+        version_entry = {
+            "version": new_version,
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "requirements": request.additional_requirements,
+            "hardware_id": request.hardware_id,
+            "middleware_ids": request.middleware_ids,
+            "software_component_ids": request.software_component_ids,
+            "peripherals": request.peripherals,
+            "files": generated_files,
+            "cargo_toml": cargo_toml,
+            "memory_x": memory_x,
+            "cargo_config": cargo_config,
+            "build_rs": build_rs,
+            "readme": readme
+        }
+        
+        await db.projects.update_one(
+            {"id": project_id},
+            {
+                "$push": {"versions": version_entry},
+                "$set": {
+                    "updated_at": datetime.now(timezone.utc).isoformat(),
+                    "hardware_id": request.hardware_id,
+                    "middleware_ids": request.middleware_ids,
+                    "software_component_ids": request.software_component_ids,
+                    "peripherals": request.peripherals,
+                    "description": request.description
+                }
+            }
+        )
+    else:
+        # Create new project
+        project_id = str(uuid.uuid4())
+        new_version = 1
+        
+        version_entry = {
+            "version": new_version,
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "requirements": request.additional_requirements,
+            "hardware_id": request.hardware_id,
+            "middleware_ids": request.middleware_ids,
+            "software_component_ids": request.software_component_ids,
+            "peripherals": request.peripherals,
+            "files": generated_files,
+            "cargo_toml": cargo_toml,
+            "memory_x": memory_x,
+            "cargo_config": cargo_config,
+            "build_rs": build_rs,
+            "readme": readme
+        }
+        
+        project = {
+            "id": project_id,
+            "user_id": current_user["id"],
+            "name": request.name,
+            "description": request.description,
+            "hardware_id": request.hardware_id,
+            "middleware_ids": request.middleware_ids,
+            "software_component_ids": request.software_component_ids,
+            "peripherals": request.peripherals,
+            "versions": [version_entry],
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        await db.projects.insert_one(project)
+    
+    return {
+        "project_id": project_id,
+        "version": new_version,
+        "message": f"Project generated successfully (Version {new_version})",
+        "files_generated": len(generated_files) + 4  # +4 for Cargo.toml, memory.x, etc.
+    }
+
+@api_router.get("/projects/{project_id}/download/{version}")
+async def download_project(
+    project_id: str,
+    version: int,
+    current_user: dict = Depends(get_current_user)
+):
+    """Download a project version as a ZIP file"""
+    
+    # Fetch project
+    project = await db.projects.find_one({
+        "id": project_id,
+        "user_id": current_user["id"]
+    }, {"_id": 0})
+    
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    
+    # Find the specific version
+    version_data = None
+    for v in project.get("versions", []):
+        if v.get("version") == version:
+            version_data = v
+            break
+    
+    if not version_data:
+        raise HTTPException(status_code=404, detail=f"Version {version} not found")
+    
+    # Create ZIP file
+    zip_buffer = create_project_zip(
+        project_name=project["name"],
+        files=version_data.get("files", []),
+        cargo_toml=version_data.get("cargo_toml", ""),
+        memory_x=version_data.get("memory_x", ""),
+        cargo_config=version_data.get("cargo_config", ""),
+        build_rs=version_data.get("build_rs", ""),
+        readme=version_data.get("readme", "")
+    )
+    
+    safe_name = project["name"].lower().replace(" ", "_").replace("-", "_")
+    filename = f"{safe_name}_v{version}.zip"
+    
+    return StreamingResponse(
+        zip_buffer,
+        media_type="application/zip",
+        headers={"Content-Disposition": f"attachment; filename={filename}"}
+    )
+
+@api_router.get("/projects/{project_id}/versions")
+async def get_project_versions(
+    project_id: str,
+    current_user: dict = Depends(get_current_user)
+):
+    """Get all versions of a project"""
+    
+    project = await db.projects.find_one({
+        "id": project_id,
+        "user_id": current_user["id"]
+    }, {"_id": 0})
+    
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    
+    versions = []
+    for v in project.get("versions", []):
+        versions.append({
+            "version": v.get("version"),
+            "generated_at": v.get("generated_at"),
+            "hardware_id": v.get("hardware_id"),
+            "middleware_ids": v.get("middleware_ids"),
+            "peripherals": v.get("peripherals"),
+            "files_count": len(v.get("files", [])) + 4
+        })
+    
+    return {
+        "project_id": project_id,
+        "project_name": project["name"],
+        "versions": versions
+    }
+
 # User Account Management (Self-service)
 @api_router.put("/account/profile")
 async def update_user_profile(update_data: UserProfileUpdate, current_user: dict = Depends(get_current_user)):
