@@ -85,13 +85,13 @@ class TestSmartProjectBuilderAPIs:
         print(f"SUCCESS: Compatible middleware for {core}: {len(compatible)} items")
     
     def test_compatible_software_endpoint(self, hardware_list):
-        """Test compatible software filtering by core"""
+        """Test compatible software filtering by hardware_id"""
         hw = hardware_list[0]
-        core = hw["core"]
-        response = requests.get(f"{BASE_URL}/api/software-components/compatible/{core}")
+        hw_id = hw["id"]
+        response = requests.get(f"{BASE_URL}/api/software-components/compatible/{hw_id}")
         assert response.status_code == 200
         compatible = response.json()
-        print(f"SUCCESS: Compatible software for {core}: {len(compatible)} items")
+        print(f"SUCCESS: Compatible software for {hw['name']}: {len(compatible)} items")
 
 
 class TestProjectGeneration:
