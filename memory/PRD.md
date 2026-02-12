@@ -3,6 +3,12 @@
 ## Original Problem Statement
 Build an AI coding platform for Embedded systems with RISC-V centric using RUST language.
 
+## Platform Identity
+- **Brand Name**: TrusteD-V
+- **Tagline**: RISC-V Development Platform
+- **IDE Name**: TrusteD-V Studio
+- **Theme**: Bosch-inspired corporate aesthetic (Primary: #005691)
+
 ## Core Requirements
 1. **AI-Powered Hardware Selection**: Analyze user prompts to suggest best hardware and peripherals from a database
 2. **Middleware Selection**: Select appropriate middleware (e.g., RTOS) based on requirements
