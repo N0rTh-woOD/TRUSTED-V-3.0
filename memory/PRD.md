@@ -94,31 +94,28 @@ Build an AI coding platform for Embedded systems with RISC-V centric using RUST 
 ## Prioritized Backlog
 
 ### P0 - Critical
-- None currently
+- None currently (Core features implemented)
 
 ### P1 - High Priority
-1. **Implement Interactive Smart Project Builder**
-   - Connect AI chat to LLM for intelligent suggestions
-   - Hardware/middleware selection with compatibility checking
-   - Project configuration workflow
-
-2. **Project ZIP Generation**
-   - Generate downloadable project packages
-   - Include selected drivers, bootloader, templates
+1. **Enhanced Code Templates**
+   - Add more hardware-specific templates
+   - Improve peripheral driver implementations
+   - Add example applications
 
 ### P2 - Medium Priority
-1. **Project Versioning System**
-   - Save/manage different versions of user projects
-   - Version history and restore functionality
+1. **Project Sharing & Collaboration**
+   - Share projects with other users
+   - Collaborative editing
 
-2. **Real AI Integration**
-   - Integrate Emergent LLM key for prompt analysis
-   - Intelligent hardware recommendations
+2. **Real-time Code Preview**
+   - Show generated code in UI before download
+   - Syntax highlighting
 
 ### P3 - Future Enhancements
-1. **Notification System** - Alert users when changes require updates
-2. **IDE Download Functionality** - Host actual IDE binaries
-3. **Backend Refactoring** - Split server.py into modular routers
+1. **IDE Integration** - Host actual IDE binaries
+2. **CI/CD Integration** - Automated build pipelines
+3. **Hardware Simulator** - In-browser RISC-V emulator
+4. **Backend Refactoring** - Split server.py into modular routers
 
 ---
 
