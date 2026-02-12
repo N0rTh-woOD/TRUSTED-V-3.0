@@ -1456,15 +1456,6 @@ async def update_project(project_id: str, update_data: ProjectUpdate, current_us
             ver['generated_at'] = datetime.fromisoformat(ver['generated_at'])
     return updated
 
-@api_router.get("/projects/{project_id}/download/{version}")
-async def download_project(project_id: str, version: int, current_user: dict = Depends(get_current_user)):
-    project = await db.projects.find_one({"id": project_id, "user_id": current_user["id"]}, {"_id": 0})
-    if not project:
-        raise HTTPException(status_code=404, detail="Project not found")
-    
-    # In a real implementation, generate ZIP file here
-    return {"download_url": f"#download-{project_id}-v{version}", "message": "Project download feature coming soon"}
-
 # IDE Downloads
 @api_router.get("/ide-downloads", response_model=List[IDEDownload])
 async def get_ide_downloads():
