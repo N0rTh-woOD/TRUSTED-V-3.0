@@ -21,7 +21,7 @@ import AdminIDE from "@/pages/admin/AdminIDE";
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="risc-v-theme">
+    <ThemeProvider defaultTheme="light" storageKey="trusted-v-theme">
       <AuthProvider>
         <div className="App min-h-screen bg-background">
           <BrowserRouter>
