@@ -321,6 +321,524 @@ async def get_current_admin_user(current_user: dict = Depends(get_current_user))
         raise HTTPException(status_code=403, detail="Admin access required")
     return current_user
 
+# LLM Helper Functions
+async def get_llm_settings():
+    """Get current LLM settings from database or return defaults"""
+    settings = await db.llm_settings.find_one({"id": "llm_settings"}, {"_id": 0})
+    if not settings:
+        return {
+            "id": "llm_settings",
+            "provider": "gemini",
+            "model": "gemini-3-flash-preview",
+            "api_key_type": "emergent",
+            "custom_api_key": None
+        }
+    return settings
+
+async def get_llm_chat(session_id: str, system_message: str):
+    """Create LLM chat instance based on current settings"""
+    settings = await get_llm_settings()
+    
+    # Determine API key to use
+    if settings.get("api_key_type") == "custom" and settings.get("custom_api_key"):
+        api_key = settings["custom_api_key"]
+    else:
+        api_key = EMERGENT_LLM_KEY
+    
+    chat = LlmChat(
+        api_key=api_key,
+        session_id=session_id,
+        system_message=system_message
+    )
+    
+    # Configure provider and model
+    provider = settings.get("provider", "gemini")
+    model = settings.get("model", "gemini-3-flash-preview")
+    chat.with_model(provider, model)
+    
+    return chat
+
+# Code Generation Templates
+def get_cargo_toml_template(project_name: str, hardware: dict, middleware: list, software: list):
+    """Generate Cargo.toml content"""
+    deps = []
+    
+    # Add riscv dependencies
+    deps.append('riscv = "0.11"')
+    deps.append('riscv-rt = "0.12"')
+    deps.append('panic-halt = "0.2"')
+    
+    # Add embedded-hal
+    deps.append('embedded-hal = "1.0"')
+    
+    # Add middleware-specific dependencies
+    for mw in middleware:
+        if "freertos" in mw.get("name", "").lower():
+            deps.append('# FreeRTOS integration (configure based on your setup)')
+        if "zephyr" in mw.get("name", "").lower():
+            deps.append('# Zephyr RTOS integration')
+    
+    deps_str = "\n".join(deps)
+    
+    return f'''[package]
+name = "{project_name.lower().replace(" ", "_").replace("-", "_")}"
+version = "0.1.0"
+edition = "2021"
+authors = ["TrusteD-V Project Generator"]
+
+[dependencies]
+{deps_str}
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+debug = false
+
+[profile.dev]
+opt-level = 1
+debug = true
+'''
+
+def get_memory_x_template(hardware: dict):
+    """Generate memory.x linker script based on hardware"""
+    memory_size = hardware.get("memory", "16 KB").upper()
+    flash_size = hardware.get("flash", "4 MB").upper()
+    
+    # Parse memory sizes
+    mem_kb = 16
+    if "KB" in memory_size:
+        mem_kb = int(memory_size.replace("KB", "").strip())
+    elif "MB" in memory_size:
+        mem_kb = int(memory_size.replace("MB", "").strip()) * 1024
+    
+    flash_kb = 4096
+    if "KB" in flash_size:
+        flash_kb = int(flash_size.replace("KB", "").strip())
+    elif "MB" in flash_size:
+        flash_kb = int(flash_size.replace("MB", "").strip()) * 1024
+    
+    return f'''/* Memory layout for {hardware.get("name", "RISC-V")} */
+/* Core: {hardware.get("core", "RISC-V")} @ {hardware.get("clock_speed", "Unknown")} */
+
+MEMORY
+{{
+    FLASH : ORIGIN = 0x20000000, LENGTH = {flash_kb}K
+    RAM   : ORIGIN = 0x80000000, LENGTH = {mem_kb}K
+}}
+
+REGION_ALIAS("REGION_TEXT", FLASH);
+REGION_ALIAS("REGION_RODATA", FLASH);
+REGION_ALIAS("REGION_DATA", RAM);
+REGION_ALIAS("REGION_BSS", RAM);
+REGION_ALIAS("REGION_HEAP", RAM);
+REGION_ALIAS("REGION_STACK", RAM);
+'''
+
+def get_cargo_config_template(hardware: dict):
+    """Generate .cargo/config.toml"""
+    core = hardware.get("core", "").lower()
+    
+    # Determine target based on core
+    if "64" in core:
+        target = "riscv64imac-unknown-none-elf"
+    elif "32" in core or "e31" in core:
+        target = "riscv32imac-unknown-none-elf"
+    else:
+        target = "riscv32imac-unknown-none-elf"
+    
+    return f'''[build]
+target = "{target}"
+
+[target.{target}]
+runner = "qemu-system-riscv32 -machine virt -nographic -semihosting-config enable=on -kernel"
+rustflags = [
+    "-C", "link-arg=-Tmemory.x",
+    "-C", "link-arg=-Tlink.x",
+]
+
+[env]
+DEFMT_LOG = "trace"
+'''
+
+def get_build_rs_template():
+    """Generate build.rs"""
+    return '''use std::env;
+use std::fs::File;
+use std::io::Write;
+use std::path::PathBuf;
+
+fn main() {
+    // Put the linker script somewhere the linker can find it
+    let out = &PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    
+    File::create(out.join("memory.x"))
+        .unwrap()
+        .write_all(include_bytes!("memory.x"))
+        .unwrap();
+    
+    println!("cargo:rustc-link-search={}", out.display());
+    println!("cargo:rerun-if-changed=memory.x");
+    println!("cargo:rerun-if-changed=build.rs");
+}
+'''
+
+async def generate_code_with_llm(
+    project_name: str,
+    description: str,
+    hardware: dict,
+    middleware: list,
+    software: list,
+    peripherals: list,
+    additional_requirements: str
+):
+    """Use LLM to generate main.rs and driver code"""
+    
+    system_prompt = """You are an expert embedded systems developer specializing in RISC-V architecture and Rust programming.
+You generate production-quality, well-documented Rust code for embedded systems.
+Always include proper error handling, safety comments, and follow Rust embedded best practices.
+Use #![no_std] and #![no_main] attributes for embedded projects.
+Include detailed comments explaining the code structure and hardware interactions."""
+    
+    # Build the prompt with all project details
+    peripheral_list = ", ".join(peripherals) if peripherals else "None specified"
+    middleware_names = ", ".join([m.get("name", "") for m in middleware]) if middleware else "None"
+    software_names = ", ".join([s.get("name", "") for s in software]) if software else "None"
+    
+    user_prompt = f"""Generate a complete Rust embedded project for RISC-V with the following specifications:
+
+**Project Name:** {project_name}
+**Description:** {description}
+
+**Hardware:**
+- Board: {hardware.get("name", "Unknown")}
+- Manufacturer: {hardware.get("manufacturer", "Unknown")}
+- Core: {hardware.get("core", "RISC-V")}
+- Clock Speed: {hardware.get("clock_speed", "Unknown")}
+- Memory: {hardware.get("memory", "Unknown")}
+- Flash: {hardware.get("flash", "Unknown")}
+
+**Middleware/RTOS:** {middleware_names}
+
+**Software Components:** {software_names}
+
+**Peripherals to Initialize:** {peripheral_list}
+
+**Additional Requirements:** {additional_requirements if additional_requirements else "None"}
+
+Please generate the following files in JSON format with this exact structure:
+{{
+    "files": [
+        {{"path": "src/main.rs", "content": "..."}},
+        {{"path": "src/lib.rs", "content": "..."}},
+        {{"path": "src/drivers/mod.rs", "content": "..."}},
+        {{"path": "src/drivers/gpio.rs", "content": "..."}},
+        {{"path": "src/drivers/uart.rs", "content": "..."}}
+    ]
+}}
+
+Requirements for the code:
+1. Use #![no_std] and #![no_main] for bare-metal
+2. Include proper panic handler using panic-halt
+3. Initialize all specified peripherals
+4. Add comprehensive documentation comments
+5. Include a main loop with example usage
+6. Create driver modules for each peripheral type
+7. Use embedded-hal traits where appropriate
+8. Include proper memory safety considerations
+
+Return ONLY the JSON object, no additional text or markdown formatting."""
+
+    try:
+        chat = await get_llm_chat(
+            session_id=f"codegen-{uuid.uuid4()}",
+            system_message=system_prompt
+        )
+        
+        response = await chat.send_message(UserMessage(text=user_prompt))
+        
+        # Parse the JSON response
+        # Clean up response if it has markdown code blocks
+        response_text = response.strip()
+        if response_text.startswith("```"):
+            # Remove markdown code blocks
+            lines = response_text.split("\n")
+            if lines[0].startswith("```"):
+                lines = lines[1:]
+            if lines[-1].strip() == "```":
+                lines = lines[:-1]
+            response_text = "\n".join(lines)
+        
+        try:
+            result = json.loads(response_text)
+            return result.get("files", [])
+        except json.JSONDecodeError:
+            # If JSON parsing fails, create a basic structure
+            logging.error(f"Failed to parse LLM response as JSON: {response_text[:500]}")
+            return get_fallback_code_files(project_name, hardware, peripherals)
+            
+    except Exception as e:
+        logging.error(f"LLM code generation failed: {str(e)}")
+        return get_fallback_code_files(project_name, hardware, peripherals)
+
+def get_fallback_code_files(project_name: str, hardware: dict, peripherals: list):
+    """Generate basic code files if LLM fails"""
+    
+    peripheral_inits = ""
+    for p in peripherals:
+        peripheral_inits += f"    // TODO: Initialize {p}\n"
+    
+    main_rs = f'''#![no_std]
+#![no_main]
+
+use panic_halt as _;
+use riscv_rt::entry;
+
+mod drivers;
+
+/// Entry point for {project_name}
+/// Hardware: {hardware.get("name", "RISC-V Board")}
+/// Core: {hardware.get("core", "RISC-V")}
+#[entry]
+fn main() -> ! {{
+    // Initialize hardware
+{peripheral_inits if peripheral_inits else "    // No peripherals configured"}
+    
+    // Main application loop
+    loop {{
+        // TODO: Add your application logic here
+        riscv::asm::wfi(); // Wait for interrupt
+    }}
+}}
+'''
+
+    lib_rs = f'''#![no_std]
+
+//! {project_name} - RISC-V Embedded Project
+//! 
+//! Generated by TrusteD-V Platform
+//! Hardware: {hardware.get("name", "Unknown")}
+
+pub mod drivers;
+
+/// Board configuration constants
+pub mod config {{
+    /// System clock frequency in Hz
+    pub const CLOCK_FREQ: u32 = {hardware.get("clock_speed", "320 MHz").replace(" MHz", "").replace(" ", "")}000000;
+}}
+'''
+
+    drivers_mod = '''//! Hardware drivers module
+
+pub mod gpio;
+pub mod uart;
+
+pub use gpio::*;
+pub use uart::*;
+'''
+
+    gpio_driver = '''//! GPIO Driver for RISC-V
+//! 
+//! Provides basic GPIO functionality
+
+use embedded_hal::digital::{InputPin, OutputPin, ErrorType};
+
+/// GPIO Pin representation
+pub struct GpioPin {
+    pin_number: u8,
+    is_output: bool,
+}
+
+impl GpioPin {
+    /// Create a new GPIO pin
+    pub const fn new(pin_number: u8) -> Self {
+        Self {
+            pin_number,
+            is_output: false,
+        }
+    }
+    
+    /// Configure pin as output
+    pub fn into_output(mut self) -> Self {
+        self.is_output = true;
+        // TODO: Configure hardware registers
+        self
+    }
+    
+    /// Configure pin as input
+    pub fn into_input(mut self) -> Self {
+        self.is_output = false;
+        // TODO: Configure hardware registers
+        self
+    }
+}
+
+#[derive(Debug)]
+pub struct GpioError;
+
+impl embedded_hal::digital::Error for GpioError {
+    fn kind(&self) -> embedded_hal::digital::ErrorKind {
+        embedded_hal::digital::ErrorKind::Other
+    }
+}
+
+impl ErrorType for GpioPin {
+    type Error = GpioError;
+}
+
+impl OutputPin for GpioPin {
+    fn set_low(&mut self) -> Result<(), Self::Error> {
+        // TODO: Set pin low via hardware register
+        Ok(())
+    }
+    
+    fn set_high(&mut self) -> Result<(), Self::Error> {
+        // TODO: Set pin high via hardware register
+        Ok(())
+    }
+}
+
+impl InputPin for GpioPin {
+    fn is_high(&mut self) -> Result<bool, Self::Error> {
+        // TODO: Read pin state from hardware register
+        Ok(false)
+    }
+    
+    fn is_low(&mut self) -> Result<bool, Self::Error> {
+        // TODO: Read pin state from hardware register
+        Ok(true)
+    }
+}
+'''
+
+    uart_driver = '''//! UART Driver for RISC-V
+//! 
+//! Provides serial communication functionality
+
+use embedded_hal::serial::{ErrorType, Write};
+
+/// UART peripheral
+pub struct Uart {
+    base_address: usize,
+    baud_rate: u32,
+}
+
+impl Uart {
+    /// Create a new UART instance
+    pub const fn new(base_address: usize, baud_rate: u32) -> Self {
+        Self {
+            base_address,
+            baud_rate,
+        }
+    }
+    
+    /// Initialize the UART peripheral
+    pub fn init(&mut self) {
+        // TODO: Configure UART registers
+        // - Set baud rate divisor
+        // - Enable TX/RX
+        // - Configure data format (8N1)
+    }
+    
+    /// Write a byte to UART
+    pub fn write_byte(&mut self, byte: u8) {
+        // TODO: Wait for TX buffer empty, then write byte
+        let _ = byte;
+    }
+    
+    /// Read a byte from UART (blocking)
+    pub fn read_byte(&mut self) -> u8 {
+        // TODO: Wait for RX data available, then read byte
+        0
+    }
+}
+
+#[derive(Debug)]
+pub struct UartError;
+
+impl embedded_hal::serial::Error for UartError {
+    fn kind(&self) -> embedded_hal::serial::ErrorKind {
+        embedded_hal::serial::ErrorKind::Other
+    }
+}
+
+impl ErrorType for Uart {
+    type Error = UartError;
+}
+
+impl Write for Uart {
+    fn write(&mut self, buf: &[u8]) -> Result<(), Self::Error> {
+        for byte in buf {
+            self.write_byte(*byte);
+        }
+        Ok(())
+    }
+    
+    fn flush(&mut self) -> Result<(), Self::Error> {
+        // TODO: Wait for TX complete
+        Ok(())
+    }
+}
+'''
+
+    return [
+        {"path": "src/main.rs", "content": main_rs},
+        {"path": "src/lib.rs", "content": lib_rs},
+        {"path": "src/drivers/mod.rs", "content": drivers_mod},
+        {"path": "src/drivers/gpio.rs", "content": gpio_driver},
+        {"path": "src/drivers/uart.rs", "content": uart_driver},
+    ]
+
+def create_project_zip(
+    project_name: str,
+    files: list,
+    cargo_toml: str,
+    memory_x: str,
+    cargo_config: str,
+    build_rs: str,
+    readme: str
+):
+    """Create a ZIP file containing all project files"""
+    
+    zip_buffer = io.BytesIO()
+    
+    safe_name = project_name.lower().replace(" ", "_").replace("-", "_")
+    
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zf:
+        # Add Cargo.toml
+        zf.writestr(f"{safe_name}/Cargo.toml", cargo_toml)
+        
+        # Add memory.x
+        zf.writestr(f"{safe_name}/memory.x", memory_x)
+        
+        # Add .cargo/config.toml
+        zf.writestr(f"{safe_name}/.cargo/config.toml", cargo_config)
+        
+        # Add build.rs
+        zf.writestr(f"{safe_name}/build.rs", build_rs)
+        
+        # Add README.md
+        zf.writestr(f"{safe_name}/README.md", readme)
+        
+        # Add generated source files
+        for file in files:
+            file_path = file.get("path", "")
+            file_content = file.get("content", "")
+            if file_path and file_content:
+                zf.writestr(f"{safe_name}/{file_path}", file_content)
+        
+        # Add .gitignore
+        gitignore = '''target/
+Cargo.lock
+*.swp
+*.swo
+.DS_Store
+'''
+        zf.writestr(f"{safe_name}/.gitignore", gitignore)
+    
+    zip_buffer.seek(0)
+    return zip_buffer
+
 # Initialize sample data
 async def init_sample_data():
     # Create admin user if not exists
