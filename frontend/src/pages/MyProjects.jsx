@@ -4,7 +4,13 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Package, Download, Clock, FolderGit2, Plus } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Loader2, Package, Download, Clock, FolderGit2, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +22,8 @@ const MyProjects = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expandedProject, setExpandedProject] = useState(null);
+  const [downloadingVersion, setDownloadingVersion] = useState(null);
 
   useEffect(() => {
     loadProjects();
@@ -35,17 +43,54 @@ const MyProjects = () => {
     }
   };
 
-  const handleDownload = async (projectId, version) => {
+  const handleDownload = async (projectId, projectName, version) => {
+    setDownloadingVersion(`${projectId}-${version}`);
     try {
       const response = await axios.get(
         `${API}/projects/${projectId}/download/${version}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          responseType: "blob",
+        }
       );
-      toast.info(response.data.message);
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${projectName.toLowerCase().replace(/\s+/g, "_")}_v${version}.zip`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+
+      toast.success(`Downloaded version ${version}`);
     } catch (error) {
       console.error("Failed to download:", error);
       toast.error("Download failed");
+    } finally {
+      setDownloadingVersion(null);
     }
+  };
+
+  const handleDelete = async (projectId) => {
+    if (!window.confirm("Are you sure you want to delete this project? This action cannot be undone.")) {
+      return;
+    }
+
+    try {
+      await axios.delete(`${API}/projects/${projectId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      toast.success("Project deleted successfully");
+      loadProjects();
+    } catch (error) {
+      console.error("Failed to delete project:", error);
+      toast.error("Failed to delete project");
+    }
+  };
+
+  const toggleExpand = (projectId) => {
+    setExpandedProject(expandedProject === projectId ? null : projectId);
   };
 
   if (loading) {
@@ -105,63 +150,145 @@ const MyProjects = () => {
               <Card
                 key={project.id}
                 data-testid={`project-card-${project.id}`}
-                className="bg-card border border-border hover:border-primary/50 transition-colors"
+                className="bg-card border border-border"
               >
                 <CardHeader className="p-6 border-b border-border">
                   <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="text-xl font-semibold text-foreground mb-1">
-                        {project.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-xl font-semibold text-foreground">
+                          {project.name}
+                        </h3>
+                        <Badge variant="secondary">
+                          {project.versions?.length || 0} Versions
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-3">
                         {project.description}
                       </p>
+                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        <span>Created: {new Date(project.created_at).toLocaleDateString()}</span>
+                        <span>Updated: {new Date(project.updated_at).toLocaleDateString()}</span>
+                      </div>
                     </div>
-                    <Badge variant="secondary">
-                      {project.versions.length}{" "}
-                      {project.versions.length === 1 ? "Version" : "Versions"}
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => toggleExpand(project.id)}
+                      >
+                        {expandedProject === project.id ? (
+                          <ChevronUp className="w-4 h-4" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4" />
+                        )}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-destructive hover:text-destructive"
+                        onClick={() => handleDelete(project.id)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </div>
                 </CardHeader>
 
-                <CardContent className="p-6">
-                  <div className="space-y-3">
-                    {project.versions.map((version, index) => (
-                      <div
-                        key={index}
-                        data-testid={`version-${index}`}
-                        className="flex items-center justify-between p-4 rounded-lg bg-muted/50 border border-border"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <Package className="w-5 h-5 text-primary" />
-                          </div>
-                          <div>
-                            <p className="font-medium text-foreground">
-                              Version {version.version}
-                            </p>
-                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                              <Clock className="w-3 h-3" />
-                              <span>
-                                {new Date(version.generated_at).toLocaleString()}
-                              </span>
+                {expandedProject === project.id && (
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold text-foreground mb-4">Version History</h4>
+                    <div className="space-y-3">
+                      {project.versions?.map((version, index) => (
+                        <div
+                          key={index}
+                          data-testid={`version-${index}`}
+                          className="flex items-center justify-between p-4 rounded-lg bg-muted/50 border border-border"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                              <Package className="w-5 h-5 text-primary" />
+                            </div>
+                            <div>
+                              <p className="font-medium text-foreground">
+                                Version {version.version}
+                              </p>
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <Clock className="w-3 h-3" />
+                                <span>
+                                  {new Date(version.generated_at).toLocaleString()}
+                                </span>
+                              </div>
+                              {version.peripherals?.length > 0 && (
+                                <div className="flex items-center gap-1 mt-1">
+                                  {version.peripherals.slice(0, 3).map((p, i) => (
+                                    <Badge key={i} variant="outline" className="text-[10px]">
+                                      {p}
+                                    </Badge>
+                                  ))}
+                                  {version.peripherals.length > 3 && (
+                                    <Badge variant="outline" className="text-[10px]">
+                                      +{version.peripherals.length - 3}
+                                    </Badge>
+                                  )}
+                                </div>
+                              )}
                             </div>
                           </div>
-                        </div>
 
-                        <Button
-                          data-testid={`download-btn-${index}`}
-                          onClick={() => handleDownload(project.id, version.version)}
-                          variant="outline"
-                          size="sm"
-                        >
-                          <Download className="w-4 h-4 mr-2" />
-                          Download
-                        </Button>
+                          <Button
+                            data-testid={`download-btn-${index}`}
+                            onClick={() => handleDownload(project.id, project.name, version.version)}
+                            variant="outline"
+                            size="sm"
+                            disabled={downloadingVersion === `${project.id}-${version.version}`}
+                          >
+                            {downloadingVersion === `${project.id}-${version.version}` ? (
+                              <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                            ) : (
+                              <Download className="w-4 h-4 mr-2" />
+                            )}
+                            Download
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+
+                    {(!project.versions || project.versions.length === 0) && (
+                      <p className="text-sm text-muted-foreground text-center py-4">
+                        No versions generated yet
+                      </p>
+                    )}
+                  </CardContent>
+                )}
+
+                {expandedProject !== project.id && project.versions?.length > 0 && (
+                  <CardContent className="p-4 pt-0">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Package className="w-4 h-4" />
+                        <span>Latest: Version {project.versions[project.versions.length - 1]?.version}</span>
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
+                      <Button
+                        data-testid={`quick-download-btn-${project.id}`}
+                        onClick={() => handleDownload(
+                          project.id, 
+                          project.name, 
+                          project.versions[project.versions.length - 1]?.version
+                        )}
+                        size="sm"
+                        disabled={downloadingVersion === `${project.id}-${project.versions[project.versions.length - 1]?.version}`}
+                      >
+                        {downloadingVersion === `${project.id}-${project.versions[project.versions.length - 1]?.version}` ? (
+                          <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                        ) : (
+                          <Download className="w-4 h-4 mr-2" />
+                        )}
+                        Download Latest
+                      </Button>
+                    </div>
+                  </CardContent>
+                )}
               </Card>
             ))}
           </div>
