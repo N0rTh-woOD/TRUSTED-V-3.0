@@ -248,6 +248,43 @@ class ProjectUpdate(BaseModel):
     sdk_id: Optional[str] = None
     requirements: Optional[str] = None
 
+# LLM Settings Model (Admin configurable)
+class LLMSettings(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = "llm_settings"  # Singleton
+    provider: str = "gemini"  # openai, anthropic, gemini
+    model: str = "gemini-3-flash-preview"
+    api_key_type: str = "emergent"  # emergent or custom
+    custom_api_key: Optional[str] = None
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_by: Optional[str] = None
+
+class LLMSettingsUpdate(BaseModel):
+    provider: str
+    model: str
+    api_key_type: str = "emergent"
+    custom_api_key: Optional[str] = None
+
+# Project Generation Models
+class ProjectGenerationRequest(BaseModel):
+    name: str
+    description: str
+    hardware_id: str
+    middleware_ids: List[str]
+    software_component_ids: List[str] = []
+    peripherals: List[str] = []
+    additional_requirements: str = ""
+
+class GeneratedFile(BaseModel):
+    path: str
+    content: str
+
+class ProjectGenerationResponse(BaseModel):
+    project_id: str
+    version: int
+    files: List[GeneratedFile]
+    message: str
+
 # Auth helper functions
 def create_access_token(data: dict):
     to_encode = data.copy()
