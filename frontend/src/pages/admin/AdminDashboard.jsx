@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Loader2, Package, Layers, Download, Database, ArrowRight, Settings } from "lucide-react";
+import { Loader2, Package, Layers, Download, Database, ArrowRight, Brain } from "lucide-react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -73,6 +73,13 @@ const AdminDashboard = () => {
       icon: Download,
       link: "/admin/ide",
       count: stats?.ide_downloads || 0,
+    },
+    {
+      title: "LLM Configuration",
+      description: "Configure AI model for code generation (provider, model, API key)",
+      icon: Brain,
+      link: "/admin/llm",
+      count: null,
     },
   ];
 
@@ -160,7 +167,7 @@ const AdminDashboard = () => {
                       {section.description}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {section.count} items
+                      {section.count !== null ? `${section.count} items` : "Settings"}
                     </p>
                   </CardContent>
                 </Card>
