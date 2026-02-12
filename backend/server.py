@@ -435,7 +435,7 @@ async def init_sample_data():
         sample_ide = [
             {
                 "id": str(uuid.uuid4()),
-                "name": "RISC-V Rust Studio",
+                "name": "TrusteD-V Studio",
                 "version": "1.2.0",
                 "platform": "Windows x64",
                 "download_url": "#",
@@ -444,7 +444,7 @@ async def init_sample_data():
             },
             {
                 "id": str(uuid.uuid4()),
-                "name": "RISC-V Rust Studio",
+                "name": "TrusteD-V Studio",
                 "version": "1.2.0",
                 "platform": "macOS",
                 "download_url": "#",
@@ -453,7 +453,7 @@ async def init_sample_data():
             },
             {
                 "id": str(uuid.uuid4()),
-                "name": "RISC-V Rust Studio",
+                "name": "TrusteD-V Studio",
                 "version": "1.2.0",
                 "platform": "Linux x64",
                 "download_url": "#",
