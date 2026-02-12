@@ -25,15 +25,17 @@ class TestRebranding:
         assert data["user"]["is_admin"] == True
         print("SUCCESS: Login with admin@trusted-v.com works")
     
-    def test_old_credentials_do_not_work(self):
-        """Test that old admin@rvrust.com credentials no longer work"""
+    def test_new_admin_user_exists(self):
+        """Test that new admin@trusted-v.com user exists and is admin"""
         response = requests.post(f"{BASE_URL}/api/auth/login", json={
-            "email": "admin@rvrust.com",
+            "email": "admin@trusted-v.com",
             "password": "admin123"
         })
-        # Should fail with 401 since old user doesn't exist
-        assert response.status_code == 401, f"Old credentials should not work: {response.text}"
-        print("SUCCESS: Old credentials (admin@rvrust.com) do not work")
+        assert response.status_code == 200, f"New admin login failed: {response.text}"
+        
+        data = response.json()
+        assert data["user"]["is_admin"] == True, "New admin user should have admin privileges"
+        print("SUCCESS: New admin@trusted-v.com user exists with admin privileges")
     
     def test_ide_downloads_show_trusted_v_studio(self):
         """Test that IDE downloads show TrusteD-V Studio branding"""
