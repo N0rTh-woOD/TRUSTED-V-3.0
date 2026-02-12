@@ -283,10 +283,10 @@ async def get_current_admin_user(current_user: dict = Depends(get_current_user))
 # Initialize sample data
 async def init_sample_data():
     # Create admin user if not exists
-    admin_exists = await db.users.find_one({"email": "admin@rvrust.com"})
+    admin_exists = await db.users.find_one({"email": "admin@trusted-v.com"})
     if not admin_exists:
         admin = User(
-            email="admin@rvrust.com",
+            email="admin@trusted-v.com",
             username="admin",
             password_hash=get_password_hash("admin123"),
             is_admin=True
@@ -294,7 +294,7 @@ async def init_sample_data():
         admin_dict = admin.model_dump()
         admin_dict['created_at'] = admin_dict['created_at'].isoformat()
         await db.users.insert_one(admin_dict)
-        logging.info("Admin user created: admin@rvrust.com / admin123")
+        logging.info("Admin user created: admin@trusted-v.com / admin123")
     
     # Check if data exists
     hardware_count = await db.hardware.count_documents({})
