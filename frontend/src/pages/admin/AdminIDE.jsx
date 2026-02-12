@@ -59,7 +59,7 @@ const AdminIDE = () => {
   const handleAdd = () => {
     setEditingIDE(null);
     setFormData({
-      name: "RISC-V Rust Studio",
+      name: "TrusteD-V Studio",
       version: "",
       platform: "",
       download_url: "",
