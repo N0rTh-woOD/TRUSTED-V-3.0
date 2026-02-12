@@ -18,6 +18,7 @@ import AdminHardware from "@/pages/admin/AdminHardware";
 import AdminMiddleware from "@/pages/admin/AdminMiddleware";
 import AdminSoftware from "@/pages/admin/AdminSoftware";
 import AdminIDE from "@/pages/admin/AdminIDE";
+import AdminLLM from "@/pages/admin/AdminLLM";
 
 function App() {
   return (
@@ -93,6 +94,14 @@ function App() {
                 element={
                   <AdminRoute>
                     <AdminIDE />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/llm"
+                element={
+                  <AdminRoute>
+                    <AdminLLM />
                   </AdminRoute>
                 }
               />
