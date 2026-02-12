@@ -1,4 +1,4 @@
-# RV-RUST: AI-Powered RISC-V Embedded Development Platform
+# TrusteD-V: AI-Powered RISC-V Embedded Development Platform
 
 ## Original Problem Statement
 Build an AI coding platform for Embedded systems with RISC-V centric using RUST language.
@@ -176,7 +176,7 @@ Build an AI coding platform for Embedded systems with RISC-V centric using RUST 
 ---
 
 ## Test Credentials
-- **Admin**: admin@rvrust.com / admin123
+- **Admin**: admin@trusted-v.com / admin123
 - **Standard User**: Create via registration
 
 ## Key Files
