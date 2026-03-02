@@ -135,10 +135,12 @@ class TestAdminStats:
         assert response.status_code == 200
         data = response.json()
         
-        # Verify stats structure
-        assert "total_users" in data
-        assert "total_projects" in data
-        assert "total_hardware" in data
+        # Verify stats structure - actual field names
+        assert "users" in data
+        assert "projects" in data
+        assert "hardware" in data
+        assert "middleware" in data
+        assert "ide_downloads" in data
 
     def test_admin_stats_requires_auth(self):
         """Admin stats endpoint requires authentication"""
