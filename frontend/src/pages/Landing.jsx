@@ -42,19 +42,19 @@ const Landing = () => {
   ];
 
   const hardwarePartners = [
-    { name: "SiFive", description: "RISC-V IP & SoCs" },
-    { name: "Espressif", description: "IoT Solutions" },
-    { name: "StarFive", description: "High-Performance SBCs" },
-    { name: "Canaan", description: "AI Accelerators" },
-    { name: "Microchip", description: "PolarFire FPGA" },
-    { name: "BeagleBoard", description: "Open Hardware" },
+    { name: "C-DAC", description: "VEGA Processors" },
+    { name: "IIT Madras", description: "Shakti Cores" },
+    { name: "InCore Semi", description: "RISC-V IP" },
+    { name: "Mindgrove", description: "Vision SoCs" },
+    { name: "ISRO", description: "Space-Grade" },
+    { name: "3rdiTech", description: "Surveillance" },
   ];
 
   const stats = [
-    { value: "50+", label: "Supported Boards" },
-    { value: "15+", label: "RTOS Options" },
-    { value: "100+", label: "SDK Components" },
-    { value: "24/7", label: "Community Support" },
+    { value: "6+", label: "Indian Boards" },
+    { value: "5+", label: "RTOS Options" },
+    { value: "10+", label: "SDK Components" },
+    { value: "Made in", label: "India 🇮🇳" },
   ];
   
   return (
