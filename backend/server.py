@@ -2066,6 +2066,119 @@ async def delete_ide_download(ide_id: str, current_user: dict = Depends(get_curr
         raise HTTPException(status_code=404, detail="IDE download not found")
     return {"message": "IDE download deleted successfully"}
 
+# IDE Binary Upload Endpoint (Admin Only)
+UPLOAD_DIR = ROOT_DIR / "uploads" / "ide"
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+@api_router.post("/admin/ide-downloads/{ide_id}/upload")
+async def upload_ide_binary(
+    ide_id: str,
+    file: UploadFile = File(...),
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Upload IDE binary file for a specific platform (Admin only)"""
+    # Verify the IDE download entry exists
+    ide_entry = await db.ide_downloads.find_one({"id": ide_id})
+    if not ide_entry:
+        raise HTTPException(status_code=404, detail="IDE download entry not found")
+    
+    # Validate file extension
+    allowed_extensions = ['.exe', '.dmg', '.pkg', '.deb', '.rpm', '.tar.gz', '.zip', '.AppImage']
+    file_ext = None
+    for ext in allowed_extensions:
+        if file.filename.lower().endswith(ext):
+            file_ext = ext
+            break
+    
+    if not file_ext:
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Invalid file type. Allowed: {', '.join(allowed_extensions)}"
+        )
+    
+    # Generate unique filename
+    safe_filename = f"{ide_id}_{file.filename.replace(' ', '_')}"
+    file_path = UPLOAD_DIR / safe_filename
+    
+    # Save the file
+    try:
+        contents = await file.read()
+        with open(file_path, 'wb') as f:
+            f.write(contents)
+        
+        # Calculate file size
+        file_size = len(contents)
+        if file_size > 1024 * 1024 * 1024:  # GB
+            size_str = f"{file_size / (1024 * 1024 * 1024):.1f} GB"
+        elif file_size > 1024 * 1024:  # MB
+            size_str = f"{file_size / (1024 * 1024):.0f} MB"
+        else:  # KB
+            size_str = f"{file_size / 1024:.0f} KB"
+        
+        # Update the database with download URL and size
+        download_url = f"/api/ide-downloads/{ide_id}/download"
+        await db.ide_downloads.update_one(
+            {"id": ide_id},
+            {"$set": {
+                "download_url": download_url,
+                "size": size_str,
+                "filename": safe_filename,
+                "uploaded_at": datetime.now(timezone.utc).isoformat()
+            }}
+        )
+        
+        return {
+            "message": "File uploaded successfully",
+            "filename": safe_filename,
+            "size": size_str,
+            "download_url": download_url
+        }
+    except Exception as e:
+        logging.error(f"File upload error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to upload file: {str(e)}")
+
+@api_router.get("/ide-downloads/{ide_id}/download")
+async def download_ide_binary(ide_id: str):
+    """Download IDE binary file (Public access)"""
+    ide_entry = await db.ide_downloads.find_one({"id": ide_id})
+    if not ide_entry:
+        raise HTTPException(status_code=404, detail="IDE download not found")
+    
+    filename = ide_entry.get("filename")
+    if not filename:
+        raise HTTPException(status_code=404, detail="No binary file uploaded for this platform")
+    
+    file_path = UPLOAD_DIR / filename
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Binary file not found on server")
+    
+    # Determine content type
+    content_type = "application/octet-stream"
+    if filename.endswith('.exe'):
+        content_type = "application/x-msdownload"
+    elif filename.endswith('.dmg'):
+        content_type = "application/x-apple-diskimage"
+    elif filename.endswith('.deb'):
+        content_type = "application/vnd.debian.binary-package"
+    elif filename.endswith('.zip'):
+        content_type = "application/zip"
+    elif filename.endswith('.tar.gz'):
+        content_type = "application/gzip"
+    
+    def iterfile():
+        with open(file_path, 'rb') as f:
+            while chunk := f.read(1024 * 1024):  # 1MB chunks
+                yield chunk
+    
+    return StreamingResponse(
+        iterfile(),
+        media_type=content_type,
+        headers={
+            "Content-Disposition": f"attachment; filename={filename}",
+            "Content-Length": str(file_path.stat().st_size)
+        }
+    )
+
 # Get component types
 @api_router.get("/component-types")
 async def get_component_types():
