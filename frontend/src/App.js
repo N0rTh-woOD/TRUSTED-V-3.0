@@ -5,14 +5,28 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute, AdminRoute } from "@/components/ProtectedRoute";
 import { Toaster } from "@/components/ui/sonner";
 import Navigation from "@/components/Navigation";
+
+// Public Pages
 import Landing from "@/pages/Landing";
+import About from "@/pages/About";
+import ProductSuite from "@/pages/ProductSuite";
+import DeveloperPortal from "@/pages/DeveloperPortal";
+import HardwareCatalog from "@/pages/HardwareCatalog";
+import Partners from "@/pages/Partners";
+import PartnerRegistration from "@/pages/PartnerRegistration";
+import IDEDownloads from "@/pages/IDEDownloads";
+import Blog from "@/pages/Blog";
+
+// Auth Pages
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
+
+// Protected Pages
 import SmartProjectBuilder from "@/pages/SmartProjectBuilder";
-import HardwareCatalog from "@/pages/HardwareCatalog";
 import MyProjects from "@/pages/MyProjects";
-import IDEDownloads from "@/pages/IDEDownloads";
 import AccountSettings from "@/pages/AccountSettings";
+
+// Admin Pages
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import AdminHardware from "@/pages/admin/AdminHardware";
 import AdminMiddleware from "@/pages/admin/AdminMiddleware";
@@ -28,16 +42,47 @@ function App() {
           <BrowserRouter>
             <Navigation />
             <Routes>
+              {/* Public Routes */}
               <Route path="/" element={<Landing />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/product-suite" element={<ProductSuite />} />
+              <Route path="/developer-portal" element={<DeveloperPortal />} />
+              <Route path="/hardware-catalog" element={<HardwareCatalog />} />
+              <Route path="/partners" element={<Partners />} />
+              <Route path="/partner-registration" element={<PartnerRegistration />} />
+              <Route path="/download-ide" element={<IDEDownloads />} />
+              <Route path="/blog" element={<Blog />} />
+              
+              {/* Legacy routes - redirect to new paths */}
               <Route path="/hardware" element={<HardwareCatalog />} />
               <Route path="/ide" element={<IDEDownloads />} />
+              
+              {/* Auth Routes */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              
+              {/* Protected Routes */}
+              <Route
+                path="/solution-builder"
+                element={
+                  <ProtectedRoute>
+                    <SmartProjectBuilder />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/builder"
                 element={
                   <ProtectedRoute>
                     <SmartProjectBuilder />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/projects"
+                element={
+                  <ProtectedRoute>
+                    <MyProjects />
                   </ProtectedRoute>
                 }
               />
@@ -57,6 +102,8 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              
+              {/* Admin Routes */}
               <Route
                 path="/admin"
                 element={
