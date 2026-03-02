@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
   Download, Monitor, Apple, Terminal, CheckCircle2, 
-  Cpu, Code, Wrench, Zap, FileDown, HardDrive
+  Cpu, Code, Wrench, Zap, FileDown, HardDrive, AlertCircle
 } from "lucide-react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -33,6 +33,12 @@ const IDEDownloads = () => {
     if (platform.toLowerCase().includes("windows")) return Monitor;
     if (platform.toLowerCase().includes("mac")) return Apple;
     return Terminal;
+  };
+
+  const getPlatformEmoji = (platform) => {
+    if (platform.toLowerCase().includes("windows")) return "🪟";
+    if (platform.toLowerCase().includes("mac")) return "🍎";
+    return "🐧";
   };
 
   const getPlatformColor = (platform) => {
@@ -79,6 +85,17 @@ const IDEDownloads = () => {
     acc[key].platforms.push(dl);
     return acc;
   }, {});
+
+  const handleDownload = (ide) => {
+    if (ide.download_url && ide.download_url !== "#" && ide.filename) {
+      // Open the download URL in a new tab
+      window.open(`${BACKEND_URL}${ide.download_url}`, "_blank");
+    }
+  };
+
+  const isDownloadAvailable = (ide) => {
+    return ide.download_url && ide.download_url !== "#" && ide.filename;
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -151,7 +168,7 @@ fn main() -> ! {
                     <div className="col-span-3 bg-slate-800 rounded p-2">
                       <div className="text-[10px] text-slate-400 mb-2">Debug</div>
                       <div className="text-[10px] text-cyan-400">● Connected</div>
-                      <div className="text-[10px] text-slate-300 mt-1">SiFive HiFive1</div>
+                      <div className="text-[10px] text-slate-300 mt-1">Shakti E-Class</div>
                     </div>
                   </div>
                 </div>
@@ -211,12 +228,13 @@ fn main() -> ! {
                   <div className="grid md:grid-cols-3 gap-4">
                     {group.platforms.map((dl, index) => {
                       const Icon = getPlatformIcon(dl.platform);
+                      const available = isDownloadAvailable(dl);
                       return (
                         <Card key={index} className="hover:shadow-md transition-shadow">
                           <CardContent className="p-6">
                             <div className="flex items-start justify-between mb-4">
-                              <div className="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center">
-                                <Icon className="w-6 h-6 text-slate-600" />
+                              <div className="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center text-2xl">
+                                {getPlatformEmoji(dl.platform)}
                               </div>
                               <Badge className={getPlatformColor(dl.platform)}>{dl.platform}</Badge>
                             </div>
@@ -230,19 +248,26 @@ fn main() -> ! {
                                 <HardDrive className="w-4 h-4" />
                                 {dl.size}
                               </span>
+                              {available ? (
+                                <span className="flex items-center gap-1 text-green-600">
+                                  <CheckCircle2 className="w-4 h-4" />
+                                  Available
+                                </span>
+                              ) : (
+                                <span className="flex items-center gap-1 text-amber-600">
+                                  <AlertCircle className="w-4 h-4" />
+                                  Coming Soon
+                                </span>
+                              )}
                             </div>
                             
                             <Button 
                               className="w-full" 
-                              disabled={dl.download_url === "#"}
-                              onClick={() => {
-                                if (dl.download_url && dl.download_url !== "#") {
-                                  window.open(dl.download_url, "_blank");
-                                }
-                              }}
+                              disabled={!available}
+                              onClick={() => handleDownload(dl)}
                             >
                               <Download className="w-4 h-4 mr-2" />
-                              {dl.download_url === "#" ? "Coming Soon" : "Download"}
+                              {available ? "Download" : "Coming Soon"}
                             </Button>
                           </CardContent>
                         </Card>
@@ -270,8 +295,8 @@ fn main() -> ! {
                 <Card key={platform} className="bg-white">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-slate-600" />
+                      <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-xl">
+                        {getPlatformEmoji(platform)}
                       </div>
                       <h3 className="font-semibold text-foreground capitalize">{platform}</h3>
                     </div>
