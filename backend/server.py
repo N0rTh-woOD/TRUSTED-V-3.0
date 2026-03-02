@@ -853,101 +853,164 @@ async def init_sample_data():
         admin_dict = admin.model_dump()
         admin_dict['created_at'] = admin_dict['created_at'].isoformat()
         await db.users.insert_one(admin_dict)
-        logging.info("Admin user created: admin@trusted-v.com / bosch@2425")
+        logging.info("Admin user created")
     else:
         # Update existing admin password to new credentials
         await db.users.update_one(
             {"email": "admin@trusted-v.com"},
             {"$set": {"password_hash": get_password_hash("bosch@2425")}}
         )
-        logging.info("Admin password updated to bosch@2425")
+        logging.info("Admin password updated")
     
-    # Check if data exists
+    # Create sample users (not displayed anywhere on the platform)
+    sample_users = [
+        {"email": "developer@example.com", "username": "developer", "password": "dev@12345"},
+        {"email": "engineer@example.com", "username": "engineer", "password": "eng@12345"},
+        {"email": "tester@example.com", "username": "tester", "password": "test@12345"},
+    ]
+    for user_data in sample_users:
+        user_exists = await db.users.find_one({"email": user_data["email"]})
+        if not user_exists:
+            user = User(
+                email=user_data["email"],
+                username=user_data["username"],
+                password_hash=get_password_hash(user_data["password"]),
+                is_admin=False
+            )
+            user_dict = user.model_dump()
+            user_dict['created_at'] = user_dict['created_at'].isoformat()
+            await db.users.insert_one(user_dict)
+    
+    # Check if data exists - Use ONLY Indian RISC-V hardware
     hardware_count = await db.hardware.count_documents({})
-    if hardware_count == 0:
-        sample_hardware = [
-            {
-                "id": str(uuid.uuid4()),
-                "name": "SiFive HiFive1 Rev B",
-                "manufacturer": "SiFive",
-                "core": "RISC-V E31",
-                "clock_speed": "320 MHz",
-                "memory": "16 KB",
-                "flash": "4 MB",
-                "image_url": "https://images.unsplash.com/photo-1562408590-e32931084e23?w=400",
-                "price": "$59",
-                "peripherals": [
-                    {"name": "GPIO", "type": "Digital I/O", "interface": "19 pins"},
-                    {"name": "UART", "type": "Serial", "interface": "2 channels"},
-                    {"name": "SPI", "type": "Serial Peripheral", "interface": "1 channel"},
-                    {"name": "I2C", "type": "Two-Wire", "interface": "1 channel"},
-                    {"name": "PWM", "type": "Pulse Width Modulation", "interface": "8 channels"}
-                ],
-                "description": "Arduino-compatible dev board with RISC-V core, perfect for IoT and embedded applications",
-                "created_at": datetime.now(timezone.utc).isoformat()
-            },
-            {
-                "id": str(uuid.uuid4()),
-                "name": "Kendryte K210",
-                "manufacturer": "Canaan",
-                "core": "RISC-V Dual Core 64-bit",
-                "clock_speed": "400 MHz",
-                "memory": "8 MB",
-                "flash": "16 MB",
-                "image_url": "https://images.unsplash.com/photo-1562408590-e32931084e23?w=400",
-                "price": "$129",
-                "peripherals": [
-                    {"name": "Camera Interface", "type": "DVP", "interface": "Dual camera"},
-                    {"name": "Audio", "type": "I2S", "interface": "8 channels"},
-                    {"name": "LCD", "type": "Display", "interface": "8-bit MCU"},
-                    {"name": "GPIO", "type": "Digital I/O", "interface": "32 pins"},
-                    {"name": "Neural Network Processor", "type": "KPU", "interface": "Dedicated AI accelerator"}
-                ],
-                "description": "AI-capable RISC-V board with neural network processor, ideal for edge AI and vision applications",
-                "created_at": datetime.now(timezone.utc).isoformat()
-            },
-            {
-                "id": str(uuid.uuid4()),
-                "name": "ESP32-C3",
-                "manufacturer": "Espressif",
-                "core": "RISC-V Single Core 32-bit",
-                "clock_speed": "160 MHz",
-                "memory": "400 KB",
-                "flash": "4 MB",
-                "image_url": "https://images.unsplash.com/photo-1562408590-e32931084e23?w=400",
-                "price": "$39",
-                "peripherals": [
-                    {"name": "WiFi", "type": "Wireless", "interface": "802.11 b/g/n"},
-                    {"name": "Bluetooth", "type": "Wireless", "interface": "BLE 5.0"},
-                    {"name": "GPIO", "type": "Digital I/O", "interface": "22 pins"},
-                    {"name": "ADC", "type": "Analog", "interface": "6 channels 12-bit"},
-                    {"name": "SPI", "type": "Serial Peripheral", "interface": "3 channels"}
-                ],
-                "description": "WiFi/BLE enabled RISC-V microcontroller, perfect for IoT projects with wireless connectivity",
-                "created_at": datetime.now(timezone.utc).isoformat()
-            },
-            {
-                "id": str(uuid.uuid4()),
-                "name": "StarFive VisionFive 2",
-                "manufacturer": "StarFive",
-                "core": "RISC-V Quad Core 64-bit",
-                "clock_speed": "1.5 GHz",
-                "memory": "8 GB",
-                "flash": "eMMC/SD Card",
-                "image_url": "https://images.unsplash.com/photo-1562408590-e32931084e23?w=400",
-                "price": "$249",
-                "peripherals": [
-                    {"name": "Ethernet", "type": "Network", "interface": "Gigabit"},
-                    {"name": "USB", "type": "Universal Serial Bus", "interface": "4x USB 3.0"},
-                    {"name": "HDMI", "type": "Display", "interface": "4K output"},
-                    {"name": "GPIO", "type": "Digital I/O", "interface": "40-pin header"},
-                    {"name": "PCIe", "type": "Expansion", "interface": "Gen 2 x1"}
-                ],
-                "description": "High-performance RISC-V SBC for embedded Linux, suitable for edge computing and development",
-                "created_at": datetime.now(timezone.utc).isoformat()
-            }
-        ]
-        await db.hardware.insert_many(sample_hardware)
+    # Clear existing hardware to replace with Indian boards only
+    if hardware_count > 0:
+        await db.hardware.delete_many({})
+    
+    # Indian RISC-V Hardware Only
+    indian_hardware = [
+        {
+            "id": str(uuid.uuid4()),
+            "name": "ARIES V3.0",
+            "manufacturer": "C-DAC",
+            "core": "VEGA ET1031 32-bit RISC-V",
+            "clock_speed": "100 MHz",
+            "memory": "256 KB SRAM",
+            "flash": "External SPI Flash",
+            "image_url": None,
+            "price": "₹2,500",
+            "peripherals": [
+                {"name": "GPIO", "type": "Digital I/O", "interface": "32 pins"},
+                {"name": "UART", "type": "Serial", "interface": "3 channels"},
+                {"name": "SPI", "type": "Serial Peripheral", "interface": "2 channels"},
+                {"name": "I2C", "type": "Two-Wire", "interface": "2 channels"},
+                {"name": "Timer", "type": "Timer/Counter", "interface": "4 channels"}
+            ],
+            "description": "Made in India RISC-V development board with VEGA processor, ideal for IoT and embedded learning",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "name": "ARIES IoT",
+            "manufacturer": "C-DAC",
+            "core": "VEGA RISC-V 32-bit",
+            "clock_speed": "80 MHz",
+            "memory": "128 KB SRAM",
+            "flash": "4 MB External",
+            "image_url": None,
+            "price": "₹1,800",
+            "peripherals": [
+                {"name": "GPIO", "type": "Digital I/O", "interface": "24 pins"},
+                {"name": "UART", "type": "Serial", "interface": "2 channels"},
+                {"name": "SPI", "type": "Serial Peripheral", "interface": "1 channel"},
+                {"name": "I2C", "type": "Two-Wire", "interface": "1 channel"},
+                {"name": "ADC", "type": "Analog", "interface": "4 channels 12-bit"}
+            ],
+            "description": "Compact IoT-focused RISC-V board from C-DAC for sensor networks and wearables",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "name": "Shakti E-Class Board",
+            "manufacturer": "IIT Madras / InCore",
+            "core": "Shakti E-Class 32-bit RISC-V",
+            "clock_speed": "100 MHz",
+            "memory": "64 KB SRAM",
+            "flash": "16 MB QSPI",
+            "image_url": None,
+            "price": "₹3,500",
+            "peripherals": [
+                {"name": "GPIO", "type": "Digital I/O", "interface": "32 pins"},
+                {"name": "UART", "type": "Serial", "interface": "2 channels"},
+                {"name": "SPI", "type": "Serial Peripheral", "interface": "2 channels"},
+                {"name": "I2C", "type": "Two-Wire", "interface": "1 channel"},
+                {"name": "PWM", "type": "Pulse Width Modulation", "interface": "6 channels"}
+            ],
+            "description": "Open-source Shakti E-Class microcontroller board from IIT Madras for embedded applications",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "name": "Shakti C-Class Arty",
+            "manufacturer": "IIT Madras / InCore",
+            "core": "Shakti C-Class 64-bit RISC-V",
+            "clock_speed": "50 MHz (FPGA)",
+            "memory": "256 MB DDR3",
+            "flash": "16 MB QSPI",
+            "image_url": None,
+            "price": "₹15,000",
+            "peripherals": [
+                {"name": "Ethernet", "type": "Network", "interface": "10/100 Mbps"},
+                {"name": "UART", "type": "Serial", "interface": "1 channel"},
+                {"name": "GPIO", "type": "Digital I/O", "interface": "40 pins"},
+                {"name": "SPI", "type": "Serial Peripheral", "interface": "1 channel"},
+                {"name": "JTAG", "type": "Debug", "interface": "Standard JTAG"}
+            ],
+            "description": "64-bit Shakti C-Class on Arty FPGA for Linux development and research applications",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "name": "VEGA DHRUV64 Evaluation",
+            "manufacturer": "C-DAC",
+            "core": "VEGA AS2161 DHRUV64 Dual-Core 64-bit",
+            "clock_speed": "1 GHz",
+            "memory": "2 GB DDR4",
+            "flash": "eMMC/SD Card",
+            "image_url": None,
+            "price": "₹25,000",
+            "peripherals": [
+                {"name": "Ethernet", "type": "Network", "interface": "Gigabit"},
+                {"name": "USB", "type": "Universal Serial Bus", "interface": "USB 3.0"},
+                {"name": "HDMI", "type": "Display", "interface": "1080p output"},
+                {"name": "GPIO", "type": "Digital I/O", "interface": "40-pin header"},
+                {"name": "PCIe", "type": "Expansion", "interface": "Gen 2"}
+            ],
+            "description": "High-performance dual-core 64-bit RISC-V board for Linux, 5G, and automotive applications",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "name": "IRIS Development Kit",
+            "manufacturer": "ISRO / IIT Madras",
+            "core": "Shakti 64-bit RISC-V (Space Grade)",
+            "clock_speed": "100 MHz",
+            "memory": "128 KB SRAM",
+            "flash": "8 MB NOR Flash",
+            "image_url": None,
+            "price": "₹50,000",
+            "peripherals": [
+                {"name": "SpaceWire", "type": "Space Communication", "interface": "4 ports"},
+                {"name": "CAN", "type": "Automotive Bus", "interface": "2 channels"},
+                {"name": "UART", "type": "Serial", "interface": "4 channels"},
+                {"name": "GPIO", "type": "Digital I/O", "interface": "48 pins"},
+                {"name": "Radiation Hardened", "type": "Special", "interface": "SEU tolerant"}
+            ],
+            "description": "Space-qualified RISC-V development kit based on ISRO's IRIS chip for satellite and IoT",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+    ]
+    await db.hardware.insert_many(indian_hardware)
         
         sample_middleware = [
             {
