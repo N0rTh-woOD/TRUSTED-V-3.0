@@ -841,19 +841,26 @@ Cargo.lock
 
 # Initialize sample data
 async def init_sample_data():
-    # Create admin user if not exists
+    # Create admin user if not exists - Updated credentials
     admin_exists = await db.users.find_one({"email": "admin@trusted-v.com"})
     if not admin_exists:
         admin = User(
             email="admin@trusted-v.com",
             username="admin",
-            password_hash=get_password_hash("admin123"),
+            password_hash=get_password_hash("bosch@2425"),
             is_admin=True
         )
         admin_dict = admin.model_dump()
         admin_dict['created_at'] = admin_dict['created_at'].isoformat()
         await db.users.insert_one(admin_dict)
-        logging.info("Admin user created: admin@trusted-v.com / admin123")
+        logging.info("Admin user created: admin@trusted-v.com / bosch@2425")
+    else:
+        # Update existing admin password to new credentials
+        await db.users.update_one(
+            {"email": "admin@trusted-v.com"},
+            {"$set": {"password_hash": get_password_hash("bosch@2425")}}
+        )
+        logging.info("Admin password updated to bosch@2425")
     
     # Check if data exists
     hardware_count = await db.hardware.count_documents({})
