@@ -1063,7 +1063,10 @@ async def init_sample_data():
             }
         ]
         await db.middleware.insert_many(sample_middleware)
-        
+    
+    # IDE downloads
+    ide_count = await db.ide_downloads.count_documents({})
+    if ide_count == 0:
         sample_ide = [
             {
                 "id": str(uuid.uuid4()),
