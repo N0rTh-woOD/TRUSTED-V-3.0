@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +13,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Loader2, Plus, Edit, Trash2, Download, ArrowLeft } from "lucide-react";
+import { Loader2, Plus, Edit, Trash2, Download, ArrowLeft, Upload, CheckCircle2, AlertCircle, FileUp } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 
@@ -25,12 +26,15 @@ const AdminIDE = () => {
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
   const [editingIDE, setEditingIDE] = useState(null);
+  const [uploadingId, setUploadingId] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const fileInputRefs = useRef({});
   const [formData, setFormData] = useState({
     name: "",
     version: "",
     platform: "",
-    download_url: "",
-    size: "",
+    download_url: "#",
+    size: "Pending",
     description: "",
   });
 
@@ -60,10 +64,10 @@ const AdminIDE = () => {
     setEditingIDE(null);
     setFormData({
       name: "TrusteD-V Studio",
-      version: "",
+      version: "1.2.0",
       platform: "",
-      download_url: "",
-      size: "",
+      download_url: "#",
+      size: "Pending",
       description: "",
     });
     setShowDialog(true);
@@ -105,6 +109,60 @@ const AdminIDE = () => {
     }
   };
 
+  const handleFileUpload = async (ideId, file) => {
+    if (!file) return;
+
+    setUploadingId(ideId);
+    setUploadProgress(0);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await axios.post(
+        `${API}/admin/ide-downloads/${ideId}/upload`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            const progress = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(progress);
+          },
+        }
+      );
+
+      toast.success(`Binary uploaded successfully! Size: ${response.data.size}`);
+      loadDownloads();
+    } catch (error) {
+      console.error("Upload failed:", error);
+      toast.error(error.response?.data?.detail || "Failed to upload binary");
+    } finally {
+      setUploadingId(null);
+      setUploadProgress(0);
+    }
+  };
+
+  const triggerFileInput = (ideId) => {
+    if (fileInputRefs.current[ideId]) {
+      fileInputRefs.current[ideId].click();
+    }
+  };
+
+  const getPlatformIcon = (platform) => {
+    if (platform.toLowerCase().includes("windows")) return "🪟";
+    if (platform.toLowerCase().includes("mac")) return "🍎";
+    return "🐧";
+  };
+
+  const hasUploadedBinary = (ide) => {
+    return ide.download_url && ide.download_url !== "#" && ide.filename;
+  };
+
   if (loading) {
     return (
       <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
@@ -126,7 +184,7 @@ const AdminIDE = () => {
               IDE Downloads
             </h1>
             <p className="text-muted-foreground">
-              Manage IDE versions and download links
+              Manage IDE versions and upload binary files for Windows, macOS, and Linux
             </p>
           </div>
           <Button
@@ -148,8 +206,8 @@ const AdminIDE = () => {
             >
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center">
-                    <Download className="w-6 h-6 text-amber-500" />
+                  <div className="w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center text-2xl">
+                    {getPlatformIcon(ide.platform)}
                   </div>
                   <div className="flex gap-2">
                     <Button
@@ -177,13 +235,72 @@ const AdminIDE = () => {
                   <Badge variant="secondary" className="text-xs">v{ide.version}</Badge>
                 </div>
                 
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                   {ide.description}
                 </p>
                 
-                <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center justify-between text-sm mb-4">
                   <span className="text-muted-foreground">Size:</span>
                   <span className="font-medium text-foreground">{ide.size}</span>
+                </div>
+
+                {/* Binary Status */}
+                <div className="border-t border-border pt-4 mt-4">
+                  {hasUploadedBinary(ide) ? (
+                    <div className="flex items-center gap-2 text-sm text-green-600 mb-3">
+                      <CheckCircle2 className="w-4 h-4" />
+                      <span>Binary uploaded</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 text-sm text-amber-600 mb-3">
+                      <AlertCircle className="w-4 h-4" />
+                      <span>No binary uploaded</span>
+                    </div>
+                  )}
+
+                  {/* Upload Progress */}
+                  {uploadingId === ide.id && (
+                    <div className="mb-3">
+                      <Progress value={uploadProgress} className="h-2" />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Uploading... {uploadProgress}%
+                      </p>
+                    </div>
+                  )}
+
+                  {/* File Input (hidden) */}
+                  <input
+                    type="file"
+                    ref={(el) => (fileInputRefs.current[ide.id] = el)}
+                    className="hidden"
+                    accept=".exe,.dmg,.pkg,.deb,.rpm,.tar.gz,.zip,.AppImage"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleFileUpload(ide.id, file);
+                      e.target.value = "";
+                    }}
+                  />
+
+                  {/* Upload Button */}
+                  <Button
+                    variant={hasUploadedBinary(ide) ? "outline" : "default"}
+                    size="sm"
+                    className="w-full"
+                    disabled={uploadingId === ide.id}
+                    onClick={() => triggerFileInput(ide.id)}
+                  >
+                    {uploadingId === ide.id ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Uploading...
+                      </>
+                    ) : (
+                      <>
+                        <FileUp className="w-4 h-4 mr-2" />
+                        {hasUploadedBinary(ide) ? "Replace Binary" : "Upload Binary"}
+                      </>
+                    )}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -195,6 +312,9 @@ const AdminIDE = () => {
             <CardContent className="p-16 text-center">
               <Download className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
               <p className="text-muted-foreground text-lg">No IDE downloads configured</p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Add IDE versions for Windows, macOS, and Linux
+              </p>
             </CardContent>
           </Card>
         )}
@@ -213,7 +333,7 @@ const AdminIDE = () => {
                 <Input
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="RISC-V Rust Studio"
+                  placeholder="TrusteD-V Studio"
                 />
               </div>
 
@@ -228,30 +348,19 @@ const AdminIDE = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground">Platform *</label>
-                  <Input
+                  <select
                     value={formData.platform}
                     onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-                    placeholder="Windows x64"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">Download URL *</label>
-                  <Input
-                    value={formData.download_url}
-                    onChange={(e) => setFormData({ ...formData, download_url: e.target.value })}
-                    placeholder="https://..."
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">Size *</label>
-                  <Input
-                    value={formData.size}
-                    onChange={(e) => setFormData({ ...formData, size: e.target.value })}
-                    placeholder="450 MB"
-                  />
+                    className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                  >
+                    <option value="">Select platform</option>
+                    <option value="Windows x64">Windows x64</option>
+                    <option value="macOS (Intel)">macOS (Intel)</option>
+                    <option value="macOS (Apple Silicon)">macOS (Apple Silicon)</option>
+                    <option value="Linux x64 (deb)">Linux x64 (deb)</option>
+                    <option value="Linux x64 (rpm)">Linux x64 (rpm)</option>
+                    <option value="Linux (AppImage)">Linux (AppImage)</option>
+                  </select>
                 </div>
               </div>
 
@@ -260,9 +369,13 @@ const AdminIDE = () => {
                 <Input
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Complete IDE with Rust toolchain..."
+                  placeholder="Complete IDE with Rust toolchain, debugger, and RISC-V emulator"
                 />
               </div>
+
+              <p className="text-xs text-muted-foreground">
+                After saving, use the "Upload Binary" button on the card to upload the installer file.
+              </p>
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setShowDialog(false)}>
