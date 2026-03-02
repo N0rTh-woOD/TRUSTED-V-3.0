@@ -15,7 +15,7 @@ test.describe('Public Navigation', () => {
     await expect(page.getByTestId('nav-products')).toBeVisible();
     await expect(page.getByTestId('nav-developer-portal')).toBeVisible();
     await expect(page.getByTestId('nav-hardware')).toBeVisible();
-    await expect(page.getByTestId('nav-partner-with-us')).toBeVisible();
+    await expect(page.getByTestId('nav-partner-with us')).toBeVisible();
     
     // Verify Sign In button visible
     await expect(page.getByTestId('login-btn')).toBeVisible();
@@ -70,7 +70,7 @@ test.describe('Public Navigation', () => {
     await page.waitForLoadState('domcontentloaded');
     
     // Navigation now shows "Partner With Us" instead of "Partners"
-    await page.getByTestId('nav-partner-with-us').click();
+    await page.getByTestId('nav-partner-with us').click();
     await page.waitForLoadState('domcontentloaded');
     
     await expect(page).toHaveURL(/\/partners/);

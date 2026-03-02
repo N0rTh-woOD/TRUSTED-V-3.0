@@ -200,8 +200,8 @@ test.describe('Navigation Update - Partner With Us', () => {
     await page.goto('/');
     await page.waitForLoadState('domcontentloaded');
     
-    // Desktop navigation should show "Partner With Us" 
-    const partnerNavLink = page.getByTestId('nav-partner-with-us');
+    // Desktop navigation should show "Partner With Us" (testid generated as 'nav-partner-with us')
+    const partnerNavLink = page.getByTestId('nav-partner-with us');
     await expect(partnerNavLink).toBeVisible();
     await expect(partnerNavLink).toHaveText('Partner With Us');
   });
@@ -210,7 +210,7 @@ test.describe('Navigation Update - Partner With Us', () => {
     await page.goto('/');
     await page.waitForLoadState('domcontentloaded');
     
-    await page.getByTestId('nav-partner-with-us').click();
+    await page.getByTestId('nav-partner-with us').click();
     await page.waitForLoadState('domcontentloaded');
     
     await expect(page).toHaveURL(/\/partners/);
