@@ -1166,40 +1166,6 @@ async def init_sample_data():
             }
         ]
         await db.software_components.insert_many(sample_software)
-                    "version": "1.0.0",
-                    "description": "Platform-Level Interrupt Controller driver for RISC-V",
-                    "compatible_cores": ["RISC-V E31", "RISC-V Single Core 32-bit", "RISC-V Dual Core 64-bit", "RISC-V Quad Core 64-bit"],
-                    "compatible_hardware": [],
-                    "features": ["Interrupt routing", "Priority management", "Context switching"],
-                    "created_at": datetime.now(timezone.utc).isoformat()
-                },
-                {
-                    "id": str(uuid.uuid4()),
-                    "name": "embedded-hal",
-                    "type": "Library",
-                    "version": "1.0.0",
-                    "description": "Hardware abstraction layer for embedded systems in Rust",
-                    "compatible_cores": ["RISC-V E31", "RISC-V Single Core 32-bit", "RISC-V Dual Core 64-bit"],
-                    "compatible_hardware": [],
-                    "features": ["GPIO traits", "SPI traits", "I2C traits", "Timer traits", "PWM traits"],
-                    "download_url": "https://crates.io/crates/embedded-hal",
-                    "documentation_url": "https://docs.rs/embedded-hal",
-                    "created_at": datetime.now(timezone.utc).isoformat()
-                },
-                {
-                    "id": str(uuid.uuid4()),
-                    "name": "VisionFive 2 BSP",
-                    "type": "BSP",
-                    "version": "3.0.0",
-                    "description": "Board Support Package for StarFive VisionFive 2 SBC",
-                    "compatible_cores": ["RISC-V Quad Core 64-bit"],
-                    "compatible_hardware": [],
-                    "features": ["Linux kernel support", "GPU drivers", "Camera drivers", "Audio subsystem"],
-                    "download_url": "https://github.com/starfive-tech/VisionFive2",
-                    "created_at": datetime.now(timezone.utc).isoformat()
-                }
-            ]
-            await db.software_components.insert_many(sample_software)
 
 @app.on_event("startup")
 async def startup_event():
