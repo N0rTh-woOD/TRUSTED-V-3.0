@@ -40,7 +40,7 @@ test.describe('Public Navigation', () => {
     await page.waitForLoadState('domcontentloaded');
     
     await expect(page).toHaveURL(/\/product-suite/);
-    await expect(page.getByRole('heading', { name: /Product Suite/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Complete Development Ecosystem/i })).toBeVisible();
   });
 
   test('Navigate to Developer Portal page', async ({ page }) => {
@@ -51,7 +51,7 @@ test.describe('Public Navigation', () => {
     await page.waitForLoadState('domcontentloaded');
     
     await expect(page).toHaveURL(/\/developer-portal/);
-    await expect(page.getByRole('heading', { name: /Developer Portal/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Build with TrusteD-V/i })).toBeVisible();
   });
 
   test('Navigate to Hardware page', async ({ page }) => {
