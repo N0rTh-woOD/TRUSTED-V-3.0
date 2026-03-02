@@ -58,6 +58,14 @@ const Navigation = () => {
                   Secure RISC-V Development Platform
                 </span>
               </div>
+              {/* Bosch Association - subtle indicator */}
+              <div className="hidden md:flex items-center pl-3 ml-3 border-l border-border">
+                <img 
+                  src="/bosch-logo.png" 
+                  alt="" 
+                  className="h-5 opacity-60 hover:opacity-100 transition-opacity"
+                />
+              </div>
             </Link>
             
             {/* Desktop Navigation */}
