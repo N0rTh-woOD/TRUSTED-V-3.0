@@ -83,6 +83,19 @@ code {
     }
 }
 
+/* Full HD Layout Support - max-w-7xl = 80rem = 1280px, expanding for 1920px displays */
+@media (min-width: 1536px) {
+    .max-w-7xl {
+        max-width: 1400px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .max-w-7xl {
+        max-width: 1600px;
+    }
+}
+
 /* Bosch-style top red border */
 .bosch-top-border {
     border-top: 3px solid hsl(var(--bosch-red));
@@ -111,6 +124,12 @@ code {
 .badge-bootloader { @apply bg-red-100 text-red-800 border-red-200; }
 .badge-library { @apply bg-cyan-100 text-cyan-800 border-cyan-200; }
 .badge-framework { @apply bg-indigo-100 text-indigo-800 border-indigo-200; }
+
+/* Ensure proper container widths for Full HD */
+.container-fhd {
+    @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1600px;
+}
 
 @layer base {
     [data-debug-wrapper='true'] {
