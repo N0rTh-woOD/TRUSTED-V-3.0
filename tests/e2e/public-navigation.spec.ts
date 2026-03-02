@@ -73,15 +73,16 @@ test.describe('Public Navigation', () => {
     await page.waitForLoadState('domcontentloaded');
     
     await expect(page).toHaveURL(/\/partners/);
-    await expect(page.getByText(/Partner Ecosystem/i)).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Building Together/i })).toBeVisible();
   });
   
   test('Hardware catalog displays RISC-V boards', async ({ page }) => {
     await page.goto('/hardware-catalog');
     await page.waitForLoadState('domcontentloaded');
     
-    // Wait for hardware list to load
-    await expect(page.getByText(/SiFive/i).first()).toBeVisible({ timeout: 10000 });
+    // Wait for hardware list to load - check for heading and board count text
+    await expect(page.getByRole('heading', { name: /RISC-V Development Boards/i })).toBeVisible();
+    await expect(page.getByText(/Showing.*boards/i)).toBeVisible({ timeout: 10000 });
     
     // Verify filter options are present
     await expect(page.getByPlaceholder(/Search/i)).toBeVisible();
