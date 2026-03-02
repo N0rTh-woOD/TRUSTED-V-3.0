@@ -1,209 +1,158 @@
-# TrusteD-V: AI-Powered RISC-V Embedded Development Platform
+# TrusteD-V Platform - Product Requirements Document
+
+## Overview
+**TrusteD-V** is an AI-powered development platform for building secure embedded systems with RISC-V architecture and Rust programming language. The platform provides tools, SDKs, and AI-assisted code generation for developing production-ready embedded applications.
 
 ## Original Problem Statement
-Build an AI coding platform for Embedded systems with RISC-V centric using RUST language.
-
-## Platform Identity
-- **Brand Name**: TrusteD-V
-- **Tagline**: RISC-V Development Platform
-- **IDE Name**: TrusteD-V Studio
-- **Theme**: Bosch-inspired corporate aesthetic (Primary: #005691)
-
-## Core Requirements
-1. **AI-Powered Hardware Selection**: Analyze user prompts to suggest best hardware and peripherals from a database
-2. **Middleware Selection**: Select appropriate middleware (e.g., RTOS) based on requirements
-3. **Project Template Generation**: Generate base template projects (drivers, boot-loaders, etc.)
-4. **Interactive UI**: Visual cards for hardware, checkboxes for middleware
-5. **Project Versioning**: Download generated projects as versioned ZIP files
-6. **Hardware Catalog**: Comprehensive catalog of supported RISC-V hardware
-7. **Admin Panel**: Manage hardware, software components databases (NOT user management)
-8. **User Self-Service**: Users manage their own accounts, projects, and versions
-
-## User Personas
-- **Embedded Developer**: Needs to quickly set up RISC-V projects with proper hardware/software combinations
-- **Admin**: Manages platform databases (hardware, software components, IDE downloads)
+Build an "AI coding platform for Embedded systems with RISC-V centric using RUST language" that:
+- Analyzes user prompts to suggest the best hardware and peripherals
+- Selects appropriate middleware (e.g., RTOS)
+- Generates base template projects (drivers, boot-loaders, etc.)
+- Allows users to download generated projects as versioned ZIP files
+- Provides a professional, interactive, user-friendly UI
+- Includes admin panel to manage hardware/software catalogs and user accounts
 
 ## Tech Stack
-- **Backend**: FastAPI, MongoDB, JWT Authentication
-- **Frontend**: React, TailwindCSS, Shadcn/UI
-- **Design Theme**: Bosch-inspired corporate aesthetic (Blue #005691, white/light gray backgrounds)
+- **Backend**: FastAPI, MongoDB (motor), Pydantic, JWT authentication
+- **Frontend**: React 18, React Router, TailwindCSS, Shadcn/UI components
+- **AI Integration**: Gemini 3 Flash via Emergent LLM Key (emergentintegrations)
+- **Design System**: Bosch-inspired professional theme (white background, blue primary, red accent border)
 
----
+## Current Credentials
+- **Admin**: admin@trusted-v.com / bosch@2425
 
-## What's Been Implemented
+## Implemented Features (as of Dec 2025)
 
-### ✅ Completed (Jan 22, 2025)
+### Phase 1: Core Platform ✓
+- [x] JWT-based authentication (login/register)
+- [x] User account management (profile, password change)
+- [x] Admin dashboard with database management
+- [x] MongoDB integration for data persistence
 
-#### Smart Project Builder (NEW - AI Code Generation)
-- **4-Step Workflow**: Describe → Hardware → Software → Generate
-- **AI Code Generation**: Uses Gemini 3 Flash via Emergent LLM Key
-- **Generated Files**: Complete Rust project structure
-  - Cargo.toml with dependencies
-  - memory.x linker script for selected hardware
-  - .cargo/config.toml for target configuration
-  - src/main.rs with peripheral initialization
-  - src/lib.rs with board configuration
-  - src/drivers/ with GPIO, UART drivers
-  - README.md with setup instructions
-- **ZIP Download**: Downloadable project packages
-- **Project Versioning**: Track iterations as requirements change
+### Phase 2: Content Management ✓
+- [x] Hardware catalog with RISC-V development boards
+- [x] Software components database (RTOS, BSPs, SDKs, Drivers)
+- [x] Middleware management (FreeRTOS, Zephyr, Embassy, RT-Thread)
+- [x] IDE downloads management for Windows/macOS/Linux
 
-#### Admin LLM Configuration (NEW)
-- Configure AI provider (Gemini, OpenAI, Anthropic)
-- Select model (Gemini 3 Flash, GPT-5.2, Claude Sonnet 4.5, etc.)
-- Choose API key type (Emergent Key or Custom)
-- Stored in database for easy switching
+### Phase 3: AI-Powered Features ✓
+- [x] Smart Project Builder with AI code generation
+- [x] Hardware recommendation engine
+- [x] Project versioning and ZIP download
+- [x] Configurable LLM settings (admin-managed)
 
-#### UI Redesign
-- Implemented Bosch-inspired corporate design (Primary: #005691)
-- Light theme with white/gray backgrounds
-- Clean Inter typography, professional card layouts
-- Mobile responsive navigation
+### Phase 4: Professional UI Redesign ✓
+- [x] Bosch-inspired design system
+- [x] Red accent border at top of all pages
+- [x] Professional navigation with mobile responsiveness
+- [x] White background with blue primary colors
+- [x] Inter font family for professional typography
 
-#### Authentication System
-- JWT-based user authentication
-- User registration and login flows
-- Admin role support
-- Protected routes
+### Phase 5: New Pages & Features ✓
+- [x] Landing page with hero section and feature cards
+- [x] About page with mission/vision/values
+- [x] Product Suite page with categorized offerings
+- [x] Developer Portal with SDKs and resources
+- [x] Enhanced Hardware Catalog with filtering
+- [x] Partners page with partner network
+- [x] Partner Registration form
+- [x] IDE Downloads page with platform support
+- [x] Technical Blog with articles
 
-#### Admin Panel (Database Management)
-- **Dashboard**: Stats for Hardware, Middleware, Software Components, IDE Downloads
-- **Hardware Management**: CRUD operations for RISC-V boards
-- **Middleware Management**: CRUD for RTOS, frameworks
-- **Software Components**: NEW - BSP, SDK, Driver, Bootloader, Library management
-  - Filter by component type
-  - Color-coded type badges
-- **IDE Downloads**: NEW - Manage IDE versions for different platforms
-- **NO User Management** - users manage their own accounts
+## Page Structure
 
-#### User Account Settings (NEW)
-- Profile editing (username, email)
-- Password change
-- Project statistics dashboard
-- Account deletion with confirmation
+### Public Pages
+| Route | Page | Description |
+|-------|------|-------------|
+| `/` | Landing | Hero, features, stats, CTA |
+| `/about` | About | Mission, vision, technology stack |
+| `/product-suite` | Products | Development tools, SDKs, middleware |
+| `/developer-portal` | Developer Portal | Documentation, SDKs, community |
+| `/hardware-catalog` | Hardware | RISC-V board catalog with filters |
+| `/partners` | Partners | Partner network showcase |
+| `/partner-registration` | Partner Registration | Application form |
+| `/download-ide` | IDE Downloads | Windows/macOS/Linux downloads |
+| `/blog` | Blog | Technical articles and tutorials |
+| `/login` | Login | Authentication |
+| `/register` | Register | New account creation |
 
-#### Main Application Pages
-- Landing page with features showcase
-- Hardware Catalog with search
-- IDE Downloads page
-- Smart Project Builder (placeholder)
-- My Projects page
+### Protected Pages (Authenticated)
+| Route | Page | Description |
+|-------|------|-------------|
+| `/solution-builder` | Solution Builder | AI-powered project generation |
+| `/projects` | My Projects | User's project dashboard |
+| `/account` | Account Settings | Profile and password management |
 
----
+### Admin Pages
+| Route | Page | Description |
+|-------|------|-------------|
+| `/admin` | Dashboard | Stats and quick links |
+| `/admin/hardware` | Hardware Management | CRUD for RISC-V boards |
+| `/admin/middleware` | Middleware Management | RTOS and frameworks |
+| `/admin/software` | Software Components | BSPs, SDKs, drivers |
+| `/admin/ide` | IDE Downloads | Manage IDE binaries |
+| `/admin/llm` | LLM Settings | AI provider configuration |
 
-## Prioritized Backlog
-
-### P0 - Critical
-- None currently (Core features implemented)
-
-### P1 - High Priority
-1. **Enhanced Code Templates**
-   - Add more hardware-specific templates
-   - Improve peripheral driver implementations
-   - Add example applications
-
-### P2 - Medium Priority
-1. **Project Sharing & Collaboration**
-   - Share projects with other users
-   - Collaborative editing
-
-2. **Real-time Code Preview**
-   - Show generated code in UI before download
-   - Syntax highlighting
-
-### P3 - Future Enhancements
-1. **IDE Integration** - Host actual IDE binaries
-2. **CI/CD Integration** - Automated build pipelines
-3. **Hardware Simulator** - In-browser RISC-V emulator
-4. **Backend Refactoring** - Split server.py into modular routers
-
----
-
-## Database Schema
-
-### Users Collection
-```json
-{
-  "id": "string",
-  "email": "string",
-  "username": "string",
-  "password_hash": "string",
-  "is_admin": "boolean",
-  "created_at": "datetime"
-}
-```
-
-### Hardware Collection
-```json
-{
-  "id": "string",
-  "name": "string",
-  "manufacturer": "string",
-  "core": "string",
-  "clock_speed": "string",
-  "memory": "string",
-  "flash": "string",
-  "description": "string",
-  "image_url": "string",
-  "price": "string",
-  "peripherals": [{"name": "string", "type": "string", "interface": "string"}]
-}
-```
-
-### Software Components Collection (NEW)
-```json
-{
-  "id": "string",
-  "name": "string",
-  "type": "RTOS|BSP|SDK|Driver|Bootloader|Framework|Library",
-  "version": "string",
-  "description": "string",
-  "compatible_cores": ["string"],
-  "compatible_hardware": ["string"],
-  "features": ["string"],
-  "download_url": "string",
-  "documentation_url": "string",
-  "created_at": "datetime"
-}
-```
-
----
+## Hardware Database
+Real RISC-V boards currently in catalog:
+1. SiFive HiFive1 Rev B (RISC-V E31, 320 MHz)
+2. Kendryte K210 (Dual Core 64-bit, 400 MHz, AI accelerator)
+3. ESP32-C3 (Single Core 32-bit, WiFi/BLE)
+4. StarFive VisionFive 2 (Quad Core 64-bit, 1.5 GHz)
 
 ## API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/me` - Get current user
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
 
-### User Account (Self-Service)
-- `PUT /api/account/profile` - Update profile
-- `PUT /api/account/password` - Change password
-- `DELETE /api/account` - Delete own account
-- `GET /api/account/projects/stats` - Get project statistics
-
-### Public
+### Public APIs
 - `GET /api/hardware` - List all hardware
-- `GET /api/middleware` - List all middleware
-- `GET /api/software-components` - List software components (with optional type filter)
-- `GET /api/component-types` - Get valid component types
+- `GET /api/middleware` - List middleware options
 - `GET /api/ide-downloads` - List IDE downloads
 
-### Admin (Database Management)
-- `GET /api/admin/stats` - Get platform stats
-- Hardware CRUD: POST/PUT/DELETE `/api/admin/hardware`
-- Middleware CRUD: POST/PUT/DELETE `/api/admin/middleware`
-- Software Components CRUD: POST/PUT/DELETE `/api/admin/software-components`
-- IDE Downloads CRUD: POST/PUT/DELETE `/api/admin/ide-downloads`
+### Protected APIs
+- `POST /api/projects/generate` - Generate project with AI
+- `GET /api/projects` - User's projects
+- `GET /api/projects/{id}/download` - Download project ZIP
+- `PUT /api/users/me` - Update profile
+- `DELETE /api/users/me` - Delete account
+
+### Admin APIs
+- `GET/POST /api/admin/hardware` - Manage hardware
+- `GET/POST /api/admin/middleware` - Manage middleware
+- `GET/POST /api/admin/software` - Manage software
+- `GET/POST /api/admin/ide-downloads` - Manage IDE downloads
+- `GET/POST /api/admin/llm-settings` - Configure LLM
+
+## Test Results (Latest)
+- **Backend**: 100% (15/15 tests passed)
+- **Frontend**: 100% (25/25 E2E tests passed)
+- **Test files**: `/app/backend/tests/test_api.py`, `/app/tests/e2e/`
+
+## Deployment Considerations
+- AWS Amplify / EC2 compatible
+- Environment variables managed via .env files
+- MongoDB Atlas for production database
+- CI/CD ready with GitHub integration
+
+## Pending/Future Tasks
+
+### P1 - High Priority
+- [ ] Add file upload for IDE binaries (admin)
+- [ ] Implement actual IDE download functionality
+- [ ] Add more RISC-V hardware to catalog
+
+### P2 - Medium Priority
+- [ ] Refactor server.py into separate routers
+- [ ] Enhance project versioning UI
+- [ ] Add notification system
+
+### P3 - Low Priority/Backlog
+- [ ] Web IDE integration
+- [ ] User project sharing
+- [ ] Community forum integration
+- [ ] ISO 26262 certification workflow
 
 ---
-
-## Test Credentials
-- **Admin**: admin@trusted-v.com / admin123
-- **Standard User**: Create via registration
-
-## Key Files
-- `/app/backend/server.py` - All backend APIs
-- `/app/frontend/src/App.js` - Frontend routes
-- `/app/frontend/src/pages/admin/AdminSoftware.jsx` - Software components management
-- `/app/frontend/src/pages/AccountSettings.jsx` - User account settings
+*Last Updated: December 2025*
