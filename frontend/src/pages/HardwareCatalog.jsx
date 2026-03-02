@@ -1,163 +1,248 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Loader2, Cpu, Zap, HardDrive, Layers, Search } from "lucide-react";
+import { 
+  Cpu, Search, Filter, ExternalLink, ChevronDown, 
+  Wifi, Zap, Server, Gauge, MemoryStick, HardDrive
+} from "lucide-react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
 
 const HardwareCatalog = () => {
   const [hardware, setHardware] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCore, setSelectedCore] = useState("all");
+  const [selectedManufacturer, setSelectedManufacturer] = useState("all");
+
   useEffect(() => {
     loadHardware();
   }, []);
-  
+
   const loadHardware = async () => {
     try {
-      const response = await axios.get(`${API}/hardware`);
-      setHardware(response.data);
+      const res = await axios.get(`${BACKEND_URL}/api/hardware`);
+      setHardware(res.data);
     } catch (error) {
       console.error("Failed to load hardware:", error);
     } finally {
       setLoading(false);
     }
   };
-  
-  const filteredHardware = hardware.filter(hw => 
-    hw.name.toLowerCase().includes(search.toLowerCase()) ||
-    hw.manufacturer.toLowerCase().includes(search.toLowerCase()) ||
-    hw.core.toLowerCase().includes(search.toLowerCase())
-  );
-  
-  if (loading) {
-    return (
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-  
+
+  // Extract unique values for filters
+  const cores = useMemo(() => {
+    const unique = [...new Set(hardware.map(h => h.core))];
+    return ["all", ...unique];
+  }, [hardware]);
+
+  const manufacturers = useMemo(() => {
+    const unique = [...new Set(hardware.map(h => h.manufacturer))];
+    return ["all", ...unique];
+  }, [hardware]);
+
+  // Filter hardware
+  const filteredHardware = useMemo(() => {
+    return hardware.filter(hw => {
+      const matchesSearch = !searchQuery || 
+        hw.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        hw.manufacturer.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        hw.description.toLowerCase().includes(searchQuery.toLowerCase());
+      
+      const matchesCore = selectedCore === "all" || hw.core === selectedCore;
+      const matchesManufacturer = selectedManufacturer === "all" || hw.manufacturer === selectedManufacturer;
+      
+      return matchesSearch && matchesCore && matchesManufacturer;
+    });
+  }, [hardware, searchQuery, selectedCore, selectedManufacturer]);
+
+  const getCoreColor = (core) => {
+    if (core.includes("64")) return "bg-purple-100 text-purple-800 border-purple-200";
+    if (core.includes("32")) return "bg-blue-100 text-blue-800 border-blue-200";
+    return "bg-gray-100 text-gray-800 border-gray-200";
+  };
+
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-            Hardware Catalog
-          </h1>
-          <p className="text-muted-foreground text-lg mb-6">
-            Browse our curated collection of RISC-V development boards
-          </p>
-          
-          <div className="relative max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <Input
-              data-testid="hardware-search-input"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by name, manufacturer, or core..."
-              className="pl-10 h-11"
-            />
+    <div className="min-h-screen bg-white">
+      {/* Hero */}
+      <section className="py-16 bg-gradient-to-b from-slate-50 to-white border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Hardware Catalog</span>
+            <h1 className="text-4xl font-bold text-foreground mt-2 mb-4">
+              RISC-V Development Boards
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Comprehensive catalog of supported RISC-V development boards, from microcontrollers to high-performance SBCs. 
+              Each board is fully tested and compatible with TrusteD-V tools.
+            </p>
           </div>
         </div>
-        
-        {/* Hardware Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredHardware.map((hw) => (
-            <Card 
-              key={hw.id}
-              data-testid={`hardware-card-${hw.id}`}
-              className="bg-card border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300"
+      </section>
+
+      {/* Filters */}
+      <section className="py-6 bg-white border-b border-border sticky top-[68px] z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row gap-4 items-center">
+            {/* Search */}
+            <div className="relative flex-1 w-full">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                placeholder="Search boards by name, manufacturer, or description..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+            
+            {/* Core Filter */}
+            <div className="flex items-center gap-2">
+              <Filter className="w-4 h-4 text-muted-foreground" />
+              <select
+                value={selectedCore}
+                onChange={(e) => setSelectedCore(e.target.value)}
+                className="px-3 py-2 border border-border rounded-md text-sm bg-white"
+              >
+                <option value="all">All Cores</option>
+                {cores.filter(c => c !== "all").map(core => (
+                  <option key={core} value={core}>{core}</option>
+                ))}
+              </select>
+            </div>
+            
+            {/* Manufacturer Filter */}
+            <select
+              value={selectedManufacturer}
+              onChange={(e) => setSelectedManufacturer(e.target.value)}
+              className="px-3 py-2 border border-border rounded-md text-sm bg-white"
             >
-              <CardHeader className="p-6 pb-4">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-1">
-                      {hw.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">{hw.manufacturer}</p>
-                  </div>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Cpu className="w-6 h-6 text-primary" />
-                  </div>
-                </div>
-              </CardHeader>
-              
-              <CardContent className="p-6 pt-0 space-y-4">
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {hw.description}
-                </p>
-                
-                {/* Specs Grid */}
-                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-                      <Cpu className="w-3.5 h-3.5" />
-                      <span>Core</span>
-                    </div>
-                    <p className="text-sm font-medium text-foreground">{hw.core}</p>
-                  </div>
-                  
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-                      <Zap className="w-3.5 h-3.5" />
-                      <span>Speed</span>
-                    </div>
-                    <p className="text-sm font-medium text-foreground">{hw.clock_speed}</p>
-                  </div>
-                  
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-                      <Layers className="w-3.5 h-3.5" />
-                      <span>Memory</span>
-                    </div>
-                    <p className="text-sm font-medium text-foreground">{hw.memory}</p>
-                  </div>
-                  
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-                      <HardDrive className="w-3.5 h-3.5" />
-                      <span>Flash</span>
-                    </div>
-                    <p className="text-sm font-medium text-foreground">{hw.flash}</p>
-                  </div>
-                </div>
-                
-                {/* Peripherals */}
-                <div className="pt-4 border-t border-border">
-                  <p className="text-xs text-muted-foreground font-medium mb-3">
-                    Peripherals
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {hw.peripherals.map((peripheral, index) => (
-                      <Badge 
-                        key={index}
-                        data-testid={`peripheral-${index}`}
-                        variant="secondary"
-                        className="text-xs"
-                      >
-                        {peripheral.name}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        
-        {filteredHardware.length === 0 && (
-          <div className="text-center py-16">
-            <Cpu className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground text-lg">No hardware found matching your search.</p>
+              <option value="all">All Manufacturers</option>
+              {manufacturers.filter(m => m !== "all").map(mfr => (
+                <option key={mfr} value={mfr}>{mfr}</option>
+              ))}
+            </select>
           </div>
-        )}
-      </div>
+        </div>
+      </section>
+
+      {/* Hardware Grid */}
+      <section className="py-12 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-muted-foreground mt-4">Loading hardware catalog...</p>
+            </div>
+          ) : filteredHardware.length === 0 ? (
+            <div className="text-center py-12">
+              <Cpu className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+              <p className="text-muted-foreground">No hardware found matching your criteria.</p>
+            </div>
+          ) : (
+            <>
+              <div className="mb-6 flex items-center justify-between">
+                <p className="text-sm text-muted-foreground">
+                  Showing {filteredHardware.length} of {hardware.length} boards
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredHardware.map((hw) => (
+                  <Card 
+                    key={hw.id} 
+                    className="bg-white hover:shadow-lg transition-all duration-300 overflow-hidden group"
+                    data-testid={`hardware-card-${hw.id}`}
+                  >
+                    {/* Image placeholder - In production, use hw.image_url */}
+                    <div className="h-40 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center relative overflow-hidden">
+                      <Cpu className="w-16 h-16 text-slate-300" />
+                      <div className="absolute top-3 right-3">
+                        <Badge className={getCoreColor(hw.core)}>{hw.core}</Badge>
+                      </div>
+                    </div>
+                    
+                    <CardContent className="p-5">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="font-semibold text-foreground text-lg group-hover:text-primary transition-colors">
+                            {hw.name}
+                          </h3>
+                          <p className="text-sm text-muted-foreground">{hw.manufacturer}</p>
+                        </div>
+                        {hw.price && (
+                          <span className="font-semibold text-primary">{hw.price}</span>
+                        )}
+                      </div>
+                      
+                      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                        {hw.description}
+                      </p>
+                      
+                      {/* Specs Grid */}
+                      <div className="grid grid-cols-2 gap-3 mb-4">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Gauge className="w-3.5 h-3.5 text-primary" />
+                          <span>{hw.clock_speed}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <MemoryStick className="w-3.5 h-3.5 text-primary" />
+                          <span>{hw.memory}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <HardDrive className="w-3.5 h-3.5 text-primary" />
+                          <span>{hw.flash}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Zap className="w-3.5 h-3.5 text-primary" />
+                          <span>{hw.peripherals?.length || 0} peripherals</span>
+                        </div>
+                      </div>
+                      
+                      {/* Peripherals */}
+                      {hw.peripherals && hw.peripherals.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 mb-4">
+                          {hw.peripherals.slice(0, 5).map((p, i) => (
+                            <span key={i} className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-xs">
+                              {p.name}
+                            </span>
+                          ))}
+                          {hw.peripherals.length > 5 && (
+                            <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-xs">
+                              +{hw.peripherals.length - 5} more
+                            </span>
+                          )}
+                        </div>
+                      )}
+                      
+                      <Button variant="outline" size="sm" className="w-full group-hover:bg-primary group-hover:text-white transition-colors">
+                        View Details
+                        <ExternalLink className="w-3.5 h-3.5 ml-1" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 bg-white border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl font-bold text-foreground mb-4">Can't find your board?</h2>
+          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+            We're constantly adding new hardware support. Contact us to request support for your specific development board.
+          </p>
+          <div className="flex justify-center gap-4">
+            <Button>Request Board Support</Button>
+            <Button variant="outline">Become a Hardware Partner</Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
