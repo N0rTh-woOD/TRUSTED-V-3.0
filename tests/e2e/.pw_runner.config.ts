@@ -11,7 +11,7 @@ export default defineConfig({
     ['json', { outputFile: '/root/.emergent/automation_output/20260302_020257/results.json' }],
   ],
   use: {
-    baseURL: 'https://trusted-v-builder.preview.emergentagent.com',
+    baseURL: 'https://embedded-ai-lab.preview.emergentagent.com',
     screenshot: 'only-on-failure',
     trace: 'off',
     headless: true,
