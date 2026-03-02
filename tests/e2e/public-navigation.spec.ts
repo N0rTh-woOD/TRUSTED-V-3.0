@@ -104,7 +104,7 @@ test.describe('Public Navigation', () => {
     await page.goto('/blog');
     await page.waitForLoadState('domcontentloaded');
     
-    await expect(page.getByRole('heading', { name: /Blog/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Insights & Tutorials/i })).toBeVisible();
     // Verify featured post is visible
     await expect(page.getByText(/Building Secure Boot for RISC-V/i)).toBeVisible();
   });
