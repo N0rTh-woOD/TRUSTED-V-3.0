@@ -15,7 +15,7 @@ test.describe('Public Navigation', () => {
     await expect(page.getByTestId('nav-products')).toBeVisible();
     await expect(page.getByTestId('nav-developer-portal')).toBeVisible();
     await expect(page.getByTestId('nav-hardware')).toBeVisible();
-    await expect(page.getByTestId('nav-partners')).toBeVisible();
+    await expect(page.getByTestId('nav-partner-with-us')).toBeVisible();
     
     // Verify Sign In button visible
     await expect(page.getByTestId('login-btn')).toBeVisible();
@@ -69,11 +69,13 @@ test.describe('Public Navigation', () => {
     await page.goto('/');
     await page.waitForLoadState('domcontentloaded');
     
-    await page.getByTestId('nav-partners').click();
+    // Navigation now shows "Partner With Us" instead of "Partners"
+    await page.getByTestId('nav-partner-with-us').click();
     await page.waitForLoadState('domcontentloaded');
     
     await expect(page).toHaveURL(/\/partners/);
-    await expect(page.getByRole('heading', { name: /Building Together/i })).toBeVisible();
+    // Partners page now focuses on "Become a Partner" instead of listing partners
+    await expect(page.getByRole('heading', { name: /Join the TrusteD-V Ecosystem/i })).toBeVisible();
   });
   
   test('Hardware catalog displays RISC-V boards', async ({ page }) => {

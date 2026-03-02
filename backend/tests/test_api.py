@@ -53,16 +53,22 @@ class TestHardwareEndpoints:
     """Test hardware catalog endpoints"""
     
     def test_get_hardware_list(self):
-        """GET /api/hardware returns list of RISC-V boards"""
+        """GET /api/hardware returns list of RISC-V boards - only C-DAC and Mindgrove"""
         response = requests.get(f"{API}/hardware")
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, list)
-        assert len(data) > 0
+        assert len(data) == 6, "Should have exactly 6 boards (3 C-DAC + 3 Mindgrove)"
         
-        # Verify RISC-V boards are present
+        # Verify only C-DAC and Mindgrove boards are present
+        manufacturers = set(h["manufacturer"] for h in data)
+        assert "C-DAC" in manufacturers, "Should have C-DAC boards"
+        assert "Mindgrove Technologies" in manufacturers, "Should have Mindgrove boards"
+        
+        # Verify specific boards
         board_names = [h["name"] for h in data]
-        assert any("SiFive" in name for name in board_names), "Should have SiFive board"
+        assert any("ARIES" in name for name in board_names), "Should have ARIES board from C-DAC"
+        assert any("Mindgrove" in name for name in board_names), "Should have Mindgrove boards"
         
     def test_hardware_has_required_fields(self):
         """Hardware entries have all required fields"""
