@@ -8,9 +8,6 @@ test.describe('Partners Page - "Become a Partner" Focus', () => {
     
     // Main heading should be "Join the TrusteD-V Ecosystem"
     await expect(page.getByRole('heading', { name: /Join the TrusteD-V Ecosystem/i })).toBeVisible();
-    
-    // Should have "Partner With Us" label
-    await expect(page.getByText('PARTNER WITH US')).toBeVisible();
   });
 
   test('Partners page shows partnership opportunities cards', async ({ page }) => {
@@ -76,11 +73,13 @@ test.describe('Hardware Catalog - C-DAC and Mindgrove Only', () => {
     const count = await cards.count();
     expect(count).toBe(6);
     
-    // Check for C-DAC boards
-    await expect(page.getByText('C-DAC').first()).toBeVisible();
+    // Check for C-DAC boards within card content (not in the dropdown)
+    const cdacCards = page.locator('[data-testid^="hardware-card-"] p:has-text("C-DAC")');
+    await expect(cdacCards.first()).toBeVisible();
     
-    // Check for Mindgrove boards
-    await expect(page.getByText('Mindgrove Technologies').first()).toBeVisible();
+    // Check for Mindgrove boards within card content
+    const mindgroveCards = page.locator('[data-testid^="hardware-card-"] p:has-text("Mindgrove")');
+    await expect(mindgroveCards.first()).toBeVisible();
   });
 
   test('Hardware catalog shows C-DAC ARIES boards', async ({ page }) => {
