@@ -43,11 +43,11 @@ const Landing = () => {
 
   const hardwarePartners = [
     { name: "C-DAC", description: "VEGA Processors" },
-    { name: "IIT Madras", description: "Shakti Cores" },
-    { name: "InCore Semi", description: "RISC-V IP" },
+    { name: "C-DAC", description: "DHRUV64 SoCs" },
+    { name: "Mindgrove", description: "Secure IoT" },
     { name: "Mindgrove", description: "Vision SoCs" },
-    { name: "ISRO", description: "Space-Grade" },
-    { name: "3rdiTech", description: "Surveillance" },
+    { name: "Mindgrove", description: "Industrial" },
+    { name: "C-DAC", description: "ARIES Boards" },
   ];
 
   const stats = [
