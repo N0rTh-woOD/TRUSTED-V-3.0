@@ -1,7 +1,7 @@
 # TrusteD-V Platform - Product Requirements Document
 
 ## Overview
-**TrusteD-V** is an AI-powered development platform for building secure embedded systems with RISC-V architecture and Rust programming language. The platform provides tools, SDKs, and AI-assisted code generation for developing production-ready embedded applications.
+**TrusteD-V** is an AI-powered development platform for building secure embedded systems with RISC-V architecture and Rust programming language, focused on the Indian RISC-V ecosystem.
 
 ## Original Problem Statement
 Build an "AI coding platform for Embedded systems with RISC-V centric using RUST language" that:
@@ -9,17 +9,22 @@ Build an "AI coding platform for Embedded systems with RISC-V centric using RUST
 - Selects appropriate middleware (e.g., RTOS)
 - Generates base template projects (drivers, boot-loaders, etc.)
 - Allows users to download generated projects as versioned ZIP files
-- Provides a professional, interactive, user-friendly UI
-- Includes admin panel to manage hardware/software catalogs and user accounts
+- Provides a professional, interactive, user-friendly UI (Bosch-inspired)
+- Includes admin panel to manage hardware/software catalogs
+- Focuses on Indian RISC-V companies and hardware
 
 ## Tech Stack
 - **Backend**: FastAPI, MongoDB (motor), Pydantic, JWT authentication
 - **Frontend**: React 18, React Router, TailwindCSS, Shadcn/UI components
 - **AI Integration**: Gemini 3 Flash via Emergent LLM Key (emergentintegrations)
-- **Design System**: Bosch-inspired professional theme (white background, blue primary, red accent border)
+- **Design System**: Bosch-inspired (white background, blue primary, red accent border)
 
-## Current Credentials
+## Credentials (CONFIDENTIAL - NOT DISPLAYED ON PLATFORM)
 - **Admin**: admin@trusted-v.com / bosch@2425
+- **Sample Users**: (created but not displayed anywhere)
+  - developer@example.com / dev@12345
+  - engineer@example.com / eng@12345
+  - tester@example.com / test@12345
 
 ## Implemented Features (as of Dec 2025)
 
@@ -28,131 +33,97 @@ Build an "AI coding platform for Embedded systems with RISC-V centric using RUST
 - [x] User account management (profile, password change)
 - [x] Admin dashboard with database management
 - [x] MongoDB integration for data persistence
+- [x] Credentials hidden from login page
 
-### Phase 2: Content Management ✓
-- [x] Hardware catalog with RISC-V development boards
-- [x] Software components database (RTOS, BSPs, SDKs, Drivers)
-- [x] Middleware management (FreeRTOS, Zephyr, Embassy, RT-Thread)
-- [x] IDE downloads management for Windows/macOS/Linux
+### Phase 2: Indian RISC-V Hardware ✓
+- [x] Hardware catalog with only Indian RISC-V boards:
+  - ARIES V3.0 (C-DAC) - ₹2,500
+  - ARIES IoT (C-DAC) - ₹1,800
+  - Shakti E-Class Board (IIT Madras / InCore) - ₹3,500
+  - Shakti C-Class Arty (IIT Madras / InCore) - ₹15,000
+  - VEGA DHRUV64 Evaluation (C-DAC) - ₹25,000
+  - IRIS Development Kit (ISRO / IIT Madras) - ₹50,000
+- [x] Software components (Shakti BSP, VEGA SDK, etc.)
 
-### Phase 3: AI-Powered Features ✓
-- [x] Smart Project Builder with AI code generation
-- [x] Hardware recommendation engine
-- [x] Project versioning and ZIP download
-- [x] Configurable LLM settings (admin-managed)
+### Phase 3: Indian Partners ✓
+- [x] Partners page with Indian companies:
+  - **Semiconductor**: InCore Semiconductors, Mindgrove Technologies, 3rdiTech, Netrasemi, BigEndian
+  - **Government**: C-DAC, ISRO, SCL Chandigarh
+  - **Academic**: IIT Madras (Shakti), IIT Bombay, IIIT Hyderabad
+  - **Integrators**: Tata Advanced Systems, IGCAR
+- [x] Government initiatives section (DIR-V, C2S, DLI)
+- [x] Partner registration form
 
-### Phase 4: Professional UI Redesign ✓
-- [x] Bosch-inspired design system
+### Phase 4: IDE Binary Upload ✓
+- [x] Admin can upload IDE binaries for Windows/Mac/Linux
+- [x] File upload API with progress tracking
+- [x] Public download page shows "Coming Soon" until binary uploaded
+- [x] Supported formats: .exe, .dmg, .pkg, .deb, .rpm, .tar.gz, .zip, .AppImage
+
+### Phase 5: Professional UI ✓
+- [x] Bosch-inspired design (white background, blue primary)
 - [x] Red accent border at top of all pages
 - [x] Professional navigation with mobile responsiveness
-- [x] White background with blue primary colors
-- [x] Inter font family for professional typography
-
-### Phase 5: New Pages & Features ✓
-- [x] Landing page with hero section and feature cards
-- [x] About page with mission/vision/values
-- [x] Product Suite page with categorized offerings
-- [x] Developer Portal with SDKs and resources
-- [x] Enhanced Hardware Catalog with filtering
-- [x] Partners page with partner network
-- [x] Partner Registration form
-- [x] IDE Downloads page with platform support
-- [x] Technical Blog with articles
+- [x] Clean login page (no credentials displayed)
+- [x] All pages professionally designed
 
 ## Page Structure
 
 ### Public Pages
 | Route | Page | Description |
 |-------|------|-------------|
-| `/` | Landing | Hero, features, stats, CTA |
+| `/` | Landing | Hero, features, Indian partners |
 | `/about` | About | Mission, vision, technology stack |
-| `/product-suite` | Products | Development tools, SDKs, middleware |
-| `/developer-portal` | Developer Portal | Documentation, SDKs, community |
-| `/hardware-catalog` | Hardware | RISC-V board catalog with filters |
-| `/partners` | Partners | Partner network showcase |
+| `/product-suite` | Products | Development tools, SDKs |
+| `/developer-portal` | Developer Portal | Documentation, SDKs |
+| `/hardware-catalog` | Hardware | Indian RISC-V boards only |
+| `/partners` | Partners | Indian companies only |
 | `/partner-registration` | Partner Registration | Application form |
-| `/download-ide` | IDE Downloads | Windows/macOS/Linux downloads |
-| `/blog` | Blog | Technical articles and tutorials |
-| `/login` | Login | Authentication |
+| `/download-ide` | IDE Downloads | Binary download (when available) |
+| `/blog` | Blog | Technical articles |
+| `/login` | Login | Authentication (no credentials shown) |
 | `/register` | Register | New account creation |
 
-### Protected Pages (Authenticated)
+### Protected Pages (Authenticated Users Only)
 | Route | Page | Description |
 |-------|------|-------------|
 | `/solution-builder` | Solution Builder | AI-powered project generation |
 | `/projects` | My Projects | User's project dashboard |
-| `/account` | Account Settings | Profile and password management |
+| `/account` | Account Settings | Profile management |
 
-### Admin Pages
+### Admin Pages (Admin Only)
 | Route | Page | Description |
 |-------|------|-------------|
 | `/admin` | Dashboard | Stats and quick links |
-| `/admin/hardware` | Hardware Management | CRUD for RISC-V boards |
-| `/admin/middleware` | Middleware Management | RTOS and frameworks |
-| `/admin/software` | Software Components | BSPs, SDKs, drivers |
-| `/admin/ide` | IDE Downloads | Manage IDE binaries |
-| `/admin/llm` | LLM Settings | AI provider configuration |
-
-## Hardware Database
-Real RISC-V boards currently in catalog:
-1. SiFive HiFive1 Rev B (RISC-V E31, 320 MHz)
-2. Kendryte K210 (Dual Core 64-bit, 400 MHz, AI accelerator)
-3. ESP32-C3 (Single Core 32-bit, WiFi/BLE)
-4. StarFive VisionFive 2 (Quad Core 64-bit, 1.5 GHz)
+| `/admin/hardware` | Hardware | CRUD for Indian boards |
+| `/admin/middleware` | Middleware | RTOS and frameworks |
+| `/admin/software` | Software | BSPs, SDKs |
+| `/admin/ide` | IDE Downloads | Upload binaries |
+| `/admin/llm` | LLM Settings | AI configuration |
 
 ## API Endpoints
 
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
+### Public
+- `GET /api/hardware` - Indian RISC-V boards
+- `GET /api/middleware` - RTOS options
+- `GET /api/ide-downloads` - IDE versions
+- `GET /api/ide-downloads/{id}/download` - Download binary (if available)
 
-### Public APIs
-- `GET /api/hardware` - List all hardware
-- `GET /api/middleware` - List middleware options
-- `GET /api/ide-downloads` - List IDE downloads
+### Admin (Requires Admin Token)
+- `POST /api/admin/ide-downloads/{id}/upload` - Upload IDE binary
+- CRUD for hardware, middleware, software, IDE
 
-### Protected APIs
-- `POST /api/projects/generate` - Generate project with AI
-- `GET /api/projects` - User's projects
-- `GET /api/projects/{id}/download` - Download project ZIP
-- `PUT /api/users/me` - Update profile
-- `DELETE /api/users/me` - Delete account
+## Deployment
+- **AWS Ready**: Environment variables, no hardcoded values
+- **CI/CD Compatible**: Standard build commands
+- **Frontend**: `yarn build`
+- **Backend**: `pip install -r requirements.txt`
 
-### Admin APIs
-- `GET/POST /api/admin/hardware` - Manage hardware
-- `GET/POST /api/admin/middleware` - Manage middleware
-- `GET/POST /api/admin/software` - Manage software
-- `GET/POST /api/admin/ide-downloads` - Manage IDE downloads
-- `GET/POST /api/admin/llm-settings` - Configure LLM
-
-## Test Results (Latest)
-- **Backend**: 100% (15/15 tests passed)
-- **Frontend**: 100% (25/25 E2E tests passed)
-- **Test files**: `/app/backend/tests/test_api.py`, `/app/tests/e2e/`
-
-## Deployment Considerations
-- AWS Amplify / EC2 compatible
-- Environment variables managed via .env files
-- MongoDB Atlas for production database
-- CI/CD ready with GitHub integration
-
-## Pending/Future Tasks
-
-### P1 - High Priority
-- [ ] Add file upload for IDE binaries (admin)
-- [ ] Implement actual IDE download functionality
-- [ ] Add more RISC-V hardware to catalog
-
-### P2 - Medium Priority
-- [ ] Refactor server.py into separate routers
-- [ ] Enhance project versioning UI
-- [ ] Add notification system
-
-### P3 - Low Priority/Backlog
-- [ ] Web IDE integration
-- [ ] User project sharing
-- [ ] Community forum integration
-- [ ] ISO 26262 certification workflow
+## Future Tasks
+- [ ] Add more Indian RISC-V boards as they become available
+- [ ] Integrate with DIR-V program APIs
+- [ ] Add company logo upload in admin settings
+- [ ] Refactor server.py into routers
 
 ---
 *Last Updated: December 2025*
