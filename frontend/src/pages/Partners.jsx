@@ -1,55 +1,117 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { 
   Cpu, ArrowRight, CheckCircle2, Users, Building2, 
-  GraduationCap, Rocket, Globe, Award
+  GraduationCap, Rocket, Globe, Award, MapPin
 } from "lucide-react";
 
 const Partners = () => {
   const partnerTypes = [
     {
-      type: "Hardware Vendors",
+      type: "Semiconductor Companies",
       icon: Cpu,
-      description: "Leading RISC-V silicon and development board manufacturers",
+      description: "Leading Indian RISC-V silicon and processor IP providers",
       partners: [
-        { name: "SiFive", description: "RISC-V IP cores and development boards", logo: "SF" },
-        { name: "Espressif", description: "ESP32-C series RISC-V IoT solutions", logo: "ES" },
-        { name: "StarFive", description: "High-performance RISC-V SBCs", logo: "ST" },
-        { name: "Canaan", description: "Kendryte AI accelerator chips", logo: "CA" },
-        { name: "Microchip", description: "PolarFire RISC-V FPGA SoC", logo: "MC" },
-        { name: "BeagleBoard", description: "Open-source RISC-V hardware", logo: "BB" },
+        { 
+          name: "InCore Semiconductors", 
+          description: "RISC-V processor IP and SoC solutions, IIT Madras spin-off", 
+          logo: "IC",
+          location: "Chennai"
+        },
+        { 
+          name: "Mindgrove Technologies", 
+          description: "RISC-V SoCs for vision systems, CCTV, and dashcams", 
+          logo: "MG",
+          location: "Chennai"
+        },
+        { 
+          name: "3rdiTech", 
+          description: "Surveillance and imaging SoC development", 
+          logo: "3T",
+          location: "Bangalore"
+        },
+        { 
+          name: "Netrasemi", 
+          description: "RISC-V based video processing solutions", 
+          logo: "NS",
+          location: "Hyderabad"
+        },
+        { 
+          name: "BigEndian Semiconductors", 
+          description: "RISC-V SoCs for IoT and edge computing", 
+          logo: "BE",
+          location: "Bangalore"
+        },
       ]
     },
     {
-      type: "Software Partners",
+      type: "Government & Research",
       icon: Building2,
-      description: "RTOS, toolchain, and middleware providers",
+      description: "Government organizations driving RISC-V adoption in India",
       partners: [
-        { name: "Zephyr Project", description: "Scalable RTOS for connected devices", logo: "ZP" },
-        { name: "FreeRTOS", description: "Market-leading real-time kernel", logo: "FR" },
-        { name: "RT-Thread", description: "Open-source IoT operating system", logo: "RT" },
-        { name: "Embassy", description: "Async Rust embedded framework", logo: "EM" },
+        { 
+          name: "C-DAC", 
+          description: "VEGA RISC-V processors and ARIES development boards", 
+          logo: "CD",
+          location: "Pune"
+        },
+        { 
+          name: "ISRO", 
+          description: "Space-grade RISC-V solutions with IRIS chip", 
+          logo: "IS",
+          location: "Bangalore"
+        },
+        { 
+          name: "SCL Chandigarh", 
+          description: "Semiconductor fabrication for indigenous chips", 
+          logo: "SC",
+          location: "Chandigarh"
+        },
       ]
     },
     {
       type: "Academic Partners",
       icon: GraduationCap,
-      description: "Universities and research institutions advancing RISC-V",
+      description: "Leading institutions advancing RISC-V research and development",
       partners: [
-        { name: "IIT Madras", description: "Shakti RISC-V processor development", logo: "IIT" },
-        { name: "UC Berkeley", description: "RISC-V architecture originators", logo: "UCB" },
-        { name: "ETH Zurich", description: "PULP Platform research", logo: "ETH" },
+        { 
+          name: "IIT Madras - Shakti", 
+          description: "Open-source Shakti RISC-V processor development", 
+          logo: "IIT",
+          location: "Chennai"
+        },
+        { 
+          name: "IIT Bombay", 
+          description: "VLSI design and embedded systems research", 
+          logo: "IIB",
+          location: "Mumbai"
+        },
+        { 
+          name: "IIIT Hyderabad", 
+          description: "Computer architecture and SoC research", 
+          logo: "IIH",
+          location: "Hyderabad"
+        },
       ]
     },
     {
-      type: "Integration Partners",
+      type: "System Integrators",
       icon: Rocket,
-      description: "System integrators and solution providers",
+      description: "Companies integrating RISC-V solutions into products",
       partners: [
-        { name: "Antmicro", description: "Open hardware design services", logo: "AM" },
-        { name: "lowRISC", description: "Open-source silicon foundation", logo: "LR" },
+        { 
+          name: "Tata Advanced Systems", 
+          description: "Chip packaging and system integration", 
+          logo: "TA",
+          location: "Hyderabad"
+        },
+        { 
+          name: "IGCAR", 
+          description: "Nuclear applications with RISC-V FPGA deployments", 
+          logo: "IG",
+          location: "Kalpakkam"
+        },
       ]
     },
   ];
@@ -57,18 +119,18 @@ const Partners = () => {
   const benefits = [
     {
       icon: Globe,
-      title: "Global Visibility",
-      description: "Showcase your products to thousands of embedded developers worldwide",
+      title: "India-First Ecosystem",
+      description: "Join India's growing RISC-V semiconductor ecosystem with government support",
     },
     {
       icon: Users,
-      title: "Community Access",
-      description: "Connect with a growing community of RISC-V and Rust enthusiasts",
+      title: "DIR-V Program Access",
+      description: "Connect with Digital India RISC-V (DIR-V) initiatives and funding opportunities",
     },
     {
       icon: Award,
-      title: "Technical Support",
-      description: "Priority integration support and co-marketing opportunities",
+      title: "Technical Collaboration",
+      description: "Access to Shakti and VEGA cores with priority integration support",
     },
   ];
 
@@ -80,11 +142,11 @@ const Partners = () => {
           <div className="max-w-3xl mx-auto text-center">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Partner Network</span>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-6">
-              Building Together
+              Building India's RISC-V Ecosystem
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              TrusteD-V partners with leading hardware vendors, software providers, and academic 
-              institutions to create the most comprehensive RISC-V development ecosystem.
+              TrusteD-V partners with leading Indian semiconductor companies, research institutions, 
+              and government organizations to create a self-reliant RISC-V development ecosystem.
             </p>
             <div className="mt-8">
               <Link to="/partner-registration">
@@ -125,9 +187,13 @@ const Partners = () => {
                         <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                           <span className="text-primary font-bold text-lg">{partner.logo}</span>
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <h3 className="font-semibold text-foreground">{partner.name}</h3>
                           <p className="text-sm text-muted-foreground mt-1">{partner.description}</p>
+                          <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                            <MapPin className="w-3 h-3" />
+                            {partner.location}
+                          </div>
                         </div>
                       </div>
                     </CardContent>
@@ -138,6 +204,31 @@ const Partners = () => {
           </section>
         );
       })}
+
+      {/* Government Initiatives */}
+      <section className="py-16 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold">Supported by Government Initiatives</h2>
+            <p className="text-slate-400 mt-2">Part of India's semiconductor self-reliance mission</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-6 rounded-lg bg-slate-800">
+              <h3 className="font-semibold text-xl mb-2">DIR-V</h3>
+              <p className="text-slate-400 text-sm">Digital India RISC-V program enabling 130+ SoC designs</p>
+            </div>
+            <div className="text-center p-6 rounded-lg bg-slate-800">
+              <h3 className="font-semibold text-xl mb-2">Chips to Startup (C2S)</h3>
+              <p className="text-slate-400 text-sm">Supporting semiconductor startups with tools and funding</p>
+            </div>
+            <div className="text-center p-6 rounded-lg bg-slate-800">
+              <h3 className="font-semibold text-xl mb-2">DLI Scheme</h3>
+              <p className="text-slate-400 text-sm">Design Linked Incentive for domestic chip design</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Benefits */}
       <section className="py-20 bg-primary text-white">
@@ -169,7 +260,7 @@ const Partners = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground mb-4">Ready to Partner?</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join our growing ecosystem and help shape the future of secure embedded development.
+            Join India's growing RISC-V ecosystem and help build indigenous semiconductor capabilities.
           </p>
           <Link to="/partner-registration">
             <Button size="lg" className="font-semibold">
