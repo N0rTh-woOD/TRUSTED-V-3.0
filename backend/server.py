@@ -887,7 +887,7 @@ async def init_sample_data():
     if hardware_count > 0:
         await db.hardware.delete_many({})
     
-    # Indian RISC-V Hardware Only
+    # Indian RISC-V Hardware Only - Mindgrove and C-DAC chips only
     indian_hardware = [
         {
             "id": str(uuid.uuid4()),
@@ -906,12 +906,12 @@ async def init_sample_data():
                 {"name": "I2C", "type": "Two-Wire", "interface": "2 channels"},
                 {"name": "Timer", "type": "Timer/Counter", "interface": "4 channels"}
             ],
-            "description": "Made in India RISC-V development board with VEGA processor, ideal for IoT and embedded learning",
+            "description": "Made in India RISC-V development board with VEGA processor from C-DAC, ideal for IoT and embedded applications",
             "created_at": datetime.now(timezone.utc).isoformat()
         },
         {
             "id": str(uuid.uuid4()),
-            "name": "ARIES IoT",
+            "name": "ARIES IoT v2",
             "manufacturer": "C-DAC",
             "core": "VEGA RISC-V 32-bit",
             "clock_speed": "80 MHz",
@@ -926,47 +926,7 @@ async def init_sample_data():
                 {"name": "I2C", "type": "Two-Wire", "interface": "1 channel"},
                 {"name": "ADC", "type": "Analog", "interface": "4 channels 12-bit"}
             ],
-            "description": "Compact IoT-focused RISC-V board from C-DAC for sensor networks and wearables",
-            "created_at": datetime.now(timezone.utc).isoformat()
-        },
-        {
-            "id": str(uuid.uuid4()),
-            "name": "Shakti E-Class Board",
-            "manufacturer": "IIT Madras / InCore",
-            "core": "Shakti E-Class 32-bit RISC-V",
-            "clock_speed": "100 MHz",
-            "memory": "64 KB SRAM",
-            "flash": "16 MB QSPI",
-            "image_url": None,
-            "price": "₹3,500",
-            "peripherals": [
-                {"name": "GPIO", "type": "Digital I/O", "interface": "32 pins"},
-                {"name": "UART", "type": "Serial", "interface": "2 channels"},
-                {"name": "SPI", "type": "Serial Peripheral", "interface": "2 channels"},
-                {"name": "I2C", "type": "Two-Wire", "interface": "1 channel"},
-                {"name": "PWM", "type": "Pulse Width Modulation", "interface": "6 channels"}
-            ],
-            "description": "Open-source Shakti E-Class microcontroller board from IIT Madras for embedded applications",
-            "created_at": datetime.now(timezone.utc).isoformat()
-        },
-        {
-            "id": str(uuid.uuid4()),
-            "name": "Shakti C-Class Arty",
-            "manufacturer": "IIT Madras / InCore",
-            "core": "Shakti C-Class 64-bit RISC-V",
-            "clock_speed": "50 MHz (FPGA)",
-            "memory": "256 MB DDR3",
-            "flash": "16 MB QSPI",
-            "image_url": None,
-            "price": "₹15,000",
-            "peripherals": [
-                {"name": "Ethernet", "type": "Network", "interface": "10/100 Mbps"},
-                {"name": "UART", "type": "Serial", "interface": "1 channel"},
-                {"name": "GPIO", "type": "Digital I/O", "interface": "40 pins"},
-                {"name": "SPI", "type": "Serial Peripheral", "interface": "1 channel"},
-                {"name": "JTAG", "type": "Debug", "interface": "Standard JTAG"}
-            ],
-            "description": "64-bit Shakti C-Class on Arty FPGA for Linux development and research applications",
+            "description": "Compact IoT-focused RISC-V board from C-DAC for sensor networks, wearables and edge computing",
             "created_at": datetime.now(timezone.utc).isoformat()
         },
         {
@@ -986,27 +946,67 @@ async def init_sample_data():
                 {"name": "GPIO", "type": "Digital I/O", "interface": "40-pin header"},
                 {"name": "PCIe", "type": "Expansion", "interface": "Gen 2"}
             ],
-            "description": "High-performance dual-core 64-bit RISC-V board for Linux, 5G, and automotive applications",
+            "description": "High-performance dual-core 64-bit RISC-V board from C-DAC for Linux, 5G, and automotive applications",
             "created_at": datetime.now(timezone.utc).isoformat()
         },
         {
             "id": str(uuid.uuid4()),
-            "name": "IRIS Development Kit",
-            "manufacturer": "ISRO / IIT Madras",
-            "core": "Shakti 64-bit RISC-V (Space Grade)",
-            "clock_speed": "100 MHz",
-            "memory": "128 KB SRAM",
-            "flash": "8 MB NOR Flash",
+            "name": "Mindgrove Secure IoT SoC",
+            "manufacturer": "Mindgrove Technologies",
+            "core": "RISC-V 32-bit Secure Core",
+            "clock_speed": "200 MHz",
+            "memory": "512 KB SRAM",
+            "flash": "8 MB QSPI",
             "image_url": None,
-            "price": "₹50,000",
+            "price": "₹4,500",
             "peripherals": [
-                {"name": "SpaceWire", "type": "Space Communication", "interface": "4 ports"},
-                {"name": "CAN", "type": "Automotive Bus", "interface": "2 channels"},
-                {"name": "UART", "type": "Serial", "interface": "4 channels"},
                 {"name": "GPIO", "type": "Digital I/O", "interface": "48 pins"},
-                {"name": "Radiation Hardened", "type": "Special", "interface": "SEU tolerant"}
+                {"name": "UART", "type": "Serial", "interface": "4 channels"},
+                {"name": "SPI", "type": "Serial Peripheral", "interface": "2 channels"},
+                {"name": "I2C", "type": "Two-Wire", "interface": "2 channels"},
+                {"name": "Crypto Engine", "type": "Security", "interface": "AES/SHA Hardware"}
             ],
-            "description": "Space-qualified RISC-V development kit based on ISRO's IRIS chip for satellite and IoT",
+            "description": "Secure RISC-V SoC from Mindgrove with hardware crypto acceleration for IoT security applications",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "name": "Mindgrove Vision SoC Dev Kit",
+            "manufacturer": "Mindgrove Technologies",
+            "core": "RISC-V 64-bit with Vision NPU",
+            "clock_speed": "800 MHz",
+            "memory": "1 GB LPDDR4",
+            "flash": "16 MB QSPI + eMMC",
+            "image_url": None,
+            "price": "₹18,000",
+            "peripherals": [
+                {"name": "MIPI CSI", "type": "Camera Interface", "interface": "2-lane CSI-2"},
+                {"name": "GPIO", "type": "Digital I/O", "interface": "56 pins"},
+                {"name": "UART", "type": "Serial", "interface": "3 channels"},
+                {"name": "NPU", "type": "Neural Processing", "interface": "2 TOPS INT8"},
+                {"name": "USB", "type": "Universal Serial Bus", "interface": "USB 2.0 OTG"}
+            ],
+            "description": "Vision-focused RISC-V development kit from Mindgrove for AI/ML edge computing, dashcam and CCTV applications",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "name": "Mindgrove Industrial SoC",
+            "manufacturer": "Mindgrove Technologies",
+            "core": "RISC-V 32-bit Industrial Grade",
+            "clock_speed": "320 MHz",
+            "memory": "256 KB SRAM",
+            "flash": "4 MB QSPI",
+            "image_url": None,
+            "price": "₹6,500",
+            "peripherals": [
+                {"name": "CAN", "type": "Automotive/Industrial Bus", "interface": "CAN 2.0B"},
+                {"name": "GPIO", "type": "Digital I/O", "interface": "64 pins"},
+                {"name": "PWM", "type": "Pulse Width Modulation", "interface": "12 channels"},
+                {"name": "ADC", "type": "Analog", "interface": "16 channels 12-bit"},
+                {"name": "Watchdog", "type": "System", "interface": "Independent WDT"}
+            ],
+            "description": "Industrial-grade RISC-V SoC from Mindgrove designed for motor control, automation and industrial IoT",
             "created_at": datetime.now(timezone.utc).isoformat()
         }
     ]
