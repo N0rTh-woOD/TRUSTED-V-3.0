@@ -375,7 +375,7 @@ pub fn init_wireless() -> Result<()> {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/about" className="hover:text-white">About Us</Link></li>
-                <li><Link to="/partners" className="hover:text-white">Partner Network</Link></li>
+                <li><Link to="/partners" className="hover:text-white">Partner With Us</Link></li>
                 <li><Link to="/partner-registration" className="hover:text-white">Become a Partner</Link></li>
                 <li><a href="#" className="hover:text-white">Contact</a></li>
               </ul>
@@ -391,11 +391,21 @@ pub fn init_wireless() -> Result<()> {
           </div>
           
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded bg-primary flex items-center justify-center">
-                <Cpu className="w-4 h-4 text-white" />
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded bg-primary flex items-center justify-center">
+                  <Cpu className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-semibold">TrusteD-V</span>
               </div>
-              <span className="font-semibold">TrusteD-V</span>
+              {/* Bosch Association Badge */}
+              <div className="flex items-center gap-2 pl-6 border-l border-slate-700">
+                <img 
+                  src="/bosch-logo.png" 
+                  alt="Technology Partner" 
+                  className="h-6 opacity-70 hover:opacity-100 transition-opacity"
+                />
+              </div>
             </div>
             <p className="text-sm text-slate-400">
               © 2025 TrusteD-V. Secure RISC-V Development Platform.
