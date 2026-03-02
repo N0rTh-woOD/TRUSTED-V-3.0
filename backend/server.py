@@ -1011,7 +1011,10 @@ async def init_sample_data():
         }
     ]
     await db.hardware.insert_many(indian_hardware)
-        
+    
+    # Update middleware with Indian compatible data
+    middleware_count = await db.middleware.count_documents({})
+    if middleware_count == 0:
         sample_middleware = [
             {
                 "id": str(uuid.uuid4()),
