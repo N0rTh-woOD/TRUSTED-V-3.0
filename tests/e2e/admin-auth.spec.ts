@@ -3,19 +3,26 @@ import { test, expect } from '@playwright/test';
 const ADMIN_EMAIL = 'admin@trusted-v.com';
 const ADMIN_PASSWORD = 'bosch@2425';
 
+// Helper to perform admin login
+async function loginAsAdmin(page: any) {
+  await page.goto('/login');
+  await page.waitForLoadState('domcontentloaded');
+  
+  // Fill in admin credentials
+  await page.getByTestId('email-input').fill(ADMIN_EMAIL);
+  await page.getByTestId('password-input').fill(ADMIN_PASSWORD);
+  
+  // Click the submit button in the form (not the nav button)
+  await page.locator('form').getByTestId('login-btn').click();
+  
+  // Wait for navigation to happen after login
+  await page.waitForURL(/\/builder/, { timeout: 10000 });
+}
+
 test.describe('Admin Authentication', () => {
   
   test('Admin login with new credentials (admin@trusted-v.com / bosch@2425)', async ({ page }) => {
-    await page.goto('/login');
-    await page.waitForLoadState('domcontentloaded');
-    
-    // Fill in admin credentials
-    await page.getByTestId('email-input').fill(ADMIN_EMAIL);
-    await page.getByTestId('password-input').fill(ADMIN_PASSWORD);
-    await page.getByTestId('login-btn').click();
-    
-    // Wait for navigation to happen after login
-    await page.waitForURL(/\/builder/, { timeout: 10000 });
+    await loginAsAdmin(page);
     
     // Verify admin is logged in - should see Admin nav link
     await expect(page.getByTestId('nav-admin')).toBeVisible();
@@ -23,13 +30,7 @@ test.describe('Admin Authentication', () => {
   });
 
   test('Admin can access admin dashboard', async ({ page }) => {
-    // Login first
-    await page.goto('/login');
-    await page.waitForLoadState('domcontentloaded');
-    await page.getByTestId('email-input').fill(ADMIN_EMAIL);
-    await page.getByTestId('password-input').fill(ADMIN_PASSWORD);
-    await page.getByTestId('login-btn').click();
-    await page.waitForURL(/\/builder/, { timeout: 10000 });
+    await loginAsAdmin(page);
     
     // Navigate to admin dashboard
     await page.getByTestId('nav-admin').click();
@@ -42,13 +43,7 @@ test.describe('Admin Authentication', () => {
   });
 
   test('Admin dashboard shows correct stats', async ({ page }) => {
-    // Login first
-    await page.goto('/login');
-    await page.waitForLoadState('domcontentloaded');
-    await page.getByTestId('email-input').fill(ADMIN_EMAIL);
-    await page.getByTestId('password-input').fill(ADMIN_PASSWORD);
-    await page.getByTestId('login-btn').click();
-    await page.waitForURL(/\/builder/, { timeout: 10000 });
+    await loginAsAdmin(page);
     
     // Navigate to admin dashboard
     await page.goto('/admin');
@@ -59,13 +54,7 @@ test.describe('Admin Authentication', () => {
   });
 
   test('Admin can access hardware management', async ({ page }) => {
-    // Login first
-    await page.goto('/login');
-    await page.waitForLoadState('domcontentloaded');
-    await page.getByTestId('email-input').fill(ADMIN_EMAIL);
-    await page.getByTestId('password-input').fill(ADMIN_PASSWORD);
-    await page.getByTestId('login-btn').click();
-    await page.waitForURL(/\/builder/, { timeout: 10000 });
+    await loginAsAdmin(page);
     
     // Navigate to admin hardware page
     await page.goto('/admin/hardware');
@@ -78,13 +67,7 @@ test.describe('Admin Authentication', () => {
   });
 
   test('Admin can access IDE management', async ({ page }) => {
-    // Login first
-    await page.goto('/login');
-    await page.waitForLoadState('domcontentloaded');
-    await page.getByTestId('email-input').fill(ADMIN_EMAIL);
-    await page.getByTestId('password-input').fill(ADMIN_PASSWORD);
-    await page.getByTestId('login-btn').click();
-    await page.waitForURL(/\/builder/, { timeout: 10000 });
+    await loginAsAdmin(page);
     
     // Navigate to admin IDE page
     await page.goto('/admin/ide');
@@ -100,13 +83,7 @@ test.describe('Admin Authentication', () => {
 test.describe('Solution Builder Access', () => {
   
   test('Solution Builder page loads after admin login', async ({ page }) => {
-    // Login first
-    await page.goto('/login');
-    await page.waitForLoadState('domcontentloaded');
-    await page.getByTestId('email-input').fill(ADMIN_EMAIL);
-    await page.getByTestId('password-input').fill(ADMIN_PASSWORD);
-    await page.getByTestId('login-btn').click();
-    await page.waitForURL(/\/builder/, { timeout: 10000 });
+    await loginAsAdmin(page);
     
     // Should be on solution builder page
     await expect(page).toHaveURL(/\/builder|\/solution-builder/);
@@ -116,13 +93,7 @@ test.describe('Solution Builder Access', () => {
   });
 
   test('Solution Builder accessible via navigation', async ({ page }) => {
-    // Login first
-    await page.goto('/login');
-    await page.waitForLoadState('domcontentloaded');
-    await page.getByTestId('email-input').fill(ADMIN_EMAIL);
-    await page.getByTestId('password-input').fill(ADMIN_PASSWORD);
-    await page.getByTestId('login-btn').click();
-    await page.waitForURL(/\/builder/, { timeout: 10000 });
+    await loginAsAdmin(page);
     
     // Navigate to home first
     await page.goto('/');
