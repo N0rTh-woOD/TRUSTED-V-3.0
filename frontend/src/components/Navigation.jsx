@@ -20,7 +20,7 @@ const Navigation = () => {
     { path: "/product-suite", label: "Products", icon: Layers },
     { path: "/developer-portal", label: "Developer Portal", icon: Code },
     { path: "/hardware-catalog", label: "Hardware", icon: Cpu },
-    { path: "/partners", label: "Partners", icon: Users },
+    { path: "/partners", label: "Partner With Us", icon: Users },
   ];
   
   // Authenticated user items
