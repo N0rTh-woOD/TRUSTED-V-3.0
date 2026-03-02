@@ -1097,11 +1097,11 @@ async def init_sample_data():
             }
         ]
         await db.ide_downloads.insert_many(sample_ide)
-        
-        # Add software components
-        software_count = await db.software_components.count_documents({})
-        if software_count == 0:
-            sample_software = [
+    
+    # Add software components
+    software_count = await db.software_components.count_documents({})
+    if software_count == 0:
+        sample_software = [
                 {
                     "id": str(uuid.uuid4()),
                     "name": "SiFive HiFive1 BSP",
