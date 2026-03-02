@@ -113,7 +113,7 @@ const Login = () => {
 
           <div className="mt-6 pt-6 border-t border-border">
             <p className="text-xs text-muted-foreground text-center">
-              Demo credentials: admin@trusted-v.com / admin123
+              Admin credentials: admin@trusted-v.com / bosch@2425
             </p>
           </div>
         </CardContent>
