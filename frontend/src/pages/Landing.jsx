@@ -179,68 +179,73 @@ const Landing = () => {
               </div>
             </div>
             
-            {/* Industry Applications Panel */}
+            {/* Platform Capabilities Panel */}
             <div className="relative hidden lg:block">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-orange-500/10 rounded-2xl blur-3xl" />
               <div className="relative rounded-xl overflow-hidden border border-border shadow-2xl bg-white">
                 {/* Header */}
                 <div className="p-5 border-b border-border bg-slate-50">
                   <h3 className="font-semibold text-foreground flex items-center gap-2">
-                    <Cpu className="w-5 h-5 text-primary" />
-                    Industry Applications
+                    <Layers className="w-5 h-5 text-primary" />
+                    What You Get
                   </h3>
-                  <p className="text-sm text-muted-foreground mt-1">Powering next-generation embedded solutions</p>
+                  <p className="text-sm text-muted-foreground mt-1">Complete development ecosystem for RISC-V</p>
                 </div>
                 
-                {/* Industry Grid */}
-                <div className="p-5 grid grid-cols-2 gap-4">
-                  <div className="p-4 rounded-lg bg-blue-50 border border-blue-100">
-                    <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center mb-3">
-                      <Server className="w-5 h-5 text-blue-600" />
+                {/* Capabilities List */}
+                <div className="p-5 space-y-4">
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-50/50 border border-blue-100">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Zap className="w-4 h-4 text-primary" />
                     </div>
-                    <h4 className="font-semibold text-sm text-foreground">Automotive</h4>
-                    <p className="text-xs text-muted-foreground mt-1">ADAS, ECUs, Infotainment systems with ISO 26262 compliance</p>
+                    <div>
+                      <h4 className="font-medium text-sm text-foreground">AI-Powered Project Generator</h4>
+                      <p className="text-xs text-muted-foreground mt-0.5">Describe your requirements, get ready-to-build Rust project templates with drivers, HAL, and RTOS configuration</p>
+                    </div>
                   </div>
                   
-                  <div className="p-4 rounded-lg bg-green-50 border border-green-100">
-                    <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center mb-3">
-                      <Cog className="w-5 h-5 text-green-600" />
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-green-50/50 border border-green-100">
+                    <div className="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                      <Cpu className="w-4 h-4 text-green-600" />
                     </div>
-                    <h4 className="font-semibold text-sm text-foreground">Industrial IoT</h4>
-                    <p className="text-xs text-muted-foreground mt-1">Smart factories, PLCs, motor control & automation</p>
+                    <div>
+                      <h4 className="font-medium text-sm text-foreground">Indian RISC-V Hardware Support</h4>
+                      <p className="text-xs text-muted-foreground mt-0.5">Pre-configured BSPs for C-DAC VEGA/ARIES and Mindgrove SoCs with peripheral drivers</p>
+                    </div>
                   </div>
                   
-                  <div className="p-4 rounded-lg bg-purple-50 border border-purple-100">
-                    <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center mb-3">
-                      <Shield className="w-5 h-5 text-purple-600" />
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-orange-50/50 border border-orange-100">
+                    <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0">
+                      <Package className="w-4 h-4 text-orange-600" />
                     </div>
-                    <h4 className="font-semibold text-sm text-foreground">Security & Defense</h4>
-                    <p className="text-xs text-muted-foreground mt-1">Secure communications, HSMs, trusted computing</p>
+                    <div>
+                      <h4 className="font-medium text-sm text-foreground">Downloadable Project Archives</h4>
+                      <p className="text-xs text-muted-foreground mt-0.5">Export complete Cargo projects as ZIP files with build scripts, documentation, and version history</p>
+                    </div>
                   </div>
                   
-                  <div className="p-4 rounded-lg bg-orange-50 border border-orange-100">
-                    <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center mb-3">
-                      <Wifi className="w-5 h-5 text-orange-600" />
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-purple-50/50 border border-purple-100">
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center flex-shrink-0">
+                      <Cog className="w-4 h-4 text-purple-600" />
                     </div>
-                    <h4 className="font-semibold text-sm text-foreground">Edge AI</h4>
-                    <p className="text-xs text-muted-foreground mt-1">Vision processing, ML inference, smart sensors</p>
+                    <div>
+                      <h4 className="font-medium text-sm text-foreground">RTOS & Middleware Selection</h4>
+                      <p className="text-xs text-muted-foreground mt-0.5">Choose from FreeRTOS, Zephyr, Embassy, or bare-metal configurations for your project</p>
+                    </div>
                   </div>
                 </div>
                 
-                {/* Bottom Stats */}
+                {/* Hardware Partners */}
                 <div className="p-5 border-t border-border bg-slate-50">
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div>
-                      <div className="text-2xl font-bold text-primary">50%</div>
-                      <div className="text-xs text-muted-foreground">Faster Development</div>
+                  <p className="text-xs text-muted-foreground mb-3 font-medium">Supported Hardware Partners</p>
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-md border border-border">
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                      <span className="text-xs font-medium text-foreground">C-DAC</span>
                     </div>
-                    <div>
-                      <div className="text-2xl font-bold text-green-600">Zero</div>
-                      <div className="text-xs text-muted-foreground">Memory Vulnerabilities</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-orange-500">100%</div>
-                      <div className="text-xs text-muted-foreground">Made in India</div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-md border border-border">
+                      <div className="w-2 h-2 rounded-full bg-green-500" />
+                      <span className="text-xs font-medium text-foreground">Mindgrove</span>
                     </div>
                   </div>
                 </div>
