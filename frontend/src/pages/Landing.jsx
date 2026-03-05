@@ -4,40 +4,85 @@ import { Card, CardContent } from "@/components/ui/card";
 import { 
   Cpu, Zap, Code, Package, Layers, Download, ArrowRight, 
   CheckCircle2, Shield, Lock, Gauge, Wifi, Server, ChevronRight,
-  ExternalLink
+  ExternalLink, Cog, Binary, GitBranch, Box
 } from "lucide-react";
+import TrustedVLogo from "@/components/TrustedVLogo";
 
 const Landing = () => {
-  const features = [
+  // Rust language benefits
+  const rustBenefits = [
+    {
+      title: "Memory Safety",
+      description: "Eliminates buffer overflows, null pointer dereferences, and data races at compile time",
+    },
+    {
+      title: "Zero-Cost Abstractions",
+      description: "High-level features compile to efficient machine code with no runtime overhead",
+    },
+    {
+      title: "Fearless Concurrency",
+      description: "Ownership system prevents data races, enabling safe multi-threaded embedded code",
+    },
+    {
+      title: "No Garbage Collection",
+      description: "Deterministic memory management perfect for real-time embedded systems",
+    },
+  ];
+
+  // RISC-V + Rust benefits
+  const riscvRustBenefits = [
     {
       icon: Shield,
-      title: "Secure Boot & Trusted Execution",
-      description: "Hardware root of trust with secure boot chain, TPM integration, and trusted execution environments for critical applications.",
-    },
-    {
-      icon: Cpu,
-      title: "Optimized RISC-V Compilers",
-      description: "State-of-the-art Rust toolchain with Pliron & Cranelift backends optimized specifically for RISC-V architectures.",
-    },
-    {
-      icon: Code,
-      title: "AI-Powered Development",
-      description: "Intelligent code generation, smart hardware recommendations, and automated project scaffolding with best practices.",
-    },
-    {
-      icon: Layers,
-      title: "Comprehensive SDK Support",
-      description: "Pre-integrated SDKs for heterogeneous chips including RISC-V, TPUs, and NPUs with unified development experience.",
+      title: "Secure by Default",
+      description: "Rust's memory safety combined with RISC-V's hardware security extensions creates a robust security foundation for embedded systems.",
     },
     {
       icon: Gauge,
-      title: "Real-Time Performance",
-      description: "RTOS integration with Zephyr, FreeRTOS, and Embassy for deterministic, low-latency embedded applications.",
+      title: "Optimal Performance",
+      description: "RISC-V's clean ISA pairs perfectly with Rust's zero-cost abstractions for maximum efficiency on resource-constrained devices.",
+    },
+    {
+      icon: Code,
+      title: "Modern Toolchain",
+      description: "Cargo build system, integrated testing, and excellent LLVM support for RISC-V targets accelerate development.",
+    },
+    {
+      icon: GitBranch,
+      title: "Open Ecosystem",
+      description: "Both RISC-V and Rust are open-source, vendor-neutral technologies ensuring long-term sustainability.",
+    },
+  ];
+
+  const features = [
+    {
+      icon: Shield,
+      title: "Secure Boot & TEE",
+      description: "Hardware root of trust with secure boot chain, TPM integration, and trusted execution environments.",
+    },
+    {
+      icon: Cpu,
+      title: "RISC-V Optimized Compilers",
+      description: "State-of-the-art Rust toolchain with Pliron & Cranelift backends optimized for RISC-V.",
+    },
+    {
+      icon: Zap,
+      title: "AI-Powered Development",
+      description: "Intelligent code generation, smart hardware recommendations, and automated project scaffolding.",
+    },
+    {
+      icon: Layers,
+      title: "Comprehensive SDK",
+      description: "Pre-integrated SDKs for heterogeneous chips including RISC-V cores, TPUs, and NPUs.",
+    },
+    {
+      icon: Cog,
+      title: "Real-Time Support",
+      description: "RTOS integration with Zephyr, FreeRTOS, and Embassy for deterministic embedded applications.",
     },
     {
       icon: Lock,
-      title: "Functional Safety (ISO 26262)",
-      description: "Safety-certified components and workflows for automotive, industrial, and medical device development.",
+      title: "Functional Safety",
+      description: "ISO 26262 compliant workflows for automotive, industrial, and medical device development.",
     },
   ];
 
@@ -51,31 +96,55 @@ const Landing = () => {
   ];
 
   const stats = [
-    { value: "6+", label: "Indian Boards" },
+    { value: "6+", label: "RISC-V Boards" },
     { value: "5+", label: "RTOS Options" },
-    { value: "10+", label: "SDK Components" },
+    { value: "100%", label: "Rust Native" },
     { value: "Made in", label: "India 🇮🇳" },
   ];
   
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-white">
+      {/* Hero Section - Large Product Name */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        
+        {/* Decorative elements */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
+        
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 py-16 md:py-24 relative">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-sm font-semibold text-primary">RISC-V × Rust × Security</span>
+              {/* Large Product Name */}
+              <div className="mb-8">
+                <TrustedVLogo size="xl" />
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight mb-6 leading-tight">
-                Secure Embedded Systems Development
+              
+              {/* Technology badges */}
+              <div className="flex flex-wrap gap-3 mb-8">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20">
+                  <span className="w-2 h-2 rounded-full bg-orange-500" />
+                  <span className="text-sm font-bold text-orange-600">Rust</span>
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+                  <span className="w-2 h-2 rounded-full bg-primary" />
+                  <span className="text-sm font-bold text-primary">RISC-V</span>
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20">
+                  <Shield className="w-3 h-3 text-green-600" />
+                  <span className="text-sm font-bold text-green-600">Secure</span>
+                </div>
+              </div>
+              
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground tracking-tight mb-6 leading-tight">
+                The Complete <span className="text-primary">RISC-V</span> + <span className="text-orange-500">Rust</span> Development Platform
               </h1>
+              
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
-                The complete platform for building secure, high-performance embedded systems with RISC-V and Rust. 
-                From secure boot to AI deployment—everything you need in one integrated ecosystem.
+                Build secure, high-performance embedded systems with India's premier RISC-V development ecosystem. 
+                From secure boot to AI deployment—everything powered by <strong>Rust</strong>.
               </p>
+              
               <div className="flex flex-wrap gap-4">
                 <Link to="/solution-builder">
                   <Button 
@@ -83,7 +152,7 @@ const Landing = () => {
                     size="lg"
                     className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
                   >
-                    Start Building
+                    Start Building with Rust
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
@@ -111,40 +180,162 @@ const Landing = () => {
             </div>
             
             <div className="relative hidden lg:block">
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl blur-3xl" />
-              <div className="relative rounded-xl overflow-hidden border border-border shadow-2xl bg-white">
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-3 h-3 rounded-full bg-red-500" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                    <div className="w-3 h-3 rounded-full bg-green-500" />
-                    <span className="ml-2 text-xs text-muted-foreground">TrusteD-V Solution Builder</span>
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-orange-500/10 rounded-2xl blur-3xl" />
+              <div className="relative rounded-xl overflow-hidden border border-border shadow-2xl bg-slate-900">
+                <div className="p-4 border-b border-slate-700 flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                  <span className="ml-2 text-xs text-slate-400">main.rs — TrusteD-V Project</span>
+                </div>
+                <pre className="p-6 text-sm font-mono overflow-hidden">
+<code className="text-xs leading-relaxed">
+<span className="text-slate-500">// TrusteD-V Generated Rust Project</span>
+<span className="text-orange-400">{"\n"}#![no_std]</span>
+<span className="text-orange-400">{"\n"}#![no_main]</span>
+{"\n"}
+<span className="text-purple-400">{"\n"}use</span><span className="text-slate-300"> riscv_rt::entry;</span>
+<span className="text-purple-400">{"\n"}use</span><span className="text-slate-300"> trusted_v_hal::prelude::*;</span>
+{"\n"}
+<span className="text-orange-400">{"\n"}#[entry]</span>
+<span className="text-purple-400">{"\n"}fn</span><span className="text-green-400"> main</span><span className="text-slate-300">() -&gt; ! {"{"}</span>
+<span className="text-slate-500">{"\n"}    // Secure boot verified ✓</span>
+<span className="text-purple-400">{"\n"}    let</span><span className="text-slate-300"> peripherals = Peripherals::take();</span>
+<span className="text-purple-400">{"\n"}    let</span><span className="text-slate-300"> gpio = peripherals.GPIO.split();</span>
+{"\n"}
+<span className="text-slate-500">{"\n"}    // Memory-safe Rust guarantees</span>
+<span className="text-purple-400">{"\n"}    let</span><span className="text-slate-300"> uart = Uart::new(peripherals.UART0)</span>
+<span className="text-slate-300">{"\n"}        .with_encryption(AES256)</span>
+<span className="text-slate-300">{"\n"}        .init();</span>
+{"\n"}
+<span className="text-purple-400">{"\n"}    loop</span><span className="text-slate-300"> {"{"}</span>
+<span className="text-slate-500">{"\n"}        // Zero-cost abstractions</span>
+<span className="text-slate-300">{"\n"}        wfi();</span>
+<span className="text-slate-300">{"\n"}    {"}"}</span>
+<span className="text-slate-300">{"\n"}{"}"}</span>
+</code>
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Rust Section */}
+      <section className="py-20 bg-gradient-to-b from-orange-50 to-white border-t border-orange-100">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 mb-4">
+              <span className="text-lg font-bold text-orange-600">Rust</span>
+              <span className="text-sm text-orange-600/80">Programming Language</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
+              Why <span className="text-orange-500">Rust</span> for Embedded Systems?
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Rust provides memory safety without garbage collection, making it the perfect language 
+              for secure, high-performance embedded development.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {rustBenefits.map((benefit, index) => (
+              <Card 
+                key={index}
+                className="bg-white border border-orange-100 hover:border-orange-300 hover:shadow-lg transition-all duration-300"
+              >
+                <CardContent className="p-6">
+                  <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                    <CheckCircle2 className="w-5 h-5 text-orange-500" />
                   </div>
-                  <pre className="text-sm text-muted-foreground font-mono bg-slate-50 p-4 rounded-lg overflow-hidden">
-<code className="text-xs">{`// Generated by TrusteD-V
-#![no_std]
-#![no_main]
+                  <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
+                  <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-use riscv_rt::entry;
-use trusted_v_hal::prelude::*;
-
-#[entry]
-fn main() -> ! {
-    // Secure boot verified
-    let peripherals = Peripherals::take();
-    let gpio = peripherals.GPIO.split();
-    
-    // Initialize secure channel
-    let uart = Uart::new(peripherals.UART0)
-        .with_encryption(AES256)
-        .init();
-    
-    loop {
-        // Your secure application
-        wfi();
-    }
-}`}</code>
-                  </pre>
+      {/* RISC-V + Rust Benefits */}
+      <section className="py-20 bg-white">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+                  <Cpu className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-bold text-primary">RISC-V</span>
+                </div>
+                <span className="text-2xl">×</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20">
+                  <span className="text-sm font-bold text-orange-500">Rust</span>
+                </div>
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                The Perfect Combination for Secure Embedded Systems
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                RISC-V's open, extensible architecture combined with Rust's memory safety creates 
+                the most secure and efficient foundation for modern embedded development.
+              </p>
+              
+              <div className="space-y-6">
+                {riscvRustBenefits.map((benefit, index) => {
+                  const Icon = benefit.icon;
+                  return (
+                    <div key={index} className="flex gap-4">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground">{benefit.title}</h4>
+                        <p className="text-sm text-muted-foreground mt-1">{benefit.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            
+            <div className="bg-slate-900 rounded-xl p-8 text-white">
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                <Binary className="w-5 h-5 text-primary" />
+                TrusteD-V Architecture
+              </h3>
+              <div className="space-y-4">
+                <div className="bg-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-400 mb-2">Application Layer</div>
+                  <div className="flex flex-wrap gap-2">
+                    {["AI Assistant", "Web IDE", "Solution Builder"].map((item) => (
+                      <span key={item} className="px-2 py-1 bg-primary/20 rounded text-xs">{item}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-400 mb-2">Rust SDK & Middleware</div>
+                  <div className="flex flex-wrap gap-2">
+                    {["Embassy", "RTIC", "embedded-hal", "Drivers"].map((item) => (
+                      <span key={item} className="px-2 py-1 bg-orange-500/20 rounded text-xs">{item}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-400 mb-2">Secure Foundation</div>
+                  <div className="flex flex-wrap gap-2">
+                    {["Secure Boot", "Trusted HAL", "HSM", "TEE"].map((item) => (
+                      <span key={item} className="px-2 py-1 bg-green-500/20 rounded text-xs">{item}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-400 mb-2">RISC-V Hardware</div>
+                  <div className="flex flex-wrap gap-2">
+                    {["C-DAC VEGA", "Mindgrove", "DHRUV64", "Vision NPU"].map((item) => (
+                      <span key={item} className="px-2 py-1 bg-blue-500/20 rounded text-xs">{item}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -153,15 +344,15 @@ fn main() -> ! {
       </section>
       
       {/* Features Grid */}
-      <section className="py-20 bg-white border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-slate-50 border-t border-border">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           <div className="text-center mb-16">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Platform Capabilities</span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
               Complete Development Ecosystem
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need for secure RISC-V embedded systems development—from hardware abstraction to production deployment.
+              Everything you need for secure RISC-V embedded development with Rust.
             </p>
           </div>
           
@@ -193,15 +384,15 @@ fn main() -> ! {
       </section>
       
       {/* Hardware Partners */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-white">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           <div className="text-center mb-12">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Ecosystem</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Hardware Ecosystem</span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-              Supported Hardware Ecosystem
+              Supported <span className="text-primary">RISC-V</span> Hardware
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Pre-integrated support for leading RISC-V hardware vendors and development platforms.
+              Pre-integrated support for C-DAC and Mindgrove RISC-V development platforms.
             </p>
           </div>
           
@@ -209,7 +400,7 @@ fn main() -> ! {
             {hardwarePartners.map((partner, index) => (
               <div 
                 key={index}
-                className="bg-white rounded-lg border border-border p-6 text-center hover:shadow-md transition-shadow"
+                className="bg-slate-50 rounded-lg border border-border p-6 text-center hover:shadow-md transition-shadow"
               >
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
                   <Cpu className="w-6 h-6 text-primary" />
@@ -231,98 +422,15 @@ fn main() -> ! {
         </div>
       </section>
       
-      {/* Development Tools Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">Integrated Tools</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-6">
-                Professional Development Environment
-              </h2>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                TrusteD-V Studio provides a vertically integrated IDE with AI-powered assistance, 
-                advanced debugging capabilities, and seamless hardware integration.
-              </p>
-              
-              <ul className="space-y-4 mb-8">
-                {[
-                  "SLM-based intelligent code completion and suggestions",
-                  "Integrated probe.rs debugging with JTAG/SWD support",
-                  "Real-time memory profiling and performance analysis",
-                  "One-click secure deployment to target hardware",
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-muted-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              
-              <div className="flex gap-4">
-                <Link to="/download-ide">
-                  <Button className="font-medium">
-                    <Download className="w-4 h-4 mr-2" />
-                    Download IDE
-                  </Button>
-                </Link>
-                <Link to="/developer-portal">
-                  <Button variant="outline" className="font-medium">
-                    Try Web IDE
-                    <ExternalLink className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            
-            <div className="relative">
-              <div className="rounded-xl overflow-hidden border border-border shadow-xl bg-slate-900">
-                <div className="p-4 border-b border-slate-700 flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                  <span className="ml-2 text-xs text-slate-400">TrusteD-V Studio</span>
-                </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-12 gap-4">
-                    <div className="col-span-3 space-y-2">
-                      <div className="text-xs text-slate-400 mb-2">Explorer</div>
-                      {["src/", "├── main.rs", "├── lib.rs", "├── drivers/", "Cargo.toml", "memory.x"].map((item, i) => (
-                        <div key={i} className="text-xs text-slate-300 font-mono">{item}</div>
-                      ))}
-                    </div>
-                    <div className="col-span-9 bg-slate-800 rounded p-3">
-                      <pre className="text-xs text-green-400 font-mono">
-{`// AI Assistant: Detected ESP32-C3
-// Suggested: WiFi + BLE initialization
-
-use esp_wifi::wifi::*;
-
-pub fn init_wireless() -> Result<()> {
-    let config = WifiConfig::sta()?;
-    config.set_security(WPA3);
-    wifi.connect()?;
-    Ok(())
-}`}
-                      </pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       {/* CTA Section */}
       <section className="py-20 bg-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to Build Secure Embedded Systems?
+              Ready to Build Secure Embedded Systems with <span className="text-orange-300">Rust</span>?
             </h2>
             <p className="text-primary-foreground/80 mb-8 text-lg leading-relaxed">
-              Start your RISC-V journey today with AI-powered tools and production-ready templates.
+              Start your RISC-V journey today with AI-powered tools and production-ready Rust templates.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/solution-builder">
@@ -351,7 +459,7 @@ pub fn init_wireless() -> Result<()> {
 
       {/* Footer */}
       <footer className="py-12 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h4 className="font-semibold mb-4">Platform</h4>
@@ -392,17 +500,12 @@ pub fn init_wireless() -> Result<()> {
           
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded bg-primary flex items-center justify-center">
-                  <Cpu className="w-4 h-4 text-white" />
-                </div>
-                <span className="font-semibold">TrusteD-V</span>
-              </div>
+              <TrustedVLogo size="sm" />
               {/* Bosch Association Badge */}
               <div className="flex items-center gap-2 pl-6 border-l border-slate-700">
                 <img 
                   src="/bosch-logo.png" 
-                  alt="Technology Partner" 
+                  alt="" 
                   className="h-6 opacity-70 hover:opacity-100 transition-opacity"
                 />
               </div>

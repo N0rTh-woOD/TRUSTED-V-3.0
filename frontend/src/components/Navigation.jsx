@@ -1,11 +1,12 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { 
-  Cpu, Zap, Package, FolderGit2, Download, LogOut, Shield, Menu, X, 
-  Settings, BookOpen, Users, Info, Home, Layers, Code
+  Zap, FolderGit2, LogOut, Shield, Menu, X, 
+  Settings, Users, Info, Home, Layers, Code, Cpu
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import TrustedVLogo, { TrustedVIcon } from "@/components/TrustedVLogo";
 
 const Navigation = () => {
   const location = useLocation();
@@ -18,7 +19,7 @@ const Navigation = () => {
     { path: "/", label: "Home", icon: Home },
     { path: "/about", label: "About", icon: Info },
     { path: "/product-suite", label: "Products", icon: Layers },
-    { path: "/developer-portal", label: "Developer Portal", icon: Code },
+    { path: "/developer-portal", label: "Developers", icon: Code },
     { path: "/hardware-catalog", label: "Hardware", icon: Cpu },
     { path: "/partners", label: "Partner With Us", icon: Users },
   ];
@@ -33,7 +34,7 @@ const Navigation = () => {
   
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/login");
   };
   
   return (
@@ -43,33 +44,16 @@ const Navigation = () => {
       
       {/* Main Navigation */}
       <nav className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded bg-primary flex items-center justify-center transition-transform group-hover:scale-105">
-                <Cpu className="w-5 h-5 text-white" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-lg text-foreground tracking-tight">
-                  TrusteD-V
-                </span>
-                <span className="text-[10px] text-muted-foreground -mt-0.5 hidden sm:block font-medium">
-                  Secure RISC-V Development Platform
-                </span>
-              </div>
-              {/* Bosch Association - subtle indicator */}
-              <div className="hidden md:flex items-center pl-3 ml-3 border-l border-border">
-                <img 
-                  src="/bosch-logo.png" 
-                  alt="" 
-                  className="h-5 opacity-60 hover:opacity-100 transition-opacity"
-                />
-              </div>
+        <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+          <div className="flex items-center justify-between h-16 lg:h-18">
+            
+            {/* Left: Logo */}
+            <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
+              <TrustedVLogo size="md" showText={true} />
             </Link>
             
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
+            {/* Center: Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-1 flex-1 justify-center max-w-3xl">
               {mainNavItems.slice(0, 6).map((item) => {
                 const isActive = location.pathname === item.path;
                 return (
@@ -78,7 +62,7 @@ const Navigation = () => {
                     to={item.path}
                     data-testid={`nav-${item.label.toLowerCase().replace(' ', '-')}`}
                     className={`
-                      px-3 py-2 text-sm font-medium transition-all duration-200
+                      px-3 py-2 text-sm font-medium transition-all duration-200 whitespace-nowrap
                       ${
                         isActive
                           ? "text-primary border-b-2 border-primary"
@@ -92,8 +76,8 @@ const Navigation = () => {
               })}
             </div>
             
-            {/* Right Side - Auth */}
-            <div className="hidden lg:flex items-center gap-2">
+            {/* Right: Auth + Bosch Logo */}
+            <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
               {isAuthenticated && (
                 <>
                   <Link
@@ -142,13 +126,13 @@ const Navigation = () => {
                 </Link>
               )}
               
-              <div className="w-px h-6 bg-border mx-2" />
+              <div className="w-px h-6 bg-border" />
               
               {isAuthenticated ? (
                 <div className="flex items-center gap-2">
                   <Link
                     to="/account"
-                    className="text-sm text-muted-foreground hover:text-foreground"
+                    className="text-sm text-muted-foreground hover:text-foreground p-2"
                   >
                     <Settings className="w-4 h-4" />
                   </Link>
@@ -173,15 +157,31 @@ const Navigation = () => {
                   Sign In
                 </Button>
               )}
+              
+              {/* Bosch Logo - Far Right */}
+              <div className="pl-4 border-l border-border">
+                <img 
+                  src="/bosch-logo.png" 
+                  alt="" 
+                  className="h-6 opacity-70 hover:opacity-100 transition-opacity"
+                />
+              </div>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+            {/* Mobile: Bosch Logo + Menu Button */}
+            <div className="flex lg:hidden items-center gap-3">
+              <img 
+                src="/bosch-logo.png" 
+                alt="" 
+                className="h-5 opacity-60"
+              />
+              <button
+                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Navigation */}
