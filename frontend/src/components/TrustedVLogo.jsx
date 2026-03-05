@@ -42,7 +42,7 @@ const TrustedVLogo = ({ size = "md", showText = true, className = "" }) => {
       {showText && (
         <div className="flex flex-col">
           <span className={`font-bold ${s.text} text-foreground tracking-tight leading-none`}>
-            Truste<span className="text-primary">D-V</span>
+            TrusteD-V
           </span>
           <span className={`${s.subtext} text-muted-foreground font-medium tracking-wide`}>
             RISC-V × Rust Platform

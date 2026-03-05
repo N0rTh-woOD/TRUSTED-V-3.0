@@ -35,33 +35,11 @@ import AdminSoftware from "@/pages/admin/AdminSoftware";
 import AdminIDE from "@/pages/admin/AdminIDE";
 import AdminLLM from "@/pages/admin/AdminLLM";
 
-// Development Mode Lock - Requires Admin Authentication
-const DEVELOPMENT_MODE = true; // Set to false to disable site-wide lock
-
-const SiteLock = ({ children }) => {
-  const { isAuthenticated, isAdmin, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="text-center">
-          <Loader2 className="w-10 h-10 animate-spin text-primary mx-auto mb-4" />
-          <p className="text-muted-foreground">Loading TrusteD-V Platform...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // In development mode, require admin authentication for all pages except login
-  if (DEVELOPMENT_MODE && !isAdmin) {
-    return null; // Will be handled by routes
-  }
-
-  return children;
-};
+// Site-wide authentication lock - requires any authenticated user
+const SITE_LOCK_ENABLED = true; // Set to false to make site publicly accessible
 
 const AppContent = () => {
-  const { isAdmin, loading } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
     return (
@@ -74,12 +52,13 @@ const AppContent = () => {
     );
   }
 
-  // In development mode, only show login page if not admin
-  if (DEVELOPMENT_MODE && !isAdmin) {
+  // If site lock is enabled and user is not authenticated, show login
+  if (SITE_LOCK_ENABLED && !isAuthenticated) {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login developmentMode={true} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
         <Toaster />
@@ -91,7 +70,7 @@ const AppContent = () => {
     <BrowserRouter>
       <Navigation />
       <Routes>
-        {/* Public Routes - Only accessible when admin logged in (dev mode) */}
+        {/* Public Routes - accessible when site lock is disabled or user is authenticated */}
         <Route path="/" element={<Landing />} />
         <Route path="/about" element={<About />} />
         <Route path="/product-suite" element={<ProductSuite />} />
@@ -106,11 +85,11 @@ const AppContent = () => {
         <Route path="/hardware" element={<HardwareCatalog />} />
         <Route path="/ide" element={<IDEDownloads />} />
         
-        {/* Auth Routes */}
+        {/* Auth Routes - redirect authenticated users to home */}
         <Route path="/login" element={<Navigate to="/" replace />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Navigate to="/" replace />} />
         
-        {/* Protected Routes */}
+        {/* Protected Routes - require authentication (Solution Builder, Projects, etc.) */}
         <Route
           path="/solution-builder"
           element={
@@ -152,7 +131,7 @@ const AppContent = () => {
           }
         />
         
-        {/* Admin Routes */}
+        {/* Admin Routes - require admin role */}
         <Route
           path="/admin"
           element={
