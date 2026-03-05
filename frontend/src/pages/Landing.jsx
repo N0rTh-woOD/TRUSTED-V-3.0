@@ -179,42 +179,71 @@ const Landing = () => {
               </div>
             </div>
             
+            {/* Industry Applications Panel */}
             <div className="relative hidden lg:block">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-orange-500/10 rounded-2xl blur-3xl" />
-              <div className="relative rounded-xl overflow-hidden border border-border shadow-2xl bg-slate-900">
-                <div className="p-4 border-b border-slate-700 flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                  <span className="ml-2 text-xs text-slate-400">main.rs — TrusteD-V Project</span>
+              <div className="relative rounded-xl overflow-hidden border border-border shadow-2xl bg-white">
+                {/* Header */}
+                <div className="p-5 border-b border-border bg-slate-50">
+                  <h3 className="font-semibold text-foreground flex items-center gap-2">
+                    <Cpu className="w-5 h-5 text-primary" />
+                    Industry Applications
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1">Powering next-generation embedded solutions</p>
                 </div>
-                <pre className="p-6 text-sm font-mono overflow-hidden">
-<code className="text-xs leading-relaxed">
-<span className="text-slate-500">// TrusteD-V Generated Rust Project</span>
-<span className="text-orange-400">{"\n"}#![no_std]</span>
-<span className="text-orange-400">{"\n"}#![no_main]</span>
-{"\n"}
-<span className="text-purple-400">{"\n"}use</span><span className="text-slate-300"> riscv_rt::entry;</span>
-<span className="text-purple-400">{"\n"}use</span><span className="text-slate-300"> trusted_v_hal::prelude::*;</span>
-{"\n"}
-<span className="text-orange-400">{"\n"}#[entry]</span>
-<span className="text-purple-400">{"\n"}fn</span><span className="text-green-400"> main</span><span className="text-slate-300">() -&gt; ! {"{"}</span>
-<span className="text-slate-500">{"\n"}    // Secure boot verified ✓</span>
-<span className="text-purple-400">{"\n"}    let</span><span className="text-slate-300"> peripherals = Peripherals::take();</span>
-<span className="text-purple-400">{"\n"}    let</span><span className="text-slate-300"> gpio = peripherals.GPIO.split();</span>
-{"\n"}
-<span className="text-slate-500">{"\n"}    // Memory-safe Rust guarantees</span>
-<span className="text-purple-400">{"\n"}    let</span><span className="text-slate-300"> uart = Uart::new(peripherals.UART0)</span>
-<span className="text-slate-300">{"\n"}        .with_encryption(AES256)</span>
-<span className="text-slate-300">{"\n"}        .init();</span>
-{"\n"}
-<span className="text-purple-400">{"\n"}    loop</span><span className="text-slate-300"> {"{"}</span>
-<span className="text-slate-500">{"\n"}        // Zero-cost abstractions</span>
-<span className="text-slate-300">{"\n"}        wfi();</span>
-<span className="text-slate-300">{"\n"}    {"}"}</span>
-<span className="text-slate-300">{"\n"}{"}"}</span>
-</code>
-                </pre>
+                
+                {/* Industry Grid */}
+                <div className="p-5 grid grid-cols-2 gap-4">
+                  <div className="p-4 rounded-lg bg-blue-50 border border-blue-100">
+                    <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center mb-3">
+                      <Server className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h4 className="font-semibold text-sm text-foreground">Automotive</h4>
+                    <p className="text-xs text-muted-foreground mt-1">ADAS, ECUs, Infotainment systems with ISO 26262 compliance</p>
+                  </div>
+                  
+                  <div className="p-4 rounded-lg bg-green-50 border border-green-100">
+                    <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center mb-3">
+                      <Cog className="w-5 h-5 text-green-600" />
+                    </div>
+                    <h4 className="font-semibold text-sm text-foreground">Industrial IoT</h4>
+                    <p className="text-xs text-muted-foreground mt-1">Smart factories, PLCs, motor control & automation</p>
+                  </div>
+                  
+                  <div className="p-4 rounded-lg bg-purple-50 border border-purple-100">
+                    <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center mb-3">
+                      <Shield className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <h4 className="font-semibold text-sm text-foreground">Security & Defense</h4>
+                    <p className="text-xs text-muted-foreground mt-1">Secure communications, HSMs, trusted computing</p>
+                  </div>
+                  
+                  <div className="p-4 rounded-lg bg-orange-50 border border-orange-100">
+                    <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center mb-3">
+                      <Wifi className="w-5 h-5 text-orange-600" />
+                    </div>
+                    <h4 className="font-semibold text-sm text-foreground">Edge AI</h4>
+                    <p className="text-xs text-muted-foreground mt-1">Vision processing, ML inference, smart sensors</p>
+                  </div>
+                </div>
+                
+                {/* Bottom Stats */}
+                <div className="p-5 border-t border-border bg-slate-50">
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <div className="text-2xl font-bold text-primary">50%</div>
+                      <div className="text-xs text-muted-foreground">Faster Development</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-green-600">Zero</div>
+                      <div className="text-xs text-muted-foreground">Memory Vulnerabilities</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-orange-500">100%</div>
+                      <div className="text-xs text-muted-foreground">Made in India</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
