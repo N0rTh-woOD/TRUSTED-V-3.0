@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { 
   Zap, FolderGit2, LogOut, Shield, Menu, X, 
-  Settings, Users, Info, Home, Layers, Code, Cpu
+  Settings, Users, Info, Home, Layers, Code, Cpu, UsersRound
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,7 @@ const Navigation = () => {
     { path: "/product-suite", label: "Products", icon: Layers },
     { path: "/developer-portal", label: "Developers", icon: Code },
     { path: "/hardware-catalog", label: "Hardware", icon: Cpu },
+    { path: "/team", label: "Team", icon: UsersRound },
     { path: "/partners", label: "Partner With Us", icon: Users },
   ];
   

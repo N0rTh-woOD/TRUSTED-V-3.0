@@ -17,6 +17,7 @@ import Partners from "@/pages/Partners";
 import PartnerRegistration from "@/pages/PartnerRegistration";
 import IDEDownloads from "@/pages/IDEDownloads";
 import Blog from "@/pages/Blog";
+import Team from "@/pages/Team";
 
 // Auth Pages
 import Login from "@/pages/Login";
@@ -80,6 +81,7 @@ const AppContent = () => {
         <Route path="/partner-registration" element={<PartnerRegistration />} />
         <Route path="/download-ide" element={<IDEDownloads />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/team" element={<Team />} />
         
         {/* Legacy routes - redirect to new paths */}
         <Route path="/hardware" element={<HardwareCatalog />} />
