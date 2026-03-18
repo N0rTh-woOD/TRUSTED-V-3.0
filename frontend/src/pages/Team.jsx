@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Linkedin, Twitter, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 
 const Team = () => {
   const [hoveredMember, setHoveredMember] = useState(null);
@@ -304,9 +304,6 @@ const Team = () => {
                         >
                           <button className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white transition-colors">
                             <Linkedin className="w-4 h-4" />
-                          </button>
-                          <button className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white transition-colors">
-                            <Twitter className="w-4 h-4" />
                           </button>
                           <button className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white transition-colors">
                             <Mail className="w-4 h-4" />
