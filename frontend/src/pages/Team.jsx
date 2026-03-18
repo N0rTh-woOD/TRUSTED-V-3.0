@@ -144,7 +144,7 @@ const Team = () => {
 
   // Profile Image Component with fallback
   const ProfileImage = ({ member, index }) => {
-    const [imageError, setImageError] = useState(true); // Default to true since we're using placeholders
+    const [imageError, setImageError] = useState(false);
     const isHovered = hoveredMember === index;
 
     return (
