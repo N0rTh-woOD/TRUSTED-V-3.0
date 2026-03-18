@@ -319,36 +319,6 @@ const Team = () => {
           ))}
         </div>
       </section>
-
-      {/* Join Us CTA */}
-      <section className="py-16 bg-gradient-to-b from-white to-slate-50">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-primary to-blue-600 rounded-2xl p-10 text-center text-white relative overflow-hidden">
-            {/* Background pattern */}
-            <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-1/2 -translate-y-1/2" />
-              <div className="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full translate-x-1/2 translate-y-1/2" />
-            </div>
-            
-            <div className="relative">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                Want to Join Our Team?
-              </h2>
-              <p className="text-white/80 mb-6 max-w-xl mx-auto">
-                We're always looking for talented engineers passionate about RISC-V, 
-                Rust, and building the future of embedded systems.
-              </p>
-              <a 
-                href="mailto:careers@trusted-v.com"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-white/90 transition-colors"
-              >
-                <Mail className="w-4 h-4" />
-                Get in Touch
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
