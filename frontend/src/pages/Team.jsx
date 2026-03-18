@@ -233,7 +233,8 @@ const Team = () => {
             { label: "Leadership", start: 0, end: 3 },
             { label: "Management", start: 3, end: 6 },
             { label: "Architecture", start: 6, end: 9 },
-            { label: "Engineering", start: 9, end: 15 },
+            { label: "Engineering", start: 9, end: 12 },
+            { label: "Security & Quality", start: 12, end: 15 },
           ].map((section, sectionIndex) => (
             <div key={section.label} className="mb-16 last:mb-0">
               {/* Section Label */}
