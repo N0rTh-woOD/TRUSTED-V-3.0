@@ -1,76 +1,82 @@
 # TrusteD-V Platform - AWS Deployment Guide
+## With Self-Hosted MongoDB (Internal Database)
 
-Complete guide to deploy the TrusteD-V platform on AWS.
-
----
-
-## Deployment Architecture
-
-```
-                    ┌─────────────────────────────────────────┐
-                    │              AWS Cloud                   │
-                    │                                          │
-┌──────────┐       │  ┌─────────────┐    ┌─────────────────┐ │
-│  Users   │──────▶│  │   Route 53  │───▶│  Load Balancer  │ │
-└──────────┘       │  │   (DNS)     │    │  (ALB/Nginx)    │ │
-                    │  └─────────────┘    └────────┬────────┘ │
-                    │                              │          │
-                    │         ┌────────────────────┴───┐      │
-                    │         ▼                        ▼      │
-                    │  ┌─────────────┐    ┌─────────────────┐ │
-                    │  │  Frontend   │    │    Backend      │ │
-                    │  │  (React)    │    │   (FastAPI)     │ │
-                    │  │  Port 3000  │    │   Port 8001     │ │
-                    │  └─────────────┘    └────────┬────────┘ │
-                    │                              │          │
-                    │                              ▼          │
-                    │                    ┌─────────────────┐  │
-                    │                    │  MongoDB Atlas  │  │
-                    │                    │   (External)    │  │
-                    │                    └─────────────────┘  │
-                    └─────────────────────────────────────────┘
-```
+Complete guide to deploy the TrusteD-V platform on AWS with MongoDB running locally on your infrastructure.
 
 ---
 
-## Option 1: EC2 Deployment (Recommended for Full Control)
+## Architecture Overview
 
-### Prerequisites
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      AWS EC2 Instance                        │
+│                                                              │
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────────┐  │
+│  │   Nginx     │───▶│  Frontend   │    │    MongoDB      │  │
+│  │  (Port 80)  │    │  (React)    │    │  (Port 27017)   │  │
+│  └──────┬──────┘    └─────────────┘    └────────▲────────┘  │
+│         │                                       │            │
+│         │           ┌─────────────┐             │            │
+│         └──────────▶│   Backend   │─────────────┘            │
+│                     │  (FastAPI)  │                          │
+│                     │  Port 8001  │                          │
+│                     └─────────────┘                          │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+                    ┌──────────────┐
+                    │    Users     │
+                    └──────────────┘
+```
+
+**Benefits of Self-Hosted MongoDB:**
+- No external dependencies
+- Data stays within your AWS infrastructure
+- No additional costs (MongoDB Atlas charges)
+- Full control over database configuration
+- Better latency (same machine/network)
+
+---
+
+## Prerequisites
+
 - AWS Account
 - Domain name (optional but recommended)
-- MongoDB Atlas account (free tier available)
+- Basic Linux command line knowledge
 
 ---
 
-### Step 1: Launch EC2 Instance
+## Step 1: Launch EC2 Instance
 
-1. **Go to AWS Console** → EC2 → Launch Instance
+### 1.1 Go to AWS Console → EC2 → Launch Instance
 
-2. **Choose AMI**: Ubuntu Server 22.04 LTS (64-bit)
+### 1.2 Configuration:
 
-3. **Instance Type**: 
-   - Development/Testing: `t2.micro` (free tier) or `t2.small`
-   - Production: `t2.medium` or `t3.medium`
+| Setting | Value |
+|---------|-------|
+| **Name** | trusted-v-server |
+| **AMI** | Ubuntu Server 22.04 LTS (64-bit) |
+| **Instance Type** | t2.small (min) or t2.medium (recommended) |
+| **Key Pair** | Create new or use existing |
+| **Storage** | 30 GB gp3 (for app + database) |
 
-4. **Key Pair**: Create new or use existing (download .pem file)
+### 1.3 Security Group (Inbound Rules):
 
-5. **Network Settings** (Security Group):
-   ```
-   Inbound Rules:
-   - SSH (22) - Your IP
-   - HTTP (80) - Anywhere (0.0.0.0/0)
-   - HTTPS (443) - Anywhere (0.0.0.0/0)
-   - Custom TCP (8001) - Anywhere (for API, optional)
-   - Custom TCP (3000) - Anywhere (for dev, optional)
-   ```
+| Type | Port | Source | Description |
+|------|------|--------|-------------|
+| SSH | 22 | Your IP | SSH access |
+| HTTP | 80 | 0.0.0.0/0 | Web traffic |
+| HTTPS | 443 | 0.0.0.0/0 | Secure web traffic |
+| Custom TCP | 8001 | 0.0.0.0/0 | API (optional, for debugging) |
 
-6. **Storage**: 20-30 GB gp3
+> **Note:** MongoDB port 27017 is NOT exposed to internet - it's only accessible locally.
 
-7. **Launch Instance**
+### 1.4 Launch the Instance
 
 ---
 
-### Step 2: Connect to EC2
+## Step 2: Connect to EC2
 
 ```bash
 # Set permissions for key file
@@ -82,11 +88,35 @@ ssh -i your-key.pem ubuntu@<your-ec2-public-ip>
 
 ---
 
-### Step 3: Install Dependencies on EC2
+## Step 3: Run Initial Setup Script
+
+Copy and run this script on your EC2 instance:
 
 ```bash
+# Download and run setup script
+curl -O https://raw.githubusercontent.com/your-repo/scripts/ec2-setup.sh
+chmod +x ec2-setup.sh
+./ec2-setup.sh
+```
+
+Or run these commands manually:
+
+```bash
+#!/bin/bash
 # Update system
 sudo apt update && sudo apt upgrade -y
+
+# Install MongoDB 7.0
+curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | \
+   sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+sudo apt update
+sudo apt install -y mongodb-org
+
+# Start and enable MongoDB
+sudo systemctl start mongod
+sudo systemctl enable mongod
 
 # Install Node.js 18
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -101,38 +131,82 @@ sudo apt install -y python3.11 python3.11-venv python3-pip
 # Install Nginx
 sudo apt install -y nginx
 
-# Install PM2 (Process Manager)
+# Install PM2
 sudo npm install -g pm2
+
+# Install Certbot for SSL
+sudo apt install -y certbot python3-certbot-nginx
 
 # Install Git
 sudo apt install -y git
 
-# Verify installations
-node --version
-python3.11 --version
-nginx -v
-pm2 --version
+# Verify MongoDB is running
+sudo systemctl status mongod
 ```
 
 ---
 
-### Step 4: Setup MongoDB Atlas
+## Step 4: Configure MongoDB
 
-1. Go to https://www.mongodb.com/cloud/atlas
-2. Create free account / Sign in
-3. Create a new cluster (M0 Free Tier)
-4. **Database Access**: Create user with password
-5. **Network Access**: Add IP `0.0.0.0/0` (allow all) or your EC2 IP
-6. **Get Connection String**:
-   - Click "Connect" → "Connect your application"
-   - Copy the connection string:
-   ```
-   mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
-   ```
+### 4.1 Create Database User (Optional but Recommended)
+
+```bash
+# Connect to MongoDB shell
+mongosh
+
+# In MongoDB shell:
+use admin
+db.createUser({
+  user: "trustedv_admin",
+  pwd: "your-secure-password-here",
+  roles: [
+    { role: "userAdminAnyDatabase", db: "admin" },
+    { role: "readWriteAnyDatabase", db: "admin" }
+  ]
+})
+
+# Create application database and user
+use trusted_v_db
+db.createUser({
+  user: "trustedv_app",
+  pwd: "your-app-password-here",
+  roles: [{ role: "readWrite", db: "trusted_v_db" }]
+})
+
+exit
+```
+
+### 4.2 Enable MongoDB Authentication (Optional)
+
+```bash
+sudo nano /etc/mongod.conf
+```
+
+Add/modify these lines:
+```yaml
+security:
+  authorization: enabled
+
+net:
+  port: 27017
+  bindIp: 127.0.0.1  # Only allow local connections
+```
+
+Restart MongoDB:
+```bash
+sudo systemctl restart mongod
+```
+
+### 4.3 Verify MongoDB is Running
+
+```bash
+sudo systemctl status mongod
+mongosh --eval "db.serverStatus().ok"
+```
 
 ---
 
-### Step 5: Clone and Setup Project
+## Step 5: Setup Application Directory
 
 ```bash
 # Create app directory
@@ -140,16 +214,16 @@ sudo mkdir -p /var/www/trusted-v
 sudo chown -R ubuntu:ubuntu /var/www/trusted-v
 cd /var/www/trusted-v
 
-# Clone your repository (or upload files via SCP)
+# Clone your repository
 git clone <your-repo-url> .
 
 # Or upload via SCP from local machine:
-# scp -i your-key.pem -r ./backend ./frontend ubuntu@<ec2-ip>:/var/www/trusted-v/
+# scp -i your-key.pem -r ./* ubuntu@<ec2-ip>:/var/www/trusted-v/
 ```
 
 ---
 
-### Step 6: Setup Backend
+## Step 6: Setup Backend
 
 ```bash
 cd /var/www/trusted-v/backend
@@ -165,28 +239,54 @@ pip install emergentintegrations --extra-index-url https://d33sy5i8bnduwe.cloudf
 
 # Create uploads directory
 mkdir -p uploads/ide
-
-# Create production .env file
-nano .env
 ```
 
-**Backend `.env` content:**
+### 6.1 Create Backend Environment File
+
+```bash
+nano /var/www/trusted-v/backend/.env
+```
+
+**Content (WITHOUT authentication):**
 ```env
-MONGO_URL="mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority"
-DB_NAME="trusted_v_production"
-CORS_ORIGINS="https://yourdomain.com,http://yourdomain.com"
-JWT_SECRET="generate-a-strong-random-secret-key-here-64-chars-minimum"
-EMERGENT_LLM_KEY="your-emergent-api-key"
+# MongoDB - Local Instance (No Auth)
+MONGO_URL=mongodb://localhost:27017
+DB_NAME=trusted_v_db
+
+# Security
+JWT_SECRET=generate-a-64-character-random-string-here-use-openssl-rand-hex-32
+
+# CORS - Update with your domain
+CORS_ORIGINS=https://yourdomain.com,http://yourdomain.com,http://localhost
+
+# Emergent LLM Key (for AI features)
+EMERGENT_LLM_KEY=your-emergent-api-key
 ```
 
-**Generate a secure JWT secret:**
+**Content (WITH authentication):**
+```env
+# MongoDB - Local Instance (With Auth)
+MONGO_URL=mongodb://trustedv_app:your-app-password-here@localhost:27017/trusted_v_db?authSource=trusted_v_db
+DB_NAME=trusted_v_db
+
+# Security
+JWT_SECRET=generate-a-64-character-random-string-here-use-openssl-rand-hex-32
+
+# CORS
+CORS_ORIGINS=https://yourdomain.com,http://yourdomain.com
+
+# Emergent LLM Key
+EMERGENT_LLM_KEY=your-emergent-api-key
+```
+
+**Generate JWT Secret:**
 ```bash
 openssl rand -hex 32
 ```
 
 ---
 
-### Step 7: Setup Frontend
+## Step 7: Setup Frontend
 
 ```bash
 cd /var/www/trusted-v/frontend
@@ -194,14 +294,14 @@ cd /var/www/trusted-v/frontend
 # Install dependencies
 yarn install
 
-# Create production .env
+# Create environment file
 nano .env
 ```
 
-**Frontend `.env` content:**
+**Frontend .env content:**
 ```env
 REACT_APP_BACKEND_URL=https://yourdomain.com
-# Or if using IP: REACT_APP_BACKEND_URL=http://<ec2-public-ip>
+# Or for IP-based: REACT_APP_BACKEND_URL=http://<ec2-public-ip>
 ```
 
 **Build for production:**
@@ -211,16 +311,16 @@ yarn build
 
 ---
 
-### Step 8: Configure PM2 (Process Manager)
-
-Create PM2 ecosystem file:
+## Step 8: Configure PM2 (Process Manager)
 
 ```bash
 cd /var/www/trusted-v
+
+# Create PM2 config
 nano ecosystem.config.js
 ```
 
-**ecosystem.config.js content:**
+**Content:**
 ```javascript
 module.exports = {
   apps: [
@@ -228,7 +328,7 @@ module.exports = {
       name: 'trusted-v-backend',
       cwd: '/var/www/trusted-v/backend',
       script: 'venv/bin/uvicorn',
-      args: 'server:app --host 0.0.0.0 --port 8001',
+      args: 'server:app --host 127.0.0.1 --port 8001',
       interpreter: 'none',
       env: {
         NODE_ENV: 'production',
@@ -236,7 +336,7 @@ module.exports = {
       instances: 1,
       autorestart: true,
       watch: false,
-      max_memory_restart: '1G',
+      max_memory_restart: '500M',
     },
   ],
 };
@@ -247,55 +347,61 @@ module.exports = {
 pm2 start ecosystem.config.js
 pm2 save
 pm2 startup
-# Run the command it outputs to enable auto-start on reboot
+# Copy and run the command it outputs
 ```
 
 ---
 
-### Step 9: Configure Nginx
+## Step 9: Configure Nginx
 
 ```bash
 sudo nano /etc/nginx/sites-available/trusted-v
 ```
 
-**Nginx configuration:**
+**Content:**
 ```nginx
 server {
     listen 80;
     server_name yourdomain.com www.yourdomain.com;
-    # Or use: server_name _;  for IP-based access
+    # For IP-based: server_name _;
 
-    # Frontend - Serve React build
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+
+    # Gzip
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
+
+    # Frontend
+    root /var/www/trusted-v/frontend/build;
+    index index.html;
+
     location / {
-        root /var/www/trusted-v/frontend/build;
-        index index.html;
         try_files $uri $uri/ /index.html;
     }
 
-    # Backend API - Proxy to FastAPI
+    # Static assets caching
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # Backend API
     location /api/ {
         proxy_pass http://127.0.0.1:8001/api/;
         proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_cache_bypass $http_upgrade;
         proxy_read_timeout 300s;
-        proxy_connect_timeout 75s;
         client_max_body_size 100M;
     }
 
-    # Uploaded files (IDE binaries)
+    # Uploaded files
     location /uploads/ {
         alias /var/www/trusted-v/backend/uploads/;
-    }
-
-    # Team images
-    location /team/ {
-        alias /var/www/trusted-v/frontend/build/team/;
     }
 }
 ```
@@ -303,295 +409,214 @@ server {
 **Enable the site:**
 ```bash
 sudo ln -s /etc/nginx/sites-available/trusted-v /etc/nginx/sites-enabled/
-sudo rm /etc/nginx/sites-enabled/default  # Remove default site
-sudo nginx -t  # Test configuration
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo nginx -t
 sudo systemctl restart nginx
 ```
 
 ---
 
-### Step 10: Setup SSL with Let's Encrypt (For HTTPS)
+## Step 10: Setup SSL (HTTPS)
 
 ```bash
-# Install Certbot
-sudo apt install -y certbot python3-certbot-nginx
-
-# Get SSL certificate (replace with your domain)
+# Get SSL certificate
 sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 
-# Auto-renewal is set up automatically
-# Test renewal:
+# Test auto-renewal
 sudo certbot renew --dry-run
 ```
 
 ---
 
-### Step 11: Verify Deployment
+## Step 11: Verify Deployment
 
 ```bash
-# Check PM2 status
+# Check all services
+sudo systemctl status mongod
 pm2 status
-
-# Check Nginx status
 sudo systemctl status nginx
 
-# Check backend logs
+# Test MongoDB
+mongosh --eval "db.serverStatus().ok"
+
+# Test Backend
+curl http://localhost:8001/api/health
+
+# Test from browser
+# http://your-ec2-ip or https://yourdomain.com
+```
+
+---
+
+## Database Backup & Restore
+
+### Backup MongoDB
+
+```bash
+# Create backup directory
+mkdir -p /var/backups/mongodb
+
+# Backup entire database
+mongodump --db trusted_v_db --out /var/backups/mongodb/$(date +%Y%m%d)
+
+# Backup with authentication
+mongodump --db trusted_v_db --username trustedv_app --password your-password --authenticationDatabase trusted_v_db --out /var/backups/mongodb/$(date +%Y%m%d)
+```
+
+### Restore MongoDB
+
+```bash
+# Restore database
+mongorestore --db trusted_v_db /var/backups/mongodb/20250101/trusted_v_db
+
+# Restore with authentication
+mongorestore --db trusted_v_db --username trustedv_app --password your-password --authenticationDatabase trusted_v_db /var/backups/mongodb/20250101/trusted_v_db
+```
+
+### Automated Backups (Cron)
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add daily backup at 2 AM
+0 2 * * * mongodump --db trusted_v_db --out /var/backups/mongodb/$(date +\%Y\%m\%d) && find /var/backups/mongodb -mtime +7 -delete
+```
+
+---
+
+## Monitoring & Logs
+
+### View Logs
+
+```bash
+# Backend logs
 pm2 logs trusted-v-backend
 
-# Test API
-curl http://localhost:8001/api/health
+# Nginx logs
+sudo tail -f /var/log/nginx/access.log
+sudo tail -f /var/log/nginx/error.log
+
+# MongoDB logs
+sudo tail -f /var/log/mongodb/mongod.log
 ```
 
-**Access your application:**
-- http://your-ec2-ip (or https://yourdomain.com)
-- Login: admin@trusted-v.com / bosch@2425
-
----
-
-## Option 2: Docker Deployment
-
-### Dockerfile for Backend
-
-Create `/var/www/trusted-v/backend/Dockerfile`:
-
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install emergentintegrations --extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/
-
-# Copy application
-COPY . .
-
-# Create uploads directory
-RUN mkdir -p uploads/ide
-
-# Expose port
-EXPOSE 8001
-
-# Run application
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8001"]
-```
-
-### Dockerfile for Frontend
-
-Create `/var/www/trusted-v/frontend/Dockerfile`:
-
-```dockerfile
-FROM node:18-alpine as build
-
-WORKDIR /app
-
-# Install dependencies
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
-
-# Copy source and build
-COPY . .
-RUN yarn build
-
-# Production image with Nginx
-FROM nginx:alpine
-
-# Copy build files
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Copy nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-### Frontend Nginx Config
-
-Create `/var/www/trusted-v/frontend/nginx.conf`:
-
-```nginx
-server {
-    listen 80;
-    root /usr/share/nginx/html;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}
-```
-
-### Docker Compose
-
-Create `/var/www/trusted-v/docker-compose.yml`:
-
-```yaml
-version: '3.8'
-
-services:
-  backend:
-    build: ./backend
-    ports:
-      - "8001:8001"
-    environment:
-      - MONGO_URL=${MONGO_URL}
-      - DB_NAME=${DB_NAME}
-      - JWT_SECRET=${JWT_SECRET}
-      - EMERGENT_LLM_KEY=${EMERGENT_LLM_KEY}
-      - CORS_ORIGINS=${CORS_ORIGINS}
-    volumes:
-      - ./backend/uploads:/app/uploads
-    restart: unless-stopped
-
-  frontend:
-    build: 
-      context: ./frontend
-      args:
-        - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-    restart: unless-stopped
-
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/ssl:/etc/nginx/ssl
-    depends_on:
-      - backend
-      - frontend
-    restart: unless-stopped
-```
-
-### Run with Docker
+### Monitor Resources
 
 ```bash
-# Install Docker
-sudo apt install -y docker.io docker-compose
+# PM2 monitoring
+pm2 monit
 
-# Create .env file for docker-compose
-nano .env
+# System resources
+htop
+
+# Disk usage
+df -h
+
+# MongoDB stats
+mongosh --eval "db.stats()"
 ```
-
-**.env for Docker:**
-```env
-MONGO_URL=mongodb+srv://user:pass@cluster.mongodb.net
-DB_NAME=trusted_v_production
-JWT_SECRET=your-secret-key
-EMERGENT_LLM_KEY=your-key
-CORS_ORIGINS=https://yourdomain.com
-REACT_APP_BACKEND_URL=https://yourdomain.com
-```
-
-```bash
-# Build and run
-docker-compose up -d --build
-
-# View logs
-docker-compose logs -f
-
-# Stop
-docker-compose down
-```
-
----
-
-## AWS Services Quick Reference
-
-| Service | Purpose | Cost (Approx) |
-|---------|---------|---------------|
-| EC2 t2.micro | Server (Free tier eligible) | Free / $8-10/mo |
-| EC2 t2.small | Server | ~$17/mo |
-| EC2 t2.medium | Server (Production) | ~$34/mo |
-| Route 53 | Domain DNS | $0.50/mo per zone |
-| ACM | SSL Certificate | Free |
-| MongoDB Atlas M0 | Database (Free tier) | Free |
-| MongoDB Atlas M10 | Database (Production) | ~$57/mo |
-
----
-
-## Deployment Checklist
-
-- [ ] EC2 instance launched with correct security groups
-- [ ] SSH access working
-- [ ] Node.js, Python, Nginx installed
-- [ ] MongoDB Atlas cluster created and configured
-- [ ] Project files uploaded/cloned
-- [ ] Backend dependencies installed (including emergentintegrations)
-- [ ] Frontend built for production
-- [ ] Environment variables configured
-- [ ] PM2 running backend
-- [ ] Nginx configured and running
-- [ ] SSL certificate installed (for HTTPS)
-- [ ] Application accessible via browser
-- [ ] Admin login working
 
 ---
 
 ## Troubleshooting
 
-### Backend not starting
+### MongoDB Won't Start
+
 ```bash
-pm2 logs trusted-v-backend --lines 100
-cd /var/www/trusted-v/backend
-source venv/bin/activate
-python -c "import server"  # Check for import errors
+# Check status
+sudo systemctl status mongod
+
+# Check logs
+sudo tail -50 /var/log/mongodb/mongod.log
+
+# Check permissions
+sudo chown -R mongodb:mongodb /var/lib/mongodb
+sudo chown -R mongodb:mongodb /var/log/mongodb
+
+# Restart
+sudo systemctl restart mongod
 ```
 
-### Nginx 502 Bad Gateway
+### Backend Connection Error
+
+```bash
+# Test MongoDB connection
+mongosh --eval "db.adminCommand('ping')"
+
+# Check backend logs
+pm2 logs trusted-v-backend --lines 50
+
+# Verify environment variables
+cat /var/www/trusted-v/backend/.env
+```
+
+### 502 Bad Gateway
+
 ```bash
 # Check if backend is running
+pm2 status
 curl http://localhost:8001/api/health
 
-# Check PM2
-pm2 status
-
-# Check Nginx error logs
-sudo tail -f /var/log/nginx/error.log
-```
-
-### MongoDB Connection Issues
-```bash
-# Test connection from EC2
-python3 -c "from pymongo import MongoClient; c = MongoClient('your-connection-string'); print(c.list_database_names())"
-```
-
-### Permission Issues
-```bash
-sudo chown -R ubuntu:ubuntu /var/www/trusted-v
-chmod -R 755 /var/www/trusted-v
+# Restart backend
+pm2 restart trusted-v-backend
 ```
 
 ---
 
-## Maintenance Commands
+## Quick Commands Reference
 
 ```bash
-# Update application
+# Start all services
+sudo systemctl start mongod
+pm2 start all
+sudo systemctl start nginx
+
+# Stop all services
+pm2 stop all
+sudo systemctl stop nginx
+sudo systemctl stop mongod
+
+# Restart all services
+sudo systemctl restart mongod
+pm2 restart all
+sudo systemctl restart nginx
+
+# View status
+sudo systemctl status mongod && pm2 status && sudo systemctl status nginx
+
+# Deploy updates
 cd /var/www/trusted-v
-git pull origin main
-
-# Rebuild frontend
+git pull
 cd frontend && yarn build
-
-# Restart backend
 pm2 restart trusted-v-backend
-
-# View logs
-pm2 logs
-
-# Monitor resources
-pm2 monit
-htop
 ```
+
+---
+
+## Security Checklist
+
+- [ ] MongoDB only listening on localhost (127.0.0.1)
+- [ ] MongoDB authentication enabled
+- [ ] Strong passwords for database users
+- [ ] JWT_SECRET is a strong random string
+- [ ] SSL/HTTPS enabled
+- [ ] Security groups properly configured
+- [ ] Regular backups configured
+- [ ] System updates applied
+
+---
+
+## Estimated Costs (AWS)
+
+| Resource | Type | Monthly Cost |
+|----------|------|--------------|
+| EC2 | t2.micro (free tier) | $0 (first year) |
+| EC2 | t2.small | ~$17 |
+| EC2 | t2.medium | ~$34 |
+| EBS Storage | 30 GB gp3 | ~$2.50 |
+| Data Transfer | First 100 GB | Free |
+| **Total (t2.small)** | | **~$20/month** |
 
 ---
 
