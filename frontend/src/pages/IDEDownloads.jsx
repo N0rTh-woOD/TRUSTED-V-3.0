@@ -39,7 +39,12 @@ const IDEDownloads = () => {
 
   const handleDownload = (ide) => {
     if (ide.download_url && ide.download_url !== "#" && ide.filename) {
-      window.open(`${BACKEND_URL}${ide.download_url}`, "_blank");
+      const link = document.createElement("a");
+      link.href = `${BACKEND_URL}${ide.download_url}`;
+      link.download = ide.filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 

@@ -354,12 +354,9 @@ const AdminIDE = () => {
                     className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
                   >
                     <option value="">Select platform</option>
-                    <option value="Windows x64">Windows x64</option>
-                    <option value="macOS (Intel)">macOS (Intel)</option>
-                    <option value="macOS (Apple Silicon)">macOS (Apple Silicon)</option>
-                    <option value="Linux x64 (deb)">Linux x64 (deb)</option>
-                    <option value="Linux x64 (rpm)">Linux x64 (rpm)</option>
-                    <option value="Linux (AppImage)">Linux (AppImage)</option>
+                    <option value="Windows">Windows</option>
+                    <option value="macOS">macOS</option>
+                    <option value="Linux">Linux</option>
                   </select>
                 </div>
               </div>

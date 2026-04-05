@@ -2070,7 +2070,12 @@ async def update_ide_download(ide_id: str, ide_data: dict, current_user: dict = 
     if not existing:
         raise HTTPException(status_code=404, detail="IDE download not found")
     
-    await db.ide_downloads.update_one({"id": ide_id}, {"$set": ide_data})
+    # Only allow updating metadata fields — never overwrite upload fields
+    safe_fields = {"name", "version", "platform", "description"}
+    update = {k: v for k, v in ide_data.items() if k in safe_fields}
+    
+    if update:
+        await db.ide_downloads.update_one({"id": ide_id}, {"$set": update})
     updated = await db.ide_downloads.find_one({"id": ide_id}, {"_id": 0})
     return updated
 
