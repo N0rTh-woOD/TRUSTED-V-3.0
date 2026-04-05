@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { 
   Cpu, Zap, Code, Package, Layers, Download, ArrowRight, 
   CheckCircle2, Shield, Lock, Gauge, ChevronRight,
-  Cog, Binary, GitBranch
+  Cog, Binary, GitBranch, Rocket, Wrench, CircuitBoard
 } from "lucide-react";
 import TrustedVLogo from "@/components/TrustedVLogo";
 
@@ -295,6 +295,82 @@ const Landing = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Storytelling Journey - Animated sequence */}
+      <section className="py-20 bg-white border-t border-border overflow-hidden">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+          <div className="text-center mb-16">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">How It Works</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">From Concept to Deployment</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              See how TrusteD-V transforms your embedded development journey
+            </p>
+          </div>
+          
+          <div className="relative max-w-5xl mx-auto">
+            {/* Connecting line */}
+            <div className="absolute top-20 left-0 right-0 h-0.5 bg-gradient-to-r from-red-300 via-primary to-green-400 hidden lg:block" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+              {[
+                { 
+                  icon: Wrench, color: "bg-red-500", border: "border-red-200", 
+                  title: "The Challenge",
+                  desc: "Complex hardware, fragmented tools, security vulnerabilities",
+                  visual: "bg-red-50"
+                },
+                { 
+                  icon: Shield, color: "bg-primary", border: "border-primary/20",
+                  title: "TrusteD-V",
+                  desc: "Unified secure platform for RISC-V embedded development",
+                  visual: "bg-primary/5"
+                },
+                { 
+                  icon: Code, color: "bg-orange-500", border: "border-orange-200",
+                  title: "Rust Integration",
+                  desc: "Memory-safe firmware with zero-cost abstractions",
+                  visual: "bg-orange-50"
+                },
+                { 
+                  icon: Layers, color: "bg-purple-500", border: "border-purple-200",
+                  title: "Security Layer",
+                  desc: "Secure boot, HSM, and TEE overlay on your firmware",
+                  visual: "bg-purple-50"
+                },
+                { 
+                  icon: Rocket, color: "bg-green-500", border: "border-green-200",
+                  title: "Production Ready",
+                  desc: "Compiled, tested, and deployed to real hardware",
+                  visual: "bg-green-50"
+                },
+              ].map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <RevealItem key={index} delay={index * 200}>
+                    <div className="relative text-center group">
+                      {/* Step circle */}
+                      <div className={`w-16 h-16 rounded-full ${step.color} flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10`}>
+                        <Icon className="w-7 h-7 text-white" />
+                      </div>
+                      
+                      {/* Content card */}
+                      <div className={`${step.visual} rounded-xl p-5 border ${step.border} group-hover:shadow-md transition-shadow`}>
+                        <h4 className="font-semibold text-foreground text-sm mb-1">{step.title}</h4>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
+                      </div>
+                      
+                      {/* Step number */}
+                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-white border-2 border-border flex items-center justify-center z-20">
+                        <span className="text-[10px] font-bold text-muted-foreground">{index + 1}</span>
+                      </div>
+                    </div>
+                  </RevealItem>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -54,10 +54,10 @@ const About = () => {
   ];
 
   const milestones = [
-    { year: "2023", title: "Platform Foundation", description: "Initial development of secure RISC-V toolchain and core architecture" },
-    { year: "2024", title: "SDK & Hardware Integration", description: "Release of comprehensive SDK with C-DAC and Mindgrove board support" },
-    { year: "2025", title: "AI Integration — Jarvyn", description: "Launch of Jarvyn AI-powered development assistant and IDE" },
-    { year: "2026", title: "Enterprise & Safety", description: "ISO 26262 certification workflows and enterprise deployment options" },
+    { year: "2024", title: "Platform Foundation", description: "Core architecture, RISC-V Rust toolchain, and secure boot chain development" },
+    { year: "2024", title: "Hardware Partnerships", description: "C-DAC VEGA and Mindgrove board integration with BSP support" },
+    { year: "2025", title: "TrusteD-V IDE — Jarvyn", description: "Launch of AI-powered IDE with Jarvyn assistant, integrated debugger, and Smart Builder" },
+    { year: "2026", title: "Enterprise & Safety", description: "ISO 26262 compliant workflows, enterprise deployment, and expanded board support" },
   ];
 
   const team = [
