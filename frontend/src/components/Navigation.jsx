@@ -27,7 +27,6 @@ const Navigation = () => {
   
   // Authenticated user items
   const authNavItems = [
-    { path: "/solution-builder", label: "Solution Builder", icon: Zap },
     { path: "/projects", label: "My Projects", icon: FolderGit2 },
   ];
   
@@ -80,34 +79,19 @@ const Navigation = () => {
             {/* Right: Auth + Bosch Logo */}
             <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
               {isAuthenticated && (
-                <>
-                  <Link
-                    to="/solution-builder"
-                    data-testid="nav-solution-builder"
-                    className={`
-                      px-3 py-2 text-sm font-medium transition-all duration-200
-                      ${location.pathname === '/solution-builder' 
-                        ? "text-primary" 
-                        : "text-muted-foreground hover:text-foreground"
-                      }
-                    `}
-                  >
-                    Solution Builder
-                  </Link>
-                  <Link
-                    to="/projects"
-                    data-testid="nav-projects"
-                    className={`
-                      px-3 py-2 text-sm font-medium transition-all duration-200
-                      ${location.pathname === '/projects' 
-                        ? "text-primary" 
-                        : "text-muted-foreground hover:text-foreground"
-                      }
-                    `}
-                  >
-                    My Projects
-                  </Link>
-                </>
+                <Link
+                  to="/projects"
+                  data-testid="nav-projects"
+                  className={`
+                    px-3 py-2 text-sm font-medium transition-all duration-200
+                    ${location.pathname === '/projects' 
+                      ? "text-primary" 
+                      : "text-muted-foreground hover:text-foreground"
+                    }
+                  `}
+                >
+                  My Projects
+                </Link>
               )}
               
               {isAdmin && (

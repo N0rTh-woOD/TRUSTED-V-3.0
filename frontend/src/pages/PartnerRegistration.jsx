@@ -305,16 +305,33 @@ const PartnerRegistration = () => {
 
             {/* Terms & Submit */}
             <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-start gap-3 mb-6">
+              <CardHeader>
+                <h2 className="text-lg font-semibold text-foreground">Terms & Conditions</h2>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="max-h-48 overflow-y-auto p-4 bg-slate-50 rounded-lg border border-border text-xs text-muted-foreground leading-relaxed space-y-3">
+                  <p><strong>TrusteD-V Partner Program — Terms and Conditions</strong></p>
+                  <p><strong>1. Eligibility.</strong> Partnership applications are open to legally registered entities. TrusteD-V reserves the right to accept or reject applications at its sole discretion.</p>
+                  <p><strong>2. Confidentiality.</strong> All information exchanged during the partnership evaluation and engagement shall be treated as confidential. Neither party shall disclose proprietary or trade-secret information without prior written consent.</p>
+                  <p><strong>3. Intellectual Property.</strong> Each party retains ownership of its pre-existing intellectual property. Any jointly developed IP during the partnership will be governed by a separate IP agreement executed before development begins.</p>
+                  <p><strong>4. Branding & Marketing.</strong> Use of TrusteD-V logos, trademarks, or brand assets requires prior written approval. Co-marketing activities will be mutually agreed upon in writing.</p>
+                  <p><strong>5. Data Protection.</strong> Both parties shall comply with applicable data protection laws including the Information Technology Act, 2000 (India) and the Digital Personal Data Protection Act, 2023. Personal data collected through this form will be used solely for partnership evaluation.</p>
+                  <p><strong>6. Liability.</strong> TrusteD-V shall not be liable for indirect, incidental, or consequential damages arising from the partnership. Total liability shall not exceed the fees paid under any executed partnership agreement.</p>
+                  <p><strong>7. Termination.</strong> Either party may terminate the partnership with 30 days written notice. Upon termination, each party shall return or destroy confidential information of the other party.</p>
+                  <p><strong>8. Governing Law.</strong> These terms are governed by the laws of India. Any disputes shall be resolved through arbitration in Bangalore, Karnataka, under the Arbitration and Conciliation Act, 1996.</p>
+                  <p><strong>9. Modifications.</strong> TrusteD-V reserves the right to modify these terms with 30 days notice to active partners. Continued participation constitutes acceptance of modified terms.</p>
+                  <p><strong>10. Entire Agreement.</strong> These terms, together with any executed partnership agreement, constitute the entire agreement between the parties regarding the TrusteD-V Partner Program.</p>
+                </div>
+                
+                <div className="flex items-start gap-3">
                   <Checkbox
                     id="terms"
                     checked={formData.agreeTerms}
                     onCheckedChange={(checked) => setFormData(prev => ({ ...prev, agreeTerms: checked }))}
+                    data-testid="agree-terms-checkbox"
                   />
                   <label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                    I agree to the TrusteD-V Partner Program Terms and Conditions and acknowledge that 
-                    this application will be reviewed by the TrusteD-V partnership team. *
+                    I have read and agree to the <strong>TrusteD-V Partner Program Terms and Conditions</strong>. I acknowledge that this application will be reviewed by the TrusteD-V partnership team and that my submission is subject to approval. *
                   </label>
                 </div>
                 
@@ -322,7 +339,8 @@ const PartnerRegistration = () => {
                   type="submit" 
                   size="lg" 
                   className="w-full md:w-auto font-semibold"
-                  disabled={submitting}
+                  disabled={submitting || !formData.agreeTerms}
+                  data-testid="submit-partner-application-btn"
                 >
                   {submitting ? (
                     <>

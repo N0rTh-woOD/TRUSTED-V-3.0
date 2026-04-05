@@ -1,210 +1,59 @@
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Linkedin, Mail } from "lucide-react";
 
 const Team = () => {
-  const [hoveredMember, setHoveredMember] = useState(null);
-
   const teamMembers = [
     // Row 1 - Leadership
-    {
-      name: "Yashwanth Singh M",
-      role: "Founder",
-      image: "/team/yashwanth.jpg",
-      category: "Leadership",
-    },
-    {
-      name: "Sriram Varma",
-      role: "Business Development",
-      image: "/team/sriram.jpg",
-      category: "Leadership",
-    },
-    {
-      name: "Abhishek Dhamale",
-      role: "Co-Founder",
-      image: "/team/abhishek.jpg",
-      category: "Leadership",
-    },
+    { name: "Yashwanth Singh M", role: "Founder", category: "Leadership" },
+    { name: "Sriram Varma", role: "Business Development", category: "Leadership" },
+    { name: "Abhishek Dhamale", role: "Co-Founder", category: "Leadership" },
     // Row 2 - Management
-    {
-      name: "Ipsita",
-      role: "Marketing Head",
-      image: "/team/ipsita.jpg",
-      category: "Management",
-    },
-    {
-      name: "Brian",
-      role: "Chief Architect",
-      image: "/team/brian.jpg",
-      category: "Management",
-    },
-    {
-      name: "Imran",
-      role: "Chief Engineer",
-      image: "/team/imran.jpg",
-      category: "Management",
-    },
+    { name: "Ipsita", role: "Marketing Head", category: "Management" },
+    { name: "Brian", role: "Chief Architect", category: "Management" },
+    { name: "Imran", role: "Chief Engineer", category: "Management" },
     // Row 3 - Architecture
-    {
-      name: "Karthik",
-      role: "Embedded Architect",
-      image: "/team/karthik.jpg",
-      category: "Architecture",
-    },
-    {
-      name: "Praveen",
-      role: "Software Architect",
-      image: "/team/praveen.jpg",
-      category: "Architecture",
-    },
-    {
-      name: "Shrinivas",
-      role: "AI Architect",
-      image: "/team/shrinivas.jpg",
-      category: "Architecture",
-    },
-    // Row 4 - Engineering (Crypto & AI)
-    {
-      name: "Harika",
-      role: "Crypto Engineer",
-      image: "/team/harika.jpg",
-      category: "Engineering",
-    },
-    {
-      name: "Shivam",
-      role: "Crypto Engineer",
-      image: "/team/shivam.jpg",
-      category: "Engineering",
-    },
-    {
-      name: "Chandana",
-      role: "AI Engineer",
-      image: "/team/chandana.jpg",
-      category: "Engineering",
-    },
-    // Row 5 - Engineering (Cloud, Security, QA)
-    {
-      name: "Pavan",
-      role: "Cloud Engineer",
-      image: "/team/pavan.jpg",
-      category: "Engineering",
-    },
-    {
-      name: "Reshma",
-      role: "Security Manager",
-      image: "/team/reshma.jpg",
-      category: "Engineering",
-    },
-    {
-      name: "Nishant",
-      role: "Quality Gates",
-      image: "/team/nishant.jpg",
-      category: "Engineering",
-    },
+    { name: "Karthik", role: "Embedded Architect", category: "Architecture" },
+    { name: "Praveen", role: "Software Architect", category: "Architecture" },
+    { name: "Shrinivas", role: "AI Architect", category: "Architecture" },
+    // Row 4 - Engineering
+    { name: "Harika", role: "Crypto Engineer", category: "Engineering" },
+    { name: "Shivam", role: "Crypto Engineer", category: "Engineering" },
+    { name: "Chandana", role: "AI Engineer", category: "Engineering" },
+    // Row 5 - Security & Quality
+    { name: "Pavan", role: "Cloud Engineer", category: "Security & Quality" },
+    { name: "Reshma", role: "Security Manager", category: "Security & Quality" },
+    { name: "Nishant", role: "Quality Gates", category: "Security & Quality" },
   ];
 
-  // Get initials for placeholder
   const getInitials = (name) => {
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
+    return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
   };
 
-  // Get gradient based on role
   const getRoleGradient = (role) => {
-    if (role.includes("Founder") || role.includes("Co-Founder")) {
-      return "from-primary to-blue-600";
-    }
-    if (role.includes("Chief") || role.includes("Head")) {
-      return "from-purple-500 to-indigo-600";
-    }
-    if (role.includes("Architect")) {
-      return "from-orange-500 to-red-500";
-    }
-    if (role.includes("Crypto")) {
-      return "from-green-500 to-emerald-600";
-    }
-    if (role.includes("AI")) {
-      return "from-pink-500 to-rose-500";
-    }
-    if (role.includes("Cloud")) {
-      return "from-cyan-500 to-blue-500";
-    }
-    if (role.includes("Security")) {
-      return "from-red-500 to-orange-500";
-    }
-    if (role.includes("Quality")) {
-      return "from-teal-500 to-green-500";
-    }
+    if (role.includes("Founder") || role.includes("Co-Founder")) return "from-primary to-blue-600";
+    if (role.includes("Chief") || role.includes("Head")) return "from-purple-500 to-indigo-600";
+    if (role.includes("Architect")) return "from-orange-500 to-red-500";
+    if (role.includes("Crypto")) return "from-green-500 to-emerald-600";
+    if (role.includes("AI")) return "from-pink-500 to-rose-500";
+    if (role.includes("Cloud")) return "from-cyan-500 to-blue-500";
+    if (role.includes("Security")) return "from-red-500 to-orange-500";
+    if (role.includes("Quality")) return "from-teal-500 to-green-500";
+    if (role.includes("Business")) return "from-amber-500 to-orange-500";
+    if (role.includes("Marketing")) return "from-violet-500 to-purple-500";
     return "from-slate-500 to-slate-600";
   };
 
-  // Profile Image Component with fallback
-  const ProfileImage = ({ member, index }) => {
-    const [imageError, setImageError] = useState(false);
-    const isHovered = hoveredMember === index;
-
-    return (
-      <div 
-        className={`
-          relative w-32 h-32 mx-auto rounded-full overflow-hidden
-          transition-all duration-500 ease-out
-          ${isHovered ? "scale-110 shadow-2xl" : "shadow-lg"}
-        `}
-      >
-        {/* Animated border ring */}
-        <div 
-          className={`
-            absolute -inset-1 rounded-full bg-gradient-to-r ${getRoleGradient(member.role)}
-            transition-all duration-500
-            ${isHovered ? "opacity-100 animate-spin-slow" : "opacity-50"}
-          `}
-          style={{ animationDuration: "8s" }}
-        />
-        
-        {/* Inner container */}
-        <div className="absolute inset-0.5 rounded-full overflow-hidden bg-white">
-          {imageError ? (
-            // Placeholder with initials
-            <div 
-              className={`
-                w-full h-full flex items-center justify-center
-                bg-gradient-to-br ${getRoleGradient(member.role)}
-                text-white text-2xl font-bold
-              `}
-            >
-              {getInitials(member.name)}
-            </div>
-          ) : (
-            <img
-              src={member.image}
-              alt={member.name}
-              className="w-full h-full object-cover"
-              onError={() => setImageError(true)}
-            />
-          )}
-        </div>
-        
-        {/* Shine effect on hover */}
-        <div 
-          className={`
-            absolute inset-0 bg-gradient-to-tr from-white/0 via-white/30 to-white/0
-            transition-all duration-700 ease-out
-            ${isHovered ? "translate-x-full" : "-translate-x-full"}
-          `}
-        />
-      </div>
-    );
-  };
+  const sections = [
+    { label: "Leadership", start: 0, end: 3 },
+    { label: "Management", start: 3, end: 6 },
+    { label: "Architecture", start: 6, end: 9 },
+    { label: "Engineering", start: 9, end: 12 },
+    { label: "Security & Quality", start: 12, end: 15 },
+  ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" data-testid="team-page">
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
-        {/* Background decoration */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
         
@@ -228,14 +77,7 @@ const Team = () => {
       {/* Team Grid */}
       <section className="py-16 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Row Labels and Members */}
-          {[
-            { label: "Leadership", start: 0, end: 3 },
-            { label: "Management", start: 3, end: 6 },
-            { label: "Architecture", start: 6, end: 9 },
-            { label: "Engineering", start: 9, end: 12 },
-            { label: "Security & Quality", start: 12, end: 15 },
-          ].map((section, sectionIndex) => (
+          {sections.map((section) => (
             <div key={section.label} className="mb-16 last:mb-0">
               {/* Section Label */}
               <div className="flex items-center gap-4 mb-10">
@@ -254,61 +96,29 @@ const Team = () => {
                     <Card
                       key={member.name}
                       data-testid={`team-member-${globalIndex}`}
-                      className={`
-                        w-full max-w-xs bg-white border border-border
-                        transition-all duration-500 ease-out cursor-pointer
-                        hover:shadow-xl hover:-translate-y-2 hover:border-primary/30
-                        group
-                      `}
-                      onMouseEnter={() => setHoveredMember(globalIndex)}
-                      onMouseLeave={() => setHoveredMember(null)}
-                      style={{
-                        animationDelay: `${index * 100}ms`,
-                      }}
+                      className="w-full max-w-xs bg-white border border-border transition-all duration-500 ease-out hover:shadow-xl hover:-translate-y-2 hover:border-primary/30 group"
                     >
                       <CardContent className="p-8 text-center">
-                        {/* Profile Image */}
-                        <ProfileImage member={member} index={globalIndex} />
+                        {/* Colored background avatar with initials */}
+                        <div className="relative w-28 h-28 mx-auto rounded-full overflow-hidden transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl shadow-lg">
+                          <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getRoleGradient(member.role)} opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
+                          <div className="absolute inset-0.5 rounded-full overflow-hidden">
+                            <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${getRoleGradient(member.role)} text-white text-2xl font-bold`}>
+                              {getInitials(member.name)}
+                            </div>
+                          </div>
+                        </div>
                         
                         {/* Name */}
-                        <h3 
-                          className={`
-                            mt-6 text-lg font-semibold text-foreground
-                            transition-all duration-300
-                            group-hover:text-primary
-                          `}
-                        >
+                        <h3 className="mt-6 text-lg font-semibold text-foreground transition-all duration-300 group-hover:text-primary">
                           {member.name}
                         </h3>
                         
                         {/* Role Badge */}
                         <div className="mt-2">
-                          <span 
-                            className={`
-                              inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
-                              bg-gradient-to-r ${getRoleGradient(member.role)} text-white
-                              transition-all duration-300
-                              group-hover:shadow-md group-hover:scale-105
-                            `}
-                          >
+                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${getRoleGradient(member.role)} text-white transition-all duration-300 group-hover:shadow-md group-hover:scale-105`}>
                             {member.role}
                           </span>
-                        </div>
-                        
-                        {/* Social Links (placeholder) */}
-                        <div 
-                          className={`
-                            flex items-center justify-center gap-3 mt-5
-                            transition-all duration-500
-                            ${hoveredMember === globalIndex ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}
-                          `}
-                        >
-                          <button className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white transition-colors">
-                            <Linkedin className="w-4 h-4" />
-                          </button>
-                          <button className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white transition-colors">
-                            <Mail className="w-4 h-4" />
-                          </button>
                         </div>
                       </CardContent>
                     </Card>

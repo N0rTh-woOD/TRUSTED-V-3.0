@@ -207,7 +207,7 @@ const About = () => {
                 <div className="bg-slate-800 rounded-lg p-4">
                   <div className="text-xs text-slate-400 mb-2">Application Layer</div>
                   <div className="flex flex-wrap gap-2">
-                    {["AI Assistant", "Web IDE", "Solution Builder"].map((item) => (
+                    {["Jarvyn AI", "IDE", "Project Manager"].map((item) => (
                       <span key={item} className="px-2 py-1 bg-primary/20 rounded text-xs">{item}</span>
                     ))}
                   </div>

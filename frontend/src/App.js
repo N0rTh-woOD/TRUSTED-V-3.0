@@ -91,7 +91,7 @@ const AppContent = () => {
         <Route path="/login" element={<Navigate to="/" replace />} />
         <Route path="/register" element={<Navigate to="/" replace />} />
         
-        {/* Protected Routes - require authentication (Solution Builder, Projects, etc.) */}
+        {/* Protected Routes - require authentication (Projects, etc.) */}
         <Route
           path="/solution-builder"
           element={

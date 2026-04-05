@@ -14,10 +14,10 @@ const ProductSuite = () => {
       category: "Development Tools",
       items: [
         {
-          name: "TrusteD-V Studio IDE",
-          description: "Vertically integrated development environment with AI-powered assistance, advanced debugging, and seamless hardware integration.",
+          name: "TrusteD-V IDE — Jarvyn",
+          description: "AI-native development environment with Jarvyn AI assistant, integrated debugging, one-click firmware flashing, and RISC-V native support.",
           icon: Terminal,
-          features: ["SLM-based code completion", "Integrated debugger (probe.rs)", "Real-time profiling", "One-click deployment"],
+          features: ["Jarvyn AI code assistant", "Integrated debugger (probe-rs / LLDB)", "Smart Builder engine", "One-click build & flash"],
           badge: "Flagship",
           link: "/download-ide"
         },
@@ -28,14 +28,6 @@ const ProductSuite = () => {
           features: ["Zero installation", "Cloud compilation", "Project sharing", "Live preview"],
           badge: "Beta",
           link: "/developer-portal"
-        },
-        {
-          name: "Solution Builder",
-          description: "AI-powered project configuration tool that generates optimized project templates based on your requirements.",
-          icon: Zap,
-          features: ["Smart hardware selection", "Middleware recommendations", "Code generation", "ZIP export"],
-          badge: "AI-Powered",
-          link: "/solution-builder"
         },
       ]
     },
@@ -220,9 +212,9 @@ const ProductSuite = () => {
             {[
               "Requirements",
               "→",
-              "Solution Builder",
+              "Jarvyn IDE",
               "→",
-              "IDE / Web IDE",
+              "Build & Config",
               "→",
               "Secure Build",
               "→",
@@ -247,7 +239,7 @@ const ProductSuite = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground mb-4">Ready to Get Started?</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Download TrusteD-V Studio or try the Solution Builder to create your first project.
+            Download TrusteD-V IDE — Jarvyn or explore the Developer Portal to get started.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/download-ide">
@@ -256,10 +248,10 @@ const ProductSuite = () => {
                 Download IDE
               </Button>
             </Link>
-            <Link to="/solution-builder">
+            <Link to="/developer-portal">
               <Button size="lg" variant="outline" className="font-semibold">
-                <Zap className="w-4 h-4 mr-2" />
-                Try Solution Builder
+                <Code className="w-4 h-4 mr-2" />
+                Developer Portal
               </Button>
             </Link>
           </div>

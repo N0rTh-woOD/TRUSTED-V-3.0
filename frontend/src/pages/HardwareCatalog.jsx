@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -156,11 +157,25 @@ const HardwareCatalog = () => {
                     className="bg-white hover:shadow-lg transition-all duration-300 overflow-hidden group"
                     data-testid={`hardware-card-${hw.id}`}
                   >
-                    {/* Image placeholder - In production, use hw.image_url */}
+                    {/* Hardware Image */}
                     <div className="h-40 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center relative overflow-hidden">
-                      <Cpu className="w-16 h-16 text-slate-300" />
+                      {hw.image_url ? (
+                        <img src={hw.image_url} alt={hw.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <img 
+                          src={hw.manufacturer === "C-DAC" 
+                            ? "https://images.unsplash.com/photo-1769148023257-02df7ec903be?w=400&h=300&fit=crop" 
+                            : "https://images.unsplash.com/photo-1651340675491-6fb0bfb5c4ea?w=400&h=300&fit=crop"
+                          }
+                          alt={hw.name}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
                       <div className="absolute top-3 right-3">
                         <Badge className={getCoreColor(hw.core)}>{hw.core}</Badge>
+                      </div>
+                      <div className="absolute bottom-3 left-3">
+                        <Badge className="bg-white/90 text-foreground border-0 text-xs font-medium shadow-sm">{hw.manufacturer}</Badge>
                       </div>
                     </div>
                     
@@ -238,8 +253,12 @@ const HardwareCatalog = () => {
             We're constantly adding new hardware support. Contact us to request support for your specific development board.
           </p>
           <div className="flex justify-center gap-4">
-            <Button>Request Board Support</Button>
-            <Button variant="outline">Become a Hardware Partner</Button>
+            <Link to="/partner-registration">
+              <Button>Request Board Support</Button>
+            </Link>
+            <Link to="/partners">
+              <Button variant="outline">Become a Hardware Partner</Button>
+            </Link>
           </div>
         </div>
       </section>

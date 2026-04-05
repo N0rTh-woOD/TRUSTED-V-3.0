@@ -219,6 +219,8 @@ class IDEDownload(BaseModel):
     download_url: str
     size: str
     description: str
+    filename: Optional[str] = None
+    uploaded_at: Optional[str] = None
 
 class ChatRequest(BaseModel):
     message: str
@@ -1070,30 +1072,30 @@ async def init_sample_data():
         sample_ide = [
             {
                 "id": str(uuid.uuid4()),
-                "name": "TrusteD-V Studio",
+                "name": "TrusteD-V IDE — Jarvyn",
                 "version": "1.2.0",
-                "platform": "Windows x64",
+                "platform": "Windows",
                 "download_url": "#",
-                "size": "450 MB",
-                "description": "Complete IDE with Rust toolchain, debugger, and RISC-V emulator for Windows"
+                "size": "~450 MB",
+                "description": "AI-native IDE with Jarvyn assistant, Rust toolchain, integrated debugger, and RISC-V board support for Windows"
             },
             {
                 "id": str(uuid.uuid4()),
-                "name": "TrusteD-V Studio",
+                "name": "TrusteD-V IDE — Jarvyn",
                 "version": "1.2.0",
                 "platform": "macOS",
                 "download_url": "#",
-                "size": "420 MB",
-                "description": "Complete IDE with Rust toolchain, debugger, and RISC-V emulator for macOS"
+                "size": "~420 MB",
+                "description": "AI-native IDE with Jarvyn assistant, Rust toolchain, integrated debugger, and RISC-V board support for macOS"
             },
             {
                 "id": str(uuid.uuid4()),
-                "name": "TrusteD-V Studio",
+                "name": "TrusteD-V IDE — Jarvyn",
                 "version": "1.2.0",
-                "platform": "Linux x64",
+                "platform": "Linux",
                 "download_url": "#",
-                "size": "380 MB",
-                "description": "Complete IDE with Rust toolchain, debugger, and RISC-V emulator for Linux"
+                "size": "~380 MB",
+                "description": "AI-native IDE with Jarvyn assistant, Rust toolchain, integrated debugger, and RISC-V board support for Linux"
             }
         ]
         await db.ide_downloads.insert_many(sample_ide)

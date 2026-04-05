@@ -86,7 +86,7 @@ class TestHardwareEndpoints:
 
 
 class TestIDEDownloadsEndpoints:
-    """Test IDE downloads endpoints"""
+    """Test IDE downloads endpoints - Updated for Jarvyn naming"""
     
     def test_get_ide_downloads(self):
         """GET /api/ide-downloads returns download list"""
@@ -117,6 +117,21 @@ class TestIDEDownloadsEndpoints:
             assert "version" in dl
             assert "platform" in dl
             assert "size" in dl
+    
+    def test_ide_downloads_jarvyn_naming(self):
+        """IDE downloads should use 'TrusteD-V IDE — Jarvyn' naming"""
+        response = requests.get(f"{API}/ide-downloads")
+        assert response.status_code == 200
+        data = response.json()
+        
+        # All IDE entries should have Jarvyn in the name
+        for dl in data:
+            assert "Jarvyn" in dl["name"], f"IDE name should contain 'Jarvyn', got: {dl['name']}"
+            assert "TrusteD-V IDE" in dl["name"], f"IDE name should contain 'TrusteD-V IDE', got: {dl['name']}"
+        
+        # Should NOT have 'Studio' in the name
+        for dl in data:
+            assert "Studio" not in dl["name"], f"IDE name should NOT contain 'Studio', got: {dl['name']}"
 
 
 class TestAdminStats:
