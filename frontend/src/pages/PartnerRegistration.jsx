@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,8 @@ import {
   GraduationCap, Rocket, Send, ArrowLeft
 } from "lucide-react";
 import { toast } from "sonner";
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const PartnerRegistration = () => {
   const [formData, setFormData] = useState({
@@ -66,18 +69,32 @@ const PartnerRegistration = () => {
     e.preventDefault();
     
     if (!formData.companyName || !formData.email || !formData.partnerType || !formData.agreeTerms) {
-      toast.error("Please fill in all required fields");
+      toast.error("Please fill in all required fields and accept the Terms & Conditions");
       return;
     }
 
     setSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setSubmitting(false);
-    setSubmitted(true);
-    toast.success("Partnership application submitted successfully!");
+    try {
+      await axios.post(`${BACKEND_URL}/api/applications/partnership`, {
+        company_name: formData.companyName,
+        contact_name: formData.contactName,
+        email: formData.email,
+        phone: formData.phone,
+        website: formData.website,
+        company_type: formData.companySize,
+        partnership_type: formData.partnerType,
+        description: formData.description,
+        products: formData.productCategory.join(", "),
+        agree_terms: formData.agreeTerms,
+      });
+      setSubmitted(true);
+      toast.success("Partnership application submitted successfully!");
+    } catch (error) {
+      toast.error("Failed to submit application. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {

@@ -160,16 +160,9 @@ const HardwareCatalog = () => {
                     {/* Hardware Image */}
                     <div className="h-40 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center relative overflow-hidden">
                       {hw.image_url ? (
-                        <img src={hw.image_url} alt={hw.name} className="w-full h-full object-cover" />
+                        <img src={hw.image_url.startsWith("/api") ? `${BACKEND_URL}${hw.image_url}` : hw.image_url} alt={hw.name} className="w-full h-full object-cover" />
                       ) : (
-                        <img 
-                          src={hw.manufacturer === "C-DAC" 
-                            ? "https://images.unsplash.com/photo-1769148023257-02df7ec903be?w=400&h=300&fit=crop" 
-                            : "https://images.unsplash.com/photo-1651340675491-6fb0bfb5c4ea?w=400&h=300&fit=crop"
-                          }
-                          alt={hw.name}
-                          className="w-full h-full object-cover"
-                        />
+                        <Cpu className="w-16 h-16 text-slate-300" />
                       )}
                       <div className="absolute top-3 right-3">
                         <Badge className={getCoreColor(hw.core)}>{hw.core}</Badge>
@@ -253,10 +246,10 @@ const HardwareCatalog = () => {
             We're constantly adding new hardware support. Contact us to request support for your specific development board.
           </p>
           <div className="flex justify-center gap-4">
-            <Link to="/partner-registration">
+            <Link to="/board-support">
               <Button>Request Board Support</Button>
             </Link>
-            <Link to="/partners">
+            <Link to="/partner-registration">
               <Button variant="outline">Become a Hardware Partner</Button>
             </Link>
           </div>

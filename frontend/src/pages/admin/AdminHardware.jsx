@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Loader2, Plus, Edit, Trash2, Package, ArrowLeft } from "lucide-react";
+import { Loader2, Plus, Edit, Trash2, Package, ArrowLeft, Upload, Image } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 
@@ -113,6 +113,20 @@ const AdminHardware = () => {
     }
   };
 
+  const handleImageUpload = async (hwId, file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      await axios.post(`${API}/admin/hardware/${hwId}/upload-image`, formData, {
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
+      });
+      toast.success("Image uploaded successfully");
+      loadHardware();
+    } catch (error) {
+      toast.error("Failed to upload image");
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
@@ -191,6 +205,12 @@ const AdminHardware = () => {
                 </div>
               </CardHeader>
               <CardContent className="p-6">
+                {/* Image preview */}
+                {hw.image_url && (
+                  <div className="mb-4 rounded-lg overflow-hidden h-32 bg-slate-100">
+                    <img src={hw.image_url.startsWith("/api") ? `${BACKEND_URL}${hw.image_url}` : hw.image_url} alt={hw.name} className="w-full h-full object-cover" />
+                  </div>
+                )}
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Core:</span>
@@ -222,6 +242,15 @@ const AdminHardware = () => {
                       +{hw.peripherals.length - 3} more
                     </Badge>
                   )}
+                </div>
+                {/* Upload image button */}
+                <div className="mt-3">
+                  <label className="cursor-pointer">
+                    <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files[0] && handleImageUpload(hw.id, e.target.files[0])} />
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-dashed border-border text-xs text-muted-foreground hover:border-primary hover:text-primary transition-colors">
+                      <Upload className="w-3.5 h-3.5" />{hw.image_url ? "Change Image" : "Upload Image"}
+                    </span>
+                  </label>
                 </div>
               </CardContent>
             </Card>

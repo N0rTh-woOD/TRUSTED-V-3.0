@@ -157,12 +157,16 @@ const ProductSuite = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {category.items.map((product, prodIndex) => {
                 const Icon = product.icon;
+                const isToolCard = product.link && (product.badge === "Flagship" || product.badge === "Beta");
                 return (
-                  <Card key={prodIndex} className="bg-white border-border hover:shadow-lg transition-all duration-300 group">
+                  <Card key={prodIndex} className={`bg-white border-border hover:shadow-lg transition-all duration-300 group overflow-hidden ${isToolCard ? "border-primary/20" : ""}`}>
+                    {isToolCard && <div className="h-1.5 bg-gradient-to-r from-primary to-blue-400" />}
                     <CardHeader className="pb-4">
                       <div className="flex items-start justify-between">
-                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
-                          <Icon className="w-6 h-6 text-primary" />
+                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center transition-colors ${
+                          isToolCard ? "bg-primary text-white" : "bg-primary/10 group-hover:bg-primary/15"
+                        }`}>
+                          <Icon className={`w-6 h-6 ${isToolCard ? "text-white" : "text-primary"}`} />
                         </div>
                         <Badge className={getBadgeColor(product.badge)}>{product.badge}</Badge>
                       </div>
@@ -182,9 +186,25 @@ const ProductSuite = () => {
                       </ul>
                       {product.link && (
                         <Link to={product.link}>
-                          <Button variant="outline" size="sm" className="w-full mt-2 group-hover:bg-primary group-hover:text-white transition-colors">
-                            Learn More
-                            <ArrowRight className="w-4 h-4 ml-1" />
+                          <Button 
+                            size="sm" 
+                            className={`w-full mt-2 transition-all ${
+                              isToolCard 
+                                ? "bg-primary text-white hover:bg-primary/90 shadow-md hover:shadow-lg"
+                                : "bg-transparent border border-border text-foreground hover:bg-primary hover:text-white hover:border-primary"
+                            }`}
+                          >
+                            {product.badge === "Flagship" ? (
+                              <>
+                                <Download className="w-4 h-4 mr-1" />
+                                Get {product.name.split("—")[0].trim()}
+                              </>
+                            ) : (
+                              <>
+                                Explore {product.name}
+                                <ArrowRight className="w-4 h-4 ml-1" />
+                              </>
+                            )}
                           </Button>
                         </Link>
                       )}

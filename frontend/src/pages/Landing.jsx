@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import TrustedVLogo from "@/components/TrustedVLogo";
 
-// Animated counter component
+// Animated counter with intersection observer
 const AnimatedCounter = ({ end, label, suffix = "" }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -46,7 +46,38 @@ const AnimatedCounter = ({ end, label, suffix = "" }) => {
   );
 };
 
+// Staggered reveal item
+const RevealItem = ({ children, delay = 0, className = "" }) => {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.2 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div 
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${className} ${
+        visible 
+          ? "opacity-100 translate-y-0" 
+          : "opacity-0 translate-y-8"
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
+
 const Landing = () => {
+  const [activePanel, setActivePanel] = useState("features"); // "features" | "architecture"
+
   const rustBenefits = [
     { title: "Memory Safety", description: "Eliminates buffer overflows, null pointer dereferences, and data races at compile time" },
     { title: "Zero-Cost Abstractions", description: "High-level features compile to efficient machine code with no runtime overhead" },
@@ -78,6 +109,34 @@ const Landing = () => {
     { name: "Mindgrove", description: "Industrial" },
     { name: "C-DAC", description: "ARIES Boards" },
   ];
+
+  const featureItems = [
+    { icon: Zap, color: "blue", title: "TrusteD-V IDE — Jarvyn", desc: "AI-native IDE with Jarvyn assistant, integrated debugger, and one-click firmware flashing" },
+    { icon: Cpu, color: "green", title: "Indian RISC-V Hardware Support", desc: "Pre-configured BSPs for C-DAC VEGA/ARIES and Mindgrove SoCs with peripheral drivers" },
+    { icon: Package, color: "orange", title: "Downloadable Project Archives", desc: "Export complete Cargo projects as ZIP files with build scripts, documentation, and version history" },
+    { icon: Cog, color: "purple", title: "RTOS & Middleware Selection", desc: "Choose from FreeRTOS, Zephyr, Embassy, or bare-metal configurations for your project" },
+  ];
+
+  const archLayers = [
+    { label: "Application Layer", color: "primary", items: ["Jarvyn AI", "IDE", "Project Manager"] },
+    { label: "Rust SDK & Middleware", color: "orange", items: ["Embassy", "RTIC", "embedded-hal", "Drivers"] },
+    { label: "Secure Foundation", color: "green", items: ["Secure Boot", "Trusted HAL", "HSM", "TEE"] },
+    { label: "RISC-V Hardware", color: "blue", items: ["C-DAC VEGA", "Mindgrove", "DHRUV64", "Vision NPU"] },
+  ];
+
+  const colorMap = {
+    blue: { bg: "bg-blue-50/50", border: "border-blue-100", icon: "bg-primary/10 text-primary" },
+    green: { bg: "bg-green-50/50", border: "border-green-100", icon: "bg-green-500/10 text-green-600" },
+    orange: { bg: "bg-orange-50/50", border: "border-orange-100", icon: "bg-orange-500/10 text-orange-600" },
+    purple: { bg: "bg-purple-50/50", border: "border-purple-100", icon: "bg-purple-500/10 text-purple-600" },
+  };
+
+  const archColorMap = {
+    primary: "bg-primary/20",
+    orange: "bg-orange-500/20",
+    green: "bg-green-500/20",
+    blue: "bg-blue-500/20",
+  };
   
   return (
     <div className="min-h-screen bg-white">
@@ -120,28 +179,17 @@ const Landing = () => {
               
               <div className="flex flex-wrap gap-4">
                 <Link to="/download-ide">
-                  <Button 
-                    data-testid="start-building-btn"
-                    size="lg"
-                    className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
-                  >
-                    Download IDE
-                    <Download className="ml-2 w-5 h-5" />
+                  <Button data-testid="start-building-btn" size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                    Download IDE <Download className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
                 <Link to="/developer-portal">
-                  <Button 
-                    data-testid="explore-portal-btn"
-                    variant="outline"
-                    size="lg"
-                    className="h-12 px-8 text-base font-semibold"
-                  >
+                  <Button data-testid="explore-portal-btn" variant="outline" size="lg" className="h-12 px-8 text-base font-semibold">
                     Developer Portal
                   </Button>
                 </Link>
               </div>
               
-              {/* Animated Stats Row */}
               <div className="grid grid-cols-4 gap-6 mt-12 pt-8 border-t border-border">
                 <AnimatedCounter end={6} suffix="+" label="RISC-V Boards" />
                 <AnimatedCounter end={5} suffix="+" label="RTOS Options" />
@@ -153,70 +201,96 @@ const Landing = () => {
               </div>
             </div>
             
-            {/* Platform Capabilities Panel */}
+            {/* Overlapping Animated Panel - Toggle between "What You Get" and "Architecture" */}
             <div className="relative hidden lg:block">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-orange-500/10 rounded-2xl blur-3xl" />
-              <div className="relative rounded-xl overflow-hidden border border-border shadow-2xl bg-white">
-                <div className="p-5 border-b border-border bg-slate-50">
-                  <h3 className="font-semibold text-foreground flex items-center gap-2">
-                    <Layers className="w-5 h-5 text-primary" />
+              <div className="relative">
+                {/* Panel Toggle Tabs */}
+                <div className="flex mb-0 relative z-10">
+                  <button 
+                    data-testid="panel-features-tab"
+                    onClick={() => setActivePanel("features")}
+                    className={`flex-1 py-3 px-5 text-sm font-semibold rounded-t-xl transition-all duration-300 ${
+                      activePanel === "features" 
+                        ? "bg-white text-foreground border border-border border-b-white shadow-sm" 
+                        : "bg-slate-100 text-muted-foreground hover:text-foreground border border-transparent"
+                    }`}
+                  >
+                    <Layers className="w-4 h-4 inline mr-2" />
                     What You Get
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-1">Complete development ecosystem for RISC-V</p>
+                  </button>
+                  <button 
+                    data-testid="panel-architecture-tab"
+                    onClick={() => setActivePanel("architecture")}
+                    className={`flex-1 py-3 px-5 text-sm font-semibold rounded-t-xl transition-all duration-300 ${
+                      activePanel === "architecture" 
+                        ? "bg-slate-900 text-white border border-slate-700 border-b-slate-900 shadow-sm" 
+                        : "bg-slate-200 text-muted-foreground hover:text-foreground border border-transparent"
+                    }`}
+                  >
+                    <Binary className="w-4 h-4 inline mr-2" />
+                    TrusteD-V Architecture
+                  </button>
                 </div>
                 
-                <div className="p-5 space-y-4">
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-50/50 border border-blue-100">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Zap className="w-4 h-4 text-primary" />
+                {/* Features Panel */}
+                <div className={`rounded-b-xl rounded-tr-none overflow-hidden transition-all duration-500 ${
+                  activePanel === "features" ? "opacity-100 max-h-[600px]" : "opacity-0 max-h-0 absolute"
+                }`}>
+                  <div className="border border-border border-t-0 shadow-2xl bg-white rounded-b-xl">
+                    <div className="p-5 space-y-3">
+                      {featureItems.map((item, i) => {
+                        const Icon = item.icon;
+                        const c = colorMap[item.color];
+                        return (
+                          <RevealItem key={i} delay={i * 150}>
+                            <div className={`flex items-start gap-3 p-3 rounded-lg ${c.bg} border ${c.border} hover:shadow-md transition-shadow`}>
+                              <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${c.icon.split(" ")[0]}`}>
+                                <Icon className={`w-4 h-4 ${c.icon.split(" ").pop()}`} />
+                              </div>
+                              <div>
+                                <h4 className="font-medium text-sm text-foreground">{item.title}</h4>
+                                <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
+                              </div>
+                            </div>
+                          </RevealItem>
+                        );
+                      })}
                     </div>
-                    <div>
-                      <h4 className="font-medium text-sm text-foreground">TrusteD-V IDE — Jarvyn</h4>
-                      <p className="text-xs text-muted-foreground mt-0.5">AI-native IDE with Jarvyn assistant, integrated debugger, and one-click firmware flashing</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-green-50/50 border border-green-100">
-                    <div className="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0">
-                      <Cpu className="w-4 h-4 text-green-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-sm text-foreground">Indian RISC-V Hardware Support</h4>
-                      <p className="text-xs text-muted-foreground mt-0.5">Pre-configured BSPs for C-DAC VEGA/ARIES and Mindgrove SoCs with peripheral drivers</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-orange-50/50 border border-orange-100">
-                    <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0">
-                      <Package className="w-4 h-4 text-orange-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-sm text-foreground">Downloadable Project Archives</h4>
-                      <p className="text-xs text-muted-foreground mt-0.5">Export complete Cargo projects as ZIP files with build scripts, documentation, and version history</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3 p-3 rounded-lg bg-purple-50/50 border border-purple-100">
-                    <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center flex-shrink-0">
-                      <Cog className="w-4 h-4 text-purple-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-sm text-foreground">RTOS & Middleware Selection</h4>
-                      <p className="text-xs text-muted-foreground mt-0.5">Choose from FreeRTOS, Zephyr, Embassy, or bare-metal configurations for your project</p>
+                    <div className="p-5 border-t border-border bg-slate-50 rounded-b-xl">
+                      <p className="text-xs text-muted-foreground mb-3 font-medium">Supported Hardware Partners</p>
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-md border border-border">
+                          <div className="w-2 h-2 rounded-full bg-primary" />
+                          <span className="text-xs font-medium text-foreground">C-DAC</span>
+                        </div>
+                        <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-md border border-border">
+                          <div className="w-2 h-2 rounded-full bg-green-500" />
+                          <span className="text-xs font-medium text-foreground">Mindgrove</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-5 border-t border-border bg-slate-50">
-                  <p className="text-xs text-muted-foreground mb-3 font-medium">Supported Hardware Partners</p>
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-md border border-border">
-                      <div className="w-2 h-2 rounded-full bg-primary" />
-                      <span className="text-xs font-medium text-foreground">C-DAC</span>
-                    </div>
-                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-md border border-border">
-                      <div className="w-2 h-2 rounded-full bg-green-500" />
-                      <span className="text-xs font-medium text-foreground">Mindgrove</span>
+                {/* Architecture Panel */}
+                <div className={`rounded-b-xl overflow-hidden transition-all duration-500 ${
+                  activePanel === "architecture" ? "opacity-100 max-h-[600px]" : "opacity-0 max-h-0 absolute"
+                }`}>
+                  <div className="bg-slate-900 border border-slate-700 border-t-0 shadow-2xl rounded-b-xl p-6">
+                    <div className="space-y-3">
+                      {archLayers.map((layer, i) => (
+                        <RevealItem key={i} delay={i * 200}>
+                          <div className="bg-slate-800 rounded-lg p-4">
+                            <div className="text-xs text-slate-400 mb-2">{layer.label}</div>
+                            <div className="flex flex-wrap gap-2">
+                              {layer.items.map((item) => (
+                                <span key={item} className={`px-2 py-1 ${archColorMap[layer.color]} rounded text-xs text-white`}>{item}</span>
+                              ))}
+                            </div>
+                          </div>
+                        </RevealItem>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -245,21 +319,23 @@ const Landing = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {rustBenefits.map((benefit, index) => (
-              <Card key={index} className="bg-white border border-orange-100 hover:border-orange-300 hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
-                    <CheckCircle2 className="w-5 h-5 text-orange-500" />
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground">{benefit.description}</p>
-                </CardContent>
-              </Card>
+              <RevealItem key={index} delay={index * 120}>
+                <Card className="bg-white border border-orange-100 hover:border-orange-300 hover:shadow-lg transition-all duration-300 h-full">
+                  <CardContent className="p-6">
+                    <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                      <CheckCircle2 className="w-5 h-5 text-orange-500" />
+                    </div>
+                    <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
+                    <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                  </CardContent>
+                </Card>
+              </RevealItem>
             ))}
           </div>
         </div>
       </section>
 
-      {/* RISC-V Rust Benefits */}
+      {/* RISC-V Rust Benefits - Animated one by one */}
       <section className="py-20 bg-white">
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -283,63 +359,46 @@ const Landing = () => {
                 the most secure and efficient foundation for modern embedded development.
               </p>
               
+              {/* Animated points one by one */}
               <div className="space-y-6">
                 {riscvRustBenefits.map((benefit, index) => {
                   const Icon = benefit.icon;
                   return (
-                    <div key={index} className="flex gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-6 h-6 text-primary" />
+                    <RevealItem key={index} delay={index * 250}>
+                      <div className="flex gap-4 group">
+                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:shadow-lg group-hover:shadow-primary/25 transition-all duration-300">
+                          <Icon className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">{benefit.title}</h4>
+                          <p className="text-sm text-muted-foreground mt-1">{benefit.description}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-semibold text-foreground">{benefit.title}</h4>
-                        <p className="text-sm text-muted-foreground mt-1">{benefit.description}</p>
-                      </div>
-                    </div>
+                    </RevealItem>
                   );
                 })}
               </div>
             </div>
             
-            {/* TrusteD-V Architecture - dark panel */}
-            <div className="bg-slate-900 rounded-xl p-8 text-white">
+            {/* TrusteD-V Architecture - differentiated dark panel */}
+            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-xl p-8 text-white shadow-2xl border border-slate-700">
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                <Binary className="w-5 h-5 text-primary" />
+                <Binary className="w-5 h-5 text-[#6b9aff]" />
                 TrusteD-V Architecture
               </h3>
               <div className="space-y-4">
-                <div className="bg-slate-800 rounded-lg p-4">
-                  <div className="text-xs text-slate-400 mb-2">Application Layer</div>
-                  <div className="flex flex-wrap gap-2">
-                    {["Jarvyn AI", "IDE", "Project Manager"].map((item) => (
-                      <span key={item} className="px-2 py-1 bg-primary/20 rounded text-xs">{item}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className="bg-slate-800 rounded-lg p-4">
-                  <div className="text-xs text-slate-400 mb-2">Rust SDK & Middleware</div>
-                  <div className="flex flex-wrap gap-2">
-                    {["Embassy", "RTIC", "embedded-hal", "Drivers"].map((item) => (
-                      <span key={item} className="px-2 py-1 bg-orange-500/20 rounded text-xs">{item}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className="bg-slate-800 rounded-lg p-4">
-                  <div className="text-xs text-slate-400 mb-2">Secure Foundation</div>
-                  <div className="flex flex-wrap gap-2">
-                    {["Secure Boot", "Trusted HAL", "HSM", "TEE"].map((item) => (
-                      <span key={item} className="px-2 py-1 bg-green-500/20 rounded text-xs">{item}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className="bg-slate-800 rounded-lg p-4">
-                  <div className="text-xs text-slate-400 mb-2">RISC-V Hardware</div>
-                  <div className="flex flex-wrap gap-2">
-                    {["C-DAC VEGA", "Mindgrove", "DHRUV64", "Vision NPU"].map((item) => (
-                      <span key={item} className="px-2 py-1 bg-blue-500/20 rounded text-xs">{item}</span>
-                    ))}
-                  </div>
-                </div>
+                {archLayers.map((layer, i) => (
+                  <RevealItem key={i} delay={i * 200}>
+                    <div className="bg-slate-800/80 rounded-lg p-4 border border-slate-700/50 hover:border-slate-600 transition-colors">
+                      <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">{layer.label}</div>
+                      <div className="flex flex-wrap gap-2">
+                        {layer.items.map((item) => (
+                          <span key={item} className={`px-2.5 py-1 ${archColorMap[layer.color]} rounded-md text-xs font-medium text-white`}>{item}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </RevealItem>
+                ))}
               </div>
             </div>
           </div>
@@ -363,19 +422,17 @@ const Landing = () => {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card 
-                  key={index}
-                  data-testid={`feature-card-${index}`}
-                  className="bg-white border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 group"
-                >
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-2 text-lg">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                <RevealItem key={index} delay={index * 100}>
+                  <Card data-testid={`feature-card-${index}`} className="bg-white border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 group h-full">
+                    <CardContent className="p-6">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
+                        <Icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <h3 className="font-semibold text-foreground mb-2 text-lg">{feature.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                    </CardContent>
+                  </Card>
+                </RevealItem>
               );
             })}
           </div>
@@ -397,21 +454,22 @@ const Landing = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {hardwarePartners.map((partner, index) => (
-              <div key={index} className="bg-slate-50 rounded-lg border border-border p-6 text-center hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <Cpu className="w-6 h-6 text-primary" />
+              <RevealItem key={index} delay={index * 80}>
+                <div className="bg-slate-50 rounded-lg border border-border p-6 text-center hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                    <Cpu className="w-6 h-6 text-primary" />
+                  </div>
+                  <h4 className="font-semibold text-foreground text-sm">{partner.name}</h4>
+                  <p className="text-xs text-muted-foreground mt-1">{partner.description}</p>
                 </div>
-                <h4 className="font-semibold text-foreground text-sm">{partner.name}</h4>
-                <p className="text-xs text-muted-foreground mt-1">{partner.description}</p>
-              </div>
+              </RevealItem>
             ))}
           </div>
           
           <div className="text-center mt-8">
             <Link to="/hardware-catalog">
               <Button variant="outline" className="font-medium">
-                View Full Hardware Catalog
-                <ChevronRight className="ml-1 w-4 h-4" />
+                View Full Hardware Catalog <ChevronRight className="ml-1 w-4 h-4" />
               </Button>
             </Link>
           </div>
@@ -430,21 +488,12 @@ const Landing = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/download-ide">
-                <Button 
-                  data-testid="get-started-cta-btn"
-                  size="lg"
-                  className="h-12 px-8 text-base font-semibold bg-white text-primary hover:bg-white/90"
-                >
-                  Download IDE
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                <Button data-testid="get-started-cta-btn" size="lg" className="h-12 px-8 text-base font-semibold bg-white text-primary hover:bg-white/90">
+                  Download IDE <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
               <Link to="/partner-registration">
-                <Button 
-                  variant="outline"
-                  size="lg"
-                  className="h-12 px-8 text-base font-semibold border-white/30 text-white hover:bg-white/10"
-                >
+                <Button variant="outline" size="lg" className="h-12 px-8 text-base font-semibold border-white/30 text-white hover:bg-white/10">
                   Become a Partner
                 </Button>
               </Link>
@@ -469,7 +518,6 @@ const Landing = () => {
               <h4 className="font-semibold mb-4">Developers</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/developer-portal" className="hover:text-white transition-colors">Developer Portal</Link></li>
-                <li><Link to="/blog" className="hover:text-white transition-colors">Technical Blog</Link></li>
                 <li><Link to="/developer-portal" className="hover:text-white transition-colors">Documentation</Link></li>
                 <li><Link to="/developer-portal" className="hover:text-white transition-colors">API Reference</Link></li>
               </ul>
@@ -479,7 +527,7 @@ const Landing = () => {
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
                 <li><Link to="/team" className="hover:text-white transition-colors">Our Team</Link></li>
-                <li><Link to="/partners" className="hover:text-white transition-colors">Partner With Us</Link></li>
+                <li><Link to="/partners" className="hover:text-white transition-colors">Partners</Link></li>
                 <li><Link to="/partner-registration" className="hover:text-white transition-colors">Become a Partner</Link></li>
               </ul>
             </div>
@@ -488,7 +536,6 @@ const Landing = () => {
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
                 <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link to="/about" className="hover:text-white transition-colors">Security</Link></li>
               </ul>
             </div>
           </div>
@@ -500,9 +547,7 @@ const Landing = () => {
                 <img src="/bosch-logo.png" alt="" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
               </div>
             </div>
-            <p className="text-sm text-slate-400">
-              &copy; 2026 TrusteD-V. Secure RISC-V Development Platform.
-            </p>
+            <p className="text-sm text-slate-400">&copy; 2026 TrusteD-V. Secure RISC-V Development Platform.</p>
           </div>
         </div>
       </footer>

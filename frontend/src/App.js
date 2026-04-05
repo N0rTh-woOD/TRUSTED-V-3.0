@@ -18,6 +18,7 @@ import PartnerRegistration from "@/pages/PartnerRegistration";
 import IDEDownloads from "@/pages/IDEDownloads";
 import Blog from "@/pages/Blog";
 import Team from "@/pages/Team";
+import BoardSupportRequest from "@/pages/BoardSupportRequest";
 
 // Auth Pages
 import Login from "@/pages/Login";
@@ -35,6 +36,8 @@ import AdminMiddleware from "@/pages/admin/AdminMiddleware";
 import AdminSoftware from "@/pages/admin/AdminSoftware";
 import AdminIDE from "@/pages/admin/AdminIDE";
 import AdminLLM from "@/pages/admin/AdminLLM";
+import AdminApplications from "@/pages/admin/AdminApplications";
+import AdminUsers from "@/pages/admin/AdminUsers";
 
 // Site-wide authentication lock - requires any authenticated user
 const SITE_LOCK_ENABLED = true; // Set to false to make site publicly accessible
@@ -82,6 +85,7 @@ const AppContent = () => {
         <Route path="/download-ide" element={<IDEDownloads />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/board-support" element={<BoardSupportRequest />} />
         
         {/* Legacy routes - redirect to new paths */}
         <Route path="/hardware" element={<HardwareCatalog />} />
@@ -179,6 +183,22 @@ const AppContent = () => {
           element={
             <AdminRoute>
               <AdminLLM />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/applications"
+          element={
+            <AdminRoute>
+              <AdminApplications />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <AdminRoute>
+              <AdminUsers />
             </AdminRoute>
           }
         />

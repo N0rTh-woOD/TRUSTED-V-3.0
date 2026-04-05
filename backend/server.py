@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, status, UploadFile, File, Form
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -231,6 +231,41 @@ class ChatResponse(BaseModel):
     session_id: str
     suggested_hardware: Optional[List[Dict[str, Any]]] = None
     suggested_middleware: Optional[List[Dict[str, Any]]] = None
+
+# Application Models (Board Support Request & Partnership)
+class BoardSupportRequest(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    company_name: str
+    contact_name: str
+    email: str
+    board_name: str
+    board_manufacturer: str
+    architecture: str = "RISC-V"
+    description: str
+    use_case: str = ""
+    status: str = "pending"
+    submitted_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    reviewed_at: Optional[str] = None
+    admin_notes: str = ""
+
+class PartnershipApplication(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    company_name: str
+    contact_name: str
+    email: str
+    phone: str = ""
+    website: str = ""
+    company_type: str = ""
+    partnership_type: str = ""
+    description: str
+    products: str = ""
+    agree_terms: bool = False
+    status: str = "pending"
+    submitted_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    reviewed_at: Optional[str] = None
+    admin_notes: str = ""
 
 class ProjectCreate(BaseModel):
     name: str
@@ -899,7 +934,7 @@ async def init_sample_data():
             "clock_speed": "100 MHz",
             "memory": "256 KB SRAM",
             "flash": "External SPI Flash",
-            "image_url": None,
+            "image_url": "https://images.unsplash.com/photo-1769148023257-02df7ec903be?w=400&h=300&fit=crop",
             "price": "₹2,500",
             "peripherals": [
                 {"name": "GPIO", "type": "Digital I/O", "interface": "32 pins"},
@@ -919,7 +954,7 @@ async def init_sample_data():
             "clock_speed": "80 MHz",
             "memory": "128 KB SRAM",
             "flash": "4 MB External",
-            "image_url": None,
+            "image_url": "https://images.unsplash.com/photo-1642229407991-e28d009cb968?w=400&h=300&fit=crop",
             "price": "₹1,800",
             "peripherals": [
                 {"name": "GPIO", "type": "Digital I/O", "interface": "24 pins"},
@@ -939,7 +974,7 @@ async def init_sample_data():
             "clock_speed": "1 GHz",
             "memory": "2 GB DDR4",
             "flash": "eMMC/SD Card",
-            "image_url": None,
+            "image_url": "https://images.unsplash.com/photo-1610878785620-3ab2d3a2ae7b?w=400&h=300&fit=crop",
             "price": "₹25,000",
             "peripherals": [
                 {"name": "Ethernet", "type": "Network", "interface": "Gigabit"},
@@ -959,7 +994,7 @@ async def init_sample_data():
             "clock_speed": "200 MHz",
             "memory": "512 KB SRAM",
             "flash": "8 MB QSPI",
-            "image_url": None,
+            "image_url": "https://images.unsplash.com/photo-1652084824351-28f85a2f680d?w=400&h=300&fit=crop",
             "price": "₹4,500",
             "peripherals": [
                 {"name": "GPIO", "type": "Digital I/O", "interface": "48 pins"},
@@ -979,7 +1014,7 @@ async def init_sample_data():
             "clock_speed": "800 MHz",
             "memory": "1 GB LPDDR4",
             "flash": "16 MB QSPI + eMMC",
-            "image_url": None,
+            "image_url": "https://images.unsplash.com/photo-1651340675491-6fb0bfb5c4ea?w=400&h=300&fit=crop",
             "price": "₹18,000",
             "peripherals": [
                 {"name": "MIPI CSI", "type": "Camera Interface", "interface": "2-lane CSI-2"},
@@ -999,7 +1034,7 @@ async def init_sample_data():
             "clock_speed": "320 MHz",
             "memory": "256 KB SRAM",
             "flash": "4 MB QSPI",
-            "image_url": None,
+            "image_url": "https://images.unsplash.com/photo-1766596945762-1d27b5e1f212?w=400&h=300&fit=crop",
             "price": "₹6,500",
             "peripherals": [
                 {"name": "CAN", "type": "Automotive/Industrial Bus", "interface": "CAN 2.0B"},
@@ -1539,6 +1574,11 @@ async def get_admin_stats(current_user: dict = Depends(get_current_admin_user)):
         count = await db.software_components.count_documents({"type": ctype})
         software_by_type[ctype] = count
     
+    board_requests_count = await db.board_support_requests.count_documents({})
+    partner_apps_count = await db.partnership_applications.count_documents({})
+    board_pending = await db.board_support_requests.count_documents({"status": "pending"})
+    partner_pending = await db.partnership_applications.count_documents({"status": "pending"})
+    
     return {
         "hardware": hardware_count,
         "middleware": middleware_count,
@@ -1546,7 +1586,10 @@ async def get_admin_stats(current_user: dict = Depends(get_current_admin_user)):
         "software_by_type": software_by_type,
         "users": users_count,
         "projects": projects_count,
-        "ide_downloads": ide_count
+        "ide_downloads": ide_count,
+        "board_support_requests": board_requests_count,
+        "partnership_applications": partner_apps_count,
+        "pending_notifications": board_pending + partner_pending
     }
 
 # Chat history
@@ -2155,6 +2198,132 @@ async def download_ide_binary(ide_id: str):
 @api_router.get("/component-types")
 async def get_component_types():
     return {"types": COMPONENT_TYPES}
+
+# =========================================================
+# APPLICATION ENDPOINTS (Board Support + Partnership)
+# =========================================================
+
+# Public: Submit Board Support Request
+@api_router.post("/applications/board-support")
+async def submit_board_support_request(data: dict):
+    req = BoardSupportRequest(**data)
+    req_dict = req.model_dump()
+    await db.board_support_requests.insert_one(req_dict)
+    return {"message": "Board support request submitted successfully", "id": req.id}
+
+# Public: Submit Partnership Application
+@api_router.post("/applications/partnership")
+async def submit_partnership_application(data: dict):
+    app_obj = PartnershipApplication(**data)
+    app_dict = app_obj.model_dump()
+    await db.partnership_applications.insert_one(app_dict)
+    return {"message": "Partnership application submitted successfully", "id": app_obj.id}
+
+# Admin: Get all board support requests
+@api_router.get("/admin/applications/board-support")
+async def get_board_support_requests(current_user: dict = Depends(get_current_admin_user)):
+    requests = await db.board_support_requests.find({}, {"_id": 0}).sort("submitted_at", -1).to_list(500)
+    return requests
+
+# Admin: Get all partnership applications
+@api_router.get("/admin/applications/partnership")
+async def get_partnership_applications(current_user: dict = Depends(get_current_admin_user)):
+    apps = await db.partnership_applications.find({}, {"_id": 0}).sort("submitted_at", -1).to_list(500)
+    return apps
+
+# Admin: Update board support request status
+@api_router.put("/admin/applications/board-support/{req_id}")
+async def update_board_support_request(req_id: str, data: dict, current_user: dict = Depends(get_current_admin_user)):
+    update_data = {k: v for k, v in data.items() if k in ["status", "admin_notes"]}
+    if "status" in update_data:
+        update_data["reviewed_at"] = datetime.now(timezone.utc).isoformat()
+    result = await db.board_support_requests.update_one({"id": req_id}, {"$set": update_data})
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Request not found")
+    return {"message": "Request updated"}
+
+# Admin: Update partnership application status
+@api_router.put("/admin/applications/partnership/{app_id}")
+async def update_partnership_application(app_id: str, data: dict, current_user: dict = Depends(get_current_admin_user)):
+    update_data = {k: v for k, v in data.items() if k in ["status", "admin_notes"]}
+    if "status" in update_data:
+        update_data["reviewed_at"] = datetime.now(timezone.utc).isoformat()
+    result = await db.partnership_applications.update_one({"id": app_id}, {"$set": update_data})
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Application not found")
+    return {"message": "Application updated"}
+
+# Admin: Delete board support request
+@api_router.delete("/admin/applications/board-support/{req_id}")
+async def delete_board_support_request(req_id: str, current_user: dict = Depends(get_current_admin_user)):
+    result = await db.board_support_requests.delete_one({"id": req_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Request not found")
+    return {"message": "Request deleted"}
+
+# Admin: Delete partnership application
+@api_router.delete("/admin/applications/partnership/{app_id}")
+async def delete_partnership_application(app_id: str, current_user: dict = Depends(get_current_admin_user)):
+    result = await db.partnership_applications.delete_one({"id": app_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Application not found")
+    return {"message": "Application deleted"}
+
+# Admin: Get notification counts (new/pending applications)
+@api_router.get("/admin/notifications")
+async def get_admin_notifications(current_user: dict = Depends(get_current_admin_user)):
+    board_pending = await db.board_support_requests.count_documents({"status": "pending"})
+    partner_pending = await db.partnership_applications.count_documents({"status": "pending"})
+    return {
+        "board_support_pending": board_pending,
+        "partnership_pending": partner_pending,
+        "total_pending": board_pending + partner_pending
+    }
+
+# Hardware Image Upload
+HW_IMAGE_DIR = ROOT_DIR / "uploads" / "hardware"
+HW_IMAGE_DIR.mkdir(parents=True, exist_ok=True)
+
+@api_router.post("/admin/hardware/{hw_id}/upload-image")
+async def upload_hardware_image(
+    hw_id: str,
+    file: UploadFile = File(...),
+    current_user: dict = Depends(get_current_admin_user)
+):
+    hw = await db.hardware.find_one({"id": hw_id})
+    if not hw:
+        raise HTTPException(status_code=404, detail="Hardware not found")
+    
+    allowed = ['.png', '.jpg', '.jpeg', '.webp']
+    ext = None
+    for e in allowed:
+        if file.filename.lower().endswith(e):
+            ext = e
+            break
+    if not ext:
+        raise HTTPException(status_code=400, detail=f"Allowed: {', '.join(allowed)}")
+    
+    safe_name = f"{hw_id}{ext}"
+    file_path = HW_IMAGE_DIR / safe_name
+    contents = await file.read()
+    with open(file_path, 'wb') as f:
+        f.write(contents)
+    
+    image_url = f"/api/hardware-images/{safe_name}"
+    await db.hardware.update_one({"id": hw_id}, {"$set": {"image_url": image_url}})
+    return {"message": "Image uploaded", "image_url": image_url}
+
+@api_router.get("/hardware-images/{filename}")
+async def serve_hardware_image(filename: str):
+    file_path = HW_IMAGE_DIR / filename
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Image not found")
+    ct = "image/png"
+    if filename.endswith('.jpg') or filename.endswith('.jpeg'):
+        ct = "image/jpeg"
+    elif filename.endswith('.webp'):
+        ct = "image/webp"
+    return FileResponse(str(file_path), media_type=ct)
 
 # Include the router in the main app
 app.include_router(api_router)

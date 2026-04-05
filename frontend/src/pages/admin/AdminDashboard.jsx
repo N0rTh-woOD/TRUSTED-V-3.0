@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Loader2, Package, Layers, Download, Database, ArrowRight, Brain } from "lucide-react";
+import { Loader2, Package, Layers, Download, Database, ArrowRight, Brain, Bell, Cpu, Building2, Users } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -80,6 +81,14 @@ const AdminDashboard = () => {
       icon: Brain,
       link: "/admin/llm",
       count: null,
+    },
+    {
+      title: "Applications",
+      description: "Review board support requests and partnership applications",
+      icon: Bell,
+      link: "/admin/applications",
+      count: (stats?.board_support_requests || 0) + (stats?.partnership_applications || 0),
+      pending: stats?.pending_notifications || 0,
     },
   ];
 
@@ -160,8 +169,11 @@ const AdminDashboard = () => {
                     </div>
                   </CardHeader>
                   <CardContent className="p-6 pt-0">
-                    <h3 className="font-semibold text-foreground mb-2">
+                    <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
                       {section.title}
+                      {section.pending > 0 && (
+                        <Badge className="bg-red-500 text-white text-[10px] px-1.5 py-0.5">{section.pending} new</Badge>
+                      )}
                     </h3>
                     <p className="text-sm text-muted-foreground mb-3">
                       {section.description}
