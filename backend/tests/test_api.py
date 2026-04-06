@@ -8,7 +8,7 @@ import os
 
 BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', '').rstrip('/')
 if not BASE_URL:
-    BASE_URL = "https://rust-embedded-dev.preview.emergentagent.com"
+    BASE_URL = "https://embedded-ai-builder.preview.emergentagent.com"
 
 API = f"{BASE_URL}/api"
 

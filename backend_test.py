@@ -5,7 +5,7 @@ from datetime import datetime
 import uuid
 
 class RISCVPlatformTester:
-    def __init__(self, base_url="https://rust-embedded-dev.preview.emergentagent.com"):
+    def __init__(self, base_url="https://embedded-ai-builder.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.tests_run = 0
