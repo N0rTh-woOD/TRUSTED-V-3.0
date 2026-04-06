@@ -59,7 +59,7 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ### Phase 5 — Content Overhaul & Engine Visualization (Completed - Apr 2026)
 - **Navigation**: "Hardware" tab replaced with "Marketplace" (Hardware + IP)
-- **Landing Hero**: TrusteD-V Engine Architecture diagram (5-layer stack: Application API → Middleware → SoC/Module → Discrete Chips → IP Blocks with Code/Chip/Core Engine labels)
+- **Landing Hero**: High-fidelity TrusteD-V Engine SVG visualization recreated from user's HTML artifact — 5 isometric 3D polygon layers (Application API blue → Middleware purple → SoC/Module green → Discrete Chips amber → IP Blocks grey) with animated exhaust plume (flames + sparks), per-layer bobbing animations, engine category brackets (Code/Chip/Core Engine), colored title, and 5-item legend
 - **"Designed in India"**: Subtle flag + text below the engine diagram (not dominant)
 - **7-Stage Build Simulation**: Full Requirement → IP → Chips → SoC → Firmware → Simulation → Launch pipeline with step cards, progress bars, IP chips, and engine badges
 - **Business Plans**: 3-tier pricing (Basic/Pro/Enterprise) with flexible licensing model
