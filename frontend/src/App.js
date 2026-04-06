@@ -19,6 +19,7 @@ import IDEDownloads from "@/pages/IDEDownloads";
 import Blog from "@/pages/Blog";
 import Team from "@/pages/Team";
 import BoardSupportRequest from "@/pages/BoardSupportRequest";
+import ContactSales from "@/pages/ContactSales";
 
 // Auth Pages
 import Login from "@/pages/Login";
@@ -87,6 +88,7 @@ const AppContent = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/team" element={<Team />} />
         <Route path="/board-support" element={<BoardSupportRequest />} />
+        <Route path="/contact-sales" element={<ContactSales />} />
         
         {/* Legacy routes - redirect to new paths */}
         <Route path="/hardware" element={<HardwareCatalog />} />

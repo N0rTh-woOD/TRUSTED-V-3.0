@@ -458,6 +458,7 @@ const Landing = () => {
         "Public documentation",
       ],
       cta: "Get Started",
+      link: "/download-ide",
       highlight: false,
     },
     {
@@ -475,6 +476,7 @@ const Landing = () => {
         "Hardware simulation environment",
       ],
       cta: "Talk to Sales",
+      link: "/contact-sales?plan=pro",
       highlight: true,
     },
     {
@@ -493,6 +495,7 @@ const Landing = () => {
         "Compliance certification support",
       ],
       cta: "Contact Enterprise",
+      link: "/contact-sales?plan=enterprise",
       highlight: false,
     },
   ];
@@ -921,7 +924,7 @@ const Landing = () => {
                         </li>
                       ))}
                     </ul>
-                    <Link to="/partner-registration">
+                    <Link to={tier.link}>
                       <Button 
                         className={`w-full ${tier.highlight ? "bg-primary text-white hover:bg-primary/90" : ""}`}
                         variant={tier.highlight ? "default" : "outline"}

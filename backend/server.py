@@ -2224,6 +2224,24 @@ async def submit_partnership_application(data: dict):
     await db.partnership_applications.insert_one(app_dict)
     return {"message": "Partnership application submitted successfully", "id": app_obj.id}
 
+@api_router.post("/applications/sales-inquiry")
+async def submit_sales_inquiry(data: dict):
+    from datetime import datetime, timezone
+    inquiry = {
+        "id": str(uuid.uuid4()),
+        "type": data.get("type", "sales_inquiry"),
+        "data": data.get("data", {}),
+        "status": "new",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    await db.sales_inquiries.insert_one(inquiry)
+    return {"message": "Sales inquiry submitted successfully", "id": inquiry["id"]}
+
+@api_router.get("/admin/applications/sales-inquiries")
+async def get_sales_inquiries(current_user: dict = Depends(get_current_admin_user)):
+    inquiries = await db.sales_inquiries.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
+    return inquiries
+
 # Admin: Get all board support requests
 @api_router.get("/admin/applications/board-support")
 async def get_board_support_requests(current_user: dict = Depends(get_current_admin_user)):
