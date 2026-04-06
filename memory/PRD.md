@@ -41,6 +41,12 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Product Suite: Crypto Stack, Secure Boot (rboot/rustBoot), RTOS Benchmarks
 - Partners: Upbeat Tech added, WebIDE repositioned as capable counterpart
 
+### Phase 6.2 — Build Pipeline Visualization (Completed - Apr 2026)
+- **Rich 7-step pipeline**: Replaced basic React card simulation with exact HTML artifact from user (`trusted_v_with_simulation.html`) injected via `dangerouslySetInnerHTML` with scoped CSS (`.tv-pipeline` prefix, `tvp*` animation names)
+- **Animated SVG scenes**: Step 4 satellite floating over Earth, Step 6 PCB simulation board with RISC-V SoC/RF/sensor/power chips + UART monitor + waveforms + LED blinks, Step 7 rocket launch with animated flames
+- **Content**: 7 steps (Requirement → Decomposition → Core Engine IP → Chip Engine SoC → Code Engine Firmware → Simulation → Launch), 10 IP chips, progress bars, mini-grid detail cards, engine legend
+- **New component**: `/app/frontend/src/components/BuildPipelineViz.jsx`
+
 ### Phase 6.1 — Landing Page UI Refinement (Completed - Apr 2026)
 - **Engine visualization redesigned**: Replaced massive raw-HTML SVG engine diagram (~760px canvas) with a compact React/Tailwind `EngineArchCard` component showing 5 layers (Application API, Middleware, SoC/Module, Discrete Chips, IP Blocks) with 3 engine groupings (Code, Chip, Core) — no empty space, well-aligned
 - **"Made in India" consolidated**: Removed duplicate badges (was in hero left + under engine). Now a single full-width tricolor banner (saffron/white/green stripe + flag + "Made in India | Engineered for the world") between hero and simulation sections
