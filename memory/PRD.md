@@ -41,10 +41,10 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Product Suite: Crypto Stack, Secure Boot (rboot/rustBoot), RTOS Benchmarks
 - Partners: Upbeat Tech added, WebIDE repositioned as capable counterpart
 
-### Phase 6.1 — Landing Page UI Fixes (Completed - Apr 2026)
-- **Engine diagram overlap fix**: Adjusted CSS canvas height (680→760px) and stack bottom offset (175→100px) to prevent nosecone overlapping with "TrusteD-V Engine" title
-- **Made in India badge**: Added prominent tricolor flag badge in hero section (below CTA buttons) with "Made in India / Proudly engineered for the world" text
-- **Designed & Engineered in India**: Added matching badge with tricolor flag under engine diagram (desktop + mobile)
+### Phase 6.1 — Landing Page UI Refinement (Completed - Apr 2026)
+- **Engine visualization redesigned**: Replaced massive raw-HTML SVG engine diagram (~760px canvas) with a compact React/Tailwind `EngineArchCard` component showing 5 layers (Application API, Middleware, SoC/Module, Discrete Chips, IP Blocks) with 3 engine groupings (Code, Chip, Core) — no empty space, well-aligned
+- **"Made in India" consolidated**: Removed duplicate badges (was in hero left + under engine). Now a single full-width tricolor banner (saffron/white/green stripe + flag + "Made in India | Engineered for the world") between hero and simulation sections
+- **Engine diagram overlap fix**: No longer an issue since the raw HTML diagram was replaced with the compact card
 
 ### Phase 6 — Pages, Marketplace & Logos (Completed - Apr 2026)
 - **Products page**: Removed HSM Integration, 4 clean categories, desktop-aligned 3-column grid
