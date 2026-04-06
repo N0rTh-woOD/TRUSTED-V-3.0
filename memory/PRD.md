@@ -41,6 +41,11 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Product Suite: Crypto Stack, Secure Boot (rboot/rustBoot), RTOS Benchmarks
 - Partners: Upbeat Tech added, WebIDE repositioned as capable counterpart
 
+### Phase 6.1 — Landing Page UI Fixes (Completed - Apr 2026)
+- **Engine diagram overlap fix**: Adjusted CSS canvas height (680→760px) and stack bottom offset (175→100px) to prevent nosecone overlapping with "TrusteD-V Engine" title
+- **Made in India badge**: Added prominent tricolor flag badge in hero section (below CTA buttons) with "Made in India / Proudly engineered for the world" text
+- **Designed & Engineered in India**: Added matching badge with tricolor flag under engine diagram (desktop + mobile)
+
 ### Phase 6 — Pages, Marketplace & Logos (Completed - Apr 2026)
 - **Products page**: Removed HSM Integration, 4 clean categories, desktop-aligned 3-column grid
 - **Dedicated detail pages**: `/product/secure-boot` (rboot + rustBoot with GitHub links, boot chain diagram), `/product/crypto-stack` (algorithm tables: Symmetric/Asymmetric/Hashing/Post-Quantum with status badges), `/product/rtos-benchmark` (4 RTOS options, benchmark table with 9x/12x metrics)
