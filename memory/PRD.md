@@ -1,21 +1,24 @@
 # TrusteD-V Platform — Product Requirements Document
 
 ## Original Problem Statement
-Build a highly professional "AI coding platform for Embedded systems with RISC-V centric using RUST language," branded as "TrusteD-V". The platform should feature Bosch-inspired professional UI, authentic content focused on Indian RISC-V companies (Mindgrove, C-DAC, Upbeat Tech), and comprehensive developer tools including IDE, WebIDE, hardware marketplace, and AI-powered development.
+Build a highly professional "AI coding platform for Embedded systems with RISC-V centric using RUST language," branded as "TrusteD-V". The platform should feature Bosch-inspired professional UI, authentic content focused on Indian RISC-V companies (Mindgrove, C-DAC, Upbeat Tech), and comprehensive developer tools including IDE, WebIDE, hardware marketplace, IP marketplace, and AI-powered development.
 
 ## User Personas
 - **Embedded Engineers**: Primary users building firmware on RISC-V with Rust
 - **Hardware Partners**: C-DAC, Mindgrove, and Upbeat Tech teams integrating their boards
+- **SoC Designers**: Engineers looking for RISC-V IP blocks for their custom chips
 - **Platform Admins**: Managing IDE binaries, hardware catalog, partners, and applications
 
 ## Core Requirements
-1. **Branding**: "TrusteD-V" — RISC-V Rust platform (no "+" in branding)
+1. **Branding**: "TrusteD-V" — RISC-V Rust platform
 2. **IDE**: "TrusteD-V IDE — Jarvyn" with AI-native development features
 3. **WebIDE**: Cloud-capable counterpart with full compilation and collaboration features
-4. **Hardware Focus**: Indian RISC-V hardware (C-DAC, Mindgrove, Upbeat Tech)
+4. **Hardware + IP Marketplace**: Tabbed marketplace for development boards AND IP blocks
 5. **Auth Lock**: Entire site behind authentication while in development
-6. **Admin Panel**: Manage IDE binaries, hardware catalog, applications, partners, team
+6. **Admin Panel**: Manage IDE binaries, hardware catalog, applications, sales inquiries
 7. **Made in India**: Subtle "Designed in India" angle — present but not dominant
+8. **Dedicated Product Pages**: Secure Boot, Crypto Stack, RTOS Benchmarks with GitHub links
+9. **Partner Logos**: SVG logos for C-DAC, Mindgrove, Upbeat Tech used throughout
 
 ## Architecture
 - **Frontend**: React + TailwindCSS + Shadcn UI
@@ -26,88 +29,71 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
-### Phase 1 — Foundation (Completed)
-- Full-stack React + FastAPI + MongoDB setup
-- JWT authentication with admin roles
-- Hardware catalog (C-DAC + Mindgrove boards only)
-- Admin dashboard with CRUD operations
-- Bosch-inspired UI with red primary theme
+### Phase 1-4 (Completed - Feb 2026)
+- Full-stack setup, JWT auth, admin dashboard, hardware catalog
+- Team page, Bosch branding, IDE rebranded to Jarvyn
+- Board Support & Partnership application forms
+- Hardware image upload, storytelling animations
 
-### Phase 2 — Branding & Content (Completed)
-- TrusteD-V logo and Bosch subtle branding
-- Team page with 5 rows (Leadership, Management, Architecture, Engineering, Security & Quality)
-- Site-wide auth lock in App.js
-- Landing page with business capabilities
-- AWS deployment docs, Docker configs, architecture diagrams
+### Phase 5 — Content Overhaul (Completed - Apr 2026)
+- Navigation: "Hardware" → "Marketplace"
+- Landing: Engine visualization (exact replica of HTML artifact), 7-stage simulation, business plans
+- Product Suite: Crypto Stack, Secure Boot (rboot/rustBoot), RTOS Benchmarks
+- Partners: Upbeat Tech added, WebIDE repositioned as capable counterpart
 
-### Phase 3 — Review V1 (Completed - Feb 2026)
-- Removed "+" from branding, renamed IDE to "TrusteD-V IDE — Jarvyn"
-- IDE download page with Jarvyn screenshots (VSCode-style)
-- Team page: colored backgrounds only, no photos/social links
-- Hardware catalog: actual images + fixed broken links
-- Partners page: exclusively C-DAC and Mindgrove
-- Partner registration: full T&C with mandatory acceptance
-- Developer portal: expandable sections (Tuya/Cursor inspired)
-- Landing page: animated counters, corrected CTAs
+### Phase 6 — Pages, Marketplace & Logos (Completed - Apr 2026)
+- **Products page**: Removed HSM Integration, 4 clean categories, desktop-aligned 3-column grid
+- **Dedicated detail pages**: `/product/secure-boot` (rboot + rustBoot with GitHub links, boot chain diagram), `/product/crypto-stack` (algorithm tables: Symmetric/Asymmetric/Hashing/Post-Quantum with status badges), `/product/rtos-benchmark` (4 RTOS options, benchmark table with 9x/12x metrics)
+- **Marketplace**: New tabbed page — Hardware tab (from API with partner logos, images, peripherals) + IP Blocks tab (Ibex, OpenTitan, CVA6, PULP RI5CY, DMA Controller, UART/SPI/I2C — with GitHub links)
+- **Partner logos**: SVG PartnerLogo component for C-DAC (blue), Mindgrove (green), Upbeat Tech (orange) — used in Marketplace header, hardware cards, Landing page, Partners page
+- **Business plans**: Aligned with document — 4 revenue streams (per-core/annual, per-project, per-device/per-deployment, custom/SLA)
+- **Contact Sales page**: Dedicated form with plan pre-selection, team size, project details
+- **Sales inquiry API**: `POST /api/applications/sales-inquiry` + admin endpoint
 
-### Phase 4 — UI Polish & Application System (Completed - Feb 2026)
-- Storytelling animation: 5-step animated journey
-- About page: animated team stats
-- Board Support Request & Partnership application forms
-- Admin Applications panel with review/approve/reject workflow
-- Hardware image upload via Admin panel
-
-### Phase 5 — Content Overhaul & Engine Visualization (Completed - Apr 2026)
-- **Navigation**: "Hardware" tab replaced with "Marketplace" (Hardware + IP)
-- **Landing Hero**: High-fidelity TrusteD-V Engine visualization — EXACT replica of user's `trusted_v_engine_v3.html` artifact rendered via `dangerouslySetInnerHTML` with scoped CSS. Features 5 isometric diamond-shaped layers (Application API blue → Middleware purple → SoC/Module green → Discrete Chips amber → IP Blocks grey), green rocket nose, animated exhaust plume with flames/sparks/smoke, left-side wire callouts, right-side engine brackets (Code/Chip/Core Engine), colored title, legend, and engine key
-- **"Designed in India"**: Subtle flag + text below the engine diagram (not dominant)
-- **7-Stage Build Simulation**: Full Requirement → IP → Chips → SoC → Firmware → Simulation → Launch pipeline with step cards, progress bars, IP chips, and engine badges
-- **Business Plans**: 3-tier pricing (Basic/Pro/Enterprise) with flexible licensing model
-- **Crypto Stack**: New product card with AES-256-GCM, RSA-4096, ECC, SHA-3/BLAKE3, post-quantum (Kyber/Dilithium), hardware crypto engine integration
-- **Secure Boot Expanded**: rboot (lightweight RISC-V first-stage) + rustBoot (Rust-native secure bootloader with A/B updates, anti-rollback)
-- **WebIDE Repositioned**: "TrusteD-V WebIDE" with Cloud badge — full-featured browser IDE with cloud compilation, real-time collaboration, Git integration
-- **RTOS Benchmarking**: Full comparison table (TrusteD-V RTOS vs FreeRTOS) — 9x faster context switch, 12x faster task creation, memory safety via Rust
-- **Upbeat Tech**: Added as third hardware partner (edge AI, intelligent sensors) across Landing, Partners, and Architecture layers
-- **Platform Architecture**: Updated to include Upbeat Tech in RISC-V Hardware layer
-
-## Key DB Schema
-- `users`: {username, email, hashed_password, role}
-- `hardware`: {id, name, type, arch, description, image_url, company, price, peripherals}
-- `ide_downloads`: {id, name, version, platform, download_url, size, description, filename, uploaded_at}
-- `board_support_requests`: {id, company_name, contact_name, email, board_name, description, status, submitted_at}
-- `partnership_applications`: {id, company_name, contact_name, email, partnership_type, description, status, submitted_at}
+## Key Pages & Routes
+| Route | Page | Description |
+|---|---|---|
+| `/` | Landing | Hero + Engine + Simulation + Pricing + Partners |
+| `/about` | About | Company info, animated counters |
+| `/product-suite` | Products | 4 categories, Learn More links |
+| `/product/secure-boot` | Secure Boot | rboot + rustBoot, GitHub, boot chain |
+| `/product/crypto-stack` | Crypto Stack | Algorithm tables, security features |
+| `/product/rtos-benchmark` | RTOS Benchmarks | 4 RTOS options, comparison table |
+| `/marketplace` | Marketplace | Hardware + IP tabs with logos |
+| `/developer-portal` | Developers | SDK docs, expandable sections |
+| `/download-ide` | IDE Download | Jarvyn IDE binaries |
+| `/contact-sales` | Sales | Inquiry form with plan selection |
+| `/partner-registration` | Partner Registration | Partnership application |
+| `/board-support` | Board Support | Board support request |
+| `/team` | Team | 5-row team hierarchy |
+| `/partners` | Partners | C-DAC, Mindgrove, Upbeat Tech |
+| `/admin/*` | Admin | Dashboard, Hardware, IDE, Applications |
 
 ## Key API Endpoints
 - `POST /api/auth/login` — User login
 - `GET /api/hardware` — Hardware catalog
-- `GET /api/ide-downloads` — IDE download listings
-- `POST /api/admin/ide-downloads/{id}/upload` — Upload IDE binary (admin)
-- `GET /api/ide-downloads/{id}/download` — Download IDE binary
-- `POST /api/admin/hardware/{id}/upload-image` — Upload hardware image (admin)
-- `POST /api/applications/board-support` — Submit board support request
-- `POST /api/applications/partnership` — Submit partnership application
-- `GET /api/admin/applications/board-support` — List board requests (admin)
-- `GET /api/admin/applications/partnership` — List partner apps (admin)
-- `GET /api/admin/notifications` — Pending notification counts (admin)
+- `GET /api/ide-downloads` — IDE listings
+- `POST /api/applications/sales-inquiry` — Sales inquiry
+- `GET /api/admin/applications/sales-inquiries` — Admin: view inquiries
+- `POST /api/applications/board-support` — Board support request
+- `POST /api/applications/partnership` — Partnership application
 
 ## Prioritized Backlog
-
 ### P0 — Critical
-- Refactor monolithic `server.py` into modular FastAPI APIRouter modules
+- Refactor monolithic `server.py` into modular APIRouter modules
 
 ### P1 — High
-- Complete "Solution Builder" functionality (AI code generation)
-- Complete team member photos (replace placeholders as photos are provided)
+- Complete "Solution Builder" AI code generation
+- Team member photos (as provided)
 
 ### P2 — Medium
-- Public release (remove site-wide auth lock when ready)
-- Customer testimonials/case studies section
-- Company logo upload in admin settings
+- Public release (remove auth lock)
+- Admin panel: sales inquiries tab
+- Customer testimonials
 
 ### P3 — Future
-- Enhanced project versioning UI in "My Projects"
-- Enhanced AI code generation prompts
-- Email notifications for new applications
+- Enhanced project versioning
+- Email notifications for applications
 
 ## 3rd Party Integrations
 - Gemini 3 Flash via emergentintegrations (Emergent LLM Key)
