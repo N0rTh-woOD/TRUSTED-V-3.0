@@ -51,6 +51,27 @@ const Partners = () => {
         "Hardware crypto acceleration APIs",
       ],
     },
+    {
+      name: "Upbeat Tech",
+      fullName: "Upbeat Technologies",
+      description: "Emerging Indian RISC-V partner specializing in edge AI and intelligent sensor platforms. Building next-generation RISC-V SoCs with integrated NPU for on-device inference.",
+      type: "Hardware Partner",
+      logo: null,
+      color: "orange",
+      website: "#",
+      contributions: [
+        "Edge AI SoC — RISC-V with integrated neural processing unit",
+        "Intelligent sensor fusion platform",
+        "Low-power edge inference accelerator",
+        "Smart industrial controller board",
+      ],
+      integration: [
+        "Pre-configured BSP for TrusteD-V IDE — Jarvyn",
+        "Edge AI model deployment pipeline",
+        "Sensor fusion SDK integration",
+        "Power-optimized firmware templates",
+      ],
+    },
   ];
 
   const partnerBenefits = [
@@ -75,7 +96,7 @@ const Partners = () => {
               Built with India's <span className="text-primary">RISC-V</span> Pioneers
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              TrusteD-V partners exclusively with Indian RISC-V hardware companies to deliver 
+              TrusteD-V partners with Indian RISC-V hardware companies to deliver 
               a native, integrated development experience for the Indian semiconductor ecosystem.
             </p>
           </div>
@@ -88,16 +109,16 @@ const Partners = () => {
           <div className="space-y-12">
             {partners.map((partner, index) => (
               <Card key={index} data-testid={`partner-card-${index}`} className="overflow-hidden border-border hover:shadow-xl transition-all duration-300">
-                <div className={`h-2 ${partner.color === "primary" ? "bg-primary" : "bg-green-500"}`} />
+                <div className={`h-2 ${partner.color === "primary" ? "bg-primary" : partner.color === "green" ? "bg-green-500" : "bg-orange-500"}`} />
                 <CardContent className="p-8">
                   <div className="grid lg:grid-cols-2 gap-8">
                     {/* Partner Info */}
                     <div>
                       <div className="flex items-center gap-3 mb-4">
                         <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${
-                          partner.color === "primary" ? "bg-primary/10" : "bg-green-500/10"
+                          partner.color === "primary" ? "bg-primary/10" : partner.color === "green" ? "bg-green-500/10" : "bg-orange-500/10"
                         }`}>
-                          <Cpu className={`w-7 h-7 ${partner.color === "primary" ? "text-primary" : "text-green-600"}`} />
+                          <Cpu className={`w-7 h-7 ${partner.color === "primary" ? "text-primary" : partner.color === "green" ? "text-green-600" : "text-orange-600"}`} />
                         </div>
                         <div>
                           <h2 className="text-2xl font-bold text-foreground">{partner.name}</h2>
@@ -105,7 +126,7 @@ const Partners = () => {
                         </div>
                       </div>
                       
-                      <Badge className={`mb-4 ${partner.color === "primary" ? "bg-primary/10 text-primary border-primary/20" : "bg-green-100 text-green-800 border-green-200"}`}>
+                      <Badge className={`mb-4 ${partner.color === "primary" ? "bg-primary/10 text-primary border-primary/20" : partner.color === "green" ? "bg-green-100 text-green-800 border-green-200" : "bg-orange-100 text-orange-800 border-orange-200"}`}>
                         {partner.type}
                       </Badge>
                       
@@ -115,7 +136,7 @@ const Partners = () => {
                       <ul className="space-y-2 mb-6">
                         {partner.contributions.map((item, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${partner.color === "primary" ? "text-primary" : "text-green-500"}`} />
+                            <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${partner.color === "primary" ? "text-primary" : partner.color === "green" ? "text-green-500" : "text-orange-500"}`} />
                             {item}
                           </li>
                         ))}

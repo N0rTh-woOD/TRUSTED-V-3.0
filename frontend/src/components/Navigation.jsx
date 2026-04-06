@@ -1,12 +1,12 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { 
   Zap, FolderGit2, LogOut, Shield, Menu, X, 
-  Settings, Users, Info, Home, Layers, Code, Cpu, UsersRound
+  Settings, Users, Info, Home, Layers, Code, Cpu, UsersRound, Store
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import TrustedVLogo, { TrustedVIcon } from "@/components/TrustedVLogo";
+import TrustedVLogo from "@/components/TrustedVLogo";
 
 const Navigation = () => {
   const location = useLocation();
@@ -20,7 +20,7 @@ const Navigation = () => {
     { path: "/about", label: "About", icon: Info },
     { path: "/product-suite", label: "Products", icon: Layers },
     { path: "/developer-portal", label: "Developers", icon: Code },
-    { path: "/hardware-catalog", label: "Hardware", icon: Cpu },
+    { path: "/marketplace", label: "Marketplace", icon: Store },
     { path: "/team", label: "Team", icon: UsersRound },
     { path: "/partners", label: "Partner With Us", icon: Users },
   ];
