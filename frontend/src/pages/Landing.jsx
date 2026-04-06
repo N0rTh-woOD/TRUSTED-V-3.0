@@ -88,9 +88,9 @@ const EngineArchDiagram = () => {
 .tv-engine .hdr{text-align:center;margin-bottom:28px}
 .tv-engine .hdr h3{font-size:22px;font-weight:800;letter-spacing:-.5px;margin:0 0 6px;line-height:1.2}
 .tv-engine .hdr p{font-size:12px;color:#aaa;letter-spacing:.3px;margin:0}
-.tv-engine .canvas{position:relative;width:100%;max-width:680px;margin:0 auto;height:680px;overflow:visible}
+.tv-engine .canvas{position:relative;width:100%;max-width:680px;margin:0 auto;height:760px;overflow:visible}
 .tv-engine .exhaust{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:500px;height:220px;pointer-events:none;z-index:1}
-.tv-engine .stack{position:absolute;left:50%;transform:translateX(-50%);bottom:175px;width:340px;z-index:2}
+.tv-engine .stack{position:absolute;left:50%;transform:translateX(-50%);bottom:100px;width:340px;z-index:2}
 .tv-engine .slab-row{position:relative;width:340px}
 .tv-engine .conn{display:flex;justify-content:center;align-items:center;gap:8px;padding:4px 0}
 .tv-engine .cdot{width:3px;height:3px;border-radius:50%;background:#ccc}
@@ -555,7 +555,7 @@ const Landing = () => {
                 Three AI engines — from IP blocks to production firmware — everything powered by <strong>Rust</strong>.
               </p>
               
-              <div className="flex flex-wrap gap-4 mb-8">
+              <div className="flex flex-wrap gap-4 mb-6">
                 <Link to="/download-ide">
                   <Button data-testid="start-building-btn" size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
                     Download IDE <Download className="ml-2 w-5 h-5" />
@@ -566,6 +566,23 @@ const Landing = () => {
                     Developer Portal
                   </Button>
                 </Link>
+              </div>
+              
+              {/* Made in India Badge */}
+              <div data-testid="made-in-india-badge" className="inline-flex items-center gap-3 px-5 py-2.5 rounded-lg bg-gradient-to-r from-[#FF9933]/10 via-white to-[#138808]/10 border border-[#FF9933]/30 mb-8 group hover:shadow-md transition-all duration-300">
+                <div className="flex flex-col gap-0 w-7 h-[18px] rounded-sm overflow-hidden shadow-sm">
+                  <div className="flex-1 bg-[#FF9933]" />
+                  <div className="flex-1 bg-white relative">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-[6px] h-[6px] rounded-full border border-[#000080]" />
+                    </div>
+                  </div>
+                  <div className="flex-1 bg-[#138808]" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-foreground tracking-wide leading-tight">Made in India</span>
+                  <span className="text-[10px] text-muted-foreground leading-tight">Proudly engineered for the world</span>
+                </div>
               </div>
               
               <div className="grid grid-cols-4 gap-6 pt-6 border-t border-border">
@@ -580,19 +597,39 @@ const Landing = () => {
             <div className="hidden lg:flex items-start justify-center">
               <div className="w-full max-w-[520px]">
                 <EngineArchDiagram />
-                {/* Subtle "Designed in India" */}
-                <div className="flex items-center justify-end gap-1.5 mt-3 opacity-60">
-                  <span className="text-[10px] text-muted-foreground font-medium tracking-wide">Designed in India</span>
-                  <span className="text-[10px]">&#x1F1EE;&#x1F1F3;</span>
+                {/* Made in India badge under engine */}
+                <div className="flex items-center justify-center gap-2.5 mt-4 px-4 py-2 rounded-full bg-gradient-to-r from-[#FF9933]/8 via-transparent to-[#138808]/8 border border-slate-200">
+                  <div className="flex flex-col gap-0 w-5 h-[13px] rounded-[2px] overflow-hidden shadow-sm flex-shrink-0">
+                    <div className="flex-1 bg-[#FF9933]" />
+                    <div className="flex-1 bg-white relative">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-[4px] h-[4px] rounded-full border border-[#000080]" />
+                      </div>
+                    </div>
+                    <div className="flex-1 bg-[#138808]" />
+                  </div>
+                  <span className="text-xs font-semibold text-slate-600 tracking-wide">Designed & Engineered in India</span>
                 </div>
               </div>
             </div>
           </div>
           
           {/* Mobile: show engine below on smaller screens */}
-          <div className="lg:hidden flex justify-center mb-8">
+          <div className="lg:hidden flex flex-col items-center mb-8">
             <div className="w-full max-w-[420px]">
               <EngineArchDiagram />
+            </div>
+            <div className="flex items-center gap-2.5 mt-4 px-4 py-2 rounded-full bg-gradient-to-r from-[#FF9933]/8 via-transparent to-[#138808]/8 border border-slate-200">
+              <div className="flex flex-col gap-0 w-5 h-[13px] rounded-[2px] overflow-hidden shadow-sm flex-shrink-0">
+                <div className="flex-1 bg-[#FF9933]" />
+                <div className="flex-1 bg-white relative">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-[4px] h-[4px] rounded-full border border-[#000080]" />
+                  </div>
+                </div>
+                <div className="flex-1 bg-[#138808]" />
+              </div>
+              <span className="text-xs font-semibold text-slate-600 tracking-wide">Designed & Engineered in India</span>
             </div>
           </div>
         </div>
