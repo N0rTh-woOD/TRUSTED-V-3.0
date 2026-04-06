@@ -73,279 +73,146 @@ const RevealItem = ({ children, delay = 0, className = "" }) => {
   );
 };
 
-/* ── TrusteD-V Engine — Exact replica from artifact ── */
-const EngineArchDiagram = () => {
-  const containerRef = useRef(null);
+/* ── TrusteD-V Engine — Compact Architecture Card ── */
+const engineLayers = [
+  {
+    name: "Application API",
+    engine: "Code Engine",
+    engineColor: "#B7410E",
+    bg: "bg-blue-500",
+    bgLight: "bg-blue-50",
+    border: "border-blue-300",
+    textColor: "text-blue-700",
+    chips: ["REST", "SDK", "MQTT", "OTA"],
+    chipBg: "bg-blue-600",
+  },
+  {
+    name: "Middleware",
+    engine: "Code Engine",
+    engineColor: "#B7410E",
+    bg: "bg-violet-500",
+    bgLight: "bg-violet-50",
+    border: "border-violet-300",
+    textColor: "text-violet-700",
+    chips: ["RTOS", "HAL", "Drivers", "Protocols"],
+    chipBg: "bg-violet-600",
+  },
+  {
+    name: "SoC / Module",
+    engine: "Chip Engine",
+    engineColor: "#0071c5",
+    bg: "bg-green-500",
+    bgLight: "bg-green-50",
+    border: "border-green-300",
+    textColor: "text-green-700",
+    chips: ["CPU", "MEM", "WiFi", "SEC"],
+    chipBg: "bg-green-600",
+  },
+  {
+    name: "Discrete Chips",
+    engine: "Chip Engine",
+    engineColor: "#0071c5",
+    bg: "bg-amber-500",
+    bgLight: "bg-amber-50",
+    border: "border-amber-300",
+    textColor: "text-amber-700",
+    chips: ["RISC-V", "Memory", "NPU"],
+    chipBg: "bg-amber-600",
+  },
+  {
+    name: "IP Blocks",
+    engine: "Core Engine",
+    engineColor: "#7B3F00",
+    bg: "bg-stone-400",
+    bgLight: "bg-stone-50",
+    border: "border-stone-300",
+    textColor: "text-stone-600",
+    chips: ["Ibex", "OpenTitan", "DMA", "GPIO"],
+    chipBg: "bg-stone-500",
+  },
+];
 
-  useEffect(() => {
-    if (!containerRef.current) return;
-    // Inject scoped CSS 
-    if (!document.getElementById('tv-engine-css')) {
-      const style = document.createElement('style');
-      style.id = 'tv-engine-css';
-      style.textContent = `
-.tv-engine{width:100%;background:#fff;padding:28px 16px 18px;font-family:'Helvetica Neue',Arial,sans-serif;border-radius:12px;border:1px solid #e2e8f0;box-shadow:0 25px 50px -12px rgba(0,0,0,.12)}
-.tv-engine .hdr{text-align:center;margin-bottom:28px}
-.tv-engine .hdr h3{font-size:22px;font-weight:800;letter-spacing:-.5px;margin:0 0 6px;line-height:1.2}
-.tv-engine .hdr p{font-size:12px;color:#aaa;letter-spacing:.3px;margin:0}
-.tv-engine .canvas{position:relative;width:100%;max-width:680px;margin:0 auto;height:760px;overflow:visible}
-.tv-engine .exhaust{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:500px;height:220px;pointer-events:none;z-index:1}
-.tv-engine .stack{position:absolute;left:50%;transform:translateX(-50%);bottom:100px;width:340px;z-index:2}
-.tv-engine .slab-row{position:relative;width:340px}
-.tv-engine .conn{display:flex;justify-content:center;align-items:center;gap:8px;padding:4px 0}
-.tv-engine .cdot{width:3px;height:3px;border-radius:50%;background:#ccc}
-.tv-engine .wire-l{position:absolute;left:-170px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:0;white-space:nowrap;pointer-events:none}
-.tv-engine .wire-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.tv-engine .wire-line{width:40px;height:1px;flex-shrink:0}
-.tv-engine .wire-l div:last-child{padding-left:8px}
-.tv-engine .wname{font-size:11px;font-weight:700;display:block}
-.tv-engine .wsub{font-size:9px;color:#aaa;display:block;margin-top:1px}
-.tv-engine .r1{animation:tvr .5s ease both .00s,tvb1 4s ease-in-out infinite 1.2s}
-.tv-engine .r2{animation:tvr .5s ease both .12s,tvb2 4s ease-in-out infinite 1.5s}
-.tv-engine .r3{animation:tvr .5s ease both .24s,tvb3 4s ease-in-out infinite 1.8s}
-.tv-engine .r4{animation:tvr .5s ease both .36s,tvb4 4s ease-in-out infinite 2.1s}
-.tv-engine .r5{animation:tvr .5s ease both .48s,tvb5 3.6s ease-in-out infinite 2.4s}
-.tv-engine .rnose{animation:tvr .5s ease both .60s,tvb5 3.6s ease-in-out infinite 2.4s}
-@keyframes tvr{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes tvb1{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@keyframes tvb2{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes tvb3{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-@keyframes tvb4{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes tvb5{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-.tv-engine .fo{animation:tvfo .7s ease-in-out infinite;transform-origin:center bottom}
-.tv-engine .fm{animation:tvfm .5s ease-in-out infinite .06s;transform-origin:center bottom}
-.tv-engine .fc{animation:tvfc .38s ease-in-out infinite .03s;transform-origin:center bottom}
-@keyframes tvfo{0%,100%{transform:scaleY(1)scaleX(1)}33%{transform:scaleY(1.1)scaleX(.91)}66%{transform:scaleY(.9)scaleX(1.07)}}
-@keyframes tvfm{0%,100%{transform:scaleY(1)scaleX(1)}40%{transform:scaleY(1.17)scaleX(.87)}80%{transform:scaleY(.88)scaleX(1.09)}}
-@keyframes tvfc{0%,100%{transform:scaleY(1)scaleX(1)}50%{transform:scaleY(1.24)scaleX(.83)}}
-.tv-engine .gp{animation:tvgp .55s ease-in-out infinite}
-@keyframes tvgp{0%,100%{opacity:.4}50%{opacity:.75}}
-.tv-engine .sp{animation:tvspark 1.3s ease-out infinite var(--sd,0s);transform-origin:center center}
-@keyframes tvspark{0%{opacity:1;transform:translate(0,0)scale(1)}100%{opacity:0;transform:translate(var(--sx),var(--sy))scale(0)}}
-.tv-engine .sm1{animation:tvsm 2.2s ease-out infinite .0s;transform-origin:center center}
-.tv-engine .sm2{animation:tvsm 2.2s ease-out infinite .72s;transform-origin:center center}
-.tv-engine .sm3{animation:tvsm 2.2s ease-out infinite 1.44s;transform-origin:center center}
-@keyframes tvsm{0%{opacity:.25;transform:translateY(0)scale(1)}100%{opacity:0;transform:translateY(-90px)scale(2.4)}}
-.tv-engine .legend{display:flex;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
-.tv-engine .li{display:flex;align-items:center;gap:5px;font-size:10px;color:#999}
-.tv-engine .ld{width:10px;height:10px;border-radius:2px;flex-shrink:0}
-.tv-engine .ekey{display:flex;justify-content:center;gap:20px;margin-top:10px;flex-wrap:wrap}
-.tv-engine .ek{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:800}
-.tv-engine .ekd{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.tv-engine .eks{font-weight:400;color:#aaa;font-size:9px}
-      `;
-      document.head.appendChild(style);
-    }
-  }, []);
-
-  const engineHTML = `
-<div class="hdr">
-  <h3><span style="color:#111">T</span><span style="color:#B7410E">rust</span><span style="color:#111">eD</span><span style="color:#C8A200">-V</span><span style="color:#2E7D32"> Engine</span></h3>
-  <p>Three AI agents — one unified silicon-to-application platform</p>
-</div>
-<div class="canvas">
-  <div class="exhaust">
-    <svg width="500" height="220" viewBox="0 0 500 220" overflow="visible">
-      <ellipse class="gp" cx="250" cy="210" rx="200" ry="16" fill="#FF8C00" opacity=".18"/>
-      <ellipse class="gp" cx="250" cy="210" rx="145" ry="11" fill="#FFA500" opacity=".24"/>
-      <ellipse class="gp" cx="250" cy="210" rx="88" ry="7" fill="#FFD700" opacity=".32"/>
-      <path d="M214,122 Q164,155 72,188 Q124,166 204,144 Z" fill="#FF5500" opacity=".18"/>
-      <path d="M286,122 Q336,155 428,188 Q376,166 296,144 Z" fill="#FF5500" opacity=".18"/>
-      <ellipse class="sm1" cx="210" cy="116" rx="50" ry="26" fill="#c0c0c0" opacity=".2"/>
-      <ellipse class="sm2" cx="290" cy="106" rx="40" ry="22" fill="#ccc" opacity=".17"/>
-      <ellipse class="sm3" cx="250" cy="94" rx="30" ry="17" fill="#ddd" opacity=".14"/>
-      <g class="fo"><path d="M200,135 Q180,96 202,60 Q216,28 230,10 Q240,0 250,2 Q260,0 270,10 Q284,28 298,60 Q320,96 300,135 Z" fill="#FF4400" opacity=".5"/></g>
-      <g class="fm"><path d="M213,135 Q198,100 214,72 Q225,46 237,24 Q243,10 250,12 Q257,10 263,24 Q275,46 286,72 Q302,100 287,135 Z" fill="#FF8800" opacity=".75"/></g>
-      <g class="fc"><path d="M226,135 Q215,104 228,78 Q237,56 245,38 Q248,24 250,26 Q252,24 255,38 Q263,56 272,78 Q285,104 274,135 Z" fill="#FFB800" opacity=".9"/></g>
-      <g class="fc">
-        <path d="M235,135 Q228,108 237,86 Q243,66 248,50 Q249,38 250,40 Q251,38 252,50 Q257,66 263,86 Q272,108 265,135 Z" fill="#FFE840" opacity=".97"/>
-        <path d="M241,135 Q238,112 243,92 Q247,76 250,62 Q253,76 257,92 Q262,112 259,135 Z" fill="#FFFFF0" opacity="1"/>
-      </g>
-      <circle class="sp" style="--sx:-32px;--sy:-48px;--sd:0s" cx="224" cy="116" r="2.5" fill="#FFD700"/>
-      <circle class="sp" style="--sx:36px;--sy:-40px;--sd:.22s" cx="276" cy="120" r="2" fill="#FF8C00"/>
-      <circle class="sp" style="--sx:-22px;--sy:-66px;--sd:.45s" cx="234" cy="102" r="2" fill="#FFE840"/>
-      <circle class="sp" style="--sx:26px;--sy:-58px;--sd:.67s" cx="266" cy="108" r="2.5" fill="#FFD700"/>
-      <circle class="sp" style="--sx:-44px;--sy:-30px;--sd:.9s" cx="214" cy="128" r="2" fill="#FF6600"/>
-      <circle class="sp" style="--sx:48px;--sy:-24px;--sd:1.1s" cx="286" cy="128" r="2.5" fill="#FFB800"/>
-      <circle class="sp" style="--sx:-12px;--sy:-80px;--sd:.35s" cx="242" cy="90" r="1.5" fill="#FFFFF0"/>
-      <circle class="sp" style="--sx:14px;--sy:-74px;--sd:.82s" cx="258" cy="94" r="1.5" fill="#FFFFF0"/>
-      <path d="M212,138 Q210,118 226,112 L250,108 L274,112 Q290,118 288,138 Z" fill="#C8C6BE" stroke="#9A9890" stroke-width="1.2"/>
-      <path d="M220,112 L250,108 L280,112 L275,117 L250,114 L225,117 Z" fill="#B4B2A9"/>
-      <line x1="225" y1="112" x2="222" y2="136" stroke="#9A9890" stroke-width=".5" opacity=".5"/>
-      <line x1="237" y1="109" x2="234" y2="136" stroke="#9A9890" stroke-width=".5" opacity=".5"/>
-      <line x1="250" y1="108" x2="250" y2="136" stroke="#9A9890" stroke-width=".5" opacity=".5"/>
-      <line x1="263" y1="109" x2="266" y2="136" stroke="#9A9890" stroke-width=".5" opacity=".5"/>
-      <line x1="275" y1="112" x2="278" y2="136" stroke="#9A9890" stroke-width=".5" opacity=".5"/>
-    </svg>
-  </div>
-  <div class="stack">
-    <div class="slab-row rnose" style="margin-bottom:0">
-      <svg width="340" height="100" viewBox="0 0 340 100" overflow="visible">
-        <path d="M24,96 C52,94 84,72 114,50 C140,32 157,14 170,4 C183,14 200,32 226,50 C256,72 288,94 316,96 Z" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.8"/>
-        <path d="M170,4 C183,14 200,32 226,50 C256,72 288,94 316,96 L296,96 C270,94 242,74 218,54 C196,36 180,18 170,4 Z" fill="#A5D6A7" stroke="none"/>
-        <line x1="170" y1="4" x2="60" y2="96" stroke="#2E7D32" stroke-width=".6" opacity=".3"/>
-        <line x1="170" y1="4" x2="110" y2="96" stroke="#2E7D32" stroke-width=".6" opacity=".3"/>
-        <line x1="170" y1="4" x2="170" y2="96" stroke="#2E7D32" stroke-width=".6" opacity=".25"/>
-        <line x1="170" y1="4" x2="230" y2="96" stroke="#2E7D32" stroke-width=".6" opacity=".3"/>
-        <line x1="170" y1="4" x2="280" y2="96" stroke="#2E7D32" stroke-width=".6" opacity=".3"/>
-        <path d="M24,96 C52,94 84,72 114,50 C140,32 157,14 170,4 C183,14 200,32 226,50 C256,72 288,94 316,96" fill="none" stroke="#1B5E20" stroke-width="2"/>
-        <circle cx="36" cy="95" r="2.2" fill="#2E7D32" opacity=".55"/><circle cx="76" cy="88" r="2.2" fill="#2E7D32" opacity=".55"/>
-        <circle cx="116" cy="72" r="2.2" fill="#2E7D32" opacity=".55"/><circle cx="148" cy="54" r="2.2" fill="#2E7D32" opacity=".55"/>
-        <circle cx="192" cy="54" r="2.2" fill="#2E7D32" opacity=".55"/><circle cx="224" cy="72" r="2.2" fill="#2E7D32" opacity=".55"/>
-        <circle cx="264" cy="88" r="2.2" fill="#2E7D32" opacity=".55"/><circle cx="304" cy="95" r="2.2" fill="#2E7D32" opacity=".55"/>
-        <circle cx="170" cy="4" r="3.5" fill="#1B5E20"/>
-      </svg>
-    </div>
-    <div class="slab-row r5" style="margin-top:-2px">
-      <svg width="340" height="84" viewBox="0 0 340 84" overflow="visible">
-        <polygon points="170,6 316,46 170,66 24,46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.4"/>
-        <polygon points="316,46 316,68 170,88 170,66" fill="#2E7CC8" stroke="#185FA5" stroke-width="1.4"/>
-        <polygon points="24,46 24,68 170,88 170,66" fill="#5EA4E8" stroke="#185FA5" stroke-width="1.4"/>
-        <rect x="76" y="26" width="34" height="14" rx="7" fill="#185FA5" stroke="#0C447C" stroke-width=".8"/>
-        <rect x="116" y="20" width="40" height="14" rx="7" fill="#185FA5" stroke="#0C447C" stroke-width=".8"/>
-        <rect x="162" y="20" width="40" height="14" rx="7" fill="#185FA5" stroke="#0C447C" stroke-width=".8"/>
-        <rect x="208" y="26" width="34" height="14" rx="7" fill="#185FA5" stroke="#0C447C" stroke-width=".8"/>
-        <text x="93" y="36" text-anchor="middle" font-size="8" fill="#E6F1FB" font-family="'Helvetica Neue',sans-serif" font-weight="700">REST</text>
-        <text x="136" y="30" text-anchor="middle" font-size="8" fill="#E6F1FB" font-family="'Helvetica Neue',sans-serif" font-weight="700">SDK</text>
-        <text x="182" y="30" text-anchor="middle" font-size="8" fill="#E6F1FB" font-family="'Helvetica Neue',sans-serif" font-weight="700">MQTT</text>
-        <text x="225" y="36" text-anchor="middle" font-size="8" fill="#E6F1FB" font-family="'Helvetica Neue',sans-serif" font-weight="700">OTA</text>
-        <text x="243" y="80" text-anchor="middle" font-size="10" fill="#ffffff" stroke="#042C53" stroke-width="3" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".5">APPLICATION API</text>
-      </svg>
-      <div class="wire-l"><div class="wire-dot" style="background:#185FA5"></div><div class="wire-line" style="background:linear-gradient(to left,#185FA5,#ddd)"></div><div><span class="wname" style="color:#0C447C">Application API</span><span class="wsub">REST · SDK · MQTT · OTA</span></div></div>
-    </div>
-    <div style="position:relative;height:0"><div style="position:absolute;right:-192px;top:-108px;display:flex;align-items:center;gap:0;pointer-events:none;height:190px"><svg width="18" height="190" viewBox="0 0 18 190"><line x1="8" y1="0" x2="18" y2="0" stroke="#B7410E" stroke-width="1.5"/><line x1="8" y1="0" x2="8" y2="190" stroke="#B7410E" stroke-width="1.5"/><line x1="8" y1="190" x2="18" y2="190" stroke="#B7410E" stroke-width="1.5"/><circle cx="8" cy="95" r="3" fill="#B7410E"/></svg><div style="padding-left:7px"><span style="font-size:12px;font-weight:800;color:#B7410E;display:block;white-space:nowrap">Code Engine</span><span style="font-size:9px;color:#bbb;display:block;white-space:nowrap;margin-top:2px">API · Middleware</span></div></div></div>
-    <div class="conn r4"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>
-    <div class="slab-row r4">
-      <svg width="340" height="82" viewBox="0 0 340 82" overflow="visible">
-        <polygon points="170,6 316,44 170,64 24,44" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.4"/>
-        <polygon points="316,44 316,66 170,86 170,64" fill="#7F77DD" stroke="#534AB7" stroke-width="1.4"/>
-        <polygon points="24,44 24,66 170,86 170,64" fill="#AFA9EC" stroke="#534AB7" stroke-width="1.4"/>
-        <rect x="52" y="16" width="54" height="12" rx="2" fill="#7F77DD" stroke="#534AB7" stroke-width=".6"/>
-        <rect x="112" y="13" width="54" height="12" rx="2" fill="#7F77DD" stroke="#534AB7" stroke-width=".6"/>
-        <rect x="172" y="13" width="54" height="12" rx="2" fill="#7F77DD" stroke="#534AB7" stroke-width=".6"/>
-        <rect x="232" y="16" width="54" height="12" rx="2" fill="#7F77DD" stroke="#534AB7" stroke-width=".6"/>
-        <text x="79" y="25" text-anchor="middle" font-size="8" fill="#EEEDFE" font-family="'Helvetica Neue',sans-serif" font-weight="700">RTOS</text>
-        <text x="139" y="22" text-anchor="middle" font-size="8" fill="#EEEDFE" font-family="'Helvetica Neue',sans-serif" font-weight="700">HAL</text>
-        <text x="199" y="22" text-anchor="middle" font-size="8" fill="#EEEDFE" font-family="'Helvetica Neue',sans-serif" font-weight="700">Drivers</text>
-        <text x="259" y="25" text-anchor="middle" font-size="8" fill="#EEEDFE" font-family="'Helvetica Neue',sans-serif" font-weight="700">Protocols</text>
-        <rect x="68" y="31" width="50" height="10" rx="2" fill="#534AB7" stroke="#3C3489" stroke-width=".5"/>
-        <rect x="124" y="28" width="92" height="10" rx="2" fill="#534AB7" stroke="#3C3489" stroke-width=".5"/>
-        <rect x="222" y="31" width="50" height="10" rx="2" fill="#534AB7" stroke="#3C3489" stroke-width=".5"/>
-        <text x="93" y="37" text-anchor="middle" font-size="7.5" fill="#CECBF6" font-family="'Helvetica Neue',sans-serif" font-weight="700">Power Mgmt</text>
-        <text x="170" y="35" text-anchor="middle" font-size="7.5" fill="#CECBF6" font-family="'Helvetica Neue',sans-serif" font-weight="700">Network Stack (BLE · WiFi · MQTT)</text>
-        <text x="247" y="37" text-anchor="middle" font-size="7.5" fill="#CECBF6" font-family="'Helvetica Neue',sans-serif" font-weight="700">Bootloader</text>
-        <text x="243" y="78" text-anchor="middle" font-size="10" fill="#ffffff" stroke="#26215C" stroke-width="3" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".5">MIDDLEWARE</text>
-      </svg>
-      <div class="wire-l"><div class="wire-dot" style="background:#534AB7"></div><div class="wire-line" style="background:linear-gradient(to left,#534AB7,#ddd)"></div><div><span class="wname" style="color:#3C3489">Middleware</span><span class="wsub">RTOS · HAL · Drivers · Protocols</span></div></div>
-    </div>
-    <div style="position:relative;height:0"><div style="position:absolute;right:-192px;top:0px;display:flex;align-items:center;gap:0;pointer-events:none;height:210px"><svg width="18" height="210" viewBox="0 0 18 210"><line x1="8" y1="0" x2="18" y2="0" stroke="#0071c5" stroke-width="1.5"/><line x1="8" y1="0" x2="8" y2="210" stroke="#0071c5" stroke-width="1.5"/><line x1="8" y1="210" x2="18" y2="210" stroke="#0071c5" stroke-width="1.5"/><circle cx="8" cy="105" r="3" fill="#0071c5"/></svg><div style="padding-left:7px"><span style="font-size:12px;font-weight:800;color:#0071c5;display:block;white-space:nowrap">Chip Engine</span><span style="font-size:9px;color:#bbb;display:block;white-space:nowrap;margin-top:2px">SoC · Discrete Chips</span></div></div></div>
-    <div class="conn r3"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>
-    <div class="slab-row r3">
-      <svg width="340" height="100" viewBox="0 0 340 100" overflow="visible">
-        <polygon points="170,8 316,54 170,78 24,54" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.4"/>
-        <polygon points="316,54 316,80 170,104 170,78" fill="#639922" stroke="#3B6D11" stroke-width="1.4"/>
-        <polygon points="24,54 24,80 170,104 170,78" fill="#97C459" stroke="#3B6D11" stroke-width="1.4"/>
-        <rect x="96" y="24" width="148" height="44" rx="5" fill="#C0DD97" stroke="#3B6D11" stroke-width="1.2"/>
-        <rect x="104" y="30" width="32" height="18" rx="3" fill="#639922" stroke="#27500A" stroke-width=".7"/>
-        <rect x="142" y="30" width="28" height="18" rx="3" fill="#639922" stroke="#27500A" stroke-width=".7"/>
-        <rect x="176" y="30" width="28" height="18" rx="3" fill="#639922" stroke="#27500A" stroke-width=".7"/>
-        <rect x="210" y="30" width="28" height="18" rx="3" fill="#639922" stroke="#27500A" stroke-width=".7"/>
-        <text x="120" y="42" text-anchor="middle" font-size="8" fill="#EAF3DE" font-family="'Helvetica Neue',sans-serif" font-weight="700">CPU</text>
-        <text x="156" y="42" text-anchor="middle" font-size="8" fill="#EAF3DE" font-family="'Helvetica Neue',sans-serif" font-weight="700">MEM</text>
-        <text x="190" y="42" text-anchor="middle" font-size="8" fill="#EAF3DE" font-family="'Helvetica Neue',sans-serif" font-weight="700">WiFi</text>
-        <text x="224" y="42" text-anchor="middle" font-size="8" fill="#EAF3DE" font-family="'Helvetica Neue',sans-serif" font-weight="700">SEC</text>
-        <rect x="104" y="50" width="134" height="5" rx="2" fill="#3B6D11" stroke="#27500A" stroke-width=".5"/>
-        <circle cx="120" cy="68" r="3" fill="#3B6D11" opacity=".55"/><circle cx="138" cy="68" r="3" fill="#3B6D11" opacity=".55"/>
-        <circle cx="156" cy="68" r="3" fill="#3B6D11" opacity=".55"/><circle cx="174" cy="68" r="3" fill="#3B6D11" opacity=".55"/>
-        <circle cx="192" cy="68" r="3" fill="#3B6D11" opacity=".55"/><circle cx="210" cy="68" r="3" fill="#3B6D11" opacity=".55"/>
-        <circle cx="228" cy="68" r="3" fill="#3B6D11" opacity=".55"/>
-        <text x="243" y="96" text-anchor="middle" font-size="10" fill="#ffffff" stroke="#173404" stroke-width="3" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".5">SoC / MODULE</text>
-      </svg>
-      <div class="wire-l"><div class="wire-dot" style="background:#3B6D11"></div><div class="wire-line" style="background:linear-gradient(to left,#3B6D11,#ddd)"></div><div><span class="wname" style="color:#27500A">SoC / Module</span><span class="wsub">CPU · Mem · WiFi · Security</span></div></div>
-    </div>
-    <div class="conn r2"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>
-    <div class="slab-row r2">
-      <svg width="340" height="90" viewBox="0 0 340 90" overflow="visible">
-        <polygon points="170,8 316,50 170,72 24,50" fill="#FEF3E2" stroke="#D4960A" stroke-width="1.4"/>
-        <polygon points="316,50 316,74 170,96 170,72" fill="#D4960A" stroke="#BA7517" stroke-width="1.4"/>
-        <polygon points="24,50 24,74 170,96 170,72" fill="#EF9F27" stroke="#BA7517" stroke-width="1.4"/>
-        <rect x="68" y="30" width="48" height="34" rx="4" fill="#EF9F27" stroke="#BA7517" stroke-width="1.2"/>
-        <rect x="75" y="37" width="34" height="20" rx="2.5" fill="#BA7517"/><rect x="78" y="40" width="28" height="14" rx="1.5" fill="#633806"/>
-        <text x="92" y="50" text-anchor="middle" font-size="8" fill="#FEF3E2" font-family="'Helvetica Neue',sans-serif" font-weight="700">RISC-V</text>
-        <line x1="68" y1="38" x2="60" y2="38" stroke="#BA7517" stroke-width="1.5"/><line x1="68" y1="44" x2="60" y2="44" stroke="#BA7517" stroke-width="1.5"/><line x1="68" y1="50" x2="60" y2="50" stroke="#BA7517" stroke-width="1.5"/>
-        <line x1="116" y1="38" x2="124" y2="38" stroke="#BA7517" stroke-width="1.5"/><line x1="116" y1="44" x2="124" y2="44" stroke="#BA7517" stroke-width="1.5"/><line x1="116" y1="50" x2="124" y2="50" stroke="#BA7517" stroke-width="1.5"/>
-        <rect x="146" y="24" width="48" height="34" rx="4" fill="#EF9F27" stroke="#BA7517" stroke-width="1.2"/>
-        <rect x="153" y="31" width="34" height="20" rx="2.5" fill="#BA7517"/><rect x="156" y="34" width="28" height="14" rx="1.5" fill="#633806"/>
-        <text x="170" y="44" text-anchor="middle" font-size="8" fill="#FEF3E2" font-family="'Helvetica Neue',sans-serif" font-weight="700">Mem</text>
-        <line x1="146" y1="32" x2="138" y2="32" stroke="#BA7517" stroke-width="1.5"/><line x1="146" y1="38" x2="138" y2="38" stroke="#BA7517" stroke-width="1.5"/><line x1="146" y1="44" x2="138" y2="44" stroke="#BA7517" stroke-width="1.5"/>
-        <line x1="194" y1="32" x2="202" y2="32" stroke="#BA7517" stroke-width="1.5"/><line x1="194" y1="38" x2="202" y2="38" stroke="#BA7517" stroke-width="1.5"/><line x1="194" y1="44" x2="202" y2="44" stroke="#BA7517" stroke-width="1.5"/>
-        <rect x="224" y="30" width="48" height="34" rx="4" fill="#EF9F27" stroke="#BA7517" stroke-width="1.2"/>
-        <rect x="231" y="37" width="34" height="20" rx="2.5" fill="#BA7517"/><rect x="234" y="40" width="28" height="14" rx="1.5" fill="#633806"/>
-        <text x="248" y="50" text-anchor="middle" font-size="8" fill="#FEF3E2" font-family="'Helvetica Neue',sans-serif" font-weight="700">NPU</text>
-        <line x1="224" y1="38" x2="216" y2="38" stroke="#BA7517" stroke-width="1.5"/><line x1="224" y1="44" x2="216" y2="44" stroke="#BA7517" stroke-width="1.5"/><line x1="224" y1="50" x2="216" y2="50" stroke="#BA7517" stroke-width="1.5"/>
-        <line x1="272" y1="38" x2="280" y2="38" stroke="#BA7517" stroke-width="1.5"/><line x1="272" y1="44" x2="280" y2="44" stroke="#BA7517" stroke-width="1.5"/><line x1="272" y1="50" x2="280" y2="50" stroke="#BA7517" stroke-width="1.5"/>
-        <line x1="124" y1="46" x2="138" y2="42" stroke="#BA7517" stroke-width=".8" stroke-dasharray="3 2" opacity=".7"/>
-        <line x1="202" y1="40" x2="216" y2="44" stroke="#BA7517" stroke-width=".8" stroke-dasharray="3 2" opacity=".7"/>
-        <text x="243" y="88" text-anchor="middle" font-size="10" fill="#ffffff" stroke="#412402" stroke-width="3" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".5">DISCRETE CHIPS</text>
-      </svg>
-      <div class="wire-l"><div class="wire-dot" style="background:#BA7517"></div><div class="wire-line" style="background:linear-gradient(to left,#BA7517,#ddd)"></div><div><span class="wname" style="color:#633806">Discrete Chips</span><span class="wsub">RISC-V CPU · Memory · NPU</span></div></div>
-    </div>
-    <div style="position:relative;height:0"><div style="position:absolute;right:-192px;top:0px;display:flex;align-items:center;gap:0;pointer-events:none;height:100px"><svg width="18" height="100" viewBox="0 0 18 100"><line x1="8" y1="0" x2="18" y2="0" stroke="#7B3F00" stroke-width="1.5"/><line x1="8" y1="0" x2="8" y2="100" stroke="#7B3F00" stroke-width="1.5"/><line x1="8" y1="100" x2="18" y2="100" stroke="#7B3F00" stroke-width="1.5"/><circle cx="8" cy="50" r="3" fill="#7B3F00"/></svg><div style="padding-left:7px"><span style="font-size:12px;font-weight:800;color:#7B3F00;display:block;white-space:nowrap">Core Engine</span><span style="font-size:9px;color:#bbb;display:block;white-space:nowrap;margin-top:2px">IP Blocks</span></div></div></div>
-    <div class="conn r1"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>
-    <div class="slab-row r1">
-      <svg width="340" height="88" viewBox="0 0 340 88" overflow="visible">
-        <polygon points="170,8 316,50 170,70 24,50" fill="#F5F4F0" stroke="#B4B2A9" stroke-width="1.4"/>
-        <polygon points="316,50 316,72 170,92 170,70" fill="#888780" stroke="#B4B2A9" stroke-width="1.4"/>
-        <polygon points="24,50 24,72 170,92 170,70" fill="#B4B2A9" stroke="#B4B2A9" stroke-width="1.4"/>
-        <rect x="60" y="38" width="28" height="20" rx="3" fill="#D3D1C7" stroke="#888780" stroke-width=".9"/>
-        <rect x="96" y="32" width="28" height="20" rx="3" fill="#D3D1C7" stroke="#888780" stroke-width=".9"/>
-        <rect x="132" y="28" width="28" height="20" rx="3" fill="#D3D1C7" stroke="#888780" stroke-width=".9"/>
-        <rect x="168" y="28" width="28" height="20" rx="3" fill="#D3D1C7" stroke="#888780" stroke-width=".9"/>
-        <rect x="204" y="32" width="28" height="20" rx="3" fill="#D3D1C7" stroke="#888780" stroke-width=".9"/>
-        <rect x="240" y="38" width="28" height="20" rx="3" fill="#D3D1C7" stroke="#888780" stroke-width=".9"/>
-        <rect x="63" y="41" width="22" height="14" rx="1.5" fill="#B4B2A9" stroke="#5F5E5A" stroke-width=".4"/>
-        <rect x="99" y="35" width="22" height="14" rx="1.5" fill="#B4B2A9" stroke="#5F5E5A" stroke-width=".4"/>
-        <rect x="135" y="31" width="22" height="14" rx="1.5" fill="#B4B2A9" stroke="#5F5E5A" stroke-width=".4"/>
-        <rect x="171" y="31" width="22" height="14" rx="1.5" fill="#B4B2A9" stroke="#5F5E5A" stroke-width=".4"/>
-        <rect x="207" y="35" width="22" height="14" rx="1.5" fill="#B4B2A9" stroke="#5F5E5A" stroke-width=".4"/>
-        <rect x="243" y="41" width="22" height="14" rx="1.5" fill="#B4B2A9" stroke="#5F5E5A" stroke-width=".4"/>
-        <text x="74" y="50" text-anchor="middle" font-size="7" fill="#2C2C2A" font-family="'Helvetica Neue',sans-serif" font-weight="700">Ibex</text>
-        <text x="110" y="44" text-anchor="middle" font-size="7" fill="#2C2C2A" font-family="'Helvetica Neue',sans-serif" font-weight="700">OT</text>
-        <text x="146" y="40" text-anchor="middle" font-size="7" fill="#2C2C2A" font-family="'Helvetica Neue',sans-serif" font-weight="700">DMA</text>
-        <text x="182" y="40" text-anchor="middle" font-size="7" fill="#2C2C2A" font-family="'Helvetica Neue',sans-serif" font-weight="700">NPU</text>
-        <text x="218" y="44" text-anchor="middle" font-size="7" fill="#2C2C2A" font-family="'Helvetica Neue',sans-serif" font-weight="700">MEM</text>
-        <text x="254" y="50" text-anchor="middle" font-size="7" fill="#2C2C2A" font-family="'Helvetica Neue',sans-serif" font-weight="700">GPIO</text>
-        <line x1="88" y1="51" x2="96" y2="48" stroke="#888780" stroke-width=".6" stroke-dasharray="3 2"/>
-        <line x1="124" y1="46" x2="132" y2="44" stroke="#888780" stroke-width=".6" stroke-dasharray="3 2"/>
-        <line x1="160" y1="43" x2="168" y2="42" stroke="#888780" stroke-width=".6" stroke-dasharray="3 2"/>
-        <line x1="196" y1="44" x2="204" y2="46" stroke="#888780" stroke-width=".6" stroke-dasharray="3 2"/>
-        <line x1="232" y1="48" x2="240" y2="51" stroke="#888780" stroke-width=".6" stroke-dasharray="3 2"/>
-        <text x="243" y="84" text-anchor="middle" font-size="10" fill="#ffffff" stroke="#2C2C2A" stroke-width="3" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".5">IP BLOCKS</text>
-      </svg>
-      <div class="wire-l"><div class="wire-dot" style="background:#888780"></div><div class="wire-line" style="background:linear-gradient(to left,#888780,#ddd)"></div><div><span class="wname" style="color:#2C2C2A">IP Blocks</span><span class="wsub">Ibex · OpenTitan · DMA · NPU</span></div></div>
-    </div>
-  </div>
-</div>
-<div class="legend">
-  <div class="li"><div class="ld" style="background:#D3D1C7;border:1px solid #9A9890"></div>IP blocks</div>
-  <div class="li"><div class="ld" style="background:#EF9F27;border:1px solid #BA7517"></div>Discrete chips</div>
-  <div class="li"><div class="ld" style="background:#639922;border:1px solid #3B6D11"></div>SoC / Module</div>
-  <div class="li"><div class="ld" style="background:#7F77DD;border:1px solid #534AB7"></div>Middleware</div>
-  <div class="li"><div class="ld" style="background:#378ADD;border:1px solid #185FA5"></div>Application API</div>
-</div>
-<div class="ekey">
-  <div class="ek" style="color:#B7410E"><div class="ekd" style="background:#B7410E"></div>Code Engine <span class="eks">API · Middleware</span></div>
-  <div class="ek" style="color:#0071c5"><div class="ekd" style="background:#0071c5"></div>Chip Engine <span class="eks">SoC · Discrete Chips</span></div>
-  <div class="ek" style="color:#7B3F00"><div class="ekd" style="background:#7B3F00"></div>Core Engine <span class="eks">IP Blocks</span></div>
-</div>
-  `;
-
+const EngineArchCard = () => {
+  const [hoveredLayer, setHoveredLayer] = useState(null);
+  
   return (
-    <div ref={containerRef} data-testid="engine-arch-diagram">
-      <div 
-        className="tv-engine" 
-        dangerouslySetInnerHTML={{ __html: engineHTML }} 
-      />
+    <div data-testid="engine-arch-diagram" className="w-full rounded-xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 shadow-xl overflow-hidden">
+      {/* Header */}
+      <div className="px-5 pt-5 pb-3 text-center border-b border-slate-100">
+        <h3 className="text-lg font-extrabold tracking-tight">
+          <span className="text-foreground">T</span>
+          <span className="text-[#B7410E]">rust</span>
+          <span className="text-foreground">eD</span>
+          <span className="text-[#C8A200]">-V</span>
+          <span className="text-[#2E7D32]"> Engine</span>
+        </h3>
+        <p className="text-[11px] text-muted-foreground mt-0.5">Three AI agents — silicon to application</p>
+      </div>
+      
+      {/* Layers Stack */}
+      <div className="px-4 py-4 space-y-1.5">
+        {engineLayers.map((layer, i) => {
+          const isFirst = i === 0;
+          const showEngineBadge = i === 0 || layer.engine !== engineLayers[i - 1].engine;
+          return (
+            <div key={layer.name}>
+              {showEngineBadge && (
+                <div className="flex items-center gap-1.5 mb-1 ml-1">
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: layer.engineColor }} />
+                  <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: layer.engineColor }}>{layer.engine}</span>
+                </div>
+              )}
+              <div
+                className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-lg ${layer.bgLight} ${layer.border} border cursor-default transition-all duration-200 hover:shadow-md`}
+                onMouseEnter={() => setHoveredLayer(i)}
+                onMouseLeave={() => setHoveredLayer(null)}
+              >
+                {/* Color accent bar */}
+                <div className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-lg ${layer.bg}`} />
+                
+                {/* Layer name */}
+                <div className={`text-xs font-bold ${layer.textColor} min-w-[90px] pl-2`}>{layer.name}</div>
+                
+                {/* Chips */}
+                <div className="flex flex-wrap gap-1 flex-1">
+                  {layer.chips.map((chip) => (
+                    <span key={chip} className={`text-[9px] font-semibold px-1.5 py-0.5 rounded ${layer.chipBg} text-white`}>
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+                
+                {/* Arrow connector */}
+                {!isFirst && (
+                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2">
+                    <ChevronRight className="w-3 h-3 text-slate-300 rotate-[-90deg]" />
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {/* Engine Legend + Exhaust gradient */}
+      <div className="px-4 pb-2">
+        <div className="flex justify-center gap-4 py-2 flex-wrap">
+          {[
+            { name: "Core Engine", color: "#7B3F00", sub: "IP Blocks" },
+            { name: "Chip Engine", color: "#0071c5", sub: "SoC + Chips" },
+            { name: "Code Engine", color: "#B7410E", sub: "Firmware + API" },
+          ].map((e) => (
+            <div key={e.name} className="flex items-center gap-1 text-[9px]">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: e.color }} />
+              <span className="font-bold" style={{ color: e.color }}>{e.name}</span>
+              <span className="text-muted-foreground">{e.sub}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {/* Bottom exhaust glow */}
+      <div className="h-1.5 bg-gradient-to-r from-transparent via-orange-400 to-transparent opacity-60" />
     </div>
   );
 };
@@ -555,7 +422,7 @@ const Landing = () => {
                 Three AI engines — from IP blocks to production firmware — everything powered by <strong>Rust</strong>.
               </p>
               
-              <div className="flex flex-wrap gap-4 mb-6">
+              <div className="flex flex-wrap gap-4 mb-8">
                 <Link to="/download-ide">
                   <Button data-testid="start-building-btn" size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
                     Download IDE <Download className="ml-2 w-5 h-5" />
@@ -568,23 +435,6 @@ const Landing = () => {
                 </Link>
               </div>
               
-              {/* Made in India Badge */}
-              <div data-testid="made-in-india-badge" className="inline-flex items-center gap-3 px-5 py-2.5 rounded-lg bg-gradient-to-r from-[#FF9933]/10 via-white to-[#138808]/10 border border-[#FF9933]/30 mb-8 group hover:shadow-md transition-all duration-300">
-                <div className="flex flex-col gap-0 w-7 h-[18px] rounded-sm overflow-hidden shadow-sm">
-                  <div className="flex-1 bg-[#FF9933]" />
-                  <div className="flex-1 bg-white relative">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-[6px] h-[6px] rounded-full border border-[#000080]" />
-                    </div>
-                  </div>
-                  <div className="flex-1 bg-[#138808]" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-sm font-bold text-foreground tracking-wide leading-tight">Made in India</span>
-                  <span className="text-[10px] text-muted-foreground leading-tight">Proudly engineered for the world</span>
-                </div>
-              </div>
-              
               <div className="grid grid-cols-4 gap-6 pt-6 border-t border-border">
                 <AnimatedCounter end={6} suffix="+" label="RISC-V Boards" />
                 <AnimatedCounter end={5} suffix="+" label="RTOS Options" />
@@ -593,46 +443,49 @@ const Landing = () => {
               </div>
             </div>
             
-            {/* Engine Preview on large screens - show the top portion */}
+            {/* Engine Preview on large screens */}
             <div className="hidden lg:flex items-start justify-center">
-              <div className="w-full max-w-[520px]">
-                <EngineArchDiagram />
-                {/* Made in India badge under engine */}
-                <div className="flex items-center justify-center gap-2.5 mt-4 px-4 py-2 rounded-full bg-gradient-to-r from-[#FF9933]/8 via-transparent to-[#138808]/8 border border-slate-200">
-                  <div className="flex flex-col gap-0 w-5 h-[13px] rounded-[2px] overflow-hidden shadow-sm flex-shrink-0">
-                    <div className="flex-1 bg-[#FF9933]" />
-                    <div className="flex-1 bg-white relative">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-[4px] h-[4px] rounded-full border border-[#000080]" />
-                      </div>
-                    </div>
-                    <div className="flex-1 bg-[#138808]" />
-                  </div>
-                  <span className="text-xs font-semibold text-slate-600 tracking-wide">Designed & Engineered in India</span>
-                </div>
+              <div className="w-full max-w-[440px]">
+                <EngineArchCard />
               </div>
             </div>
           </div>
           
           {/* Mobile: show engine below on smaller screens */}
           <div className="lg:hidden flex flex-col items-center mb-8">
-            <div className="w-full max-w-[420px]">
-              <EngineArchDiagram />
-            </div>
-            <div className="flex items-center gap-2.5 mt-4 px-4 py-2 rounded-full bg-gradient-to-r from-[#FF9933]/8 via-transparent to-[#138808]/8 border border-slate-200">
-              <div className="flex flex-col gap-0 w-5 h-[13px] rounded-[2px] overflow-hidden shadow-sm flex-shrink-0">
-                <div className="flex-1 bg-[#FF9933]" />
-                <div className="flex-1 bg-white relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[4px] h-[4px] rounded-full border border-[#000080]" />
-                  </div>
-                </div>
-                <div className="flex-1 bg-[#138808]" />
-              </div>
-              <span className="text-xs font-semibold text-slate-600 tracking-wide">Designed & Engineered in India</span>
+            <div className="w-full max-w-[400px]">
+              <EngineArchCard />
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ══ MADE IN INDIA — Single prominent placement ══ */}
+      <section data-testid="made-in-india-badge" className="relative overflow-hidden">
+        <div className="h-[3px] flex">
+          <div className="flex-1 bg-[#FF9933]" />
+          <div className="flex-1 bg-white" />
+          <div className="flex-1 bg-[#138808]" />
+        </div>
+        <div className="bg-gradient-to-r from-[#FF9933]/[0.04] via-white to-[#138808]/[0.04] py-4">
+          <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-4">
+            <div className="flex flex-col gap-0 w-8 h-[22px] rounded-[3px] overflow-hidden shadow-sm flex-shrink-0 border border-slate-200/50">
+              <div className="flex-1 bg-[#FF9933]" />
+              <div className="flex-1 bg-white relative">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-[7px] h-[7px] rounded-full border-[1.5px] border-[#000080]" />
+                </div>
+              </div>
+              <div className="flex-1 bg-[#138808]" />
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-sm sm:text-base font-bold text-slate-800 tracking-wide">Made in India</span>
+              <span className="hidden sm:inline text-xs text-slate-400 font-medium">|</span>
+              <span className="hidden sm:inline text-xs text-slate-500 font-medium">Engineered for the world</span>
+            </div>
+          </div>
+        </div>
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
       </section>
 
       {/* ══ 7-STAGE BUILD SIMULATION ══ */}
