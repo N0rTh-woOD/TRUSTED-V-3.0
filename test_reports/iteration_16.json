@@ -1,0 +1,94 @@
+{
+  "summary": "Completed comprehensive testing of TrusteD-V Marketplace and Product Pages features. All 14 features verified successfully. Products page has HSM Integration removed, 4 categories with Learn More buttons. New dedicated pages for Secure Boot (rboot/rustBoot with GitHub links), Crypto Stack (algorithm tables), and RTOS Benchmark (RTOS options + benchmark table) all working. Marketplace has Hardware and IP Blocks tabs with partner logos. Landing page pricing aligns with 4 revenue streams.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_marketplace_features.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [
+    "/app/backend/tests/test_marketplace_features.py"
+  ],
+  "success_rate": {
+    "backend": "100% (10/10 tests passed)",
+    "frontend": "100% (All 14 features verified)"
+  },
+  "test_credentials": {
+    "admin": "admin@trusted-v.com / bosch@2425"
+  },
+  "seed_data_creation": "None - used existing seeded data",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All Marketplace and Product Pages features verified. Products page at /product-suite has 4 categories (Development Tools, Secure Foundation, SDKs & Middleware, Debugging & Testing) with Learn More buttons linking to dedicated pages. HSM Integration card removed. New pages: /product/secure-boot (rboot + rustBoot with GitHub links), /product/crypto-stack (algorithm tables), /product/rtos-benchmark (RTOS options + benchmark table). Marketplace at /marketplace has Hardware tab (from API) and IP Blocks tab (static catalog) with partner logos strip. Partners page shows C-DAC, Mindgrove, Upbeat Tech with PartnerLogo component. Landing page pricing shows 3 tiers (Basic, Pro, Enterprise) with per-core/per-project/custom pricing aligned with 4 revenue streams. WebIDE has 'Cloud' badge.",
+  "features_verified": {
+    "products_page_no_hsm": {
+      "status": "PASSED",
+      "details": "Products page (/product-suite) loads without HSM Integration card"
+    },
+    "products_learn_more_buttons": {
+      "status": "PASSED",
+      "details": "Products page has 4 Learn More buttons linking to dedicated pages"
+    },
+    "secure_boot_page": {
+      "status": "PASSED",
+      "details": "/product/secure-boot shows rboot and rustBoot side by side with GitHub buttons"
+    },
+    "crypto_stack_page": {
+      "status": "PASSED",
+      "details": "/product/crypto-stack shows algorithm tables (Symmetric, Asymmetric, Hashing, Post-Quantum)"
+    },
+    "rtos_benchmark_page": {
+      "status": "PASSED",
+      "details": "/product/rtos-benchmark shows RTOS options (TrusteD-V RTOS, FreeRTOS, Zephyr, Embassy) and benchmark table"
+    },
+    "marketplace_tabs": {
+      "status": "PASSED",
+      "details": "Marketplace (/marketplace) has two tabs: Hardware and IP Blocks"
+    },
+    "marketplace_hardware_tab": {
+      "status": "PASSED",
+      "details": "Hardware tab shows hardware cards with partner logos from API"
+    },
+    "marketplace_ip_blocks_tab": {
+      "status": "PASSED",
+      "details": "IP Blocks tab shows 6 IP block cards with GitHub links (Ibex, OpenTitan, CVA6, PULP, DMA, UART/SPI/I2C)"
+    },
+    "marketplace_partner_logos": {
+      "status": "PASSED",
+      "details": "Partner logos (C-DAC blue, Mindgrove green, Upbeat Tech orange) appear in Marketplace header"
+    },
+    "partners_page_logos": {
+      "status": "PASSED",
+      "details": "Partners page (/partners) shows partner logos using PartnerLogo component"
+    },
+    "landing_hardware_section": {
+      "status": "PASSED",
+      "details": "Landing page hardware section uses partner logos (C-DAC, Mindgrove, Upbeat Tech)"
+    },
+    "landing_pricing_tiers": {
+      "status": "PASSED",
+      "details": "Landing page pricing shows 3 tiers (Basic, Pro, Enterprise) with per-core/per-project/custom pricing"
+    },
+    "pricing_talk_to_sales": {
+      "status": "PASSED",
+      "details": "Pricing 'Talk to Sales' links to /contact-sales?plan=pro"
+    },
+    "webide_cloud_badge": {
+      "status": "PASSED",
+      "details": "WebIDE card positioned as 'Cloud' capability with Cloud badge"
+    }
+  },
+  "mocked_apis": {
+    "has_mocked_apis": false,
+    "mocked_apis_list": []
+  }
+}

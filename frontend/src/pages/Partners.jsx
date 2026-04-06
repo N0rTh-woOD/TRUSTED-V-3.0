@@ -6,6 +6,7 @@ import {
   Cpu, CheckCircle2, ArrowRight, Building2, 
   Globe, Wrench, Shield, Package, ExternalLink
 } from "lucide-react";
+import { PartnerLogo } from "@/components/PartnerLogos";
 
 const Partners = () => {
   const partners = [
@@ -115,10 +116,8 @@ const Partners = () => {
                     {/* Partner Info */}
                     <div>
                       <div className="flex items-center gap-3 mb-4">
-                        <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${
-                          partner.color === "primary" ? "bg-primary/10" : partner.color === "green" ? "bg-green-500/10" : "bg-orange-500/10"
-                        }`}>
-                          <Cpu className={`w-7 h-7 ${partner.color === "primary" ? "text-primary" : partner.color === "green" ? "text-green-600" : "text-orange-600"}`} />
+                        <div className="w-14 h-14 rounded-xl flex items-center justify-center bg-slate-50 border border-border">
+                          <PartnerLogo name={partner.name} className="h-7" />
                         </div>
                         <div>
                           <h2 className="text-2xl font-bold text-foreground">{partner.name}</h2>

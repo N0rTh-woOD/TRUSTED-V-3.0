@@ -9,6 +9,7 @@ import {
   Radio, FlaskConical, Flame, BarChart3, Server
 } from "lucide-react";
 import TrustedVLogo from "@/components/TrustedVLogo";
+import { PartnerLogo } from "@/components/PartnerLogos";
 
 const AnimatedCounter = ({ end, label, suffix = "" }) => {
   const [count, setCount] = useState(0);
@@ -448,8 +449,8 @@ const Landing = () => {
     {
       name: "Basic",
       tagline: "Platform Access",
-      price: "Contact Sales",
-      desc: "Core platform access for individual developers and small teams getting started with RISC-V Rust development.",
+      price: "Per-core / Annual",
+      desc: "Core platform access for individual developers and small teams. RISC-V Rust software, toolchain, and IDE with annual or per-core licensing.",
       features: [
         "TrusteD-V IDE — Jarvyn (Community)",
         "RISC-V Rust SDK access",
@@ -464,15 +465,15 @@ const Landing = () => {
     {
       name: "Pro",
       tagline: "Advanced Tools + Support",
-      price: "Contact Sales",
-      desc: "Advanced toolchain, priority support, and extended middleware for professional embedded teams.",
+      price: "Per-project / Annual",
+      desc: "Advanced toolchain, priority support, and extended middleware. Per-project or annual licensing with engineering services and marketplace access.",
       features: [
         "Everything in Basic",
         "Jarvyn AI code assistant (Full)",
         "RTOS integration suite",
         "Secure Boot configuration tool",
         "Priority engineering support",
-        "CI/CD pipeline templates",
+        "Marketplace access (per-device)",
         "Hardware simulation environment",
       ],
       cta: "Talk to Sales",
@@ -482,8 +483,8 @@ const Landing = () => {
     {
       name: "Enterprise",
       tagline: "Customization + SLA",
-      price: "Custom",
-      desc: "Full platform customization, dedicated support, and SLA-backed guarantees for production deployments.",
+      price: "Custom / SLA",
+      desc: "Full customization, dedicated professional services, integration support, and SLA-backed guarantees for production deployments.",
       features: [
         "Everything in Pro",
         "Custom BSP development",
@@ -940,7 +941,7 @@ const Landing = () => {
           
           <div className="text-center mt-8">
             <p className="text-xs text-muted-foreground">
-              Annual / per-core / per-project licensing available. Per-device and per-deployment pricing for platform subscriptions.
+              4 revenue streams: RISC-V Software & Toolchain (annual/per-core), Engineering Services (custom dev), Marketplace Platform (per-device/per-deployment), Professional Services (integration & support).
             </p>
           </div>
         </div>
@@ -962,9 +963,9 @@ const Landing = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {hardwarePartners.map((partner, index) => (
               <RevealItem key={index} delay={index * 80}>
-                <div className="bg-white rounded-lg border border-border p-6 text-center hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                    <Cpu className="w-6 h-6 text-primary" />
+                <div className="bg-white rounded-lg border border-border p-5 text-center hover:shadow-md transition-shadow">
+                  <div className="flex justify-center mb-3">
+                    <PartnerLogo name={partner.name} className="h-6" />
                   </div>
                   <h4 className="font-semibold text-foreground text-sm">{partner.name}</h4>
                   <p className="text-xs text-muted-foreground mt-1">{partner.description}</p>
