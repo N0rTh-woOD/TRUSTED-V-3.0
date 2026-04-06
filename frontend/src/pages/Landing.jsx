@@ -86,9 +86,9 @@ const EngineArchDiagram = () => {
       s.id = 'tv-eng-css';
       s.textContent = `
 .tv-eng{width:100%;font-family:'Helvetica Neue',Arial,sans-serif}
-.tv-eng .canvas{position:relative;width:340px;margin:0 auto;height:640px;overflow:visible}
+.tv-eng .canvas{position:relative;width:340px;margin:0 auto;height:780px;overflow:visible}
 .tv-eng .exhaust{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:400px;height:180px;pointer-events:none;z-index:1}
-.tv-eng .stack{position:absolute;left:50%;transform:translateX(-50%);bottom:50px;width:340px;z-index:2}
+.tv-eng .stack{position:absolute;left:50%;transform:translateX(-50%);bottom:175px;width:340px;z-index:2}
 .tv-eng .slab-row{position:relative;width:340px}
 .tv-eng .conn{display:flex;justify-content:center;align-items:center;gap:8px;padding:3px 0}
 .tv-eng .cdot{width:3px;height:3px;border-radius:50%;background:#ccc}

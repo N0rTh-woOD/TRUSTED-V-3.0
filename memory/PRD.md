@@ -41,6 +41,10 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Product Suite: Crypto Stack, Secure Boot (rboot/rustBoot), RTOS Benchmarks
 - Partners: Upbeat Tech added, WebIDE repositioned as capable counterpart
 
+### Phase 6.4 — Engine Exhaust Fire Fix (Completed - Apr 2026)
+- **Fire position fixed**: Restored original artifact spacing (canvas 780px, stack bottom 175px) so exhaust flames render BELOW IP Blocks slab instead of behind it
+- The nozzle + flames now appear at the rocket bottom as intended
+
 ### Phase 6.3 — Engine Diagram Native Size (Completed - Apr 2026)
 - **No compression**: Removed CSS `scale(0.62)` — diagram renders at native 340px width, all labels crisp and readable
 - **Removed card wrapper**: No border/shadow box around engine, cleaner layout
