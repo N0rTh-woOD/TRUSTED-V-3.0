@@ -72,107 +72,288 @@ const RevealItem = ({ children, delay = 0, className = "" }) => {
   );
 };
 
-/* ── TrusteD-V Engine Architecture Diagram ── */
-const EngineArchDiagram = () => {
-  const layers = [
-    { label: "APPLICATION API", items: ["REST", "SDK", "MQTT", "OTA"], color: "#B7410E", bg: "#FFF0EB" },
-    { label: "MIDDLEWARE", items: ["RTOS", "HAL", "Drivers", "Protocols"], color: "#B7410E", bg: "#FFF5F0" },
-    { label: "SoC / MODULE", items: ["CPU", "MEM", "WiFi", "SEC"], color: "#0071c5", bg: "#E6F1FB" },
-    { label: "DISCRETE CHIPS", items: ["RISC-V", "Memory", "NPU"], color: "#0071c5", bg: "#EDF4FC" },
-    { label: "IP BLOCKS", items: ["Ibex", "OpenTitan", "DMA", "GPIO"], color: "#7B3F00", bg: "#FEF3E2" },
-  ];
+/* ── TrusteD-V Engine Architecture — Full SVG Visualization ── */
+const engineCSS = `
+@keyframes eng-rise { from { opacity:0; transform:translateY(28px) } to { opacity:1; transform:translateY(0) } }
+@keyframes eng-bob1 { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-5px) } }
+@keyframes eng-bob2 { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-6px) } }
+@keyframes eng-bob3 { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-7px) } }
+@keyframes eng-bob4 { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-8px) } }
+@keyframes eng-bob5 { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-9px) } }
+@keyframes eng-fo { 0%,100%{transform:scaleY(1)scaleX(1)} 33%{transform:scaleY(1.1)scaleX(.91)} 66%{transform:scaleY(.9)scaleX(1.07)} }
+@keyframes eng-fm { 0%,100%{transform:scaleY(1)scaleX(1)} 40%{transform:scaleY(1.17)scaleX(.87)} 80%{transform:scaleY(.88)scaleX(1.09)} }
+@keyframes eng-fc { 0%,100%{transform:scaleY(1)scaleX(1)} 50%{transform:scaleY(1.24)scaleX(.83)} }
+@keyframes eng-gp { 0%,100%{opacity:.4} 50%{opacity:.75} }
+@keyframes eng-spark { 0%{opacity:1;transform:translate(0,0)scale(1)} 100%{opacity:0;transform:translate(var(--sx),var(--sy))scale(0)} }
+@keyframes eng-sm { 0%{opacity:.25;transform:translateY(0)scale(1)} 100%{opacity:0;transform:translateY(-90px)scale(2.4)} }
+`;
 
-  const engines = [
-    { name: "Code Engine", color: "#B7410E", span: [0, 1] },
-    { name: "Chip Engine", color: "#0071c5", span: [2, 3] },
-    { name: "Core Engine", color: "#7B3F00", span: [4, 4] },
-  ];
+const EngineArchDiagram = () => {
+  useEffect(() => {
+    if (!document.getElementById('engine-anim-css')) {
+      const style = document.createElement('style');
+      style.id = 'engine-anim-css';
+      style.textContent = engineCSS;
+      document.head.appendChild(style);
+    }
+  }, []);
 
   return (
     <div className="relative" data-testid="engine-arch-diagram">
-      <div className="bg-slate-900 rounded-xl p-6 border border-slate-700 shadow-2xl">
-        <div className="flex items-center gap-2 mb-5">
-          <Binary className="w-4 h-4 text-slate-400" />
-          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            T<span className="text-[#B7410E]">rust</span>eD<span className="text-[#C8A200]">-V</span> Engine
-          </span>
+      <div className="bg-white rounded-xl border border-slate-200 shadow-2xl overflow-hidden" style={{ padding: '28px 16px 20px' }}>
+        {/* Title */}
+        <div className="text-center mb-5">
+          <h3 className="text-lg font-extrabold tracking-tight" style={{ letterSpacing: '-0.5px' }}>
+            <span style={{ color: '#111' }}>T</span>
+            <span style={{ color: '#B7410E' }}>rust</span>
+            <span style={{ color: '#111' }}>eD</span>
+            <span style={{ color: '#C8A200' }}>-V</span>
+            <span style={{ color: '#2E7D32' }}> Engine</span>
+          </h3>
+          <p className="text-[11px] text-muted-foreground mt-1 tracking-wide">Silicon-to-Application Platform — AI Agents + Hardware</p>
         </div>
-        
-        <div className="flex gap-3">
-          {/* Main stack */}
-          <div className="flex-1 space-y-1.5">
-            {layers.map((layer, i) => (
-              <div 
-                key={i}
-                className="rounded-lg p-3 border transition-all duration-300 hover:scale-[1.02]"
-                style={{ 
-                  backgroundColor: layer.bg, 
-                  borderColor: `${layer.color}30`,
-                  animationDelay: `${i * 150}ms`
-                }}
-              >
-                <div className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: layer.color }}>
-                  {layer.label}
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  {layer.items.map((item, j) => (
-                    <span 
-                      key={j} 
-                      className="text-[9px] font-semibold px-2 py-0.5 rounded"
-                      style={{ 
-                        backgroundColor: `${layer.color}15`, 
-                        color: layer.color,
-                        border: `1px solid ${layer.color}25`
-                      }}
-                    >
-                      {item}
-                    </span>
-                  ))}
+
+        {/* Engine Stack + Brackets */}
+        <div className="relative mx-auto" style={{ maxWidth: 440 }}>
+          <div className="flex">
+            {/* Left callouts + Stack */}
+            <div className="flex-1">
+              {/* Layer 5: APPLICATION API */}
+              <div style={{ animation: 'eng-rise .5s ease both .48s, eng-bob5 3.6s ease-in-out infinite 2.4s' }}>
+                <svg width="100%" viewBox="0 0 340 84" overflow="visible" className="block">
+                  <polygon points="30,10 310,10 340,30 340,60 310,84 30,84 0,60 0,30" fill="#E6F1FB" stroke="#185FA5" strokeWidth="1.4"/>
+                  <polygon points="0,60 30,84 310,84 340,60 340,74 310,84 30,84 0,74" fill="#2E7CC8" stroke="#185FA5" strokeWidth="1.4"/>
+                  <polygon points="0,30 0,60 30,84 30,52" fill="#5EA4E8" stroke="#185FA5" strokeWidth="1.4"/>
+                  {/* API boxes */}
+                  <rect x="55" y="28" width="52" height="28" rx="4" fill="#185FA5" stroke="#0C447C" strokeWidth=".8"/>
+                  <text x="81" y="46" fontSize="8" fill="#E6F1FB" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">REST</text>
+                  <rect x="117" y="28" width="52" height="28" rx="4" fill="#185FA5" stroke="#0C447C" strokeWidth=".8"/>
+                  <text x="143" y="46" fontSize="8" fill="#E6F1FB" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">SDK</text>
+                  <rect x="179" y="28" width="52" height="28" rx="4" fill="#185FA5" stroke="#0C447C" strokeWidth=".8"/>
+                  <text x="205" y="46" fontSize="8" fill="#E6F1FB" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">MQTT</text>
+                  <rect x="241" y="28" width="52" height="28" rx="4" fill="#185FA5" stroke="#0C447C" strokeWidth=".8"/>
+                  <text x="267" y="46" fontSize="8" fill="#E6F1FB" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">OTA</text>
+                  <text x="170" y="76" fontSize="10" fill="#ffffff" stroke="#042C53" strokeWidth="3" paintOrder="stroke" fontFamily="'Helvetica Neue',sans-serif" fontWeight="800" textAnchor="middle" letterSpacing=".5">APPLICATION API</text>
+                </svg>
+              </div>
+              {/* connector */}
+              <div className="flex justify-center items-center gap-2 py-0.5">
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+              </div>
+
+              {/* Layer 4: MIDDLEWARE */}
+              <div style={{ animation: 'eng-rise .5s ease both .36s, eng-bob4 4s ease-in-out infinite 2.1s' }}>
+                <svg width="100%" viewBox="0 0 340 82" overflow="visible" className="block">
+                  <polygon points="30,8 310,8 340,28 340,56 310,82 30,82 0,56 0,28" fill="#EEEDFE" stroke="#534AB7" strokeWidth="1.4"/>
+                  <polygon points="0,56 30,82 310,82 340,56 340,68 310,82 30,82 0,68" fill="#7F77DD" stroke="#534AB7" strokeWidth="1.4"/>
+                  <polygon points="0,28 0,56 30,82 30,50" fill="#AFA9EC" stroke="#534AB7" strokeWidth="1.4"/>
+                  <rect x="42" y="24" width="56" height="24" rx="3" fill="#7F77DD" stroke="#534AB7" strokeWidth=".6"/>
+                  <text x="70" y="40" fontSize="8" fill="#EEEDFE" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">RTOS</text>
+                  <rect x="107" y="24" width="50" height="24" rx="3" fill="#7F77DD" stroke="#534AB7" strokeWidth=".6"/>
+                  <text x="132" y="40" fontSize="8" fill="#EEEDFE" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">HAL</text>
+                  <rect x="166" y="24" width="56" height="24" rx="3" fill="#7F77DD" stroke="#534AB7" strokeWidth=".6"/>
+                  <text x="194" y="40" fontSize="8" fill="#EEEDFE" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">Drivers</text>
+                  <rect x="231" y="24" width="62" height="24" rx="3" fill="#7F77DD" stroke="#534AB7" strokeWidth=".6"/>
+                  <text x="262" y="40" fontSize="8" fill="#EEEDFE" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">Protocols</text>
+                  {/* Sub labels */}
+                  <rect x="50" y="54" width="44" height="14" rx="2" fill="#534AB7" stroke="#3C3489" strokeWidth=".5"/>
+                  <text x="72" y="64" fontSize="7" fill="#CECBF6" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">Power Mgmt</text>
+                  <rect x="104" y="54" width="52" height="14" rx="2" fill="#534AB7" stroke="#3C3489" strokeWidth=".5"/>
+                  <text x="130" y="64" fontSize="7" fill="#CECBF6" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">Network Stack</text>
+                  <rect x="166" y="54" width="48" height="14" rx="2" fill="#534AB7" stroke="#3C3489" strokeWidth=".5"/>
+                  <text x="190" y="64" fontSize="7" fill="#CECBF6" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">Bootloader</text>
+                  <text x="170" y="78" fontSize="10" fill="#ffffff" stroke="#26215C" strokeWidth="3" paintOrder="stroke" fontFamily="'Helvetica Neue',sans-serif" fontWeight="800" textAnchor="middle" letterSpacing=".5">MIDDLEWARE</text>
+                </svg>
+              </div>
+              <div className="flex justify-center items-center gap-2 py-0.5">
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+              </div>
+
+              {/* Layer 3: SoC / MODULE */}
+              <div style={{ animation: 'eng-rise .5s ease both .24s, eng-bob3 4s ease-in-out infinite 1.8s' }}>
+                <svg width="100%" viewBox="0 0 340 100" overflow="visible" className="block">
+                  <polygon points="30,8 310,8 340,32 340,66 310,100 30,100 0,66 0,32" fill="#EAF3DE" stroke="#3B6D11" strokeWidth="1.4"/>
+                  <polygon points="0,66 30,100 310,100 340,66 340,80 310,100 30,100 0,80" fill="#639922" stroke="#3B6D11" strokeWidth="1.4"/>
+                  <polygon points="0,32 0,66 30,100 30,62" fill="#97C459" stroke="#3B6D11" strokeWidth="1.4"/>
+                  <rect x="52" y="26" width="236" height="44" rx="5" fill="#C0DD97" stroke="#3B6D11" strokeWidth="1.2"/>
+                  <rect x="62" y="32" width="48" height="30" rx="3" fill="#639922" stroke="#27500A" strokeWidth=".7"/>
+                  <text x="86" y="51" fontSize="8" fill="#EAF3DE" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">CPU</text>
+                  <rect x="118" y="32" width="48" height="30" rx="3" fill="#639922" stroke="#27500A" strokeWidth=".7"/>
+                  <text x="142" y="51" fontSize="8" fill="#EAF3DE" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">MEM</text>
+                  <rect x="174" y="32" width="48" height="30" rx="3" fill="#639922" stroke="#27500A" strokeWidth=".7"/>
+                  <text x="198" y="51" fontSize="8" fill="#EAF3DE" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">WiFi</text>
+                  <rect x="230" y="32" width="48" height="30" rx="3" fill="#639922" stroke="#27500A" strokeWidth=".7"/>
+                  <text x="254" y="51" fontSize="8" fill="#EAF3DE" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">SEC</text>
+                  {/* Bus lines */}
+                  <rect x="62" y="68" width="216" height="3" rx="1" fill="#3B6D11" stroke="#27500A" strokeWidth=".5"/>
+                  <circle cx="86" cy="78" r="3" fill="#3B6D11" opacity=".55"/>
+                  <circle cx="142" cy="78" r="3" fill="#3B6D11" opacity=".55"/>
+                  <circle cx="198" cy="78" r="3" fill="#3B6D11" opacity=".55"/>
+                  <circle cx="254" cy="78" r="3" fill="#3B6D11" opacity=".55"/>
+                  <text x="170" y="94" fontSize="10" fill="#ffffff" stroke="#173404" strokeWidth="3" paintOrder="stroke" fontFamily="'Helvetica Neue',sans-serif" fontWeight="800" textAnchor="middle" letterSpacing=".5">SoC / MODULE</text>
+                </svg>
+              </div>
+              <div className="flex justify-center items-center gap-2 py-0.5">
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+              </div>
+
+              {/* Layer 2: DISCRETE CHIPS */}
+              <div style={{ animation: 'eng-rise .5s ease both .12s, eng-bob2 4s ease-in-out infinite 1.5s' }}>
+                <svg width="100%" viewBox="0 0 340 90" overflow="visible" className="block">
+                  <polygon points="30,8 310,8 340,28 340,62 310,90 30,90 0,62 0,28" fill="#FEF3E2" stroke="#D4960A" strokeWidth="1.4"/>
+                  <polygon points="0,62 30,90 310,90 340,62 340,74 310,90 30,90 0,74" fill="#D4960A" stroke="#BA7517" strokeWidth="1.4"/>
+                  <polygon points="0,28 0,62 30,90 30,56" fill="#EF9F27" stroke="#BA7517" strokeWidth="1.4"/>
+                  {/* Chips */}
+                  <rect x="48" y="22" width="70" height="42" rx="5" fill="#EF9F27" stroke="#BA7517" strokeWidth="1.2"/>
+                  <rect x="54" y="28" width="58" height="12" rx="2" fill="#BA7517" stroke="#633806" strokeWidth=".5"/>
+                  <text x="83" y="37" fontSize="7" fill="#FEF3E2" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">RISC-V CPU</text>
+                  <rect x="54" y="44" width="58" height="14" rx="2" fill="#BA7517" stroke="#633806" strokeWidth=".6"/>
+                  <rect x="136" y="22" width="70" height="42" rx="5" fill="#EF9F27" stroke="#BA7517" strokeWidth="1.2"/>
+                  <rect x="142" y="28" width="58" height="12" rx="2" fill="#BA7517" stroke="#633806" strokeWidth=".5"/>
+                  <text x="171" y="37" fontSize="7" fill="#FEF3E2" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">Memory</text>
+                  <rect x="142" y="44" width="58" height="14" rx="2" fill="#BA7517" stroke="#633806" strokeWidth=".6"/>
+                  <rect x="224" y="22" width="70" height="42" rx="5" fill="#EF9F27" stroke="#BA7517" strokeWidth="1.2"/>
+                  <rect x="230" y="28" width="58" height="12" rx="2" fill="#BA7517" stroke="#633806" strokeWidth=".5"/>
+                  <text x="259" y="37" fontSize="7" fill="#FEF3E2" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">NPU</text>
+                  <rect x="230" y="44" width="58" height="14" rx="2" fill="#BA7517" stroke="#633806" strokeWidth=".6"/>
+                  {/* Connecting traces */}
+                  <line x1="118" y1="43" x2="136" y2="43" stroke="#BA7517" strokeWidth="1.5" strokeDasharray="3 2" opacity=".7"/>
+                  <line x1="206" y1="43" x2="224" y2="43" stroke="#BA7517" strokeWidth="1.5" strokeDasharray="3 2" opacity=".7"/>
+                  <text x="170" y="82" fontSize="10" fill="#ffffff" stroke="#412402" strokeWidth="3" paintOrder="stroke" fontFamily="'Helvetica Neue',sans-serif" fontWeight="800" textAnchor="middle" letterSpacing=".5">DISCRETE CHIPS</text>
+                </svg>
+              </div>
+              <div className="flex justify-center items-center gap-2 py-0.5">
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+                <span className="w-[3px] h-[3px] rounded-full bg-slate-300"/>
+              </div>
+
+              {/* Layer 1: IP BLOCKS */}
+              <div style={{ animation: 'eng-rise .5s ease both .00s, eng-bob1 4s ease-in-out infinite 1.2s' }}>
+                <svg width="100%" viewBox="0 0 340 88" overflow="visible" className="block">
+                  <polygon points="30,8 310,8 340,30 340,60 310,88 30,88 0,60 0,30" fill="#F5F4F0" stroke="#B4B2A9" strokeWidth="1.4"/>
+                  <polygon points="0,60 30,88 310,88 340,60 340,72 310,88 30,88 0,72" fill="#888780" stroke="#B4B2A9" strokeWidth="1.4"/>
+                  <polygon points="0,30 0,60 30,88 30,54" fill="#B4B2A9" stroke="#B4B2A9" strokeWidth="1.4"/>
+                  {/* IP blocks */}
+                  <rect x="36" y="22" width="40" height="36" rx="4" fill="#D3D1C7" stroke="#888780" strokeWidth=".9"/>
+                  <rect x="40" y="26" width="32" height="10" rx="2" fill="#B4B2A9" stroke="#5F5E5A" strokeWidth=".4"/>
+                  <text x="56" y="48" fontSize="7" fill="#2C2C2A" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">Ibex</text>
+                  <rect x="86" y="22" width="40" height="36" rx="4" fill="#D3D1C7" stroke="#888780" strokeWidth=".9"/>
+                  <rect x="90" y="26" width="32" height="10" rx="2" fill="#B4B2A9" stroke="#5F5E5A" strokeWidth=".4"/>
+                  <text x="106" y="48" fontSize="7" fill="#2C2C2A" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">OT</text>
+                  <rect x="136" y="22" width="40" height="36" rx="4" fill="#D3D1C7" stroke="#888780" strokeWidth=".9"/>
+                  <rect x="140" y="26" width="32" height="10" rx="2" fill="#B4B2A9" stroke="#5F5E5A" strokeWidth=".4"/>
+                  <text x="156" y="48" fontSize="7" fill="#2C2C2A" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">DMA</text>
+                  <rect x="186" y="22" width="40" height="36" rx="4" fill="#D3D1C7" stroke="#888780" strokeWidth=".9"/>
+                  <rect x="190" y="26" width="32" height="10" rx="2" fill="#B4B2A9" stroke="#5F5E5A" strokeWidth=".4"/>
+                  <text x="206" y="48" fontSize="7" fill="#2C2C2A" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">NPU</text>
+                  <rect x="236" y="22" width="40" height="36" rx="4" fill="#D3D1C7" stroke="#888780" strokeWidth=".9"/>
+                  <rect x="240" y="26" width="32" height="10" rx="2" fill="#B4B2A9" stroke="#5F5E5A" strokeWidth=".4"/>
+                  <text x="256" y="48" fontSize="7" fill="#2C2C2A" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">MEM</text>
+                  <rect x="286" y="22" width="40" height="36" rx="4" fill="#D3D1C7" stroke="#888780" strokeWidth=".9"/>
+                  <rect x="290" y="26" width="32" height="10" rx="2" fill="#B4B2A9" stroke="#5F5E5A" strokeWidth=".4"/>
+                  <text x="306" y="48" fontSize="7" fill="#2C2C2A" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" textAnchor="middle">GPIO</text>
+                  {/* connecting traces */}
+                  <line x1="76" y1="40" x2="86" y2="40" stroke="#888780" strokeWidth=".6" strokeDasharray="3 2"/>
+                  <line x1="126" y1="40" x2="136" y2="40" stroke="#888780" strokeWidth=".6" strokeDasharray="3 2"/>
+                  <line x1="176" y1="40" x2="186" y2="40" stroke="#888780" strokeWidth=".6" strokeDasharray="3 2"/>
+                  <line x1="226" y1="40" x2="236" y2="40" stroke="#888780" strokeWidth=".6" strokeDasharray="3 2"/>
+                  <line x1="276" y1="40" x2="286" y2="40" stroke="#888780" strokeWidth=".6" strokeDasharray="3 2"/>
+                  <text x="170" y="80" fontSize="10" fill="#ffffff" stroke="#2C2C2A" strokeWidth="3" paintOrder="stroke" fontFamily="'Helvetica Neue',sans-serif" fontWeight="800" textAnchor="middle" letterSpacing=".5">IP BLOCKS</text>
+                </svg>
+              </div>
+
+              {/* Exhaust plume (simplified) */}
+              <div className="relative flex justify-center" style={{ height: 60, pointerEvents: 'none' }}>
+                <svg width="200" height="60" viewBox="0 0 200 60" className="block">
+                  <ellipse cx="100" cy="8" rx="60" ry="6" fill="#FF8C00" opacity=".18" style={{ animation: 'eng-gp .55s ease-in-out infinite' }}/>
+                  <ellipse cx="100" cy="12" rx="44" ry="5" fill="#FFA500" opacity=".24" style={{ animation: 'eng-gp .55s ease-in-out infinite .1s' }}/>
+                  <ellipse cx="100" cy="16" rx="28" ry="4" fill="#FFD700" opacity=".32" style={{ animation: 'eng-gp .55s ease-in-out infinite .2s' }}/>
+                  {/* Outer flame */}
+                  <g style={{ animation: 'eng-fo .7s ease-in-out infinite', transformOrigin: '100px 6px' }}>
+                    <path d="M72,6 Q60,28 68,44 Q80,58 100,55 Q120,58 132,44 Q140,28 128,6Z" fill="#FF4400" opacity=".15"/>
+                  </g>
+                  {/* Mid flame */}
+                  <g style={{ animation: 'eng-fm .5s ease-in-out infinite .06s', transformOrigin: '100px 6px' }}>
+                    <path d="M78,6 Q70,24 76,38 Q86,50 100,48 Q114,50 124,38 Q130,24 122,6Z" fill="#FF8800" opacity=".3"/>
+                  </g>
+                  {/* Core flame */}
+                  <g style={{ animation: 'eng-fc .38s ease-in-out infinite .03s', transformOrigin: '100px 6px' }}>
+                    <path d="M86,6 Q80,20 84,32 Q92,42 100,40 Q108,42 116,32 Q120,20 114,6Z" fill="#FFE840" opacity=".45"/>
+                    <path d="M90,6 Q86,16 88,26 Q94,34 100,32 Q106,34 112,26 Q114,16 110,6Z" fill="#FFFFF0" opacity=".6"/>
+                  </g>
+                  {/* Sparks */}
+                  <circle r="2" cx="100" cy="10" fill="#FFD700" style={{ animation: 'eng-spark 1.3s ease-out infinite', '--sx': '-30px', '--sy': '35px' }}/>
+                  <circle r="1.5" cx="100" cy="10" fill="#FF8C00" style={{ animation: 'eng-spark 1.3s ease-out infinite .3s', '--sx': '25px', '--sy': '40px' }}/>
+                  <circle r="1.8" cx="100" cy="10" fill="#FFE840" style={{ animation: 'eng-spark 1.3s ease-out infinite .6s', '--sx': '-18px', '--sy': '30px' }}/>
+                  <circle r="1.2" cx="100" cy="10" fill="#FF6600" style={{ animation: 'eng-spark 1.3s ease-out infinite .9s', '--sx': '22px', '--sy': '32px' }}/>
+                </svg>
+              </div>
+            </div>
+
+            {/* Right-side engine brackets */}
+            <div className="hidden xl:flex flex-col justify-between relative" style={{ width: 90, marginLeft: 8 }}>
+              {/* Code Engine bracket — spans top 2 layers */}
+              <div className="flex items-center" style={{ flex: '2' }}>
+                <svg width="18" height="100%" viewBox="0 0 18 100" preserveAspectRatio="none" className="flex-shrink-0">
+                  <line x1="2" y1="4" x2="10" y2="4" stroke="#B7410E" strokeWidth="1.5"/>
+                  <line x1="10" y1="4" x2="10" y2="96" stroke="#B7410E" strokeWidth="1.5"/>
+                  <line x1="2" y1="96" x2="10" y2="96" stroke="#B7410E" strokeWidth="1.5"/>
+                  <circle cx="10" cy="50" r="3" fill="#B7410E"/>
+                </svg>
+                <div className="ml-1.5">
+                  <span className="text-[10px] font-extrabold block leading-tight" style={{ color: '#B7410E' }}>Code Engine</span>
+                  <span className="text-[8px] text-muted-foreground block">API + Middleware</span>
                 </div>
               </div>
-            ))}
-          </div>
-          
-          {/* Engine labels */}
-          <div className="w-20 relative flex flex-col justify-between py-1">
-            {engines.map((engine, i) => {
-              const topPct = (engine.span[0] / 5) * 100;
-              const heightPct = ((engine.span[1] - engine.span[0] + 1) / 5) * 100;
-              return (
-                <div 
-                  key={i}
-                  className="absolute flex items-center"
-                  style={{ 
-                    top: `${topPct}%`, 
-                    height: `${heightPct}%`,
-                    right: 0,
-                    left: 0
-                  }}
-                >
-                  <div 
-                    className="w-0.5 h-full rounded-full mr-2"
-                    style={{ backgroundColor: engine.color }}
-                  />
-                  <div className="flex-1">
-                    <span 
-                      className="text-[9px] font-bold leading-tight block"
-                      style={{ color: engine.color }}
-                    >
-                      {engine.name}
-                    </span>
-                  </div>
+              {/* Chip Engine bracket — spans middle 2 layers */}
+              <div className="flex items-center" style={{ flex: '2.2' }}>
+                <svg width="18" height="100%" viewBox="0 0 18 100" preserveAspectRatio="none" className="flex-shrink-0">
+                  <line x1="2" y1="4" x2="10" y2="4" stroke="#0071c5" strokeWidth="1.5"/>
+                  <line x1="10" y1="4" x2="10" y2="96" stroke="#0071c5" strokeWidth="1.5"/>
+                  <line x1="2" y1="96" x2="10" y2="96" stroke="#0071c5" strokeWidth="1.5"/>
+                  <circle cx="10" cy="50" r="3" fill="#0071c5"/>
+                </svg>
+                <div className="ml-1.5">
+                  <span className="text-[10px] font-extrabold block leading-tight" style={{ color: '#0071c5' }}>Chip Engine</span>
+                  <span className="text-[8px] text-muted-foreground block">SoC + Chips</span>
                 </div>
-              );
-            })}
+              </div>
+              {/* Core Engine bracket — spans bottom layer */}
+              <div className="flex items-center" style={{ flex: '1' }}>
+                <svg width="18" height="100%" viewBox="0 0 18 100" preserveAspectRatio="none" className="flex-shrink-0">
+                  <line x1="2" y1="10" x2="10" y2="10" stroke="#7B3F00" strokeWidth="1.5"/>
+                  <line x1="10" y1="10" x2="10" y2="90" stroke="#7B3F00" strokeWidth="1.5"/>
+                  <line x1="2" y1="90" x2="10" y2="90" stroke="#7B3F00" strokeWidth="1.5"/>
+                  <circle cx="10" cy="50" r="3" fill="#7B3F00"/>
+                </svg>
+                <div className="ml-1.5">
+                  <span className="text-[10px] font-extrabold block leading-tight" style={{ color: '#7B3F00' }}>Core Engine</span>
+                  <span className="text-[8px] text-muted-foreground block">IP Blocks</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        
+
         {/* Legend */}
-        <div className="flex gap-4 mt-4 pt-3 border-t border-slate-700">
-          {engines.map((e, i) => (
+        <div className="flex justify-center gap-4 mt-4 pt-3 border-t border-border flex-wrap">
+          {[
+            { color: '#E6F1FB', stroke: '#185FA5', label: 'Application' },
+            { color: '#EEEDFE', stroke: '#534AB7', label: 'Middleware' },
+            { color: '#EAF3DE', stroke: '#3B6D11', label: 'SoC' },
+            { color: '#FEF3E2', stroke: '#D4960A', label: 'Chips' },
+            { color: '#F5F4F0', stroke: '#B4B2A9', label: 'IP' },
+          ].map((l, i) => (
             <div key={i} className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: e.color }} />
-              <span className="text-[9px] text-slate-500 font-medium">{e.name}</span>
+              <div className="w-3 h-3 rounded-sm border" style={{ backgroundColor: l.color, borderColor: l.stroke }}/>
+              <span className="text-[9px] text-muted-foreground font-medium">{l.label}</span>
             </div>
           ))}
         </div>
