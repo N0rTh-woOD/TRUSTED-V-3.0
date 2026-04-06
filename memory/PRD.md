@@ -41,6 +41,12 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Product Suite: Crypto Stack, Secure Boot (rboot/rustBoot), RTOS Benchmarks
 - Partners: Upbeat Tech added, WebIDE repositioned as capable counterpart
 
+### Phase 6.3 — Engine Diagram Restoration (Completed - Apr 2026)
+- **3D isometric diagram restored**: Put back the original `trusted_v_engine_v3.html` artifact as the hero engine visualization, replacing the compact card
+- **Scaled to fit**: CSS `transform: scale(0.62)` within a 380px-wide, 450px-tall white card container — no white space, no overlap
+- **Side labels removed**: Left wire labels and right engine brackets stripped (caused empty space); layer names are printed on the isometric slabs directly
+- **"Build & Launch" tagline**: Added "Build & launch RISC-V solutions seamlessly — from IP blocks to production firmware, powered by three AI engines." below the engine card
+
 ### Phase 6.2 — Build Pipeline Visualization (Completed - Apr 2026)
 - **Rich 7-step pipeline**: Replaced basic React card simulation with exact HTML artifact from user (`trusted_v_with_simulation.html`) injected via `dangerouslySetInnerHTML` with scoped CSS (`.tv-pipeline` prefix, `tvp*` animation names)
 - **Animated SVG scenes**: Step 4 satellite floating over Earth, Step 6 PCB simulation board with RISC-V SoC/RF/sensor/power chips + UART monitor + waveforms + LED blinks, Step 7 rocket launch with animated flames
