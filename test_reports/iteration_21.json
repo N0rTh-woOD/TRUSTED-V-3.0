@@ -1,0 +1,127 @@
+{
+  "summary": "Completed frontend testing of TrusteD-V Landing Page with Engine Diagram at NATIVE size. All 20 test cases PASSED. The engine diagram now renders at native 340px width (no CSS scale/transform compression). The 'Build and launch RISC-V solutions' text is correctly merged into the left hero description paragraph. No separate caption exists below the engine diagram.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/.screenshots/hero_engine_native_size.png"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "N/A (frontend only testing)",
+    "frontend": "100% (All 20 test cases passed)"
+  },
+  "test_credentials": {
+    "admin": "admin@trusted-v.com / bosch@2425"
+  },
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Engine diagram now renders at NATIVE 340px width (no CSS transform/scale). Canvas height is 640px. The 'Build and launch RISC-V solutions' text is merged into the hero left column paragraph, not as a separate caption below the engine. All 5 isometric layers readable at native size.",
+  "features_verified": {
+    "engine_diagram_native_size": {
+      "status": "PASSED",
+      "details": "Engine diagram renders at native 340px width (actual: 340px x 736px)"
+    },
+    "no_css_transform": {
+      "status": "PASSED",
+      "details": "No CSS transform/scale compression - both diagram and canvas transform: none"
+    },
+    "engine_header": {
+      "status": "PASSED",
+      "details": "TrusteD-V Engine header visible above diagram, no overlap with nosecone"
+    },
+    "isometric_layers_5": {
+      "status": "PASSED",
+      "details": "All 5 layers readable at native size: APPLICATION API, MIDDLEWARE, SoC/MODULE, DISCRETE CHIPS, IP BLOCKS"
+    },
+    "exhaust_flames_orange": {
+      "status": "PASSED",
+      "details": "Orange exhaust flames visible with #FF4400/#FF8800/#FFB800 colors"
+    },
+    "legend_visible": {
+      "status": "PASSED",
+      "details": "Legend visible below layers with all 5 categories"
+    },
+    "engine_keys_visible": {
+      "status": "PASSED",
+      "details": "All 3 engine keys visible: Code Engine, Chip Engine, Core Engine"
+    },
+    "merged_text_in_description": {
+      "status": "PASSED",
+      "details": "'Build and launch RISC-V solutions seamlessly' text found in left hero description paragraph"
+    },
+    "no_separate_caption_below_engine": {
+      "status": "PASSED",
+      "details": "No separate caption/text below the engine diagram on the right side"
+    },
+    "hero_logo": {
+      "status": "PASSED",
+      "details": "TrusteD-V logo visible in hero section"
+    },
+    "hero_badges": {
+      "status": "PASSED",
+      "details": "All 3 badges: Rust, RISC-V, Secure"
+    },
+    "hero_title": {
+      "status": "PASSED",
+      "details": "Build Secure RISC-V Systems with Rust"
+    },
+    "hero_description": {
+      "status": "PASSED",
+      "details": "Silicon-to-application platform description with merged 'Build and launch' text"
+    },
+    "cta_buttons": {
+      "status": "PASSED",
+      "details": "Download IDE and Developer Portal buttons with data-testid attributes"
+    },
+    "animated_stats": {
+      "status": "PASSED",
+      "details": "All 4 stats: RISC-V Boards, RTOS Options, Team Members, Hardware Partners"
+    },
+    "made_in_india_banner": {
+      "status": "PASSED",
+      "details": "data-testid='made-in-india-badge' with tricolor flag between hero and pipeline sections"
+    },
+    "build_pipeline_section": {
+      "status": "PASSED",
+      "details": "data-testid='simulation-section' with all 7 steps"
+    },
+    "navigation_about": {
+      "status": "PASSED",
+      "details": "About link navigates to /about"
+    },
+    "navigation_products": {
+      "status": "PASSED",
+      "details": "Products link navigates to /product-suite"
+    },
+    "navigation_developers": {
+      "status": "PASSED",
+      "details": "Developers link navigates to /developer-portal"
+    },
+    "navigation_marketplace": {
+      "status": "PASSED",
+      "details": "Marketplace link navigates to /marketplace"
+    },
+    "navigation_team": {
+      "status": "PASSED",
+      "details": "Team link navigates to /team"
+    },
+    "navigation_home": {
+      "status": "PASSED",
+      "details": "Home link works correctly"
+    }
+  },
+  "mocked_apis": {
+    "has_mocked_apis": false,
+    "mocked_apis_list": []
+  }
+}

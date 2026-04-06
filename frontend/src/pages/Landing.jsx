@@ -86,9 +86,9 @@ const EngineArchDiagram = () => {
       s.id = 'tv-eng-css';
       s.textContent = `
 .tv-eng{width:100%;font-family:'Helvetica Neue',Arial,sans-serif}
-.tv-eng .canvas{position:relative;width:340px;margin:0 auto;height:590px;overflow:visible}
+.tv-eng .canvas{position:relative;width:340px;margin:0 auto;height:640px;overflow:visible}
 .tv-eng .exhaust{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:400px;height:180px;pointer-events:none;z-index:1}
-.tv-eng .stack{position:absolute;left:50%;transform:translateX(-50%);bottom:60px;width:340px;z-index:2}
+.tv-eng .stack{position:absolute;left:50%;transform:translateX(-50%);bottom:50px;width:340px;z-index:2}
 .tv-eng .slab-row{position:relative;width:340px}
 .tv-eng .conn{display:flex;justify-content:center;align-items:center;gap:8px;padding:3px 0}
 .tv-eng .cdot{width:3px;height:3px;border-radius:50%;background:#ccc}
@@ -331,7 +331,7 @@ const Landing = () => {
               
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 max-w-xl">
                 The silicon-to-application platform for RISC-V embedded development. 
-                Three AI engines — from IP blocks to production firmware — everything powered by <strong>Rust</strong>.
+                Build and launch RISC-V solutions seamlessly with three AI engines — from IP blocks to production firmware — everything powered by <strong>Rust</strong>.
               </p>
               
               <div className="flex flex-wrap gap-4 mb-8">
@@ -355,11 +355,10 @@ const Landing = () => {
               </div>
             </div>
             
-            {/* Engine Preview on large screens */}
-            <div className="hidden lg:flex flex-col items-center justify-start">
-              <div className="w-full max-w-[380px] rounded-xl border border-slate-200 bg-white shadow-lg overflow-hidden">
-                {/* Engine header */}
-                <div className="text-center pt-4 pb-2 border-b border-slate-100">
+            {/* Engine Preview on large screens — native size, no compression */}
+            <div className="hidden lg:flex items-start justify-center pt-2">
+              <div className="w-[340px] flex-shrink-0">
+                <div className="text-center mb-2">
                   <h3 className="text-base font-extrabold tracking-tight">
                     <span className="text-foreground">T</span>
                     <span className="text-[#B7410E]">rust</span>
@@ -368,41 +367,25 @@ const Landing = () => {
                     <span className="text-[#2E7D32]"> Engine</span>
                   </h3>
                 </div>
-                {/* Scaled diagram */}
-                <div className="relative" style={{ height: '450px', overflow: 'hidden' }}>
-                  <div style={{ transform: 'scale(0.62)', transformOrigin: 'top center', position: 'absolute', top: '-10px', left: '50%', marginLeft: '-170px' }}>
-                    <EngineArchDiagram />
-                  </div>
-                </div>
+                <EngineArchDiagram />
               </div>
-              {/* CTA below engine */}
-              <p className="text-xs text-center text-muted-foreground mt-3 max-w-[340px] leading-relaxed font-medium">
-                Build & launch RISC-V solutions seamlessly — from IP blocks to production firmware, powered by three AI engines.
-              </p>
             </div>
           </div>
           
           {/* Mobile: show engine below on smaller screens */}
           <div className="lg:hidden flex flex-col items-center mb-8">
-            <div className="w-full max-w-[340px] rounded-xl border border-slate-200 bg-white shadow-lg overflow-hidden">
-              <div className="text-center pt-3 pb-2 border-b border-slate-100">
-                <h3 className="text-sm font-extrabold tracking-tight">
-                  <span className="text-foreground">T</span>
-                  <span className="text-[#B7410E]">rust</span>
-                  <span className="text-foreground">eD</span>
-                  <span className="text-[#C8A200]">-V</span>
-                  <span className="text-[#2E7D32]"> Engine</span>
-                </h3>
-              </div>
-              <div className="relative" style={{ height: '360px', overflow: 'hidden' }}>
-                <div style={{ transform: 'scale(0.52)', transformOrigin: 'top center', position: 'absolute', top: '-10px', left: '50%', marginLeft: '-170px' }}>
-                  <EngineArchDiagram />
-                </div>
-              </div>
+            <div className="text-center mb-2">
+              <h3 className="text-sm font-extrabold tracking-tight">
+                <span className="text-foreground">T</span>
+                <span className="text-[#B7410E]">rust</span>
+                <span className="text-foreground">eD</span>
+                <span className="text-[#C8A200]">-V</span>
+                <span className="text-[#2E7D32]"> Engine</span>
+              </h3>
             </div>
-            <p className="text-xs text-center text-muted-foreground mt-2 max-w-[300px] leading-relaxed font-medium">
-              Build & launch RISC-V solutions seamlessly — from IP blocks to production firmware.
-            </p>
+            <div className="w-[340px] max-w-full overflow-x-auto">
+              <EngineArchDiagram />
+            </div>
           </div>
         </div>
       </section>
