@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -102,17 +102,18 @@ const Login = () => {
             </Button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground">
-              Don't have an account?{" "}
-              <Link
-                to="/register"
-                data-testid="register-link"
-                className="text-primary hover:underline font-medium"
-              >
-                Create Account
-              </Link>
-            </p>
+          <div className="mt-6 p-4 rounded-lg bg-slate-50 border border-slate-200">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Demo Credentials</p>
+            <div className="space-y-1.5 text-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground">Email:</span>
+                <code className="text-xs bg-white px-2 py-0.5 rounded border font-mono">demo@trusted-v.com</code>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground">Password:</span>
+                <code className="text-xs bg-white px-2 py-0.5 rounded border font-mono">demo@2025</code>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>

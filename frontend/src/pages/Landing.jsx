@@ -8,7 +8,6 @@ import {
   Cog, Rocket, Wrench, CircuitBoard,
   Radio, FlaskConical, Flame, BarChart3, Server
 } from "lucide-react";
-import { BuildPipelineViz } from "@/components/BuildPipelineViz";
 import TrustedVLogo from "@/components/TrustedVLogo";
 import { PartnerLogo } from "@/components/PartnerLogos";
 
@@ -191,16 +190,17 @@ const EngineArchDiagram = () => {
 };
 
 /* ── 7-Stage Build Simulation ── */
-const Landing = () => {
-  const features = [
-    { icon: Shield, title: "Secure Boot & TEE", description: "Hardware root of trust with verified boot chain via rboot/rustBoot, TPM integration, and trusted execution." },
-    { icon: Cpu, title: "RISC-V Optimized Compilers", description: "State-of-the-art Rust toolchain with Pliron & Cranelift backends optimized for RISC-V targets." },
-    { icon: Zap, title: "AI-Powered IDE — Jarvyn", description: "Context-aware code generation, debugging, hardware-aware suggestions, and one-click flashing." },
-    { icon: Layers, title: "Comprehensive SDK", description: "Pre-integrated SDKs for heterogeneous chips including RISC-V cores, TPUs, and NPUs." },
-    { icon: Cog, title: "RTOS Integration", description: "FreeRTOS, Zephyr, Embassy — with TrusteD-V RTOS benchmarks showing 9x faster context switching." },
-    { icon: Lock, title: "Crypto Stack", description: "Native AES-256, RSA, ECC, SHA-3, and post-quantum cryptography support for embedded security." },
-  ];
+const simulationStages = [
+  { num: 1, title: "Requirement", badge: "Input", color: "#111", badgeBg: "#111", badgeText: "#fff", icon: Wrench, desc: "Natural language mission input parsed by TrusteD-V Engine to identify domain, constraints, and target architecture.", details: ["Mission specification", "Domain detection", "Architecture selection"] },
+  { num: 2, title: "Requirement Decomposition", badge: "Analysis", color: "#5F5E5A", badgeBg: "#F1EFE8", badgeText: "#444", icon: Layers, desc: "Requirements broken into functional blocks — Sensing, Compute, Power, Security — mapped to hardware and software needs.", details: ["Sensing & I/O mapping", "Compute & NPU allocation", "Security requirements"] },
+  { num: 3, title: "Core Engine — IP Accumulation", badge: "Core Engine", color: "#7B3F00", badgeBg: "#7B3F00", badgeText: "#FEF9F2", icon: CircuitBoard, desc: "Open-source and commercial IPs selected, verified, and composed into the RISC-V architecture.", chips: ["Ibex RV32IMC", "OpenTitan", "NPU IP", "AES-256", "DMA ctrl", "UART/SPI/I2C"], progress: [{ label: "Open IP", pct: 78, color: "#EF9F27" }, { label: "Custom IP", pct: 22, color: "#BA7517" }] },
+  { num: 4, title: "Chip Engine — SoC Integration", badge: "Chip Engine", color: "#0071c5", badgeBg: "#0071c5", badgeText: "#fff", icon: Cpu, desc: "IPs fused into chips, unified into SoC with AXI bus fabric. PCB designed and BOM finalized.", details: ["RISC-V SoC unified", "RF chip (LoRa+UHF)", "Memory map locked", "PCB + BOM ready"] },
+  { num: 5, title: "Code Engine — Firmware & API", badge: "Code Engine", color: "#B7410E", badgeBg: "#B7410E", badgeText: "#fff", icon: Code, desc: "Rust firmware auto-generated from hardware abstraction map. Full middleware and application API stack built.", progress: [{ label: "Firmware", pct: 100, color: "#B7410E" }, { label: "Middleware", pct: 100, color: "#D85A30" }, { label: "APIs", pct: 100, color: "#F0997B" }] },
+  { num: 6, title: "Simulation & Testing", badge: "Verification", color: "#0F6E56", badgeBg: "#0F6E56", badgeText: "#E1F5EE", icon: FlaskConical, desc: "Hardware and software tested together in a closed-loop simulation environment before tape-out.", progress: [{ label: "HW sim", pct: 100, color: "#0F6E56" }, { label: "SW sim", pct: 98, color: "#1D9E75" }, { label: "Coverage", pct: 98, color: "#5DCAA5" }] },
+  { num: 7, title: "Production Ready", badge: "Launch", color: "#2E7D32", badgeBg: "#2E7D32", badgeText: "#fff", icon: Rocket, desc: "Verified, validated, and cleared for production deployment. Complete bill of materials and manufacturing files ready.", summary: ["10 IP blocks", "3 chips", "SoC unified", "RTOS+HAL", "All tests pass"] },
+];
 
+const Landing = () => {
   const hardwarePartners = [
     { name: "C-DAC", description: "VEGA Processors" },
     { name: "C-DAC", description: "DHRUV64 SoCs" },
@@ -390,49 +390,91 @@ const Landing = () => {
         <div className="h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
       </section>
 
-      {/* ══ BUILD PIPELINE — Rich animated visualization ══ */}
-      <section className="py-20 bg-[#f8f7f4] border-t border-border overflow-hidden" data-testid="simulation-section">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
-          <div className="text-center mb-12">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Complete Build Pipeline</span>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto mt-2">
-              See how TrusteD-V transforms a natural-language requirement into production-ready hardware and firmware — end to end.
-            </p>
-          </div>
-          <BuildPipelineViz />
-        </div>
-      </section>
-
-      {/* ══ PLATFORM CAPABILITIES ══ */}
-      <section className="py-20 bg-slate-50 border-t border-border">
+      {/* ══ 7-STAGE BUILD PIPELINE ══ */}
+      <section className="py-20 bg-white border-t border-border overflow-hidden" data-testid="simulation-section">
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           <div className="text-center mb-16">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Platform Capabilities</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">TrusteD-V Engine</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-              Complete Development Ecosystem
+              Requirement &rarr; IP &rarr; Chips &rarr; SoC &rarr; Firmware &rarr; Sim &rarr; Launch
             </h2>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              Everything you need for secure RISC-V embedded development with Rust.
+              See the complete build pipeline — from a natural-language requirement to production-ready hardware and firmware.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <RevealItem key={index} delay={index * 100}>
-                  <Card data-testid={`feature-card-${index}`} className="bg-white border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 group h-full">
-                    <CardContent className="p-6">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
-                        <Icon className="w-6 h-6 text-primary" />
+          <div className="relative max-w-3xl mx-auto">
+            <div className="absolute left-8 top-12 bottom-12 w-0.5 bg-gradient-to-b from-slate-200 via-slate-300 to-green-300 hidden md:block" />
+            
+            <div className="space-y-6">
+              {simulationStages.map((stage, i) => {
+                const Icon = stage.icon;
+                return (
+                  <RevealItem key={i} delay={i * 100}>
+                    <div className="flex gap-4 md:gap-6 items-start relative" data-testid={`sim-stage-${stage.num}`}>
+                      <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10 border-2" style={{ backgroundColor: `${stage.color}10`, borderColor: stage.color }}>
+                        <Icon className="w-6 h-6" style={{ color: stage.color }} />
+                        <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[9px] font-bold flex items-center justify-center border-2 border-white" style={{ backgroundColor: stage.color, color: "#fff" }}>{stage.num}</span>
                       </div>
-                      <h3 className="font-semibold text-foreground mb-2 text-lg">{feature.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                </RevealItem>
-              );
-            })}
+                      <div className="flex-1 rounded-xl border bg-white p-4 hover:shadow-md transition-shadow" style={{ borderColor: `${stage.color}30` }}>
+                        <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                          <h4 className="font-bold text-sm text-foreground">{stage.title}</h4>
+                          <span className="text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ backgroundColor: stage.badgeBg, color: stage.badgeText }}>{stage.badge}</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground leading-relaxed mb-2">{stage.desc}</p>
+                        {stage.chips && (
+                          <div className="flex flex-wrap gap-1.5 mt-2">
+                            {stage.chips.map((chip, j) => (
+                              <span key={j} className="text-[10px] font-semibold px-2 py-0.5 rounded border" style={{ backgroundColor: `${stage.color}08`, borderColor: `${stage.color}30`, color: stage.color }}>{chip}</span>
+                            ))}
+                          </div>
+                        )}
+                        {stage.details && (
+                          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
+                            {stage.details.map((d, j) => (
+                              <span key={j} className="text-[10px] text-muted-foreground flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-current" />{d}</span>
+                            ))}
+                          </div>
+                        )}
+                        {stage.progress && (
+                          <div className="space-y-1.5 mt-3">
+                            {stage.progress.map((p, j) => (
+                              <div key={j} className="flex items-center gap-2">
+                                <span className="text-[9px] font-medium text-muted-foreground w-16 text-right">{p.label}</span>
+                                <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div className="h-full rounded-full transition-all duration-1000" style={{ width: `${p.pct}%`, backgroundColor: p.color }} /></div>
+                                <span className="text-[9px] font-medium w-8" style={{ color: p.color }}>{p.pct === 100 ? "PASS" : `${p.pct}%`}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {stage.summary && (
+                          <div className="flex flex-wrap gap-1.5 mt-2">
+                            {stage.summary.map((s, j) => (
+                              <span key={j} className="text-[9px] font-bold px-2 py-1 rounded-md border" style={{ backgroundColor: `${stage.color}10`, borderColor: `${stage.color}30`, color: stage.color }}>{s}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </RevealItem>
+                );
+              })}
+            </div>
+            
+            <div className="flex justify-center gap-6 mt-10 flex-wrap">
+              {[
+                { name: "Core Engine", color: "#7B3F00", sub: "IP blocks" },
+                { name: "Chip Engine", color: "#0071c5", sub: "SoC + chips" },
+                { name: "Code Engine", color: "#B7410E", sub: "Firmware + API" },
+                { name: "Verification", color: "#0F6E56", sub: "HW + SW sim" },
+              ].map((e, i) => (
+                <div key={i} className="flex items-center gap-1.5 text-xs">
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: e.color }} />
+                  <span className="font-bold" style={{ color: e.color }}>{e.name}</span>
+                  <span className="text-muted-foreground">{e.sub}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -573,7 +615,7 @@ const Landing = () => {
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/product-suite" className="hover:text-white transition-colors">Product Suite</Link></li>
                 <li><Link to="/marketplace" className="hover:text-white transition-colors">Marketplace</Link></li>
-                <li><Link to="/download-ide" className="hover:text-white transition-colors">Download IDE</Link></li>
+                <li><Link to="/download-ide" className="hover:text-white transition-colors">IDE — Jarvyn</Link></li>
               </ul>
             </div>
             <div>

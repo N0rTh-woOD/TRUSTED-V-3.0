@@ -199,7 +199,7 @@ const ProductSuite = () => {
                             }`}
                           >
                             {product.badge === "Flagship" ? (
-                              <><Download className="w-4 h-4 mr-1" /> Download IDE</>
+                              <>Learn More <ArrowRight className="w-4 h-4 ml-1" /></>
                             ) : (
                               <>Learn More <ArrowRight className="w-4 h-4 ml-1" /></>
                             )}
@@ -245,12 +245,12 @@ const ProductSuite = () => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground mb-4">Ready to Get Started?</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Download TrusteD-V IDE — Jarvyn or explore detailed product documentation.
+            Explore TrusteD-V IDE — Jarvyn or browse detailed product documentation.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/download-ide">
               <Button size="lg" className="font-semibold">
-                <Download className="w-4 h-4 mr-2" /> Download IDE
+                Learn More About IDE <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
             <Link to="/developer-portal">

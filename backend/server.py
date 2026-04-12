@@ -901,9 +901,7 @@ async def init_sample_data():
     
     # Create sample users (not displayed anywhere on the platform)
     sample_users = [
-        {"email": "developer@example.com", "username": "developer", "password": "dev@12345"},
-        {"email": "engineer@example.com", "username": "engineer", "password": "eng@12345"},
-        {"email": "tester@example.com", "username": "tester", "password": "test@12345"},
+        {"email": "demo@trusted-v.com", "username": "demo_user", "password": "demo@2025"},
     ]
     for user_data in sample_users:
         user_exists = await db.users.find_one({"email": user_data["email"]})
@@ -1211,36 +1209,7 @@ async def startup_event():
 # Auth endpoints
 @api_router.post("/auth/register", response_model=Token)
 async def register(user_data: UserRegister):
-    # Check if user exists
-    existing_user = await db.users.find_one({"email": user_data.email})
-    if existing_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    
-    # Create user
-    user = User(
-        email=user_data.email,
-        username=user_data.username,
-        password_hash=get_password_hash(user_data.password),
-        is_admin=False
-    )
-    
-    user_dict = user.model_dump()
-    user_dict['created_at'] = user_dict['created_at'].isoformat()
-    await db.users.insert_one(user_dict)
-    
-    # Create token
-    access_token = create_access_token(data={"sub": user.id})
-    
-    return Token(
-        access_token=access_token,
-        token_type="bearer",
-        user={
-            "id": user.id,
-            "email": user.email,
-            "username": user.username,
-            "is_admin": user.is_admin
-        }
-    )
+    raise HTTPException(status_code=403, detail="Registration is currently disabled. Please use the provided demo credentials to access the platform.")
 
 @api_router.post("/auth/login", response_model=Token)
 async def login(credentials: UserLogin):
