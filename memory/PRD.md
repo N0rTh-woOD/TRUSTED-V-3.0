@@ -41,47 +41,24 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Product Suite: Crypto Stack, Secure Boot (rboot/rustBoot), RTOS Benchmarks
 - Partners: Upbeat Tech added, WebIDE repositioned as capable counterpart
 
-### Phase 7 — Content Overhaul + Auth Lockdown (Completed - Apr 2026)
-- **Removed sections**: "Complete Development Ecosystem" from landing, Team page (route + nav + import)
-- **Pipeline reverted**: Replaced animated BuildPipelineViz HTML with card-based 7-stage pipeline (Requirement → IP → Chips → SoC → Firmware → Sim → Launch)
-- **IDE page rewritten**: Enriched with PDF report content — Hardware-Aware AI, Native Rust Analyzer, SVD visualization, Checkpoint system, supported RISC-V boards, changelog. "Download IDE" → "Learn More" across Products page
-- **Registration disabled**: POST /api/auth/register returns 403. Demo user seeded: `demo@trusted-v.com / demo@2025`. Login page shows demo credentials box.
-
-### Phase 6.5 — Section & Page Removals (Completed - Apr 2026)
-- **Removed**: Team page (route, nav link, import, footer link)
-- **Removed**: "Why Rust" section from Landing page (rustBenefits data + section JSX)
-- **Removed**: "Perfect Combination for Secure Embedded Systems" section (riscvRustBenefits, archLayers, archColorMap data + section JSX)
-- Cleaned up unused imports (Binary, GitBranch, Gauge)
-
-### Phase 6.4 — Engine Exhaust Fire Fix (Completed - Apr 2026)
-- **Fire position fixed**: Restored original artifact spacing (canvas 780px, stack bottom 175px) so exhaust flames render BELOW IP Blocks slab instead of behind it
-- The nozzle + flames now appear at the rocket bottom as intended
-
-### Phase 6.3 — Engine Diagram Native Size (Completed - Apr 2026)
-- **No compression**: Removed CSS `scale(0.62)` — diagram renders at native 340px width, all labels crisp and readable
-- **Removed card wrapper**: No border/shadow box around engine, cleaner layout
-- **Text merged**: "Build and launch RISC-V solutions seamlessly" moved from caption below engine into left hero description paragraph
-- **Canvas**: 640px height, stack bottom 50px — nosecone clears header, exhaust fully visible
-
-### Phase 6.2 — Build Pipeline Visualization (Completed - Apr 2026)
-- **Rich 7-step pipeline**: Replaced basic React card simulation with exact HTML artifact from user (`trusted_v_with_simulation.html`) injected via `dangerouslySetInnerHTML` with scoped CSS (`.tv-pipeline` prefix, `tvp*` animation names)
-- **Animated SVG scenes**: Step 4 satellite floating over Earth, Step 6 PCB simulation board with RISC-V SoC/RF/sensor/power chips + UART monitor + waveforms + LED blinks, Step 7 rocket launch with animated flames
-- **Content**: 7 steps (Requirement → Decomposition → Core Engine IP → Chip Engine SoC → Code Engine Firmware → Simulation → Launch), 10 IP chips, progress bars, mini-grid detail cards, engine legend
-- **New component**: `/app/frontend/src/components/BuildPipelineViz.jsx`
-
-### Phase 6.1 — Landing Page UI Refinement (Completed - Apr 2026)
-- **Engine visualization redesigned**: Replaced massive raw-HTML SVG engine diagram (~760px canvas) with a compact React/Tailwind `EngineArchCard` component showing 5 layers (Application API, Middleware, SoC/Module, Discrete Chips, IP Blocks) with 3 engine groupings (Code, Chip, Core) — no empty space, well-aligned
-- **"Made in India" consolidated**: Removed duplicate badges (was in hero left + under engine). Now a single full-width tricolor banner (saffron/white/green stripe + flag + "Made in India | Engineered for the world") between hero and simulation sections
-- **Engine diagram overlap fix**: No longer an issue since the raw HTML diagram was replaced with the compact card
-
 ### Phase 6 — Pages, Marketplace & Logos (Completed - Apr 2026)
-- **Products page**: Removed HSM Integration, 4 clean categories, desktop-aligned 3-column grid
-- **Dedicated detail pages**: `/product/secure-boot` (rboot + rustBoot with GitHub links, boot chain diagram), `/product/crypto-stack` (algorithm tables: Symmetric/Asymmetric/Hashing/Post-Quantum with status badges), `/product/rtos-benchmark` (4 RTOS options, benchmark table with 9x/12x metrics)
-- **Marketplace**: New tabbed page — Hardware tab (from API with partner logos, images, peripherals) + IP Blocks tab (Ibex, OpenTitan, CVA6, PULP RI5CY, DMA Controller, UART/SPI/I2C — with GitHub links)
-- **Partner logos**: SVG PartnerLogo component for C-DAC (blue), Mindgrove (green), Upbeat Tech (orange) — used in Marketplace header, hardware cards, Landing page, Partners page
-- **Business plans**: Aligned with document — 4 revenue streams (per-core/annual, per-project, per-device/per-deployment, custom/SLA)
-- **Contact Sales page**: Dedicated form with plan pre-selection, team size, project details
-- **Sales inquiry API**: `POST /api/applications/sales-inquiry` + admin endpoint
+- Products page: 4 clean categories, desktop-aligned 3-column grid
+- Dedicated detail pages: Secure Boot, Crypto Stack, RTOS Benchmark
+- Marketplace: Tabbed Hardware + IP Blocks
+- Partner logos: SVG components for C-DAC, Mindgrove, Upbeat Tech
+- Business plans: 4 revenue streams
+- Contact Sales page with plan pre-selection
+- Sales inquiry API
+
+### Phase 7 — Content Overhaul + Auth Lockdown (Completed - Apr 2026)
+- Removed sections: "Complete Development Ecosystem", Team page, "Why Rust", "Perfect Combination"
+- Pipeline reverted to card-based 7-stage pipeline
+- Registration disabled at API level
+- Demo credentials saved to test_credentials.md only (not shown on UI)
+
+### Phase 8 — IDE Page & Crypto Stack Overhaul (Completed - Apr 2026)
+- **IDE Page (IDEDownloads.jsx)**: Overhauled with PDF report content — 21 purpose-built features (Hardware-Aware AI, Native Rust Analyzer, SVD visualization, Checkpoint system, etc.), comparison table vs general IDEs (8 aspects), Benefits section, professional dark hero. Unused imports cleaned.
+- **Crypto Stack Page (CryptoStackPage.jsx)**: Complete rewrite with user-provided algorithm data — 8 categories: Hashing (SHA-2/SHA-3, SHAKE — BLAKE removed), PQC Signatures (ML-DSA, SLH-DSA), PQC Key Exchange (ML-KEM), Symmetric Encryption (AES + modes with CBC/CFB deprecation note), Classical Signatures (ECDSA/EdDSA, RSA), Classical Key Exchange (ECDH, RSA-KEM), Randomness (PRNG DRBG), Future/Advanced (Side-Channel Protections). Color-coded category headers, monospaced variant tags, NIST FIPS standards references, dark hero with standards compliance card.
 
 ## Key Pages & Routes
 | Route | Page | Description |
@@ -90,20 +67,20 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 | `/about` | About | Company info, animated counters |
 | `/product-suite` | Products | 4 categories, Learn More links |
 | `/product/secure-boot` | Secure Boot | rboot + rustBoot, GitHub, boot chain |
-| `/product/crypto-stack` | Crypto Stack | Algorithm tables, security features |
+| `/product/crypto-stack` | Crypto Stack | 8-category algorithm reference tables |
 | `/product/rtos-benchmark` | RTOS Benchmarks | 4 RTOS options, comparison table |
 | `/marketplace` | Marketplace | Hardware + IP tabs with logos |
 | `/developer-portal` | Developers | SDK docs, expandable sections |
-| `/download-ide` | IDE Download | Jarvyn IDE binaries |
+| `/download-ide` | IDE Download | 21 features, comparison, benefits |
 | `/contact-sales` | Sales | Inquiry form with plan selection |
 | `/partner-registration` | Partner Registration | Partnership application |
 | `/board-support` | Board Support | Board support request |
-| `/team` | Team | 5-row team hierarchy |
 | `/partners` | Partners | C-DAC, Mindgrove, Upbeat Tech |
 | `/admin/*` | Admin | Dashboard, Hardware, IDE, Applications |
 
 ## Key API Endpoints
 - `POST /api/auth/login` — User login
+- `POST /api/auth/register` — DISABLED (returns 400/403)
 - `GET /api/hardware` — Hardware catalog
 - `GET /api/ide-downloads` — IDE listings
 - `POST /api/applications/sales-inquiry` — Sales inquiry
@@ -112,20 +89,17 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - `POST /api/applications/partnership` — Partnership application
 
 ## Prioritized Backlog
-### P0 — Critical
-- Refactor monolithic `server.py` into modular APIRouter modules
-
 ### P1 — High
+- Refactor monolithic `server.py` into modular APIRouter modules
 - Complete "Solution Builder" AI code generation
-- Team member photos (as provided)
 
 ### P2 — Medium
-- Public release (remove auth lock)
-- Admin panel: sales inquiries tab
-- Customer testimonials
+- Admin panel: sales inquiries tab in AdminApplications.jsx
+- Customer testimonials/case studies section
 
 ### P3 — Future
-- Enhanced project versioning
+- Public release (remove auth lock)
+- Enhanced project versioning UI in "My Projects"
 - Email notifications for applications
 
 ## 3rd Party Integrations
