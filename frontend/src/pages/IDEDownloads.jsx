@@ -1,105 +1,150 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
-  CheckCircle2, Cpu, Code, Zap, ChevronRight,
+  CheckCircle2, Cpu, Code, Zap, ChevronRight, ArrowRight,
   Bug, Layers, Rocket, Shield, Sparkles, Brain,
   FileCode, Settings, Eye, Save, Terminal as TerminalIcon,
-  Cog, MonitorSmartphone, Wrench, Box, FileText
+  Cog, MonitorSmartphone, Wrench, Box, FileText,
+  GitBranch, FolderTree, Play, SplitSquareHorizontal,
+  FileSearch, AlertTriangle, Package, HardDrive
 } from "lucide-react";
 
 const IDEDownloads = () => {
 
-  const coreFeatures = [
+  const keyFeatures = [
+    {
+      icon: HardDrive,
+      title: "Hardware-Focused Development Platform",
+      description: "Built for semiconductor, embedded system, and hardware developers. Supports workflows with chips, peripheral devices, registers, and hardware-level programming — far more efficient than general-purpose IDEs.",
+    },
     {
       icon: Brain,
-      title: "Hardware-Aware AI Engine",
-      description: "Jarvyn AI is trained specifically on GPIO, UART, SPI, I2C, timers, registers, HAL, and embedded Rust crates. Not a generic LLM — a dedicated embedded intelligence.",
-      highlights: ["Context-aware code generation", "Hardware config auto-detection", "Datasheet-informed suggestions"],
+      title: "AI Trained on Hardware-Specific Knowledge",
+      description: "AI trained on GPIO communication, UART interfaces, device registers, HAL packages, embedded crates, and peripheral modules. Access relevant hardware information directly within the IDE while coding.",
     },
     {
       icon: Code,
-      title: "Built-in Rust Analyzer",
-      description: "Native Rust Analyzer integration — not a plugin. Real-time type inference, error diagnostics, auto-completion, and macro expansion built directly into the editor core.",
-      highlights: ["Zero-config setup", "Live error diagnostics", "Macro expansion support"],
-    },
-    {
-      icon: Bug,
-      title: "Integrated Debugging",
-      description: "Full probe-rs and LLDB debugging with breakpoints, variable inspection, call stack, register view, and peripheral state visualization — all within the IDE.",
-      highlights: ["probe-rs + LLDB support", "Register & peripheral view", "SWD/JTAG interfaces"],
+      title: "Built-in Rust Analyzer (Native Integration)",
+      description: "Rust analyzer integrated directly into the IDE core — no external plugins needed. Real-time code analysis, intelligent auto-completion, faster error detection, and consistent Rust development support.",
     },
     {
       icon: Eye,
-      title: "Hover-Based Hardware Insights",
-      description: "Hover over any register name, HAL function, or peripheral reference to see real-time documentation, bit-field layouts, and configuration details from SVD files.",
-      highlights: ["Register bit-field visualization", "SVD file integration", "Live documentation overlay"],
+      title: "Hover-Based Insights",
+      description: "View detailed information about variables, functions, and types by hovering. Access relevant documentation and contextual details without leaving the workspace.",
     },
     {
       icon: Sparkles,
-      title: "AI Assistance Panel",
-      description: "Dedicated side panel for Jarvyn AI — ask hardware questions, generate driver code, debug peripheral issues, and get architecture recommendations without leaving your editor.",
-      highlights: ["Natural language queries", "Driver code generation", "Architecture guidance"],
+      title: "Integrated AI Assistance Panel",
+      description: "Interact with an intelligent AI system directly while coding — ask questions, receive debugging support, generate code, create files, and get contextual documentation insights without context switching.",
     },
     {
-      icon: Layers,
-      title: "Smart Builder Engine",
-      description: "Project scaffolding with pre-configured Cargo.toml, driver setup, and HAL integration. Supports bare-metal, FreeRTOS, Zephyr, and Embassy async frameworks.",
-      highlights: ["Template-based scaffolding", "Auto Cargo.toml management", "Multi-framework support"],
-    },
-  ];
-
-  const technicalCapabilities = [
-    {
-      icon: MonitorSmartphone,
-      title: "SVD Support & Hardware Visualization",
-      description: "Load System View Description files to visualize the entire peripheral map of your target MCU. See register addresses, bit fields, and access types at a glance.",
+      icon: Wrench,
+      title: "Built-from-Scratch Architecture",
+      description: "Developed from the ground up for better performance optimization, tighter feature integration, improved flexibility, and a cleaner user experience. Not a fork of any existing editor.",
     },
     {
-      icon: FileText,
-      title: "TOML Validation & Crate Suggestions",
-      description: "Real-time TOML validation for Cargo.toml with AI-powered crate version suggestions. Jarvyn recommends compatible embedded crates based on your target hardware.",
+      icon: FolderTree,
+      title: "Structured Project File Explorer",
+      description: "Navigation designed for hardware and embedded development involving multiple modules, crates, configuration files, and device-related components.",
     },
     {
       icon: Settings,
-      title: "Manual Hardware Selection + AI Config",
-      description: "Choose your target board and MCU manually, then let Jarvyn AI auto-configure memory maps, linker scripts, and peripheral initialization code.",
+      title: "Integrated Development Controls",
+      description: "File management, search and replacement, run/build options, and terminal integration — a familiar workflow supporting advanced hardware development within a single environment.",
+    },
+    {
+      icon: SplitSquareHorizontal,
+      title: "Split Editor for Multitasking",
+      description: "Split editor views allow developers to work on multiple files simultaneously — essential when referencing datasheets alongside firmware code.",
+    },
+    {
+      icon: GitBranch,
+      title: "Integrated Git Version Control",
+      description: "Built-in Git support for committing changes, tracking file modifications, and managing repositories — no reliance on external tools, smoother workflow for collaborative projects.",
     },
     {
       icon: Save,
-      title: "Checkpoint System + Auto-Save",
-      description: "Every manual save creates a named checkpoint for instant rollback. Auto-save triggers every 30 seconds. Never lose work, even during hardware debugging crashes.",
+      title: "Auto-Save (Every 30 Seconds)",
+      description: "Automatically saves changes at regular intervals, preventing loss of work due to unexpected interruptions. Focus on coding without manual saving.",
+    },
+    {
+      icon: Bug,
+      title: "Integrated Debugging Support",
+      description: "Set breakpoints, step through code execution, inspect variable values, and analyze program behavior in real time. Crucial for understanding code-device interaction in embedded systems.",
+    },
+    {
+      icon: Play,
+      title: "Build and Run Support",
+      description: "Compile and execute programs directly within the IDE. Essential for rapid testing and iteration to verify device behavior and program correctness without external tools.",
     },
     {
       icon: TerminalIcon,
-      title: "Integrated Logs & Terminal",
-      description: "Built-in serial monitor, UART logger, and system terminal. View real-time device output alongside your code with configurable baud rates and filters.",
+      title: "Integrated Terminal",
+      description: "Execute build commands, scripts, version control operations, and interact with development tools directly within the IDE — reduces context switching for hardware workflows.",
+    },
+    {
+      icon: AlertTriangle,
+      title: "Real-Time Diagnostics & Error Detection",
+      description: "Identify errors, warnings, and potential issues while writing code. Highlights syntax errors, type mismatches, unused variables — with suggestions for resolving issues.",
+    },
+    {
+      icon: Package,
+      title: "Crate Version Suggestions in Cargo.toml",
+      description: "Intelligent suggestions for selecting crate versions. Recommends latest stable versions for dependencies, ensuring compatibility and simplifying dependency management.",
+    },
+    {
+      icon: FileText,
+      title: "TOML Validation Support",
+      description: "Validates TOML files in real time — identifies syntax errors, invalid configurations, and incorrect dependency definitions. Reduces build failures and improves reliability.",
     },
     {
       icon: Cpu,
-      title: "RISC-V Native Toolchain",
-      description: "First-class RISC-V support with pre-configured cross-compilation targets. Supports C-DAC VEGA, Mindgrove Secure IoT, and custom RISC-V boards out of the box.",
+      title: "Manual Hardware Selection + AI Config",
+      description: "Select target hardware platform, peripherals, and middleware from a welcome interface. AI generates relevant project files, configurations, and code tailored to your hardware setup.",
+    },
+    {
+      icon: FileSearch,
+      title: "Checkpoints for Every Manual Save",
+      description: "Every manual save creates a snapshot of the current code state. Track changes over time and revert to previous versions — useful during experimentation, debugging, and iterative development.",
+    },
+    {
+      icon: FileCode,
+      title: "Integrated Logs System",
+      description: "Records build outputs, runtime messages, errors, and debugging information. Track application behavior, identify issues, and analyze system performance in one place.",
+    },
+    {
+      icon: MonitorSmartphone,
+      title: "SVD Support for Hardware Visualization",
+      description: "Structured visualization of hardware components — registers, peripherals, memory mappings. View device-level configuration within the IDE, reducing reliance on external datasheets.",
     },
   ];
 
-  const architectureHighlights = [
-    { label: "Built-from-scratch", detail: "Not a VS Code fork. Custom architecture optimized for embedded workflows." },
-    { label: "Offline capable", detail: "Core features work without internet. AI assistance available offline with local models." },
-    { label: "Minimal footprint", detail: "Designed for resource-constrained development machines. Under 500MB installed." },
-    { label: "Plugin-free core", detail: "Rust Analyzer, debugger, and terminal are native — no plugin overhead." },
+  const comparisonData = [
+    { aspect: "Development Focus", general: "Software, web, and application development workflows", ours: "Hardware and semiconductor development using Rust" },
+    { aspect: "AI Assistance", general: "Generic coding suggestions without deep hardware awareness", ours: "AI trained on GPIO, UART, peripheral communication, embedded crates" },
+    { aspect: "Rust Tooling", general: "Requires installing rust-analyzer plugin/extension", ours: "Built-in native Rust analyzer — no plugins needed" },
+    { aspect: "Hardware Awareness", general: "Limited. Relies on external datasheets and documentation", ours: "Designed with awareness of registers, peripherals, device-level interactions" },
+    { aspect: "Documentation Access", general: "External docs, datasheets, and online resources needed", ours: "AI provides contextual hardware info directly inside the IDE" },
+    { aspect: "Setup Complexity", general: "Multiple plugins, toolchains, and extensions required", ours: "Built-in tools simplify setup for hardware-focused Rust development" },
+    { aspect: "Context Switching", general: "Frequent switching between IDE, docs, and datasheets", ours: "Integrated AI + hardware support — everything within the IDE" },
+    { aspect: "Project Structure", general: "Optimized for software modules and application files", ours: "Handles hardware modules, crates, config files, device components" },
   ];
 
-  const supportedBoards = [
-    { name: "C-DAC VEGA Processors", desc: "THEJAS32 (RV32IM) and THEJAS64 (RV64GC)" },
-    { name: "Mindgrove Secure IoT SoC", desc: "Custom RISC-V core with security extensions" },
-    { name: "Upbeat Tech", desc: "RISC-V development platforms" },
-    { name: "ESP32-C3 / C6", desc: "Espressif RISC-V WiFi/BLE SoCs" },
-    { name: "Custom RISC-V targets", desc: "Any RV32/RV64 with SVD file support" },
+  const motivations = [
+    "Providing a specialized environment for hardware-focused Rust development",
+    "Reducing dependency on external documentation and plugins",
+    "Improving developer productivity through integrated AI assistance",
+    "Supporting device-level programming for chips, peripherals, and embedded systems",
+    "Delivering a modern, streamlined experience with a clean interface",
   ];
 
-  const whatsNew = [
-    { version: "1.2.0", date: "Feb 2026", items: ["Jarvyn AI context-aware completions", "SVD hardware visualization", "Checkpoint rollback system", "TOML crate suggestions"] },
-    { version: "1.1.0", date: "Dec 2025", items: ["Embassy async framework support", "RISC-V vector extension debugging", "Auto-save (30s interval)", "Integrated serial monitor"] },
-    { version: "1.0.0", date: "Oct 2025", items: ["Initial release with Rust toolchain", "C-DAC VEGA board support", "Integrated probe-rs debugger", "Smart Builder engine"] },
+  const benefits = [
+    "Faster hardware-focused Rust development workflow",
+    "Reduced need to search external documentation",
+    "Seamless AI-assisted coding and debugging support",
+    "No dependency on plugin installation for core Rust tooling",
+    "Improved productivity through a specialized development environment",
+    "Optimized platform for embedded and semiconductor development",
   ];
 
   return (
@@ -110,68 +155,88 @@ const IDEDownloads = () => {
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-[#4a7dff]/20 flex items-center justify-center">
-                <Rocket className="w-5 h-5 text-[#4a7dff]" />
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <Badge className="bg-[#4a7dff]/10 text-[#6b9aff] border-[#4a7dff]/30 text-xs">Jarvyn Rust IDE</Badge>
+                <Badge className="bg-orange-500/10 text-orange-400 border-orange-500/30 text-xs">Built from Scratch</Badge>
               </div>
-              <Badge className="bg-[#4a7dff]/10 text-[#6b9aff] border-[#4a7dff]/30 text-xs">v1.2.0 — Latest</Badge>
-              <Badge className="bg-orange-500/10 text-orange-400 border-orange-500/30 text-xs">Built from Scratch</Badge>
+              
+              <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
+                The IDE Built for
+                <span className="block text-[#6b9aff]">Hardware Developers</span>
+              </h1>
+              
+              <p className="text-base text-slate-400 leading-relaxed mb-6 max-w-xl">
+                Modern code editors like Zed and Lapce offer high performance for general programming — but aren't designed for hardware-focused development. 
+                Jarvyn extends beyond with specialized tooling, AI assistance trained on hardware knowledge, and integrated Rust support tailored for embedded systems.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-3">
+                {["Hardware-aware AI", "Native Rust Analyzer", "SVD visualization", "Checkpoint system", "Auto-save", "Integrated debugger"].map((tag) => (
+                  <span key={tag} className="flex items-center gap-1.5 text-sm text-slate-400">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-400 flex-shrink-0" />
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-4 leading-tight">
-              TrusteD-V IDE
-              <span className="block text-[#6b9aff] text-2xl md:text-3xl mt-2 font-medium">Jarvyn</span>
-            </h1>
-            
-            <p className="text-lg text-slate-400 leading-relaxed mb-8 max-w-xl">
-              The AI-native development environment for RISC-V embedded systems. 
-              Built from scratch — not a VS Code fork. Hardware-aware AI, native Rust Analyzer, 
-              integrated debugging, and one-click firmware deployment.
-            </p>
-            
-            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
-              {["Hardware-aware AI", "Native Rust Analyzer", "SVD visualization", "Checkpoint system", "Offline capable"].map((tag) => (
-                <span key={tag} className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
-                  {tag}
-                </span>
-              ))}
+            {/* Problem Statement Card */}
+            <div className="bg-[#252a3e] rounded-xl border border-slate-700/50 p-6">
+              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">The Problem</h3>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-start gap-3 text-sm text-slate-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0" />
+                  General-purpose IDEs are optimized for software development, not hardware
+                </div>
+                <div className="flex items-start gap-3 text-sm text-slate-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0" />
+                  Hardware-specific tools are limited to specific ecosystems
+                </div>
+                <div className="flex items-start gap-3 text-sm text-slate-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0" />
+                  Developers rely on external docs, plugins, and fragmented workflows
+                </div>
+              </div>
+              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Our Solution</h3>
+              <div className="space-y-3">
+                {motivations.map((m, i) => (
+                  <div key={i} className="flex items-start gap-3 text-sm text-slate-300">
+                    <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                    {m}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Core Features */}
+      {/* All 21 Key Features */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Core Features</span>
-            <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Purpose-Built for Embedded Rust</h2>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Capabilities</span>
+            <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Key Features</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Every feature is designed for embedded development — from hardware-aware AI to integrated debugging and SVD visualization.
+              21 purpose-built features for hardware and embedded system development — from AI-powered code generation to SVD hardware visualization.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {coreFeatures.map((feature, index) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {keyFeatures.map((feature, index) => {
               const Icon = feature.icon;
               return (
                 <Card key={index} data-testid={`ide-feature-${index}`} className="bg-white border-border hover:shadow-lg hover:border-primary/20 transition-all duration-300 group h-full">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                      <Icon className="w-5 h-5 text-primary group-hover:text-white transition-colors" />
+                  <CardContent className="p-5 flex flex-col h-full">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors">
+                        <Icon className="w-4.5 h-4.5 text-primary group-hover:text-white transition-colors" />
+                      </div>
+                      <h3 className="font-semibold text-foreground text-sm leading-tight">{feature.title}</h3>
                     </div>
-                    <h3 className="font-semibold text-foreground mb-2 text-base">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">{feature.description}</p>
-                    <div className="mt-auto space-y-1">
-                      {feature.highlights.map((h, i) => (
-                        <div key={i} className="flex items-center gap-1.5 text-xs text-primary/80">
-                          <ChevronRight className="w-3 h-3 flex-shrink-0" />
-                          {h}
-                        </div>
-                      ))}
-                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{feature.description}</p>
                   </CardContent>
                 </Card>
               );
@@ -180,99 +245,72 @@ const IDEDownloads = () => {
         </div>
       </section>
 
-      {/* Architecture Highlights */}
-      <section className="py-16 bg-white border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Architecture</span>
-            <h2 className="text-3xl font-bold text-foreground mt-2">Built Different</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {architectureHighlights.map((item, i) => (
-              <div key={i} className="p-5 rounded-lg bg-slate-50 border border-slate-200 hover:border-primary/30 transition-colors">
-                <h4 className="font-bold text-sm text-foreground mb-1">{item.label}</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">{item.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technical Capabilities */}
-      <section className="py-20 bg-slate-50 border-t border-border">
+      {/* Comparison Table */}
+      <section className="py-20 bg-white border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Capabilities</span>
-            <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Deep Technical Integration</h2>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Comparison</span>
+            <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Jarvyn vs General IDEs</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              See how a purpose-built hardware IDE differs from VS Code, IntelliJ, Zed, and Lapce.
+            </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {technicalCapabilities.map((cap, i) => {
-              const Icon = cap.icon;
-              return (
-                <div key={i} className="flex gap-4 p-5 bg-white rounded-lg border border-slate-200 hover:shadow-md transition-all">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-sm text-foreground mb-1">{cap.title}</h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{cap.description}</p>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="max-w-5xl mx-auto overflow-x-auto">
+            <table className="w-full text-sm border-collapse" data-testid="ide-comparison-table">
+              <thead>
+                <tr className="border-b-2 border-slate-200">
+                  <th className="text-left py-3 px-4 font-semibold text-muted-foreground w-[180px]">Aspect</th>
+                  <th className="text-left py-3 px-4 font-semibold text-muted-foreground">General IDEs <span className="text-xs font-normal">(VS Code, Zed, Lapce)</span></th>
+                  <th className="text-left py-3 px-4 font-semibold text-primary">Jarvyn IDE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonData.map((row, i) => (
+                  <tr key={i} className={`border-b border-slate-100 ${i % 2 === 0 ? "bg-slate-50/50" : ""}`}>
+                    <td className="py-3 px-4 font-medium text-foreground text-xs">{row.aspect}</td>
+                    <td className="py-3 px-4 text-muted-foreground text-xs">{row.general}</td>
+                    <td className="py-3 px-4 text-foreground text-xs font-medium">{row.ours}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      {/* Supported Boards */}
-      <section className="py-16 bg-white border-t border-border">
+      {/* Benefits */}
+      <section className="py-16 bg-slate-50 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Hardware Support</span>
-            <h2 className="text-3xl font-bold text-foreground mt-2">Supported RISC-V Boards</h2>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Why Jarvyn</span>
+            <h2 className="text-3xl font-bold text-foreground mt-2">Benefits</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {supportedBoards.map((board, i) => (
-              <div key={i} className="flex items-start gap-3 p-4 rounded-lg border border-slate-200 bg-slate-50">
-                <Cpu className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-semibold text-sm text-foreground">{board.name}</h4>
-                  <p className="text-xs text-muted-foreground">{board.desc}</p>
-                </div>
+            {benefits.map((b, i) => (
+              <div key={i} className="flex items-start gap-3 p-4 rounded-lg bg-white border border-slate-200">
+                <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-foreground font-medium">{b}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* What's New */}
-      <section className="py-20 bg-slate-50 border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Changelog</span>
-            <h2 className="text-3xl font-bold text-foreground mt-2">What's New</h2>
-          </div>
-          
-          <div className="max-w-3xl mx-auto space-y-6">
-            {whatsNew.map((release, i) => (
-              <Card key={i} className={`bg-white ${i === 0 ? "border-primary/30 shadow-md" : ""}`}>
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Badge className={i === 0 ? "bg-primary text-white" : "bg-slate-100 text-slate-700"}>v{release.version}</Badge>
-                    <span className="text-sm text-muted-foreground">{release.date}</span>
-                    {i === 0 && <Badge className="bg-green-100 text-green-800 border-green-200 text-xs">Latest</Badge>}
-                  </div>
-                  <ul className="space-y-2">
-                    {release.items.map((item, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <ChevronRight className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+      {/* Conclusion / CTA */}
+      <section className="py-20 bg-primary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">Purpose-Built for the Future of Embedded</h2>
+          <p className="text-primary-foreground/80 mb-6 max-w-2xl mx-auto text-base leading-relaxed">
+            The increasing complexity of embedded systems and semiconductor development demands specialized tools beyond traditional software-focused IDEs. 
+            Jarvyn combines hardware-focused tooling, built-in Rust analyzer, and AI assistance trained on hardware knowledge to streamline your workflow.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-primary-foreground/70">
+            {["Semiconductor Dev", "Embedded Systems", "RISC-V", "Peripheral Programming", "Chip Design"].map((tag) => (
+              <span key={tag} className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/50" />
+                {tag}
+              </span>
             ))}
           </div>
         </div>
