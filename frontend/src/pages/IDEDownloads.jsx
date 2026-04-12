@@ -1,10 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
-  CheckCircle2, Cpu, Code, Zap, ChevronRight, ArrowRight,
-  Bug, Layers, Rocket, Shield, Sparkles, Brain,
+  CheckCircle2, Cpu, Code,
+  Bug, Sparkles, Brain,
   FileCode, Settings, Eye, Save, Terminal as TerminalIcon,
-  Cog, MonitorSmartphone, Wrench, Box, FileText,
+  MonitorSmartphone, Wrench, FileText,
   GitBranch, FolderTree, Play, SplitSquareHorizontal,
   FileSearch, AlertTriangle, Package, HardDrive
 } from "lucide-react";
