@@ -1,16 +1,16 @@
-# TrusteD-V Test Credentials
+## TrusteD-V Test Credentials
 
-## Admin Account
-- **Email:** admin@trusted-v.com
-- **Password:** bosch@2425
-- **Role:** admin
+### Admin User
+- Email: `admin@trusted-v.com`
+- Password: `bosch@2425`
+- Role: Admin (full access including admin dashboard)
 
-## Demo Account
-- **Email:** demo@trusted-v.com
-- **Password:** demo@2025
-- **Role:** user (non-admin)
+### Demo User
+- Email: `demo@trusted-v.com`
+- Password: `demo@2025`
+- Role: Normal user (standard platform access)
 
-## Notes
-- Public registration is DISABLED (returns 403)
+### Notes
+- Public registration is **disabled** (returns 403)
 - Demo credentials are displayed on the login page
-- Site requires authentication to access any page
+- Login page is at `/login`

@@ -41,6 +41,12 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Product Suite: Crypto Stack, Secure Boot (rboot/rustBoot), RTOS Benchmarks
 - Partners: Upbeat Tech added, WebIDE repositioned as capable counterpart
 
+### Phase 7 — Content Overhaul + Auth Lockdown (Completed - Apr 2026)
+- **Removed sections**: "Complete Development Ecosystem" from landing, Team page (route + nav + import)
+- **Pipeline reverted**: Replaced animated BuildPipelineViz HTML with card-based 7-stage pipeline (Requirement → IP → Chips → SoC → Firmware → Sim → Launch)
+- **IDE page rewritten**: Enriched with PDF report content — Hardware-Aware AI, Native Rust Analyzer, SVD visualization, Checkpoint system, supported RISC-V boards, changelog. "Download IDE" → "Learn More" across Products page
+- **Registration disabled**: POST /api/auth/register returns 403. Demo user seeded: `demo@trusted-v.com / demo@2025`. Login page shows demo credentials box.
+
 ### Phase 6.5 — Section & Page Removals (Completed - Apr 2026)
 - **Removed**: Team page (route, nav link, import, footer link)
 - **Removed**: "Why Rust" section from Landing page (rustBenefits data + section JSX)
