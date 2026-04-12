@@ -293,65 +293,121 @@ const DeveloperPortal = () => {
       </section>
 
       {/* Code Example */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-20 bg-[#1a1d2e]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-foreground">Quick Start Example</h2>
-            <p className="text-muted-foreground mt-2">Get up and running with a simple blinky example on RISC-V</p>
+          <div className="text-center mb-12">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Quick Start</span>
+            <h2 className="text-3xl font-bold text-white mt-2">Start Building in Minutes</h2>
+            <p className="text-slate-400 mt-2 max-w-lg mx-auto">A minimal LED blink example for RISC-V — from zero to hardware in under 30 lines of Rust.</p>
           </div>
           
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-slate-900 rounded-xl overflow-hidden shadow-xl">
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-700">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="ml-2 text-xs text-slate-400">src/main.rs — TrusteD-V IDE Jarvyn</span>
+          <div className="max-w-5xl mx-auto grid lg:grid-cols-[1fr_300px] gap-6 items-start">
+            {/* Code Editor */}
+            <div className="rounded-xl overflow-hidden shadow-2xl border border-slate-700/60 bg-[#0d1117]" data-testid="quick-start-code-block">
+              {/* Title Bar */}
+              <div className="flex items-center justify-between px-4 py-2.5 bg-[#161b22] border-b border-slate-700/60">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <FileCode className="w-3.5 h-3.5 text-slate-500" />
+                  <span className="text-xs text-slate-400 font-mono">src/main.rs</span>
+                </div>
+                <Badge className="bg-primary/15 text-primary border-primary/30 text-[10px] px-2 py-0">Jarvyn IDE</Badge>
               </div>
-              <pre className="p-6 text-sm overflow-x-auto">
-<code className="text-green-400">{`#![no_std]
-#![no_main]
-
-use panic_halt as _;
-use riscv_rt::entry;
-use embedded_hal::digital::OutputPin;
-
-// Use the HAL for your specific board
-use your_board_hal::{Peripherals, gpio::GpioExt};
-
-#[entry]
-fn main() -> ! {
-    // Take ownership of peripherals
-    let dp = Peripherals::take().unwrap();
-    
-    // Configure GPIO pin as output
-    let gpioa = dp.GPIOA.split();
-    let mut led = gpioa.pa5.into_push_pull_output();
-
-    loop {
-        // Toggle LED
-        led.set_high().unwrap();
-        delay_ms(500);
-        led.set_low().unwrap();
-        delay_ms(500);
-    }
-}`}</code>
-              </pre>
+              {/* Code with line numbers + syntax highlighting */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-[13px] leading-[1.65] font-mono">
+                  <tbody>
+                    {[
+                      { n: 1,  code: <><span className="text-[#ff7b72]">#![</span><span className="text-[#d2a8ff]">no_std</span><span className="text-[#ff7b72]">]</span></> },
+                      { n: 2,  code: <><span className="text-[#ff7b72]">#![</span><span className="text-[#d2a8ff]">no_main</span><span className="text-[#ff7b72]">]</span></> },
+                      { n: 3,  code: null },
+                      { n: 4,  code: <><span className="text-[#ff7b72]">use</span> <span className="text-[#c9d1d9]">panic_halt</span> <span className="text-[#ff7b72]">as</span> <span className="text-[#c9d1d9]">_;</span></> },
+                      { n: 5,  code: <><span className="text-[#ff7b72]">use</span> <span className="text-[#c9d1d9]">riscv_rt::</span><span className="text-[#d2a8ff]">entry</span><span className="text-[#c9d1d9]">;</span></> },
+                      { n: 6,  code: <><span className="text-[#ff7b72]">use</span> <span className="text-[#c9d1d9]">embedded_hal::digital::</span><span className="text-[#ffa657]">OutputPin</span><span className="text-[#c9d1d9]">;</span></> },
+                      { n: 7,  code: null },
+                      { n: 8,  code: <span className="text-[#8b949e] italic">{"// Board HAL — replace with your target"}</span> },
+                      { n: 9,  code: <><span className="text-[#ff7b72]">use</span> <span className="text-[#c9d1d9]">vega_hal::{`{`}</span><span className="text-[#ffa657]">Peripherals</span><span className="text-[#c9d1d9]">, gpio::</span><span className="text-[#ffa657]">GpioExt</span><span className="text-[#c9d1d9]">{`}`};</span></> },
+                      { n: 10, code: null },
+                      { n: 11, code: <><span className="text-[#ff7b72]">#[</span><span className="text-[#d2a8ff]">entry</span><span className="text-[#ff7b72]">]</span></> },
+                      { n: 12, code: <><span className="text-[#ff7b72]">fn</span> <span className="text-[#79c0ff]">main</span><span className="text-[#c9d1d9]">() -&gt; </span><span className="text-[#ff7b72]">!</span> <span className="text-[#c9d1d9]">{`{`}</span></> },
+                      { n: 13, code: <span className="text-[#8b949e] italic">{"    // Take ownership of device peripherals"}</span> },
+                      { n: 14, code: <><span className="text-[#c9d1d9]">    </span><span className="text-[#ff7b72]">let</span> <span className="text-[#c9d1d9]">dp = </span><span className="text-[#ffa657]">Peripherals</span><span className="text-[#c9d1d9]">::</span><span className="text-[#79c0ff]">take</span><span className="text-[#c9d1d9]">().</span><span className="text-[#79c0ff]">unwrap</span><span className="text-[#c9d1d9]">();</span></> },
+                      { n: 15, code: null },
+                      { n: 16, code: <span className="text-[#8b949e] italic">{"    // Configure GPIO pin as push-pull output"}</span> },
+                      { n: 17, code: <><span className="text-[#c9d1d9]">    </span><span className="text-[#ff7b72]">let</span> <span className="text-[#c9d1d9]">gpioa = dp.GPIOA.</span><span className="text-[#79c0ff]">split</span><span className="text-[#c9d1d9]">();</span></> },
+                      { n: 18, code: <><span className="text-[#c9d1d9]">    </span><span className="text-[#ff7b72]">let mut</span> <span className="text-[#c9d1d9]">led = gpioa.pa5.</span><span className="text-[#79c0ff]">into_push_pull_output</span><span className="text-[#c9d1d9]">();</span></> },
+                      { n: 19, code: null },
+                      { n: 20, code: <><span className="text-[#c9d1d9]">    </span><span className="text-[#ff7b72]">loop</span> <span className="text-[#c9d1d9]">{`{`}</span></> },
+                      { n: 21, code: <><span className="text-[#c9d1d9]">        led.</span><span className="text-[#79c0ff]">set_high</span><span className="text-[#c9d1d9]">().</span><span className="text-[#79c0ff]">unwrap</span><span className="text-[#c9d1d9]">();</span></> },
+                      { n: 22, code: <><span className="text-[#c9d1d9]">        </span><span className="text-[#79c0ff]">delay_ms</span><span className="text-[#c9d1d9]">(</span><span className="text-[#79c0ff]">500</span><span className="text-[#c9d1d9]">);</span></> },
+                      { n: 23, code: <><span className="text-[#c9d1d9]">        led.</span><span className="text-[#79c0ff]">set_low</span><span className="text-[#c9d1d9]">().</span><span className="text-[#79c0ff]">unwrap</span><span className="text-[#c9d1d9]">();</span></> },
+                      { n: 24, code: <><span className="text-[#c9d1d9]">        </span><span className="text-[#79c0ff]">delay_ms</span><span className="text-[#c9d1d9]">(</span><span className="text-[#79c0ff]">500</span><span className="text-[#c9d1d9]">);</span></> },
+                      { n: 25, code: <span className="text-[#c9d1d9]">{"    }"}</span> },
+                      { n: 26, code: <span className="text-[#c9d1d9]">{"}"}</span> },
+                    ].map((line) => (
+                      <tr key={line.n} className="hover:bg-[#161b22]/60">
+                        <td className="pl-4 pr-3 py-0 text-right text-[#484f58] select-none w-[1%] whitespace-nowrap align-top">{line.n}</td>
+                        <td className="pr-4 py-0 whitespace-pre">{line.code || "\u00A0"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {/* Terminal output bar */}
+              <div className="border-t border-slate-700/60 bg-[#161b22] px-4 py-2.5 flex items-center gap-2">
+                <Terminal className="w-3.5 h-3.5 text-[#28c840]" />
+                <span className="text-[11px] font-mono text-[#28c840]">cargo build --target riscv32imac-unknown-none-elf</span>
+                <span className="text-[11px] font-mono text-slate-500 ml-auto">Compiling blinky v0.1.0</span>
+              </div>
             </div>
-            
-            <div className="flex justify-center gap-4 mt-6">
-              <Link to="/download-ide">
-                <Button>
-                  <Download className="w-4 h-4 mr-2" />
-                  Download IDE
-                </Button>
-              </Link>
-              <a href="https://github.com/riscv-rust/riscv-rust-quickstart" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline">
-                  <GitBranch className="w-4 h-4 mr-2" />
-                  View on GitHub
-                </Button>
-              </a>
+
+            {/* Side info cards */}
+            <div className="space-y-4">
+              <div className="bg-[#252a3e] rounded-xl border border-slate-700/50 p-5">
+                <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">What This Does</h4>
+                <div className="space-y-2.5">
+                  {[
+                    "Initializes a bare-metal RISC-V core",
+                    "Takes ownership of GPIO peripherals",
+                    "Configures PA5 as push-pull output",
+                    "Toggles LED at 1 Hz (500ms on/off)",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
+                      <span className="text-[#28c840] font-bold mt-px">{i + 1}.</span>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-[#252a3e] rounded-xl border border-slate-700/50 p-5">
+                <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Supported Boards</h4>
+                <div className="space-y-2">
+                  {["C-DAC ARIES V3.0", "C-DAC ARIES IoT v2", "Mindgrove Secure IoT"].map((b) => (
+                    <div key={b} className="flex items-center gap-2 text-xs text-slate-300">
+                      <Cpu className="w-3 h-3 text-primary flex-shrink-0" />
+                      {b}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col gap-2.5">
+                <Link to="/download-ide">
+                  <Button className="w-full" size="sm" data-testid="quick-start-download-btn">
+                    <Download className="w-4 h-4 mr-2" />
+                    Download IDE
+                  </Button>
+                </Link>
+                <a href="https://github.com/riscv-rust/riscv-rust-quickstart" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="w-full border-slate-600 text-slate-300 hover:bg-slate-700/50" size="sm" data-testid="quick-start-github-btn">
+                    <GitBranch className="w-4 h-4 mr-2" />
+                    View on GitHub
+                  </Button>
+                </a>
+              </div>
             </div>
           </div>
         </div>

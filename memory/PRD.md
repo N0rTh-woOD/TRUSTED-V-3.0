@@ -59,6 +59,7 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 ### Phase 8 — IDE Page & Crypto Stack Overhaul (Completed - Apr 2026)
 - **IDE Page (IDEDownloads.jsx)**: Overhauled with PDF report content — 21 purpose-built features (Hardware-Aware AI, Native Rust Analyzer, SVD visualization, Checkpoint system, etc.), comparison table vs general IDEs (8 aspects), Benefits section, professional dark hero. Unused imports cleaned.
 - **Crypto Stack Page (CryptoStackPage.jsx)**: Complete rewrite with user-provided algorithm data — 8 categories: Hashing (SHA-2/SHA-3, SHAKE — BLAKE removed), PQC Signatures (ML-DSA, SLH-DSA), PQC Key Exchange (ML-KEM), Symmetric Encryption (AES + modes with CBC/CFB deprecation note), Classical Signatures (ECDSA/EdDSA, RSA), Classical Key Exchange (ECDH, RSA-KEM), Randomness (PRNG DRBG), Future/Advanced (Side-Channel Protections). Color-coded category headers, monospaced variant tags, NIST FIPS standards references, dark hero with standards compliance card.
+- **Developer Portal Quick Start**: Upgraded code example with proper Rust syntax highlighting (GitHub dark theme colors), line numbers, terminal output bar, side info cards (What This Does + Supported Boards), dark section background.
 
 ## Key Pages & Routes
 | Route | Page | Description |
