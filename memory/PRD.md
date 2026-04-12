@@ -41,6 +41,12 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Product Suite: Crypto Stack, Secure Boot (rboot/rustBoot), RTOS Benchmarks
 - Partners: Upbeat Tech added, WebIDE repositioned as capable counterpart
 
+### Phase 6.5 — Section & Page Removals (Completed - Apr 2026)
+- **Removed**: Team page (route, nav link, import, footer link)
+- **Removed**: "Why Rust" section from Landing page (rustBenefits data + section JSX)
+- **Removed**: "Perfect Combination for Secure Embedded Systems" section (riscvRustBenefits, archLayers, archColorMap data + section JSX)
+- Cleaned up unused imports (Binary, GitBranch, Gauge)
+
 ### Phase 6.4 — Engine Exhaust Fire Fix (Completed - Apr 2026)
 - **Fire position fixed**: Restored original artifact spacing (canvas 780px, stack bottom 175px) so exhaust flames render BELOW IP Blocks slab instead of behind it
 - The nozzle + flames now appear at the rocket bottom as intended

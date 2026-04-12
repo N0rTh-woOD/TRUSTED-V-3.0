@@ -21,8 +21,7 @@ const Navigation = () => {
     { path: "/product-suite", label: "Products", icon: Layers },
     { path: "/developer-portal", label: "Developers", icon: Code },
     { path: "/marketplace", label: "Marketplace", icon: Store },
-    { path: "/team", label: "Team", icon: UsersRound },
-    { path: "/partners", label: "Partner With Us", icon: Users },
+    { path: "/partners", label: "Partners", icon: UsersRound },
   ];
   
   // Authenticated user items

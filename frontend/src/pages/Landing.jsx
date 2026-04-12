@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   Cpu, Zap, Code, Package, Layers, Download, ArrowRight, 
-  CheckCircle2, Shield, Lock, Gauge, ChevronRight,
-  Cog, Binary, GitBranch, Rocket, Wrench, CircuitBoard,
+  CheckCircle2, Shield, Lock, ChevronRight,
+  Cog, Rocket, Wrench, CircuitBoard,
   Radio, FlaskConical, Flame, BarChart3, Server
 } from "lucide-react";
 import { BuildPipelineViz } from "@/components/BuildPipelineViz";
@@ -192,20 +192,6 @@ const EngineArchDiagram = () => {
 
 /* ── 7-Stage Build Simulation ── */
 const Landing = () => {
-  const rustBenefits = [
-    { title: "Memory Safety", description: "Eliminates buffer overflows, null pointer dereferences, and data races at compile time" },
-    { title: "Zero-Cost Abstractions", description: "High-level features compile to efficient machine code with no runtime overhead" },
-    { title: "Fearless Concurrency", description: "Ownership system prevents data races, enabling safe multi-threaded embedded code" },
-    { title: "No Garbage Collection", description: "Deterministic memory management perfect for real-time embedded systems" },
-  ];
-
-  const riscvRustBenefits = [
-    { icon: Shield, title: "Secure by Default", description: "Rust's memory safety combined with RISC-V's hardware security extensions creates a robust security foundation." },
-    { icon: Gauge, title: "Optimal Performance", description: "RISC-V's clean ISA pairs with Rust's zero-cost abstractions for maximum efficiency on constrained devices." },
-    { icon: Code, title: "Modern Toolchain", description: "Cargo build system, integrated testing, and LLVM support for RISC-V targets accelerate development." },
-    { icon: GitBranch, title: "Open Ecosystem", description: "Both RISC-V and Rust are open-source, vendor-neutral technologies ensuring long-term sustainability." },
-  ];
-
   const features = [
     { icon: Shield, title: "Secure Boot & TEE", description: "Hardware root of trust with verified boot chain via rboot/rustBoot, TPM integration, and trusted execution." },
     { icon: Cpu, title: "RISC-V Optimized Compilers", description: "State-of-the-art Rust toolchain with Pliron & Cranelift backends optimized for RISC-V targets." },
@@ -279,20 +265,6 @@ const Landing = () => {
       highlight: false,
     },
   ];
-
-  const archLayers = [
-    { label: "Application Layer", color: "primary", items: ["Jarvyn AI", "IDE", "Project Manager"] },
-    { label: "Rust SDK & Middleware", color: "orange", items: ["Embassy", "RTIC", "embedded-hal", "Drivers"] },
-    { label: "Secure Foundation", color: "green", items: ["Secure Boot", "Trusted HAL", "HSM", "TEE"] },
-    { label: "RISC-V Hardware", color: "blue", items: ["C-DAC VEGA", "Mindgrove", "Upbeat Tech", "DHRUV64"] },
-  ];
-
-  const archColorMap = {
-    primary: "bg-primary/20",
-    orange: "bg-orange-500/20",
-    green: "bg-green-500/20",
-    blue: "bg-blue-500/20",
-  };
   
   return (
     <div className="min-h-screen bg-white">
@@ -431,109 +403,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* ══ WHY RUST ══ */}
-      <section className="py-20 bg-gradient-to-b from-orange-50 to-white border-t border-orange-100">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 mb-4">
-              <span className="text-lg font-bold text-orange-600">Rust</span>
-              <span className="text-sm text-orange-600/80">Programming Language</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-              Why <span className="text-orange-500">Rust</span> for Embedded Systems?
-            </h2>
-            <p className="text-base text-muted-foreground max-w-3xl mx-auto">
-              Rust provides memory safety without garbage collection, making it the perfect language 
-              for secure, high-performance embedded development.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {rustBenefits.map((benefit, index) => (
-              <RevealItem key={index} delay={index * 120}>
-                <Card className="bg-white border border-orange-100 hover:border-orange-300 hover:shadow-lg transition-all duration-300 h-full">
-                  <CardContent className="p-6">
-                    <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
-                      <CheckCircle2 className="w-5 h-5 text-orange-500" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
-                    <p className="text-sm text-muted-foreground">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              </RevealItem>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══ RISC-V x RUST ══ */}
-      <section className="py-20 bg-white">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-                  <Cpu className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-bold text-primary">RISC-V</span>
-                </div>
-                <span className="text-2xl font-light text-muted-foreground">x</span>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20">
-                  <span className="text-sm font-bold text-orange-500">Rust</span>
-                </div>
-              </div>
-              
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-6">
-                The Perfect Combination for Secure Embedded Systems
-              </h2>
-              <p className="text-base text-muted-foreground mb-8 leading-relaxed">
-                RISC-V's open, extensible architecture combined with Rust's memory safety creates 
-                the most secure and efficient foundation for modern embedded development.
-              </p>
-              
-              <div className="space-y-6">
-                {riscvRustBenefits.map((benefit, index) => {
-                  const Icon = benefit.icon;
-                  return (
-                    <RevealItem key={index} delay={index * 250}>
-                      <div className="flex gap-4 group">
-                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:shadow-lg group-hover:shadow-primary/25 transition-all duration-300">
-                          <Icon className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">{benefit.title}</h4>
-                          <p className="text-sm text-muted-foreground mt-1">{benefit.description}</p>
-                        </div>
-                      </div>
-                    </RevealItem>
-                  );
-                })}
-              </div>
-            </div>
-            
-            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-xl p-8 text-white shadow-2xl border border-slate-700">
-              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                <Binary className="w-5 h-5 text-[#6b9aff]" />
-                Platform Architecture
-              </h3>
-              <div className="space-y-4">
-                {archLayers.map((layer, i) => (
-                  <RevealItem key={i} delay={i * 200}>
-                    <div className="bg-slate-800/80 rounded-lg p-4 border border-slate-700/50 hover:border-slate-600 transition-colors">
-                      <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">{layer.label}</div>
-                      <div className="flex flex-wrap gap-2">
-                        {layer.items.map((item) => (
-                          <span key={item} className={`px-2.5 py-1 ${archColorMap[layer.color]} rounded-md text-xs font-medium text-white`}>{item}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </RevealItem>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       {/* ══ PLATFORM CAPABILITIES ══ */}
       <section className="py-20 bg-slate-50 border-t border-border">
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
@@ -719,7 +588,6 @@ const Landing = () => {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
-                <li><Link to="/team" className="hover:text-white transition-colors">Our Team</Link></li>
                 <li><Link to="/partners" className="hover:text-white transition-colors">Partners</Link></li>
                 <li><Link to="/partner-registration" className="hover:text-white transition-colors">Become a Partner</Link></li>
               </ul>

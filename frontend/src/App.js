@@ -17,7 +17,6 @@ import Partners from "@/pages/Partners";
 import PartnerRegistration from "@/pages/PartnerRegistration";
 import IDEDownloads from "@/pages/IDEDownloads";
 import Blog from "@/pages/Blog";
-import Team from "@/pages/Team";
 import BoardSupportRequest from "@/pages/BoardSupportRequest";
 import ContactSales from "@/pages/ContactSales";
 import Marketplace from "@/pages/Marketplace";
@@ -93,7 +92,6 @@ const AppContent = () => {
         <Route path="/partner-registration" element={<PartnerRegistration />} />
         <Route path="/download-ide" element={<IDEDownloads />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/team" element={<Team />} />
         <Route path="/board-support" element={<BoardSupportRequest />} />
         <Route path="/contact-sales" element={<ContactSales />} />
         
