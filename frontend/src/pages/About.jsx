@@ -53,13 +53,6 @@ const About = () => {
     { icon: Globe, title: "Open Standards", description: "Built on open architectures and standards for maximum flexibility and vendor independence." },
   ];
 
-  const milestones = [
-    { year: "2024", title: "Platform Foundation", description: "Core architecture, RISC-V Rust toolchain, and secure boot chain development" },
-    { year: "2024", title: "Hardware Partnerships", description: "C-DAC VEGA and Mindgrove board integration with BSP support" },
-    { year: "2025", title: "TrusteD-V IDE — Jarvyn", description: "Launch of AI-powered IDE with Jarvyn assistant, integrated debugger, and Smart Builder" },
-    { year: "2026", title: "Enterprise & Safety", description: "ISO 26262 compliant workflows, enterprise deployment, and expanded board support" },
-  ];
-
   const team = [
     { role: "Architects", count: 4, description: "RISC-V & Security Architects" },
     { role: "Developers", count: 10, description: "Embedded Systems Engineers" },
@@ -222,32 +215,6 @@ const About = () => {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Roadmap */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Journey</span>
-            <h2 className="text-3xl font-bold text-foreground mt-2">Platform Roadmap</h2>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border" />
-              {milestones.map((milestone, index) => (
-                <div key={index} className="relative flex gap-6 pb-12 last:pb-0">
-                  <div className={`w-16 h-16 rounded-full bg-white border-2 ${index <= 2 ? 'border-primary bg-primary/5' : 'border-border'} flex items-center justify-center z-10 flex-shrink-0`}>
-                    <span className={`text-sm font-bold ${index <= 2 ? 'text-primary' : 'text-muted-foreground'}`}>{milestone.year}</span>
-                  </div>
-                  <div className="flex-1 pt-3">
-                    <h3 className="font-semibold text-foreground text-lg">{milestone.title}</h3>
-                    <p className="text-muted-foreground mt-1">{milestone.description}</p>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
