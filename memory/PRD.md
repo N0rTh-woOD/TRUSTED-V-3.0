@@ -56,7 +56,13 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Registration disabled at API level
 - Demo credentials saved to test_credentials.md only (not shown on UI)
 
-### Phase 8 — IDE Page & Crypto Stack Overhaul (Completed - Apr 2026)
+### Phase 9: Landing Page Hero Rewrite + Em Dash Cleanup (Completed - Apr 2026)
+- **Hero rewrite**: Bigger TrusteD-V logo (trustedv-rocket-logo.png), "Powered by Bosch" slogan, heading "Build your secure RISC-V Solution", removed Rust/RISC-V/Secure pill badges.
+- **Stats removed**: Removed animated counter section (6+ boards, 5+ RTOS, 15 Team, 3 Partners). Replaced with inline Made in India badge with tricolor flag.
+- **Rocket launch scene**: Replaced engine architecture diagram with animated rocket launch SVG from HTML artifact (stars, launchpad, flames with tvBurn animation, rocket rises with tvRise).
+- **4 Domain cards**: Added "We Cater to 4 Key Domains" section: Automotive, IoT, Consumer Electronics, Data Center.
+- **Em dash cleanup**: Removed all em dashes (—) from visible content text across all pages (Landing, IDEDownloads, CryptoStack, SecureBoot, RTOS Benchmark, About, Partners, AdminIDE). Replaced with colons, commas, or periods as appropriate.
+- **AnimatedCounter removed**: Deleted unused component and cleaned up imports (Shield, Zap, Package, Lock, Flame, BarChart3).
 - **IDE Page (IDEDownloads.jsx)**: Overhauled with PDF report content — 21 purpose-built features (Hardware-Aware AI, Native Rust Analyzer, SVD visualization, Checkpoint system, etc.), comparison table vs general IDEs (8 aspects), Benefits section, professional dark hero. Unused imports cleaned.
 - **Crypto Stack Page (CryptoStackPage.jsx)**: Complete rewrite with user-provided algorithm data — 8 categories: Hashing (SHA-2/SHA-3, SHAKE — BLAKE removed), PQC Signatures (ML-DSA, SLH-DSA), PQC Key Exchange (ML-KEM), Symmetric Encryption (AES + modes with CBC/CFB deprecation note), Classical Signatures (ECDSA/EdDSA, RSA), Classical Key Exchange (ECDH, RSA-KEM), Randomness (PRNG DRBG), Future/Advanced (Side-Channel Protections). Color-coded category headers, monospaced variant tags, NIST FIPS standards references, dark hero with standards compliance card.
 - **Developer Portal Quick Start**: Upgraded code example with proper Rust syntax highlighting (GitHub dark theme colors), line numbers, terminal output bar, side info cards (What This Does + Supported Boards), dark section background.
