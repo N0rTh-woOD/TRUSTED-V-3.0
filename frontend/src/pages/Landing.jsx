@@ -165,75 +165,7 @@ const simulationStages = [
 ];
 
 /* ── Rocket Launch Scene from HTML artifact ── */
-const RocketLaunchScene = () => {
-  return (
-    <div className="relative w-full max-w-[500px] h-[260px] rounded-xl overflow-hidden border border-slate-200 shadow-lg" data-testid="rocket-launch-scene">
-      <style>{`
-        @keyframes tvBlink{0%,100%{opacity:1}50%{opacity:.3}}
-        @keyframes tvGlow{0%,100%{opacity:.25}50%{opacity:.5}}
-        @keyframes tvPulse{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.15);opacity:.15}}
-        @keyframes tvBurn{0%,100%{transform:scaleY(1)scaleX(1)}33%{transform:scaleY(1.12)scaleX(.88)}66%{transform:scaleY(.88)scaleX(1.1)}}
-        @keyframes tvRise{0%{transform:translateX(-50%) translateY(0)}100%{transform:translateX(-50%) translateY(-220px)}}
-      `}</style>
-      <svg width="100%" height="100%" viewBox="0 0 500 260" style={{position:'absolute',inset:0}}>
-        <rect x="0" y="0" width="500" height="260" fill="#0d0d0d"/>
-        {/* Stars */}
-        <circle cx="25" cy="18" r="1" fill="#fff" opacity=".7" style={{animation:'tvBlink 2s infinite'}}/>
-        <circle cx="70" cy="35" r=".8" fill="#fff" opacity=".5" style={{animation:'tvBlink 2.5s infinite .4s'}}/>
-        <circle cx="110" cy="12" r="1.2" fill="#fff" opacity=".8" style={{animation:'tvBlink 1.8s infinite .8s'}}/>
-        <circle cx="170" cy="30" r=".9" fill="#fff" opacity=".6" style={{animation:'tvBlink 2.2s infinite .2s'}}/>
-        <circle cx="240" cy="14" r="1" fill="#fff" opacity=".7" style={{animation:'tvBlink 2.8s infinite 1s'}}/>
-        <circle cx="310" cy="28" r=".8" fill="#fff" opacity=".5" style={{animation:'tvBlink 2.1s infinite .6s'}}/>
-        <circle cx="370" cy="10" r="1.1" fill="#fff" opacity=".8" style={{animation:'tvBlink 1.9s infinite .3s'}}/>
-        <circle cx="430" cy="25" r=".9" fill="#fff" opacity=".6" style={{animation:'tvBlink 2.4s infinite .9s'}}/>
-        <circle cx="480" cy="40" r=".7" fill="#fff" opacity=".5" style={{animation:'tvBlink 2.7s infinite .1s'}}/>
-        <circle cx="55" cy="55" r=".7" fill="#fff" opacity=".4" style={{animation:'tvBlink 3s infinite .7s'}}/>
-        <circle cx="150" cy="65" r=".9" fill="#fff" opacity=".5" style={{animation:'tvBlink 2.3s infinite 1.2s'}}/>
-        <circle cx="350" cy="55" r="1" fill="#fff" opacity=".6" style={{animation:'tvBlink 2.6s infinite .5s'}}/>
-        <circle cx="460" cy="70" r=".8" fill="#fff" opacity=".4" style={{animation:'tvBlink 1.7s infinite 1.4s'}}/>
-        {/* Ground */}
-        <rect x="0" y="230" width="500" height="30" fill="#1a2a1a"/>
-        <rect x="0" y="225" width="500" height="6" fill="#2a3a2a"/>
-        {/* Launchpad */}
-        <rect x="222" y="205" width="56" height="18" rx="2" fill="#333"/>
-        <rect x="230" y="198" width="8" height="25" rx="2" fill="#444"/>
-        <rect x="262" y="198" width="8" height="25" rx="2" fill="#444"/>
-        {/* Ground glow */}
-        <ellipse cx="250" cy="228" rx="50" ry="10" fill="#FF6600" opacity=".25" style={{animation:'tvGlow .5s ease-in-out infinite'}}/>
-        <ellipse cx="250" cy="228" rx="34" ry="7" fill="#FF8800" opacity=".3" style={{animation:'tvGlow .5s ease-in-out infinite .15s'}}/>
-        <ellipse cx="250" cy="228" rx="20" ry="4" fill="#FFD700" opacity=".4" style={{animation:'tvGlow .5s ease-in-out infinite .05s'}}/>
-        {/* Smoke */}
-        <ellipse cx="210" cy="218" rx="22" ry="11" fill="#555" opacity=".3" style={{animation:'tvPulse 1.8s ease-in-out infinite'}}/>
-        <ellipse cx="290" cy="216" rx="18" ry="9" fill="#555" opacity=".25" style={{animation:'tvPulse 1.8s ease-in-out infinite .4s'}}/>
-        <ellipse cx="250" cy="212" rx="14" ry="8" fill="#666" opacity=".2" style={{animation:'tvPulse 1.8s ease-in-out infinite .8s'}}/>
-        {/* TrusteD-V label */}
-        <text x="250" y="253" textAnchor="middle" fontSize="10" fill="#5DCAA5" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" letterSpacing="2">TRUSTED-V LAUNCH</text>
-      </svg>
-      {/* Rising rocket */}
-      <div style={{position:'absolute',left:'50%',bottom:'36px',transform:'translateX(-50%)',animation:'tvRise 3.5s ease-in both 1.5s'}}>
-        <svg width="44" height="80" viewBox="0 0 48 86" style={{overflow:'visible'}}>
-          <path d="M24 4 C20 16 16 30 16 42 L32 42 C32 30 28 16 24 4Z" fill="#C8E6C9" stroke="#2E7D32" strokeWidth="1.2"/>
-          <rect x="16" y="42" width="16" height="26" rx="2" fill="#E8EAF0" stroke="#9aa0b8" strokeWidth="1"/>
-          <rect x="16" y="50" width="16" height="4" fill="#2E7D32" opacity=".6"/>
-          <circle cx="24" cy="60" r="3.5" fill="#0a1830" stroke="#7a8298" strokeWidth=".8"/>
-          <path d="M16 60 L8 72 L14 68 L16 64Z" fill="#97C459"/>
-          <path d="M32 60 L40 72 L34 68 L32 64Z" fill="#97C459"/>
-          <path d="M18 68 Q18 76 21 78 L24 80 L27 78 Q30 76 30 68Z" fill="#888"/>
-          <g style={{animation:'tvBurn .55s ease-in-out infinite',transformOrigin:'24px 80px'}}>
-            <path d="M19 80 Q16 92 19 98 Q22 106 24 104 Q26 106 29 98 Q32 92 29 80Z" fill="#FF5500" opacity=".6"/>
-          </g>
-          <g style={{animation:'tvBurn .42s ease-in-out infinite .07s',transformOrigin:'24px 80px'}}>
-            <path d="M20 80 Q18 90 20 96 Q22 102 24 100 Q26 102 28 96 Q30 90 28 80Z" fill="#FF9900" opacity=".8"/>
-          </g>
-          <g style={{animation:'tvBurn .33s ease-in-out infinite .03s',transformOrigin:'24px 80px'}}>
-            <path d="M21 80 Q20 88 21 93 Q22.5 98 24 96 Q25.5 98 27 93 Q28 88 27 80Z" fill="#FFE040" opacity=".95"/>
-            <path d="M22.5 80 Q22 86 23 90 Q23.5 93 24 92 Q24.5 93 25 90 Q26 86 25.5 80Z" fill="#FFFFF0"/>
-          </g>
-        </svg>
-      </div>
-    </div>
-  );
-};
+/* removed - replaced with v7 engine diagram */
 
 const Landing = () => {
   const hardwarePartners = [
@@ -343,33 +275,43 @@ const Landing = () => {
                 </Link>
               </div>
               
-              {/* Made in India */}
-              <div data-testid="made-in-india-badge" className="inline-flex items-center gap-4 px-6 py-3 rounded-xl bg-white border border-slate-200 shadow-sm">
-                <div className="flex flex-col gap-0 w-12 h-8 rounded overflow-hidden shadow-sm flex-shrink-0 border border-slate-200/50">
-                  <div className="flex-1 bg-[#FF9933]" />
-                  <div className="flex-1 bg-white relative">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-[9px] h-[9px] rounded-full border-[1.5px] border-[#000080]" />
-                    </div>
-                  </div>
-                  <div className="flex-1 bg-[#138808]" />
-                </div>
-                <div>
-                  <span className="text-lg font-bold text-slate-800 tracking-wide block leading-tight">Made in India</span>
-                  <span className="text-xs text-slate-500 font-medium">Engineered for the world</span>
-                </div>
+              {/* Made in India - prominent image */}
+              <div data-testid="made-in-india-badge" className="mt-2">
+                <img src="/make-in-india.jpg" alt="Make in India" className="w-full max-w-[400px] rounded-xl shadow-lg border border-slate-200" />
               </div>
             </div>
             
-            {/* Rocket Launch Scene */}
-            <div className="hidden lg:flex items-center justify-center">
-              <RocketLaunchScene />
+            {/* Engine Architecture Diagram (v7) */}
+            <div className="hidden lg:flex items-start justify-center pt-2">
+              <div className="w-[340px] flex-shrink-0">
+                <div className="text-center mb-2">
+                  <h3 className="text-base font-extrabold tracking-tight">
+                    <span className="text-foreground">T</span>
+                    <span className="text-[#B7410E]">rust</span>
+                    <span className="text-foreground">eD</span>
+                    <span className="text-[#C8A200]">-V</span>
+                    <span className="text-[#2E7D32]"> Engine</span>
+                  </h3>
+                </div>
+                <EngineArchDiagram />
+              </div>
             </div>
           </div>
           
-          {/* Mobile: Rocket below */}
+          {/* Mobile: Engine below */}
           <div className="lg:hidden flex flex-col items-center mt-8 mb-4">
-            <RocketLaunchScene />
+            <div className="text-center mb-2">
+              <h3 className="text-sm font-extrabold tracking-tight">
+                <span className="text-foreground">T</span>
+                <span className="text-[#B7410E]">rust</span>
+                <span className="text-foreground">eD</span>
+                <span className="text-[#C8A200]">-V</span>
+                <span className="text-[#2E7D32]"> Engine</span>
+              </h3>
+            </div>
+            <div className="w-[340px] max-w-full overflow-x-auto">
+              <EngineArchDiagram />
+            </div>
           </div>
         </div>
       </section>
