@@ -1,0 +1,113 @@
+{
+  "summary": "Completed frontend testing of Landing page layout restructure. All 19 test cases PASSED (12 desktop + 7 mobile). Major layout fixes verified: Engine diagram no longer overlaps, max-w-7xl applied, hero grid lg:grid-cols-[1fr_340px], engine hidden on mobile via lg:block, Make in India image capped at max-w-[280px].",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/.screenshots/desktop_hero_full.png",
+    "/.screenshots/desktop_domains.png",
+    "/.screenshots/desktop_pipeline.png",
+    "/.screenshots/desktop_pricing.png",
+    "/.screenshots/desktop_partners.png",
+    "/.screenshots/desktop_footer.png",
+    "/.screenshots/mobile_hero.png",
+    "/.screenshots/mobile_domains.png",
+    "/.screenshots/mobile_pipeline.png",
+    "/.screenshots/mobile_pricing.png",
+    "/.screenshots/mobile_footer.png"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "N/A (frontend only testing)",
+    "frontend": "100% (19/19 tests passed)"
+  },
+  "test_credentials": {
+    "admin": "admin@trusted-v.com / bosch@2425"
+  },
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Landing page layout restructure tested and verified. Key changes from iteration_25: 1) max-w-[1800px] changed to max-w-7xl throughout, 2) Engine CSS: overflow:hidden, canvas height 640px, side labels (.ll/.lr) display:none to prevent text overlap, 3) Hero grid changed to lg:grid-cols-[1fr_340px] for better proportions, 4) Made in India image capped at max-w-[280px], 5) Engine diagram hidden on mobile via lg:block class. All sections verified: Hero (logo, Powered by Bosch, heading, buttons, Make in India image, engine diagram), 4 domain cards, 7-stage build pipeline, 3 pricing tiers, hardware partners, footer links. Mobile responsive layout working correctly with engine hidden and content stacking vertically.",
+  "features_verified": {
+    "login_authentication": {
+      "status": "PASSED",
+      "details": "Admin login with admin@trusted-v.com / bosch@2425 works correctly"
+    },
+    "hero_logo": {
+      "status": "PASSED",
+      "details": "TrusteD-V logo visible with data-testid='hero-logo'"
+    },
+    "powered_by_bosch": {
+      "status": "PASSED",
+      "details": "'Powered by' text with Bosch logo visible in hero section"
+    },
+    "hero_heading": {
+      "status": "PASSED",
+      "details": "Heading 'Build your secure RISC-V Solution' with data-testid='hero-heading'"
+    },
+    "download_ide_button": {
+      "status": "PASSED",
+      "details": "Download IDE button present with data-testid='start-building-btn'"
+    },
+    "developer_portal_button": {
+      "status": "PASSED",
+      "details": "Developer Portal button present with data-testid='explore-portal-btn'"
+    },
+    "make_in_india_image": {
+      "status": "PASSED",
+      "details": "Make in India image visible with data-testid='made-in-india-badge', max-w-[280px]"
+    },
+    "engine_diagram_desktop": {
+      "status": "PASSED",
+      "details": "Engine diagram visible on desktop (1920px) with NO text overlap. Contains layers: APPLICATION API, MIDDLEWARE, SoC/MODULE, DISCRETE CHIPS, IP BLOCKS with animated exhaust flames"
+    },
+    "engine_diagram_mobile_hidden": {
+      "status": "PASSED",
+      "details": "Engine diagram correctly hidden on mobile (390px) via lg:block class"
+    },
+    "domain_cards": {
+      "status": "PASSED",
+      "details": "4 domain cards present: Automotive, IoT, Consumer Electronics, Data Center. 2-col grid on mobile"
+    },
+    "build_pipeline_section": {
+      "status": "PASSED",
+      "details": "7-stage build pipeline section present with all stages visible, no overflow on mobile"
+    },
+    "pricing_section": {
+      "status": "PASSED",
+      "details": "3 pricing tiers present: Basic, Pro, Enterprise. No overflow on mobile"
+    },
+    "hardware_partners_section": {
+      "status": "PASSED",
+      "details": "Hardware Partners section visible with C-DAC, Mindgrove, Upbeat Tech"
+    },
+    "footer_links": {
+      "status": "PASSED",
+      "details": "Footer links working: Product Suite, Marketplace, IDE Jarvyn, Developer Portal, About Us, Partners, Terms of Service, Privacy Policy"
+    },
+    "mobile_hero_layout": {
+      "status": "PASSED",
+      "details": "Hero layout stacks vertically on mobile (390px)"
+    },
+    "mobile_no_overflow": {
+      "status": "PASSED",
+      "details": "Pipeline and pricing sections render without horizontal overflow on mobile"
+    }
+  },
+  "mocked_apis": {
+    "has_mocked_apis": false,
+    "mocked_apis_list": []
+  },
+  "viewport_tests": {
+    "desktop_1920x1080": "12/12 tests passed",
+    "mobile_390x844": "7/7 tests passed"
+  }
+}

@@ -48,17 +48,12 @@ const EngineArchDiagram = () => {
       const s = document.createElement('style');
       s.id = 'tv-eng-css';
       s.textContent = `
-.tv-eng{width:100%;font-family:'Helvetica Neue',Arial,sans-serif}
-.tv-eng .canvas{position:relative;width:300px;margin:0 auto;height:700px;overflow:visible}
-.tv-eng .exhaust{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:360px;height:165px;pointer-events:none;z-index:1}
-.tv-eng .stack{position:absolute;left:50%;bottom:132px;transform:translateX(-50%);width:300px;z-index:2}
+.tv-eng{width:100%;font-family:'Helvetica Neue',Arial,sans-serif;overflow:hidden}
+.tv-eng .canvas{position:relative;width:300px;margin:0 auto;height:640px;overflow:hidden}
+.tv-eng .exhaust{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:320px;height:150px;pointer-events:none;z-index:1}
+.tv-eng .stack{position:absolute;left:50%;bottom:120px;transform:translateX(-50%);width:300px;z-index:2}
 .tv-eng .slab{position:relative;width:300px}
-.tv-eng .ll{position:absolute;right:100%;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;padding-right:6px;white-space:nowrap;flex-direction:row-reverse;text-align:right}
-.tv-eng .lr{position:absolute;left:100%;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;padding-left:6px;white-space:nowrap}
-.tv-eng .ldot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.tv-eng .lline{width:26px;height:1px;flex-shrink:0}
-.tv-eng .lname{font-size:10px;font-weight:800;display:block;line-height:1.3}
-.tv-eng .lsub{font-size:9px;color:#bbb;display:block}
+.tv-eng .ll,.tv-eng .lr{display:none}
 .tv-eng .conn{display:flex;justify-content:center;align-items:center;gap:6px;padding:2px 0}
 .tv-eng .cdot{width:2.5px;height:2.5px;border-radius:50%;background:#ccc}
 @keyframes tvEr{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
@@ -87,12 +82,12 @@ const EngineArchDiagram = () => {
 .tv-eng .sp{animation:tvEsp 1.4s ease-out infinite var(--sd,0s)}
 .tv-eng .sm1{animation:tvEsm 2.1s ease-out infinite 0s}
 .tv-eng .sm2{animation:tvEsm 2.1s ease-out infinite .7s}
-.tv-eng .legend{display:flex;justify-content:center;gap:12px;margin-top:18px;flex-wrap:wrap}
-.tv-eng .li{display:flex;align-items:center;gap:5px;font-size:10px;color:#888}
-.tv-eng .ld{width:9px;height:9px;border-radius:2px;flex-shrink:0}
-.tv-eng .ekey{display:flex;justify-content:center;gap:16px;margin-top:10px;flex-wrap:wrap}
-.tv-eng .ek{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:800}
-.tv-eng .ekd{width:8px;height:8px;border-radius:50%}
+.tv-eng .legend{display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.tv-eng .li{display:flex;align-items:center;gap:4px;font-size:9px;color:#888}
+.tv-eng .ld{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.tv-eng .ekey{display:flex;justify-content:center;gap:14px;margin-top:8px;flex-wrap:wrap}
+.tv-eng .ek{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:800}
+.tv-eng .ekd{width:7px;height:7px;border-radius:50%}
       `;
       document.head.appendChild(s);
     }
@@ -237,75 +232,58 @@ const Landing = () => {
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
         
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 py-12 md:py-16 relative">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 relative">
+          <div className="grid lg:grid-cols-[1fr_340px] gap-8 lg:gap-12 items-start">
+            {/* Left: Content */}
+            <div className="pt-2">
               {/* Logo + Powered by Bosch */}
-              <div className="mb-6">
-                <img src="/trustedv-rocket-logo.png" alt="TrusteD-V" className="h-28 sm:h-36 w-auto object-contain mb-3" data-testid="hero-logo" />
-                <div className="flex items-center gap-2.5">
-                  <span className="text-sm font-semibold text-slate-500 tracking-wide">Powered by</span>
-                  <img src="/bosch-logo.png" alt="Bosch" className="h-5 sm:h-6 object-contain" />
+              <div className="flex items-center gap-4 mb-5">
+                <img src="/trustedv-rocket-logo.png" alt="TrusteD-V" className="h-16 sm:h-20 w-auto object-contain" data-testid="hero-logo" />
+                <div>
+                  <div className="text-xs text-slate-400 font-medium">Powered by</div>
+                  <img src="/bosch-logo.png" alt="Bosch" className="h-5 object-contain mt-0.5" />
                 </div>
               </div>
               
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-5 leading-tight" data-testid="hero-heading">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-4 leading-tight" data-testid="hero-heading">
                 Build your secure <span className="text-primary">RISC-V</span> Solution
               </h1>
               
-              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 max-w-xl">
+              <p className="text-base text-muted-foreground leading-relaxed mb-6 max-w-lg">
                 The silicon-to-application platform for RISC-V embedded development. 
                 From IP blocks to production firmware, everything powered by <strong>Rust</strong>.
               </p>
               
-              <div className="flex flex-wrap gap-4 mb-8">
+              <div className="flex flex-wrap gap-3 mb-6">
                 <Link to="/download-ide">
-                  <Button data-testid="start-building-btn" size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
-                    Download IDE <Download className="ml-2 w-5 h-5" />
+                  <Button data-testid="start-building-btn" size="lg" className="h-11 px-7 text-sm font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                    Download IDE <Download className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
                 <Link to="/developer-portal">
-                  <Button data-testid="explore-portal-btn" variant="outline" size="lg" className="h-12 px-8 text-base font-semibold">
+                  <Button data-testid="explore-portal-btn" variant="outline" size="lg" className="h-11 px-7 text-sm font-semibold">
                     Developer Portal
                   </Button>
                 </Link>
               </div>
               
-              {/* Made in India - prominent image */}
-              <div data-testid="made-in-india-badge" className="mt-2">
-                <img src="/make-in-india.jpg" alt="Make in India" className="w-full max-w-[400px] rounded-xl shadow-lg border border-slate-200" />
+              {/* Made in India */}
+              <div data-testid="made-in-india-badge">
+                <img src="/make-in-india.jpg" alt="Make in India" className="w-full max-w-[280px] rounded-lg shadow-md border border-slate-200" />
               </div>
             </div>
             
-            {/* Engine Architecture Diagram (v7) */}
-            <div className="hidden lg:flex items-start justify-center pt-2">
-              <div className="w-[340px] flex-shrink-0">
-                <div className="text-center mb-2">
-                  <h3 className="text-base font-extrabold tracking-tight">
-                    <span className="text-foreground">T</span>
-                    <span className="text-[#B7410E]">rust</span>
-                    <span className="text-foreground">eD</span>
-                    <span className="text-[#C8A200]">-V</span>
-                    <span className="text-[#2E7D32]"> Engine</span>
-                  </h3>
-                </div>
-                <EngineArchDiagram />
+            {/* Right: Engine Diagram - desktop only */}
+            <div className="hidden lg:block">
+              <div className="text-center mb-1">
+                <h3 className="text-sm font-extrabold tracking-tight">
+                  <span className="text-foreground">T</span>
+                  <span className="text-[#B7410E]">rust</span>
+                  <span className="text-foreground">eD</span>
+                  <span className="text-[#C8A200]">-V</span>
+                  <span className="text-[#2E7D32]"> Engine</span>
+                </h3>
               </div>
-            </div>
-          </div>
-          
-          {/* Mobile: Engine below */}
-          <div className="lg:hidden flex flex-col items-center mt-8 mb-4">
-            <div className="text-center mb-2">
-              <h3 className="text-sm font-extrabold tracking-tight">
-                <span className="text-foreground">T</span>
-                <span className="text-[#B7410E]">rust</span>
-                <span className="text-foreground">eD</span>
-                <span className="text-[#C8A200]">-V</span>
-                <span className="text-[#2E7D32]"> Engine</span>
-              </h3>
-            </div>
-            <div className="w-[340px] max-w-full overflow-x-auto">
               <EngineArchDiagram />
             </div>
           </div>
@@ -313,13 +291,13 @@ const Landing = () => {
       </section>
 
       {/* ══ 4 DOMAINS ══ */}
-      <section className="py-12 bg-white border-t border-border" data-testid="domains-section">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+      <section className="py-10 bg-white border-t border-border" data-testid="domains-section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Industries We Serve</span>
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">We Cater to 4 Key Domains</h2>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
               { icon: Cog, title: "Automotive", desc: "ADAS, telematics, and in-vehicle networking on RISC-V.", color: "#0071c5" },
               { icon: Radio, title: "IoT", desc: "Smart sensors, edge gateways, and connected devices.", color: "#2E7D32" },
@@ -330,11 +308,11 @@ const Landing = () => {
               return (
                 <RevealItem key={i} delay={i * 100}>
                   <Card data-testid={`domain-card-${i}`} className="text-center hover:shadow-lg transition-all border-border group h-full">
-                    <CardContent className="p-6">
-                      <div className="w-14 h-14 rounded-xl mx-auto mb-4 flex items-center justify-center transition-colors" style={{ backgroundColor: `${domain.color}12` }}>
-                        <Icon className="w-7 h-7 transition-colors" style={{ color: domain.color }} />
+                    <CardContent className="p-5">
+                      <div className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center transition-colors" style={{ backgroundColor: `${domain.color}12` }}>
+                        <Icon className="w-6 h-6 transition-colors" style={{ color: domain.color }} />
                       </div>
-                      <h3 className="font-bold text-foreground text-base mb-1.5">{domain.title}</h3>
+                      <h3 className="font-bold text-foreground text-sm mb-1">{domain.title}</h3>
                       <p className="text-xs text-muted-foreground leading-relaxed">{domain.desc}</p>
                     </CardContent>
                   </Card>
@@ -346,11 +324,11 @@ const Landing = () => {
       </section>
 
       {/* ══ 7-STAGE BUILD PIPELINE ══ */}
-      <section className="py-20 bg-white border-t border-border overflow-hidden" data-testid="simulation-section">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
-          <div className="text-center mb-16">
+      <section className="py-16 bg-white border-t border-border overflow-hidden" data-testid="simulation-section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">TrusteD-V Engine</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
               Requirement &rarr; IP &rarr; Chips &rarr; SoC &rarr; Firmware &rarr; Sim &rarr; Launch
             </h2>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
@@ -435,11 +413,11 @@ const Landing = () => {
       </section>
 
       {/* ══ BUSINESS PLANS ══ */}
-      <section className="py-20 bg-white border-t border-border" data-testid="pricing-section">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
-          <div className="text-center mb-16">
+      <section className="py-16 bg-white border-t border-border" data-testid="pricing-section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Licensing & Plans</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
               Flexible Plans for Every Team
             </h2>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
@@ -499,11 +477,11 @@ const Landing = () => {
       </section>
       
       {/* ══ HARDWARE PARTNERS ══ */}
-      <section className="py-20 bg-slate-50 border-t border-border">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
-          <div className="text-center mb-12">
+      <section className="py-16 bg-slate-50 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Hardware Ecosystem</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
               Supported <span className="text-primary">RISC-V</span> Hardware
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -536,10 +514,10 @@ const Landing = () => {
       </section>
       
       {/* ══ CTA ══ */}
-      <section className="py-20 bg-primary">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+      <section className="py-16 bg-primary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
               Ready to Build Secure Embedded Systems with <span className="text-orange-300">Rust</span>?
             </h2>
             <p className="text-primary-foreground/80 mb-8 text-base sm:text-lg leading-relaxed">
@@ -563,7 +541,7 @@ const Landing = () => {
 
       {/* ══ FOOTER ══ */}
       <footer className="py-12 bg-slate-900 text-white">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h4 className="font-semibold mb-4">Platform</h4>
