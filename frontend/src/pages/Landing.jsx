@@ -254,19 +254,6 @@ const Landing = () => {
                 From IP blocks to production firmware, everything powered by <strong>Rust</strong>.
               </p>
               
-              <div className="flex flex-wrap gap-3 mb-6">
-                <Link to="/download-ide">
-                  <Button data-testid="start-building-btn" size="lg" className="h-11 px-7 text-sm font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
-                    Download IDE <Download className="ml-2 w-4 h-4" />
-                  </Button>
-                </Link>
-                <Link to="/developer-portal">
-                  <Button data-testid="explore-portal-btn" variant="outline" size="lg" className="h-11 px-7 text-sm font-semibold">
-                    Developer Portal
-                  </Button>
-                </Link>
-              </div>
-              
               {/* Made in India */}
               <div data-testid="made-in-india-badge">
                 <img src="/make-in-india.jpg" alt="Make in India" className="w-full max-w-[280px] rounded-lg shadow-md border border-slate-200" />
