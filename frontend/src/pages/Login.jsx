@@ -40,13 +40,15 @@ const Login = () => {
       
       <Card className="w-full max-w-md bg-card border border-border shadow-2xl">
         <CardHeader className="space-y-6 p-8 pb-6">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <TrustedVLogo size="lg" />
+          <div className="flex flex-col items-center justify-center gap-5">
+            <div className="flex flex-col items-center">
+              <TrustedVLogo size="lg" showPoweredBy={true} className="flex flex-col items-center" />
+            </div>
             <div className="text-center">
               <h2 className="text-2xl font-bold text-foreground">
                 Welcome Back
               </h2>
-              <p className="text-sm text-muted-foreground mt-2">
+              <p className="text-sm text-muted-foreground mt-1">
                 Sign in to access the platform
               </p>
             </div>

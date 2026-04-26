@@ -236,26 +236,12 @@ const Landing = () => {
           <div className="grid lg:grid-cols-[1fr_360px] gap-8 lg:gap-10 items-start">
             {/* Left: Content */}
             <div className="pt-4">
-              {/* Logo + Branding */}
-              <div className="mb-6">
-                <div className="flex items-center gap-3 mb-2">
-                  <img src="/trustedv-rocket-logo.png" alt="TrusteD-V" className="h-14 sm:h-16 w-auto object-contain" data-testid="hero-logo" />
-                  <div>
-                    <span className="text-2xl sm:text-3xl font-bold tracking-tight leading-none">
-                      <span className="text-foreground">T</span>
-                      <span className="text-[#B7410E]">rust</span>
-                      <span className="text-foreground">eD</span>
-                      <span className="text-[#C8A200]">-V</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 ml-1">
-                  <span className="text-xs text-slate-400 font-medium">Powered by</span>
-                  <img src="/bosch-logo.png" alt="Bosch" className="h-4 object-contain" />
-                </div>
+              {/* Brand Lockup */}
+              <div className="mb-8">
+                <TrustedVLogo size="hero" showPoweredBy={true} />
               </div>
               
-              <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-foreground tracking-tight mb-4 leading-tight" data-testid="hero-heading">
+              <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-foreground tracking-tight mb-4 leading-[1.15]" data-testid="hero-heading">
                 Build your secure{" "}
                 <span className="text-[#003262]">RISC-V</span> Solution
               </h1>
@@ -266,13 +252,13 @@ const Landing = () => {
               </p>
               
               {/* Made in India */}
-              <div data-testid="made-in-india-badge" className="relative">
+              <div data-testid="made-in-india-badge">
                 <img 
                   src="/make-in-india.jpg" 
                   alt="Make in India" 
                   className="w-full max-w-[320px] rounded-xl shadow-lg border border-slate-200/80" 
                 />
-                <p className="text-xs text-muted-foreground mt-2 font-medium">Designed in India, engineered for the world</p>
+                <p className="text-xs text-muted-foreground mt-2.5 font-medium tracking-wide">Designed in India, engineered for the world</p>
               </div>
             </div>
             
@@ -580,13 +566,7 @@ const Landing = () => {
           </div>
           
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <TrustedVLogo size="sm" />
-              <div className="flex items-center gap-2 pl-4 border-l border-slate-700">
-                <span className="text-xs text-slate-500">Powered by</span>
-                <img src="/bosch-logo.png" alt="" className="h-5 opacity-70 hover:opacity-100 transition-opacity" />
-              </div>
-            </div>
+            <TrustedVLogo size="sm" showPoweredBy={true} dark={true} />
             <p className="text-sm text-slate-400">&copy; 2026 TrusteD-V. Secure RISC-V Development Platform.</p>
           </div>
         </div>

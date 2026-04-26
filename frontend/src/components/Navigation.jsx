@@ -47,8 +47,8 @@ const Navigation = () => {
           <div className="flex items-center justify-between h-16 lg:h-18">
             
             {/* Left: Logo */}
-            <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-              <TrustedVLogo size="md" showText={true} />
+            <Link to="/" className="flex items-center group flex-shrink-0">
+              <TrustedVLogo size="md" />
             </Link>
             
             {/* Center: Desktop Navigation */}
