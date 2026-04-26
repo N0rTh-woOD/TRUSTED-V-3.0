@@ -3,10 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { 
   CheckCircle2, Cpu, Code,
   Bug, Sparkles, Brain,
-  FileCode, Settings, Eye, Save, Terminal as TerminalIcon,
-  MonitorSmartphone, Wrench, FileText,
-  GitBranch, FolderTree, Play, SplitSquareHorizontal,
-  FileSearch, AlertTriangle, Package, HardDrive
+  Settings, Eye,
+  MonitorSmartphone, SplitSquareHorizontal,
+  FileSearch, Package, HardDrive
 } from "lucide-react";
 
 const IDEDownloads = () => {
@@ -15,7 +14,7 @@ const IDEDownloads = () => {
     {
       icon: HardDrive,
       title: "Hardware-Focused Development Platform",
-      description: "Built for semiconductor, embedded system, and hardware developers. Supports workflows with chips, peripheral devices, registers, and hardware-level programming, far more efficient than general-purpose IDEs.",
+      description: "Built from the ground up, not a fork of any existing editor, to ensure peak performance and deep integration for semiconductor and embedded development. It streamlines hardware-level programming, register management, and peripheral integration in a way general-purpose IDEs cannot.",
     },
     {
       icon: Brain,
@@ -24,8 +23,8 @@ const IDEDownloads = () => {
     },
     {
       icon: Code,
-      title: "Built-in Rust Analyzer (Native Integration)",
-      description: "Rust analyzer integrated directly into the IDE core, no external plugins needed. Real-time code analysis, intelligent auto-completion, faster error detection, and consistent Rust development support.",
+      title: "Native Rust Analyzer & Real-Time Diagnostics",
+      description: "A natively integrated Rust core that provides high-performance, plugin-free code intelligence. By removing external dependencies, you get faster error detection, real-time syntax highlighting, and hardware-aware type checking for a seamless embedded development experience.",
     },
     {
       icon: Eye,
@@ -35,37 +34,17 @@ const IDEDownloads = () => {
     {
       icon: Sparkles,
       title: "Integrated AI Assistance Panel",
-      description: "Interact with an intelligent AI system directly while coding, ask questions, receive debugging support, generate code, create files, and get contextual documentation insights without context switching.",
-    },
-    {
-      icon: Wrench,
-      title: "Built-from-Scratch Architecture",
-      description: "Developed from the ground up for better performance optimization, tighter feature integration, improved flexibility, and a cleaner user experience. Not a fork of any existing editor.",
-    },
-    {
-      icon: FolderTree,
-      title: "Structured Project File Explorer",
-      description: "Navigation designed for hardware and embedded development involving multiple modules, crates, configuration files, and device-related components.",
+      description: "An integrated AI panel providing real-time debugging, code generation, and contextual insights directly within your workspace to eliminate context switching.",
     },
     {
       icon: Settings,
-      title: "Integrated Development Controls",
-      description: "File management, search and replacement, run/build options, and terminal integration, a familiar workflow supporting advanced hardware development within a single environment.",
+      title: "Unified Development Workspace",
+      description: "Consolidate your entire workflow into a single environment. Integrated development controls including file management, terminal access, and build/run options provide a familiar yet powerful interface designed specifically to handle complex hardware development without context switching.",
     },
     {
       icon: SplitSquareHorizontal,
       title: "Split Editor for Multitasking",
-      description: "Split editor views allow developers to work on multiple files simultaneously, essential when referencing datasheets alongside firmware code.",
-    },
-    {
-      icon: GitBranch,
-      title: "Integrated Git Version Control",
-      description: "Built-in Git support for committing changes, tracking file modifications, and managing repositories, no reliance on external tools, smoother workflow for collaborative projects.",
-    },
-    {
-      icon: Save,
-      title: "Auto-Save (Every 30 Seconds)",
-      description: "Automatically saves changes at regular intervals, preventing loss of work due to unexpected interruptions. Focus on coding without manual saving.",
+      description: "A high-productivity split-view editor designed for simultaneous multitasking, enabling developers to reference datasheets or register maps side-by-side with active firmware code.",
     },
     {
       icon: Bug,
@@ -73,29 +52,9 @@ const IDEDownloads = () => {
       description: "Set breakpoints, step through code execution, inspect variable values, and analyze program behavior in real time. Crucial for understanding code-device interaction in embedded systems.",
     },
     {
-      icon: Play,
-      title: "Build and Run Support",
-      description: "Compile and execute programs directly within the IDE. Essential for rapid testing and iteration to verify device behavior and program correctness without external tools.",
-    },
-    {
-      icon: TerminalIcon,
-      title: "Integrated Terminal",
-      description: "Execute build commands, scripts, version control operations, and interact with development tools directly within the IDE, reduces context switching for hardware workflows.",
-    },
-    {
-      icon: AlertTriangle,
-      title: "Real-Time Diagnostics & Error Detection",
-      description: "Identify errors, warnings, and potential issues while writing code. Highlights syntax errors, type mismatches, unused variables, with suggestions for resolving issues.",
-    },
-    {
       icon: Package,
-      title: "Crate Version Suggestions in Cargo.toml",
-      description: "Intelligent suggestions for selecting crate versions. Recommends latest stable versions for dependencies, ensuring compatibility and simplifying dependency management.",
-    },
-    {
-      icon: FileText,
-      title: "TOML Validation Support",
-      description: "Validates TOML files in real time, identifies syntax errors, invalid configurations, and incorrect dependency definitions. Reduces build failures and improves reliability.",
+      title: "Intelligent Cargo & TOML Management",
+      description: "Streamline your project configuration with real-time TOML validation and smart crate version suggestions. Instantly identify syntax errors or invalid dependency definitions in your Cargo.toml to reduce build failures and ensure a reliable firmware environment.",
     },
     {
       icon: Cpu,
@@ -105,46 +64,31 @@ const IDEDownloads = () => {
     {
       icon: FileSearch,
       title: "Checkpoints for Every Manual Save",
-      description: "Every manual save creates a snapshot of the current code state. Track changes over time and revert to previous versions, useful during experimentation, debugging, and iterative development.",
-    },
-    {
-      icon: FileCode,
-      title: "Integrated Logs System",
-      description: "Records build outputs, runtime messages, errors, and debugging information. Track application behavior, identify issues, and analyze system performance in one place.",
+      description: "An automated snapshot system that creates a versioned checkpoint on every manual save, allowing developers to effortlessly track experiments and revert to stable states during iterative hardware debugging.",
     },
     {
       icon: MonitorSmartphone,
       title: "SVD Support for Hardware Visualization",
-      description: "Structured visualization of hardware components, registers, peripherals, memory mappings. View device-level configuration within the IDE, reducing reliance on external datasheets.",
+      description: "Structured visualization of hardware components: registers, peripherals, memory mappings. View device-level configuration within the IDE, reducing reliance on external datasheets.",
     },
   ];
 
   const comparisonData = [
     { aspect: "Development Focus", general: "Software, web, and application development workflows", ours: "Hardware and semiconductor development using Rust" },
     { aspect: "AI Assistance", general: "Generic coding suggestions without deep hardware awareness", ours: "AI trained on GPIO, UART, peripheral communication, embedded crates" },
-    { aspect: "Rust Tooling", general: "Requires installing rust-analyzer plugin/extension", ours: "Built-in native Rust analyzer, no plugins needed" },
-    { aspect: "Hardware Awareness", general: "Limited. Relies on external datasheets and documentation", ours: "Designed with awareness of registers, peripherals, device-level interactions" },
+    { aspect: "Rust Tooling", general: "Requires installing rust-analyzer plugin or extension", ours: "Built-in native Rust analyzer, no plugins needed" },
+    { aspect: "Hardware Awareness", general: "Limited, relies on external datasheets and documentation", ours: "Designed with awareness of registers, peripherals, device-level interactions" },
     { aspect: "Documentation Access", general: "External docs, datasheets, and online resources needed", ours: "AI provides contextual hardware info directly inside the IDE" },
     { aspect: "Setup Complexity", general: "Multiple plugins, toolchains, and extensions required", ours: "Built-in tools simplify setup for hardware-focused Rust development" },
     { aspect: "Context Switching", general: "Frequent switching between IDE, docs, and datasheets", ours: "Integrated AI + hardware support, everything within the IDE" },
     { aspect: "Project Structure", general: "Optimized for software modules and application files", ours: "Handles hardware modules, crates, config files, device components" },
   ];
 
-  const motivations = [
-    "Providing a specialized environment for hardware-focused Rust development",
-    "Reducing dependency on external documentation and plugins",
-    "Improving developer productivity through integrated AI assistance",
-    "Supporting device-level programming for chips, peripherals, and embedded systems",
-    "Delivering a modern, streamlined experience with a clean interface",
-  ];
-
-  const benefits = [
-    "Faster hardware-focused Rust development workflow",
-    "Reduced need to search external documentation",
-    "Seamless AI-assisted coding and debugging support",
-    "No dependency on plugin installation for core Rust tooling",
-    "Improved productivity through a specialized development environment",
-    "Optimized platform for embedded and semiconductor development",
+  const solutionPillars = [
+    { title: "Hardware-Aware Intelligence", desc: "Integrated AI trained on HALs, registers, and protocols to bring documentation directly to your cursor." },
+    { title: "Native Rust Core", desc: "No more plugin bloat. High-performance Rust Analyzer and SVD visualization out of the box." },
+    { title: "Unified Workflow", desc: "From register-level programming to real-time diagnostics, every tool supports the journey from chip to code." },
+    { title: "Built for Performance", desc: "A modern, streamlined interface that respects your machine's resources and your developer's intuition." },
   ];
 
   return (
@@ -168,8 +112,7 @@ const IDEDownloads = () => {
               </h1>
               
               <p className="text-base text-slate-400 leading-relaxed mb-6 max-w-xl">
-                Modern code editors like Zed and Lapce offer high performance for general programming, but aren't designed for hardware-focused development. 
-                Jarvyn extends beyond with specialized tooling, AI assistance trained on hardware knowledge, and integrated Rust support tailored for embedded systems.
+                A high-performance IDE built from the ground up to bridge the gap between software and silicon, combining native Rust intelligence with hardware-aware AI and specialized debugging tools for the modern embedded developer.
               </p>
               
               <div className="grid grid-cols-2 gap-3">
@@ -182,29 +125,19 @@ const IDEDownloads = () => {
               </div>
             </div>
             
-            {/* Problem Statement Card */}
+            {/* Problem / Solution Card */}
             <div className="bg-[#252a3e] rounded-xl border border-slate-700/50 p-6">
               <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">The Problem</h3>
-              <div className="space-y-3 mb-6">
-                <div className="flex items-start gap-3 text-sm text-slate-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0" />
-                  General-purpose IDEs are optimized for software development, not hardware
-                </div>
-                <div className="flex items-start gap-3 text-sm text-slate-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0" />
-                  Hardware-specific tools are limited to specific ecosystems
-                </div>
-                <div className="flex items-start gap-3 text-sm text-slate-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0" />
-                  Developers rely on external docs, plugins, and fragmented workflows
-                </div>
-              </div>
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Our Solution</h3>
+              <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                General-purpose IDEs are built for high-level software, leaving hardware developers stranded between generic editors and clunky, vendor-locked toolchains. Today's embedded workflow is a struggle of fragmented plugins, constant context-switching for datasheets, and fragile environments that aren't optimized for the metal.
+              </p>
+              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">The Solution</h3>
+              <p className="text-sm text-slate-300/80 mb-4">Jarvyn reclaims the hardware development experience by providing a ground-up environment designed specifically for the complexities of embedded Rust.</p>
               <div className="space-y-3">
-                {motivations.map((m, i) => (
+                {solutionPillars.map((p, i) => (
                   <div key={i} className="flex items-start gap-3 text-sm text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                    {m}
+                    <div><span className="font-semibold text-white">{p.title}:</span> {p.desc}</div>
                   </div>
                 ))}
               </div>
@@ -213,14 +146,14 @@ const IDEDownloads = () => {
         </div>
       </section>
 
-      {/* All 21 Key Features */}
+      {/* Key Features (12 after merge) */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Capabilities</span>
             <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Key Features</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              21 purpose-built features for hardware and embedded system development, from AI-powered code generation to SVD hardware visualization.
+              12 purpose-built capabilities for hardware and embedded system development, from hardware-aware AI to SVD visualization.
             </p>
           </div>
           
@@ -252,7 +185,7 @@ const IDEDownloads = () => {
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Comparison</span>
             <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Jarvyn vs General IDEs</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              See how a purpose-built hardware IDE differs from VS Code, IntelliJ, Zed, and Lapce.
+              See how a purpose-built hardware IDE differs from general-purpose code editors.
             </p>
           </div>
           
@@ -261,7 +194,7 @@ const IDEDownloads = () => {
               <thead>
                 <tr className="border-b-2 border-slate-200">
                   <th className="text-left py-3 px-4 font-semibold text-muted-foreground w-[180px]">Aspect</th>
-                  <th className="text-left py-3 px-4 font-semibold text-muted-foreground">General IDEs <span className="text-xs font-normal">(VS Code, Zed, Lapce)</span></th>
+                  <th className="text-left py-3 px-4 font-semibold text-muted-foreground">General IDEs</th>
                   <th className="text-left py-3 px-4 font-semibold text-primary">Jarvyn IDE</th>
                 </tr>
               </thead>
@@ -275,24 +208,6 @@ const IDEDownloads = () => {
                 ))}
               </tbody>
             </table>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="py-16 bg-slate-50 border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Why Jarvyn</span>
-            <h2 className="text-3xl font-bold text-foreground mt-2">Benefits</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {benefits.map((b, i) => (
-              <div key={i} className="flex items-start gap-3 p-4 rounded-lg bg-white border border-slate-200">
-                <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-foreground font-medium">{b}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
