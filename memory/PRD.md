@@ -70,13 +70,12 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - **Slogans reflected**: "Powered by Bosch" and "Build your secure RISC-V Solution" properly placed in hero section.
 
 ### Phase 10: Platform-Wide Branding Overhaul (Completed - Apr 2026)
-- **Removed "RISC-V RUST PLATFORM" subtitle** from `TrustedVLogo.jsx` across all pages (Nav, Login, Footer, etc.).
-- **TrusteD-V coloring standardized**: "rust" in reddish (#B7410E), "V" in yellow (#C8A200) matching HTML artifact.
-- **RISC-V official color**: Changed from generic primary blue to Berkeley Blue (#003262) in hero heading.
-- **Hero restructured**: Logo + colored name + "Powered by Bosch" + "Build your secure RISC-V Solution" heading + Make in India image with "Designed in India, engineered for the world" tagline.
-- **Engine diagram**: Proper 360px column, overflow hidden, no text overlap.
-- **Navigation**: Max-width normalized to max-w-7xl. Footer updated with "Powered by" Bosch branding.
-- **All 34 tests passed** (26 desktop + 8 mobile).
+- **Removed "RISC-V RUST PLATFORM" subtitle** from `TrustedVLogo.jsx` across all pages.
+- **TrustedVLogo component redesigned**: 6 size presets (xs/sm/md/lg/xl/hero), `showPoweredBy` prop for cohesive "POWERED BY BOSCH" lockup, `dark` prop for footer. Uses Helvetica Neue, font-extrabold. Colors: T/eD=slate-800, rust=#B7410E, -V=#C8A200.
+- **Brand lockup sizes**: Nav=md(32px), Login=lg(44px)+poweredBy, Hero=hero(72px)+poweredBy, Footer=sm(28px)+poweredBy+dark.
+- **RISC-V official Berkeley Blue (#003262)** in hero heading.
+- **Mobile responsive**: All brand elements scale properly on 390px. Engine diagram hidden on mobile.
+- **All 24 tests passed** (iteration_28).
 - **IDE Page (IDEDownloads.jsx)**: Overhauled with PDF report content — 21 purpose-built features (Hardware-Aware AI, Native Rust Analyzer, SVD visualization, Checkpoint system, etc.), comparison table vs general IDEs (8 aspects), Benefits section, professional dark hero. Unused imports cleaned.
 - **Crypto Stack Page (CryptoStackPage.jsx)**: Complete rewrite with user-provided algorithm data — 8 categories: Hashing (SHA-2/SHA-3, SHAKE — BLAKE removed), PQC Signatures (ML-DSA, SLH-DSA), PQC Key Exchange (ML-KEM), Symmetric Encryption (AES + modes with CBC/CFB deprecation note), Classical Signatures (ECDSA/EdDSA, RSA), Classical Key Exchange (ECDH, RSA-KEM), Randomness (PRNG DRBG), Future/Advanced (Side-Channel Protections). Color-coded category headers, monospaced variant tags, NIST FIPS standards references, dark hero with standards compliance card.
 - **Developer Portal Quick Start**: Upgraded code example with proper Rust syntax highlighting (GitHub dark theme colors), line numbers, terminal output bar, side info cards (What This Does + Supported Boards), dark section background.
