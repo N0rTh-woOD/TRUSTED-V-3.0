@@ -69,11 +69,14 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - **Make in India globe image**: Replaced small text badge with the user's uploaded "Make in India" globe image (make-in-india.jpg) showing India highlighted on Earth with chip overlay. Displayed prominently below CTA buttons.
 - **Slogans reflected**: "Powered by Bosch" and "Build your secure RISC-V Solution" properly placed in hero section.
 
-### Phase 9.2: Landing Page Layout Fix (Completed - Apr 2026)
-- **Engine diagram CSS fix**: Set `overflow:hidden` on canvas, hid side labels (.ll/.lr) that were causing text overlap outside container, reduced canvas height from 700px to 640px.
-- **Layout restructure**: Changed all `max-w-[1800px]` to `max-w-7xl` for proper content width. Hero grid changed to `lg:grid-cols-[1fr_340px]`. Reduced padding/margins throughout.
-- **Make in India image**: Capped at `max-w-[280px]` for proportional display.
-- **Mobile responsive**: Engine diagram hidden on mobile via `lg:block`. Domain cards 2-col grid. All sections verified for no horizontal overflow on 390px viewport.
+### Phase 10: Platform-Wide Branding Overhaul (Completed - Apr 2026)
+- **Removed "RISC-V RUST PLATFORM" subtitle** from `TrustedVLogo.jsx` across all pages (Nav, Login, Footer, etc.).
+- **TrusteD-V coloring standardized**: "rust" in reddish (#B7410E), "V" in yellow (#C8A200) matching HTML artifact.
+- **RISC-V official color**: Changed from generic primary blue to Berkeley Blue (#003262) in hero heading.
+- **Hero restructured**: Logo + colored name + "Powered by Bosch" + "Build your secure RISC-V Solution" heading + Make in India image with "Designed in India, engineered for the world" tagline.
+- **Engine diagram**: Proper 360px column, overflow hidden, no text overlap.
+- **Navigation**: Max-width normalized to max-w-7xl. Footer updated with "Powered by" Bosch branding.
+- **All 34 tests passed** (26 desktop + 8 mobile).
 - **IDE Page (IDEDownloads.jsx)**: Overhauled with PDF report content — 21 purpose-built features (Hardware-Aware AI, Native Rust Analyzer, SVD visualization, Checkpoint system, etc.), comparison table vs general IDEs (8 aspects), Benefits section, professional dark hero. Unused imports cleaned.
 - **Crypto Stack Page (CryptoStackPage.jsx)**: Complete rewrite with user-provided algorithm data — 8 categories: Hashing (SHA-2/SHA-3, SHAKE — BLAKE removed), PQC Signatures (ML-DSA, SLH-DSA), PQC Key Exchange (ML-KEM), Symmetric Encryption (AES + modes with CBC/CFB deprecation note), Classical Signatures (ECDSA/EdDSA, RSA), Classical Key Exchange (ECDH, RSA-KEM), Randomness (PRNG DRBG), Future/Advanced (Side-Channel Protections). Color-coded category headers, monospaced variant tags, NIST FIPS standards references, dark hero with standards compliance card.
 - **Developer Portal Quick Start**: Upgraded code example with proper Rust syntax highlighting (GitHub dark theme colors), line numbers, terminal output bar, side info cards (What This Does + Supported Boards), dark section background.
