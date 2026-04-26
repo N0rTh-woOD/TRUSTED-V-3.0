@@ -233,35 +233,51 @@ const Landing = () => {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 relative">
-          <div className="grid lg:grid-cols-[1fr_340px] gap-8 lg:gap-12 items-start">
+          <div className="grid lg:grid-cols-[1fr_360px] gap-8 lg:gap-10 items-start">
             {/* Left: Content */}
-            <div className="pt-2">
-              {/* Logo + Powered by Bosch */}
-              <div className="flex items-center gap-4 mb-5">
-                <img src="/trustedv-rocket-logo.png" alt="TrusteD-V" className="h-16 sm:h-20 w-auto object-contain" data-testid="hero-logo" />
-                <div>
-                  <div className="text-xs text-slate-400 font-medium">Powered by</div>
-                  <img src="/bosch-logo.png" alt="Bosch" className="h-5 object-contain mt-0.5" />
+            <div className="pt-4">
+              {/* Logo + Branding */}
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <img src="/trustedv-rocket-logo.png" alt="TrusteD-V" className="h-14 sm:h-16 w-auto object-contain" data-testid="hero-logo" />
+                  <div>
+                    <span className="text-2xl sm:text-3xl font-bold tracking-tight leading-none">
+                      <span className="text-foreground">T</span>
+                      <span className="text-[#B7410E]">rust</span>
+                      <span className="text-foreground">eD</span>
+                      <span className="text-[#C8A200]">-V</span>
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 ml-1">
+                  <span className="text-xs text-slate-400 font-medium">Powered by</span>
+                  <img src="/bosch-logo.png" alt="Bosch" className="h-4 object-contain" />
                 </div>
               </div>
               
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-4 leading-tight" data-testid="hero-heading">
-                Build your secure <span className="text-primary">RISC-V</span> Solution
+              <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-foreground tracking-tight mb-4 leading-tight" data-testid="hero-heading">
+                Build your secure{" "}
+                <span className="text-[#003262]">RISC-V</span> Solution
               </h1>
               
-              <p className="text-base text-muted-foreground leading-relaxed mb-6 max-w-lg">
+              <p className="text-base text-muted-foreground leading-relaxed mb-8 max-w-lg">
                 The silicon-to-application platform for RISC-V embedded development. 
-                From IP blocks to production firmware, everything powered by <strong>Rust</strong>.
+                From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
               </p>
               
               {/* Made in India */}
-              <div data-testid="made-in-india-badge">
-                <img src="/make-in-india.jpg" alt="Make in India" className="w-full max-w-[280px] rounded-lg shadow-md border border-slate-200" />
+              <div data-testid="made-in-india-badge" className="relative">
+                <img 
+                  src="/make-in-india.jpg" 
+                  alt="Make in India" 
+                  className="w-full max-w-[320px] rounded-xl shadow-lg border border-slate-200/80" 
+                />
+                <p className="text-xs text-muted-foreground mt-2 font-medium">Designed in India, engineered for the world</p>
               </div>
             </div>
             
             {/* Right: Engine Diagram - desktop only */}
-            <div className="hidden lg:block">
+            <div className="hidden lg:block pt-2">
               <div className="text-center mb-1">
                 <h3 className="text-sm font-extrabold tracking-tight">
                   <span className="text-foreground">T</span>
@@ -469,7 +485,7 @@ const Landing = () => {
           <div className="text-center mb-10">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Hardware Ecosystem</span>
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
-              Supported <span className="text-primary">RISC-V</span> Hardware
+              Supported <span className="text-[#003262]">RISC-V</span> Hardware
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Pre-integrated support for C-DAC, Mindgrove, and Upbeat Tech RISC-V development platforms.
@@ -564,10 +580,11 @@ const Landing = () => {
           </div>
           
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4">
               <TrustedVLogo size="sm" />
-              <div className="flex items-center gap-2 pl-6 border-l border-slate-700">
-                <img src="/bosch-logo.png" alt="" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <div className="flex items-center gap-2 pl-4 border-l border-slate-700">
+                <span className="text-xs text-slate-500">Powered by</span>
+                <img src="/bosch-logo.png" alt="" className="h-5 opacity-70 hover:opacity-100 transition-opacity" />
               </div>
             </div>
             <p className="text-sm text-slate-400">&copy; 2026 TrusteD-V. Secure RISC-V Development Platform.</p>

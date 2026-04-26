@@ -43,7 +43,7 @@ const Navigation = () => {
       
       {/* Main Navigation */}
       <nav className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
-        <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-18">
             
             {/* Left: Logo */}
