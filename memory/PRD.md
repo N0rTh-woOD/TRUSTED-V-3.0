@@ -63,6 +63,11 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - **4 Domain cards**: Added "We Cater to 4 Key Domains" section: Automotive, IoT, Consumer Electronics, Data Center.
 - **Em dash cleanup**: Removed all em dashes (—) from visible content text across all pages (Landing, IDEDownloads, CryptoStack, SecureBoot, RTOS Benchmark, About, Partners, AdminIDE). Replaced with colons, commas, or periods as appropriate.
 - **AnimatedCounter removed**: Deleted unused component and cleaned up imports (Shield, Zap, Package, Lock, Flame, BarChart3).
+
+### Phase 9.1: Engine v7 + Make in India Image (Completed - Apr 2026)
+- **Engine v7 diagram restored**: Replaced rocket launch scene with the original isometric 3D engine diagram (v7 with improved gradients) in the hero section. Shows 5 layers: IP Blocks, Discrete Chips, SoC/Module, Middleware, Application API with animated exhaust.
+- **Make in India globe image**: Replaced small text badge with the user's uploaded "Make in India" globe image (make-in-india.jpg) showing India highlighted on Earth with chip overlay. Displayed prominently below CTA buttons.
+- **Slogans reflected**: "Powered by Bosch" and "Build your secure RISC-V Solution" properly placed in hero section.
 - **IDE Page (IDEDownloads.jsx)**: Overhauled with PDF report content — 21 purpose-built features (Hardware-Aware AI, Native Rust Analyzer, SVD visualization, Checkpoint system, etc.), comparison table vs general IDEs (8 aspects), Benefits section, professional dark hero. Unused imports cleaned.
 - **Crypto Stack Page (CryptoStackPage.jsx)**: Complete rewrite with user-provided algorithm data — 8 categories: Hashing (SHA-2/SHA-3, SHAKE — BLAKE removed), PQC Signatures (ML-DSA, SLH-DSA), PQC Key Exchange (ML-KEM), Symmetric Encryption (AES + modes with CBC/CFB deprecation note), Classical Signatures (ECDSA/EdDSA, RSA), Classical Key Exchange (ECDH, RSA-KEM), Randomness (PRNG DRBG), Future/Advanced (Side-Channel Protections). Color-coded category headers, monospaced variant tags, NIST FIPS standards references, dark hero with standards compliance card.
 - **Developer Portal Quick Start**: Upgraded code example with proper Rust syntax highlighting (GitHub dark theme colors), line numbers, terminal output bar, side info cards (What This Does + Supported Boards), dark section background.
