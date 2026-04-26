@@ -139,7 +139,7 @@ const CryptoStackPage = () => {
             <span className="text-sm font-semibold text-amber-600 uppercase tracking-wider">Algorithm Reference</span>
             <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Supported Algorithms & Standards</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Full coverage from classical to post-quantum cryptography — each algorithm implemented in Rust for embedded RISC-V targets.
+              Full coverage from classical to post-quantum cryptography, each algorithm implemented in Rust for embedded RISC-V targets.
             </p>
           </div>
 

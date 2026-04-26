@@ -63,7 +63,7 @@ const AdminIDE = () => {
   const handleAdd = () => {
     setEditingIDE(null);
     setFormData({
-      name: "TrusteD-V IDE — Jarvyn",
+      name: "TrusteD-V IDE Jarvyn",
       version: "1.2.0",
       platform: "",
       download_url: "#",
@@ -333,7 +333,7 @@ const AdminIDE = () => {
                 <Input
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="TrusteD-V IDE — Jarvyn"
+                  placeholder="TrusteD-V IDE Jarvyn"
                 />
               </div>
 

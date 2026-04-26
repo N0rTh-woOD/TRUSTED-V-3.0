@@ -19,7 +19,7 @@ const Partners = () => {
       color: "primary",
       website: "https://vegaprocessors.in",
       contributions: [
-        "VEGA ET1031 — 32-bit RISC-V microcontroller for IoT",
+        "VEGA ET1031: 32-bit RISC-V microcontroller for IoT",
         "DHRUV64 — Dual-core 64-bit RISC-V processor",
         "ARIES development boards with full BSP support",
         "VEGA SDK and peripheral driver libraries",

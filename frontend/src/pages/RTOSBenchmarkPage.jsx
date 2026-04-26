@@ -23,7 +23,7 @@ const RTOSBenchmarkPage = () => {
     { name: "TrusteD-V RTOS", desc: "Custom Rust RTOS built for RISC-V with memory-safe concurrency and 9x faster context switching.", features: ["9x faster context switch", "12x faster task creation", "100% memory safe (Rust)", "Compile-time GPIO verification", "Sub-ms real-time response"] },
     { name: "FreeRTOS", desc: "Industry-standard RTOS with broad ecosystem support. Supported via C FFI bindings in TrusteD-V.", features: ["Broad ecosystem", "Legacy project support", "C FFI bindings", "Pre-configured for RISC-V"] },
     { name: "Zephyr RTOS", desc: "Linux Foundation-backed RTOS with built-in networking and security features.", features: ["Built-in networking", "Bluetooth & WiFi", "Security subsystem", "RISC-V support"] },
-    { name: "Embassy", desc: "Async Rust framework for embedded. No RTOS needed — cooperative multitasking at compile time.", features: ["Async/await native", "Zero-overhead concurrency", "No scheduler overhead", "Timer-based task execution"] },
+    { name: "Embassy", desc: "Async Rust framework for embedded. No RTOS needed. Cooperative multitasking at compile time.", features: ["Async/await native", "Zero-overhead concurrency", "No scheduler overhead", "Timer-based task execution"] },
   ];
 
   return (
@@ -155,7 +155,7 @@ const RTOSBenchmarkPage = () => {
           
           <p className="text-xs text-slate-500 mt-6 text-center">
             Verdict: TrusteD-V RTOS delivers fast context switching (9x), memory safety (Rust), and sub-ms real-time response. 
-            Contended IPC is 4-5x slower than FreeRTOS — an acceptable trade-off for safety-critical applications.
+            Contended IPC is 4-5x slower than FreeRTOS, an acceptable trade-off for safety-critical applications.
           </p>
         </div>
       </section>

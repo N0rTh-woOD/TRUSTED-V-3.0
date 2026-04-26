@@ -79,7 +79,7 @@ const About = () => {
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
               TrusteD-V provides a comprehensive, vertically integrated platform for developing secure 
-              embedded systems with RISC-V architecture and Rust programming language — designed and built in India.
+              embedded systems with RISC-V architecture and Rust programming language, designed and built in India.
             </p>
           </div>
         </div>
@@ -249,7 +249,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Join Our Ecosystem</h2>
           <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            Partner with us to build the future of secure embedded systems — your RISC-V embedded AI engine.
+            Partner with us to build the future of secure embedded systems, your RISC-V embedded AI engine.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/partner-registration">

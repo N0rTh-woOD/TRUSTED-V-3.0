@@ -23,7 +23,7 @@ const SecureBootPage = () => {
             <Badge className="bg-red-100 text-red-800 border-red-200">Security</Badge>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Secure Boot — rboot & rustBoot
+            Secure Boot: rboot & rustBoot
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed">
             Hardware root of trust with verified boot chain for RISC-V. Two complementary bootloaders designed for different stages and use cases.
@@ -57,7 +57,7 @@ const SecureBootPage = () => {
                     "Minimal footprint (~8KB flash)",
                     "First-stage hardware init for RISC-V",
                     "Signature verification of next-stage image",
-                    "Written in Rust — no unsafe C dependencies",
+                    "Written in Rust, no unsafe C dependencies",
                     "Support for SPI/QSPI flash boot",
                     "Watchdog timer integration",
                   ].map((f, i) => (

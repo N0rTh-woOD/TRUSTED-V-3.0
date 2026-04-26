@@ -3,49 +3,13 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
-  Cpu, Zap, Code, Package, Layers, Download, ArrowRight, 
-  CheckCircle2, Shield, Lock, ChevronRight,
+  Cpu, Code, Layers, Download, ArrowRight, 
+  CheckCircle2, ChevronRight,
   Cog, Rocket, Wrench, CircuitBoard,
-  Radio, FlaskConical, Flame, BarChart3, Server
+  Radio, FlaskConical, Server
 } from "lucide-react";
 import TrustedVLogo from "@/components/TrustedVLogo";
 import { PartnerLogo } from "@/components/PartnerLogos";
-
-const AnimatedCounter = ({ end, label, suffix = "" }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true); },
-      { threshold: 0.5 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [started]);
-
-  useEffect(() => {
-    if (!started) return;
-    const duration = 1500;
-    const steps = 40;
-    const increment = end / steps;
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= end) { setCount(end); clearInterval(timer); }
-      else setCount(Math.floor(current));
-    }, duration / steps);
-    return () => clearInterval(timer);
-  }, [started, end]);
-
-  return (
-    <div ref={ref} className="text-center">
-      <div className="text-2xl font-bold text-primary">{count}{suffix}</div>
-      <div className="text-xs text-muted-foreground mt-1">{label}</div>
-    </div>
-  );
-};
 
 const RevealItem = ({ children, delay = 0, className = "" }) => {
   const ref = useRef(null);
@@ -192,13 +156,84 @@ const EngineArchDiagram = () => {
 /* ── 7-Stage Build Simulation ── */
 const simulationStages = [
   { num: 1, title: "Requirement", badge: "Input", color: "#111", badgeBg: "#111", badgeText: "#fff", icon: Wrench, desc: "Natural language mission input parsed by TrusteD-V Engine to identify domain, constraints, and target architecture.", details: ["Mission specification", "Domain detection", "Architecture selection"] },
-  { num: 2, title: "Requirement Decomposition", badge: "Analysis", color: "#5F5E5A", badgeBg: "#F1EFE8", badgeText: "#444", icon: Layers, desc: "Requirements broken into functional blocks — Sensing, Compute, Power, Security — mapped to hardware and software needs.", details: ["Sensing & I/O mapping", "Compute & NPU allocation", "Security requirements"] },
-  { num: 3, title: "Core Engine — IP Accumulation", badge: "Core Engine", color: "#7B3F00", badgeBg: "#7B3F00", badgeText: "#FEF9F2", icon: CircuitBoard, desc: "Open-source and commercial IPs selected, verified, and composed into the RISC-V architecture.", chips: ["Ibex RV32IMC", "OpenTitan", "NPU IP", "AES-256", "DMA ctrl", "UART/SPI/I2C"], progress: [{ label: "Open IP", pct: 78, color: "#EF9F27" }, { label: "Custom IP", pct: 22, color: "#BA7517" }] },
-  { num: 4, title: "Chip Engine — SoC Integration", badge: "Chip Engine", color: "#0071c5", badgeBg: "#0071c5", badgeText: "#fff", icon: Cpu, desc: "IPs fused into chips, unified into SoC with AXI bus fabric. PCB designed and BOM finalized.", details: ["RISC-V SoC unified", "RF chip (LoRa+UHF)", "Memory map locked", "PCB + BOM ready"] },
-  { num: 5, title: "Code Engine — Firmware & API", badge: "Code Engine", color: "#B7410E", badgeBg: "#B7410E", badgeText: "#fff", icon: Code, desc: "Rust firmware auto-generated from hardware abstraction map. Full middleware and application API stack built.", progress: [{ label: "Firmware", pct: 100, color: "#B7410E" }, { label: "Middleware", pct: 100, color: "#D85A30" }, { label: "APIs", pct: 100, color: "#F0997B" }] },
+  { num: 2, title: "Requirement Decomposition", badge: "Analysis", color: "#5F5E5A", badgeBg: "#F1EFE8", badgeText: "#444", icon: Layers, desc: "Requirements broken into functional blocks (Sensing, Compute, Power, Security) and mapped to hardware and software needs.", details: ["Sensing & I/O mapping", "Compute & NPU allocation", "Security requirements"] },
+  { num: 3, title: "Core Engine: IP Accumulation", badge: "Core Engine", color: "#7B3F00", badgeBg: "#7B3F00", badgeText: "#FEF9F2", icon: CircuitBoard, desc: "Open-source and commercial IPs selected, verified, and composed into the RISC-V architecture.", chips: ["Ibex RV32IMC", "OpenTitan", "NPU IP", "AES-256", "DMA ctrl", "UART/SPI/I2C"], progress: [{ label: "Open IP", pct: 78, color: "#EF9F27" }, { label: "Custom IP", pct: 22, color: "#BA7517" }] },
+  { num: 4, title: "Chip Engine: SoC Integration", badge: "Chip Engine", color: "#0071c5", badgeBg: "#0071c5", badgeText: "#fff", icon: Cpu, desc: "IPs fused into chips, unified into SoC with AXI bus fabric. PCB designed and BOM finalized.", details: ["RISC-V SoC unified", "RF chip (LoRa+UHF)", "Memory map locked", "PCB + BOM ready"] },
+  { num: 5, title: "Code Engine: Firmware & API", badge: "Code Engine", color: "#B7410E", badgeBg: "#B7410E", badgeText: "#fff", icon: Code, desc: "Rust firmware auto-generated from hardware abstraction map. Full middleware and application API stack built.", progress: [{ label: "Firmware", pct: 100, color: "#B7410E" }, { label: "Middleware", pct: 100, color: "#D85A30" }, { label: "APIs", pct: 100, color: "#F0997B" }] },
   { num: 6, title: "Simulation & Testing", badge: "Verification", color: "#0F6E56", badgeBg: "#0F6E56", badgeText: "#E1F5EE", icon: FlaskConical, desc: "Hardware and software tested together in a closed-loop simulation environment before tape-out.", progress: [{ label: "HW sim", pct: 100, color: "#0F6E56" }, { label: "SW sim", pct: 98, color: "#1D9E75" }, { label: "Coverage", pct: 98, color: "#5DCAA5" }] },
   { num: 7, title: "Production Ready", badge: "Launch", color: "#2E7D32", badgeBg: "#2E7D32", badgeText: "#fff", icon: Rocket, desc: "Verified, validated, and cleared for production deployment. Complete bill of materials and manufacturing files ready.", summary: ["10 IP blocks", "3 chips", "SoC unified", "RTOS+HAL", "All tests pass"] },
 ];
+
+/* ── Rocket Launch Scene from HTML artifact ── */
+const RocketLaunchScene = () => {
+  return (
+    <div className="relative w-full max-w-[500px] h-[260px] rounded-xl overflow-hidden border border-slate-200 shadow-lg" data-testid="rocket-launch-scene">
+      <style>{`
+        @keyframes tvBlink{0%,100%{opacity:1}50%{opacity:.3}}
+        @keyframes tvGlow{0%,100%{opacity:.25}50%{opacity:.5}}
+        @keyframes tvPulse{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.15);opacity:.15}}
+        @keyframes tvBurn{0%,100%{transform:scaleY(1)scaleX(1)}33%{transform:scaleY(1.12)scaleX(.88)}66%{transform:scaleY(.88)scaleX(1.1)}}
+        @keyframes tvRise{0%{transform:translateX(-50%) translateY(0)}100%{transform:translateX(-50%) translateY(-220px)}}
+      `}</style>
+      <svg width="100%" height="100%" viewBox="0 0 500 260" style={{position:'absolute',inset:0}}>
+        <rect x="0" y="0" width="500" height="260" fill="#0d0d0d"/>
+        {/* Stars */}
+        <circle cx="25" cy="18" r="1" fill="#fff" opacity=".7" style={{animation:'tvBlink 2s infinite'}}/>
+        <circle cx="70" cy="35" r=".8" fill="#fff" opacity=".5" style={{animation:'tvBlink 2.5s infinite .4s'}}/>
+        <circle cx="110" cy="12" r="1.2" fill="#fff" opacity=".8" style={{animation:'tvBlink 1.8s infinite .8s'}}/>
+        <circle cx="170" cy="30" r=".9" fill="#fff" opacity=".6" style={{animation:'tvBlink 2.2s infinite .2s'}}/>
+        <circle cx="240" cy="14" r="1" fill="#fff" opacity=".7" style={{animation:'tvBlink 2.8s infinite 1s'}}/>
+        <circle cx="310" cy="28" r=".8" fill="#fff" opacity=".5" style={{animation:'tvBlink 2.1s infinite .6s'}}/>
+        <circle cx="370" cy="10" r="1.1" fill="#fff" opacity=".8" style={{animation:'tvBlink 1.9s infinite .3s'}}/>
+        <circle cx="430" cy="25" r=".9" fill="#fff" opacity=".6" style={{animation:'tvBlink 2.4s infinite .9s'}}/>
+        <circle cx="480" cy="40" r=".7" fill="#fff" opacity=".5" style={{animation:'tvBlink 2.7s infinite .1s'}}/>
+        <circle cx="55" cy="55" r=".7" fill="#fff" opacity=".4" style={{animation:'tvBlink 3s infinite .7s'}}/>
+        <circle cx="150" cy="65" r=".9" fill="#fff" opacity=".5" style={{animation:'tvBlink 2.3s infinite 1.2s'}}/>
+        <circle cx="350" cy="55" r="1" fill="#fff" opacity=".6" style={{animation:'tvBlink 2.6s infinite .5s'}}/>
+        <circle cx="460" cy="70" r=".8" fill="#fff" opacity=".4" style={{animation:'tvBlink 1.7s infinite 1.4s'}}/>
+        {/* Ground */}
+        <rect x="0" y="230" width="500" height="30" fill="#1a2a1a"/>
+        <rect x="0" y="225" width="500" height="6" fill="#2a3a2a"/>
+        {/* Launchpad */}
+        <rect x="222" y="205" width="56" height="18" rx="2" fill="#333"/>
+        <rect x="230" y="198" width="8" height="25" rx="2" fill="#444"/>
+        <rect x="262" y="198" width="8" height="25" rx="2" fill="#444"/>
+        {/* Ground glow */}
+        <ellipse cx="250" cy="228" rx="50" ry="10" fill="#FF6600" opacity=".25" style={{animation:'tvGlow .5s ease-in-out infinite'}}/>
+        <ellipse cx="250" cy="228" rx="34" ry="7" fill="#FF8800" opacity=".3" style={{animation:'tvGlow .5s ease-in-out infinite .15s'}}/>
+        <ellipse cx="250" cy="228" rx="20" ry="4" fill="#FFD700" opacity=".4" style={{animation:'tvGlow .5s ease-in-out infinite .05s'}}/>
+        {/* Smoke */}
+        <ellipse cx="210" cy="218" rx="22" ry="11" fill="#555" opacity=".3" style={{animation:'tvPulse 1.8s ease-in-out infinite'}}/>
+        <ellipse cx="290" cy="216" rx="18" ry="9" fill="#555" opacity=".25" style={{animation:'tvPulse 1.8s ease-in-out infinite .4s'}}/>
+        <ellipse cx="250" cy="212" rx="14" ry="8" fill="#666" opacity=".2" style={{animation:'tvPulse 1.8s ease-in-out infinite .8s'}}/>
+        {/* TrusteD-V label */}
+        <text x="250" y="253" textAnchor="middle" fontSize="10" fill="#5DCAA5" fontFamily="'Helvetica Neue',sans-serif" fontWeight="700" letterSpacing="2">TRUSTED-V LAUNCH</text>
+      </svg>
+      {/* Rising rocket */}
+      <div style={{position:'absolute',left:'50%',bottom:'36px',transform:'translateX(-50%)',animation:'tvRise 3.5s ease-in both 1.5s'}}>
+        <svg width="44" height="80" viewBox="0 0 48 86" style={{overflow:'visible'}}>
+          <path d="M24 4 C20 16 16 30 16 42 L32 42 C32 30 28 16 24 4Z" fill="#C8E6C9" stroke="#2E7D32" strokeWidth="1.2"/>
+          <rect x="16" y="42" width="16" height="26" rx="2" fill="#E8EAF0" stroke="#9aa0b8" strokeWidth="1"/>
+          <rect x="16" y="50" width="16" height="4" fill="#2E7D32" opacity=".6"/>
+          <circle cx="24" cy="60" r="3.5" fill="#0a1830" stroke="#7a8298" strokeWidth=".8"/>
+          <path d="M16 60 L8 72 L14 68 L16 64Z" fill="#97C459"/>
+          <path d="M32 60 L40 72 L34 68 L32 64Z" fill="#97C459"/>
+          <path d="M18 68 Q18 76 21 78 L24 80 L27 78 Q30 76 30 68Z" fill="#888"/>
+          <g style={{animation:'tvBurn .55s ease-in-out infinite',transformOrigin:'24px 80px'}}>
+            <path d="M19 80 Q16 92 19 98 Q22 106 24 104 Q26 106 29 98 Q32 92 29 80Z" fill="#FF5500" opacity=".6"/>
+          </g>
+          <g style={{animation:'tvBurn .42s ease-in-out infinite .07s',transformOrigin:'24px 80px'}}>
+            <path d="M20 80 Q18 90 20 96 Q22 102 24 100 Q26 102 28 96 Q30 90 28 80Z" fill="#FF9900" opacity=".8"/>
+          </g>
+          <g style={{animation:'tvBurn .33s ease-in-out infinite .03s',transformOrigin:'24px 80px'}}>
+            <path d="M21 80 Q20 88 21 93 Q22.5 98 24 96 Q25.5 98 27 93 Q28 88 27 80Z" fill="#FFE040" opacity=".95"/>
+            <path d="M22.5 80 Q22 86 23 90 Q23.5 93 24 92 Q24.5 93 25 90 Q26 86 25.5 80Z" fill="#FFFFF0"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  );
+};
 
 const Landing = () => {
   const hardwarePartners = [
@@ -217,7 +252,7 @@ const Landing = () => {
       price: "Per-core / Annual",
       desc: "Core platform access for individual developers and small teams. RISC-V Rust software, toolchain, and IDE with annual or per-core licensing.",
       features: [
-        "TrusteD-V IDE — Jarvyn (Community)",
+        "TrusteD-V IDE Jarvyn (Community)",
         "RISC-V Rust SDK access",
         "Community support",
         "Standard BSP templates",
@@ -275,35 +310,24 @@ const Landing = () => {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
         
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 py-12 md:py-16 relative">
-          {/* Top: Branding + message row */}
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start mb-12">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
+              {/* Logo + Powered by Bosch */}
               <div className="mb-6">
-                <TrustedVLogo size="xl" />
-              </div>
-              
-              <div className="flex flex-wrap gap-3 mb-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20">
-                  <span className="w-2 h-2 rounded-full bg-orange-500" />
-                  <span className="text-sm font-bold text-orange-600">Rust</span>
-                </div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-                  <span className="w-2 h-2 rounded-full bg-primary" />
-                  <span className="text-sm font-bold text-primary">RISC-V</span>
-                </div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20">
-                  <Shield className="w-3 h-3 text-green-600" />
-                  <span className="text-sm font-bold text-green-600">Secure</span>
+                <img src="/trustedv-rocket-logo.png" alt="TrusteD-V" className="h-28 sm:h-36 w-auto object-contain mb-3" data-testid="hero-logo" />
+                <div className="flex items-center gap-2.5">
+                  <span className="text-sm font-semibold text-slate-500 tracking-wide">Powered by</span>
+                  <img src="/bosch-logo.png" alt="Bosch" className="h-5 sm:h-6 object-contain" />
                 </div>
               </div>
               
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-5 leading-tight">
-                Build Secure <span className="text-primary">RISC-V</span> Systems with <span className="text-orange-500">Rust</span>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-5 leading-tight" data-testid="hero-heading">
+                Build your secure <span className="text-primary">RISC-V</span> Solution
               </h1>
               
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 max-w-xl">
                 The silicon-to-application platform for RISC-V embedded development. 
-                Build and launch RISC-V solutions seamlessly with three AI engines — from IP blocks to production firmware — everything powered by <strong>Rust</strong>.
+                From IP blocks to production firmware, everything powered by <strong>Rust</strong>.
               </p>
               
               <div className="flex flex-wrap gap-4 mb-8">
@@ -319,75 +343,68 @@ const Landing = () => {
                 </Link>
               </div>
               
-              <div className="grid grid-cols-4 gap-6 pt-6 border-t border-border">
-                <AnimatedCounter end={6} suffix="+" label="RISC-V Boards" />
-                <AnimatedCounter end={5} suffix="+" label="RTOS Options" />
-                <AnimatedCounter end={15} suffix="" label="Team Members" />
-                <AnimatedCounter end={3} suffix="" label="Hardware Partners" />
+              {/* Made in India */}
+              <div data-testid="made-in-india-badge" className="inline-flex items-center gap-4 px-6 py-3 rounded-xl bg-white border border-slate-200 shadow-sm">
+                <div className="flex flex-col gap-0 w-12 h-8 rounded overflow-hidden shadow-sm flex-shrink-0 border border-slate-200/50">
+                  <div className="flex-1 bg-[#FF9933]" />
+                  <div className="flex-1 bg-white relative">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-[9px] h-[9px] rounded-full border-[1.5px] border-[#000080]" />
+                    </div>
+                  </div>
+                  <div className="flex-1 bg-[#138808]" />
+                </div>
+                <div>
+                  <span className="text-lg font-bold text-slate-800 tracking-wide block leading-tight">Made in India</span>
+                  <span className="text-xs text-slate-500 font-medium">Engineered for the world</span>
+                </div>
               </div>
             </div>
             
-            {/* Engine Preview on large screens — native size, no compression */}
-            <div className="hidden lg:flex items-start justify-center pt-2">
-              <div className="w-[340px] flex-shrink-0">
-                <div className="text-center mb-2">
-                  <h3 className="text-base font-extrabold tracking-tight">
-                    <span className="text-foreground">T</span>
-                    <span className="text-[#B7410E]">rust</span>
-                    <span className="text-foreground">eD</span>
-                    <span className="text-[#C8A200]">-V</span>
-                    <span className="text-[#2E7D32]"> Engine</span>
-                  </h3>
-                </div>
-                <EngineArchDiagram />
-              </div>
+            {/* Rocket Launch Scene */}
+            <div className="hidden lg:flex items-center justify-center">
+              <RocketLaunchScene />
             </div>
           </div>
           
-          {/* Mobile: show engine below on smaller screens */}
-          <div className="lg:hidden flex flex-col items-center mb-8">
-            <div className="text-center mb-2">
-              <h3 className="text-sm font-extrabold tracking-tight">
-                <span className="text-foreground">T</span>
-                <span className="text-[#B7410E]">rust</span>
-                <span className="text-foreground">eD</span>
-                <span className="text-[#C8A200]">-V</span>
-                <span className="text-[#2E7D32]"> Engine</span>
-              </h3>
-            </div>
-            <div className="w-[340px] max-w-full overflow-x-auto">
-              <EngineArchDiagram />
-            </div>
+          {/* Mobile: Rocket below */}
+          <div className="lg:hidden flex flex-col items-center mt-8 mb-4">
+            <RocketLaunchScene />
           </div>
         </div>
       </section>
 
-      {/* ══ MADE IN INDIA — Single prominent placement ══ */}
-      <section data-testid="made-in-india-badge" className="relative overflow-hidden">
-        <div className="h-[3px] flex">
-          <div className="flex-1 bg-[#FF9933]" />
-          <div className="flex-1 bg-white" />
-          <div className="flex-1 bg-[#138808]" />
-        </div>
-        <div className="bg-gradient-to-r from-[#FF9933]/[0.04] via-white to-[#138808]/[0.04] py-4">
-          <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-4">
-            <div className="flex flex-col gap-0 w-8 h-[22px] rounded-[3px] overflow-hidden shadow-sm flex-shrink-0 border border-slate-200/50">
-              <div className="flex-1 bg-[#FF9933]" />
-              <div className="flex-1 bg-white relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-[7px] h-[7px] rounded-full border-[1.5px] border-[#000080]" />
-                </div>
-              </div>
-              <div className="flex-1 bg-[#138808]" />
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-sm sm:text-base font-bold text-slate-800 tracking-wide">Made in India</span>
-              <span className="hidden sm:inline text-xs text-slate-400 font-medium">|</span>
-              <span className="hidden sm:inline text-xs text-slate-500 font-medium">Engineered for the world</span>
-            </div>
+      {/* ══ 4 DOMAINS ══ */}
+      <section className="py-12 bg-white border-t border-border" data-testid="domains-section">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+          <div className="text-center mb-8">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Industries We Serve</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">We Cater to 4 Key Domains</h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+            {[
+              { icon: Cog, title: "Automotive", desc: "ADAS, telematics, and in-vehicle networking on RISC-V.", color: "#0071c5" },
+              { icon: Radio, title: "IoT", desc: "Smart sensors, edge gateways, and connected devices.", color: "#2E7D32" },
+              { icon: Cpu, title: "Consumer Electronics", desc: "Wearables, home automation, and multimedia SoCs.", color: "#B7410E" },
+              { icon: Server, title: "Data Center", desc: "Accelerators, SmartNICs, and infrastructure processors.", color: "#7B3F00" },
+            ].map((domain, i) => {
+              const Icon = domain.icon;
+              return (
+                <RevealItem key={i} delay={i * 100}>
+                  <Card data-testid={`domain-card-${i}`} className="text-center hover:shadow-lg transition-all border-border group h-full">
+                    <CardContent className="p-6">
+                      <div className="w-14 h-14 rounded-xl mx-auto mb-4 flex items-center justify-center transition-colors" style={{ backgroundColor: `${domain.color}12` }}>
+                        <Icon className="w-7 h-7 transition-colors" style={{ color: domain.color }} />
+                      </div>
+                      <h3 className="font-bold text-foreground text-base mb-1.5">{domain.title}</h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{domain.desc}</p>
+                    </CardContent>
+                  </Card>
+                </RevealItem>
+              );
+            })}
           </div>
         </div>
-        <div className="h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
       </section>
 
       {/* ══ 7-STAGE BUILD PIPELINE ══ */}
@@ -399,7 +416,7 @@ const Landing = () => {
               Requirement &rarr; IP &rarr; Chips &rarr; SoC &rarr; Firmware &rarr; Sim &rarr; Launch
             </h2>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              See the complete build pipeline — from a natural-language requirement to production-ready hardware and firmware.
+              See the complete build pipeline: from a natural-language requirement to production-ready hardware and firmware.
             </p>
           </div>
           
@@ -488,7 +505,7 @@ const Landing = () => {
               Flexible Plans for Every Team
             </h2>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              From individual developers to enterprise deployments — choose the plan that scales with your RISC-V projects.
+              From individual developers to enterprise deployments, choose the plan that scales with your RISC-V projects.
             </p>
           </div>
           
@@ -588,7 +605,7 @@ const Landing = () => {
               Ready to Build Secure Embedded Systems with <span className="text-orange-300">Rust</span>?
             </h2>
             <p className="text-primary-foreground/80 mb-8 text-base sm:text-lg leading-relaxed">
-              Start your RISC-V journey today with TrusteD-V IDE — Jarvyn, AI-powered tools, and production-ready Rust templates.
+              Start your RISC-V journey today with TrusteD-V IDE Jarvyn, AI-powered tools, and production-ready Rust templates.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/download-ide">
@@ -615,7 +632,7 @@ const Landing = () => {
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/product-suite" className="hover:text-white transition-colors">Product Suite</Link></li>
                 <li><Link to="/marketplace" className="hover:text-white transition-colors">Marketplace</Link></li>
-                <li><Link to="/download-ide" className="hover:text-white transition-colors">IDE — Jarvyn</Link></li>
+                <li><Link to="/download-ide" className="hover:text-white transition-colors">IDE Jarvyn</Link></li>
               </ul>
             </div>
             <div>

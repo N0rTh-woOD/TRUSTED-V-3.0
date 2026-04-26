@@ -15,7 +15,7 @@ const IDEDownloads = () => {
     {
       icon: HardDrive,
       title: "Hardware-Focused Development Platform",
-      description: "Built for semiconductor, embedded system, and hardware developers. Supports workflows with chips, peripheral devices, registers, and hardware-level programming — far more efficient than general-purpose IDEs.",
+      description: "Built for semiconductor, embedded system, and hardware developers. Supports workflows with chips, peripheral devices, registers, and hardware-level programming, far more efficient than general-purpose IDEs.",
     },
     {
       icon: Brain,
@@ -25,7 +25,7 @@ const IDEDownloads = () => {
     {
       icon: Code,
       title: "Built-in Rust Analyzer (Native Integration)",
-      description: "Rust analyzer integrated directly into the IDE core — no external plugins needed. Real-time code analysis, intelligent auto-completion, faster error detection, and consistent Rust development support.",
+      description: "Rust analyzer integrated directly into the IDE core, no external plugins needed. Real-time code analysis, intelligent auto-completion, faster error detection, and consistent Rust development support.",
     },
     {
       icon: Eye,
@@ -35,7 +35,7 @@ const IDEDownloads = () => {
     {
       icon: Sparkles,
       title: "Integrated AI Assistance Panel",
-      description: "Interact with an intelligent AI system directly while coding — ask questions, receive debugging support, generate code, create files, and get contextual documentation insights without context switching.",
+      description: "Interact with an intelligent AI system directly while coding, ask questions, receive debugging support, generate code, create files, and get contextual documentation insights without context switching.",
     },
     {
       icon: Wrench,
@@ -50,17 +50,17 @@ const IDEDownloads = () => {
     {
       icon: Settings,
       title: "Integrated Development Controls",
-      description: "File management, search and replacement, run/build options, and terminal integration — a familiar workflow supporting advanced hardware development within a single environment.",
+      description: "File management, search and replacement, run/build options, and terminal integration, a familiar workflow supporting advanced hardware development within a single environment.",
     },
     {
       icon: SplitSquareHorizontal,
       title: "Split Editor for Multitasking",
-      description: "Split editor views allow developers to work on multiple files simultaneously — essential when referencing datasheets alongside firmware code.",
+      description: "Split editor views allow developers to work on multiple files simultaneously, essential when referencing datasheets alongside firmware code.",
     },
     {
       icon: GitBranch,
       title: "Integrated Git Version Control",
-      description: "Built-in Git support for committing changes, tracking file modifications, and managing repositories — no reliance on external tools, smoother workflow for collaborative projects.",
+      description: "Built-in Git support for committing changes, tracking file modifications, and managing repositories, no reliance on external tools, smoother workflow for collaborative projects.",
     },
     {
       icon: Save,
@@ -80,12 +80,12 @@ const IDEDownloads = () => {
     {
       icon: TerminalIcon,
       title: "Integrated Terminal",
-      description: "Execute build commands, scripts, version control operations, and interact with development tools directly within the IDE — reduces context switching for hardware workflows.",
+      description: "Execute build commands, scripts, version control operations, and interact with development tools directly within the IDE, reduces context switching for hardware workflows.",
     },
     {
       icon: AlertTriangle,
       title: "Real-Time Diagnostics & Error Detection",
-      description: "Identify errors, warnings, and potential issues while writing code. Highlights syntax errors, type mismatches, unused variables — with suggestions for resolving issues.",
+      description: "Identify errors, warnings, and potential issues while writing code. Highlights syntax errors, type mismatches, unused variables, with suggestions for resolving issues.",
     },
     {
       icon: Package,
@@ -95,7 +95,7 @@ const IDEDownloads = () => {
     {
       icon: FileText,
       title: "TOML Validation Support",
-      description: "Validates TOML files in real time — identifies syntax errors, invalid configurations, and incorrect dependency definitions. Reduces build failures and improves reliability.",
+      description: "Validates TOML files in real time, identifies syntax errors, invalid configurations, and incorrect dependency definitions. Reduces build failures and improves reliability.",
     },
     {
       icon: Cpu,
@@ -105,7 +105,7 @@ const IDEDownloads = () => {
     {
       icon: FileSearch,
       title: "Checkpoints for Every Manual Save",
-      description: "Every manual save creates a snapshot of the current code state. Track changes over time and revert to previous versions — useful during experimentation, debugging, and iterative development.",
+      description: "Every manual save creates a snapshot of the current code state. Track changes over time and revert to previous versions, useful during experimentation, debugging, and iterative development.",
     },
     {
       icon: FileCode,
@@ -115,18 +115,18 @@ const IDEDownloads = () => {
     {
       icon: MonitorSmartphone,
       title: "SVD Support for Hardware Visualization",
-      description: "Structured visualization of hardware components — registers, peripherals, memory mappings. View device-level configuration within the IDE, reducing reliance on external datasheets.",
+      description: "Structured visualization of hardware components, registers, peripherals, memory mappings. View device-level configuration within the IDE, reducing reliance on external datasheets.",
     },
   ];
 
   const comparisonData = [
     { aspect: "Development Focus", general: "Software, web, and application development workflows", ours: "Hardware and semiconductor development using Rust" },
     { aspect: "AI Assistance", general: "Generic coding suggestions without deep hardware awareness", ours: "AI trained on GPIO, UART, peripheral communication, embedded crates" },
-    { aspect: "Rust Tooling", general: "Requires installing rust-analyzer plugin/extension", ours: "Built-in native Rust analyzer — no plugins needed" },
+    { aspect: "Rust Tooling", general: "Requires installing rust-analyzer plugin/extension", ours: "Built-in native Rust analyzer, no plugins needed" },
     { aspect: "Hardware Awareness", general: "Limited. Relies on external datasheets and documentation", ours: "Designed with awareness of registers, peripherals, device-level interactions" },
     { aspect: "Documentation Access", general: "External docs, datasheets, and online resources needed", ours: "AI provides contextual hardware info directly inside the IDE" },
     { aspect: "Setup Complexity", general: "Multiple plugins, toolchains, and extensions required", ours: "Built-in tools simplify setup for hardware-focused Rust development" },
-    { aspect: "Context Switching", general: "Frequent switching between IDE, docs, and datasheets", ours: "Integrated AI + hardware support — everything within the IDE" },
+    { aspect: "Context Switching", general: "Frequent switching between IDE, docs, and datasheets", ours: "Integrated AI + hardware support, everything within the IDE" },
     { aspect: "Project Structure", general: "Optimized for software modules and application files", ours: "Handles hardware modules, crates, config files, device components" },
   ];
 
@@ -168,7 +168,7 @@ const IDEDownloads = () => {
               </h1>
               
               <p className="text-base text-slate-400 leading-relaxed mb-6 max-w-xl">
-                Modern code editors like Zed and Lapce offer high performance for general programming — but aren't designed for hardware-focused development. 
+                Modern code editors like Zed and Lapce offer high performance for general programming, but aren't designed for hardware-focused development. 
                 Jarvyn extends beyond with specialized tooling, AI assistance trained on hardware knowledge, and integrated Rust support tailored for embedded systems.
               </p>
               
@@ -220,7 +220,7 @@ const IDEDownloads = () => {
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Capabilities</span>
             <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Key Features</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              21 purpose-built features for hardware and embedded system development — from AI-powered code generation to SVD hardware visualization.
+              21 purpose-built features for hardware and embedded system development, from AI-powered code generation to SVD hardware visualization.
             </p>
           </div>
           
