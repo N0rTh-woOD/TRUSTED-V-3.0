@@ -49,9 +49,9 @@ const EngineArchDiagram = () => {
       s.id = 'tv-eng-css';
       s.textContent = `
 .tv-eng{width:100%;font-family:'Helvetica Neue',Arial,sans-serif;overflow:hidden}
-.tv-eng .canvas{position:relative;width:300px;margin:0 auto;height:640px;overflow:hidden}
-.tv-eng .exhaust{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:320px;height:150px;pointer-events:none;z-index:1}
-.tv-eng .stack{position:absolute;left:50%;bottom:120px;transform:translateX(-50%);width:300px;z-index:2}
+.tv-eng .canvas{position:relative;width:300px;margin:0 auto;height:680px;overflow:visible}
+.tv-eng .exhaust{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);width:320px;height:150px;pointer-events:none;z-index:1}
+.tv-eng .stack{position:absolute;left:50%;bottom:150px;transform:translateX(-50%);width:300px;z-index:2}
 .tv-eng .slab{position:relative;width:300px}
 .tv-eng .ll,.tv-eng .lr{display:none}
 .tv-eng .conn{display:flex;justify-content:center;align-items:center;gap:6px;padding:2px 0}
@@ -82,10 +82,10 @@ const EngineArchDiagram = () => {
 .tv-eng .sp{animation:tvEsp 1.4s ease-out infinite var(--sd,0s)}
 .tv-eng .sm1{animation:tvEsm 2.1s ease-out infinite 0s}
 .tv-eng .sm2{animation:tvEsm 2.1s ease-out infinite .7s}
-.tv-eng .legend{display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.tv-eng .legend{display:flex;justify-content:center;gap:10px;margin-top:10px;flex-wrap:wrap}
 .tv-eng .li{display:flex;align-items:center;gap:4px;font-size:9px;color:#888}
 .tv-eng .ld{width:8px;height:8px;border-radius:2px;flex-shrink:0}
-.tv-eng .ekey{display:flex;justify-content:center;gap:14px;margin-top:8px;flex-wrap:wrap}
+.tv-eng .ekey{display:flex;justify-content:center;gap:14px;margin-top:6px;flex-wrap:wrap}
 .tv-eng .ek{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:800}
 .tv-eng .ekd{width:7px;height:7px;border-radius:50%}
       `;
@@ -232,40 +232,53 @@ const Landing = () => {
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 relative">
-          <div className="grid lg:grid-cols-[1fr_360px] gap-8 lg:gap-10 items-start">
-            {/* Left: Content */}
-            <div className="pt-4">
-              {/* Brand Lockup */}
-              <div className="mb-8">
-                <TrustedVLogo size="hero" showPoweredBy={true} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 relative">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+            {/* Left: Brand + Content + MII */}
+            <div>
+              {/* Brand Lockup: Logo + TrusteD-V + Powered by Bosch */}
+              <div className="flex items-start gap-4 mb-6" data-testid="hero-brand-lockup">
+                <img src="/trustedv-rocket-logo.png" alt="" className="h-[80px] w-[80px] sm:h-[96px] sm:w-[96px] object-contain flex-shrink-0" data-testid="hero-logo" />
+                <div className="pt-2">
+                  <span className="block text-[36px] sm:text-[44px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
+                    <span className="text-slate-800">T</span>
+                    <span style={{ color: "#B7410E" }}>rust</span>
+                    <span className="text-slate-800">eD</span>
+                    <span style={{ color: "#C8A200" }}>-V</span>
+                  </span>
+                  <div className="flex items-center gap-1.5 mt-1.5">
+                    <span className="text-[11px] text-slate-400 font-semibold tracking-widest uppercase">Powered by</span>
+                    <img src="/bosch-logo.png" alt="Bosch" className="h-[16px] object-contain" />
+                  </div>
+                </div>
               </div>
               
-              <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-foreground tracking-tight mb-4 leading-[1.15]" data-testid="hero-heading">
+              {/* Heading + Description */}
+              <h1 className="text-[28px] sm:text-[34px] lg:text-[40px] font-bold text-foreground tracking-tight mb-3 leading-[1.2]" data-testid="hero-heading">
                 Build your secure{" "}
                 <span className="text-[#003262]">RISC-V</span> Solution
               </h1>
               
-              <p className="text-base text-muted-foreground leading-relaxed mb-8 max-w-lg">
+              <p className="text-[15px] text-muted-foreground leading-relaxed mb-6 max-w-md">
                 The silicon-to-application platform for RISC-V embedded development. 
                 From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
               </p>
               
-              {/* Made in India */}
+              {/* Made in India - Large */}
               <div data-testid="made-in-india-badge">
                 <img 
                   src="/make-in-india.jpg" 
                   alt="Make in India" 
-                  className="w-full max-w-[320px] rounded-xl shadow-lg border border-slate-200/80" 
+                  className="w-full max-w-[420px] rounded-xl shadow-xl border border-slate-200/80" 
                 />
-                <p className="text-xs text-muted-foreground mt-2.5 font-medium tracking-wide">Designed in India, engineered for the world</p>
+                <p className="text-sm text-muted-foreground mt-3 font-medium">Designed in India, Engineered in Bosch to the world</p>
               </div>
             </div>
             
             {/* Right: Engine Diagram - desktop only */}
-            <div className="hidden lg:block pt-2">
+            <div className="hidden lg:block" data-testid="hero-engine-col">
               <div className="text-center mb-1">
-                <h3 className="text-sm font-extrabold tracking-tight">
+                <h3 className="text-xs font-extrabold tracking-tight">
                   <span className="text-foreground">T</span>
                   <span className="text-[#B7410E]">rust</span>
                   <span className="text-foreground">eD</span>
