@@ -48,7 +48,7 @@ const Navigation = () => {
             
             {/* Left: Logo */}
             <Link to="/" className="flex items-center group flex-shrink-0">
-              <TrustedVLogo size="md" />
+              <TrustedVLogo size="md" showPoweredBy={true} />
             </Link>
             
             {/* Center: Desktop Navigation */}
