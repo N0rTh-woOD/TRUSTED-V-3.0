@@ -5,11 +5,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { 
   Cpu, Code, Layers, Download, ArrowRight, 
   CheckCircle2, ChevronRight,
-  Cog, Rocket, Wrench, CircuitBoard,
-  Radio, FlaskConical, Server
+  Rocket, Wrench, CircuitBoard,
+  FlaskConical
 } from "lucide-react";
 import TrustedVLogo from "@/components/TrustedVLogo";
-import { PartnerLogo } from "@/components/PartnerLogos";
 
 const RevealItem = ({ children, delay = 0, className = "" }) => {
   const ref = useRef(null);
@@ -204,15 +203,6 @@ const simulationStages = [
 /* removed - replaced with v7 engine diagram */
 
 const Landing = () => {
-  const hardwarePartners = [
-    { name: "C-DAC", description: "VEGA Processors" },
-    { name: "C-DAC", description: "DHRUV64 SoCs" },
-    { name: "Mindgrove", description: "Secure IoT" },
-    { name: "Mindgrove", description: "Vision SoCs" },
-    { name: "Upbeat Tech", description: "Edge AI" },
-    { name: "C-DAC", description: "ARIES Boards" },
-  ];
-
   const pricingTiers = [
     {
       name: "Basic",
@@ -301,7 +291,7 @@ const Landing = () => {
               {/* Heading + Description */}
               <h1 className="text-[36px] sm:text-[44px] lg:text-[54px] font-bold text-foreground tracking-tight mb-3 leading-[1.1]" data-testid="hero-heading">
                 Build your secure{" "}
-                <span className="text-[#003262]">RISC-V</span> Solution
+                <span style={{ fontFamily: "'Georgia', serif", fontWeight: 800, letterSpacing: "-0.5px" }}><span style={{ color: "#283B71" }}>RISC</span><span style={{ color: "#F5A623" }}>-V</span></span> Solution
               </h1>
               
               <p className="text-lg text-muted-foreground leading-relaxed mb-5 max-w-xl">
@@ -324,39 +314,6 @@ const Landing = () => {
             <div className="hidden lg:block" data-testid="hero-engine-col">
               <EngineArchDiagram />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══ 4 DOMAINS ══ */}
-      <section className="py-10 bg-white border-t border-border" data-testid="domains-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Industries We Serve</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">We Cater to 4 Key Domains</h2>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {[
-              { icon: Cog, title: "Automotive", desc: "ADAS, telematics, and in-vehicle networking on RISC-V.", color: "#0071c5" },
-              { icon: Radio, title: "IoT", desc: "Smart sensors, edge gateways, and connected devices.", color: "#2E7D32" },
-              { icon: Cpu, title: "Consumer Electronics", desc: "Wearables, home automation, and multimedia SoCs.", color: "#B7410E" },
-              { icon: Server, title: "Data Center", desc: "Accelerators, SmartNICs, and infrastructure processors.", color: "#7B3F00" },
-            ].map((domain, i) => {
-              const Icon = domain.icon;
-              return (
-                <RevealItem key={i} delay={i * 100}>
-                  <Card data-testid={`domain-card-${i}`} className="text-center hover:shadow-lg transition-all border-border group h-full">
-                    <CardContent className="p-5">
-                      <div className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center transition-colors" style={{ backgroundColor: `${domain.color}12` }}>
-                        <Icon className="w-6 h-6 transition-colors" style={{ color: domain.color }} />
-                      </div>
-                      <h3 className="font-bold text-foreground text-sm mb-1">{domain.title}</h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{domain.desc}</p>
-                    </CardContent>
-                  </Card>
-                </RevealItem>
-              );
-            })}
           </div>
         </div>
       </section>
@@ -520,25 +477,56 @@ const Landing = () => {
           <div className="text-center mb-10">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Hardware Ecosystem</span>
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
-              Supported <span className="text-[#003262]">RISC-V</span> Hardware
+              Supported <span style={{ fontFamily: "'Georgia', serif", fontWeight: 800, letterSpacing: "-0.5px" }}><span style={{ color: "#283B71" }}>RISC</span><span style={{ color: "#F5A623" }}>-V</span></span> Hardware Partners
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Pre-integrated support for C-DAC, Mindgrove, and Upbeat Tech RISC-V development platforms.
+              Pre-integrated support for leading Indian RISC-V development platforms.
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {hardwarePartners.map((partner, index) => (
-              <RevealItem key={index} delay={index * 80}>
-                <div className="bg-white rounded-lg border border-border p-5 text-center hover:shadow-md transition-shadow">
-                  <div className="flex justify-center mb-3">
-                    <PartnerLogo name={partner.name} className="h-6" />
-                  </div>
-                  <h4 className="font-semibold text-foreground text-sm">{partner.name}</h4>
-                  <p className="text-xs text-muted-foreground mt-1">{partner.description}</p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {/* C-DAC */}
+            <RevealItem delay={0}>
+              <div className="bg-white rounded-xl border border-border p-6 text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-4">
+                  <svg viewBox="0 0 200 50" className="h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="5" width="40" height="40" rx="8" fill="#1565C0" />
+                    <text x="22" y="32" textAnchor="middle" fill="white" fontSize="20" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif">C</text>
+                    <text x="52" y="35" fill="#1565C0" fontSize="28" fontWeight="900" fontFamily="'Arial Black',Arial,sans-serif" letterSpacing="-0.5">C-DAC</text>
+                  </svg>
                 </div>
-              </RevealItem>
-            ))}
+                <h4 className="font-bold text-foreground text-base mb-1">C-DAC</h4>
+                <p className="text-xs text-muted-foreground leading-relaxed">Centre for Development of Advanced Computing. VEGA & ARIES RISC-V processors.</p>
+              </div>
+            </RevealItem>
+            {/* Mindgrove */}
+            <RevealItem delay={100}>
+              <div className="bg-white rounded-xl border border-border p-6 text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-4">
+                  <svg viewBox="0 0 220 50" className="h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="5" width="40" height="40" rx="8" fill="#2E7D32" />
+                    <text x="22" y="32" textAnchor="middle" fill="white" fontSize="20" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif">M</text>
+                    <text x="52" y="35" fill="#2E7D32" fontSize="22" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif" letterSpacing="-0.3">Mindgrove</text>
+                  </svg>
+                </div>
+                <h4 className="font-bold text-foreground text-base mb-1">Mindgrove Technologies</h4>
+                <p className="text-xs text-muted-foreground leading-relaxed">India's fabless semiconductor startup. Secure IoT and Vision SoCs on RISC-V.</p>
+              </div>
+            </RevealItem>
+            {/* Upbeat Tech */}
+            <RevealItem delay={200}>
+              <div className="bg-white rounded-xl border border-border p-6 text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-4">
+                  <svg viewBox="0 0 220 50" className="h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="5" width="40" height="40" rx="8" fill="#E65100" />
+                    <text x="22" y="32" textAnchor="middle" fill="white" fontSize="20" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif">U</text>
+                    <text x="52" y="35" fill="#E65100" fontSize="20" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif" letterSpacing="-0.3">Upbeat Tech</text>
+                  </svg>
+                </div>
+                <h4 className="font-bold text-foreground text-base mb-1">Upbeat Tech</h4>
+                <p className="text-xs text-muted-foreground leading-relaxed">Edge AI and embedded solutions provider. RISC-V based edge computing platforms.</p>
+              </div>
+            </RevealItem>
           </div>
           
           <div className="text-center mt-8">
