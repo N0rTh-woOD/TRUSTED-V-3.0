@@ -309,12 +309,12 @@ const Landing = () => {
                 From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
               </p>
               
-              {/* Made in India - fills remaining space */}
+              {/* Made in India */}
               <div data-testid="made-in-india-badge">
                 <img 
                   src="/make-in-india.jpg" 
                   alt="Make in India" 
-                  className="w-full rounded-xl shadow-xl border border-slate-200/80" 
+                  className="w-full max-w-[480px] rounded-xl shadow-xl border border-slate-200/80" 
                 />
                 <p className="text-sm text-muted-foreground mt-2.5 font-medium">Designed in India, Engineered in Bosch to the world</p>
               </div>
