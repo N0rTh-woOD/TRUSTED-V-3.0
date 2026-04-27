@@ -277,44 +277,44 @@ const Landing = () => {
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 relative">
-          <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 items-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 md:py-6 relative">
+          <div className="grid lg:grid-cols-2 gap-4 lg:gap-5 items-start">
             {/* Left: Brand + Content + MII */}
             <div>
               {/* Brand Lockup */}
-              <div className="flex items-center gap-5 mb-5" data-testid="hero-brand-lockup">
-                <img src="/trustedv-rocket-logo.png" alt="" className="h-[88px] w-[88px] sm:h-[110px] sm:w-[110px] object-contain flex-shrink-0" data-testid="hero-logo" />
+              <div className="flex items-center gap-5 sm:gap-6 mb-4" data-testid="hero-brand-lockup">
+                <img src="/trustedv-rocket-logo.png" alt="" className="h-[100px] w-[100px] sm:h-[130px] sm:w-[130px] object-contain flex-shrink-0" data-testid="hero-logo" />
                 <div>
-                  <span className="block text-[42px] sm:text-[52px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
+                  <span className="block text-[50px] sm:text-[64px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
                     <span className="text-slate-800">T</span>
                     <span style={{ color: "#B7410E" }}>rust</span>
                     <span className="text-slate-800">eD</span>
                     <span style={{ color: "#C8A200" }}>-V</span>
                   </span>
-                  <div className="flex items-center gap-1.5 mt-1">
-                    <span className="text-[13px] text-slate-400 font-semibold tracking-widest uppercase">Powered by</span>
-                    <img src="/bosch-logo.png" alt="Bosch" className="h-[18px] object-contain" />
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-[15px] sm:text-[17px] text-slate-400 font-semibold tracking-widest uppercase">Powered by</span>
+                    <img src="/bosch-logo.png" alt="Bosch" className="h-[20px] sm:h-[24px] object-contain" />
                   </div>
                 </div>
               </div>
               
               {/* Heading + Description */}
-              <h1 className="text-[32px] sm:text-[38px] lg:text-[46px] font-bold text-foreground tracking-tight mb-3 leading-[1.15]" data-testid="hero-heading">
+              <h1 className="text-[36px] sm:text-[44px] lg:text-[54px] font-bold text-foreground tracking-tight mb-3 leading-[1.1]" data-testid="hero-heading">
                 Build your secure{" "}
                 <span className="text-[#003262]">RISC-V</span> Solution
               </h1>
               
-              <p className="text-base text-muted-foreground leading-relaxed mb-5 max-w-lg">
+              <p className="text-lg text-muted-foreground leading-relaxed mb-5 max-w-xl">
                 The silicon-to-application platform for RISC-V embedded development. 
                 From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
               </p>
               
-              {/* Made in India - Large to fill space */}
+              {/* Made in India - fills remaining space */}
               <div data-testid="made-in-india-badge">
                 <img 
                   src="/make-in-india.jpg" 
                   alt="Make in India" 
-                  className="w-full max-w-[500px] rounded-xl shadow-xl border border-slate-200/80" 
+                  className="w-full rounded-xl shadow-xl border border-slate-200/80" 
                 />
                 <p className="text-sm text-muted-foreground mt-2.5 font-medium">Designed in India, Engineered in Bosch to the world</p>
               </div>
