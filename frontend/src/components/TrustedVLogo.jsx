@@ -1,11 +1,10 @@
 const TrustedVLogo = ({ size = "md", className = "", showPoweredBy = false, dark = false }) => {
   const sizes = {
-    xs: { img: "h-6 w-6", text: "text-sm", gap: "gap-1.5" },
-    sm: { img: "h-7 w-7", text: "text-base", gap: "gap-2" },
-    md: { img: "h-8 w-8", text: "text-lg", gap: "gap-2" },
-    lg: { img: "h-11 w-11", text: "text-2xl", gap: "gap-2.5" },
-    xl: { img: "h-14 w-14", text: "text-3xl", gap: "gap-3" },
-    hero: { img: "h-[72px] w-[72px]", text: "text-[40px]", gap: "gap-4" },
+    xs: { img: "h-6 w-6", text: "text-sm", gap: "gap-1.5", pb: "text-[9px]", pbh: "h-[10px]" },
+    sm: { img: "h-7 w-7", text: "text-base", gap: "gap-2", pb: "text-[10px]", pbh: "h-[12px]" },
+    md: { img: "h-8 w-8", text: "text-lg", gap: "gap-2", pb: "text-[10px]", pbh: "h-[13px]" },
+    lg: { img: "h-11 w-11", text: "text-2xl", gap: "gap-2.5", pb: "text-[11px]", pbh: "h-[14px]" },
+    xl: { img: "h-14 w-14", text: "text-3xl", gap: "gap-3", pb: "text-[12px]", pbh: "h-[15px]" },
   };
 
   const s = sizes[size] || sizes.md;
@@ -13,22 +12,22 @@ const TrustedVLogo = ({ size = "md", className = "", showPoweredBy = false, dark
   const subColor = dark ? "text-slate-400" : "text-slate-400";
 
   return (
-    <div className={`${className}`}>
-      <div className={`flex items-center ${s.gap}`}>
-        <img src="/trustedv-rocket-logo.png" alt="" className={`${s.img} object-contain flex-shrink-0`} />
-        <span className={`font-extrabold ${s.text} tracking-tight leading-none select-none`} style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
+    <div className={`flex items-center ${s.gap} ${className}`}>
+      <img src="/trustedv-rocket-logo.png" alt="" className={`${s.img} object-contain flex-shrink-0`} />
+      <div>
+        <span className={`font-extrabold ${s.text} tracking-tight leading-none select-none block`} style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
           <span className={baseColor}>T</span>
           <span style={{ color: "#B7410E" }}>rust</span>
           <span className={baseColor}>eD</span>
           <span style={{ color: "#C8A200" }}>-V</span>
         </span>
+        {showPoweredBy && (
+          <div className="flex items-center gap-1 mt-0.5">
+            <span className={`${s.pb} ${subColor} font-semibold tracking-widest uppercase`}>Powered by</span>
+            <img src="/bosch-logo.png" alt="Bosch" className={`${s.pbh} object-contain`} />
+          </div>
+        )}
       </div>
-      {showPoweredBy && (
-        <div className="flex items-center gap-1.5 mt-1 ml-0.5">
-          <span className={`text-[11px] ${subColor} font-medium tracking-wide uppercase`}>Powered by</span>
-          <img src="/bosch-logo.png" alt="Bosch" className="h-[14px] object-contain" />
-        </div>
-      )}
     </div>
   );
 };

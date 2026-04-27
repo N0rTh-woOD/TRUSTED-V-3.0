@@ -48,10 +48,10 @@ const EngineArchDiagram = () => {
       const s = document.createElement('style');
       s.id = 'tv-eng-css';
       s.textContent = `
-.tv-eng-wrap{padding:20px 16px 28px;max-width:560px;margin:0 auto;font-family:'Helvetica Neue',Arial,sans-serif}
-.tv-eng-wrap .hdr{text-align:center;margin-bottom:18px}
-.tv-eng-wrap .hdr h1{font-size:18px;font-weight:800;letter-spacing:-.3px}
-.tv-eng-wrap .hdr p{font-size:10px;color:#aaa;margin-top:3px}
+.tv-eng-wrap{padding:8px 16px 24px;max-width:560px;margin:0 auto;font-family:'Helvetica Neue',Arial,sans-serif}
+.tv-eng-wrap .hdr{text-align:center;margin-bottom:4px}
+.tv-eng-wrap .hdr h1{font-size:16px;font-weight:800;letter-spacing:-.3px}
+.tv-eng-wrap .hdr p{font-size:10px;color:#aaa;margin-top:2px}
 .tv-eng-wrap .canvas{position:relative;width:100%;height:700px;overflow:visible}
 .tv-eng-wrap .exhaust{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:360px;height:165px;pointer-events:none;z-index:1}
 .tv-eng-wrap .stack{position:absolute;left:50%;bottom:132px;transform:translateX(-50%);width:300px;z-index:2}
@@ -277,60 +277,51 @@ const Landing = () => {
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 relative">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 relative">
+          <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 items-start">
             {/* Left: Brand + Content + MII */}
             <div>
-              {/* Brand Lockup: Logo + TrusteD-V + Powered by Bosch */}
-              <div className="flex items-start gap-4 mb-6" data-testid="hero-brand-lockup">
-                <img src="/trustedv-rocket-logo.png" alt="" className="h-[80px] w-[80px] sm:h-[96px] sm:w-[96px] object-contain flex-shrink-0" data-testid="hero-logo" />
-                <div className="pt-2">
-                  <span className="block text-[36px] sm:text-[44px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
+              {/* Brand Lockup */}
+              <div className="flex items-center gap-5 mb-5" data-testid="hero-brand-lockup">
+                <img src="/trustedv-rocket-logo.png" alt="" className="h-[88px] w-[88px] sm:h-[110px] sm:w-[110px] object-contain flex-shrink-0" data-testid="hero-logo" />
+                <div>
+                  <span className="block text-[42px] sm:text-[52px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
                     <span className="text-slate-800">T</span>
                     <span style={{ color: "#B7410E" }}>rust</span>
                     <span className="text-slate-800">eD</span>
                     <span style={{ color: "#C8A200" }}>-V</span>
                   </span>
-                  <div className="flex items-center gap-1.5 mt-1.5">
-                    <span className="text-[11px] text-slate-400 font-semibold tracking-widest uppercase">Powered by</span>
-                    <img src="/bosch-logo.png" alt="Bosch" className="h-[16px] object-contain" />
+                  <div className="flex items-center gap-1.5 mt-1">
+                    <span className="text-[13px] text-slate-400 font-semibold tracking-widest uppercase">Powered by</span>
+                    <img src="/bosch-logo.png" alt="Bosch" className="h-[18px] object-contain" />
                   </div>
                 </div>
               </div>
               
               {/* Heading + Description */}
-              <h1 className="text-[28px] sm:text-[34px] lg:text-[40px] font-bold text-foreground tracking-tight mb-3 leading-[1.2]" data-testid="hero-heading">
+              <h1 className="text-[32px] sm:text-[38px] lg:text-[46px] font-bold text-foreground tracking-tight mb-3 leading-[1.15]" data-testid="hero-heading">
                 Build your secure{" "}
                 <span className="text-[#003262]">RISC-V</span> Solution
               </h1>
               
-              <p className="text-[15px] text-muted-foreground leading-relaxed mb-6 max-w-md">
+              <p className="text-base text-muted-foreground leading-relaxed mb-5 max-w-lg">
                 The silicon-to-application platform for RISC-V embedded development. 
                 From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
               </p>
               
-              {/* Made in India - Large */}
+              {/* Made in India - Large to fill space */}
               <div data-testid="made-in-india-badge">
                 <img 
                   src="/make-in-india.jpg" 
                   alt="Make in India" 
-                  className="w-full max-w-[420px] rounded-xl shadow-xl border border-slate-200/80" 
+                  className="w-full max-w-[500px] rounded-xl shadow-xl border border-slate-200/80" 
                 />
-                <p className="text-sm text-muted-foreground mt-3 font-medium">Designed in India, Engineered in Bosch to the world</p>
+                <p className="text-sm text-muted-foreground mt-2.5 font-medium">Designed in India, Engineered in Bosch to the world</p>
               </div>
             </div>
             
             {/* Right: Engine Diagram - desktop only */}
             <div className="hidden lg:block" data-testid="hero-engine-col">
-              <div className="text-center mb-1">
-                <h3 className="text-xs font-extrabold tracking-tight">
-                  <span className="text-foreground">T</span>
-                  <span className="text-[#B7410E]">rust</span>
-                  <span className="text-foreground">eD</span>
-                  <span className="text-[#C8A200]">-V</span>
-                  <span className="text-[#2E7D32]"> Engine</span>
-                </h3>
-              </div>
               <EngineArchDiagram />
             </div>
           </div>
