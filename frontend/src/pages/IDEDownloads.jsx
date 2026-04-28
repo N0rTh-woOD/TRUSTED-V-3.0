@@ -110,64 +110,57 @@ const IDEDownloads = () => {
       <section className="relative bg-[#0c1020] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)", backgroundSize: "32px 32px" }} />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-0 md:pt-14 md:pb-0 relative">
-          {/* Top: badges + heading */}
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 relative">
+          {/* Top row: Heading + Badges */}
+          <div className="text-center mb-6">
+            <div className="flex items-center justify-center gap-3 mb-4">
               <Badge className="bg-[#4a7dff]/10 text-[#6b9aff] border-[#4a7dff]/30 text-xs">Jarvyn Rust IDE</Badge>
               <Badge className="bg-orange-500/10 text-orange-400 border-orange-500/30 text-xs">Built from Scratch</Badge>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
               The IDE Built for{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6b9aff] to-cyan-400">Hardware Developers</span>
             </h1>
-            <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
-              A high-performance IDE built from the ground up to bridge the gap between software and silicon.
-            </p>
           </div>
 
-          {/* IDE Screenshot - hero image */}
-          <div className="relative max-w-5xl mx-auto">
-            <div className="rounded-t-xl overflow-hidden border border-slate-700/40 border-b-0 shadow-2xl shadow-black/50">
-              <img src="/jarvyn-ide-screenshot.png" alt="Jarvyn IDE" className="w-full block" data-testid="ide-hero-image" />
+          {/* Main content: IDE image left + Problem/Solution right */}
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-5 items-stretch">
+            {/* IDE Screenshot */}
+            <div className="rounded-xl overflow-hidden border border-slate-700/40 shadow-2xl shadow-black/40 bg-[#1e1e2e]">
+              <img src="/jarvyn-ide-screenshot.png" alt="Jarvyn IDE" className="w-full h-full object-cover object-top" data-testid="ide-hero-image" />
             </div>
-            {/* Fade to section bg */}
-            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
-          </div>
-        </div>
-      </section>
 
-      {/* Problem / Solution - compact cards */}
-      <section className="py-12 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-[1fr_1.4fr] gap-6">
-            {/* Problem */}
-            <div className="bg-slate-50 rounded-xl border border-border p-6">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-2 h-2 rounded-full bg-red-500" />
-                <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">The Problem</h3>
+            {/* Problem + Solution stacked */}
+            <div className="flex flex-col gap-4">
+              {/* Problem */}
+              <div className="rounded-xl border border-red-500/20 bg-[#1a1218] p-5 flex-shrink-0">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
+                  <h3 className="text-sm font-bold text-red-400 uppercase tracking-wider">The Problem</h3>
+                </div>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Generic editors and vendor-locked toolchains force embedded developers into a fragmented workflow of bloated plugins and endless datasheet context-switching.
+                </p>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Generic editors and vendor-locked toolchains force embedded developers into a fragmented workflow of bloated plugins and endless datasheet context-switching.
-              </p>
-            </div>
-            {/* Solution */}
-            <div className="bg-[#0c1020] rounded-xl border border-slate-700/40 p-6">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-2 h-2 rounded-full bg-green-400" />
-                <h3 className="text-sm font-bold text-white uppercase tracking-wider">The Jarvyn Solution</h3>
-              </div>
-              <p className="text-xs text-slate-400 mb-3">A ground-up environment designed for the metal:</p>
-              <div className="grid grid-cols-2 gap-2.5">
-                {solutionPillars.map((p, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span className="text-xs font-semibold text-white block">{p.title}</span>
-                      <span className="text-[11px] text-slate-400 leading-snug">{p.desc}</span>
+
+              {/* Solution */}
+              <div className="rounded-xl border border-green-500/20 bg-[#0f1a14] p-5 flex-1">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                  <h3 className="text-sm font-bold text-green-400 uppercase tracking-wider">The Jarvyn Solution</h3>
+                </div>
+                <p className="text-xs text-slate-400 mb-3">A ground-up environment designed for the metal:</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {solutionPillars.map((p, i) => (
+                    <div key={i} className="flex items-start gap-2.5 bg-[#0a120d] rounded-lg p-3 border border-green-900/30">
+                      <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="text-xs font-bold text-white block mb-0.5">{p.title}</span>
+                        <span className="text-[11px] text-slate-400 leading-snug">{p.desc}</span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
