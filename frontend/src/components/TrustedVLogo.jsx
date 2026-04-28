@@ -3,9 +3,9 @@ const TrustedVLogo = ({ size = "md", className = "", showPoweredBy = false }) =>
   const scales = {
     xs: { wrap: "scale-[0.5]", origin: "origin-left" },
     sm: { wrap: "scale-[0.6]", origin: "origin-left" },
-    md: { wrap: "scale-[0.7]", origin: "origin-left" },
+    md: { wrap: "scale-[0.75]", origin: "origin-left" },
     lg: { wrap: "scale-[0.85]", origin: "origin-left" },
-    xl: { wrap: "scale-100", origin: "origin-left" },
+    xl: { wrap: "scale-[1.8]", origin: "origin-left" },
   };
 
   const s = scales[size] || scales.md;
@@ -13,7 +13,7 @@ const TrustedVLogo = ({ size = "md", className = "", showPoweredBy = false }) =>
   return (
     <div className={`${className}`}>
       <div className={`${s.wrap} ${s.origin} flex items-center gap-[14px]`} style={{ width: "fit-content" }}>
-        <img src="/trustedv-rocket-logo.png" alt="" className="h-[52px] w-[52px] object-contain flex-shrink-0" />
+        <img src="/trustedv-rocket-logo.png" alt="" className="h-[56px] w-[56px] object-contain flex-shrink-0" />
         <div>
           <span className="block text-[36px] font-extrabold tracking-tight leading-none select-none whitespace-nowrap" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
             <span style={{ color: "#003262" }}>TrusteD</span>

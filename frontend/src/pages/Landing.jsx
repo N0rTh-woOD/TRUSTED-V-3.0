@@ -272,7 +272,7 @@ const Landing = () => {
             {/* Left: Brand + Content + MII */}
             <div>
               {/* Brand Lockup - same component as nav, just larger */}
-              <div className="mb-5" data-testid="hero-brand-lockup">
+              <div className="mb-[45px]" data-testid="hero-brand-lockup">
                 <TrustedVLogo size="xl" showPoweredBy={true} />
               </div>
               
