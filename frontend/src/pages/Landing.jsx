@@ -272,26 +272,21 @@ const Landing = () => {
             {/* Left: Brand + Content + MII */}
             <div>
               {/* Brand Lockup */}
-              <div className="flex items-center gap-5 sm:gap-6 mb-4" data-testid="hero-brand-lockup">
-                <img src="/trustedv-rocket-logo.png" alt="" className="h-[110px] w-[110px] sm:h-[140px] sm:w-[140px] object-contain flex-shrink-0" data-testid="hero-logo" />
+              <div className="flex items-center gap-5 sm:gap-6 mb-5" data-testid="hero-brand-lockup">
+                <img src="/trustedv-rocket-logo.png" alt="" className="h-[100px] w-[100px] sm:h-[130px] sm:w-[130px] object-contain flex-shrink-0" data-testid="hero-logo" />
                 <div>
-                  <span className="block text-[54px] sm:text-[72px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
-                    <span className="text-slate-800">T</span>
-                    <span style={{ color: "#B7410E" }}>rust</span>
-                    <span className="text-slate-800">eD</span>
+                  <span className="block text-[50px] sm:text-[68px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
+                    <span style={{ color: "#003262" }}>TrusteD</span>
                     <span style={{ color: "#FDB515" }}>-V</span>
                   </span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-[14px] sm:text-[18px] text-slate-400 font-semibold uppercase" style={{ letterSpacing: "0.35em" }}>Powered by</span>
-                    <img src="/bosch-logo.png" alt="Bosch" className="h-[22px] sm:h-[28px] object-contain" />
-                  </div>
+                  <p className="text-[13px] sm:text-[16px] text-slate-400 font-medium mt-1.5 text-center tracking-[0.25em]">Powered by <img src="/bosch-logo.png" alt="Bosch" className="h-[16px] sm:h-[20px] inline-block align-middle ml-1" /></p>
                 </div>
               </div>
               
               {/* Heading + Description */}
-              <h1 className="text-[38px] sm:text-[48px] lg:text-[58px] font-bold text-foreground tracking-tight mb-3 leading-[1.1]" data-testid="hero-heading">
+              <h1 className="text-[34px] sm:text-[44px] lg:text-[56px] font-bold text-foreground tracking-tight mb-3 leading-[1.1]" data-testid="hero-heading">
                 Build your secure{" "}
-                <span style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span> Solution
+                <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span>{" "}Solution
               </h1>
               
               <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-5 max-w-xl">
@@ -300,13 +295,13 @@ const Landing = () => {
               </p>
               
               {/* Made in India */}
-              <div data-testid="made-in-india-badge">
+              <div data-testid="made-in-india-badge" className="max-w-[520px]">
                 <img 
                   src="/make-in-india.jpg" 
                   alt="Make in India" 
-                  className="w-full max-w-[520px] rounded-xl shadow-xl border border-slate-200/80" 
+                  className="w-full rounded-xl shadow-xl border border-slate-200/80" 
                 />
-                <p className="text-sm text-muted-foreground mt-2.5 font-medium">Designed in India, Engineered in Bosch to the world</p>
+                <p className="text-sm text-muted-foreground mt-2.5 font-medium text-center w-full">Designed in India, Engineered by Bosch to the world</p>
               </div>
             </div>
             
@@ -540,7 +535,7 @@ const Landing = () => {
           <div className="text-center mb-10">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Hardware Ecosystem</span>
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
-              Supported <span style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span> Hardware Partners
+              Supported <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span> Hardware Partners
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Pre-integrated support for leading Indian RISC-V development platforms.
