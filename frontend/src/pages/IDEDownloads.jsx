@@ -98,59 +98,74 @@ const IDEDownloads = () => {
   ];
 
   const solutionPillars = [
-    { title: "Hardware-Aware Intelligence", desc: "Integrated AI trained on HALs, registers, and protocols to bring documentation directly to your cursor." },
-    { title: "Native Rust Core", desc: "No more plugin bloat. High-performance Rust Analyzer and SVD visualization out of the box." },
-    { title: "Unified Workflow", desc: "From register-level programming to real-time diagnostics, every tool supports the journey from chip to code." },
-    { title: "Built for Performance", desc: "A modern, streamlined interface that respects your machine's resources and your developer's intuition." },
+    { title: "Hardware-Aware AI", desc: "HAL and register intelligence brought directly to your cursor." },
+    { title: "Native Rust Core", desc: "Built-in Rust Analyzer and SVD visualization, zero plugin bloat." },
+    { title: "Unified Workflow", desc: "Integrated debugger, auto-save, and checkpoints for a seamless chip-to-code journey." },
+    { title: "Pure Performance", desc: "A streamlined, fast interface that respects your machine's resources." },
   ];
 
   return (
     <div className="min-h-screen bg-white" data-testid="ide-downloads-page">
       {/* Hero */}
-      <section className="relative bg-[#1a1d2e] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1d2e] via-[#1e2235] to-[#252a3e]" />
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "40px 40px" }} />
+      <section className="relative bg-[#0c1020] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)", backgroundSize: "32px 32px" }} />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <Badge className="bg-[#4a7dff]/10 text-[#6b9aff] border-[#4a7dff]/30 text-xs">Jarvyn Rust IDE</Badge>
-                <Badge className="bg-orange-500/10 text-orange-400 border-orange-500/30 text-xs">Built from Scratch</Badge>
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
-                The IDE Built for
-                <span className="block text-[#6b9aff]">Hardware Developers</span>
-              </h1>
-              
-              <p className="text-base text-slate-400 leading-relaxed mb-6 max-w-xl">
-                A high-performance IDE built from the ground up to bridge the gap between software and silicon, combining native Rust intelligence with hardware-aware AI and specialized debugging tools for the modern embedded developer.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-3">
-                {["Hardware-aware AI", "Native Rust Analyzer", "SVD visualization", "Checkpoint system", "Auto-save", "Integrated debugger"].map((tag) => (
-                  <span key={tag} className="flex items-center gap-1.5 text-sm text-slate-400">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-green-400 flex-shrink-0" />
-                    {tag}
-                  </span>
-                ))}
-              </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-0 md:pt-14 md:pb-0 relative">
+          {/* Top: badges + heading */}
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-5">
+              <Badge className="bg-[#4a7dff]/10 text-[#6b9aff] border-[#4a7dff]/30 text-xs">Jarvyn Rust IDE</Badge>
+              <Badge className="bg-orange-500/10 text-orange-400 border-orange-500/30 text-xs">Built from Scratch</Badge>
             </div>
-            
-            {/* Problem / Solution Card */}
-            <div className="bg-[#252a3e] rounded-xl border border-slate-700/50 p-6">
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">The Problem</h3>
-              <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                General-purpose IDEs are built for high-level software, leaving hardware developers stranded between generic editors and clunky, vendor-locked toolchains. Today's embedded workflow is a struggle of fragmented plugins, constant context-switching for datasheets, and fragile environments that aren't optimized for the metal.
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-4 leading-tight">
+              The IDE Built for{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6b9aff] to-cyan-400">Hardware Developers</span>
+            </h1>
+            <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
+              A high-performance IDE built from the ground up to bridge the gap between software and silicon.
+            </p>
+          </div>
+
+          {/* IDE Screenshot - hero image */}
+          <div className="relative max-w-5xl mx-auto">
+            <div className="rounded-t-xl overflow-hidden border border-slate-700/40 border-b-0 shadow-2xl shadow-black/50">
+              <img src="/jarvyn-ide-screenshot.png" alt="Jarvyn IDE" className="w-full block" data-testid="ide-hero-image" />
+            </div>
+            {/* Fade to section bg */}
+            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
+          </div>
+        </div>
+      </section>
+
+      {/* Problem / Solution - compact cards */}
+      <section className="py-12 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-[1fr_1.4fr] gap-6">
+            {/* Problem */}
+            <div className="bg-slate-50 rounded-xl border border-border p-6">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-2 h-2 rounded-full bg-red-500" />
+                <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">The Problem</h3>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Generic editors and vendor-locked toolchains force embedded developers into a fragmented workflow of bloated plugins and endless datasheet context-switching.
               </p>
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">The Solution</h3>
-              <p className="text-sm text-slate-300/80 mb-4">Jarvyn reclaims the hardware development experience by providing a ground-up environment designed specifically for the complexities of embedded Rust.</p>
-              <div className="space-y-3">
+            </div>
+            {/* Solution */}
+            <div className="bg-[#0c1020] rounded-xl border border-slate-700/40 p-6">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-2 h-2 rounded-full bg-green-400" />
+                <h3 className="text-sm font-bold text-white uppercase tracking-wider">The Jarvyn Solution</h3>
+              </div>
+              <p className="text-xs text-slate-400 mb-3">A ground-up environment designed for the metal:</p>
+              <div className="grid grid-cols-2 gap-2.5">
                 {solutionPillars.map((p, i) => (
-                  <div key={i} className="flex items-start gap-3 text-sm text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                    <div><span className="font-semibold text-white">{p.title}:</span> {p.desc}</div>
+                  <div key={i} className="flex items-start gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="text-xs font-semibold text-white block">{p.title}</span>
+                      <span className="text-[11px] text-slate-400 leading-snug">{p.desc}</span>
+                    </div>
                   </div>
                 ))}
               </div>
