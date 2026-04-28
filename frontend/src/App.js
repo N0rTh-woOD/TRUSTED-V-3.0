@@ -1,11 +1,19 @@
 import "@/App.css";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { ProtectedRoute, AdminRoute } from "@/components/ProtectedRoute";
 import { Toaster } from "@/components/ui/sonner";
 import Navigation from "@/components/Navigation";
 import { Loader2 } from "lucide-react";
+
+// Scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 
 // Public Pages
 import Landing from "@/pages/Landing";
@@ -65,6 +73,7 @@ const AppContent = () => {
   if (SITE_LOCK_ENABLED && !isAuthenticated) {
     return (
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
@@ -76,6 +85,7 @@ const AppContent = () => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Navigation />
       <Routes>
         {/* Public Routes - accessible when site lock is disabled or user is authenticated */}

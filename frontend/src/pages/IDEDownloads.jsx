@@ -241,17 +241,17 @@ const IDEDownloads = () => {
           {loadingBuilds ? (
             <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin text-primary" /></div>
           ) : ideBuilds.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-3xl mx-auto">
+            <div className={`grid gap-5 max-w-3xl mx-auto ${ideBuilds.length === 1 ? 'grid-cols-1 max-w-xs' : ideBuilds.length === 2 ? 'sm:grid-cols-2 max-w-lg' : 'sm:grid-cols-2 lg:grid-cols-3'}`}>
               {ideBuilds.map((build) => (
                 <div key={build.id} className="bg-white rounded-xl border border-border p-5 text-center hover:shadow-lg transition-shadow" data-testid={`ide-build-${build.id}`}>
                   <div className="text-3xl mb-2">
                     {build.platform?.toLowerCase().includes("windows") ? "🪟" : build.platform?.toLowerCase().includes("mac") ? "🍎" : "🐧"}
                   </div>
                   <h4 className="font-bold text-foreground text-sm">{build.platform}</h4>
-                  <p className="text-xs text-muted-foreground mt-1 mb-1">v{build.version}</p>
-                  <p className="text-xs text-muted-foreground mb-3">{build.size}</p>
+                  {build.version && <p className="text-xs text-muted-foreground mt-1">v{build.version}</p>}
+                  {build.size && build.size !== "Pending" && <p className="text-xs text-muted-foreground mb-3">{build.size}</p>}
                   <a href={`${BACKEND_URL}/api/ide-downloads/${build.id}/download`} download>
-                    <Button size="sm" className="w-full" data-testid={`download-btn-${build.id}`}>
+                    <Button size="sm" className="w-full mt-2" data-testid={`download-btn-${build.id}`}>
                       <Download className="w-4 h-4 mr-2" /> Download
                     </Button>
                   </a>

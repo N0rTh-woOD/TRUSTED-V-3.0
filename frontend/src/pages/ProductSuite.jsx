@@ -158,7 +158,7 @@ const ProductSuite = () => {
               <div className="w-16 h-1 bg-primary mt-2" />
             </div>
             
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className={`grid gap-6 ${category.items.length <= 2 ? 'md:grid-cols-2 max-w-3xl mx-auto' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
               {category.items.map((product, prodIndex) => {
                 const Icon = product.icon;
                 const isHighlight = product.badge === "Flagship" || product.badge === "Cloud";
