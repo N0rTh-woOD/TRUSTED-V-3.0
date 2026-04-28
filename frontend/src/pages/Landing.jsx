@@ -271,16 +271,9 @@ const Landing = () => {
           <div className="grid lg:grid-cols-2 gap-4 lg:gap-5 items-start">
             {/* Left: Brand + Content + MII */}
             <div>
-              {/* Brand Lockup */}
-              <div className="flex items-center gap-5 sm:gap-6 mb-5" data-testid="hero-brand-lockup">
-                <img src="/trustedv-rocket-logo.png" alt="" className="h-[100px] w-[100px] sm:h-[130px] sm:w-[130px] object-contain flex-shrink-0" data-testid="hero-logo" />
-                <div>
-                  <span className="block text-[50px] sm:text-[68px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
-                    <span style={{ color: "#003262" }}>TrusteD</span>
-                    <span style={{ color: "#FDB515" }}>-V</span>
-                  </span>
-                  <p className="text-[13px] sm:text-[16px] text-slate-400 font-medium mt-1.5 text-center tracking-[0.25em]">Powered by <img src="/bosch-logo.png" alt="Bosch" className="h-[16px] sm:h-[20px] inline-block align-middle ml-1" /></p>
-                </div>
+              {/* Brand Lockup - same component as nav, just larger */}
+              <div className="mb-5" data-testid="hero-brand-lockup">
+                <TrustedVLogo size="xl" showPoweredBy={true} />
               </div>
               
               {/* Heading + Description */}
