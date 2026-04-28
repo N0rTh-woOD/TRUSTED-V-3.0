@@ -327,7 +327,7 @@ const PartnerRegistration = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="max-h-48 overflow-y-auto p-4 bg-slate-50 rounded-lg border border-border text-xs text-muted-foreground leading-relaxed space-y-3">
-                  <p><strong>TrusteD-V Partner Program — Terms and Conditions</strong></p>
+                  <p><strong>TrusteD-V Partner Program: Terms and Conditions</strong></p>
                   <p><strong>1. Eligibility.</strong> Partnership applications are open to legally registered entities. TrusteD-V reserves the right to accept or reject applications at its sole discretion.</p>
                   <p><strong>2. Confidentiality.</strong> All information exchanged during the partnership evaluation and engagement shall be treated as confidential. Neither party shall disclose proprietary or trade-secret information without prior written consent.</p>
                   <p><strong>3. Intellectual Property.</strong> Each party retains ownership of its pre-existing intellectual property. Any jointly developed IP during the partnership will be governed by a separate IP agreement executed before development begins.</p>

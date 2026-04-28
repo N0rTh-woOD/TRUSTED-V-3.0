@@ -269,7 +269,7 @@ const ContactSales = () => {
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li><a href="/partner-registration" className="text-primary hover:underline">Become a Hardware Partner</a></li>
                   <li><a href="/board-support" className="text-primary hover:underline">Request Board Support</a></li>
-                  <li><a href="/download-ide" className="text-primary hover:underline">Download IDE — Jarvyn</a></li>
+                  <li><a href="/download-ide" className="text-primary hover:underline">Download IDE Jarvyn</a></li>
                 </ul>
               </div>
             </div>

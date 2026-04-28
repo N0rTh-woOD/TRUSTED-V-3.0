@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
   CheckCircle2, Cpu, Code,
@@ -146,32 +145,34 @@ const IDEDownloads = () => {
         </div>
       </section>
 
-      {/* Key Features (12 after merge) */}
+      {/* Key Features (12 after merge) - Interactive hover */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Capabilities</span>
             <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Key Features</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              12 purpose-built capabilities for hardware and embedded system development, from hardware-aware AI to SVD visualization.
+              12 purpose-built capabilities for hardware and embedded system development. Hover to explore.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {keyFeatures.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} data-testid={`ide-feature-${index}`} className="bg-white border-border hover:shadow-lg hover:border-primary/20 transition-all duration-300 group h-full">
-                  <CardContent className="p-5 flex flex-col h-full">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors">
-                        <Icon className="w-4.5 h-4.5 text-primary group-hover:text-white transition-colors" />
-                      </div>
-                      <h3 className="font-semibold text-foreground text-sm leading-tight">{feature.title}</h3>
+                <div key={index} data-testid={`ide-feature-${index}`} className="relative bg-white border border-border rounded-xl p-5 hover:shadow-xl hover:border-primary/30 transition-all duration-300 group cursor-pointer overflow-hidden h-[72px] hover:h-auto">
+                  {/* Always visible: icon + title */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors duration-300">
+                      <Icon className="w-4 h-4 text-primary group-hover:text-white transition-colors duration-300" />
                     </div>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                    <h3 className="font-semibold text-foreground text-sm leading-tight">{feature.title}</h3>
+                  </div>
+                  {/* Revealed on hover */}
+                  <div className="mt-3 opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-[200px] transition-all duration-300 ease-in-out overflow-hidden">
+                    <p className="text-xs text-muted-foreground leading-relaxed border-t border-border/50 pt-3">{feature.description}</p>
+                  </div>
+                </div>
               );
             })}
           </div>

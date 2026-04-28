@@ -56,7 +56,7 @@ const DeveloperPortal = () => {
     { name: "embedded-hal", version: "1.0.0", description: "Hardware abstraction traits for embedded systems", downloads: "500K+", link: "https://crates.io/crates/embedded-hal" },
     { name: "riscv", version: "0.11.x", description: "Low-level access to RISC-V processors", downloads: "200K+", link: "https://crates.io/crates/riscv" },
     { name: "riscv-rt", version: "0.12.x", description: "Minimal runtime for RISC-V microcontrollers", downloads: "150K+", link: "https://crates.io/crates/riscv-rt" },
-    { name: "embassy-executor", version: "0.6.x", description: "Async executor for embedded systems — no alloc, no std", downloads: "80K+", link: "https://crates.io/crates/embassy-executor" },
+    { name: "embassy-executor", version: "0.6.x", description: "Async executor for embedded systems, no alloc, no std", downloads: "80K+", link: "https://crates.io/crates/embassy-executor" },
     { name: "probe-rs", version: "0.24.x", description: "Modern debugging toolkit for ARM and RISC-V targets", downloads: "120K+", link: "https://probe.rs" },
   ];
 
@@ -146,7 +146,7 @@ const DeveloperPortal = () => {
                 <p className="text-sm text-muted-foreground">Get your RISC-V Rust development environment set up in minutes.</p>
                 <div className="grid md:grid-cols-2 gap-3">
                   {[
-                    { step: "1", title: "Install TrusteD-V IDE — Jarvyn", desc: "Download and install the IDE for your platform" },
+                    { step: "1", title: "Install TrusteD-V IDE Jarvyn", desc: "Download and install the IDE for your platform" },
                     { step: "2", title: "Configure Rust Toolchain", desc: "The IDE auto-configures rustup with RISC-V targets" },
                     { step: "3", title: "Select Your Board", desc: "Choose from C-DAC or Mindgrove boards in the Smart Builder" },
                     { step: "4", title: "Build & Flash", desc: "One-click compile and flash to your target hardware" },
@@ -185,7 +185,7 @@ const DeveloperPortal = () => {
                       <Cpu className="w-5 h-5 text-primary flex-shrink-0" />
                       <div>
                         <h4 className="font-medium text-foreground text-sm">{item.board}</h4>
-                        <p className="text-xs text-muted-foreground">{item.chip} — {item.desc}</p>
+                        <p className="text-xs text-muted-foreground">{item.chip}: {item.desc}</p>
                       </div>
                     </div>
                     <ChevronRight className="w-4 h-4 text-muted-foreground" />
@@ -201,11 +201,11 @@ const DeveloperPortal = () => {
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground mb-4">Supported real-time operating systems and middleware frameworks.</p>
                 {[
-                  { name: "Embassy", desc: "Modern async/await framework for embedded Rust — no alloc, no std", link: "https://embassy.dev" },
+                  { name: "Embassy", desc: "Modern async/await framework for embedded Rust, no alloc, no std", link: "https://embassy.dev" },
                   { name: "FreeRTOS (Rust bindings)", desc: "Industry-standard RTOS with safe Rust FFI bindings", link: "https://freertos.org" },
                   { name: "Zephyr RTOS", desc: "Scalable RTOS with extensive driver support and networking", link: "https://zephyrproject.org" },
                   { name: "RTIC (Real-Time Interrupt-driven Concurrency)", desc: "Concurrency framework for resource-constrained devices", link: "https://rtic.rs" },
-                  { name: "Bare Metal", desc: "Direct hardware access with no_std Rust — maximum control", link: "#" },
+                  { name: "Bare Metal", desc: "Direct hardware access with no_std Rust, maximum control", link: "#" },
                 ].map((item) => (
                   <a key={item.name} href={item.link} target={item.link !== "#" ? "_blank" : undefined} rel="noopener noreferrer" className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-border hover:border-primary/30 transition-colors">
                     <div>
@@ -298,7 +298,7 @@ const DeveloperPortal = () => {
           <div className="text-center mb-12">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Quick Start</span>
             <h2 className="text-3xl font-bold text-white mt-2">Start Building in Minutes</h2>
-            <p className="text-slate-400 mt-2 max-w-lg mx-auto">A minimal LED blink example for RISC-V — from zero to hardware in under 30 lines of Rust.</p>
+            <p className="text-slate-400 mt-2 max-w-lg mx-auto">A minimal LED blink example for RISC-V, from zero to hardware in under 30 lines of Rust.</p>
           </div>
           
           <div className="max-w-5xl mx-auto grid lg:grid-cols-[1fr_300px] gap-6 items-start">
@@ -329,7 +329,7 @@ const DeveloperPortal = () => {
                       { n: 5,  code: <><span className="text-[#ff7b72]">use</span> <span className="text-[#c9d1d9]">riscv_rt::</span><span className="text-[#d2a8ff]">entry</span><span className="text-[#c9d1d9]">;</span></> },
                       { n: 6,  code: <><span className="text-[#ff7b72]">use</span> <span className="text-[#c9d1d9]">embedded_hal::digital::</span><span className="text-[#ffa657]">OutputPin</span><span className="text-[#c9d1d9]">;</span></> },
                       { n: 7,  code: null },
-                      { n: 8,  code: <span className="text-[#8b949e] italic">{"// Board HAL — replace with your target"}</span> },
+                      { n: 8,  code: <span className="text-[#8b949e] italic">{"// Board HAL, replace with your target"}</span> },
                       { n: 9,  code: <><span className="text-[#ff7b72]">use</span> <span className="text-[#c9d1d9]">vega_hal::{`{`}</span><span className="text-[#ffa657]">Peripherals</span><span className="text-[#c9d1d9]">, gpio::</span><span className="text-[#ffa657]">GpioExt</span><span className="text-[#c9d1d9]">{`}`};</span></> },
                       { n: 10, code: null },
                       { n: 11, code: <><span className="text-[#ff7b72]">#[</span><span className="text-[#d2a8ff]">entry</span><span className="text-[#ff7b72]">]</span></> },

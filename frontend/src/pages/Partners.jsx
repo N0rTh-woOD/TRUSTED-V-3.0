@@ -20,12 +20,12 @@ const Partners = () => {
       website: "https://vegaprocessors.in",
       contributions: [
         "VEGA ET1031: 32-bit RISC-V microcontroller for IoT",
-        "DHRUV64 — Dual-core 64-bit RISC-V processor",
+        "DHRUV64: Dual-core 64-bit RISC-V processor",
         "ARIES development boards with full BSP support",
         "VEGA SDK and peripheral driver libraries",
       ],
       integration: [
-        "Pre-configured BSP for TrusteD-V IDE — Jarvyn",
+        "Pre-configured BSP for TrusteD-V IDE Jarvyn",
         "One-click build and flash support",
         "Debugger integration via JTAG/SWD",
         "Peripheral driver libraries in Rust",
@@ -40,13 +40,13 @@ const Partners = () => {
       color: "green",
       website: "https://mindgrove.in",
       contributions: [
-        "Secure IoT SoC — 32-bit with hardware crypto engine",
-        "Vision SoC — 64-bit with integrated NPU for AI inference",
-        "Industrial SoC — 32-bit ruggedized for harsh environments",
+        "Secure IoT SoC: 32-bit with hardware crypto engine",
+        "Vision SoC: 64-bit with integrated NPU for AI inference",
+        "Industrial SoC: 32-bit ruggedized for harsh environments",
         "Hardware security modules and TEE support",
       ],
       integration: [
-        "Pre-configured BSP for TrusteD-V IDE — Jarvyn",
+        "Pre-configured BSP for TrusteD-V IDE Jarvyn",
         "Secure boot chain configuration tool",
         "AI model deployment via Vision SoC NPU",
         "Hardware crypto acceleration APIs",
@@ -61,13 +61,13 @@ const Partners = () => {
       color: "orange",
       website: "#",
       contributions: [
-        "Edge AI SoC — RISC-V with integrated neural processing unit",
+        "Edge AI SoC: RISC-V with integrated neural processing unit",
         "Intelligent sensor fusion platform",
         "Low-power edge inference accelerator",
         "Smart industrial controller board",
       ],
       integration: [
-        "Pre-configured BSP for TrusteD-V IDE — Jarvyn",
+        "Pre-configured BSP for TrusteD-V IDE Jarvyn",
         "Edge AI model deployment pipeline",
         "Sensor fusion SDK integration",
         "Power-optimized firmware templates",
@@ -76,7 +76,7 @@ const Partners = () => {
   ];
 
   const partnerBenefits = [
-    { icon: Package, title: "BSP Integration", description: "Your boards ship with pre-configured Board Support Packages in TrusteD-V IDE — Jarvyn." },
+    { icon: Package, title: "BSP Integration", description: "Your boards ship with pre-configured Board Support Packages in TrusteD-V IDE Jarvyn." },
     { icon: Wrench, title: "Toolchain Support", description: "Full Rust toolchain optimization and testing for your RISC-V silicon." },
     { icon: Globe, title: "Developer Reach", description: "Access to the TrusteD-V developer community building with RISC-V and Rust." },
     { icon: Shield, title: "Security Certification", description: "Joint security validation and certification for secure boot workflows." },

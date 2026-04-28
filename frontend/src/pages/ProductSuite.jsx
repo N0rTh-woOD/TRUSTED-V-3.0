@@ -15,7 +15,7 @@ const ProductSuite = () => {
       category: "Development Tools",
       items: [
         {
-          name: "TrusteD-V IDE — Jarvyn",
+          name: "TrusteD-V IDE Jarvyn",
           description: "AI-native development environment with Jarvyn AI assistant, integrated debugging, one-click firmware flashing, and RISC-V native support.",
           icon: Terminal,
           features: ["Jarvyn AI code assistant", "Integrated debugger (probe-rs / LLDB)", "Smart Builder engine", "One-click build & flash"],
@@ -24,11 +24,11 @@ const ProductSuite = () => {
         },
         {
           name: "TrusteD-V WebIDE",
-          description: "Full-featured browser-based development environment for RISC-V Rust projects. Compile, debug, and collaborate from anywhere — no local setup required.",
+          description: "Full-featured browser-based development environment for RISC-V Rust projects. Compile, debug, and collaborate from anywhere, no local setup required.",
           icon: Globe,
           features: ["Cloud-based Rust compilation", "Integrated terminal & debugger", "Real-time collaboration", "Project templates & scaffolding", "Git integration & version control"],
           badge: "Cloud",
-          link: "/developer-portal",
+          link: "/download-ide",
         },
       ]
     },
@@ -36,7 +36,7 @@ const ProductSuite = () => {
       category: "Secure Foundation",
       items: [
         {
-          name: "Secure Boot — rboot / rustBoot",
+          name: "Secure Boot: rboot / rustBoot",
           description: "Hardware root of trust with verified boot chain. rboot provides lightweight first-stage boot for RISC-V, while rustBoot delivers a full Rust-native secure bootloader with A/B updates.",
           icon: Shield,
           features: ["rboot: lightweight RISC-V first-stage loader", "rustBoot: Rust-native secure bootloader", "A/B firmware update with rollback", "Anti-rollback protection & key management"],
@@ -142,7 +142,7 @@ const ProductSuite = () => {
               Complete Development Ecosystem
             </h1>
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-              From secure boot to AI deployment — discover the comprehensive suite of tools and SDKs 
+              From secure boot to AI deployment, discover the comprehensive suite of tools and SDKs 
               for building production-ready RISC-V embedded systems with Rust.
             </p>
           </div>
@@ -245,7 +245,7 @@ const ProductSuite = () => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground mb-4">Ready to Get Started?</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Explore TrusteD-V IDE — Jarvyn or browse detailed product documentation.
+            Explore TrusteD-V IDE Jarvyn or browse detailed product documentation.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/download-ide">

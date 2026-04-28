@@ -364,6 +364,69 @@ const Landing = () => {
                             ))}
                           </div>
                         )}
+                        {stage.num === 6 && (
+                          <div className="mt-3 rounded-lg overflow-hidden border border-[#0F6E56]/20" style={{ height: "140px", position: "relative", background: "#0a0f0a" }}>
+                            <style>{`
+                              @keyframes simDash{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
+                              @keyframes simLed{0%,100%{fill:#1D9E75;opacity:.4}50%{fill:#5DCAA5;opacity:1}}
+                              @keyframes simBlink{0%,100%{opacity:1}50%{opacity:.3}}
+                              @keyframes simPulse{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:.6;transform:scale(1.05)}}
+                            `}</style>
+                            <svg width="100%" height="100%" viewBox="0 0 600 140" preserveAspectRatio="xMidYMid meet">
+                              <rect x="0" y="0" width="600" height="140" fill="#0a0f0a"/>
+                              <line x1="100" y1="0" x2="100" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
+                              <line x1="200" y1="0" x2="200" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
+                              <line x1="300" y1="0" x2="300" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
+                              <line x1="400" y1="0" x2="400" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
+                              <line x1="500" y1="0" x2="500" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
+                              <line x1="0" y1="35" x2="600" y2="35" stroke="#1a2a1a" strokeWidth=".5"/>
+                              <line x1="0" y1="70" x2="600" y2="70" stroke="#1a2a1a" strokeWidth=".5"/>
+                              <line x1="0" y1="105" x2="600" y2="105" stroke="#1a2a1a" strokeWidth=".5"/>
+                              {/* SoC chip */}
+                              <rect x="40" y="30" width="70" height="60" rx="5" fill="#0d1a0d" stroke="#1D9E75" strokeWidth="1.2"/>
+                              <rect x="50" y="40" width="50" height="40" rx="3" fill="#04342C"/>
+                              <text x="75" y="58" textAnchor="middle" fontSize="8" fill="#5DCAA5" fontFamily="monospace" fontWeight="700">RISC-V</text>
+                              <text x="75" y="72" textAnchor="middle" fontSize="7" fill="#1D9E75" fontFamily="monospace">SoC</text>
+                              <circle cx="102" cy="34" r="3" style={{ animation: "simLed 1.1s ease-in-out infinite" }}/>
+                              {/* SoC traces */}
+                              <line x1="110" y1="50" x2="160" y2="50" stroke="#1D9E75" strokeWidth="1" strokeDasharray="3 2" style={{ animation: "simDash .8s linear infinite" }}/>
+                              <line x1="110" y1="65" x2="160" y2="65" stroke="#1D9E75" strokeWidth="1" strokeDasharray="3 2" style={{ animation: "simDash .8s linear infinite .2s" }}/>
+                              <line x1="110" y1="80" x2="160" y2="80" stroke="#1D9E75" strokeWidth="1" strokeDasharray="3 2" style={{ animation: "simDash .8s linear infinite .4s" }}/>
+                              {/* RF chip */}
+                              <rect x="170" y="35" width="55" height="45" rx="4" fill="#0d130d" stroke="#378ADD" strokeWidth="1"/>
+                              <text x="197" y="56" textAnchor="middle" fontSize="7" fill="#85B7EB" fontFamily="monospace" fontWeight="700">RF</text>
+                              <text x="197" y="68" textAnchor="middle" fontSize="6" fill="#378ADD" fontFamily="monospace">LoRa</text>
+                              <circle cx="218" cy="38" r="2.5" style={{ animation: "simLed 1.6s ease-in-out infinite .3s" }}/>
+                              {/* Antenna waves */}
+                              <path d="M197 35 Q207 26 217 35" fill="none" stroke="#378ADD" strokeWidth=".7" strokeDasharray="3 2" opacity=".6" style={{ animation: "simPulse 1.2s ease-in-out infinite" }}/>
+                              <path d="M190 28 Q207 16 224 28" fill="none" stroke="#378ADD" strokeWidth=".5" strokeDasharray="3 2" opacity=".3" style={{ animation: "simPulse 1.2s ease-in-out infinite .3s" }}/>
+                              {/* Sensor */}
+                              <rect x="260" y="38" width="60" height="40" rx="4" fill="#1a0d0d" stroke="#EF9F27" strokeWidth="1"/>
+                              <text x="290" y="56" textAnchor="middle" fontSize="7" fill="#FAC775" fontFamily="monospace" fontWeight="700">CO2</text>
+                              <text x="290" y="68" textAnchor="middle" fontSize="6" fill="#BA7517" fontFamily="monospace">SENSOR</text>
+                              <circle cx="313" cy="41" r="2.5" style={{ animation: "simLed 1.3s ease-in-out infinite .6s" }}/>
+                              {/* Waveform display */}
+                              <rect x="20" y="95" width="200" height="40" rx="4" fill="#04120a" stroke="#1D9E75" strokeWidth=".8"/>
+                              <text x="28" y="106" fontSize="6" fill="#1D9E75" fontFamily="monospace">Signal Analysis</text>
+                              <polyline points="28,120 40,113 48,125 56,112 64,122 72,114 80,123 88,116 96,120 104,113 112,122 120,115 128,120 136,113 144,122 152,115 160,120 168,114 176,122 184,116 192,120 200,114 208,120" fill="none" stroke="#1D9E75" strokeWidth="1" strokeLinecap="round" style={{ animation: "simBlink 1.5s ease-in-out infinite" }}/>
+                              {/* UART Monitor */}
+                              <rect x="340" y="15" width="240" height="115" rx="5" fill="#04120a" stroke="#1D9E75" strokeWidth=".8"/>
+                              <text x="350" y="28" fontSize="7" fill="#1D9E75" fontFamily="monospace">UART Monitor</text>
+                              <text x="350" y="42" fontSize="6.5" fill="#5DCAA5" fontFamily="monospace" style={{ animation: "simBlink 3s ease-in-out infinite" }}>[ OK ] Boot sequence</text>
+                              <text x="350" y="54" fontSize="6.5" fill="#5DCAA5" fontFamily="monospace" style={{ animation: "simBlink 3s ease-in-out infinite .5s" }}>[ OK ] HAL init complete</text>
+                              <text x="350" y="66" fontSize="6.5" fill="#5DCAA5" fontFamily="monospace" style={{ animation: "simBlink 3s ease-in-out infinite 1s" }}>[ OK ] Sensor CO2=412ppm</text>
+                              <text x="350" y="78" fontSize="6.5" fill="#5DCAA5" fontFamily="monospace" style={{ animation: "simBlink 3s ease-in-out infinite 1.5s" }}>[ OK ] RF link established</text>
+                              <text x="350" y="90" fontSize="6.5" fill="#9FE1CB" fontFamily="monospace" style={{ animation: "simBlink 1s ease-in-out infinite" }}>&#9612;</text>
+                              {/* Status badges */}
+                              <rect x="480" y="98" width="88" height="18" rx="3" fill="#0F6E56" opacity=".9"/>
+                              <text x="524" y="111" textAnchor="middle" fontSize="8" fill="#E1F5EE" fontFamily="monospace" fontWeight="700">ALL PASS &#10003;</text>
+                              <rect x="350" y="98" width="60" height="18" rx="3" fill="#1D3A1D" stroke="#1D9E75" strokeWidth=".6"/>
+                              <text x="380" y="111" textAnchor="middle" fontSize="7" fill="#5DCAA5" fontFamily="monospace">98% cov</text>
+                              <rect x="415" y="98" width="60" height="18" rx="3" fill="#1D3A1D" stroke="#1D9E75" strokeWidth=".6"/>
+                              <text x="445" y="111" textAnchor="middle" fontSize="7" fill="#9FE1CB" fontFamily="monospace">2.4ms lat</text>
+                            </svg>
+                          </div>
+                        )}
                         {stage.progress && (
                           <div className="space-y-1.5 mt-3">
                             {stage.progress.map((p, j) => (
