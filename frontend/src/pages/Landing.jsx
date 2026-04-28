@@ -268,26 +268,28 @@ const Landing = () => {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 md:py-6 relative">
-          <div className="grid lg:grid-cols-2 gap-4 lg:gap-5 items-start">
-            {/* Left: Brand + Content + MII */}
-            <div>
-              {/* Brand Lockup - same component as nav, just larger */}
-              <div className="mb-[45px]" data-testid="hero-brand-lockup">
+          <div className="grid lg:grid-cols-2 gap-4 lg:gap-5 items-stretch">
+            {/* Left: Brand + Content + MII - spread to fill full height */}
+            <div className="flex flex-col justify-between">
+              {/* Brand Lockup */}
+              <div data-testid="hero-brand-lockup">
                 <TrustedVLogo size="xl" showPoweredBy={true} />
               </div>
               
               {/* Heading + Description */}
-              <h1 className="text-[34px] sm:text-[44px] lg:text-[56px] font-bold text-foreground tracking-tight mb-3 leading-[1.1]" data-testid="hero-heading">
-                Build your secure{" "}
-                <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span>{" "}Solution
-              </h1>
+              <div className="my-3 lg:my-0">
+                <h1 className="text-[34px] sm:text-[44px] lg:text-[56px] font-bold text-foreground tracking-tight mb-3 leading-[1.1]" data-testid="hero-heading">
+                  Build your secure{" "}
+                  <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span>{" "}Solution
+                </h1>
+                
+                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl">
+                  The silicon-to-application platform for RISC-V embedded development. 
+                  From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
+                </p>
+              </div>
               
-              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-5 max-w-xl">
-                The silicon-to-application platform for RISC-V embedded development. 
-                From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
-              </p>
-              
-              {/* Made in India */}
+              {/* Made in India - anchored to bottom */}
               <div data-testid="made-in-india-badge" className="max-w-[520px]">
                 <img 
                   src="/make-in-india.jpg" 
