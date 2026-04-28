@@ -48,7 +48,7 @@ const PIPELINE_CSS = `
 
 const PIPELINE_HTML = `
 <div class="ttl">
-  <h3><span style="color:#111">T</span><span style="color:#B7410E">rust</span><span style="color:#111">eD</span><span style="color:#C8A200">-V</span><span style="color:#2E7D32"> Engine</span> <span style="color:#888;font-weight:400;font-size:14px">Build Pipeline</span></h3>
+  <h3><span style="color:#111">T</span><span style="color:#B7410E">rust</span><span style="color:#111">eD</span><span style="color:#FDB515">-V</span><span style="color:#2E7D32"> Engine</span> <span style="color:#888;font-weight:400;font-size:14px">Build Pipeline</span></h3>
   <p>Requirement &#8594; IP &#8594; Chips &#8594; SoC &#8594; Firmware &#8594; Simulation &#8594; Launch</p>
 </div>
 <div class="steps">
@@ -60,8 +60,8 @@ const PIPELINE_HTML = `
     <svg viewBox="0 0 40 40" fill="none">
       <circle cx="18" cy="13" r="6" fill="#fff" opacity=".9"/>
       <path d="M6 34c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff" opacity=".7"/>
-      <rect x="22" y="6" width="14" height="10" rx="3" fill="#C8A200"/>
-      <path d="M22 14l-3 3v-3z" fill="#C8A200"/>
+      <rect x="22" y="6" width="14" height="10" rx="3" fill="#FDB515"/>
+      <path d="M22 14l-3 3v-3z" fill="#FDB515"/>
       <line x1="25" y1="9" x2="33" y2="9" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
       <line x1="25" y1="12" x2="31" y2="12" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
     </svg>

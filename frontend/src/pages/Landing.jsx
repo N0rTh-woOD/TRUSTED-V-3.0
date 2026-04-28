@@ -273,28 +273,28 @@ const Landing = () => {
             <div>
               {/* Brand Lockup */}
               <div className="flex items-center gap-5 sm:gap-6 mb-4" data-testid="hero-brand-lockup">
-                <img src="/trustedv-rocket-logo.png" alt="" className="h-[100px] w-[100px] sm:h-[130px] sm:w-[130px] object-contain flex-shrink-0" data-testid="hero-logo" />
+                <img src="/trustedv-rocket-logo.png" alt="" className="h-[110px] w-[110px] sm:h-[140px] sm:w-[140px] object-contain flex-shrink-0" data-testid="hero-logo" />
                 <div>
-                  <span className="block text-[50px] sm:text-[64px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
+                  <span className="block text-[54px] sm:text-[72px] font-extrabold tracking-tight leading-none select-none" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
                     <span className="text-slate-800">T</span>
                     <span style={{ color: "#B7410E" }}>rust</span>
                     <span className="text-slate-800">eD</span>
-                    <span style={{ color: "#C8A200" }}>-V</span>
+                    <span style={{ color: "#FDB515" }}>-V</span>
                   </span>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="text-[15px] sm:text-[17px] text-slate-400 font-semibold tracking-widest uppercase">Powered by</span>
-                    <img src="/bosch-logo.png" alt="Bosch" className="h-[20px] sm:h-[24px] object-contain" />
+                    <span className="text-[14px] sm:text-[18px] text-slate-400 font-semibold uppercase" style={{ letterSpacing: "0.35em" }}>Powered by</span>
+                    <img src="/bosch-logo.png" alt="Bosch" className="h-[22px] sm:h-[28px] object-contain" />
                   </div>
                 </div>
               </div>
               
               {/* Heading + Description */}
-              <h1 className="text-[36px] sm:text-[44px] lg:text-[54px] font-bold text-foreground tracking-tight mb-3 leading-[1.1]" data-testid="hero-heading">
+              <h1 className="text-[38px] sm:text-[48px] lg:text-[58px] font-bold text-foreground tracking-tight mb-3 leading-[1.1]" data-testid="hero-heading">
                 Build your secure{" "}
-                <span style={{ fontFamily: "'Georgia', serif", fontWeight: 800, letterSpacing: "-0.5px" }}><span style={{ color: "#283B71" }}>RISC</span><span style={{ color: "#F5A623" }}>-V</span></span> Solution
+                <span style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span> Solution
               </h1>
               
-              <p className="text-lg text-muted-foreground leading-relaxed mb-5 max-w-xl">
+              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-5 max-w-xl">
                 The silicon-to-application platform for RISC-V embedded development. 
                 From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
               </p>
@@ -304,7 +304,7 @@ const Landing = () => {
                 <img 
                   src="/make-in-india.jpg" 
                   alt="Make in India" 
-                  className="w-full max-w-[480px] rounded-xl shadow-xl border border-slate-200/80" 
+                  className="w-full max-w-[520px] rounded-xl shadow-xl border border-slate-200/80" 
                 />
                 <p className="text-sm text-muted-foreground mt-2.5 font-medium">Designed in India, Engineered in Bosch to the world</p>
               </div>
@@ -477,7 +477,7 @@ const Landing = () => {
           <div className="text-center mb-10">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Hardware Ecosystem</span>
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
-              Supported <span style={{ fontFamily: "'Georgia', serif", fontWeight: 800, letterSpacing: "-0.5px" }}><span style={{ color: "#283B71" }}>RISC</span><span style={{ color: "#F5A623" }}>-V</span></span> Hardware Partners
+              Supported <span style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span> Hardware Partners
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Pre-integrated support for leading Indian RISC-V development platforms.
