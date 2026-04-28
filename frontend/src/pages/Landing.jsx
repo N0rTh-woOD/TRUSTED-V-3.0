@@ -270,7 +270,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 md:py-6 relative">
           <div className="grid lg:grid-cols-2 gap-4 lg:gap-5 items-stretch">
             {/* Left: Brand + Content + MII - spread to fill full height */}
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-between pt-8 lg:pt-10">
               {/* Brand Lockup */}
               <div data-testid="hero-brand-lockup">
                 <TrustedVLogo size="xl" showPoweredBy={true} />
