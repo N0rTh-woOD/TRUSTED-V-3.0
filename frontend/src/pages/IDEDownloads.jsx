@@ -1,13 +1,27 @@
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { 
   CheckCircle2, Cpu, Code,
   Bug, Sparkles, Brain,
-  Settings, Eye,
+  Settings, Eye, Download,
   MonitorSmartphone, SplitSquareHorizontal,
-  FileSearch, Package, HardDrive
+  FileSearch, Package, HardDrive, Loader2
 } from "lucide-react";
+import axios from "axios";
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const IDEDownloads = () => {
+  const [ideBuilds, setIdeBuilds] = useState([]);
+  const [loadingBuilds, setLoadingBuilds] = useState(true);
+
+  useEffect(() => {
+    axios.get(`${BACKEND_URL}/api/ide-downloads`)
+      .then(res => setIdeBuilds(res.data.filter(b => b.filename)))
+      .catch(() => {})
+      .finally(() => setLoadingBuilds(false));
+  }, []);
 
   const keyFeatures = [
     {
@@ -210,6 +224,46 @@ const IDEDownloads = () => {
               </tbody>
             </table>
           </div>
+        </div>
+      </section>
+
+      {/* Download Section */}
+      <section className="py-16 bg-slate-50 border-t border-border" data-testid="ide-download-section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Get Started</span>
+            <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">Download Jarvyn IDE</h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Choose your platform and start building RISC-V embedded systems with Rust.
+            </p>
+          </div>
+          
+          {loadingBuilds ? (
+            <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin text-primary" /></div>
+          ) : ideBuilds.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-3xl mx-auto">
+              {ideBuilds.map((build) => (
+                <div key={build.id} className="bg-white rounded-xl border border-border p-5 text-center hover:shadow-lg transition-shadow" data-testid={`ide-build-${build.id}`}>
+                  <div className="text-3xl mb-2">
+                    {build.platform?.toLowerCase().includes("windows") ? "🪟" : build.platform?.toLowerCase().includes("mac") ? "🍎" : "🐧"}
+                  </div>
+                  <h4 className="font-bold text-foreground text-sm">{build.platform}</h4>
+                  <p className="text-xs text-muted-foreground mt-1 mb-1">v{build.version}</p>
+                  <p className="text-xs text-muted-foreground mb-3">{build.size}</p>
+                  <a href={`${BACKEND_URL}/api/ide-downloads/${build.id}/download`} download>
+                    <Button size="sm" className="w-full" data-testid={`download-btn-${build.id}`}>
+                      <Download className="w-4 h-4 mr-2" /> Download
+                    </Button>
+                  </a>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8 bg-white rounded-xl border border-border max-w-md mx-auto">
+              <Download className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
+              <p className="text-sm text-muted-foreground">No builds available yet. Check back soon.</p>
+            </div>
+          )}
         </div>
       </section>
 

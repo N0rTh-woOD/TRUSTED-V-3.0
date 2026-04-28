@@ -28,7 +28,7 @@ const ProductSuite = () => {
           icon: Globe,
           features: ["Cloud-based Rust compilation", "Integrated terminal & debugger", "Real-time collaboration", "Project templates & scaffolding", "Git integration & version control"],
           badge: "Cloud",
-          link: "/download-ide",
+          link: "/webide",
         },
       ]
     },

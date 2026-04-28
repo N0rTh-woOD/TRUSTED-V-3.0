@@ -23,6 +23,7 @@ import Marketplace from "@/pages/Marketplace";
 import SecureBootPage from "@/pages/SecureBootPage";
 import CryptoStackPage from "@/pages/CryptoStackPage";
 import RTOSBenchmarkPage from "@/pages/RTOSBenchmarkPage";
+import WebIDEPage from "@/pages/WebIDEPage";
 
 // Auth Pages
 import Login from "@/pages/Login";
@@ -90,6 +91,7 @@ const AppContent = () => {
         <Route path="/partners" element={<Partners />} />
         <Route path="/partner-registration" element={<PartnerRegistration />} />
         <Route path="/download-ide" element={<IDEDownloads />} />
+        <Route path="/webide" element={<WebIDEPage />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/board-support" element={<BoardSupportRequest />} />
         <Route path="/contact-sales" element={<ContactSales />} />
