@@ -131,32 +131,39 @@ const IDEDownloads = () => {
             </div>
 
             {/* Problem + Solution stacked */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-0 rounded-xl overflow-hidden border border-slate-700/40 shadow-2xl shadow-black/30">
               {/* Problem */}
-              <div className="rounded-xl border border-red-500/20 bg-[#1a1218] p-5 flex-shrink-0">
-                <div className="flex items-center gap-2 mb-2.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-                  <h3 className="text-sm font-bold text-red-400 uppercase tracking-wider">The Problem</h3>
+              <div className="relative p-6 bg-gradient-to-br from-[#1c1015] to-[#150d10] border-b border-red-900/30">
+                <div className="absolute top-0 left-0 w-1 h-full bg-red-500" />
+                <div className="flex items-center gap-2.5 mb-3">
+                  <div className="w-7 h-7 rounded-full bg-red-500/15 flex items-center justify-center">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                  </div>
+                  <h3 className="text-xs font-black text-red-400 uppercase tracking-[0.2em]">The Problem</h3>
                 </div>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-[13px] text-slate-300 leading-relaxed pl-[38px]">
                   Generic editors and vendor-locked toolchains force embedded developers into a fragmented workflow of bloated plugins and endless datasheet context-switching.
                 </p>
               </div>
 
               {/* Solution */}
-              <div className="rounded-xl border border-green-500/20 bg-[#0f1a14] p-5 flex-1">
-                <div className="flex items-center gap-2 mb-2.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                  <h3 className="text-sm font-bold text-green-400 uppercase tracking-wider">The Jarvyn Solution</h3>
+              <div className="relative p-6 bg-gradient-to-br from-[#0d1a14] to-[#0a1510] flex-1">
+                <div className="absolute top-0 left-0 w-1 h-full bg-green-500" />
+                <div className="flex items-center gap-2.5 mb-4">
+                  <div className="w-7 h-7 rounded-full bg-green-500/15 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 text-green-400" />
+                  </div>
+                  <h3 className="text-xs font-black text-green-400 uppercase tracking-[0.2em]">The Jarvyn Solution</h3>
                 </div>
-                <p className="text-xs text-slate-400 mb-3">A ground-up environment designed for the metal:</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="pl-[38px] space-y-3">
                   {solutionPillars.map((p, i) => (
-                    <div key={i} className="flex items-start gap-2.5 bg-[#0a120d] rounded-lg p-3 border border-green-900/30">
-                      <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="text-[10px] font-bold text-green-400">{i + 1}</span>
+                      </div>
                       <div>
-                        <span className="text-xs font-bold text-white block mb-0.5">{p.title}</span>
-                        <span className="text-[11px] text-slate-400 leading-snug">{p.desc}</span>
+                        <span className="text-[13px] font-bold text-white">{p.title}</span>
+                        <span className="text-[12px] text-slate-400 ml-1.5">{p.desc}</span>
                       </div>
                     </div>
                   ))}
