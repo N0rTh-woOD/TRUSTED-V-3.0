@@ -15,12 +15,12 @@ const TrustedVLogo = ({ size = "md", className = "", showPoweredBy = false }) =>
       <div className={`${s.wrap} ${s.origin} flex items-center gap-[14px]`} style={{ width: "fit-content" }}>
         <img src="/trustedv-rocket-logo.png" alt="" className="h-[56px] w-[56px] object-contain flex-shrink-0" />
         <div>
-          <span className="block text-[36px] font-extrabold tracking-tight leading-none select-none whitespace-nowrap" style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
+          <span className="block text-[36px] font-extrabold tracking-tight leading-none select-none whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
             <span style={{ color: "#003262" }}>TRusteD</span>
             <span style={{ color: "#FDB515" }}>-V</span>
           </span>
           {showPoweredBy && (
-            <p className="text-[11px] text-slate-400 font-medium mt-[3px] tracking-[0.18em] whitespace-nowrap">
+            <p className="text-[11px] text-slate-400 font-medium mt-[3px] text-center tracking-[0.18em] whitespace-nowrap">
               Powered by Bosch
             </p>
           )}
