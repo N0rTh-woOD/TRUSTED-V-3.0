@@ -267,36 +267,37 @@ const Landing = () => {
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 md:py-6 relative">
-          <div className="grid lg:grid-cols-2 gap-4 lg:gap-5 items-stretch">
-            {/* Left: Brand + Content + MII - spread to fill full height */}
-            <div className="flex flex-col justify-between pt-8 lg:pt-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+            {/* Left: Brand + Content + CTA */}
+            <div>
               {/* Brand Lockup */}
-              <div data-testid="hero-brand-lockup">
+              <div className="mb-6" data-testid="hero-brand-lockup">
                 <TrustedVLogo size="xl" showPoweredBy={true} />
               </div>
               
               {/* Heading + Description */}
-              <div className="my-3 lg:my-0">
-                <h1 className="text-[34px] sm:text-[44px] lg:text-[56px] font-bold text-foreground tracking-tight mb-3 leading-[1.1]" data-testid="hero-heading">
-                  Build your secure{" "}
-                  <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span>{" "}Solution
-                </h1>
-                
-                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl">
-                  The silicon-to-application platform for RISC-V embedded development. 
-                  From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
-                </p>
-              </div>
+              <h1 className="text-[34px] sm:text-[44px] lg:text-[56px] font-bold text-foreground tracking-tight mb-4 leading-[1.1]" data-testid="hero-heading">
+                Build your secure{" "}
+                <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span>{" "}Solution
+              </h1>
               
-              {/* Made in India - anchored to bottom */}
-              <div data-testid="made-in-india-badge" className="max-w-[520px]">
-                <img 
-                  src="/make-in-india.jpg" 
-                  alt="Make in India" 
-                  className="w-full rounded-xl shadow-xl border border-slate-200/80" 
-                />
-                <p className="text-sm text-muted-foreground mt-2.5 font-medium text-center w-full">Designed in India, Engineered by Bosch to the world</p>
+              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8 max-w-xl">
+                The silicon-to-application platform for RISC-V embedded development. 
+                From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
+              </p>
+              
+              <div className="flex flex-wrap gap-4">
+                <Link to="/download-ide">
+                  <Button size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all" data-testid="hero-cta-ide">
+                    Download IDE <Download className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+                <Link to="/product-suite">
+                  <Button variant="outline" size="lg" className="h-12 px-8 text-base font-semibold" data-testid="hero-cta-products">
+                    Explore Products
+                  </Button>
+                </Link>
               </div>
             </div>
             
