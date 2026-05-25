@@ -2,326 +2,113 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import DOMPurify from "dompurify";
 import { 
-  Cpu, Code, Layers, Download, ArrowRight, 
-  CheckCircle2, ChevronRight,
-  Rocket, Wrench, CircuitBoard,
-  FlaskConical
+  ArrowRight, CheckCircle2, ChevronRight,
+  Shield, Cpu, Code, Layers, Zap, Lock,
+  Award, Globe, Terminal
 } from "lucide-react";
 import TrustedVLogo from "@/components/TrustedVLogo";
 
 const RevealItem = ({ children, delay = 0, className = "" }) => {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
-    );
+    const observer = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.1 });
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
-    <div 
-      ref={ref}
-      className={`transition-all duration-700 ease-out ${className} ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
+    <div ref={ref} className={`transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`} style={{ transitionDelay: `${delay}ms` }}>
       {children}
     </div>
   );
 };
 
-/* ── TrusteD-V Engine v7 — Isometric 3D Diagram from artifact ── */
-const EngineArchDiagram = () => {
-  const initialized = useRef(false);
-
-  useEffect(() => {
-    if (initialized.current) return;
-    initialized.current = true;
-    if (!document.getElementById('tv-eng-css')) {
-      const s = document.createElement('style');
-      s.id = 'tv-eng-css';
-      s.textContent = `
-.tv-eng-wrap{padding:8px 16px 24px;max-width:560px;margin:0 auto;font-family:'Helvetica Neue',Arial,sans-serif}
-.tv-eng-wrap .hdr{text-align:center;margin-bottom:4px}
-.tv-eng-wrap .hdr h1{font-size:16px;font-weight:800;letter-spacing:-.3px}
-.tv-eng-wrap .hdr p{font-size:10px;color:#aaa;margin-top:2px}
-.tv-eng-wrap .canvas{position:relative;width:100%;height:700px;overflow:visible}
-.tv-eng-wrap .exhaust{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:360px;height:165px;pointer-events:none;z-index:1}
-.tv-eng-wrap .stack{position:absolute;left:50%;bottom:132px;transform:translateX(-50%);width:300px;z-index:2}
-.tv-eng-wrap .slab{position:relative;width:300px}
-.tv-eng-wrap .ll{position:absolute;right:100%;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;padding-right:6px;white-space:nowrap;flex-direction:row-reverse;text-align:right}
-.tv-eng-wrap .lr{position:absolute;left:100%;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;padding-left:6px;white-space:nowrap}
-.tv-eng-wrap .ldot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.tv-eng-wrap .lline{width:26px;height:1px;flex-shrink:0}
-.tv-eng-wrap .lname{font-size:10px;font-weight:800;display:block;line-height:1.3}
-.tv-eng-wrap .lsub{font-size:9px;color:#bbb;display:block}
-.tv-eng-wrap .conn{display:flex;justify-content:center;align-items:center;gap:6px;padding:2px 0}
-.tv-eng-wrap .cdot{width:2.5px;height:2.5px;border-radius:50%;background:#ccc}
-.tv-eng-wrap .eng-bracket{position:absolute;right:-120px;display:flex;align-items:center;gap:5px;pointer-events:none}
-.tv-eng-wrap .eng-label{display:flex;flex-direction:column}
-.tv-eng-wrap .eng-name{font-size:11px;font-weight:800;white-space:nowrap;line-height:1.3}
-.tv-eng-wrap .eng-sub{font-size:9px;color:#bbb;white-space:nowrap;margin-top:1px}
-@keyframes tvEr{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes tvEb0{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@keyframes tvEb1{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@keyframes tvEb2{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes tvEb3{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-@keyframes tvEb4{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes tvEb5{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-.tv-eng-wrap .a0{animation:tvEr .45s ease both .00s,tvEb0 4.2s ease-in-out infinite 1.0s}
-.tv-eng-wrap .a1{animation:tvEr .45s ease both .10s,tvEb1 4.2s ease-in-out infinite 1.2s}
-.tv-eng-wrap .a2{animation:tvEr .45s ease both .20s,tvEb2 4.2s ease-in-out infinite 1.4s}
-.tv-eng-wrap .a3{animation:tvEr .45s ease both .30s,tvEb3 4.2s ease-in-out infinite 1.6s}
-.tv-eng-wrap .a4{animation:tvEr .45s ease both .40s,tvEb4 4.2s ease-in-out infinite 1.8s}
-.tv-eng-wrap .a5{animation:tvEr .45s ease both .50s,tvEb5 3.8s ease-in-out infinite 2.0s}
-@keyframes tvEfo{0%,100%{transform:scaleY(1)scaleX(1)}40%{transform:scaleY(1.12)scaleX(.9)}80%{transform:scaleY(.9)scaleX(1.1)}}
-@keyframes tvEfm{0%,100%{transform:scaleY(1)scaleX(1)}35%{transform:scaleY(1.18)scaleX(.87)}75%{transform:scaleY(.9)scaleX(1.1)}}
-@keyframes tvEfc{0%,100%{transform:scaleY(1)scaleX(1)}50%{transform:scaleY(1.26)scaleX(.84)}}
-@keyframes tvEgp{0%,100%{opacity:.3}50%{opacity:.7}}
-@keyframes tvEsp{0%{opacity:1;transform:translate(0,0)scale(1)}100%{opacity:0;transform:translate(var(--sx),var(--sy))scale(0)}}
-@keyframes tvEsm{0%{opacity:.22;transform:translateY(0)scale(1)}100%{opacity:0;transform:translateY(-55px)scale(2.2)}}
-.tv-eng-wrap .fo{animation:tvEfo .72s ease-in-out infinite;transform-origin:center top}
-.tv-eng-wrap .fm{animation:tvEfm .52s ease-in-out infinite .08s;transform-origin:center top}
-.tv-eng-wrap .fc{animation:tvEfc .4s ease-in-out infinite .04s;transform-origin:center top}
-.tv-eng-wrap .gp{animation:tvEgp .6s ease-in-out infinite}
-.tv-eng-wrap .sp{animation:tvEsp 1.4s ease-out infinite var(--sd,0s)}
-.tv-eng-wrap .sm1{animation:tvEsm 2.1s ease-out infinite 0s}
-.tv-eng-wrap .sm2{animation:tvEsm 2.1s ease-out infinite .7s}
-.tv-eng-wrap .legend{display:flex;justify-content:center;gap:12px;margin-top:18px;flex-wrap:wrap}
-.tv-eng-wrap .li{display:flex;align-items:center;gap:5px;font-size:10px;color:#888}
-.tv-eng-wrap .ld{width:9px;height:9px;border-radius:2px;flex-shrink:0}
-.tv-eng-wrap .ekey{display:flex;justify-content:center;gap:16px;margin-top:10px;flex-wrap:wrap}
-.tv-eng-wrap .ek{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:800}
-.tv-eng-wrap .ekd{width:8px;height:8px;border-radius:50%}
-      `;
-      document.head.appendChild(s);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Place engine brackets after render
-    const timer = setTimeout(() => {
-      function placeBracket(cfg) {
-        const canvas = document.getElementById('tv-canvas');
-        const bracket = document.getElementById(cfg.id);
-        const topEl = document.querySelector('[data-layer="'+cfg.top+'"]');
-        const botEl = document.querySelector('[data-layer="'+cfg.bot+'"]');
-        if (!topEl || !botEl || !canvas || !bracket) return;
-        const cr = canvas.getBoundingClientRect();
-        const tr = topEl.getBoundingClientRect();
-        const br = botEl.getBoundingClientRect();
-        const startY = tr.top - cr.top;
-        const endY = br.bottom - cr.top;
-        const h = Math.max(Math.round(endY - startY), 4);
-        const mid = Math.round(h / 2);
-        bracket.style.top = startY + 'px';
-        bracket.style.height = h + 'px';
-        bracket.style.display = 'flex';
-        bracket.style.alignItems = 'center';
-        const svg = document.getElementById(cfg.svg);
-        if (!svg) return;
-        svg.setAttribute('height', h);
-        svg.setAttribute('viewBox', '0 0 14 ' + h);
-        document.getElementById(cfg.tt).setAttribute('y1', 0);
-        document.getElementById(cfg.tt).setAttribute('y2', 0);
-        document.getElementById(cfg.vl).setAttribute('y2', h);
-        document.getElementById(cfg.bt).setAttribute('y1', h);
-        document.getElementById(cfg.bt).setAttribute('y2', h);
-        document.getElementById(cfg.dot).setAttribute('cy', mid);
-      }
-      placeBracket({id:'eng-code',top:'api',bot:'mw',svg:'svg-code',tt:'tt-code',vl:'vl-code',bt:'bt-code',dot:'dot-code'});
-      placeBracket({id:'eng-chip',top:'soc',bot:'dc',svg:'svg-chip',tt:'tt-chip',vl:'vl-chip',bt:'bt-chip',dot:'dot-chip'});
-      placeBracket({id:'eng-core',top:'ip',bot:'ip',svg:'svg-core',tt:'tt-core',vl:'vl-core',bt:'bt-core',dot:'dot-core'});
-    }, 600);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const html = `<div class="canvas" id="tv-canvas">
-<div class="exhaust"><svg width="360" height="165" viewBox="0 0 360 165" overflow="visible">
-<ellipse class="gp" cx="180" cy="158" rx="140" ry="11" fill="#FF8C00" opacity=".2"/>
-<ellipse class="gp" cx="180" cy="158" rx="96" ry="7" fill="#FFB800" opacity=".26"/>
-<ellipse class="gp" cx="180" cy="158" rx="58" ry="4" fill="#FFE040" opacity=".32"/>
-<path d="M155,22 Q112,65 52,114 Q108,84 152,56 Z" fill="#FF5500" opacity=".11"/>
-<path d="M205,22 Q248,65 308,114 Q252,84 208,56 Z" fill="#FF5500" opacity=".11"/>
-<ellipse class="sm1" cx="152" cy="16" rx="30" ry="16" fill="#d0d0d0" opacity=".16"/>
-<ellipse class="sm2" cx="208" cy="12" rx="24" ry="14" fill="#ccc" opacity=".13"/>
-<g class="fo"><path d="M144,0 Q122,32 136,76 Q154,114 165,136 Q172,152 180,144 Q188,152 195,136 Q206,114 224,76 Q238,32 216,0 Z" fill="#FF4400" opacity=".42"/></g>
-<g class="fm"><path d="M153,0 Q135,28 146,70 Q160,104 169,124 Q174,138 180,132 Q186,138 191,124 Q200,104 214,70 Q225,28 207,0 Z" fill="#FF8800" opacity=".68"/></g>
-<g class="fc"><path d="M161,0 Q147,24 155,62 Q165,94 172,112 Q176,124 180,118 Q184,124 188,112 Q195,94 205,62 Q213,24 199,0 Z" fill="#FFB800" opacity=".86"/><path d="M166,0 Q156,20 161,54 Q169,82 174,98 Q177,108 180,104 Q183,108 186,98 Q191,82 199,54 Q204,20 194,0 Z" fill="#FFE040" opacity=".95"/><path d="M170,0 Q163,17 166,46 Q172,70 176,84 Q178,92 180,88 Q182,92 184,84 Q188,70 194,46 Q197,17 190,0 Z" fill="#FFF8C0" opacity="1"/><path d="M173,0 Q169,14 171,38 Q175,58 178,70 Q179,76 180,72 Q181,76 182,70 Q185,58 189,38 Q191,14 187,0 Z" fill="#FFFFF0" opacity="1"/></g>
-<circle class="sp" style="--sx:-26px;--sy:42px;--sd:0s" cx="155" cy="32" r="2" fill="#FFD700"/>
-<circle class="sp" style="--sx:28px;--sy:38px;--sd:.28s" cx="205" cy="28" r="1.8" fill="#FF8C00"/>
-<circle class="sp" style="--sx:-16px;--sy:58px;--sd:.55s" cx="162" cy="20" r="1.5" fill="#FFE840"/>
-<circle class="sp" style="--sx:20px;--sy:52px;--sd:.80s" cx="198" cy="24" r="2" fill="#FFD700"/>
-<circle class="sp" style="--sx:-36px;--sy:30px;--sd:1.1s" cx="146" cy="44" r="1.5" fill="#FF6600"/>
-<circle class="sp" style="--sx:38px;--sy:26px;--sd:1.35s" cx="214" cy="40" r="1.8" fill="#FFB800"/>
-</svg></div>
-<div class="stack">
-${/* Same SVG layers as before but with side labels enabled */""}`
-+ `<div class="slab a5" style="margin-bottom:0"><svg width="300" height="80" viewBox="0 0 300 80" overflow="visible"><path d="M18,78 C44,76 72,56 100,38 C126,22 142,10 150,2 C158,10 174,22 200,38 C228,56 256,76 282,78 Z" fill="#b8d8a8" stroke="#2E7D32" stroke-width="1.6"/><path d="M150,2 C158,10 174,22 200,38 C228,56 256,76 282,78 L266,78 C244,76 218,58 196,42 C174,26 160,14 150,2 Z" fill="#80b060"/><path d="M150,2 C142,10 126,22 100,38 C72,56 44,76 18,78" fill="none" stroke="#1B5E20" stroke-width="1.8"/><path d="M150,2 C158,10 174,22 200,38 C228,56 256,76 282,78" fill="none" stroke="#1B5E20" stroke-width="1.8"/><line x1="150" y1="2" x2="50" y2="78" stroke="#2E7D32" stroke-width=".5" opacity=".28"/><line x1="150" y1="2" x2="98" y2="78" stroke="#2E7D32" stroke-width=".5" opacity=".28"/><line x1="150" y1="2" x2="150" y2="78" stroke="#2E7D32" stroke-width=".4" opacity=".22"/><line x1="150" y1="2" x2="202" y2="78" stroke="#2E7D32" stroke-width=".5" opacity=".28"/><line x1="150" y1="2" x2="250" y2="78" stroke="#2E7D32" stroke-width=".5" opacity=".28"/><circle cx="28" cy="77" r="2" fill="#2E7D32" opacity=".5"/><circle cx="64" cy="70" r="2" fill="#2E7D32" opacity=".5"/><circle cx="100" cy="56" r="2" fill="#2E7D32" opacity=".5"/><circle cx="128" cy="42" r="2" fill="#2E7D32" opacity=".5"/><circle cx="172" cy="42" r="2" fill="#2E7D32" opacity=".5"/><circle cx="200" cy="56" r="2" fill="#2E7D32" opacity=".5"/><circle cx="236" cy="70" r="2" fill="#2E7D32" opacity=".5"/><circle cx="272" cy="77" r="2" fill="#2E7D32" opacity=".5"/><circle cx="150" cy="2" r="3" fill="#1B5E20"/></svg></div>`
-+ `<div class="slab a4" data-layer="api" style="margin-top:-1px"><svg width="300" height="72" viewBox="0 0 300 72" overflow="visible"><defs><linearGradient id="api-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#daeaf8"/><stop offset="50%" stop-color="#c0d8f0"/><stop offset="100%" stop-color="#a8c8e8"/></linearGradient><linearGradient id="api-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1e5898"/><stop offset="100%" stop-color="#103870"/></linearGradient><linearGradient id="api-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3878c0"/><stop offset="100%" stop-color="#1e5898"/></linearGradient></defs><polygon points="150,4 278,38 150,58 22,38" fill="url(#api-top)" stroke="#103870" stroke-width="1.3"/><polygon points="278,38 278,60 150,80 150,58" fill="url(#api-r)" stroke="#103870" stroke-width="1.3"/><polygon points="22,38 22,60 150,80 150,58" fill="url(#api-l)" stroke="#103870" stroke-width="1.3"/><rect x="68" y="22" width="28" height="12" rx="6" fill="#103870" stroke="#082050" stroke-width=".8"/><rect x="103" y="16" width="34" height="12" rx="6" fill="#103870" stroke="#082050" stroke-width=".8"/><rect x="143" y="16" width="34" height="12" rx="6" fill="#103870" stroke="#082050" stroke-width=".8"/><rect x="183" y="22" width="28" height="12" rx="6" fill="#103870" stroke="#082050" stroke-width=".8"/><text x="82" y="30" text-anchor="middle" font-size="7" fill="#c8e8ff" font-family="'Helvetica Neue',sans-serif" font-weight="700">REST</text><text x="120" y="24" text-anchor="middle" font-size="7" fill="#c8e8ff" font-family="'Helvetica Neue',sans-serif" font-weight="700">SDK</text><text x="160" y="24" text-anchor="middle" font-size="7" fill="#c8e8ff" font-family="'Helvetica Neue',sans-serif" font-weight="700">MQTT</text><text x="197" y="30" text-anchor="middle" font-size="7" fill="#c8e8ff" font-family="'Helvetica Neue',sans-serif" font-weight="700">OTA</text><text x="214" y="71" text-anchor="middle" font-size="9" fill="#c8e8ff" stroke="#082050" stroke-width="3" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".4">APPLICATION API</text></svg><div class="ll"><div class="ldot" style="background:#1e5898"></div><div class="lline" style="background:linear-gradient(to left,#1e5898,#ddd)"></div><div><span class="lname" style="color:#103870">Application API</span><span class="lsub">REST · SDK · MQTT · OTA</span></div></div></div>`
-+ `<div class="conn a3"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>`
-+ `<div class="slab a3" data-layer="mw"><svg width="300" height="70" viewBox="0 0 300 70" overflow="visible"><defs><linearGradient id="mw-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e4e2fc"/><stop offset="50%" stop-color="#ccc8f4"/><stop offset="100%" stop-color="#b0acec"/></linearGradient><linearGradient id="mw-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4840b0"/><stop offset="100%" stop-color="#302880"/></linearGradient><linearGradient id="mw-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#6860c8"/><stop offset="100%" stop-color="#4840b0"/></linearGradient></defs><polygon points="150,4 278,36 150,56 22,36" fill="url(#mw-top)" stroke="#302880" stroke-width="1.3"/><polygon points="278,36 278,57 150,77 150,56" fill="url(#mw-r)" stroke="#302880" stroke-width="1.3"/><polygon points="22,36 22,57 150,77 150,56" fill="url(#mw-l)" stroke="#302880" stroke-width="1.3"/><rect x="42" y="13" width="44" height="11" rx="2" fill="#4840b0" stroke="#302880" stroke-width=".6"/><rect x="92" y="10" width="44" height="11" rx="2" fill="#4840b0" stroke="#302880" stroke-width=".6"/><rect x="142" y="10" width="44" height="11" rx="2" fill="#4840b0" stroke="#302880" stroke-width=".6"/><rect x="194" y="13" width="44" height="11" rx="2" fill="#4840b0" stroke="#302880" stroke-width=".6"/><text x="64" y="21" text-anchor="middle" font-size="7" fill="#d8d4ff" font-family="'Helvetica Neue',sans-serif" font-weight="700">RTOS</text><text x="114" y="18" text-anchor="middle" font-size="7" fill="#d8d4ff" font-family="'Helvetica Neue',sans-serif" font-weight="700">HAL</text><text x="164" y="18" text-anchor="middle" font-size="7" fill="#d8d4ff" font-family="'Helvetica Neue',sans-serif" font-weight="700">Drivers</text><text x="216" y="21" text-anchor="middle" font-size="7" fill="#d8d4ff" font-family="'Helvetica Neue',sans-serif" font-weight="700">Protocols</text><text x="214" y="69" text-anchor="middle" font-size="9" fill="#d8d4ff" stroke="#201860" stroke-width="2.8" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".4">MIDDLEWARE</text></svg><div class="lr"><div class="ldot" style="background:#4840b0"></div><div class="lline" style="background:linear-gradient(to right,#4840b0,#ddd)"></div><div><span class="lname" style="color:#302880">Middleware</span><span class="lsub">RTOS · HAL · Drivers</span></div></div></div>`
-+ `<div class="conn a2"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>`
-+ `<div class="slab a2" data-layer="soc"><svg width="300" height="86" viewBox="0 0 300 86" overflow="visible"><defs><linearGradient id="soc-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d8f0d0"/><stop offset="50%" stop-color="#b8d898"/><stop offset="100%" stop-color="#98c070"/></linearGradient><linearGradient id="soc-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3a6c10"/><stop offset="100%" stop-color="#224806"/></linearGradient><linearGradient id="soc-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5a9020"/><stop offset="100%" stop-color="#3a6c10"/></linearGradient><linearGradient id="die-soc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b0cc80"/><stop offset="100%" stop-color="#88a858"/></linearGradient><linearGradient id="core-soc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a6c10"/><stop offset="100%" stop-color="#224806"/></linearGradient></defs><polygon points="150,5 278,46 150,70 22,46" fill="url(#soc-top)" stroke="#224806" stroke-width="1.3"/><polygon points="278,46 278,68 150,92 150,70" fill="url(#soc-r)" stroke="#224806" stroke-width="1.3"/><polygon points="22,46 22,68 150,92 150,70" fill="url(#soc-l)" stroke="#224806" stroke-width="1.3"/><rect x="78" y="16" width="144" height="42" rx="5" fill="url(#die-soc)" stroke="#224806" stroke-width="1.1"/><rect x="84" y="20" width="24" height="14" rx="2.5" fill="url(#core-soc)" stroke="#142e04" stroke-width=".6"/><rect x="116" y="20" width="24" height="14" rx="2.5" fill="url(#core-soc)" stroke="#142e04" stroke-width=".6"/><rect x="155" y="20" width="24" height="14" rx="2.5" fill="url(#core-soc)" stroke="#142e04" stroke-width=".6"/><rect x="190" y="20" width="24" height="14" rx="2.5" fill="url(#core-soc)" stroke="#142e04" stroke-width=".6"/><text x="96" y="29" text-anchor="middle" font-size="7" fill="#d8ffb0" font-family="'Helvetica Neue',sans-serif" font-weight="700">CPU</text><text x="128" y="29" text-anchor="middle" font-size="7" fill="#d8ffb0" font-family="'Helvetica Neue',sans-serif" font-weight="700">MEM</text><text x="167" y="29" text-anchor="middle" font-size="7" fill="#d8ffb0" font-family="'Helvetica Neue',sans-serif" font-weight="700">WiFi</text><text x="202" y="29" text-anchor="middle" font-size="7" fill="#d8ffb0" font-family="'Helvetica Neue',sans-serif" font-weight="700">SEC</text><rect x="78" y="44" width="144" height="5" rx="2" fill="#224806" stroke="#142e04" stroke-width=".5"/><text x="214" y="84" text-anchor="middle" font-size="9" fill="#d8ffb0" stroke="#142e04" stroke-width="2.8" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".4">SoC / MODULE</text></svg><div class="ll"><div class="ldot" style="background:#3a6c10"></div><div class="lline" style="background:linear-gradient(to left,#3a6c10,#ddd)"></div><div><span class="lname" style="color:#224806">SoC / Module</span><span class="lsub">CPU · Mem · WiFi · SEC</span></div></div></div>`
-+ `<div class="conn a1"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>`
-+ `<div class="slab a1" data-layer="dc"><svg width="300" height="80" viewBox="0 0 300 80" overflow="visible"><defs><linearGradient id="dc-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f8f0d8"/><stop offset="50%" stop-color="#ecdaa0"/><stop offset="100%" stop-color="#d8b868"/></linearGradient><linearGradient id="dc-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#885010"/><stop offset="100%" stop-color="#603008"/></linearGradient><linearGradient id="dc-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#b07828"/><stop offset="100%" stop-color="#885010"/></linearGradient><linearGradient id="chip-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c08020"/><stop offset="100%" stop-color="#885010"/></linearGradient><linearGradient id="die-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#583808"/><stop offset="100%" stop-color="#382404"/></linearGradient></defs><polygon points="150,5 278,42 150,64 22,42" fill="url(#dc-top)" stroke="#603008" stroke-width="1.3"/><polygon points="278,42 278,62 150,84 150,64" fill="url(#dc-r)" stroke="#603008" stroke-width="1.3"/><polygon points="22,42 22,62 150,84 150,64" fill="url(#dc-l)" stroke="#603008" stroke-width="1.3"/><rect x="40" y="18" width="58" height="42" rx="4" fill="url(#chip-body)" stroke="#603008" stroke-width="1.2"/><rect x="48" y="26" width="42" height="28" rx="2.5" fill="url(#die-fill)" stroke="#382404" stroke-width=".6"/><text x="69" y="42" text-anchor="middle" font-size="7.5" fill="#f0c858" font-family="'Helvetica Neue',sans-serif" font-weight="700">RISC-V</text><line x1="40" y1="24" x2="33" y2="24" stroke="#b07828" stroke-width="1.4"/><line x1="40" y1="30" x2="33" y2="30" stroke="#b07828" stroke-width="1.4"/><line x1="40" y1="36" x2="33" y2="36" stroke="#b07828" stroke-width="1.4"/><line x1="40" y1="42" x2="33" y2="42" stroke="#b07828" stroke-width="1.4"/><line x1="40" y1="48" x2="33" y2="48" stroke="#b07828" stroke-width="1.4"/><line x1="98" y1="24" x2="105" y2="24" stroke="#b07828" stroke-width="1.4"/><line x1="98" y1="30" x2="105" y2="30" stroke="#b07828" stroke-width="1.4"/><line x1="98" y1="36" x2="105" y2="36" stroke="#b07828" stroke-width="1.4"/><line x1="98" y1="42" x2="105" y2="42" stroke="#b07828" stroke-width="1.4"/><line x1="98" y1="48" x2="105" y2="48" stroke="#b07828" stroke-width="1.4"/><rect x="121" y="12" width="58" height="42" rx="4" fill="url(#chip-body)" stroke="#603008" stroke-width="1.2"/><rect x="129" y="20" width="42" height="28" rx="2.5" fill="url(#die-fill)" stroke="#382404" stroke-width=".6"/><text x="150" y="36" text-anchor="middle" font-size="7.5" fill="#f0c858" font-family="'Helvetica Neue',sans-serif" font-weight="700">Mem</text><rect x="202" y="18" width="58" height="42" rx="4" fill="url(#chip-body)" stroke="#603008" stroke-width="1.2"/><rect x="210" y="26" width="42" height="28" rx="2.5" fill="url(#die-fill)" stroke="#382404" stroke-width=".6"/><text x="231" y="42" text-anchor="middle" font-size="7.5" fill="#f0c858" font-family="'Helvetica Neue',sans-serif" font-weight="700">NPU</text><text x="214" y="76" text-anchor="middle" font-size="9" fill="#f0d898" stroke="#382404" stroke-width="2.8" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".4">DISCRETE CHIPS</text></svg><div class="lr"><div class="ldot" style="background:#885010"></div><div class="lline" style="background:linear-gradient(to right,#885010,#ddd)"></div><div><span class="lname" style="color:#603008">Discrete Chips</span><span class="lsub">RISC-V · Mem · NPU</span></div></div></div>`
-+ `<div class="conn a0"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>`
-+ `<div class="slab a0" data-layer="ip"><svg width="300" height="88" viewBox="0 0 300 88" overflow="visible"><defs><linearGradient id="ip-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f8f7f4"/><stop offset="50%" stop-color="#e0ddd8"/><stop offset="100%" stop-color="#c8c5c0"/></linearGradient><linearGradient id="ip-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#585550"/><stop offset="100%" stop-color="#383530"/></linearGradient><linearGradient id="ip-l" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#888480"/><stop offset="100%" stop-color="#585550"/></linearGradient><linearGradient id="ip-chip" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c8c6c0"/><stop offset="100%" stop-color="#a0a09a"/></linearGradient><linearGradient id="ip-die" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#787470"/><stop offset="100%" stop-color="#585450"/></linearGradient></defs><polygon points="150,5 278,40 150,60 22,40" fill="url(#ip-top)" stroke="#383530" stroke-width="1.3"/><polygon points="278,40 278,60 150,80 150,60" fill="url(#ip-r)" stroke="#383530" stroke-width="1.3"/><polygon points="22,40 22,60 150,80 150,60" fill="url(#ip-l)" stroke="#383530" stroke-width="1.3"/><rect x="40" y="28" width="26" height="20" rx="3" fill="url(#ip-chip)" stroke="#585550" stroke-width=".8"/><rect x="73" y="22" width="26" height="20" rx="3" fill="url(#ip-chip)" stroke="#585550" stroke-width=".8"/><rect x="106" y="17" width="26" height="20" rx="3" fill="url(#ip-chip)" stroke="#585550" stroke-width=".8"/><rect x="148" y="16" width="26" height="20" rx="3" fill="url(#ip-chip)" stroke="#585550" stroke-width=".8"/><rect x="178" y="18" width="26" height="20" rx="3" fill="url(#ip-chip)" stroke="#585550" stroke-width=".8"/><rect x="214" y="22" width="26" height="20" rx="3" fill="url(#ip-chip)" stroke="#585550" stroke-width=".8"/><rect x="43" y="31" width="20" height="14" rx="2" fill="url(#ip-die)" stroke="#383530" stroke-width=".3"/><rect x="76" y="25" width="20" height="14" rx="2" fill="url(#ip-die)" stroke="#383530" stroke-width=".3"/><rect x="109" y="20" width="20" height="14" rx="2" fill="url(#ip-die)" stroke="#383530" stroke-width=".3"/><rect x="151" y="19" width="20" height="14" rx="2" fill="url(#ip-die)" stroke="#383530" stroke-width=".3"/><rect x="181" y="21" width="20" height="14" rx="2" fill="url(#ip-die)" stroke="#383530" stroke-width=".3"/><rect x="217" y="25" width="20" height="14" rx="2" fill="url(#ip-die)" stroke="#383530" stroke-width=".3"/><text x="53" y="40" text-anchor="middle" font-size="6.5" fill="#282624" font-family="'Helvetica Neue',sans-serif" font-weight="700">Ibex</text><text x="86" y="34" text-anchor="middle" font-size="6.5" fill="#282624" font-family="'Helvetica Neue',sans-serif" font-weight="700">OT</text><text x="119" y="29" text-anchor="middle" font-size="6.5" fill="#282624" font-family="'Helvetica Neue',sans-serif" font-weight="700">DMA</text><text x="161" y="28" text-anchor="middle" font-size="6.5" fill="#282624" font-family="'Helvetica Neue',sans-serif" font-weight="700">NPU</text><text x="191" y="30" text-anchor="middle" font-size="6.5" fill="#282624" font-family="'Helvetica Neue',sans-serif" font-weight="700">MEM</text><text x="227" y="34" text-anchor="middle" font-size="6.5" fill="#282624" font-family="'Helvetica Neue',sans-serif" font-weight="700">GPIO</text><polygon points="112,60 188,60 200,68 100,68" fill="url(#ip-chip)" stroke="#888480" stroke-width="1.1"/><path d="M100,68 Q93,76 97,82 L150,86 L203,82 Q207,76 200,68 Z" fill="#b0aaa8" stroke="#888480" stroke-width="1.1"/><text x="214" y="76" text-anchor="middle" font-size="9" fill="#f0eee8" stroke="#282624" stroke-width="2.8" paint-order="stroke" font-family="'Helvetica Neue',sans-serif" font-weight="800" letter-spacing=".4">IP BLOCKS</text></svg><div class="ll"><div class="ldot" style="background:#585550"></div><div class="lline" style="background:linear-gradient(to left,#585550,#ddd)"></div><div><span class="lname" style="color:#383530">IP Blocks</span><span class="lsub">Ibex · OT · DMA · NPU</span></div></div></div>`
-+ `</div>`
-+ `<div id="eng-code" class="eng-bracket" style="display:none;flex-direction:row-reverse"><svg id="svg-code" width="14" overflow="visible"><line id="tt-code" x1="0" y1="0" x2="8" y2="0" stroke="#B7410E" stroke-width="1.5"/><line id="vl-code" x1="8" y1="0" x2="8" y2="10" stroke="#B7410E" stroke-width="1.5"/><line id="bt-code" x1="0" y1="10" x2="8" y2="10" stroke="#B7410E" stroke-width="1.5"/><circle id="dot-code" cx="8" cy="5" r="2.5" fill="#B7410E"/></svg><div class="eng-label" style="text-align:right;padding-right:7px"><span class="eng-name" style="color:#B7410E">Code Engine</span><span class="eng-sub">API · Middleware</span></div></div>`
-+ `<div id="eng-chip" class="eng-bracket" style="display:none;flex-direction:row-reverse"><svg id="svg-chip" width="14" overflow="visible"><line id="tt-chip" x1="0" y1="0" x2="8" y2="0" stroke="#0071c5" stroke-width="1.5"/><line id="vl-chip" x1="8" y1="0" x2="8" y2="10" stroke="#0071c5" stroke-width="1.5"/><line id="bt-chip" x1="0" y1="10" x2="8" y2="10" stroke="#0071c5" stroke-width="1.5"/><circle id="dot-chip" cx="8" cy="5" r="2.5" fill="#0071c5"/></svg><div class="eng-label" style="text-align:right;padding-right:7px"><span class="eng-name" style="color:#0071c5">Chip Engine</span><span class="eng-sub">SoC · Discrete Chips</span></div></div>`
-+ `<div id="eng-core" class="eng-bracket" style="display:none;flex-direction:row-reverse"><svg id="svg-core" width="14" overflow="visible"><line id="tt-core" x1="0" y1="0" x2="8" y2="0" stroke="#7B3F00" stroke-width="1.5"/><line id="vl-core" x1="8" y1="0" x2="8" y2="10" stroke="#7B3F00" stroke-width="1.5"/><line id="bt-core" x1="0" y1="10" x2="8" y2="10" stroke="#7B3F00" stroke-width="1.5"/><circle id="dot-core" cx="8" cy="5" r="2.5" fill="#7B3F00"/></svg><div class="eng-label" style="text-align:right;padding-right:7px"><span class="eng-name" style="color:#7B3F00">Core Engine</span><span class="eng-sub">IP Blocks</span></div></div>`
-+ `</div>`
-+ `<div class="legend"><div class="li"><div class="ld" style="background:#e0ddd8;border:1px solid #888480"></div>IP blocks</div><div class="li"><div class="ld" style="background:#c08020;border:1px solid #885010"></div>Discrete chips</div><div class="li"><div class="ld" style="background:#5a9020;border:1px solid #3a6c10"></div>SoC / Module</div><div class="li"><div class="ld" style="background:#5848b8;border:1px solid #3a3088"></div>Middleware</div><div class="li"><div class="ld" style="background:#2868b0;border:1px solid #103870"></div>Application API</div></div>`
-+ `<div class="ekey"><div class="ek" style="color:#B7410E"><div class="ekd" style="background:#B7410E"></div>Code Engine <span style="font-weight:400;color:#bbb;font-size:9px">API · MW</span></div><div class="ek" style="color:#0071c5"><div class="ekd" style="background:#0071c5"></div>Chip Engine <span style="font-weight:400;color:#bbb;font-size:9px">SoC · Chips</span></div><div class="ek" style="color:#7B3F00"><div class="ekd" style="background:#7B3F00"></div>Core Engine <span style="font-weight:400;color:#bbb;font-size:9px">IP Blocks</span></div></div>`;
-
-  return (
-    <div data-testid="engine-arch-diagram" className="tv-eng-wrap">
-      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html, { ADD_TAGS: ['style'], ADD_ATTR: ['style', 'class', 'viewBox', 'fill', 'stroke', 'stroke-width', 'cx', 'cy', 'r', 'rx', 'ry', 'x', 'y', 'x1', 'y1', 'x2', 'y2', 'width', 'height', 'points', 'd', 'text-anchor', 'font-size', 'font-family', 'font-weight', 'letter-spacing', 'paint-order', 'stop-color', 'stop-offset', 'offset', 'opacity', 'overflow', 'transform', 'data-layer'] }) }} />
-    </div>
-  );
-};
-
-/* ── 7-Stage Build Simulation ── */
-const simulationStages = [
-  { num: 1, title: "Requirement", badge: "Input", color: "#111", badgeBg: "#111", badgeText: "#fff", icon: Wrench, desc: "Natural language mission input parsed by TrusteD-V Engine to identify domain, constraints, and target architecture.", details: ["Mission specification", "Domain detection", "Architecture selection"] },
-  { num: 2, title: "Requirement Decomposition", badge: "Analysis", color: "#5F5E5A", badgeBg: "#F1EFE8", badgeText: "#444", icon: Layers, desc: "Requirements broken into functional blocks (Sensing, Compute, Power, Security) and mapped to hardware and software needs.", details: ["Sensing & I/O mapping", "Compute & NPU allocation", "Security requirements"] },
-  { num: 3, title: "Core Engine: IP Accumulation", badge: "Core Engine", color: "#7B3F00", badgeBg: "#7B3F00", badgeText: "#FEF9F2", icon: CircuitBoard, desc: "Open-source and commercial IPs selected, verified, and composed into the RISC-V architecture.", chips: ["Ibex RV32IMC", "OpenTitan", "NPU IP", "AES-256", "DMA ctrl", "UART/SPI/I2C"], progress: [{ label: "Open IP", pct: 78, color: "#EF9F27" }, { label: "Custom IP", pct: 22, color: "#BA7517" }] },
-  { num: 4, title: "Chip Engine: SoC Integration", badge: "Chip Engine", color: "#0071c5", badgeBg: "#0071c5", badgeText: "#fff", icon: Cpu, desc: "IPs fused into chips, unified into SoC with AXI bus fabric. PCB designed and BOM finalized.", details: ["RISC-V SoC unified", "RF chip (LoRa+UHF)", "Memory map locked", "PCB + BOM ready"] },
-  { num: 5, title: "Code Engine: Firmware & API", badge: "Code Engine", color: "#B7410E", badgeBg: "#B7410E", badgeText: "#fff", icon: Code, desc: "Rust firmware auto-generated from hardware abstraction map. Full middleware and application API stack built.", progress: [{ label: "Firmware", pct: 100, color: "#B7410E" }, { label: "Middleware", pct: 100, color: "#D85A30" }, { label: "APIs", pct: 100, color: "#F0997B" }] },
-  { num: 6, title: "Simulation & Testing", badge: "Verification", color: "#0F6E56", badgeBg: "#0F6E56", badgeText: "#E1F5EE", icon: FlaskConical, desc: "Unified hardware and software tested together in a closed-loop simulation environment before tape-out and deployment.", progress: [{ label: "HW sim", pct: 100, color: "#0F6E56" }, { label: "SW sim", pct: 98, color: "#1D9E75" }, { label: "Integration", pct: 100, color: "#5DCAA5" }, { label: "Coverage", pct: 98, color: "#9FE1CB" }], details: ["SoC register access", "Peripheral I/O timing", "Boot sequence", "Sensor data pipeline", "OTA update flow", "API endpoint tests"] },
-  { num: 7, title: "Production Ready", badge: "Launch", color: "#2E7D32", badgeBg: "#2E7D32", badgeText: "#fff", icon: Rocket, desc: "Verified, validated, and cleared for production deployment. Complete bill of materials and manufacturing files ready.", summary: ["10 IP blocks", "3 chips", "SoC unified", "RTOS+HAL", "All tests pass"] },
-];
-
-/* ── Rocket Launch Scene from HTML artifact ── */
-/* removed - replaced with v7 engine diagram */
-
 const Landing = () => {
   const pricingTiers = [
     {
-      name: "Basic",
-      tagline: "Platform Access",
-      price: "Per-core / Annual",
-      desc: "Core platform access for individual developers and small teams. RISC-V Rust software, toolchain, and IDE with annual or per-core licensing.",
-      features: [
-        "TrusteD-V IDE Jarvyn (Community)",
-        "RISC-V Rust SDK access",
-        "Community support",
-        "Standard BSP templates",
-        "Public documentation",
-      ],
-      cta: "Get Started",
-      link: "/download-ide",
-      highlight: false,
+      name: "Basic", tagline: "Individual Developer", price: "Free", highlight: false,
+      desc: "Community access for individual developers and students exploring RISC-V with Rust.",
+      features: ["TRusteD-V IDE Jarvyn (Community)", "RISC-V Rust SDK access", "Community support", "Basic project templates"],
+      cta: "Get Started", link: "/download-ide",
     },
     {
-      name: "Pro",
-      tagline: "Advanced Tools + Support",
-      price: "Per-project / Annual",
-      desc: "Advanced toolchain, priority support, and extended middleware. Per-project or annual licensing with engineering services and marketplace access.",
-      features: [
-        "Everything in Basic",
-        "Jarvyn AI code assistant (Full)",
-        "RTOS integration suite",
-        "Secure Boot configuration tool",
-        "Priority engineering support",
-        "Marketplace access (per-device)",
-        "Hardware simulation environment",
-      ],
-      cta: "Talk to Sales",
-      link: "/contact-sales?plan=pro",
-      highlight: true,
+      name: "Pro", tagline: "Professional Teams", price: "$499/yr", highlight: true,
+      desc: "Full platform access for professional embedded development teams building production RISC-V products.",
+      features: ["Full IDE + WebIDE access", "AI-powered code generation", "Priority hardware support", "Advanced debugging tools", "Team collaboration", "Email support"],
+      cta: "Start Pro Trial", link: "/contact-sales?plan=pro",
     },
     {
-      name: "Enterprise",
-      tagline: "Customization + SLA",
-      price: "Custom / SLA",
-      desc: "Full customization, dedicated professional services, integration support, and SLA-backed guarantees for production deployments.",
-      features: [
-        "Everything in Pro",
-        "Custom BSP development",
-        "Dedicated security audit",
-        "On-premise deployment option",
-        "SLA-backed support (99.9%)",
-        "White-label IDE option",
-        "Hardware partner integration",
-        "Compliance certification support",
-      ],
-      cta: "Contact Enterprise",
-      link: "/contact-sales?plan=enterprise",
-      highlight: false,
+      name: "Enterprise", tagline: "Custom Solutions", price: "Custom", highlight: false,
+      desc: "Tailored solutions for enterprises with custom hardware, dedicated support, and SLA guarantees.",
+      features: ["Everything in Pro", "Custom IP block integration", "On-premise deployment", "Dedicated account manager", "SLA guarantees", "Custom training"],
+      cta: "Contact Sales", link: "/contact-sales?plan=enterprise",
     },
   ];
-  
+
   return (
     <div className="min-h-screen bg-white">
-      {/* ══ HERO SECTION ══ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50">
-        <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]" />
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
+      {/* ══ HERO ══ */}
+      <section className="relative overflow-hidden bg-[#0c1020]">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)", backgroundSize: "40px 40px" }} />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#003262]/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#FDB515]/5 rounded-full blur-[100px]" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-            <div>
-              <div className="mb-6" data-testid="hero-brand-lockup">
-                <TrustedVLogo size="xl" showPoweredBy={true} />
-              </div>
-              <div className="inline-block bg-[#FF9933]/10 border border-[#FF9933]/30 rounded-full px-4 py-1.5 mb-5">
-                <span className="text-sm font-semibold text-[#B7410E]">Made in India, Engineered by Bosch to the World</span>
-              </div>
-              <h1 className="text-[34px] sm:text-[44px] lg:text-[52px] font-bold text-foreground tracking-tight mb-4 leading-[1.1]" data-testid="hero-heading">
-                Build your secure{" "}
-                <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span>{" "}Solution
-              </h1>
-              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 max-w-xl">
-                A unified RISC-V platform housing two products: a secure Rust-based software and toolchain ecosystem, and an AI-powered silicon pipeline from requirement to production.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link to="/product-suite">
-                  <Button size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25" data-testid="hero-cta-products">
-                    Explore Products <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </Link>
-                <Link to="/contact">
-                  <Button variant="outline" size="lg" className="h-12 px-8 text-base font-semibold" data-testid="hero-cta-contact">
-                    Talk to Engineers
-                  </Button>
-                </Link>
-              </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
+          <div className="max-w-4xl">
+            <div className="mb-8" data-testid="hero-brand-lockup">
+              <TrustedVLogo size="xl" showPoweredBy={true} dark={true} />
             </div>
-            <div className="hidden lg:block" data-testid="hero-engine-col">
-              <EngineArchDiagram />
+            
+            <div className="inline-flex items-center gap-2 bg-[#FF9933]/10 border border-[#FF9933]/25 rounded-full px-4 py-1.5 mb-6">
+              <span className="w-2 h-2 rounded-full bg-[#FF9933]" />
+              <span className="text-sm font-semibold text-[#FFB366]">Made in India, Engineered by Bosch to the World</span>
             </div>
-          </div>
-          
-          {/* Hero stat cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
-            {[
-              { icon: "🦀", title: "TRusteD-V Software & Toolchain", desc: "Rust-based secure stack: bootloaders, RTOS, IDE, TVOTS certification" },
-              { icon: "⚡", title: "SignOff Silicon", desc: "AI-powered chip pipeline: Core, Chip, and Code Engines + Cores Marketplace", accent: "#0F6E56" },
-              { icon: "⏱", title: "48 hrs", desc: "Full TRusteD-V Verified certification run on real silicon" },
-              { icon: "🏆", title: "Bronze to Platinum", desc: "5-layer production readiness grading, silicon to application" },
-            ].map((s, i) => (
-              <div key={i} className="bg-white rounded-xl border-l-4 border border-border p-4 hover:shadow-md transition-shadow" style={{ borderLeftColor: s.accent || "#003262" }}>
-                <div className="text-2xl mb-2">{s.icon}</div>
-                <div className="text-sm font-bold text-foreground mb-1">{s.title}</div>
-                <div className="text-xs text-muted-foreground leading-relaxed">{s.desc}</div>
-              </div>
-            ))}
+            
+            <h1 className="text-[40px] sm:text-[52px] lg:text-[64px] font-bold text-white tracking-tight mb-5 leading-[1.05]" data-testid="hero-heading">
+              Secure{" "}
+              <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}><span style={{ color: "#6B9AFF" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span>{" "}
+              from Silicon<br className="hidden sm:block" /> to Application
+            </h1>
+            
+            <p className="text-lg sm:text-xl text-slate-400 leading-relaxed mb-8 max-w-2xl">
+              The world's first vertically integrated RISC-V security platform. Two products under one brand: a Rust-based software and toolchain ecosystem, and an AI-powered silicon pipeline from requirement to production.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 mb-12">
+              <Link to="/product-suite">
+                <Button size="lg" className="h-13 px-8 text-base font-semibold bg-white text-[#0c1020] hover:bg-white/90 shadow-lg" data-testid="hero-cta-products">
+                  Explore Products <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="h-13 px-8 text-base font-semibold border-white/20 text-white hover:bg-white/10" data-testid="hero-cta-contact">
+                  Talk to Engineers
+                </Button>
+              </Link>
+            </div>
+            
+            {/* Hero feature pills */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                { icon: Shield, label: "CC EAL4+ / FIPS 140-3" },
+                { icon: Cpu, label: "RISC-V RV32 & RV64" },
+                { icon: Lock, label: "Rust Memory Safety" },
+                { icon: Zap, label: "48hr Certification" },
+              ].map((p, i) => (
+                <div key={i} className="flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5">
+                  <p.icon className="w-4 h-4 text-[#6B9AFF] flex-shrink-0" />
+                  <span className="text-xs font-medium text-slate-300">{p.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ══ SUB-BRANDS: Two Products ══ */}
-      <section className="py-16 bg-slate-50 border-t border-border">
+      {/* ══ TWO PRODUCTS ══ */}
+      <section className="py-16 bg-white border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Our Products</span>
@@ -329,43 +116,84 @@ const Landing = () => {
             <p className="text-muted-foreground max-w-2xl mx-auto">Under TRusteD-V, two distinct products address the complete RISC-V journey: from secure software foundation to AI-generated, production-certified silicon.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            <div className="bg-white rounded-xl border border-border p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">🦀</span>
-                <div>
-                  <span className="text-[10px] font-bold text-primary uppercase tracking-wider block">TRusteD-V Sub-brand 01</span>
-                  <span className="text-lg font-bold text-foreground">Software & Toolchain</span>
+            {/* Software & Toolchain */}
+            <RevealItem>
+              <div className="bg-white rounded-xl border-2 border-[#003262]/15 p-6 hover:shadow-xl transition-all hover:border-[#003262]/30 h-full">
+                <div className="w-12 h-12 rounded-xl bg-[#003262]/10 flex items-center justify-center mb-4">
+                  <Code className="w-6 h-6 text-[#003262]" />
                 </div>
+                <span className="text-[10px] font-bold text-[#003262] uppercase tracking-wider">Sub-brand 01</span>
+                <h3 className="text-xl font-bold text-foreground mt-1 mb-3">TRusteD-V Software & Toolchain</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">A complete Rust-based RISC-V software ecosystem from ROM-resident secure bootloader through a security-hardened RTOS, validation framework, and a full development toolchain.</p>
+                <ul className="space-y-2 mb-5">
+                  {["Rust Software Stack: rBoot, rustBoot, RTOS RV32/64, HAL & Crypto", "Toolchain & IDE: Flash Analyzer, Debugger, Simulator, Compiler", "TRusteD-V Verified: 5-layer Bronze to Platinum certification"].map((f, i) => (
+                    <li key={f} className="flex items-start gap-2 text-xs text-muted-foreground"><CheckCircle2 className="w-3.5 h-3.5 text-[#003262] mt-0.5 flex-shrink-0" />{f}</li>
+                  ))}
+                </ul>
+                <Link to="/product-suite" className="inline-flex items-center text-sm font-semibold text-[#003262] hover:underline">
+                  Explore Software & Toolchain <ArrowRight className="w-4 h-4 ml-1" />
+                </Link>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">A complete Rust-based RISC-V software ecosystem from ROM-resident secure bootloader through a security-hardened RTOS, validation framework, and a full development toolchain.</p>
-              <ul className="space-y-2 mb-4">
-                {["Rust Software Stack: rBoot, rustBoot, RTOS RV32/64, HAL & Crypto", "Toolchain & IDE: Flash Analyzer, Debugger, Simulator, Compiler", "TRusteD-V Verified: 5-layer Bronze to Platinum certification"].map((f, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground"><CheckCircle2 className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />{f}</li>
-                ))}
-              </ul>
-              <Link to="/product-suite" className="text-sm font-semibold text-primary hover:underline">Explore Software & Toolchain &rarr;</Link>
-            </div>
-            <div className="bg-white rounded-xl border border-border p-6 hover:shadow-lg transition-shadow" style={{ borderTopColor: "#0F6E56", borderTopWidth: "3px" }}>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">⚡</span>
-                <div>
-                  <span className="text-[10px] font-bold text-[#0F6E56] uppercase tracking-wider block">TRusteD-V Sub-brand 02</span>
-                  <span className="text-lg font-bold text-foreground">SignOff Silicon</span>
+            </RevealItem>
+            {/* SignOff Silicon */}
+            <RevealItem delay={100}>
+              <div className="bg-white rounded-xl border-2 border-[#0F6E56]/15 p-6 hover:shadow-xl transition-all hover:border-[#0F6E56]/30 h-full">
+                <div className="w-12 h-12 rounded-xl bg-[#0F6E56]/10 flex items-center justify-center mb-4">
+                  <Cpu className="w-6 h-6 text-[#0F6E56]" />
                 </div>
+                <span className="text-[10px] font-bold text-[#0F6E56] uppercase tracking-wider">Sub-brand 02</span>
+                <h3 className="text-xl font-bold text-foreground mt-1 mb-3">SignOff Silicon</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">An AI-powered RISC-V solution platform that converts natural language requirements into production-ready silicon: three engines, a certified Cores Marketplace, and a 7-step chip-to-deployment pipeline.</p>
+                <ul className="space-y-2 mb-5">
+                  {["AI Engine: Core Engine, Chip Engine, Code Engine", "Cores Marketplace: certified RISC-V core catalogue with scoring", "Solution Engine: NL requirement to production-ready chip"].map((f, i) => (
+                    <li key={f} className="flex items-start gap-2 text-xs text-muted-foreground"><CheckCircle2 className="w-3.5 h-3.5 text-[#0F6E56] mt-0.5 flex-shrink-0" />{f}</li>
+                  ))}
+                </ul>
+                <Link to="/product-suite" className="inline-flex items-center text-sm font-semibold text-[#0F6E56] hover:underline">
+                  Explore SignOff Silicon <ArrowRight className="w-4 h-4 ml-1" />
+                </Link>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">An AI-powered RISC-V solution platform that converts natural language requirements into production-ready silicon: three engines, a certified Cores Marketplace, and a 7-step chip-to-deployment pipeline.</p>
-              <ul className="space-y-2 mb-4">
-                {["AI Engine: Core Engine, Chip Engine, Code Engine", "Cores Marketplace: certified RISC-V core catalogue with scoring", "Solution Engine: NL requirement to production-ready chip"].map((f, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground"><CheckCircle2 className="w-3.5 h-3.5 text-[#0F6E56] mt-0.5 flex-shrink-0" />{f}</li>
-                ))}
-              </ul>
-              <Link to="/product-suite" className="text-sm font-semibold text-[#0F6E56] hover:underline">Explore SignOff Silicon &rarr;</Link>
-            </div>
+            </RevealItem>
           </div>
         </div>
       </section>
 
-      {/* ══ SECURITY CERTIFICATIONS STRIP ══ */}
+      {/* ══ WHAT WE DELIVER ══ */}
+      <section className="py-16 bg-slate-50 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Platform Capabilities</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">Full-stack RISC-V security, delivered</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+            {[
+              { icon: Shield, title: "Secure Boot Chain", desc: "ROM-resident rBoot + rustBoot: immutable root of trust through multi-stage verified boot.", color: "#003262" },
+              { icon: Terminal, title: "Jarvyn IDE", desc: "Purpose-built embedded Rust IDE with native analyzer, SVD visualization, and AI-powered hardware intelligence.", color: "#B7410E" },
+              { icon: Award, title: "TVOTS Certification", desc: "5-layer Bronze to Platinum production readiness grading: firmware, silicon, integration, system, deployment.", color: "#0F6E56" },
+              { icon: Layers, title: "Security-Hardened RTOS", desc: "Rust-native RTOS for RV32/RV64 with memory isolation, capability-based access, and deterministic scheduling.", color: "#7B3F00" },
+              { icon: Cpu, title: "AI Silicon Pipeline", desc: "Three AI engines convert NL requirements into verified SoC designs with automated firmware generation.", color: "#0071c5" },
+              { icon: Globe, title: "Cores Marketplace", desc: "Certified RISC-V IP catalogue with trust scoring, compliance badges, and one-click integration.", color: "#6B3FA0" },
+              { icon: Lock, title: "Crypto Stack", desc: "Post-quantum ready: ML-KEM, ML-DSA, AES-256-GCM, SHA-3, Ed25519 with hardware acceleration support.", color: "#C62828" },
+              { icon: Zap, title: "48-Hour Certification", desc: "Full TRusteD-V Verified certification run on real silicon in under 48 hours.", color: "#E65100" },
+            ].map((cap, i) => {
+              const Icon = cap.icon;
+              return (
+                <RevealItem key={i} delay={i * 60}>
+                  <div className="bg-white rounded-xl border border-border p-5 hover:shadow-lg transition-all h-full group">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-colors" style={{ backgroundColor: `${cap.color}10` }}>
+                      <Icon className="w-5 h-5" style={{ color: cap.color }} />
+                    </div>
+                    <h4 className="font-bold text-foreground text-sm mb-1.5">{cap.title}</h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{cap.desc}</p>
+                  </div>
+                </RevealItem>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ SECURITY CERTIFICATIONS ══ */}
       <section className="py-12 bg-[#0c1020]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
@@ -380,7 +208,7 @@ const Landing = () => {
               { name: "NIST SP 800-193", desc: "Firmware Resilience" }, { name: "TCG DICE", desc: "Device Attestation" },
               { name: "SLSA Level 3", desc: "Supply Chain" }, { name: "IEC 61508", desc: "Functional Safety SIL-2" },
             ].map((cert, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-3 text-center hover:bg-white/10 transition-colors">
+              <div key={cert.name} className="bg-white/5 border border-white/10 rounded-lg p-3 text-center hover:bg-white/10 transition-colors">
                 <div className="text-sm font-bold text-white">{cert.name}</div>
                 <div className="text-[10px] text-slate-400 mt-0.5">{cert.desc}</div>
               </div>
@@ -395,7 +223,6 @@ const Landing = () => {
           <div className="text-center mb-12">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Industry Focus</span>
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">Trusted in every industry that demands reliability</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">From constrained IoT nodes to high-reliability industrial controllers, TRusteD-V and SignOff Silicon are validated for your vertical.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
@@ -403,7 +230,7 @@ const Landing = () => {
               { icon: "🏭", title: "Industrial", desc: "IEC 61508 SIL-2, IEC 62443 cybersecurity, deterministic RTOS, harsh environment characterization and validation.", tags: ["IEC 61508", "IEC 62443", "SIL-2"] },
               { icon: "📱", title: "Consumer Electronics", desc: "Full 5-layer TRusteD-V Verified path, OTA update security, fast re-certification cycles.", tags: ["ISO/IEC 15408", "ETSI", "OTA Secure"] },
             ].map((v, i) => (
-              <RevealItem key={i} delay={i * 100}>
+              <RevealItem key={v.title} delay={i * 100}>
                 <Card className="border-border hover:shadow-lg transition-shadow h-full">
                   <CardContent className="p-6">
                     <span className="text-3xl block mb-3">{v.icon}</span>
@@ -420,224 +247,43 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* ══ 7-STAGE BUILD PIPELINE ══ */}
-      <section className="py-16 bg-white border-t border-border overflow-hidden" data-testid="simulation-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">TrusteD-V Engine</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
-              Requirement &rarr; IP &rarr; Chips &rarr; SoC &rarr; Firmware &rarr; Sim &rarr; Launch
-            </h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              See the complete build pipeline: from a natural-language requirement to production-ready hardware and firmware.
-            </p>
-          </div>
-          
-          <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-8 top-12 bottom-12 w-0.5 bg-gradient-to-b from-slate-200 via-slate-300 to-green-300 hidden md:block" />
-            
-            <div className="space-y-6">
-              {simulationStages.map((stage, i) => {
-                const Icon = stage.icon;
-                return (
-                  <RevealItem key={i} delay={i * 100}>
-                    <div className="flex gap-4 md:gap-6 items-start relative" data-testid={`sim-stage-${stage.num}`}>
-                      <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10 border-2" style={{ backgroundColor: `${stage.color}10`, borderColor: stage.color }}>
-                        <Icon className="w-6 h-6" style={{ color: stage.color }} />
-                        <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[9px] font-bold flex items-center justify-center border-2 border-white" style={{ backgroundColor: stage.color, color: "#fff" }}>{stage.num}</span>
-                      </div>
-                      <div className="flex-1 rounded-xl border bg-white p-4 hover:shadow-md transition-shadow" style={{ borderColor: `${stage.color}30` }}>
-                        <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
-                          <h4 className="font-bold text-sm text-foreground">{stage.title}</h4>
-                          <span className="text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ backgroundColor: stage.badgeBg, color: stage.badgeText }}>{stage.badge}</span>
-                        </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed mb-2">{stage.desc}</p>
-                        {stage.chips && (
-                          <div className="flex flex-wrap gap-1.5 mt-2">
-                            {stage.chips.map((chip, j) => (
-                              <span key={j} className="text-[10px] font-semibold px-2 py-0.5 rounded border" style={{ backgroundColor: `${stage.color}08`, borderColor: `${stage.color}30`, color: stage.color }}>{chip}</span>
-                            ))}
-                          </div>
-                        )}
-                        {stage.details && (
-                          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
-                            {stage.details.map((d, j) => (
-                              <span key={j} className="text-[10px] text-muted-foreground flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-current" />{d}</span>
-                            ))}
-                          </div>
-                        )}
-                        {stage.num === 6 && (
-                          <div className="mt-3 rounded-lg overflow-hidden border border-[#0F6E56]/20" style={{ height: "140px", position: "relative", background: "#0a0f0a" }}>
-                            <style>{`
-                              @keyframes simDash{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
-                              @keyframes simLed{0%,100%{fill:#1D9E75;opacity:.4}50%{fill:#5DCAA5;opacity:1}}
-                              @keyframes simBlink{0%,100%{opacity:1}50%{opacity:.3}}
-                              @keyframes simPulse{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:.6;transform:scale(1.05)}}
-                            `}</style>
-                            <svg width="100%" height="100%" viewBox="0 0 600 140" preserveAspectRatio="xMidYMid meet">
-                              <rect x="0" y="0" width="600" height="140" fill="#0a0f0a"/>
-                              <line x1="100" y1="0" x2="100" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
-                              <line x1="200" y1="0" x2="200" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
-                              <line x1="300" y1="0" x2="300" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
-                              <line x1="400" y1="0" x2="400" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
-                              <line x1="500" y1="0" x2="500" y2="140" stroke="#1a2a1a" strokeWidth=".5"/>
-                              <line x1="0" y1="35" x2="600" y2="35" stroke="#1a2a1a" strokeWidth=".5"/>
-                              <line x1="0" y1="70" x2="600" y2="70" stroke="#1a2a1a" strokeWidth=".5"/>
-                              <line x1="0" y1="105" x2="600" y2="105" stroke="#1a2a1a" strokeWidth=".5"/>
-                              {/* SoC chip */}
-                              <rect x="40" y="30" width="70" height="60" rx="5" fill="#0d1a0d" stroke="#1D9E75" strokeWidth="1.2"/>
-                              <rect x="50" y="40" width="50" height="40" rx="3" fill="#04342C"/>
-                              <text x="75" y="58" textAnchor="middle" fontSize="8" fill="#5DCAA5" fontFamily="monospace" fontWeight="700">RISC-V</text>
-                              <text x="75" y="72" textAnchor="middle" fontSize="7" fill="#1D9E75" fontFamily="monospace">SoC</text>
-                              <circle cx="102" cy="34" r="3" style={{ animation: "simLed 1.1s ease-in-out infinite" }}/>
-                              {/* SoC traces */}
-                              <line x1="110" y1="50" x2="160" y2="50" stroke="#1D9E75" strokeWidth="1" strokeDasharray="3 2" style={{ animation: "simDash .8s linear infinite" }}/>
-                              <line x1="110" y1="65" x2="160" y2="65" stroke="#1D9E75" strokeWidth="1" strokeDasharray="3 2" style={{ animation: "simDash .8s linear infinite .2s" }}/>
-                              <line x1="110" y1="80" x2="160" y2="80" stroke="#1D9E75" strokeWidth="1" strokeDasharray="3 2" style={{ animation: "simDash .8s linear infinite .4s" }}/>
-                              {/* RF chip */}
-                              <rect x="170" y="35" width="55" height="45" rx="4" fill="#0d130d" stroke="#378ADD" strokeWidth="1"/>
-                              <text x="197" y="56" textAnchor="middle" fontSize="7" fill="#85B7EB" fontFamily="monospace" fontWeight="700">RF</text>
-                              <text x="197" y="68" textAnchor="middle" fontSize="6" fill="#378ADD" fontFamily="monospace">LoRa</text>
-                              <circle cx="218" cy="38" r="2.5" style={{ animation: "simLed 1.6s ease-in-out infinite .3s" }}/>
-                              {/* Antenna waves */}
-                              <path d="M197 35 Q207 26 217 35" fill="none" stroke="#378ADD" strokeWidth=".7" strokeDasharray="3 2" opacity=".6" style={{ animation: "simPulse 1.2s ease-in-out infinite" }}/>
-                              <path d="M190 28 Q207 16 224 28" fill="none" stroke="#378ADD" strokeWidth=".5" strokeDasharray="3 2" opacity=".3" style={{ animation: "simPulse 1.2s ease-in-out infinite .3s" }}/>
-                              {/* Sensor */}
-                              <rect x="260" y="38" width="60" height="40" rx="4" fill="#1a0d0d" stroke="#EF9F27" strokeWidth="1"/>
-                              <text x="290" y="56" textAnchor="middle" fontSize="7" fill="#FAC775" fontFamily="monospace" fontWeight="700">CO2</text>
-                              <text x="290" y="68" textAnchor="middle" fontSize="6" fill="#BA7517" fontFamily="monospace">SENSOR</text>
-                              <circle cx="313" cy="41" r="2.5" style={{ animation: "simLed 1.3s ease-in-out infinite .6s" }}/>
-                              {/* Waveform display */}
-                              <rect x="20" y="95" width="200" height="40" rx="4" fill="#04120a" stroke="#1D9E75" strokeWidth=".8"/>
-                              <text x="28" y="106" fontSize="6" fill="#1D9E75" fontFamily="monospace">Signal Analysis</text>
-                              <polyline points="28,120 40,113 48,125 56,112 64,122 72,114 80,123 88,116 96,120 104,113 112,122 120,115 128,120 136,113 144,122 152,115 160,120 168,114 176,122 184,116 192,120 200,114 208,120" fill="none" stroke="#1D9E75" strokeWidth="1" strokeLinecap="round" style={{ animation: "simBlink 1.5s ease-in-out infinite" }}/>
-                              {/* UART Monitor */}
-                              <rect x="340" y="15" width="240" height="115" rx="5" fill="#04120a" stroke="#1D9E75" strokeWidth=".8"/>
-                              <text x="350" y="28" fontSize="7" fill="#1D9E75" fontFamily="monospace">UART Monitor</text>
-                              <text x="350" y="42" fontSize="6.5" fill="#5DCAA5" fontFamily="monospace" style={{ animation: "simBlink 3s ease-in-out infinite" }}>[ OK ] Boot sequence</text>
-                              <text x="350" y="54" fontSize="6.5" fill="#5DCAA5" fontFamily="monospace" style={{ animation: "simBlink 3s ease-in-out infinite .5s" }}>[ OK ] HAL init complete</text>
-                              <text x="350" y="66" fontSize="6.5" fill="#5DCAA5" fontFamily="monospace" style={{ animation: "simBlink 3s ease-in-out infinite 1s" }}>[ OK ] Sensor CO2=412ppm</text>
-                              <text x="350" y="78" fontSize="6.5" fill="#5DCAA5" fontFamily="monospace" style={{ animation: "simBlink 3s ease-in-out infinite 1.5s" }}>[ OK ] RF link established</text>
-                              <text x="350" y="90" fontSize="6.5" fill="#9FE1CB" fontFamily="monospace" style={{ animation: "simBlink 1s ease-in-out infinite" }}>&#9612;</text>
-                              {/* Status badges */}
-                              <rect x="480" y="98" width="88" height="18" rx="3" fill="#0F6E56" opacity=".9"/>
-                              <text x="524" y="111" textAnchor="middle" fontSize="8" fill="#E1F5EE" fontFamily="monospace" fontWeight="700">ALL PASS &#10003;</text>
-                              <rect x="350" y="98" width="60" height="18" rx="3" fill="#1D3A1D" stroke="#1D9E75" strokeWidth=".6"/>
-                              <text x="380" y="111" textAnchor="middle" fontSize="7" fill="#5DCAA5" fontFamily="monospace">98% cov</text>
-                              <rect x="415" y="98" width="60" height="18" rx="3" fill="#1D3A1D" stroke="#1D9E75" strokeWidth=".6"/>
-                              <text x="445" y="111" textAnchor="middle" fontSize="7" fill="#9FE1CB" fontFamily="monospace">2.4ms lat</text>
-                            </svg>
-                          </div>
-                        )}
-                        {stage.progress && (
-                          <div className="space-y-1.5 mt-3">
-                            {stage.progress.map((p, j) => (
-                              <div key={j} className="flex items-center gap-2">
-                                <span className="text-[9px] font-medium text-muted-foreground w-16 text-right">{p.label}</span>
-                                <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div className="h-full rounded-full transition-all duration-1000" style={{ width: `${p.pct}%`, backgroundColor: p.color }} /></div>
-                                <span className="text-[9px] font-medium w-8" style={{ color: p.color }}>{p.pct === 100 ? "PASS" : `${p.pct}%`}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                        {stage.summary && (
-                          <div className="flex flex-wrap gap-1.5 mt-2">
-                            {stage.summary.map((s, j) => (
-                              <span key={j} className="text-[9px] font-bold px-2 py-1 rounded-md border" style={{ backgroundColor: `${stage.color}10`, borderColor: `${stage.color}30`, color: stage.color }}>{s}</span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </RevealItem>
-                );
-              })}
-            </div>
-            
-            <div className="flex justify-center gap-6 mt-10 flex-wrap">
-              {[
-                { name: "Core Engine", color: "#7B3F00", sub: "IP blocks" },
-                { name: "Chip Engine", color: "#0071c5", sub: "SoC + chips" },
-                { name: "Code Engine", color: "#B7410E", sub: "Firmware + API" },
-                { name: "Verification", color: "#0F6E56", sub: "HW + SW sim" },
-              ].map((e, i) => (
-                <div key={i} className="flex items-center gap-1.5 text-xs">
-                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: e.color }} />
-                  <span className="font-bold" style={{ color: e.color }}>{e.name}</span>
-                  <span className="text-muted-foreground">{e.sub}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ══ BUSINESS PLANS ══ */}
-      <section className="py-16 bg-white border-t border-border" data-testid="pricing-section">
+      <section className="py-16 bg-slate-50 border-t border-border" data-testid="pricing-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Licensing & Plans</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
-              Flexible Plans for Every Team
-            </h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              From individual developers to enterprise deployments, choose the plan that scales with your RISC-V projects.
-            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">Flexible Plans for Every Team</h2>
           </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {pricingTiers.map((tier, index) => (
-              <RevealItem key={index} delay={index * 150}>
-                <Card 
-                  data-testid={`pricing-tier-${tier.name.toLowerCase()}`}
-                  className={`relative overflow-hidden h-full flex flex-col ${
-                    tier.highlight 
-                      ? "border-primary shadow-xl shadow-primary/10 scale-[1.02]" 
-                      : "border-border hover:shadow-lg"
-                  } transition-all duration-300`}
-                >
+            {pricingTiers.map((tier) => (
+              <RevealItem key={tier.name} delay={0}>
+                <Card className={`relative overflow-hidden h-full flex flex-col ${tier.highlight ? "border-primary shadow-xl shadow-primary/10 scale-[1.02]" : "border-border hover:shadow-lg"} transition-all`}>
                   {tier.highlight && <div className="h-1.5 bg-gradient-to-r from-primary to-orange-400" />}
                   <CardContent className="p-6 flex flex-col flex-1">
                     <div className="mb-4">
                       <h3 className="text-xl font-bold text-foreground">{tier.name}</h3>
                       <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mt-1">{tier.tagline}</p>
                     </div>
-                    <div className="mb-4">
-                      <span className="text-2xl font-bold text-foreground">{tier.price}</span>
-                    </div>
+                    <span className="text-2xl font-bold text-foreground mb-4 block">{tier.price}</span>
                     <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{tier.desc}</p>
                     <ul className="space-y-2.5 mb-8 flex-1">
-                      {tier.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${tier.highlight ? "text-primary" : "text-green-500"}`} />
-                          {f}
+                      {tier.features.map((f) => (
+                        <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${tier.highlight ? "text-primary" : "text-green-500"}`} />{f}
                         </li>
                       ))}
                     </ul>
-                    <Link to={tier.link}>
-                      <Button 
-                        className={`w-full ${tier.highlight ? "bg-primary text-white hover:bg-primary/90" : ""}`}
-                        variant={tier.highlight ? "default" : "outline"}
-                      >
-                        {tier.cta} <ArrowRight className="w-4 h-4 ml-1" />
-                      </Button>
-                    </Link>
+                    <Link to={tier.link}><Button className={`w-full ${tier.highlight ? "" : ""}`} variant={tier.highlight ? "default" : "outline"}>{tier.cta} <ArrowRight className="w-4 h-4 ml-1" /></Button></Link>
                   </CardContent>
                 </Card>
               </RevealItem>
             ))}
           </div>
-          
-          <div className="text-center mt-8">
-            <p className="text-xs text-muted-foreground">
-              4 revenue streams: RISC-V Software & Toolchain (annual/per-core), Engineering Services (custom dev), Marketplace Platform (per-device/per-deployment), Professional Services (integration & support).
-            </p>
-          </div>
         </div>
       </section>
       
       {/* ══ STRATEGIC ROADMAP ══ */}
-      <section className="py-16 bg-slate-50 border-t border-border">
+      <section className="py-16 bg-white border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Strategic Roadmap</span>
@@ -649,13 +295,13 @@ const Landing = () => {
               { phase: "Phase 2", subtitle: "Ecosystem Growth", title: "Scale & Expand", items: ["10+ silicon targets certified", "20+ IP blocks certified", "IoT, Industrial, Consumer verticals", "TVOTS v2.0 with AI/ML benchmarks", "10+ Consortium Principal Members"] },
               { phase: "Phase 3", subtitle: "Industry Adoption", title: "Standardize & Lead", items: ["Regulatory recognition", "RISC-V International integration", "Open reference platform", "Procurement framework integrations", "Self-sustaining consortium"] },
             ].map((r, i) => (
-              <RevealItem key={i} delay={i * 100}>
-                <div className={`rounded-xl border p-6 h-full ${r.active ? "bg-primary/5 border-primary/30" : "bg-white border-border"}`}>
+              <RevealItem key={r.phase} delay={i * 100}>
+                <div className={`rounded-xl border p-6 h-full ${r.active ? "bg-primary/5 border-primary/30" : "bg-slate-50 border-border"}`}>
                   <span className="text-[10px] font-bold text-primary uppercase tracking-wider">{r.phase} {r.subtitle}</span>
                   <h3 className="text-lg font-bold text-foreground mt-1 mb-3">{r.title}</h3>
                   <ul className="space-y-2">
-                    {r.items.map((item, j) => (
-                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground">
+                    {r.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
                         <CheckCircle2 className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${r.active ? "text-primary" : "text-slate-400"}`} />{item}
                       </li>
                     ))}
@@ -668,24 +314,24 @@ const Landing = () => {
       </section>
       
       {/* ══ CTA ══ */}
-      <section className="py-16 bg-primary">
+      <section className="py-16 bg-[#003262]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-              Ready to Build Secure Embedded Systems with <span className="text-orange-300">Rust</span>?
+              Ready to build secure <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}><span className="text-white">RISC</span><span style={{ color: "#FDB515" }}>-V</span></span> systems?
             </h2>
-            <p className="text-primary-foreground/80 mb-8 text-base sm:text-lg leading-relaxed">
-              Start your RISC-V journey today with TrusteD-V IDE Jarvyn, AI-powered tools, and production-ready Rust templates.
+            <p className="text-blue-200/80 mb-8 text-base sm:text-lg leading-relaxed">
+              Partner with Bosch to bring certified, production-grade RISC-V products to market.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/download-ide">
-                <Button data-testid="get-started-cta-btn" size="lg" className="h-12 px-8 text-base font-semibold bg-white text-primary hover:bg-white/90">
-                  Download IDE <ArrowRight className="ml-2 w-5 h-5" />
+              <Link to="/contact">
+                <Button size="lg" className="h-12 px-8 text-base font-semibold bg-white text-[#003262] hover:bg-white/90">
+                  Talk to Engineers <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link to="/partner-registration">
+              <Link to="/download-ide">
                 <Button variant="outline" size="lg" className="h-12 px-8 text-base font-semibold border-white/30 text-white hover:bg-white/10">
-                  Become a Partner
+                  Download IDE
                 </Button>
               </Link>
             </div>
@@ -710,7 +356,7 @@ const Landing = () => {
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/developer-portal" className="hover:text-white transition-colors">Developer Portal</Link></li>
                 <li><Link to="/developer-portal" className="hover:text-white transition-colors">Documentation</Link></li>
-                <li><Link to="/developer-portal" className="hover:text-white transition-colors">API Reference</Link></li>
+                <li><Link to="/webide" className="hover:text-white transition-colors">WebIDE</Link></li>
               </ul>
             </div>
             <div>
@@ -729,10 +375,9 @@ const Landing = () => {
               </ul>
             </div>
           </div>
-          
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
             <TrustedVLogo size="sm" showPoweredBy={true} dark={true} />
-            <p className="text-sm text-slate-400">&copy; 2026 TrusteD-V. Secure RISC-V Development Platform.</p>
+            <p className="text-sm text-slate-400">&copy; 2026 TRusteD-V. Secure RISC-V Development Platform.</p>
           </div>
         </div>
       </footer>
