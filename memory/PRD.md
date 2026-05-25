@@ -96,6 +96,15 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - **Trust strip**: Bottom border strip with global standards (CC EAL4+ · FIPS 140-3 · PSA L3 · ISO 26262 · IEC 62443 · SLSA L3).
 - **Smooth transition**: "Our Products" heading polished with line-accent eyebrow and stronger hierarchy.
 
+### Phase 13: About Page Rebuilt from v8 HTML (Completed - Feb 2026)
+- **Hero**: Dark `#0c1020` with tri-color top accent bar, "About Us" eyebrow, "Building trust in the RISC-V ecosystem." headline with gold "-V" mark, BGSW initiative subtitle.
+- **Mission section**: 2-col layout (1.4fr/1fr) — left text block with "Our Mission" eyebrow, headline "The RISC-V ecosystem's next growth phase is gated by trust — not silicon capability.", two paragraphs with inline TRusteD-V Blue and SignOff Silicon Green brand accents. Right column: three pillar blocks (Security, Performance, Time-to-Market) with `border-l-4 border-[#003262]` and tinted background.
+- **Why Us — 8 Structural Gaps**: 2-col grid of 8 cards. Each card: numbered badge tile, problem paragraph, and a highlighted "answer" box with `border-l-[3px] border-[#6B9AFF]` on `bg-[#003262]/[0.06]`. All copy verbatim from v8 HTML (ISA Fragmentation, Unified Security Framework, Supply Chain, SW-HW Integration, Certification Standards, Enterprise Adoption, Platform Security Layer, Ecosystem Coordination).
+- **Strategic Roadmap + Consortium**: 2-col on slate-50/70 background. Left: vertical timeline with 3 phases (Foundation active, Ecosystem Growth, Industry Adoption) and styled dot markers. Right: TRusteD-V Consortium intro + 4 tiers (Founding / Principal / Associate / Academic & Research) each with colored dot indicator.
+- **Backed by Bosch**: Centered. New stats per v8 HTML: 130+ Years, 60+ Countries, 400K+ Associates, #1 Global automotive supplier. Cert badges row below.
+- **CTA**: Berkeley Blue section with refined Shadcn-style buttons (matching new Landing hero style).
+- All TrusteD-V brand colors preserved: Berkeley Blue `#003262`, Gold `#FDB515`, SignOff Silicon Green `#0F6E56`.
+
 ## Key Pages & Routes
 | Route | Page | Description |
 |---|---|---|
