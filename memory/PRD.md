@@ -69,7 +69,12 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - **Make in India globe image**: Replaced small text badge with the user's uploaded "Make in India" globe image (make-in-india.jpg) showing India highlighted on Earth with chip overlay. Displayed prominently below CTA buttons.
 - **Slogans reflected**: "Powered by Bosch" and "Build your secure RISC-V Solution" properly placed in hero section.
 
-### Phase 10: Platform-Wide Branding Overhaul (Completed - Apr 2026)
+### Phase 11: Major Content Overhaul from HTML v8 (Completed - May 2026)
+- **Home page**: Added "Made in India, Engineered by Bosch to the World" badge, updated hero description for two sub-brands, added 4 stat cards (Software & Toolchain, SignOff Silicon, 48hrs certification, Bronze to Platinum). New sections: "Our Products" (two sub-brand cards), Security & Standards Compliance strip (10 certifications), Industry Focus (IoT, Industrial, Consumer Electronics), Strategic Roadmap (3 phases). Replaced old Business Plans and Hardware Partners sections.
+- **Contact page**: New `/contact` route with "Get in Touch" hero, contact info cards (HQ Bangalore, emails, offices), full form (First/Last Name, Work Email, Company, Country, Product Interest dropdown, Message) submitting to existing sales-inquiry API.
+- **About page**: Overhauled with "RISC-V Security, Powered by Bosch" hero, 3 mission pillars (Security, Performance, Time-to-Market), "8 Structural Gaps We Close" grid, "Backed by Bosch" animated stats (136+ years, 30000+ engineers, 40+ countries, 10B+ devices), certification badges.
+- **Navigation**: Added "Contact" link. All 7 items visible on desktop.
+- **All links verified**: Hero CTAs, sub-brand cards, footer, nav all point to correct routes.
 - **Removed "RISC-V RUST PLATFORM" subtitle** from `TrustedVLogo.jsx` across all pages.
 - **TrustedVLogo component redesigned**: 6 size presets (xs/sm/md/lg/xl/hero), `showPoweredBy` prop for cohesive "POWERED BY BOSCH" lockup, `dark` prop for footer. Uses Helvetica Neue, font-extrabold. Colors: T/eD=slate-800, rust=#B7410E, -V=#C8A200.
 - **Brand lockup sizes**: Nav=md(32px), Login=lg(44px)+poweredBy, Hero=hero(72px)+poweredBy, Footer=sm(28px)+poweredBy+dark.

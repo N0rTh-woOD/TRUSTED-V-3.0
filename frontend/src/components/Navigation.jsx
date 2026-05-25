@@ -22,6 +22,7 @@ const Navigation = () => {
     { path: "/developer-portal", label: "Developers", icon: Code },
     { path: "/marketplace", label: "Marketplace", icon: Store },
     { path: "/partners", label: "Partners", icon: UsersRound },
+    { path: "/contact", label: "Contact", icon: Info },
   ];
   
   // Authenticated user items
@@ -53,7 +54,7 @@ const Navigation = () => {
             
             {/* Center: Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1 flex-1 justify-center max-w-3xl">
-              {mainNavItems.slice(0, 6).map((item) => {
+              {mainNavItems.map((item) => {
                 const isActive = location.pathname === item.path;
                 return (
                   <Link

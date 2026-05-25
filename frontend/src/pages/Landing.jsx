@@ -269,42 +269,152 @@ const Landing = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative">
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-            {/* Left: Brand + Content + CTA */}
             <div>
-              {/* Brand Lockup */}
               <div className="mb-6" data-testid="hero-brand-lockup">
                 <TrustedVLogo size="xl" showPoweredBy={true} />
               </div>
-              
-              {/* Heading + Description */}
-              <h1 className="text-[34px] sm:text-[44px] lg:text-[56px] font-bold text-foreground tracking-tight mb-4 leading-[1.1]" data-testid="hero-heading">
+              <div className="inline-block bg-[#FF9933]/10 border border-[#FF9933]/30 rounded-full px-4 py-1.5 mb-5">
+                <span className="text-sm font-semibold text-[#B7410E]">Made in India, Engineered by Bosch to the World</span>
+              </div>
+              <h1 className="text-[34px] sm:text-[44px] lg:text-[52px] font-bold text-foreground tracking-tight mb-4 leading-[1.1]" data-testid="hero-heading">
                 Build your secure{" "}
                 <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span>{" "}Solution
               </h1>
-              
-              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8 max-w-xl">
-                The silicon-to-application platform for RISC-V embedded development. 
-                From IP blocks to production firmware, everything powered by <strong className="text-foreground">Rust</strong>.
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 max-w-xl">
+                A unified RISC-V platform housing two products: a secure Rust-based software and toolchain ecosystem, and an AI-powered silicon pipeline from requirement to production.
               </p>
-              
               <div className="flex flex-wrap gap-4">
-                <Link to="/download-ide">
-                  <Button size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all" data-testid="hero-cta-ide">
-                    Download IDE <Download className="ml-2 w-5 h-5" />
+                <Link to="/product-suite">
+                  <Button size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25" data-testid="hero-cta-products">
+                    Explore Products <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
-                <Link to="/product-suite">
-                  <Button variant="outline" size="lg" className="h-12 px-8 text-base font-semibold" data-testid="hero-cta-products">
-                    Explore Products
+                <Link to="/contact">
+                  <Button variant="outline" size="lg" className="h-12 px-8 text-base font-semibold" data-testid="hero-cta-contact">
+                    Talk to Engineers
                   </Button>
                 </Link>
               </div>
             </div>
-            
-            {/* Right: Engine Diagram - desktop only */}
             <div className="hidden lg:block" data-testid="hero-engine-col">
               <EngineArchDiagram />
             </div>
+          </div>
+          
+          {/* Hero stat cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+            {[
+              { icon: "🦀", title: "TRusteD-V Software & Toolchain", desc: "Rust-based secure stack: bootloaders, RTOS, IDE, TVOTS certification" },
+              { icon: "⚡", title: "SignOff Silicon", desc: "AI-powered chip pipeline: Core, Chip, and Code Engines + Cores Marketplace", accent: "#0F6E56" },
+              { icon: "⏱", title: "48 hrs", desc: "Full TRusteD-V Verified certification run on real silicon" },
+              { icon: "🏆", title: "Bronze to Platinum", desc: "5-layer production readiness grading, silicon to application" },
+            ].map((s, i) => (
+              <div key={i} className="bg-white rounded-xl border-l-4 border border-border p-4 hover:shadow-md transition-shadow" style={{ borderLeftColor: s.accent || "#003262" }}>
+                <div className="text-2xl mb-2">{s.icon}</div>
+                <div className="text-sm font-bold text-foreground mb-1">{s.title}</div>
+                <div className="text-xs text-muted-foreground leading-relaxed">{s.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ SUB-BRANDS: Two Products ══ */}
+      <section className="py-16 bg-slate-50 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Our Products</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">One brand. Two specialised products.</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">Under TRusteD-V, two distinct products address the complete RISC-V journey: from secure software foundation to AI-generated, production-certified silicon.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div className="bg-white rounded-xl border border-border p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">🦀</span>
+                <div>
+                  <span className="text-[10px] font-bold text-primary uppercase tracking-wider block">TRusteD-V Sub-brand 01</span>
+                  <span className="text-lg font-bold text-foreground">Software & Toolchain</span>
+                </div>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">A complete Rust-based RISC-V software ecosystem from ROM-resident secure bootloader through a security-hardened RTOS, validation framework, and a full development toolchain.</p>
+              <ul className="space-y-2 mb-4">
+                {["Rust Software Stack: rBoot, rustBoot, RTOS RV32/64, HAL & Crypto", "Toolchain & IDE: Flash Analyzer, Debugger, Simulator, Compiler", "TRusteD-V Verified: 5-layer Bronze to Platinum certification"].map((f, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground"><CheckCircle2 className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />{f}</li>
+                ))}
+              </ul>
+              <Link to="/product-suite" className="text-sm font-semibold text-primary hover:underline">Explore Software & Toolchain &rarr;</Link>
+            </div>
+            <div className="bg-white rounded-xl border border-border p-6 hover:shadow-lg transition-shadow" style={{ borderTopColor: "#0F6E56", borderTopWidth: "3px" }}>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">⚡</span>
+                <div>
+                  <span className="text-[10px] font-bold text-[#0F6E56] uppercase tracking-wider block">TRusteD-V Sub-brand 02</span>
+                  <span className="text-lg font-bold text-foreground">SignOff Silicon</span>
+                </div>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">An AI-powered RISC-V solution platform that converts natural language requirements into production-ready silicon: three engines, a certified Cores Marketplace, and a 7-step chip-to-deployment pipeline.</p>
+              <ul className="space-y-2 mb-4">
+                {["AI Engine: Core Engine, Chip Engine, Code Engine", "Cores Marketplace: certified RISC-V core catalogue with scoring", "Solution Engine: NL requirement to production-ready chip"].map((f, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground"><CheckCircle2 className="w-3.5 h-3.5 text-[#0F6E56] mt-0.5 flex-shrink-0" />{f}</li>
+                ))}
+              </ul>
+              <Link to="/product-suite" className="text-sm font-semibold text-[#0F6E56] hover:underline">Explore SignOff Silicon &rarr;</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ SECURITY CERTIFICATIONS STRIP ══ */}
+      <section className="py-12 bg-[#0c1020]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Security & Standards Compliance</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mt-2">Built to the world's most demanding security standards</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            {[
+              { name: "CC EAL4+", desc: "Common Criteria" }, { name: "FIPS 140-3", desc: "Cryptographic Module" },
+              { name: "PSA Certified L3", desc: "Platform Security" }, { name: "ISO 26262", desc: "Automotive ASIL-D" },
+              { name: "IEC 62443", desc: "Industrial Security" }, { name: "SESIP L3", desc: "IoT Platforms" },
+              { name: "NIST SP 800-193", desc: "Firmware Resilience" }, { name: "TCG DICE", desc: "Device Attestation" },
+              { name: "SLSA Level 3", desc: "Supply Chain" }, { name: "IEC 61508", desc: "Functional Safety SIL-2" },
+            ].map((cert, i) => (
+              <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-3 text-center hover:bg-white/10 transition-colors">
+                <div className="text-sm font-bold text-white">{cert.name}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">{cert.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ INDUSTRY VERTICALS ══ */}
+      <section className="py-16 bg-white border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Industry Focus</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">Trusted in every industry that demands reliability</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">From constrained IoT nodes to high-reliability industrial controllers, TRusteD-V and SignOff Silicon are validated for your vertical.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              { icon: "📡", title: "IoT & Edge", desc: "PSA/SESIP certified, constrained-device optimised, 10+ year lifecycle support with lightweight certification path.", tags: ["PSA L3", "SESIP", "ETSI EN 303 645"] },
+              { icon: "🏭", title: "Industrial", desc: "IEC 61508 SIL-2, IEC 62443 cybersecurity, deterministic RTOS, harsh environment characterization and validation.", tags: ["IEC 61508", "IEC 62443", "SIL-2"] },
+              { icon: "📱", title: "Consumer Electronics", desc: "Full 5-layer TRusteD-V Verified path, OTA update security, fast re-certification cycles.", tags: ["ISO/IEC 15408", "ETSI", "OTA Secure"] },
+            ].map((v, i) => (
+              <RevealItem key={i} delay={i * 100}>
+                <Card className="border-border hover:shadow-lg transition-shadow h-full">
+                  <CardContent className="p-6">
+                    <span className="text-3xl block mb-3">{v.icon}</span>
+                    <h3 className="font-bold text-foreground text-base mb-2">{v.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-3">{v.desc}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {v.tags.map((t) => <span key={t} className="text-[10px] font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">{t}</span>)}
+                    </div>
+                  </CardContent>
+                </Card>
+              </RevealItem>
+            ))}
           </div>
         </div>
       </section>
@@ -525,70 +635,33 @@ const Landing = () => {
         </div>
       </section>
       
-      {/* ══ HARDWARE PARTNERS ══ */}
+      {/* ══ STRATEGIC ROADMAP ══ */}
       <section className="py-16 bg-slate-50 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Hardware Ecosystem</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">
-              Supported <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif", fontWeight: 800 }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span> Hardware Partners
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Pre-integrated support for leading Indian RISC-V development platforms.
-            </p>
+          <div className="text-center mb-12">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Strategic Roadmap</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">Three phases to industry adoption</h2>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {/* C-DAC */}
-            <RevealItem delay={0}>
-              <div className="bg-white rounded-xl border border-border p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="flex justify-center mb-4">
-                  <svg viewBox="0 0 200 50" className="h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="5" width="40" height="40" rx="8" fill="#1565C0" />
-                    <text x="22" y="32" textAnchor="middle" fill="white" fontSize="20" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif">C</text>
-                    <text x="52" y="35" fill="#1565C0" fontSize="28" fontWeight="900" fontFamily="'Arial Black',Arial,sans-serif" letterSpacing="-0.5">C-DAC</text>
-                  </svg>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              { phase: "Phase 1", subtitle: "Foundation", title: "Build & Certify", items: ["TVOTS v1.0 release (open-source)", "First TRusteD-V Verified certificate", "Consortium formation & TSC", "TV-STD-001 to 006 published", "Chip Registry (TVCR) live"], active: true },
+              { phase: "Phase 2", subtitle: "Ecosystem Growth", title: "Scale & Expand", items: ["10+ silicon targets certified", "20+ IP blocks certified", "IoT, Industrial, Consumer verticals", "TVOTS v2.0 with AI/ML benchmarks", "10+ Consortium Principal Members"] },
+              { phase: "Phase 3", subtitle: "Industry Adoption", title: "Standardize & Lead", items: ["Regulatory recognition", "RISC-V International integration", "Open reference platform", "Procurement framework integrations", "Self-sustaining consortium"] },
+            ].map((r, i) => (
+              <RevealItem key={i} delay={i * 100}>
+                <div className={`rounded-xl border p-6 h-full ${r.active ? "bg-primary/5 border-primary/30" : "bg-white border-border"}`}>
+                  <span className="text-[10px] font-bold text-primary uppercase tracking-wider">{r.phase} {r.subtitle}</span>
+                  <h3 className="text-lg font-bold text-foreground mt-1 mb-3">{r.title}</h3>
+                  <ul className="space-y-2">
+                    {r.items.map((item, j) => (
+                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground">
+                        <CheckCircle2 className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${r.active ? "text-primary" : "text-slate-400"}`} />{item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h4 className="font-bold text-foreground text-base mb-1">C-DAC</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">Centre for Development of Advanced Computing. VEGA & ARIES RISC-V processors.</p>
-              </div>
-            </RevealItem>
-            {/* Mindgrove */}
-            <RevealItem delay={100}>
-              <div className="bg-white rounded-xl border border-border p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="flex justify-center mb-4">
-                  <svg viewBox="0 0 220 50" className="h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="5" width="40" height="40" rx="8" fill="#2E7D32" />
-                    <text x="22" y="32" textAnchor="middle" fill="white" fontSize="20" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif">M</text>
-                    <text x="52" y="35" fill="#2E7D32" fontSize="22" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif" letterSpacing="-0.3">Mindgrove</text>
-                  </svg>
-                </div>
-                <h4 className="font-bold text-foreground text-base mb-1">Mindgrove Technologies</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">India's fabless semiconductor startup. Secure IoT and Vision SoCs on RISC-V.</p>
-              </div>
-            </RevealItem>
-            {/* Upbeat Tech */}
-            <RevealItem delay={200}>
-              <div className="bg-white rounded-xl border border-border p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="flex justify-center mb-4">
-                  <svg viewBox="0 0 220 50" className="h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="5" width="40" height="40" rx="8" fill="#E65100" />
-                    <text x="22" y="32" textAnchor="middle" fill="white" fontSize="20" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif">U</text>
-                    <text x="52" y="35" fill="#E65100" fontSize="20" fontWeight="800" fontFamily="'Arial Black',Arial,sans-serif" letterSpacing="-0.3">Upbeat Tech</text>
-                  </svg>
-                </div>
-                <h4 className="font-bold text-foreground text-base mb-1">Upbeat Tech</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">Edge AI and embedded solutions provider. RISC-V based edge computing platforms.</p>
-              </div>
-            </RevealItem>
-          </div>
-          
-          <div className="text-center mt-8">
-            <Link to="/marketplace">
-              <Button variant="outline" className="font-medium">
-                View Full Marketplace <ChevronRight className="ml-1 w-4 h-4" />
-              </Button>
-            </Link>
+              </RevealItem>
+            ))}
           </div>
         </div>
       </section>
@@ -643,8 +716,8 @@ const Landing = () => {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
                 <li><Link to="/partners" className="hover:text-white transition-colors">Partners</Link></li>
-                <li><Link to="/partner-registration" className="hover:text-white transition-colors">Become a Partner</Link></li>
               </ul>
             </div>
             <div>

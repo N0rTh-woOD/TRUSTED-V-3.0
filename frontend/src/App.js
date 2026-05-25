@@ -27,6 +27,7 @@ import IDEDownloads from "@/pages/IDEDownloads";
 import Blog from "@/pages/Blog";
 import BoardSupportRequest from "@/pages/BoardSupportRequest";
 import ContactSales from "@/pages/ContactSales";
+import ContactPage from "@/pages/ContactPage";
 import Marketplace from "@/pages/Marketplace";
 import SecureBootPage from "@/pages/SecureBootPage";
 import CryptoStackPage from "@/pages/CryptoStackPage";
@@ -105,6 +106,7 @@ const AppContent = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/board-support" element={<BoardSupportRequest />} />
         <Route path="/contact-sales" element={<ContactSales />} />
+        <Route path="/contact" element={<ContactPage />} />
         
         {/* Legacy routes - redirect to new paths */}
         <Route path="/hardware" element={<HardwareCatalog />} />
