@@ -6,30 +6,32 @@ import {
   Shield, ArrowRight, CheckCircle2, ExternalLink, 
   GitBranch, Lock, Cpu, ArrowLeft, Zap, RefreshCw, Key
 } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 const SecureBootPage = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="secure-boot-page">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-b from-red-50/50 to-white border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary mb-8 transition-colors">
-            <ArrowLeft className="w-4 h-4" /> Back to Products
+      <PageHero
+        eyebrow="Security · Secure Boot"
+        title="Secure Boot: rboot & rustBoot"
+        subtitle="Hardware root of trust with verified boot chain for RISC-V. Two complementary bootloaders designed for different stages and use cases."
+      >
+        <div className="flex flex-col gap-3">
+          <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-[#003262] transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Products
           </Link>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Shield className="w-7 h-7 text-primary" />
+          <div className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-5">
+            <div className="w-12 h-12 rounded-xl bg-[#003262]/10 flex items-center justify-center">
+              <Shield className="w-6 h-6 text-[#003262]" />
             </div>
-            <Badge className="bg-red-100 text-red-800 border-red-200">Security</Badge>
+            <div>
+              <Badge className="bg-[#003262]/10 text-[#003262] border-[#003262]/20">Security · Bootloader</Badge>
+              <div className="text-[12.5px] text-slate-600 mt-1.5">rBoot + rustBoot &middot; Rust-native</div>
+            </div>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Secure Boot: rboot & rustBoot
-          </h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Hardware root of trust with verified boot chain for RISC-V. Two complementary bootloaders designed for different stages and use cases.
-          </p>
         </div>
-      </section>
+      </PageHero>
 
       {/* Two bootloaders side by side */}
       <section className="py-16">

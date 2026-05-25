@@ -105,6 +105,14 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - **CTA**: Berkeley Blue section with refined Shadcn-style buttons (matching new Landing hero style).
 - All TrusteD-V brand colors preserved: Berkeley Blue `#003262`, Gold `#FDB515`, SignOff Silicon Green `#0F6E56`.
 
+### Phase 14: Bosch-Grade Uniform Page Headers + Hero Refinement (Completed - Feb 2026)
+- **Navigation**: Removed Bosch red top border (`#E20015`), replaced with thin 2px Berkeley Blue (`#003262`) brand strip. Softer shadow on nav bar.
+- **Landing Hero**: Removed the multi-color tri-gradient strip; replaced gold-highlight underline + ping-dot Made-in-India badge with a refined tricolor flag chip + slate-50 background. Reduced heading size from `lg:text-[62px]` to `lg:text-[52px]`, tightened spacing, smaller button height (12 → 11), single soft Berkeley Blue accent halo for clean Bosch-grade look.
+- **TrustedVLogo `xl` size**: Reduced from `scale-[1.8]` to `scale-[1.35]` for proper visual weight in hero contexts.
+- **New `PageHero` component** at `/app/frontend/src/components/PageHero.jsx`: Reusable uniform page header with light theme, Berkeley Blue eyebrow line decoration, large slate-900 headline, optional right column for visuals/CTAs. Exports `RiscV` branded wordmark helper.
+- **Applied PageHero to all secondary pages** for consistent top section: About, ProductSuite, ContactPage, Marketplace (with partner logos), Partners, DeveloperPortal (with search), WebIDEPage (with browser mockup), CryptoStackPage (with standards card), SecureBootPage, RTOSBenchmarkPage, IDEDownloads (with IDE screenshot + light problem/solution panels moved to dedicated section).
+- **ProductSuite "Development Tools"**: 2-card grid expanded from `max-w-3xl` to `max-w-5xl` so the Jarvyn IDE and WebIDE cards have proper presence alongside other multi-card categories.
+
 ## Key Pages & Routes
 | Route | Page | Description |
 |---|---|---|

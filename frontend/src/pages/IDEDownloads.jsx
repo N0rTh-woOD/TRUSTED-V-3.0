@@ -9,6 +9,7 @@ import {
   FileSearch, Package, HardDrive, Loader2
 } from "lucide-react";
 import axios from "axios";
+import PageHero from "@/components/PageHero";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -107,67 +108,53 @@ const IDEDownloads = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="ide-downloads-page">
       {/* Hero */}
-      <section className="relative bg-[#0c1020] overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)", backgroundSize: "32px 32px" }} />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 relative">
-          {/* Top row: Heading + Badges */}
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Badge className="bg-[#4a7dff]/10 text-[#6b9aff] border-[#4a7dff]/30 text-xs">Jarvyn Rust IDE</Badge>
-              <Badge className="bg-orange-500/10 text-orange-400 border-orange-500/30 text-xs">Built from Scratch</Badge>
-            </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-              The IDE Built for{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6b9aff] to-cyan-400">Hardware Developers</span>
-            </h1>
-          </div>
+      <PageHero
+        eyebrow="Jarvyn IDE · Built from Scratch"
+        title={<>The IDE built for <span className="text-[#003262]">hardware developers</span></>}
+        subtitle="A hardware-focused development environment for RISC-V Rust projects. Built from the ground up to eliminate context switching between datasheets, editors, and toolchains."
+      >
+        <div className="rounded-xl overflow-hidden border border-slate-200 shadow-[0_30px_60px_-20px_rgba(2,6,23,0.25)] bg-[#1e1e2e]">
+          <img src="/jarvyn-ide-screenshot.png" alt="Jarvyn IDE" className="w-full h-full object-cover object-top" data-testid="ide-hero-image" />
+        </div>
+      </PageHero>
 
-          {/* Main content: IDE image left + Problem/Solution right */}
-          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-5 items-stretch">
-            {/* IDE Screenshot */}
-            <div className="rounded-xl overflow-hidden border border-slate-700/40 shadow-2xl shadow-black/40 bg-[#1e1e2e]">
-              <img src="/jarvyn-ide-screenshot.png" alt="Jarvyn IDE" className="w-full h-full object-cover object-top" data-testid="ide-hero-image" />
-            </div>
-
-            {/* Problem + Solution stacked */}
-            <div className="flex flex-col gap-0 rounded-xl overflow-hidden border border-slate-700/40 shadow-2xl shadow-black/30">
-              {/* Problem */}
-              <div className="relative p-6 bg-gradient-to-br from-[#1c1015] to-[#150d10] border-b border-red-900/30">
-                <div className="absolute top-0 left-0 w-1 h-full bg-red-500" />
-                <div className="flex items-center gap-2.5 mb-3">
-                  <div className="w-7 h-7 rounded-full bg-red-500/15 flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                  </div>
-                  <h3 className="text-xs font-black text-red-400 uppercase tracking-[0.2em]">The Problem</h3>
+      {/* Problem & Solution */}
+      <section className="py-16 bg-slate-50/60 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-6">
+            {/* Problem */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-7 border-l-4 border-l-red-400 shadow-sm">
+              <div className="flex items-center gap-2.5 mb-3">
+                <div className="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
                 </div>
-                <p className="text-[13px] text-slate-300 leading-relaxed pl-[38px]">
-                  Generic editors and vendor-locked toolchains force embedded developers into a fragmented workflow of bloated plugins and endless datasheet context-switching.
-                </p>
+                <h3 className="text-[11px] font-bold text-red-700 uppercase tracking-[0.18em]">The Problem</h3>
               </div>
+              <p className="text-[14px] text-slate-700 leading-relaxed">
+                Generic editors and vendor-locked toolchains force embedded developers into a fragmented workflow of bloated plugins and endless datasheet context-switching.
+              </p>
+            </div>
 
-              {/* Solution */}
-              <div className="relative p-6 bg-gradient-to-br from-[#0d1a14] to-[#0a1510] flex-1">
-                <div className="absolute top-0 left-0 w-1 h-full bg-green-500" />
-                <div className="flex items-center gap-2.5 mb-4">
-                  <div className="w-7 h-7 rounded-full bg-green-500/15 flex items-center justify-center">
-                    <CheckCircle2 className="w-4 h-4 text-green-400" />
-                  </div>
-                  <h3 className="text-xs font-black text-green-400 uppercase tracking-[0.2em]">The Jarvyn Solution</h3>
+            {/* Solution */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-7 border-l-4 border-l-[#003262] shadow-sm">
+              <div className="flex items-center gap-2.5 mb-4">
+                <div className="w-7 h-7 rounded-full bg-[#003262]/10 flex items-center justify-center">
+                  <CheckCircle2 className="w-4 h-4 text-[#003262]" />
                 </div>
-                <div className="pl-[38px] space-y-3">
-                  {solutionPillars.map((p, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="text-[10px] font-bold text-green-400">{i + 1}</span>
-                      </div>
-                      <div>
-                        <span className="text-[13px] font-bold text-white">{p.title}</span>
-                        <span className="text-[12px] text-slate-400 ml-1.5">{p.desc}</span>
-                      </div>
+                <h3 className="text-[11px] font-bold text-[#003262] uppercase tracking-[0.18em]">The Jarvyn Solution</h3>
+              </div>
+              <div className="space-y-2.5">
+                {solutionPillars.map((p, i) => (
+                  <div key={p.title} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded bg-[#003262]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-[10px] font-bold text-[#003262]">{i + 1}</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="text-[13px] leading-snug">
+                      <span className="font-bold text-slate-900">{p.title}</span>
+                      <span className="text-slate-600 ml-1.5">{p.desc}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

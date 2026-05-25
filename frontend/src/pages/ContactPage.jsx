@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Send, CheckCircle2 } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
+import PageHero from "@/components/PageHero";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -34,17 +35,11 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="contact-page">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Contact</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4">Get in Touch</h1>
-            <p className="text-lg text-muted-foreground">
-              Talk to our engineering team about RISC-V solutions, partnerships, or custom development.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Contact"
+        title="Get in Touch"
+        subtitle="Talk to our engineering team about RISC-V solutions, partnerships, or custom development."
+      />
 
       {/* Contact info + Form */}
       <section className="py-16 bg-white">

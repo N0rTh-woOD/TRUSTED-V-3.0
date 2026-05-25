@@ -6,6 +6,7 @@ import {
   Globe, ArrowLeft, CheckCircle2, ArrowRight,
   Terminal, GitBranch, Users, Cloud, Code, Cpu, Lock
 } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 const WebIDEPage = () => {
   const features = [
@@ -22,69 +23,42 @@ const WebIDEPage = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="webide-page">
       {/* Hero */}
-      <section className="relative bg-[#1a1d2e] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1d2e] via-[#1e2235] to-[#252a3e]" />
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "40px 40px" }} />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
-          <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white mb-8 transition-colors" data-testid="back-to-products">
-            <ArrowLeft className="w-4 h-4" /> Back to Products
+      <PageHero
+        eyebrow="WebIDE · Cloud-Native"
+        title={<>TrusteD-V <span className="text-[#003262]">WebIDE</span></>}
+        subtitle="A full-featured browser-based development environment for RISC-V Rust projects. Compile, debug, and collaborate from anywhere with no local setup required."
+      >
+        <div className="flex flex-col gap-3">
+          <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-[#003262] transition-colors w-fit">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Products
           </Link>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <Badge className="bg-cyan-500/10 text-cyan-400 border-cyan-500/30 text-xs">WebIDE</Badge>
-                <Badge className="bg-green-500/10 text-green-400 border-green-500/30 text-xs">Cloud-Native</Badge>
-              </div>
-
-              <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
-                TrusteD-V
-                <span className="block text-cyan-400">WebIDE</span>
-              </h1>
-
-              <p className="text-base text-slate-400 leading-relaxed max-w-xl mb-6">
-                A full-featured browser-based development environment for RISC-V Rust projects.
-                Compile, debug, and collaborate from anywhere with no local setup required.
-              </p>
-
-              <div className="grid grid-cols-2 gap-3">
-                {["Cloud compilation", "Live collaboration", "Integrated terminal", "Git built-in", "Hardware targets", "Secure containers"].map((tag) => (
-                  <span key={tag} className="flex items-center gap-1.5 text-sm text-slate-400">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
-                    {tag}
-                  </span>
-                ))}
-              </div>
+          {/* Browser mockup */}
+          <div className="bg-[#0b1020] rounded-xl border border-slate-200 overflow-hidden shadow-[0_30px_60px_-20px_rgba(2,6,23,0.35)] ring-1 ring-slate-900/5">
+            <div className="flex items-center gap-2 px-4 py-2.5 bg-[#0f1530] border-b border-white/5">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+              <span className="ml-2 text-[11px] text-slate-400 font-mono">webide.trusted-v.com</span>
             </div>
-
-            {/* Browser mockup */}
-            <div className="bg-[#0d1117] rounded-xl border border-slate-700/50 overflow-hidden shadow-2xl">
-              <div className="flex items-center gap-2 px-4 py-2.5 bg-[#161b22] border-b border-slate-700/50">
-                <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-                <span className="ml-3 text-xs text-slate-500 font-mono">webide.trusted-v.com</span>
-              </div>
-              <div className="p-4 font-mono text-[11px] leading-relaxed">
-                <div className="text-slate-500">// main.rs</div>
-                <div><span className="text-[#ff7b72]">#![</span><span className="text-[#d2a8ff]">no_std</span><span className="text-[#ff7b72]">]</span></div>
-                <div><span className="text-[#ff7b72]">#![</span><span className="text-[#d2a8ff]">no_main</span><span className="text-[#ff7b72]">]</span></div>
-                <div className="text-slate-600 mt-2">// Cloud-compiled for RISC-V</div>
-                <div><span className="text-[#ff7b72]">use</span> <span className="text-[#c9d1d9]">riscv_rt::</span><span className="text-[#d2a8ff]">entry</span><span className="text-[#c9d1d9]">;</span></div>
-                <div className="mt-2"><span className="text-[#ff7b72]">#[</span><span className="text-[#d2a8ff]">entry</span><span className="text-[#ff7b72]">]</span></div>
-                <div><span className="text-[#ff7b72]">fn</span> <span className="text-[#79c0ff]">main</span><span className="text-[#c9d1d9]">() -&gt; ! {"{"}</span></div>
-                <div className="text-slate-500">{"    "}// Your firmware here</div>
-                <div><span className="text-[#c9d1d9]">{"    "}</span><span className="text-[#ff7b72]">loop</span> <span className="text-[#c9d1d9]">{"{}"}</span></div>
-                <div className="text-[#c9d1d9]">{"}"}</div>
-                <div className="mt-3 border-t border-slate-700/50 pt-2">
-                  <span className="text-[#28c840]">$</span> <span className="text-slate-400">cargo build --target riscv32imac</span>
-                  <div className="text-[#28c840] mt-1">Compiling firmware v0.1.0 ... Done &#10003;</div>
-                </div>
+            <div className="p-4 font-mono text-[11px] leading-relaxed">
+              <div className="text-slate-500">// main.rs</div>
+              <div><span className="text-[#ff7b72]">#![</span><span className="text-[#d2a8ff]">no_std</span><span className="text-[#ff7b72]">]</span></div>
+              <div><span className="text-[#ff7b72]">#![</span><span className="text-[#d2a8ff]">no_main</span><span className="text-[#ff7b72]">]</span></div>
+              <div className="text-slate-600 mt-2">// Cloud-compiled for RISC-V</div>
+              <div><span className="text-[#ff7b72]">use</span> <span className="text-[#c9d1d9]">riscv_rt::</span><span className="text-[#d2a8ff]">entry</span><span className="text-[#c9d1d9]">;</span></div>
+              <div className="mt-2"><span className="text-[#ff7b72]">#[</span><span className="text-[#d2a8ff]">entry</span><span className="text-[#ff7b72]">]</span></div>
+              <div><span className="text-[#ff7b72]">fn</span> <span className="text-[#79c0ff]">main</span><span className="text-[#c9d1d9]">() -&gt; ! {"{"}</span></div>
+              <div className="text-slate-500">{"    "}// Your firmware here</div>
+              <div><span className="text-[#c9d1d9]">{"    "}</span><span className="text-[#ff7b72]">loop</span> <span className="text-[#c9d1d9]">{"{}"}</span></div>
+              <div className="text-[#c9d1d9]">{"}"}</div>
+              <div className="mt-3 border-t border-white/10 pt-2">
+                <span className="text-[#28c840]">$</span> <span className="text-slate-400">cargo build --target riscv32imac</span>
+                <div className="text-[#28c840] mt-1">Compiling firmware v0.1.0 ... Done &#10003;</div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </PageHero>
 
       {/* Features */}
       <section className="py-20 bg-slate-50">

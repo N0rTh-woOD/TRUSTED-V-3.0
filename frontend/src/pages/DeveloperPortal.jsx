@@ -10,6 +10,7 @@ import {
   ChevronDown, ChevronRight, Layers, Shield, Box,
   Sparkles, Rocket
 } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 // Expandable Section Component (inspired by Tuya/Cursor)
 const ExpandableSection = ({ title, icon: Icon, badge, children, defaultOpen = false }) => {
@@ -71,42 +72,33 @@ const DeveloperPortal = () => {
 
   return (
     <div className="min-h-screen bg-white" data-testid="developer-portal-page">
-      {/* Hero - inspired by Tuya Developer */}
-      <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)", backgroundSize: "32px 32px" }} />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Rocket className="w-5 h-5 text-primary" />
-                <span className="text-sm font-semibold text-primary uppercase tracking-wider">Developer Portal</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
-                Build with TrusteD-V
-              </h1>
-              <p className="text-lg text-slate-400 max-w-xl leading-relaxed">
-                Documentation, tools, SDKs, and resources for developing secure RISC-V embedded systems with Rust.
-              </p>
-            </div>
-            
-            <div className="w-full lg:w-96">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-                <input
-                  type="text"
-                  placeholder="Search docs, APIs, SDKs..."
-                  className="w-full pl-10 pr-4 py-3 border border-slate-600 rounded-lg bg-slate-800/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50"
-                  data-testid="dev-portal-search"
-                />
-              </div>
-            </div>
+      {/* Hero */}
+      <PageHero
+        eyebrow="Developer Portal"
+        title="Build with TrusteD-V"
+        subtitle="Documentation, tools, SDKs, and resources for developing secure RISC-V embedded systems with Rust."
+      >
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <label className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.18em] mb-2 block">Search Documentation</label>
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search docs, APIs, SDKs..."
+              className="w-full pl-9 pr-4 h-11 border border-slate-200 rounded-md bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#003262]/30 focus:border-[#003262]/50"
+              data-testid="dev-portal-search"
+            />
+          </div>
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {["Getting Started", "Hardware", "RTOS", "Secure Boot", "AI"].map((tag) => (
+              <span key={tag} className="text-[11px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">{tag}</span>
+            ))}
           </div>
         </div>
-      </section>
+      </PageHero>
 
       {/* Quick Links */}
-      <section className="py-12 bg-white -mt-8 relative z-10">
+      <section className="py-12 bg-white relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {quickLinks.map((item, index) => {

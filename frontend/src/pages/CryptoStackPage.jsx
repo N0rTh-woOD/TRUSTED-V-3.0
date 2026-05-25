@@ -6,6 +6,7 @@ import {
   Key, ArrowRight, CheckCircle2, 
   ArrowLeft, Shield, Lock, Cpu, Fingerprint, Info
 } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 const CryptoStackPage = () => {
   const cryptoCategories = [
@@ -84,53 +85,37 @@ const CryptoStackPage = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="crypto-stack-page">
       {/* Hero */}
-      <section className="relative bg-[#1a1d2e] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1d2e] via-[#1e2235] to-[#252a3e]" />
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "40px 40px" }} />
-        
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
-          <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white mb-8 transition-colors" data-testid="back-to-products">
-            <ArrowLeft className="w-4 h-4" /> Back to Products
+      <PageHero
+        eyebrow="Cryptography"
+        title={<>TrusteD-V <span className="text-[#003262]">Crypto Stack</span></>}
+        subtitle="Comprehensive native cryptography for embedded RISC-V systems. Hardware-accelerated where available, with post-quantum algorithm support aligned to the latest NIST FIPS standards."
+      >
+        <div className="flex flex-col gap-3">
+          <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-[#003262] transition-colors w-fit" data-testid="back-to-products">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Products
           </Link>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-amber-500/15 flex items-center justify-center">
-                  <Key className="w-6 h-6 text-amber-400" />
-                </div>
-                <Badge className="bg-amber-500/10 text-amber-400 border-amber-500/30 text-xs">Cryptography</Badge>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
-                TrusteD-V
-                <span className="block text-amber-400">Crypto Stack</span>
-              </h1>
-              <p className="text-base text-slate-400 leading-relaxed max-w-xl">
-                Comprehensive native cryptography for embedded RISC-V systems. 
-                Hardware-accelerated where available, with post-quantum algorithm support 
-                aligned to the latest NIST FIPS standards.
-              </p>
+          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+            <div className="flex items-center gap-2 mb-3">
+              <Key className="w-4 h-4 text-[#003262]" />
+              <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.18em]">Standards Compliance</h3>
             </div>
-            
-            <div className="bg-[#252a3e] rounded-xl border border-slate-700/50 p-6">
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Standards Compliance</h3>
-              <div className="space-y-3">
-                {[
-                  "NIST FIPS 197 / 180-4 / 186-5 / 202",
-                  "NIST FIPS 203 (ML-KEM), 204 (ML-DSA), 205 (SLH-DSA)",
-                  "NIST SP 800-90A (DRBG), SP 800-56A (Key Agreement)",
-                  "RFC 7748 (X25519/X448 Key Exchange)",
-                  "PKCS#1 v2.2, PKCS#11 Key Management",
-                ].map((s, i) => (
-                  <div key={i} className="flex items-start gap-3 text-sm text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
-                    {s}
-                  </div>
-                ))}
-              </div>
+            <div className="space-y-2">
+              {[
+                "NIST FIPS 197 / 180-4 / 186-5 / 202",
+                "NIST FIPS 203 (ML-KEM), 204 (ML-DSA), 205 (SLH-DSA)",
+                "NIST SP 800-90A (DRBG), SP 800-56A (Key Agreement)",
+                "RFC 7748 (X25519/X448 Key Exchange)",
+                "PKCS#1 v2.2, PKCS#11 Key Management",
+              ].map((s) => (
+                <div key={s} className="flex items-start gap-2 text-[12.5px] text-slate-700 leading-snug">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#003262] mt-0.5 flex-shrink-0" />
+                  {s}
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </section>
+      </PageHero>
 
       {/* Algorithm Reference */}
       <section className="py-20 bg-slate-50">

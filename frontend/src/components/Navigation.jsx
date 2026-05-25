@@ -39,11 +39,11 @@ const Navigation = () => {
   
   return (
     <>
-      {/* Bosch-style Red Top Border */}
-      <div className="h-1 bg-[#E20015] w-full" />
+      {/* Thin Berkeley Blue brand strip */}
+      <div className="h-[2px] bg-[#003262] w-full" />
       
       {/* Main Navigation */}
-      <nav className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
+      <nav className="border-b border-slate-200 bg-white sticky top-0 z-50 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-18">
             

@@ -52,59 +52,54 @@ const Landing = () => {
       {/* ══ HERO ══ */}
       <section className="relative overflow-hidden bg-white" data-testid="hero-section">
         {/* Subtle dotted grid */}
-        <div className="absolute inset-0 opacity-[0.5] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(15,23,42,0.08) 1px, transparent 0)", backgroundSize: "28px 28px", maskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)" }} />
-        {/* Accent halos */}
-        <div className="absolute -top-20 -right-20 w-[520px] h-[520px] bg-[#003262]/[0.06] rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute -bottom-32 -left-20 w-[420px] h-[420px] bg-[#FDB515]/[0.10] rounded-full blur-[100px] pointer-events-none" />
-        {/* Top thin accent bar */}
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#003262] via-[#0F6E56] to-[#FDB515]" />
+        <div className="absolute inset-0 opacity-[0.5] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(15,23,42,0.07) 1px, transparent 0)", backgroundSize: "28px 28px", maskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)" }} />
+        {/* Soft accent halo (single, Berkeley Blue) */}
+        <div className="absolute -top-32 -right-32 w-[560px] h-[560px] bg-[#003262]/[0.06] rounded-full blur-[140px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 md:pt-16 lg:pt-20 pb-12 lg:pb-16 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-14 lg:pt-16 pb-12 lg:pb-16 relative">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* LEFT — Editorial */}
             <div className="lg:col-span-7">
-              <div className="mb-6" data-testid="hero-brand-lockup">
+              <div className="mb-5" data-testid="hero-brand-lockup">
                 <TrustedVLogo size="xl" showPoweredBy={true} />
               </div>
 
-              <div className="inline-flex items-center gap-2 bg-[#FF9933]/10 border border-[#FF9933]/30 rounded-full px-3.5 py-1.5 mb-6" data-testid="hero-made-in-india-badge">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-[#FF9933] opacity-60 animate-ping" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF9933]" />
+              <div className="inline-flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-full pl-1.5 pr-3.5 py-1 mb-5" data-testid="hero-made-in-india-badge">
+                <span className="inline-flex items-center gap-px h-4 rounded-full overflow-hidden">
+                  <span className="block w-1.5 h-4 bg-[#FF9933]" />
+                  <span className="block w-1.5 h-4 bg-white border-y border-slate-200" />
+                  <span className="block w-1.5 h-4 bg-[#138808]" />
                 </span>
-                <span className="text-[12px] sm:text-[13px] font-semibold text-[#B45309] tracking-wide">Made in India · Engineered by Bosch to the World</span>
+                <span className="text-[11.5px] sm:text-[12px] font-semibold text-slate-700 tracking-wide">Made in India &middot; Engineered by Bosch to the World</span>
               </div>
 
-              <h1 className="text-[40px] sm:text-[52px] lg:text-[62px] font-bold text-slate-900 tracking-tight mb-5 leading-[1.04]" data-testid="hero-heading">
+              <h1 className="text-[36px] sm:text-[44px] lg:text-[52px] font-bold text-slate-900 tracking-tight mb-5 leading-[1.08]" data-testid="hero-heading">
                 Secure{" "}
                 <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
                   <span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span>
                 </span>
                 <br className="hidden sm:block" />
-                <span className="relative inline-block">
-                  <span className="relative z-10">from Silicon to Application</span>
-                  <span className="absolute left-0 right-0 bottom-1 h-[10px] bg-[#FDB515]/30 -z-0 rounded-sm" />
-                </span>
+                from Silicon to Application
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-7 max-w-2xl">
+              <p className="text-[15.5px] sm:text-[16.5px] text-slate-600 leading-[1.7] mb-7 max-w-2xl font-light">
                 The world's first vertically integrated <span className="font-semibold text-slate-800">RISC-V security platform</span>. Two products under one brand: a Rust-native software &amp; toolchain ecosystem, and an AI-powered silicon pipeline from requirement to production-ready chip.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-8" data-testid="hero-cta-row">
                 <Link to="/product-suite">
-                  <Button size="lg" className="group h-12 px-6 text-[15px] font-semibold bg-[#003262] hover:bg-[#002347] text-white rounded-lg shadow-[0_10px_30px_-12px_rgba(0,50,98,0.55)] hover:shadow-[0_14px_36px_-12px_rgba(0,50,98,0.75)] transition-all duration-200" data-testid="hero-cta-products">
+                  <Button size="lg" className="group h-11 px-6 text-[14px] font-semibold bg-[#003262] hover:bg-[#002347] text-white rounded-md shadow-[0_8px_24px_-12px_rgba(0,50,98,0.5)] hover:shadow-[0_12px_28px_-12px_rgba(0,50,98,0.65)] transition-all duration-200" data-testid="hero-cta-products">
                     Explore Products
                     <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                   </Button>
                 </Link>
                 <Link to="/contact">
-                  <Button variant="outline" size="lg" className="h-12 px-6 text-[15px] font-semibold border-slate-300 text-slate-800 hover:bg-slate-900 hover:text-white hover:border-slate-900 rounded-lg transition-all duration-200" data-testid="hero-cta-contact">
+                  <Button variant="outline" size="lg" className="h-11 px-6 text-[14px] font-semibold border-slate-300 text-slate-800 hover:bg-slate-900 hover:text-white hover:border-slate-900 rounded-md transition-all duration-200" data-testid="hero-cta-contact">
                     Talk to Engineers
                   </Button>
                 </Link>
                 <Link to="/download-ide">
-                  <Button variant="ghost" size="lg" className="h-12 px-4 text-[15px] font-semibold text-slate-700 hover:text-[#003262] hover:bg-transparent rounded-lg group" data-testid="hero-cta-jarvyn">
+                  <Button variant="ghost" size="lg" className="h-11 px-3 text-[14px] font-semibold text-slate-700 hover:text-[#003262] hover:bg-transparent rounded-md group" data-testid="hero-cta-jarvyn">
                     <Terminal className="w-4 h-4 mr-1.5" /> Download Jarvyn IDE
                     <ChevronRight className="ml-1 w-4 h-4 opacity-60 transition-transform duration-200 group-hover:translate-x-0.5" />
                   </Button>
@@ -112,15 +107,15 @@ const Landing = () => {
               </div>
 
               {/* Stat strip */}
-              <div className="grid grid-cols-3 max-w-xl border-y border-slate-200/80 divide-x divide-slate-200/80" data-testid="hero-stat-row">
+              <div className="grid grid-cols-3 max-w-xl border-y border-slate-200 divide-x divide-slate-200" data-testid="hero-stat-row">
                 {[
                   { value: "48 hr", label: "Certification Run" },
                   { value: "5-Layer", label: "TVOTS Grading" },
                   { value: "2 Products", label: "One Trusted Brand" },
                 ].map((s) => (
-                  <div key={s.label} className="py-4 px-3 first:pl-0 last:pr-0">
-                    <div className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">{s.value}</div>
-                    <div className="text-[11px] uppercase tracking-[0.12em] text-slate-500 mt-0.5 font-medium">{s.label}</div>
+                  <div key={s.label} className="py-3.5 px-3 first:pl-0 last:pr-0">
+                    <div className="text-xl sm:text-[22px] font-bold text-slate-900 tracking-tight">{s.value}</div>
+                    <div className="text-[10.5px] uppercase tracking-[0.13em] text-slate-500 mt-0.5 font-semibold">{s.label}</div>
                   </div>
                 ))}
               </div>

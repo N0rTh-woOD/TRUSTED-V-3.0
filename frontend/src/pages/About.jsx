@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
   Shield, Zap, Clock, ArrowRight,
 } from "lucide-react";
+import PageHero, { RiscV } from "@/components/PageHero";
 
 const AnimatedNumber = ({ value, label, color = "#003262" }) => {
   const ref = useRef(null);
@@ -63,30 +64,12 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="about-page">
       {/* ══ HERO ══ */}
-      <section className="relative overflow-hidden bg-[#0c1020]" data-testid="about-hero">
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#003262] via-[#0F6E56] to-[#FDB515]" />
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0)", backgroundSize: "32px 32px" }} />
-        <div className="absolute -top-20 right-0 w-[520px] h-[520px] bg-[#003262]/30 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute -bottom-32 -left-20 w-[420px] h-[420px] bg-[#FDB515]/[0.06] rounded-full blur-[100px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 relative">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white/40 mb-4">
-              <span className="w-6 h-px bg-white/30" /> About Us
-            </span>
-            <h1 className="text-[40px] sm:text-[48px] lg:text-[56px] font-bold text-white tracking-tight leading-[1.05] mb-5" data-testid="about-hero-heading">
-              Building trust in the{" "}
-              <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
-                <span style={{ color: "#6B9AFF" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span>
-              </span>{" "}
-              ecosystem.
-            </h1>
-            <p className="text-base sm:text-lg text-slate-300/80 leading-relaxed max-w-xl font-light">
-              TRusteD-V is a Bosch Global Software Technologies initiative providing the secure software infrastructure and AI-powered silicon pipeline the RISC-V industry needs.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="About Us"
+        title={<>Building trust in the <RiscV /> ecosystem.</>}
+        subtitle="TRusteD-V is a Bosch Global Software Technologies initiative providing the secure software infrastructure and AI-powered silicon pipeline the RISC-V industry needs."
+        data-testid="about-hero"
+      />
 
       {/* ══ MISSION + PILLARS ══ */}
       <section className="py-20 bg-white" data-testid="about-mission">

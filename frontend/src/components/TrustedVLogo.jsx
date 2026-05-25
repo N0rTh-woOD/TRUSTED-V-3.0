@@ -5,7 +5,7 @@ const TrustedVLogo = ({ size = "md", className = "", showPoweredBy = false }) =>
     sm: { wrap: "scale-[0.6]", origin: "origin-left" },
     md: { wrap: "scale-[0.75]", origin: "origin-left" },
     lg: { wrap: "scale-[0.85]", origin: "origin-left" },
-    xl: { wrap: "scale-[1.8]", origin: "origin-left" },
+    xl: { wrap: "scale-[1.35]", origin: "origin-left" },
   };
 
   const s = scales[size] || scales.md;

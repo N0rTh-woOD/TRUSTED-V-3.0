@@ -7,6 +7,7 @@ import {
   Globe, Wrench, Shield, Package, ExternalLink
 } from "lucide-react";
 import { PartnerLogo } from "@/components/PartnerLogos";
+import PageHero, { RiscV } from "@/components/PageHero";
 
 const Partners = () => {
   const partners = [
@@ -85,24 +86,11 @@ const Partners = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="partners-page">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-semibold text-primary mb-6">
-              <Building2 className="w-4 h-4" />
-              Hardware Partners
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Built with India's <span className="text-primary">RISC-V</span> Pioneers
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              TrusteD-V partners with Indian RISC-V hardware companies to deliver 
-              a native, integrated development experience for the Indian semiconductor ecosystem.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Hardware Partners"
+        title={<>Built with India's <RiscV /> pioneers</>}
+        subtitle="TrusteD-V partners with Indian RISC-V hardware companies to deliver a native, integrated development experience for the Indian semiconductor ecosystem."
+      />
 
       {/* Partner Cards */}
       <section className="py-16 bg-white">

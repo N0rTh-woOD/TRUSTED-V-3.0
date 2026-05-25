@@ -8,6 +8,7 @@ import {
   GitBranch, Box, Wrench, ExternalLink,
   Globe, Key
 } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 const ProductSuite = () => {
   const products = [
@@ -134,20 +135,11 @@ const ProductSuite = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="product-suite-page">
       {/* Hero */}
-      <section className="py-16 lg:py-20 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Product Suite</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-6">
-              Complete Development Ecosystem
-            </h1>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-              From secure boot to AI deployment, discover the comprehensive suite of tools and SDKs 
-              for building production-ready RISC-V embedded systems with Rust.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Product Suite"
+        title="Complete Development Ecosystem"
+        subtitle="From secure boot to AI deployment, discover the comprehensive suite of tools and SDKs for building production-ready RISC-V embedded systems with Rust."
+      />
 
       {/* Products by Category */}
       {products.map((category, catIndex) => (
@@ -158,7 +150,7 @@ const ProductSuite = () => {
               <div className="w-16 h-1 bg-primary mt-2" />
             </div>
             
-            <div className={`grid gap-6 ${category.items.length <= 2 ? 'md:grid-cols-2 max-w-3xl mx-auto' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
+            <div className={`grid gap-6 ${category.items.length <= 2 ? 'md:grid-cols-2 max-w-5xl' : 'md:grid-cols-2 xl:grid-cols-3'}`}>
               {category.items.map((product, prodIndex) => {
                 const Icon = product.icon;
                 const isHighlight = product.badge === "Flagship" || product.badge === "Cloud";

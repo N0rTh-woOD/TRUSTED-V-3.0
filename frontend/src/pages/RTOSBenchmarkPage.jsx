@@ -6,6 +6,7 @@ import {
   Layers, ArrowRight, ArrowLeft, CheckCircle2, 
   Gauge, Shield, Zap, Code
 } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 const RTOSBenchmarkPage = () => {
   const benchmarks = [
@@ -29,26 +30,26 @@ const RTOSBenchmarkPage = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="rtos-benchmark-page">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-b from-blue-50/50 to-white border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary mb-8 transition-colors">
-            <ArrowLeft className="w-4 h-4" /> Back to Products
+      <PageHero
+        eyebrow="Middleware · RTOS"
+        title="RTOS Integration & Benchmarks"
+        subtitle="Pre-integrated support for TrusteD-V RTOS, FreeRTOS, Zephyr, and Embassy. See real benchmarks comparing TrusteD-V RTOS against FreeRTOS on equivalent RISC-V hardware."
+      >
+        <div className="flex flex-col gap-3">
+          <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-[#003262] transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Products
           </Link>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <Layers className="w-7 h-7 text-blue-600" />
+          <div className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-5">
+            <div className="w-12 h-12 rounded-xl bg-[#003262]/10 flex items-center justify-center">
+              <Layers className="w-6 h-6 text-[#003262]" />
             </div>
-            <Badge className="bg-blue-100 text-blue-800 border-blue-200">Middleware</Badge>
+            <div>
+              <Badge className="bg-[#003262]/10 text-[#003262] border-[#003262]/20">Middleware</Badge>
+              <div className="text-[12.5px] text-slate-600 mt-1.5">9x faster context switch &middot; Rust-native</div>
+            </div>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            RTOS Integration & Benchmarks
-          </h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Pre-integrated support for TrusteD-V RTOS, FreeRTOS, Zephyr, and Embassy. See real benchmarks 
-            comparing TrusteD-V RTOS against FreeRTOS on equivalent RISC-V hardware.
-          </p>
         </div>
-      </section>
+      </PageHero>
 
       {/* RTOS Options */}
       <section className="py-16">

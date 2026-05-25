@@ -11,6 +11,7 @@ import {
   GitBranch
 } from "lucide-react";
 import { PartnerLogo } from "@/components/PartnerLogos";
+import PageHero from "@/components/PageHero";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -127,27 +128,20 @@ const Marketplace = () => {
   return (
     <div className="min-h-screen bg-white" data-testid="marketplace-page">
       {/* Hero */}
-      <section className="py-14 lg:py-16 bg-gradient-to-b from-slate-50 to-white border-b border-border">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Marketplace</span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mt-3 mb-4">
-              Hardware & IP Marketplace
-            </h1>
-            <p className="text-base text-muted-foreground leading-relaxed">
-              Browse RISC-V development boards from our hardware partners and discover open-source and commercial IP blocks for your SoC designs.
-            </p>
-          </div>
-
-          {/* Partner logos strip */}
-          <div className="flex items-center gap-8 mt-8 pt-6 border-t border-border flex-wrap">
-            <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Partners:</span>
-            <PartnerLogo name="cdac" className="h-7 opacity-70 hover:opacity-100 transition-opacity" />
-            <PartnerLogo name="mindgrove" className="h-7 opacity-70 hover:opacity-100 transition-opacity" />
-            <PartnerLogo name="upbeat" className="h-7 opacity-70 hover:opacity-100 transition-opacity" />
+      <PageHero
+        eyebrow="Marketplace"
+        title="Hardware & IP Marketplace"
+        subtitle="Browse RISC-V development boards from our hardware partners and discover open-source and commercial IP blocks for your SoC designs."
+      >
+        <div className="bg-white border border-slate-200 rounded-xl p-6">
+          <span className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.18em]">Trusted Hardware Partners</span>
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 mt-4">
+            <PartnerLogo name="cdac" className="h-8 opacity-80 hover:opacity-100 transition-opacity" />
+            <PartnerLogo name="mindgrove" className="h-8 opacity-80 hover:opacity-100 transition-opacity" />
+            <PartnerLogo name="upbeat" className="h-8 opacity-80 hover:opacity-100 transition-opacity" />
           </div>
         </div>
-      </section>
+      </PageHero>
 
       {/* Tabs + Search */}
       <section className="sticky top-16 z-10 bg-white border-b border-border shadow-sm">
