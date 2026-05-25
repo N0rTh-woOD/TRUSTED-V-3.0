@@ -85,6 +85,17 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - **Crypto Stack Page (CryptoStackPage.jsx)**: Complete rewrite with user-provided algorithm data — 8 categories: Hashing (SHA-2/SHA-3, SHAKE — BLAKE removed), PQC Signatures (ML-DSA, SLH-DSA), PQC Key Exchange (ML-KEM), Symmetric Encryption (AES + modes with CBC/CFB deprecation note), Classical Signatures (ECDSA/EdDSA, RSA), Classical Key Exchange (ECDH, RSA-KEM), Randomness (PRNG DRBG), Future/Advanced (Side-Channel Protections). Color-coded category headers, monospaced variant tags, NIST FIPS standards references, dark hero with standards compliance card.
 - **Developer Portal Quick Start**: Upgraded code example with proper Rust syntax highlighting (GitHub dark theme colors), line numbers, terminal output bar, side info cards (What This Does + Supported Boards), dark section background.
 
+### Phase 12: Landing Hero White-Theme Premium Redesign (Completed - Feb 2026)
+- **Hero background**: Switched from dark `#0c1020` to clean white with subtle dotted grid mask, accent halos (Berkeley Blue + Saffron Gold), and a tri-color top accent bar (Blue → Teal → Gold).
+- **Hybrid layout**: 7/5 split — editorial left column + Jarvyn IDE code preview right column. Fills space with no large voids.
+- **Editorial left**: Larger TrusteD-V brand lockup, animated "Made in India · Engineered by Bosch to the World" badge, headline with gold highlight underline on "from Silicon to Application", refined description with inline bold accent.
+- **Buttons CSS**: Solid Berkeley Blue primary (with depth shadow + hover lift), outline-to-dark hover-invert secondary, ghost "Download Jarvyn IDE" tertiary with chevron micro-animation. All on rounded-lg, 12-unit height, transition-all duration-200.
+- **Stat strip**: 3-column divider stat row (48 hr / 5-Layer / 2 Products) anchoring the left column.
+- **Right visual**: Code window with macOS-style chrome (traffic lights, file title, live indicator), Rust code preview using TRusteD-V `rboot::verify_chain`, `crypto::attest`, `rtos::launch`, status bar with `cargo build --release ✓ verified`. Two floating glass cards: ISA badge (RV32/RV64 GC) top-left, Verified badge (CC EAL4+ · PSA L3) bottom-right.
+- **Feature pills**: Refreshed white-bg pills with colored icon tiles and hover lift.
+- **Trust strip**: Bottom border strip with global standards (CC EAL4+ · FIPS 140-3 · PSA L3 · ISO 26262 · IEC 62443 · SLSA L3).
+- **Smooth transition**: "Our Products" heading polished with line-accent eyebrow and stronger hierarchy.
+
 ## Key Pages & Routes
 | Route | Page | Description |
 |---|---|---|
@@ -131,4 +142,4 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - Gemini 3 Flash via emergentintegrations (Emergent LLM Key)
 
 ---
-*Last Updated: April 2026*
+*Last Updated: February 2026*

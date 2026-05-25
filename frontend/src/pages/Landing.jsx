@@ -50,70 +50,196 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* ══ HERO ══ */}
-      <section className="relative overflow-hidden bg-[#0c1020]">
-        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)", backgroundSize: "40px 40px" }} />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#003262]/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#FDB515]/5 rounded-full blur-[100px]" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
-          <div className="max-w-4xl">
-            <div className="mb-8" data-testid="hero-brand-lockup">
-              <TrustedVLogo size="xl" showPoweredBy={true} dark={true} />
+      <section className="relative overflow-hidden bg-white" data-testid="hero-section">
+        {/* Subtle dotted grid */}
+        <div className="absolute inset-0 opacity-[0.5] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(15,23,42,0.08) 1px, transparent 0)", backgroundSize: "28px 28px", maskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)" }} />
+        {/* Accent halos */}
+        <div className="absolute -top-20 -right-20 w-[520px] h-[520px] bg-[#003262]/[0.06] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute -bottom-32 -left-20 w-[420px] h-[420px] bg-[#FDB515]/[0.10] rounded-full blur-[100px] pointer-events-none" />
+        {/* Top thin accent bar */}
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#003262] via-[#0F6E56] to-[#FDB515]" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 md:pt-16 lg:pt-20 pb-12 lg:pb-16 relative">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* LEFT — Editorial */}
+            <div className="lg:col-span-7">
+              <div className="mb-6" data-testid="hero-brand-lockup">
+                <TrustedVLogo size="xl" showPoweredBy={true} />
+              </div>
+
+              <div className="inline-flex items-center gap-2 bg-[#FF9933]/10 border border-[#FF9933]/30 rounded-full px-3.5 py-1.5 mb-6" data-testid="hero-made-in-india-badge">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-[#FF9933] opacity-60 animate-ping" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF9933]" />
+                </span>
+                <span className="text-[12px] sm:text-[13px] font-semibold text-[#B45309] tracking-wide">Made in India · Engineered by Bosch to the World</span>
+              </div>
+
+              <h1 className="text-[40px] sm:text-[52px] lg:text-[62px] font-bold text-slate-900 tracking-tight mb-5 leading-[1.04]" data-testid="hero-heading">
+                Secure{" "}
+                <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
+                  <span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span>
+                </span>
+                <br className="hidden sm:block" />
+                <span className="relative inline-block">
+                  <span className="relative z-10">from Silicon to Application</span>
+                  <span className="absolute left-0 right-0 bottom-1 h-[10px] bg-[#FDB515]/30 -z-0 rounded-sm" />
+                </span>
+              </h1>
+
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-7 max-w-2xl">
+                The world's first vertically integrated <span className="font-semibold text-slate-800">RISC-V security platform</span>. Two products under one brand: a Rust-native software &amp; toolchain ecosystem, and an AI-powered silicon pipeline from requirement to production-ready chip.
+              </p>
+
+              <div className="flex flex-wrap gap-3 mb-8" data-testid="hero-cta-row">
+                <Link to="/product-suite">
+                  <Button size="lg" className="group h-12 px-6 text-[15px] font-semibold bg-[#003262] hover:bg-[#002347] text-white rounded-lg shadow-[0_10px_30px_-12px_rgba(0,50,98,0.55)] hover:shadow-[0_14px_36px_-12px_rgba(0,50,98,0.75)] transition-all duration-200" data-testid="hero-cta-products">
+                    Explore Products
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </Button>
+                </Link>
+                <Link to="/contact">
+                  <Button variant="outline" size="lg" className="h-12 px-6 text-[15px] font-semibold border-slate-300 text-slate-800 hover:bg-slate-900 hover:text-white hover:border-slate-900 rounded-lg transition-all duration-200" data-testid="hero-cta-contact">
+                    Talk to Engineers
+                  </Button>
+                </Link>
+                <Link to="/download-ide">
+                  <Button variant="ghost" size="lg" className="h-12 px-4 text-[15px] font-semibold text-slate-700 hover:text-[#003262] hover:bg-transparent rounded-lg group" data-testid="hero-cta-jarvyn">
+                    <Terminal className="w-4 h-4 mr-1.5" /> Download Jarvyn IDE
+                    <ChevronRight className="ml-1 w-4 h-4 opacity-60 transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Stat strip */}
+              <div className="grid grid-cols-3 max-w-xl border-y border-slate-200/80 divide-x divide-slate-200/80" data-testid="hero-stat-row">
+                {[
+                  { value: "48 hr", label: "Certification Run" },
+                  { value: "5-Layer", label: "TVOTS Grading" },
+                  { value: "2 Products", label: "One Trusted Brand" },
+                ].map((s) => (
+                  <div key={s.label} className="py-4 px-3 first:pl-0 last:pr-0">
+                    <div className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">{s.value}</div>
+                    <div className="text-[11px] uppercase tracking-[0.12em] text-slate-500 mt-0.5 font-medium">{s.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-            
-            <div className="inline-flex items-center gap-2 bg-[#FF9933]/10 border border-[#FF9933]/25 rounded-full px-4 py-1.5 mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#FF9933]" />
-              <span className="text-sm font-semibold text-[#FFB366]">Made in India, Engineered by Bosch to the World</span>
-            </div>
-            
-            <h1 className="text-[40px] sm:text-[52px] lg:text-[64px] font-bold text-white tracking-tight mb-5 leading-[1.05]" data-testid="hero-heading">
-              Secure{" "}
-              <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}><span style={{ color: "#6B9AFF" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span></span>{" "}
-              from Silicon<br className="hidden sm:block" /> to Application
-            </h1>
-            
-            <p className="text-lg sm:text-xl text-slate-400 leading-relaxed mb-8 max-w-2xl">
-              The world's first vertically integrated RISC-V security platform. Two products under one brand: a Rust-based software and toolchain ecosystem, and an AI-powered silicon pipeline from requirement to production.
-            </p>
-            
-            <div className="flex flex-wrap gap-4 mb-12">
-              <Link to="/product-suite">
-                <Button size="lg" className="h-13 px-8 text-base font-semibold bg-white text-[#0c1020] hover:bg-white/90 shadow-lg" data-testid="hero-cta-products">
-                  Explore Products <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button variant="outline" size="lg" className="h-13 px-8 text-base font-semibold border-white/20 text-white hover:bg-white/10" data-testid="hero-cta-contact">
-                  Talk to Engineers
-                </Button>
-              </Link>
-            </div>
-            
-            {/* Hero feature pills */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {[
-                { icon: Shield, label: "CC EAL4+ / FIPS 140-3" },
-                { icon: Cpu, label: "RISC-V RV32 & RV64" },
-                { icon: Lock, label: "Rust Memory Safety" },
-                { icon: Zap, label: "48hr Certification" },
-              ].map((p, i) => (
-                <div key={i} className="flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5">
-                  <p.icon className="w-4 h-4 text-[#6B9AFF] flex-shrink-0" />
-                  <span className="text-xs font-medium text-slate-300">{p.label}</span>
+
+            {/* RIGHT — Visual: Jarvyn IDE Code Preview */}
+            <div className="lg:col-span-5 relative" data-testid="hero-code-preview">
+              {/* Floating badge top-left */}
+              <div className="absolute -top-4 -left-4 sm:-left-6 z-20 bg-white rounded-xl border border-slate-200 shadow-xl px-3.5 py-2.5 flex items-center gap-2.5 hidden sm:flex">
+                <div className="w-8 h-8 rounded-lg bg-[#003262]/10 flex items-center justify-center">
+                  <Cpu className="w-4 h-4 text-[#003262]" />
                 </div>
-              ))}
+                <div>
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">ISA</div>
+                  <div className="text-[12px] font-bold text-slate-900 -mt-0.5">RV32 / RV64 GC</div>
+                </div>
+              </div>
+
+              {/* Floating badge bottom-right */}
+              <div className="absolute -bottom-4 -right-2 sm:-right-4 z-20 bg-white rounded-xl border border-slate-200 shadow-xl px-3.5 py-2.5 flex items-center gap-2.5 hidden sm:flex">
+                <div className="w-8 h-8 rounded-lg bg-[#FDB515]/15 flex items-center justify-center">
+                  <Shield className="w-4 h-4 text-[#B45309]" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Verified</div>
+                  <div className="text-[12px] font-bold text-slate-900 -mt-0.5">CC EAL4+ · PSA L3</div>
+                </div>
+              </div>
+
+              {/* Code Window */}
+              <div className="relative rounded-2xl bg-[#0b1020] border border-slate-200 shadow-[0_30px_60px_-20px_rgba(2,6,23,0.35)] overflow-hidden ring-1 ring-slate-900/5">
+                {/* Window chrome */}
+                <div className="flex items-center justify-between px-4 py-2.5 bg-[#0f1530] border-b border-white/5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                  </div>
+                  <div className="text-[11px] font-mono text-slate-400">main.rs &mdash; Jarvyn IDE</div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">Live</span>
+                  </div>
+                </div>
+                {/* Code body */}
+                <pre className="text-[12.5px] leading-[1.7] font-mono p-5 overflow-hidden text-slate-200 select-none">
+<span className="text-slate-500">{`// Boot RISC-V securely from ROM`}</span>{"\n"}
+<span className="text-[#c792ea]">use</span> <span className="text-[#82aaff]">trustedv</span>::{`{`}<span className="text-[#ffcb6b]">rboot</span>, <span className="text-[#ffcb6b]">rtos</span>, <span className="text-[#ffcb6b]">crypto</span>{`}`};{"\n\n"}
+<span className="text-[#c792ea]">#[</span><span className="text-[#82aaff]">no_std</span><span className="text-[#c792ea]">]</span>{"\n"}
+<span className="text-[#c792ea]">#[</span><span className="text-[#82aaff]">entry</span><span className="text-[#c792ea]">]</span>{"\n"}
+<span className="text-[#c792ea]">fn</span> <span className="text-[#82aaff]">main</span>() {"->"} ! {`{`}{"\n"}
+{"  "}<span className="text-slate-500">{`// Immutable root of trust`}</span>{"\n"}
+{"  "}<span className="text-[#c792ea]">let</span> chain = <span className="text-[#ffcb6b]">rboot</span>::<span className="text-[#82aaff]">verify_chain</span>()?;{"\n"}
+{"  "}<span className="text-[#ffcb6b]">crypto</span>::<span className="text-[#82aaff]">attest</span>(&amp;chain, <span className="text-[#c3e88d]">"PSA-L3"</span>);{"\n\n"}
+{"  "}<span className="text-slate-500">{`// Hand off to hardened RTOS`}</span>{"\n"}
+{"  "}<span className="text-[#ffcb6b]">rtos</span>::<span className="text-[#82aaff]">launch</span>(<span className="text-[#82aaff]">App</span>::<span className="text-[#82aaff]">new</span>())<span className="text-[#89ddff]">.</span><span className="text-[#82aaff]">run</span>(){"\n"}
+{`}`}
+                </pre>
+                {/* Status bar */}
+                <div className="flex items-center justify-between px-4 py-2 bg-[#0f1530] border-t border-white/5 text-[11px] font-mono">
+                  <div className="flex items-center gap-3 text-slate-400">
+                    <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#6B9AFF]" />RISC-V RV64GC</span>
+                    <span className="text-slate-600">·</span>
+                    <span>cargo build --release</span>
+                  </div>
+                  <span className="text-emerald-400 flex items-center gap-1"><CheckCircle2 className="w-3 h-3" />verified</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Feature pills row */}
+          <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-3" data-testid="hero-feature-pills">
+            {[
+              { icon: Shield, label: "CC EAL4+ / FIPS 140-3", tone: "#003262" },
+              { icon: Cpu, label: "RISC-V RV32 & RV64", tone: "#0F6E56" },
+              { icon: Lock, label: "Rust Memory Safety", tone: "#B7410E" },
+              { icon: Zap, label: "48-hour Certification", tone: "#B45309" },
+            ].map((p) => (
+              <div key={p.label} className="group flex items-center gap-2.5 bg-white border border-slate-200 hover:border-slate-300 rounded-lg px-3.5 py-3 transition-all hover:shadow-md hover:-translate-y-0.5">
+                <span className="w-8 h-8 rounded-md flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${p.tone}12` }}>
+                  <p.icon className="w-4 h-4" style={{ color: p.tone }} />
+                </span>
+                <span className="text-[12.5px] font-semibold text-slate-800 leading-tight">{p.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom trust strip */}
+        <div className="border-t border-slate-200/80 bg-slate-50/60 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">Built to global standards</span>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12px] font-semibold text-slate-600">
+              <span>CC EAL4+</span>
+              <span className="text-slate-300">·</span>
+              <span>FIPS 140-3</span>
+              <span className="text-slate-300">·</span>
+              <span>PSA Certified L3</span>
+              <span className="text-slate-300">·</span>
+              <span>ISO 26262 ASIL-D</span>
+              <span className="text-slate-300">·</span>
+              <span>IEC 62443</span>
+              <span className="text-slate-300">·</span>
+              <span>SLSA L3</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* ══ TWO PRODUCTS ══ */}
-      <section className="py-16 bg-white border-t border-border">
+      <section className="py-20 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Our Products</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 mb-3">One brand. Two specialised products.</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Under TRusteD-V, two distinct products address the complete RISC-V journey: from secure software foundation to AI-generated, production-certified silicon.</p>
+          <div className="text-center mb-12 max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-2 text-[11px] font-bold text-[#003262] uppercase tracking-[0.18em]">
+              <span className="w-6 h-px bg-[#003262]/40" /> Our Products <span className="w-6 h-px bg-[#003262]/40" />
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4 tracking-tight">One brand. <span className="text-[#003262]">Two specialised products.</span></h2>
+            <p className="text-slate-600 leading-relaxed">Under TRusteD-V, two distinct products address the complete RISC-V journey: from secure software foundation to AI-generated, production-certified silicon.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {/* Software & Toolchain */}
