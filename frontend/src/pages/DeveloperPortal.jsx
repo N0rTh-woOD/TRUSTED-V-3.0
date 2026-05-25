@@ -79,20 +79,35 @@ const DeveloperPortal = () => {
         subtitle="Documentation, tools, SDKs, and resources for developing secure RISC-V embedded systems with Rust."
       >
         <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <label className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.18em] mb-2 block">Search Documentation</label>
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search docs, APIs, SDKs..."
-              className="w-full pl-9 pr-4 h-11 border border-slate-200 rounded-md bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#003262]/30 focus:border-[#003262]/50"
-              data-testid="dev-portal-search"
-            />
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.18em]">Ecosystem at a glance</span>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live
+            </span>
           </div>
-          <div className="flex flex-wrap gap-1.5 mt-3">
-            {["Getting Started", "Hardware", "RTOS", "Secure Boot", "AI"].map((tag) => (
-              <span key={tag} className="text-[11px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">{tag}</span>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+            {[
+              { value: "20+", label: "SDKs & Crates" },
+              { value: "6", label: "Supported Boards" },
+              { value: "5", label: "RTOS Integrations" },
+              { value: "100%", label: "Rust-native APIs" },
+            ].map((s) => (
+              <div key={s.label}>
+                <div className="text-2xl font-bold text-slate-900 leading-none">{s.value}</div>
+                <div className="text-[11px] text-slate-500 mt-1 font-medium uppercase tracking-[0.1em]">{s.label}</div>
+              </div>
             ))}
+          </div>
+          <div className="border-t border-slate-200 mt-5 pt-4 flex flex-wrap gap-2">
+            <Link to="/download-ide" className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#003262] bg-[#003262]/[0.06] hover:bg-[#003262]/[0.12] border border-[#003262]/15 rounded-md px-2.5 py-1.5 transition-colors">
+              <Download className="w-3.5 h-3.5" /> Get Jarvyn IDE
+            </Link>
+            <a href="https://github.com/riscv-rust/riscv-rust-quickstart" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-md px-2.5 py-1.5 transition-colors">
+              <GitBranch className="w-3.5 h-3.5" /> Quickstart Repo
+            </a>
+            <Link to="/marketplace" className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-md px-2.5 py-1.5 transition-colors">
+              <Cpu className="w-3.5 h-3.5" /> Hardware Catalog
+            </Link>
           </div>
         </div>
       </PageHero>
