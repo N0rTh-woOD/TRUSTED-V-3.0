@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import DOMPurify from "dompurify";
 import { 
   Cpu, Code, Layers, Download, ArrowRight, 
   CheckCircle2, ChevronRight,
@@ -183,7 +184,7 @@ ${/* Same SVG layers as before but with side labels enabled */""}`
 
   return (
     <div data-testid="engine-arch-diagram" className="tv-eng-wrap">
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html, { ADD_TAGS: ['style'], ADD_ATTR: ['style', 'class', 'viewBox', 'fill', 'stroke', 'stroke-width', 'cx', 'cy', 'r', 'rx', 'ry', 'x', 'y', 'x1', 'y1', 'x2', 'y2', 'width', 'height', 'points', 'd', 'text-anchor', 'font-size', 'font-family', 'font-weight', 'letter-spacing', 'paint-order', 'stop-color', 'stop-offset', 'offset', 'opacity', 'overflow', 'transform', 'data-layer'] }) }} />
     </div>
   );
 };

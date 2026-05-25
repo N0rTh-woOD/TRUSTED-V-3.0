@@ -9,10 +9,10 @@ import os
 BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://embedded-ai-builder.preview.emergentagent.com').rstrip('/')
 
 # Test credentials
-DEMO_EMAIL = "demo@trusted-v.com"
-DEMO_PASSWORD = "demo@2025"
-ADMIN_EMAIL = "admin@trusted-v.com"
-ADMIN_PASSWORD = "bosch@2425"
+DEMO_EMAIL = os.environ.get("TEST_DEMO_EMAIL", "demo@trusted-v.com")
+DEMO_PASSWORD = os.environ.get("TEST_DEMO_PASSWORD", "demo@2025")
+ADMIN_EMAIL = os.environ.get("TEST_ADMIN_EMAIL", "admin@trusted-v.com")
+ADMIN_PASSWORD = os.environ.get("TEST_ADMIN_PASSWORD", "bosch@2425")
 
 
 class TestRegistrationDisabled:
@@ -44,7 +44,7 @@ class TestDemoUserLogin:
         data = response.json()
         assert "access_token" in data, "Response should contain access_token"
         assert data["user"]["email"] == DEMO_EMAIL
-        assert data["user"]["is_admin"] == False, "Demo user should not be admin"
+        assert data["user"]["is_admin"] is False, "Demo user should not be admin"
         print(f"✅ Demo login successful: {data['user']['email']}")
         return data["access_token"]
     
@@ -71,7 +71,7 @@ class TestAdminLogin:
         data = response.json()
         assert "access_token" in data, "Response should contain access_token"
         assert data["user"]["email"] == ADMIN_EMAIL
-        assert data["user"]["is_admin"] == True, "Admin user should have is_admin=True"
+        assert data["user"]["is_admin"] is True, "Admin user should have is_admin=True"
         print(f"✅ Admin login successful: {data['user']['email']} (is_admin={data['user']['is_admin']})")
 
 

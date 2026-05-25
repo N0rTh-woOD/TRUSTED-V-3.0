@@ -157,7 +157,6 @@ const SmartProjectBuilder = () => {
       setMiddleware(mwRes.data);
       setSoftwareComponents(swRes.data);
     } catch (error) {
-      console.error("Failed to load data:", error);
       toast.error("Failed to load catalog data");
     } finally {
       setLoading(false);
@@ -337,7 +336,6 @@ const SmartProjectBuilder = () => {
       toast.success(`Project generated! Version ${response.data.version}`);
     } catch (error) {
       clearInterval(progressInterval);
-      console.error("Failed to generate project:", error);
       toast.error(error.response?.data?.detail || "Failed to generate project");
     } finally {
       setGenerating(false);
@@ -370,7 +368,6 @@ const SmartProjectBuilder = () => {
 
       toast.success("Project downloaded!");
     } catch (error) {
-      console.error("Failed to download project:", error);
       toast.error("Failed to download project");
     }
   };

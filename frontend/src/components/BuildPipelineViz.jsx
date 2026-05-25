@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import DOMPurify from "dompurify";
 
 const PIPELINE_CSS = `
 .tv-pipeline{width:100%;max-width:780px;margin:0 auto;padding:0 0 12px;font-family:'Helvetica Neue',Arial,sans-serif}
@@ -475,7 +476,7 @@ export const BuildPipelineViz = () => {
     <div
       data-testid="build-pipeline-viz"
       className="tv-pipeline"
-      dangerouslySetInnerHTML={{ __html: PIPELINE_HTML }}
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(PIPELINE_HTML, { ADD_TAGS: ['style'], ADD_ATTR: ['style', 'class'] }) }}
     />
   );
 };

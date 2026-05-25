@@ -43,7 +43,6 @@ const AdminMiddleware = () => {
       const response = await axios.get(`${API}/middleware`);
       setMiddleware(response.data);
     } catch (error) {
-      console.error("Failed to load middleware:", error);
       toast.error("Failed to load middleware");
     } finally {
       setLoading(false);
@@ -85,7 +84,6 @@ const AdminMiddleware = () => {
       setShowDialog(false);
       loadMiddleware();
     } catch (error) {
-      console.error("Failed to save middleware:", error);
       toast.error("Failed to save middleware");
     }
   };
@@ -100,7 +98,6 @@ const AdminMiddleware = () => {
       toast.success("Middleware deleted successfully");
       loadMiddleware();
     } catch (error) {
-      console.error("Failed to delete middleware:", error);
       toast.error("Failed to delete middleware");
     }
   };

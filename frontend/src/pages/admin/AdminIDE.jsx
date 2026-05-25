@@ -47,7 +47,6 @@ const AdminIDE = () => {
       const response = await axios.get(`${API}/ide-downloads`);
       setDownloads(response.data);
     } catch (error) {
-      console.error("Failed to load IDE downloads:", error);
       toast.error("Failed to load IDE downloads");
     } finally {
       setLoading(false);
@@ -89,7 +88,6 @@ const AdminIDE = () => {
       setShowDialog(false);
       loadDownloads();
     } catch (error) {
-      console.error("Failed to save IDE download:", error);
       toast.error("Failed to save IDE download");
     }
   };
@@ -104,7 +102,6 @@ const AdminIDE = () => {
       toast.success("IDE download deleted successfully");
       loadDownloads();
     } catch (error) {
-      console.error("Failed to delete IDE download:", error);
       toast.error("Failed to delete IDE download");
     }
   };
@@ -139,7 +136,6 @@ const AdminIDE = () => {
       toast.success(`Binary uploaded successfully! Size: ${response.data.size}`);
       loadDownloads();
     } catch (error) {
-      console.error("Upload failed:", error);
       toast.error(error.response?.data?.detail || "Failed to upload binary");
     } finally {
       setUploadingId(null);

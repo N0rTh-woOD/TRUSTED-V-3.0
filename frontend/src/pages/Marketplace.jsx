@@ -88,6 +88,7 @@ const Marketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedManufacturer, setSelectedManufacturer] = useState("all");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { loadHardware(); }, []);
 
   const loadHardware = async () => {
@@ -95,7 +96,6 @@ const Marketplace = () => {
       const res = await axios.get(`${BACKEND_URL}/api/hardware`);
       setHardware(res.data);
     } catch (error) {
-      console.error("Failed to load hardware:", error);
     } finally { setLoading(false); }
   };
 

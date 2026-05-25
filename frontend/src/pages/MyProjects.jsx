@@ -36,7 +36,6 @@ const MyProjects = () => {
       });
       setProjects(response.data);
     } catch (error) {
-      console.error("Failed to load projects:", error);
       toast.error("Failed to load projects");
     } finally {
       setLoading(false);
@@ -65,7 +64,6 @@ const MyProjects = () => {
 
       toast.success(`Downloaded version ${version}`);
     } catch (error) {
-      console.error("Failed to download:", error);
       toast.error("Download failed");
     } finally {
       setDownloadingVersion(null);
@@ -84,7 +82,6 @@ const MyProjects = () => {
       toast.success("Project deleted successfully");
       loadProjects();
     } catch (error) {
-      console.error("Failed to delete project:", error);
       toast.error("Failed to delete project");
     }
   };

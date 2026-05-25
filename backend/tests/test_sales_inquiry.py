@@ -157,7 +157,7 @@ class TestAuthenticationFlow:
         assert "access_token" in data
         assert "user" in data
         assert data["user"]["email"] == "admin@trusted-v.com"
-        assert data["user"]["is_admin"] == True
+        assert data["user"]["is_admin"] is True
         print("✓ Admin login successful")
         return data["access_token"]
     

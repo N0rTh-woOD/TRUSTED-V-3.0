@@ -47,7 +47,6 @@ const AdminHardware = () => {
       const response = await axios.get(`${API}/hardware`);
       setHardware(response.data);
     } catch (error) {
-      console.error("Failed to load hardware:", error);
       toast.error("Failed to load hardware");
     } finally {
       setLoading(false);
@@ -93,7 +92,6 @@ const AdminHardware = () => {
       setShowDialog(false);
       loadHardware();
     } catch (error) {
-      console.error("Failed to save hardware:", error);
       toast.error("Failed to save hardware");
     }
   };
@@ -108,7 +106,6 @@ const AdminHardware = () => {
       toast.success("Hardware deleted successfully");
       loadHardware();
     } catch (error) {
-      console.error("Failed to delete hardware:", error);
       toast.error("Failed to delete hardware");
     }
   };

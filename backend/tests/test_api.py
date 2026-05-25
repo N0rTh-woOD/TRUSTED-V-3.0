@@ -13,8 +13,8 @@ if not BASE_URL:
 API = f"{BASE_URL}/api"
 
 # New admin credentials 
-ADMIN_EMAIL = "admin@trusted-v.com"
-ADMIN_PASSWORD = "bosch@2425"
+ADMIN_EMAIL = os.environ.get("TEST_ADMIN_EMAIL", "admin@trusted-v.com")
+ADMIN_PASSWORD = os.environ.get("TEST_ADMIN_PASSWORD", "bosch@2425")
 
 
 class TestAdminAuth:
@@ -29,7 +29,7 @@ class TestAdminAuth:
         assert response.status_code == 200
         data = response.json()
         assert "access_token" in data
-        assert data["user"]["is_admin"] == True
+        assert data["user"]["is_admin"] is True
         assert data["user"]["email"] == ADMIN_EMAIL
 
     def test_admin_login_invalid_password(self):

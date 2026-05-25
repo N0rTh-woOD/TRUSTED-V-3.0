@@ -55,7 +55,6 @@ const AdminLLM = () => {
         setApiKeyType(settingsRes.data.api_key_type || "emergent");
       }
     } catch (error) {
-      console.error("Failed to load LLM settings:", error);
       toast.error("Failed to load LLM settings");
     } finally {
       setLoading(false);
@@ -88,7 +87,6 @@ const AdminLLM = () => {
       toast.success("LLM settings saved successfully");
       loadData();
     } catch (error) {
-      console.error("Failed to save LLM settings:", error);
       toast.error("Failed to save LLM settings");
     } finally {
       setSaving(false);

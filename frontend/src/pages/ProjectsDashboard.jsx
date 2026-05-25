@@ -22,7 +22,6 @@ const ProjectsDashboard = () => {
       const response = await axios.get(`${API}/projects`);
       setProjects(response.data);
     } catch (error) {
-      console.error("Failed to load projects:", error);
     } finally {
       setLoading(false);
     }

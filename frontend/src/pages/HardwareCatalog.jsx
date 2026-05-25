@@ -28,7 +28,6 @@ const HardwareCatalog = () => {
       const res = await axios.get(`${BACKEND_URL}/api/hardware`);
       setHardware(res.data);
     } catch (error) {
-      console.error("Failed to load hardware:", error);
     } finally {
       setLoading(false);
     }

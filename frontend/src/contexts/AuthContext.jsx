@@ -44,18 +44,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      console.log("Login attempt:", { email, API });
       const response = await axios.post(`${API}/auth/login`, { email, password });
-      console.log("Login response:", response.data);
       
       setToken(response.data.access_token);
       setUser(response.data.user);
       localStorage.setItem("token", response.data.access_token);
       
-      console.log("Login successful, token set");
       return response.data;
     } catch (error) {
-      console.error("Login error:", error);
       throw error;
     }
   };

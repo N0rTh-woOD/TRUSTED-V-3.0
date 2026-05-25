@@ -14,8 +14,8 @@ if not BASE_URL:
 API = f"{BASE_URL}/api"
 
 # Admin credentials 
-ADMIN_EMAIL = "admin@trusted-v.com"
-ADMIN_PASSWORD = "bosch@2425"
+ADMIN_EMAIL = os.environ.get("TEST_ADMIN_EMAIL", "admin@trusted-v.com")
+ADMIN_PASSWORD = os.environ.get("TEST_ADMIN_PASSWORD", "bosch@2425")
 
 
 class TestBoardSupportRequestEndpoints:

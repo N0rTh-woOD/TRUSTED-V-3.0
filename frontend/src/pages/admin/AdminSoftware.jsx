@@ -70,7 +70,6 @@ const AdminSoftware = () => {
       const response = await axios.get(url);
       setComponents(response.data);
     } catch (error) {
-      console.error("Failed to load components:", error);
       toast.error("Failed to load software components");
     } finally {
       setLoading(false);
@@ -131,7 +130,6 @@ const AdminSoftware = () => {
       setShowDialog(false);
       loadComponents();
     } catch (error) {
-      console.error("Failed to save component:", error);
       toast.error(error.response?.data?.detail || "Failed to save component");
     }
   };
@@ -146,7 +144,6 @@ const AdminSoftware = () => {
       toast.success("Component deleted successfully");
       loadComponents();
     } catch (error) {
-      console.error("Failed to delete component:", error);
       toast.error("Failed to delete component");
     }
   };
