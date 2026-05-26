@@ -122,7 +122,7 @@ const Landing = () => {
                 {/* Flip card */}
                 <div
                   className="relative w-full group cursor-pointer"
-                  style={{ aspectRatio: "492 / 765" }}
+                  style={{ aspectRatio: "1 / 1.25" }}
                   data-testid="chip-flip-card"
                 >
                   <div className="relative w-full h-full transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
