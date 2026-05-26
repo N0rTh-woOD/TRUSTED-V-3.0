@@ -21,8 +21,8 @@ const RTOSBenchmarkPage = () => {
   ];
 
   const rtosOptions = [
-    { name: "TrusteD-V RTOS", desc: "Custom Rust RTOS built for RISC-V with memory-safe concurrency and 9x faster context switching.", features: ["9x faster context switch", "12x faster task creation", "100% memory safe (Rust)", "Compile-time GPIO verification", "Sub-ms real-time response"] },
-    { name: "FreeRTOS", desc: "Industry-standard RTOS with broad ecosystem support. Supported via C FFI bindings in TrusteD-V.", features: ["Broad ecosystem", "Legacy project support", "C FFI bindings", "Pre-configured for RISC-V"] },
+    { name: "TRUSTED-V RTOS", desc: "Custom Rust RTOS built for RISC-V with memory-safe concurrency and 9x faster context switching.", features: ["9x faster context switch", "12x faster task creation", "100% memory safe (Rust)", "Compile-time GPIO verification", "Sub-ms real-time response"] },
+    { name: "FreeRTOS", desc: "Industry-standard RTOS with broad ecosystem support. Supported via C FFI bindings in TRUSTED-V.", features: ["Broad ecosystem", "Legacy project support", "C FFI bindings", "Pre-configured for RISC-V"] },
     { name: "Zephyr RTOS", desc: "Linux Foundation-backed RTOS with built-in networking and security features.", features: ["Built-in networking", "Bluetooth & WiFi", "Security subsystem", "RISC-V support"] },
     { name: "Embassy", desc: "Async Rust framework for embedded. No RTOS needed. Cooperative multitasking at compile time.", features: ["Async/await native", "Zero-overhead concurrency", "No scheduler overhead", "Timer-based task execution"] },
   ];
@@ -33,7 +33,7 @@ const RTOSBenchmarkPage = () => {
       <PageHero
         eyebrow="Middleware · RTOS"
         title="RTOS Integration & Benchmarks"
-        subtitle="Pre-integrated support for TrusteD-V RTOS, FreeRTOS, Zephyr, and Embassy. See real benchmarks comparing TrusteD-V RTOS against FreeRTOS on equivalent RISC-V hardware."
+        subtitle="Pre-integrated support for TRUSTED-V RTOS, FreeRTOS, Zephyr, and Embassy. See real benchmarks comparing TRUSTED-V RTOS against FreeRTOS on equivalent RISC-V hardware."
       >
         <div className="flex flex-col gap-3">
           <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-[#003262] transition-colors">
@@ -85,11 +85,11 @@ const RTOSBenchmarkPage = () => {
           <div className="text-center mb-10">
             <span className="text-sm font-semibold text-blue-400 uppercase tracking-wider">Performance</span>
             <h2 className="text-3xl font-bold text-white mt-2 mb-3">
-              TrusteD-V RTOS <span className="text-slate-400 font-normal">vs FreeRTOS</span>
+              TRUSTED-V RTOS <span className="text-slate-400 font-normal">vs FreeRTOS</span>
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto text-sm">
               All measurements in CPU cycles on equivalent RISC-V hardware. Lower is better. 
-              TrusteD-V RTOS trades marginal IPC overhead for complete memory safety via Rust.
+              TRUSTED-V RTOS trades marginal IPC overhead for complete memory safety via Rust.
             </p>
           </div>
           
@@ -155,7 +155,7 @@ const RTOSBenchmarkPage = () => {
           </div>
           
           <p className="text-xs text-slate-500 mt-6 text-center">
-            Verdict: TrusteD-V RTOS delivers fast context switching (9x), memory safety (Rust), and sub-ms real-time response. 
+            Verdict: TRUSTED-V RTOS delivers fast context switching (9x), memory safety (Rust), and sub-ms real-time response. 
             Contended IPC is 4-5x slower than FreeRTOS, an acceptable trade-off for safety-critical applications.
           </p>
         </div>
@@ -164,7 +164,7 @@ const RTOSBenchmarkPage = () => {
       {/* CTA */}
       <section className="py-14 bg-blue-600">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">Get Started with TrusteD-V RTOS</h3>
+          <h3 className="text-2xl font-bold text-white mb-4">Get Started with TRUSTED-V RTOS</h3>
           <div className="flex justify-center gap-4 flex-wrap">
             <Link to="/contact-sales?plan=pro">
               <Button size="lg" className="bg-white text-blue-700 hover:bg-white/90 font-semibold">

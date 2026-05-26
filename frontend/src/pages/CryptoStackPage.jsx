@@ -87,7 +87,7 @@ const CryptoStackPage = () => {
       {/* Hero */}
       <PageHero
         eyebrow="Cryptography"
-        title={<>TrusteD-V <span className="text-[#003262]">Crypto Stack</span></>}
+        title={<>TRUSTED-V <span className="text-[#003262]">Crypto Stack</span></>}
         subtitle="Comprehensive native cryptography for embedded RISC-V systems. Hardware-accelerated where available, with post-quantum algorithm support aligned to the latest NIST FIPS standards."
       >
         <div className="flex flex-col gap-3">
@@ -208,7 +208,7 @@ const CryptoStackPage = () => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h3 className="text-2xl font-bold text-white mb-4">Integrate the Crypto Stack</h3>
           <p className="text-amber-100 mb-6 max-w-xl mx-auto text-sm">
-            Available as part of the TrusteD-V SDK. Contact sales for post-quantum crypto access and hardware acceleration support.
+            Available as part of the TRUSTED-V SDK. Contact sales for post-quantum crypto access and hardware acceleration support.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <Link to="/contact-sales?plan=pro">

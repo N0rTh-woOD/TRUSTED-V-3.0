@@ -47,7 +47,7 @@ const ExpandableSection = ({ title, icon: Icon, badge, children, defaultOpen = f
 const DeveloperPortal = () => {
   const quickLinks = [
     { title: "Getting Started", description: "Set up your environment and create your first RISC-V Rust project.", icon: PlayCircle, link: "/download-ide", badge: "Start Here" },
-    { title: "API Reference", description: "Complete API documentation for all TrusteD-V SDKs and libraries.", icon: FileCode, link: "/developer-portal", badge: "Docs" },
+    { title: "API Reference", description: "Complete API documentation for all TRUSTED-V SDKs and libraries.", icon: FileCode, link: "/developer-portal", badge: "Docs" },
     { title: "Hardware Guides", description: "Board-specific setup instructions and peripheral configuration.", icon: Cpu, link: "/hardware-catalog", badge: "Hardware" },
     { title: "Code Examples", description: "Ready-to-use examples for common embedded patterns.", icon: Code, link: "/developer-portal", badge: "Examples" },
   ];
@@ -75,7 +75,7 @@ const DeveloperPortal = () => {
       {/* Hero */}
       <PageHero
         eyebrow="Developer Portal"
-        title="Build with TrusteD-V"
+        title="Build with TRUSTED-V"
         subtitle="Documentation, tools, SDKs, and resources for developing secure RISC-V embedded systems with Rust."
       >
         <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
@@ -153,7 +153,7 @@ const DeveloperPortal = () => {
                 <p className="text-sm text-muted-foreground">Get your RISC-V Rust development environment set up in minutes.</p>
                 <div className="grid md:grid-cols-2 gap-3">
                   {[
-                    { step: "1", title: "Install TrusteD-V IDE Jarvyn", desc: "Download and install the IDE for your platform" },
+                    { step: "1", title: "Install TRUSTED-V IDE Jarvyn", desc: "Download and install the IDE for your platform" },
                     { step: "2", title: "Configure Rust Toolchain", desc: "The IDE auto-configures rustup with RISC-V targets" },
                     { step: "3", title: "Select Your Board", desc: "Choose from C-DAC or Mindgrove boards in the Smart Builder" },
                     { step: "4", title: "Build & Flash", desc: "One-click compile and flash to your target hardware" },

@@ -129,7 +129,7 @@ const ContactPage = () => {
                       <label className="text-sm font-medium text-foreground mb-1 block">Product Interest</label>
                       <select className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm" value={form.product} onChange={e => setForm(p => ({ ...p, product: e.target.value }))}>
                         <option value="">Select a product</option>
-                        <option value="software-toolchain">TRusteD-V Software & Toolchain</option>
+                        <option value="software-toolchain">TRUSTED-V Software & Toolchain</option>
                         <option value="signoff-silicon">SignOff Silicon</option>
                         <option value="ide-jarvyn">Jarvyn IDE</option>
                         <option value="partnership">Partnership</option>

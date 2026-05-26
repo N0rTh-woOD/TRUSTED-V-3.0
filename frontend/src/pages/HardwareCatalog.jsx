@@ -77,7 +77,7 @@ const HardwareCatalog = () => {
             </h1>
             <p className="text-lg text-muted-foreground">
               Comprehensive catalog of supported RISC-V development boards, from microcontrollers to high-performance SBCs. 
-              Each board is fully tested and compatible with TrusteD-V tools.
+              Each board is fully tested and compatible with TRUSTED-V tools.
             </p>
           </div>
         </div>

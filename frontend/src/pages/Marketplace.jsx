@@ -62,7 +62,7 @@ const ipCatalog = [
   },
   {
     name: "DMA Controller IP",
-    provider: "TrusteD-V",
+    provider: "TRUSTED-V",
     type: "Peripheral IP",
     arch: "AXI4 / AHB",
     license: "Commercial",
@@ -72,7 +72,7 @@ const ipCatalog = [
   },
   {
     name: "UART/SPI/I2C Controller",
-    provider: "TrusteD-V",
+    provider: "TRUSTED-V",
     type: "Peripheral IP",
     arch: "APB / AXI-Lite",
     license: "Commercial",
@@ -304,7 +304,7 @@ const Marketplace = () => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h3 className="text-2xl font-bold text-foreground mb-3">Want to List Your Hardware or IP?</h3>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
-            Partner with TrusteD-V to reach RISC-V developers and SoC designers.
+            Partner with TRUSTED-V to reach RISC-V developers and SoC designers.
           </p>
           <Link to="/partner-registration">
             <Button size="lg" className="font-semibold">

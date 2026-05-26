@@ -72,7 +72,7 @@ const PIPELINE_HTML = `
       <div class="card-title">"Build a RISC-V satellite to monitor the environment"</div>
       <span class="card-badge" style="background:#111;color:#fff">Requirement</span>
     </div>
-    <div class="card-body">Natural language mission &#8594; TrusteD-V Engine parses intent, identifies domain (satellite &#183; environment &#183; RISC-V) and activates all three engines.</div>
+    <div class="card-body">Natural language mission &#8594; TRUSTED-V Engine parses intent, identifies domain (satellite &#183; environment &#183; RISC-V) and activates all three engines.</div>
   </div>
 </div>
 

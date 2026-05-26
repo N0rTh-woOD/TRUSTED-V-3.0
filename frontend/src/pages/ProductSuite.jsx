@@ -16,7 +16,7 @@ const ProductSuite = () => {
       category: "Development Tools",
       items: [
         {
-          name: "TrusteD-V IDE Jarvyn",
+          name: "TRUSTED-V IDE Jarvyn",
           description: "AI-native development environment with Jarvyn AI assistant, integrated debugging, one-click firmware flashing, and RISC-V native support.",
           icon: Terminal,
           features: ["Jarvyn AI code assistant", "Integrated debugger (probe-rs / LLDB)", "Smart Builder engine", "One-click build & flash"],
@@ -24,7 +24,7 @@ const ProductSuite = () => {
           link: "/download-ide",
         },
         {
-          name: "TrusteD-V WebIDE",
+          name: "TRUSTED-V WebIDE",
           description: "Full-featured browser-based development environment for RISC-V Rust projects. Compile, debug, and collaborate from anywhere, no local setup required.",
           icon: Globe,
           features: ["Cloud-based Rust compilation", "Integrated terminal & debugger", "Real-time collaboration", "Project templates & scaffolding", "Git integration & version control"],
@@ -73,9 +73,9 @@ const ProductSuite = () => {
         },
         {
           name: "RTOS Integration",
-          description: "Pre-integrated support for major real-time operating systems. TrusteD-V RTOS delivers 9x faster context switching than FreeRTOS.",
+          description: "Pre-integrated support for major real-time operating systems. TRUSTED-V RTOS delivers 9x faster context switching than FreeRTOS.",
           icon: Layers,
-          features: ["TrusteD-V RTOS (9x faster context switch)", "FreeRTOS & Zephyr RTOS", "Embassy async runtime"],
+          features: ["TRUSTED-V RTOS (9x faster context switch)", "FreeRTOS & Zephyr RTOS", "Embassy async runtime"],
           badge: "Middleware",
           link: "/product/rtos-benchmark",
         },
@@ -237,7 +237,7 @@ const ProductSuite = () => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground mb-4">Ready to Get Started?</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Explore TrusteD-V IDE Jarvyn or browse detailed product documentation.
+            Explore TRUSTED-V IDE Jarvyn or browse detailed product documentation.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/download-ide">

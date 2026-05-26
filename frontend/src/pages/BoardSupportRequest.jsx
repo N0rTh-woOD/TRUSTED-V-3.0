@@ -125,7 +125,7 @@ const BoardSupportRequest = () => {
                 </div>
                 <div>
                   <label className="text-sm font-medium text-foreground">Intended Use Case</label>
-                  <Textarea value={formData.use_case} onChange={(e) => setFormData(prev => ({...prev, use_case: e.target.value}))} placeholder="How do you plan to use this board with TrusteD-V?" rows={3} />
+                  <Textarea value={formData.use_case} onChange={(e) => setFormData(prev => ({...prev, use_case: e.target.value}))} placeholder="How do you plan to use this board with TRUSTED-V?" rows={3} />
                 </div>
               </CardContent>
             </Card>

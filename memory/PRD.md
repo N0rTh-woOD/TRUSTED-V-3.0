@@ -113,6 +113,15 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - **Applied PageHero to all secondary pages** for consistent top section: About, ProductSuite, ContactPage, Marketplace (with partner logos), Partners, DeveloperPortal (with search), WebIDEPage (with browser mockup), CryptoStackPage (with standards card), SecureBootPage, RTOSBenchmarkPage, IDEDownloads (with IDE screenshot + light problem/solution panels moved to dedicated section).
 - **ProductSuite "Development Tools"**: 2-card grid expanded from `max-w-3xl` to `max-w-5xl` so the Jarvyn IDE and WebIDE cards have proper presence alongside other multi-card categories.
 
+### Phase 15: TRUSTED-V Re-Branding + Hero Re-imagining + 3rd Product (Completed - Feb 2026)
+- **Brand-wide rename**: "TRusteD-V" / "TrusteD-V" → "TRUSTED-V" in all body copy across all pages via sed bulk replace. Component name `TrustedVLogo` preserved.
+- **Logo lockup**: `TrustedVLogo` now renders "TRUSTED" in Berkeley Blue and "-V" in Gold; new SVG wrapper file at `/public/trustedv-rocket-logo.svg` (xlink:href + href for compatibility) — PNG used in rendering for guaranteed render.
+- **Landing Hero**: New tagline "Rust-Native RISC-V Software Platform" replacing "Secure RISC-V from Silicon to Application". Removed Explore Products / Talk to Engineers / Download Jarvyn CTAs. Removed 48hr/5-Layer/2-Products stat row. Removed bottom "Built to global standards" trust strip (duplicated certs section). Removed code preview from right column; replaced with a large prominent rocket+chip+RISC-V emblem (78% col width, max 420px) with soft Berkeley Blue → Gold halo and drop-shadow. India flag now rendered as inline SVG (orange/white/green with navy chakra) instead of emoji.
+- **Code window relocated**: The rich Jarvyn-themed code preview moved to WebIDEPage right column (replacing the simpler browser mockup).
+- **Our Products section**: Expanded from 2 → 3 cards (`md:grid-cols-2 lg:grid-cols-3`, `max-w-6xl`). New 3rd card: **TRUSTED Certification** with `BadgeCheck` icon, dark amber accent `#B45309`, describing independent vendor-neutral 3rd-party certification programme. Removed all "Sub-brand 01 / 02" badges. Updated heading to "A growing portfolio under one trusted brand" and subtitle to allow more brands.
+- **Pricing section**: Replaced `$499/yr` (Pro) and `Custom` (Enterprise) with `Talk to Sales`; updated CTAs accordingly with `/contact?plan=*` links.
+- **Standards Compliance section**: Redesigned (was duplicating the removed hero "Built to global standards" strip). New 2-column layout (1fr / 1.4fr): left intro panel with "Standards Compliance" eyebrow, large headline, paragraph, and industry tags (Automotive / Industrial / IoT / Defence / Medical). Right: 3-column 12-cert grid (added ISO/SAE 21434 and ETSI EN 303 645) with hover-glow cards.
+
 ## Key Pages & Routes
 | Route | Page | Description |
 |---|---|---|

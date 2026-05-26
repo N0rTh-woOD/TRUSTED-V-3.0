@@ -26,7 +26,7 @@ const Partners = () => {
         "VEGA SDK and peripheral driver libraries",
       ],
       integration: [
-        "Pre-configured BSP for TrusteD-V IDE Jarvyn",
+        "Pre-configured BSP for TRUSTED-V IDE Jarvyn",
         "One-click build and flash support",
         "Debugger integration via JTAG/SWD",
         "Peripheral driver libraries in Rust",
@@ -47,7 +47,7 @@ const Partners = () => {
         "Hardware security modules and TEE support",
       ],
       integration: [
-        "Pre-configured BSP for TrusteD-V IDE Jarvyn",
+        "Pre-configured BSP for TRUSTED-V IDE Jarvyn",
         "Secure boot chain configuration tool",
         "AI model deployment via Vision SoC NPU",
         "Hardware crypto acceleration APIs",
@@ -68,7 +68,7 @@ const Partners = () => {
         "Smart industrial controller board",
       ],
       integration: [
-        "Pre-configured BSP for TrusteD-V IDE Jarvyn",
+        "Pre-configured BSP for TRUSTED-V IDE Jarvyn",
         "Edge AI model deployment pipeline",
         "Sensor fusion SDK integration",
         "Power-optimized firmware templates",
@@ -77,9 +77,9 @@ const Partners = () => {
   ];
 
   const partnerBenefits = [
-    { icon: Package, title: "BSP Integration", description: "Your boards ship with pre-configured Board Support Packages in TrusteD-V IDE Jarvyn." },
+    { icon: Package, title: "BSP Integration", description: "Your boards ship with pre-configured Board Support Packages in TRUSTED-V IDE Jarvyn." },
     { icon: Wrench, title: "Toolchain Support", description: "Full Rust toolchain optimization and testing for your RISC-V silicon." },
-    { icon: Globe, title: "Developer Reach", description: "Access to the TrusteD-V developer community building with RISC-V and Rust." },
+    { icon: Globe, title: "Developer Reach", description: "Access to the TRUSTED-V developer community building with RISC-V and Rust." },
     { icon: Shield, title: "Security Certification", description: "Joint security validation and certification for secure boot workflows." },
   ];
 
@@ -89,7 +89,7 @@ const Partners = () => {
       <PageHero
         eyebrow="Hardware Partners"
         title={<>Built with India's <RiscV /> pioneers</>}
-        subtitle="TrusteD-V partners with Indian RISC-V hardware companies to deliver a native, integrated development experience for the Indian semiconductor ecosystem."
+        subtitle="TRUSTED-V partners with Indian RISC-V hardware companies to deliver a native, integrated development experience for the Indian semiconductor ecosystem."
       />
 
       {/* Partner Cards */}
@@ -140,7 +140,7 @@ const Partners = () => {
                     <div className="bg-slate-50 rounded-lg p-6">
                       <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                         <Wrench className="w-5 h-5 text-primary" />
-                        TrusteD-V Integration
+                        TRUSTED-V Integration
                       </h3>
                       <ul className="space-y-3">
                         {partner.integration.map((item, i) => (
@@ -164,7 +164,7 @@ const Partners = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Partnership Benefits</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">What hardware partners get when they integrate with TrusteD-V</p>
+            <p className="text-muted-foreground max-w-2xl mx-auto">What hardware partners get when they integrate with TRUSTED-V</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -191,7 +191,7 @@ const Partners = () => {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Become a Hardware Partner</h2>
           <p className="text-primary-foreground/80 mb-8">
-            If you are an Indian RISC-V hardware company, we'd love to integrate your boards into TrusteD-V.
+            If you are an Indian RISC-V hardware company, we'd love to integrate your boards into TRUSTED-V.
           </p>
           <Link to="/partner-registration">
             <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">

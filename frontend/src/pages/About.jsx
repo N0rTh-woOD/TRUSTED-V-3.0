@@ -32,24 +32,24 @@ const Eyebrow = ({ children, center = false, color = "#003262" }) => (
 
 const About = () => {
   const pillars = [
-    { title: "Security", desc: "Formal-method driven validation at every stack layer. A component that cannot demonstrate security correctness cannot carry the TRusteD-V Verified mark.", icon: Shield },
+    { title: "Security", desc: "Formal-method driven validation at every stack layer. A component that cannot demonstrate security correctness cannot carry the TRUSTED-V Verified mark.", icon: Shield },
     { title: "Performance", desc: "Benchmarked, standardised, reproducible metrics. Every verified platform publishes latency, throughput, and power figures under documented, repeatable conditions.", icon: Zap },
     { title: "Time-to-Market", desc: "Pre-validated stacks, reusable test suites, and AI-powered tooling that measurably reduce time from silicon tape-out to production deployment.", icon: Clock },
   ];
 
   const gaps = [
-    { n: "01", title: "ISA Fragmentation", problem: "The proliferation of custom ISA extensions leads to a fragmented hardware landscape, which hinders software portability and complicates security auditing across the ecosystem.", answer: "TRusteD-V provides a standardised HAL and PAC layer that abstracts ISA variants, ensuring portable, auditable software across all RISC-V implementations." },
-    { n: "02", title: "Lack of a Unified Security Framework", problem: "The absence of a standardised security framework, including a hardware root-of-trust and Trusted Execution Environments (TEEs), creates significant vulnerabilities addressed in more mature architectures.", answer: "TRusteD-V delivers rBoot (hardware RoT) and rustBoot (TEE-ready SBL), formally aligned to TCG DICE, PSA, and CC EAL4+ from the ground up." },
-    { n: "03", title: "Supply Chain and Counterfeit Risks", problem: "The open-source model, while fostering innovation, elevates supply chain risks by enabling less-vetted manufacturers, increasing the potential for counterfeit or tampered hardware to go undetected.", answer: "The TRusteD-V Verified programme and TVOTS On-Chip Test Suite provide cryptographically signed, independently verifiable proof of silicon authenticity and compliance." },
-    { n: "04", title: "Software-Hardware Integration Gaps", problem: "Inconsistent hardware-software interfaces, fragmented toolchains, and opaque firmware result in an expanded attack surface and a higher likelihood of security exploits.", answer: "TRusteD-V's Hardware Abstraction Map (HAM) and unified toolchain create a coherent, auditable interface between hardware and software at every layer." },
-    { n: "05", title: "Lack of Certification Standards", problem: "The absence of a recognised compliance framework impedes RISC-V adoption in safety-critical and regulated markets such as medical, automotive, and defence, which require stringent validation.", answer: "TRusteD-V Verified is the industry's only RISC-V-native 5-layer certification framework, covering Silicon through Application with Bronze to Platinum grades and signed evidence packages." },
-    { n: "06", title: "Barriers to Enterprise Adoption", problem: "Enterprise uptake is significantly hindered by unclear vendor accountability, lack of service-level agreements, and insufficient indemnification, which creates unacceptable business and legal risks.", answer: "Backed by Bosch Global Software Technologies, TRusteD-V brings enterprise-grade accountability, SLA frameworks, and the legal indemnification large organisations require." },
-    { n: "07", title: "Absence of a Standardised Platform Security Layer", problem: "With no equivalent to ARM TrustZone or Intel TXT, each implementer must build their own trust infrastructure from scratch, leading to duplicated effort and inconsistent security baselines.", answer: "TRusteD-V is the RISC-V equivalent: a defined, open, reusable platform security layer that any silicon vendor or system integrator can adopt instead of reinventing from zero." },
-    { n: "08", title: "Fragmented Ecosystem Coordination", problem: "A lack of coordination among stakeholders has resulted in parallel and often incompatible development efforts, duplicated work, and failure to produce a converged, interoperable trust model.", answer: "The TRusteD-V Consortium provides a vendor-neutral governance body, open standards (TV-STD-001 to 006), and a shared Chip Registry that converges the ecosystem around a single trust baseline." },
+    { n: "01", title: "ISA Fragmentation", problem: "The proliferation of custom ISA extensions leads to a fragmented hardware landscape, which hinders software portability and complicates security auditing across the ecosystem.", answer: "TRUSTED-V provides a standardised HAL and PAC layer that abstracts ISA variants, ensuring portable, auditable software across all RISC-V implementations." },
+    { n: "02", title: "Lack of a Unified Security Framework", problem: "The absence of a standardised security framework, including a hardware root-of-trust and Trusted Execution Environments (TEEs), creates significant vulnerabilities addressed in more mature architectures.", answer: "TRUSTED-V delivers rBoot (hardware RoT) and rustBoot (TEE-ready SBL), formally aligned to TCG DICE, PSA, and CC EAL4+ from the ground up." },
+    { n: "03", title: "Supply Chain and Counterfeit Risks", problem: "The open-source model, while fostering innovation, elevates supply chain risks by enabling less-vetted manufacturers, increasing the potential for counterfeit or tampered hardware to go undetected.", answer: "The TRUSTED-V Verified programme and TVOTS On-Chip Test Suite provide cryptographically signed, independently verifiable proof of silicon authenticity and compliance." },
+    { n: "04", title: "Software-Hardware Integration Gaps", problem: "Inconsistent hardware-software interfaces, fragmented toolchains, and opaque firmware result in an expanded attack surface and a higher likelihood of security exploits.", answer: "TRUSTED-V's Hardware Abstraction Map (HAM) and unified toolchain create a coherent, auditable interface between hardware and software at every layer." },
+    { n: "05", title: "Lack of Certification Standards", problem: "The absence of a recognised compliance framework impedes RISC-V adoption in safety-critical and regulated markets such as medical, automotive, and defence, which require stringent validation.", answer: "TRUSTED-V Verified is the industry's only RISC-V-native 5-layer certification framework, covering Silicon through Application with Bronze to Platinum grades and signed evidence packages." },
+    { n: "06", title: "Barriers to Enterprise Adoption", problem: "Enterprise uptake is significantly hindered by unclear vendor accountability, lack of service-level agreements, and insufficient indemnification, which creates unacceptable business and legal risks.", answer: "Backed by Bosch Global Software Technologies, TRUSTED-V brings enterprise-grade accountability, SLA frameworks, and the legal indemnification large organisations require." },
+    { n: "07", title: "Absence of a Standardised Platform Security Layer", problem: "With no equivalent to ARM TrustZone or Intel TXT, each implementer must build their own trust infrastructure from scratch, leading to duplicated effort and inconsistent security baselines.", answer: "TRUSTED-V is the RISC-V equivalent: a defined, open, reusable platform security layer that any silicon vendor or system integrator can adopt instead of reinventing from zero." },
+    { n: "08", title: "Fragmented Ecosystem Coordination", problem: "A lack of coordination among stakeholders has resulted in parallel and often incompatible development efforts, duplicated work, and failure to produce a converged, interoperable trust model.", answer: "The TRUSTED-V Consortium provides a vendor-neutral governance body, open standards (TV-STD-001 to 006), and a shared Chip Registry that converges the ecosystem around a single trust baseline." },
   ];
 
   const roadmap = [
-    { phase: "Phase 1 · Foundation", title: "Build the trust infrastructure", desc: "TVOTS v1.0 release, first TRusteD-V Verified certificate, Consortium formed with TSC governance, all six TV-STD standards published, Chip Registry live.", active: true },
+    { phase: "Phase 1 · Foundation", title: "Build the trust infrastructure", desc: "TVOTS v1.0 release, first TRUSTED-V Verified certificate, Consortium formed with TSC governance, all six TV-STD standards published, Chip Registry live.", active: true },
     { phase: "Phase 2 · Ecosystem Growth", title: "Scale across silicon and verticals", desc: "10+ RISC-V silicon targets certified, 20+ IP blocks, IoT / Industrial / Consumer verticals covered, TVOTS v2.0, 10+ Principal Members." },
     { phase: "Phase 3 · Industry Adoption", title: "Become the RISC-V trust standard", desc: "Regulatory recognition, RISC-V International integration, open reference platform, procurement framework integrations, self-sustaining consortium." },
   ];
@@ -67,7 +67,7 @@ const About = () => {
       <PageHero
         eyebrow="About Us"
         title={<>Building trust in the <RiscV /> ecosystem.</>}
-        subtitle="TRusteD-V is a Bosch Global Software Technologies initiative providing the secure software infrastructure and AI-powered silicon pipeline the RISC-V industry needs."
+        subtitle="TRUSTED-V is a Bosch Global Software Technologies initiative providing the secure software infrastructure and AI-powered silicon pipeline the RISC-V industry needs."
         data-testid="about-hero"
       />
 
@@ -88,7 +88,7 @@ const About = () => {
                 The RISC-V ecosystem is growing rapidly across every vertical from deeply embedded IoT to high-performance computing. Yet the ecosystem operates without a common trust infrastructure. Every silicon vendor, IP licensor, and software team runs ad-hoc tests with no shared baseline.
               </p>
               <p className="text-[15px] text-slate-600 leading-[1.8] font-light">
-                Bosch Global Software Technologies is building that infrastructure &mdash; open, vendor-neutral, and purpose-built for the speed and openness of RISC-V. <span className="font-semibold text-[#003262]">TRusteD-V Software &amp; Toolchain</span> secures the software stack. <span className="font-semibold text-[#0F6E56]">SignOff Silicon</span> automates the silicon pipeline.
+                Bosch Global Software Technologies is building that infrastructure &mdash; open, vendor-neutral, and purpose-built for the speed and openness of RISC-V. <span className="font-semibold text-[#003262]">TRUSTED-V Software &amp; Toolchain</span> secures the software stack. <span className="font-semibold text-[#0F6E56]">SignOff Silicon</span> automates the silicon pipeline.
               </p>
             </div>
 
@@ -120,10 +120,10 @@ const About = () => {
               <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
                 <span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span>
               </span>{" "}
-              ecosystem has a trust problem. TRusteD-V solves it.
+              ecosystem has a trust problem. TRUSTED-V solves it.
             </h2>
             <p className="text-[15.5px] text-slate-600 leading-[1.75] font-light">
-              Eight structural gaps in the RISC-V ecosystem today make TRusteD-V not just useful but essential for any production deployment.
+              Eight structural gaps in the RISC-V ecosystem today make TRUSTED-V not just useful but essential for any production deployment.
             </p>
           </div>
 
@@ -169,7 +169,7 @@ const About = () => {
             {/* Consortium */}
             <div>
               <Eyebrow>Consortium</Eyebrow>
-              <h2 className="text-2xl sm:text-[26px] font-bold text-slate-900 tracking-tight leading-[1.2] mb-3">TRusteD-V Consortium</h2>
+              <h2 className="text-2xl sm:text-[26px] font-bold text-slate-900 tracking-tight leading-[1.2] mb-3">TRUSTED-V Consortium</h2>
               <p className="text-[14px] text-slate-600 leading-[1.75] mb-5">
                 The formal governing body &mdash; open, membership-based, and vendor-neutral &mdash; responsible for maintaining standards and managing the certification programme.
               </p>
@@ -195,7 +195,7 @@ const About = () => {
           <Eyebrow center>Backed by Bosch</Eyebrow>
           <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-bold text-slate-900 tracking-tight leading-[1.2] mb-3">The engineering heritage of a world leader</h2>
           <p className="text-[15.5px] text-slate-600 leading-[1.75] font-light max-w-2xl mx-auto mb-12">
-            Bosch Global Software Technologies brings over 130 years of engineering excellence and deep embedded systems expertise to TRusteD-V.
+            Bosch Global Software Technologies brings over 130 years of engineering excellence and deep embedded systems expertise to TRUSTED-V.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <AnimatedNumber value="130+" label="Years of engineering excellence" />

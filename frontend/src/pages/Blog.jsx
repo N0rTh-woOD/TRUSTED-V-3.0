@@ -67,7 +67,7 @@ const Blog = () => {
     {
       title: "The State of RISC-V in 2025",
       excerpt: "A comprehensive overview of the RISC-V ecosystem, market trends, and what to expect in the coming year.",
-      author: "TrusteD-V Team",
+      author: "TRUSTED-V Team",
       date: "Dec 1, 2025",
       readTime: "14 min read",
       category: "Industry",

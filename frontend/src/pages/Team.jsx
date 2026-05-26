@@ -64,7 +64,7 @@ const Team = () => {
             </span>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Meet the People Behind{" "}
-              <span className="text-primary">TrusteD-V</span>
+              <span className="text-primary">TRUSTED-V</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               A passionate team of engineers, architects, and innovators building India's 
