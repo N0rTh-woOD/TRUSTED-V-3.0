@@ -63,7 +63,12 @@ const Landing = () => {
             <div className="lg:col-span-7">
               {/* Brand + Made-in-India ribbon row */}
               <div className="flex flex-col gap-3 mb-7" data-testid="hero-brand-lockup">
-                <TrustedVLogo size="xl" showPoweredBy={true} />
+                <img
+                  src="/trustedv-brand-logo.png"
+                  alt="TRUSTED-V — Powered by Bosch"
+                  className="h-[120px] sm:h-[140px] lg:h-[160px] w-auto"
+                  draggable={false}
+                />
               </div>
 
               {/* Made-in-India intelligent badge: pill on the side */}
@@ -113,39 +118,74 @@ const Landing = () => {
               </div>
             </div>
 
-            {/* RIGHT — TRUSTED-V Certified Chip with 3D flip-to-reveal layers */}
+            {/* RIGHT — TRUSTED-V Certified Chip with X-Ray scan reveal */}
             <div className="lg:col-span-5 relative flex items-center justify-center" data-testid="hero-chip-reveal">
-              <div className="relative w-full max-w-[440px]" style={{ perspective: "1600px" }}>
+              <div className="relative w-full max-w-[460px]">
                 {/* Soft ambient glow */}
-                <div className="absolute -inset-6 bg-gradient-to-br from-[#003262]/15 via-[#00B4E0]/10 to-[#FDB515]/15 rounded-[36px] blur-2xl opacity-70 pointer-events-none" />
+                <div className="absolute -inset-6 bg-gradient-to-br from-[#003262]/15 via-[#00B4E0]/12 to-[#FDB515]/12 rounded-[36px] blur-2xl opacity-70 pointer-events-none transition-opacity duration-700 group-hover:opacity-100" />
 
-                {/* Flip card */}
+                {/* Stage container */}
                 <div
-                  className="relative w-full group cursor-pointer"
+                  className="relative w-full group cursor-pointer rounded-[20px] overflow-hidden ring-1 ring-white/15 shadow-[0_30px_70px_-20px_rgba(0,40,98,0.5)] bg-gradient-to-br from-[#0a1428] via-[#0e1c36] to-[#0a1428]"
                   style={{ aspectRatio: "1 / 1.25" }}
                   data-testid="chip-flip-card"
                 >
-                  <div className="relative w-full h-full transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-                    {/* Front face — chip image */}
-                    <div className="absolute inset-0 rounded-[20px] overflow-hidden ring-1 ring-white/15 shadow-[0_30px_70px_-20px_rgba(0,40,98,0.45)] [backface-visibility:hidden] bg-gradient-to-br from-[#0a1428] to-[#0f1f3a]">
-                      <img
-                        src="/chip-trustedv-clean.png"
-                        alt="TRUSTED-V Certified Chip"
-                        className="absolute inset-0 w-full h-full object-contain"
-                        draggable={false}
-                      />
-                    </div>
+                  {/* BASE: Chip image — fades + slight scale on hover */}
+                  <img
+                    src="/chip-trustedv-clean.png"
+                    alt="TRUSTED-V Certified Chip"
+                    className="absolute inset-0 w-full h-full object-contain transition-all duration-[1100ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:opacity-0 group-hover:scale-[1.04] group-hover:blur-[1px]"
+                    draggable={false}
+                  />
 
-                    {/* Back face — layered architecture */}
-                    <div className="absolute inset-0 rounded-[20px] overflow-hidden ring-1 ring-white/15 shadow-[0_30px_70px_-20px_rgba(0,40,98,0.45)] [backface-visibility:hidden] [transform:rotateY(180deg)] bg-gradient-to-br from-[#d8dee5] to-[#b8c2cf]">
-                      <img
-                        src="/chip-layers-clean.png"
-                        alt="TRUSTED-V Internal Layered Architecture"
-                        className="absolute inset-0 w-full h-full object-contain"
-                        draggable={false}
-                      />
+                  {/* OVERLAY: Layered architecture — revealed by clip-path scan from top to bottom */}
+                  <div
+                    className="absolute inset-0 transition-[clip-path] duration-[1300ms] ease-[cubic-bezier(0.77,0,0.18,1)] [clip-path:inset(100%_0_0_0)] group-hover:[clip-path:inset(0%_0_0_0)]"
+                  >
+                    <img
+                      src="/chip-layers-clean.png"
+                      alt="TRUSTED-V Internal Layered Architecture"
+                      className="absolute inset-0 w-full h-full object-contain"
+                      draggable={false}
+                    />
+                  </div>
+
+                  {/* SCAN LINE — bright cyan beam that travels top→bottom on hover */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <div
+                      className="absolute left-0 right-0 h-[42px] -top-[42px] transition-[top] duration-[1300ms] ease-[cubic-bezier(0.77,0,0.18,1)] group-hover:top-[100%]"
+                    >
+                      {/* Bright core line */}
+                      <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2.5px] bg-[#00E5FF] shadow-[0_0_24px_8px_rgba(0,229,255,0.65)]" />
+                      {/* Glow trail above */}
+                      <div className="absolute left-0 right-0 top-0 h-[20px] bg-gradient-to-b from-transparent to-[#00E5FF]/30 opacity-80" />
+                      {/* Glow trail below */}
+                      <div className="absolute left-0 right-0 bottom-0 h-[20px] bg-gradient-to-t from-transparent to-[#00E5FF]/30 opacity-80" />
                     </div>
                   </div>
+
+                  {/* Tech HUD: faint grid + corner ticks (always visible, intensify on hover) */}
+                  <div
+                    className="absolute inset-0 opacity-[0.06] group-hover:opacity-[0.10] transition-opacity duration-700 pointer-events-none mix-blend-overlay"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right, rgba(0,229,255,0.7) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,229,255,0.7) 1px, transparent 1px)",
+                      backgroundSize: "44px 44px",
+                    }}
+                  />
+
+                  {/* Corner ticks */}
+                  {[
+                    "top-2 left-2 border-l border-t",
+                    "top-2 right-2 border-r border-t",
+                    "bottom-2 left-2 border-l border-b",
+                    "bottom-2 right-2 border-r border-b",
+                  ].map((pos) => (
+                    <span
+                      key={pos}
+                      className={`absolute ${pos} w-3.5 h-3.5 border-[#00E5FF]/40 group-hover:border-[#00E5FF]/80 transition-colors duration-500 pointer-events-none`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
