@@ -192,3 +192,9 @@ code {
         border-bottom-color: inherit;
     }
 }
+@keyframes scanLine {
+  0%   { top: -2px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
