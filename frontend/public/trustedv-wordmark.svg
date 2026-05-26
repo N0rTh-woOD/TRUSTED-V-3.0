@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 200" preserveAspectRatio="xMidYMid meet" role="img" aria-label="TRUSTED-V">
+  <!-- TRUSTED wordmark in deep navy -->
+  <text x="0" y="98"
+        font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="900"
+        font-size="106"
+        fill="#0A2A6B"
+        letter-spacing="-3">TRUSTED</text>
+
+  <!-- Hyphen -->
+  <rect x="430" y="68" width="22" height="13" fill="#0A2A6B" rx="1.5"/>
+
+  <!-- Stylized V — left wedge (cyan) -->
+  <path d="M 462,20 L 498,20 L 512,108 L 492,108 Z" fill="#00B4E0"/>
+  <!-- Stylized V — right wedge (deep navy, was white) -->
+  <path d="M 492,108 L 512,108 L 548,20 L 512,20 Z" fill="#0A2A6B"/>
+
+  <!-- Powered by Bosch — soft blue -->
+  <text x="280" y="170"
+        text-anchor="middle"
+        font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="600"
+        font-size="20"
+        fill="#5B7CB8"
+        letter-spacing="6">POWERED BY BOSCH</text>
+</svg>

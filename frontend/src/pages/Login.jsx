@@ -35,15 +35,13 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Bosch-style top border */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-[#E20015] z-50" />
+      {/* Berkeley Blue brand strip */}
+      <div className="fixed top-0 left-0 right-0 h-[2px] bg-[#003262] z-50" />
       
       <Card className="w-full max-w-md bg-card border border-border shadow-2xl">
         <CardHeader className="space-y-6 p-8 pb-6">
           <div className="flex flex-col items-center justify-center gap-5">
-            <div className="flex flex-col items-center">
-              <TrustedVLogo size="lg" showPoweredBy={true} className="flex flex-col items-center" />
-            </div>
+            <TrustedVLogo size="lg" showPoweredBy={true} className="flex justify-center" />
             <div className="text-center">
               <h2 className="text-2xl font-bold text-foreground">
                 Welcome Back

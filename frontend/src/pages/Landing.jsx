@@ -52,41 +52,65 @@ const Landing = () => {
       {/* ══ HERO ══ */}
       <section className="relative overflow-hidden bg-white" data-testid="hero-section">
         {/* Subtle dotted grid */}
-        <div className="absolute inset-0 opacity-[0.5] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(15,23,42,0.07) 1px, transparent 0)", backgroundSize: "28px 28px", maskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)" }} />
-        {/* Soft accent halo (single, Berkeley Blue) */}
-        <div className="absolute -top-32 -right-32 w-[560px] h-[560px] bg-[#003262]/[0.06] rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.45] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(15,23,42,0.06) 1px, transparent 0)", backgroundSize: "28px 28px", maskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)" }} />
+        {/* Soft accent halos */}
+        <div className="absolute -top-32 -right-32 w-[560px] h-[560px] bg-[#003262]/[0.05] rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/3 -left-32 w-[420px] h-[420px] bg-[#00B4E0]/[0.06] rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 lg:pt-20 pb-14 lg:pb-20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 md:pt-16 lg:pt-20 pb-14 lg:pb-20 relative">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* LEFT — Editorial */}
             <div className="lg:col-span-7">
-              <div className="mb-6" data-testid="hero-brand-lockup">
+              {/* Brand + Made-in-India ribbon row */}
+              <div className="flex flex-col gap-3 mb-7" data-testid="hero-brand-lockup">
                 <TrustedVLogo size="xl" showPoweredBy={true} />
               </div>
 
-              <div className="inline-flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-full pl-1.5 pr-3.5 py-1 mb-6" data-testid="hero-made-in-india-badge">
-                {/* SVG India tricolor flag */}
-                <svg viewBox="0 0 18 12" className="w-[22px] h-[14px] rounded-sm overflow-hidden shrink-0 ring-1 ring-slate-200" aria-label="India">
-                  <rect width="18" height="4" y="0" fill="#FF9933" />
-                  <rect width="18" height="4" y="4" fill="#FFFFFF" />
-                  <rect width="18" height="4" y="8" fill="#138808" />
-                  <circle cx="9" cy="6" r="1.4" fill="none" stroke="#000080" strokeWidth="0.35" />
-                </svg>
-                <span className="text-[11.5px] sm:text-[12px] font-semibold text-slate-700 tracking-wide">Made in India &middot; Engineered by Bosch to the World</span>
+              {/* Made-in-India intelligent badge: pill on the side */}
+              <div className="inline-flex items-stretch rounded-md overflow-hidden ring-1 ring-slate-200 shadow-sm mb-7" data-testid="hero-made-in-india-badge">
+                {/* India flag block */}
+                <span className="flex flex-col w-[26px] flex-shrink-0">
+                  <span className="block flex-1 bg-[#FF9933]" />
+                  <span className="block flex-1 bg-white relative">
+                    <span className="absolute inset-0 m-auto w-[10px] h-[10px] rounded-full border border-[#000080]/70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                  </span>
+                  <span className="block flex-1 bg-[#138808]" />
+                </span>
+                {/* Text */}
+                <span className="flex items-center px-3 py-1.5 bg-slate-50">
+                  <span className="text-[11px] font-bold text-[#0A2A6B] uppercase tracking-[0.14em] mr-2">Made in India</span>
+                  <span className="w-px h-3.5 bg-slate-300 mr-2" />
+                  <span className="text-[11px] font-medium text-slate-600 tracking-wide">Engineered by Bosch to the World</span>
+                </span>
               </div>
 
-              <h1 className="text-[40px] sm:text-[50px] lg:text-[60px] font-bold text-slate-900 tracking-tight mb-5 leading-[1.05]" data-testid="hero-heading">
-                Rust-Native{" "}
-                <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
-                  <span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span>
+              <h1 className="text-[36px] sm:text-[44px] lg:text-[50px] font-bold tracking-tight mb-6 leading-[1.1]" data-testid="hero-heading">
+                <span className="block text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(135deg, #0A2A6B 0%, #1A4FA8 100%)" }}>
+                  Rust-Native{" "}
+                  <span className="whitespace-nowrap inline-block" style={{ fontFamily: "'Georgia', serif", fontSize: "0.92em" }}>
+                    <span style={{ color: "#0A2A6B" }}>RISC</span><span style={{ color: "#00B4E0" }}>-V</span>
+                  </span>
                 </span>
-                <br className="hidden sm:block" />
-                Software Platform
+                <span className="block text-slate-800">Software Platform</span>
               </h1>
 
-              <p className="text-[16px] sm:text-[17.5px] text-slate-600 leading-[1.7] max-w-2xl font-light">
-                The world's first vertically integrated <span className="font-semibold text-slate-800">RISC-V security platform</span>. Multiple specialised products under one trusted brand: a Rust-native software &amp; toolchain ecosystem, an AI-powered silicon pipeline, and an independent certification programme &mdash; from requirement to production-ready chip.
+              <p className="text-[16px] sm:text-[17px] leading-[1.75] max-w-2xl text-slate-600 font-normal">
+                The world's first vertically integrated <span className="font-semibold text-[#0A2A6B]">RISC-V security platform</span>. Multiple specialised products under one trusted brand &mdash; a Rust-native software &amp; toolchain ecosystem, an AI-powered silicon pipeline, and an independent certification programme &mdash; from requirement to production-ready chip.
               </p>
+
+              {/* Small key-points row */}
+              <div className="flex flex-wrap gap-x-6 gap-y-2 mt-7" data-testid="hero-keypoints">
+                {[
+                  { dot: "#0A2A6B", text: "Rust-native security" },
+                  { dot: "#00B4E0", text: "RISC-V RV32 & RV64" },
+                  { dot: "#FDB515", text: "Independent certification" },
+                ].map((kp) => (
+                  <span key={kp.text} className="inline-flex items-center gap-2 text-[13px] font-medium text-slate-700">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: kp.dot }} />
+                    {kp.text}
+                  </span>
+                ))}
+              </div>
             </div>
 
             {/* RIGHT — Large brand emblem */}
