@@ -118,55 +118,42 @@ const Landing = () => {
               </div>
             </div>
 
-            {/* RIGHT — TRUSTED-V Certified Chip with X-Ray scan reveal */}
+            {/* RIGHT — TRUSTED-V Certified Chip with smooth depth-fade reveal */}
             <div className="lg:col-span-5 relative flex items-center justify-center" data-testid="hero-chip-reveal">
               <div className="relative w-full max-w-[460px]">
-                {/* Soft ambient glow */}
-                <div className="absolute -inset-6 bg-gradient-to-br from-[#003262]/15 via-[#00B4E0]/12 to-[#FDB515]/12 rounded-[36px] blur-2xl opacity-70 pointer-events-none transition-opacity duration-700 group-hover:opacity-100" />
+                {/* Soft ambient halo — brightens on hover */}
+                <div className="absolute -inset-6 bg-gradient-to-br from-[#003262]/15 via-[#00B4E0]/12 to-[#FDB515]/12 rounded-[36px] blur-2xl opacity-70 pointer-events-none transition-opacity duration-[900ms] group-hover/stage:opacity-100" />
 
                 {/* Stage container */}
                 <div
-                  className="relative w-full group cursor-pointer rounded-[20px] overflow-hidden ring-1 ring-white/15 shadow-[0_30px_70px_-20px_rgba(0,40,98,0.5)] bg-gradient-to-br from-[#0a1428] via-[#0e1c36] to-[#0a1428]"
+                  className="group/stage relative w-full cursor-pointer rounded-[20px] overflow-hidden ring-1 ring-white/15 shadow-[0_30px_70px_-20px_rgba(0,40,98,0.5)] bg-gradient-to-br from-[#0a1428] via-[#0e1c36] to-[#0a1428]"
                   style={{ aspectRatio: "1 / 1.25" }}
                   data-testid="chip-flip-card"
                 >
-                  {/* BASE: Chip image — fades + slight scale on hover */}
+                  {/* FRONT: Chip image — gently fades + scales out */}
                   <img
                     src="/chip-trustedv-clean.png"
                     alt="TRUSTED-V Certified Chip"
-                    className="absolute inset-0 w-full h-full object-contain transition-all duration-[1100ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:opacity-0 group-hover:scale-[1.04] group-hover:blur-[1px]"
+                    className="absolute inset-0 w-full h-full object-contain transition-all duration-[900ms] ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/stage:opacity-0 group-hover/stage:scale-[1.06]"
                     draggable={false}
                   />
 
-                  {/* OVERLAY: Layered architecture — revealed by clip-path scan from top to bottom */}
-                  <div
-                    className="absolute inset-0 transition-[clip-path] duration-[1300ms] ease-[cubic-bezier(0.77,0,0.18,1)] [clip-path:inset(100%_0_0_0)] group-hover:[clip-path:inset(0%_0_0_0)]"
-                  >
-                    <img
-                      src="/chip-layers-clean.png"
-                      alt="TRUSTED-V Internal Layered Architecture"
-                      className="absolute inset-0 w-full h-full object-contain"
-                      draggable={false}
-                    />
+                  {/* BACK: Layered architecture — fades in from a compressed state with subtle depth */}
+                  <img
+                    src="/chip-layers-clean.png"
+                    alt="TRUSTED-V Internal Layered Architecture"
+                    className="absolute inset-0 w-full h-full object-contain opacity-0 scale-[0.94] transition-all duration-[900ms] ease-[cubic-bezier(0.4,0,0.2,1)] delay-[120ms] group-hover/stage:opacity-100 group-hover/stage:scale-100"
+                    draggable={false}
+                  />
+
+                  {/* Soft cyan core glow — pulses once during the reveal */}
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                    <div className="w-1/2 h-1/2 rounded-full bg-[#00E5FF]/[0.0] group-hover/stage:bg-[#00E5FF]/[0.18] blur-[60px] transition-colors duration-[1100ms] ease-out" />
                   </div>
 
-                  {/* SCAN LINE — bright cyan beam that travels top→bottom on hover */}
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <div
-                      className="absolute left-0 right-0 h-[42px] -top-[42px] transition-[top] duration-[1300ms] ease-[cubic-bezier(0.77,0,0.18,1)] group-hover:top-[100%]"
-                    >
-                      {/* Bright core line */}
-                      <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2.5px] bg-[#00E5FF] shadow-[0_0_24px_8px_rgba(0,229,255,0.65)]" />
-                      {/* Glow trail above */}
-                      <div className="absolute left-0 right-0 top-0 h-[20px] bg-gradient-to-b from-transparent to-[#00E5FF]/30 opacity-80" />
-                      {/* Glow trail below */}
-                      <div className="absolute left-0 right-0 bottom-0 h-[20px] bg-gradient-to-t from-transparent to-[#00E5FF]/30 opacity-80" />
-                    </div>
-                  </div>
-
-                  {/* Tech HUD: faint grid + corner ticks (always visible, intensify on hover) */}
+                  {/* Subtle tech grid overlay */}
                   <div
-                    className="absolute inset-0 opacity-[0.06] group-hover:opacity-[0.10] transition-opacity duration-700 pointer-events-none mix-blend-overlay"
+                    className="absolute inset-0 opacity-[0.05] group-hover/stage:opacity-[0.09] transition-opacity duration-[900ms] pointer-events-none mix-blend-overlay"
                     style={{
                       backgroundImage:
                         "linear-gradient(to right, rgba(0,229,255,0.7) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,229,255,0.7) 1px, transparent 1px)",
@@ -183,7 +170,7 @@ const Landing = () => {
                   ].map((pos) => (
                     <span
                       key={pos}
-                      className={`absolute ${pos} w-3.5 h-3.5 border-[#00E5FF]/40 group-hover:border-[#00E5FF]/80 transition-colors duration-500 pointer-events-none`}
+                      className={`absolute ${pos} w-3.5 h-3.5 border-[#00E5FF]/40 group-hover/stage:border-[#00E5FF]/80 transition-colors duration-[700ms] pointer-events-none`}
                     />
                   ))}
                 </div>
