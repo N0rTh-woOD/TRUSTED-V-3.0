@@ -113,103 +113,39 @@ const Landing = () => {
               </div>
             </div>
 
-            {/* RIGHT — TRUSTED-V Certified Chip with hover-to-reveal internal layers */}
+            {/* RIGHT — TRUSTED-V Certified Chip with 3D flip-to-reveal layers */}
             <div className="lg:col-span-5 relative flex items-center justify-center" data-testid="hero-chip-reveal">
-              <div className="relative w-full max-w-[460px] group" style={{ aspectRatio: "664 / 768" }}>
+              <div className="relative w-full max-w-[440px]" style={{ perspective: "1600px" }}>
                 {/* Soft ambient glow */}
-                <div className="absolute -inset-6 bg-gradient-to-br from-[#003262]/15 via-[#00B4E0]/10 to-[#FDB515]/15 rounded-[36px] blur-2xl opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                <div className="absolute -inset-6 bg-gradient-to-br from-[#003262]/15 via-[#00B4E0]/10 to-[#FDB515]/15 rounded-[36px] blur-2xl opacity-70 pointer-events-none" />
 
-                {/* Stage container */}
-                <div className="relative w-full h-full rounded-[24px] overflow-hidden bg-[#0a1428] ring-1 ring-white/10 shadow-[0_30px_70px_-20px_rgba(0,40,98,0.45)]">
-                  {/* Default layer: TRUSTED-V certified chip */}
-                  <img
-                    src="/chip-trustedv.png"
-                    alt="TRUSTED-V Certified Chip"
-                    className="absolute inset-0 w-full h-full object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-0 group-hover:scale-[1.08] group-hover:blur-[2px]"
-                    data-testid="chip-default-image"
-                    draggable={false}
-                  />
+                {/* Flip card */}
+                <div
+                  className="relative w-full group cursor-pointer"
+                  style={{ aspectRatio: "492 / 765" }}
+                  data-testid="chip-flip-card"
+                >
+                  <div className="relative w-full h-full transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    {/* Front face — chip image */}
+                    <div className="absolute inset-0 rounded-[20px] overflow-hidden ring-1 ring-white/15 shadow-[0_30px_70px_-20px_rgba(0,40,98,0.45)] [backface-visibility:hidden] bg-gradient-to-br from-[#0a1428] to-[#0f1f3a]">
+                      <img
+                        src="/chip-trustedv-clean.png"
+                        alt="TRUSTED-V Certified Chip"
+                        className="absolute inset-0 w-full h-full object-contain"
+                        draggable={false}
+                      />
+                    </div>
 
-                  {/* Hover layer: exploded layered architecture */}
-                  <img
-                    src="/chip-layers.png"
-                    alt="TRUSTED-V Internal Layered Architecture"
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 scale-[0.94] translate-y-3 transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0"
-                    data-testid="chip-hover-image"
-                    draggable={false}
-                  />
-
-                  {/* Tech grid overlay (very subtle) */}
-                  <div
-                    className="absolute inset-0 opacity-[0.08] mix-blend-overlay pointer-events-none"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(to right, rgba(0,180,224,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,180,224,0.6) 1px, transparent 1px)",
-                      backgroundSize: "48px 48px",
-                    }}
-                  />
-
-                  {/* Scan line that sweeps on hover */}
-                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00B4E0] to-transparent shadow-[0_0_20px_rgba(0,180,224,0.6)] -top-1 opacity-0 group-hover:opacity-100 group-hover:animate-[scanLine_1.4s_ease-in-out_forwards]" />
-                  </div>
-
-                  {/* Corner HUD brackets */}
-                  {["top-3 left-3 border-l-2 border-t-2", "top-3 right-3 border-r-2 border-t-2", "bottom-3 left-3 border-l-2 border-b-2", "bottom-3 right-3 border-r-2 border-b-2"].map((pos) => (
-                    <span
-                      key={pos}
-                      className={`absolute ${pos} w-5 h-5 border-[#00B4E0]/60 group-hover:border-[#00B4E0] transition-colors duration-500 pointer-events-none`}
-                    />
-                  ))}
-
-                  {/* TRUSTED-V Certified badge (top-left) */}
-                  <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm border border-white/40 rounded-full pl-1.5 pr-3 py-1 shadow-lg">
-                    <span className="w-5 h-5 rounded-full bg-[#0A2A6B] flex items-center justify-center">
-                      <svg viewBox="0 0 12 12" className="w-3 h-3 text-[#00B4E0]" fill="currentColor">
-                        <path d="M4.5 9.2L1.8 6.5l1-1L4.5 7.2l4.7-4.7 1 1z" />
-                      </svg>
-                    </span>
-                    <span className="text-[10px] font-bold text-[#0A2A6B] uppercase tracking-[0.12em]">TRUSTED-V Certified</span>
-                  </div>
-
-                  {/* Hover hint pill (bottom) — shows label that swaps copy on hover */}
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10">
-                    <div className="bg-white/95 backdrop-blur-sm rounded-full px-3.5 py-1.5 shadow-lg border border-white/50 flex items-center gap-2 transition-all duration-500 group-hover:bg-[#0A2A6B] group-hover:border-[#00B4E0]/40">
-                      <span className="relative flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full rounded-full bg-[#00B4E0] opacity-75 animate-ping" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00B4E0]" />
-                      </span>
-                      <span className="text-[11px] font-semibold text-[#0A2A6B] group-hover:text-white tracking-wide transition-colors duration-500">
-                        <span className="group-hover:hidden">Hover to inspect inner layers</span>
-                        <span className="hidden group-hover:inline">Unified Integrated System &middot; IP to SoC</span>
-                      </span>
+                    {/* Back face — layered architecture */}
+                    <div className="absolute inset-0 rounded-[20px] overflow-hidden ring-1 ring-white/15 shadow-[0_30px_70px_-20px_rgba(0,40,98,0.45)] [backface-visibility:hidden] [transform:rotateY(180deg)] bg-gradient-to-br from-[#d8dee5] to-[#b8c2cf]">
+                      <img
+                        src="/chip-layers-clean.png"
+                        alt="TRUSTED-V Internal Layered Architecture"
+                        className="absolute inset-0 w-full h-full object-contain"
+                        draggable={false}
+                      />
                     </div>
                   </div>
-
-                  {/* Layer-name pills that float in on hover (top-right) */}
-                  <div className="absolute top-16 right-3 flex flex-col gap-1.5 pointer-events-none">
-                    {[
-                      { name: "Application API", c: "#3B82F6", delay: 0 },
-                      { name: "Middleware", c: "#A855F7", delay: 80 },
-                      { name: "SoC / Module", c: "#22C55E", delay: 160 },
-                      { name: "Discrete Chips", c: "#F59E0B", delay: 240 },
-                      { name: "IP Blocks", c: "#94A3B8", delay: 320 },
-                    ].map((l) => (
-                      <span
-                        key={l.name}
-                        className="opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out bg-white/95 backdrop-blur-sm rounded-md px-2 py-0.5 text-[10px] font-bold shadow-md border-l-[3px]"
-                        style={{ borderLeftColor: l.c, color: "#0A2A6B", transitionDelay: `${l.delay}ms` }}
-                      >
-                        {l.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Caption strip below stage */}
-                <div className="mt-4 text-center">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#003262]">From Silicon to Application</p>
-                  <p className="text-[12.5px] text-slate-600 mt-1 font-medium">Every layer engineered, validated, and certified.</p>
                 </div>
               </div>
             </div>
