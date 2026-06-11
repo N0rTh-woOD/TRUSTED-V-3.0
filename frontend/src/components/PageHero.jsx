@@ -90,7 +90,7 @@ const PageHeroContent = ({ eyebrow, title, subtitle, center }) => (
 export const RiscV = () => (
   <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
     <span style={{ color: "#003262" }}>RISC</span>
-    <span style={{ color: "#FDB515" }}>-V</span>
+    <span style={{ color: "#00B4E0" }}>-V</span>
   </span>
 );
 

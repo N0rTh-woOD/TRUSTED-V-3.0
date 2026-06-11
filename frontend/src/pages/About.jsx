@@ -80,7 +80,7 @@ const About = () => {
               <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-bold text-slate-900 tracking-tight leading-[1.2] mb-4">
                 The{" "}
                 <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
-                  <span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span>
+                  <span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#00B4E0" }}>-V</span>
                 </span>{" "}
                 ecosystem's next growth phase is gated by trust &mdash; not silicon capability.
               </h2>
@@ -118,7 +118,7 @@ const About = () => {
             <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-bold text-slate-900 tracking-tight leading-[1.2] mb-3">
               The{" "}
               <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
-                <span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#FDB515" }}>-V</span>
+                <span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#00B4E0" }}>-V</span>
               </span>{" "}
               ecosystem has a trust problem. TRUSTED-V solves it.
             </h2>
@@ -218,7 +218,7 @@ const About = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
             Ready to build secure{" "}
             <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}>
-              <span className="text-white">RISC</span><span style={{ color: "#FDB515" }}>-V</span>
+              <span className="text-white">RISC</span><span style={{ color: "#00B4E0" }}>-V</span>
             </span>{" "}
             systems?
           </h2>

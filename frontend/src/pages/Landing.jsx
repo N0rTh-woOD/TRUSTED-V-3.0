@@ -96,7 +96,7 @@ const Landing = () => {
                     <span style={{ color: "#0A2A6B" }}>RISC</span><span style={{ color: "#00B4E0" }}>-V</span>
                   </span>
                 </span>
-                <span className="block text-slate-800">Software Platform</span>
+                <span className="block text-slate-800">Platform</span>
               </h1>
 
               <p className="text-[16px] sm:text-[17px] leading-[1.75] max-w-2xl text-slate-600 font-normal">
@@ -431,7 +431,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
-              Ready to build secure <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}><span className="text-white">RISC</span><span style={{ color: "#FDB515" }}>-V</span></span> systems?
+              Ready to build secure <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}><span className="text-white">RISC</span><span style={{ color: "#00B4E0" }}>-V</span></span> systems?
             </h2>
             <p className="text-blue-200/80 mb-8 text-base sm:text-lg leading-relaxed">
               Partner with Bosch to bring certified, production-grade RISC-V products to market.
