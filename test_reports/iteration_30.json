@@ -1,0 +1,42 @@
+{
+  "summary": "Frontend-only regression for Landing hero redesign + ProductSuite consistency. Logged in as admin, verified all new hero data-testids, CTA navigation, partner strip, ecosystem card, mobile stacking, and console cleanliness. All checks passed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "hero_testids_present": [
+      "hero-section", "hero-logo", "hero-made-in-india-badge", "hero-heading", "hero-subtitle",
+      "hero-cta-primary", "hero-cta-secondary", "hero-partner-strip",
+      "hero-partner-sifive", "hero-partner-akeana", "hero-partner-mips-arc-v", "hero-partner-c-dac", "hero-partner-mindgrove",
+      "hero-ecosystem-card", "hero-pillar-dev", "hero-pillar-virt (with NEW badge)", "hero-pillar-rust", "hero-pillar-silicon",
+      "hero-ecosystem-footer", "hero-lifecycle-chip"
+    ],
+    "downstream_sections_present": ["fragmentation-section", "four-pillars-section", "virtualize-first-section", "audiences-section", "pricing-section"],
+    "old_partner_ecosystem_strip_removed": true,
+    "hero_heading_text": "The Complete / RISC-V Platform / From IP to Software to Silicon.",
+    "hero_subtitle_text": "Choose any RISC-V processor IP. Virtualize before silicon exists. Ship secure Rust software. One integrated ecosystem — built with the world's leading IP vendors.",
+    "hero_logo_src": "/trustedv-brand-logo.png",
+    "cta_primary_navigates_to": "/contact (OK)",
+    "cta_secondary_navigates_to": "/product-suite (OK)",
+    "product_suite_testids_present": ["pillar-navigator", "pillar-nav-development-platform", "pillar-nav-virtualization", "pillar-nav-secure-rust", "pillar-nav-silicon-signoff", "ip-integration-section"],
+    "mobile_390x850_stacks_correctly": true,
+    "console_errors": 0,
+    "design_consistency": "RISC-V wordmark renders in Georgia serif with Navy #0A2A6B for 'RISC' and Cyan #00B4E0 for '-V'. Made-in-India ribbon uses tricolor with navy Ashoka dot. Colors consistent across Landing hero, four-pillars section, and ProductSuite hero. No purple gradients, no broken tokens observed."
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Landing.jsx is ~790 lines — approaching the 700-line threshold. Consider extracting Hero, FourPillars, VirtualizeFirst, Certifications sections into separate components for maintainability. Non-blocking.",
+    "Data duplication: partners list is defined twice inside the hero (once for hero-partner-strip, once for hero-ecosystem-footer). Extract to a const at the top of the file to keep names/gradients in sync."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "test_credentials": "admin@trusted-v.com / bosch@2425 (worked)",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Site is behind auth wall. Login via /login with admin credentials from /app/memory/test_credentials.md before hitting / or /product-suite. Landing hero rewrite (Landing.jsx lines ~52-260) is verified — all new data-testids exist and the old standalone partner-ecosystem-strip has been fully removed as intended."
+}
