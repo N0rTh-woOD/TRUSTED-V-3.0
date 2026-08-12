@@ -18,7 +18,7 @@ const ecosystemPartners = [
   { name: "Mindgrove",  short: "Mindgrove", initials: "MG", grad: "from-[#2E7D32] to-[#388e3c]" },
 ];
 
-const pillars = [
+const modules = [
   {
     id: "dev",
     number: "01",
@@ -26,16 +26,14 @@ const pillars = [
     subtitle: "IDE (Jarvyn) · WebIDE · Debugger",
     icon: Terminal,
     accent: "#003262",
-    highlight: false,
   },
   {
     id: "virt",
     number: "02",
     title: "Virtualization & Simulation",
-    subtitle: "Virtual Platform · RISC-V Hypervisor",
+    subtitle: "Virtual Platform · SiFive & Akeana Ready",
     icon: Zap,
     accent: "#00B4E0",
-    highlight: true, // NEW badge + stronger border/shadow
   },
   {
     id: "rust",
@@ -44,7 +42,6 @@ const pillars = [
     subtitle: "rBoot · rustBoot · RTOS · HAL",
     icon: Shield,
     accent: "#0F6E56",
-    highlight: false,
   },
   {
     id: "silicon",
@@ -53,57 +50,30 @@ const pillars = [
     subtitle: "SignOff · TVOTS · Verified",
     icon: BadgeCheck,
     accent: "#B45309",
-    highlight: false,
   },
 ];
 
-const PillarRow = ({ pillar }) => {
-  const Icon = pillar.icon;
-  if (pillar.highlight) {
-    return (
-      <div
-        className="group relative flex items-center gap-3 p-3 rounded-xl border-2 border-[#00B4E0]/40 shadow-[0_4px_20px_-4px_rgba(0,180,224,0.28)] bg-gradient-to-br from-[#00B4E0]/[0.04] to-white"
-        data-testid={`hero-pillar-${pillar.id}`}
-      >
-        <span className="absolute -top-1.5 -right-1.5 text-[8.5px] font-bold bg-[#00B4E0] text-white px-1.5 py-0.5 rounded-sm uppercase tracking-wider shadow-sm">
-          New
-        </span>
-        <div className="w-9 h-9 rounded-lg bg-[#00B4E0]/15 flex items-center justify-center flex-shrink-0">
-          <Icon className="w-4 h-4 text-[#00B4E0]" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-baseline gap-2">
-            <span className="text-[12px] font-bold text-slate-900 leading-tight">{pillar.title}</span>
-            <span className="text-[8.5px] font-semibold text-[#00B4E0]/80 uppercase tracking-wider">{pillar.number}</span>
-          </div>
-          <div className="text-[10.5px] text-slate-500 mt-0.5 leading-tight">{pillar.subtitle}</div>
-        </div>
-      </div>
-    );
-  }
+const ModuleRow = ({ module: m }) => {
+  const Icon = m.icon;
   return (
     <div
       className="group flex items-center gap-3 p-3 rounded-xl border border-slate-200/80 hover:shadow-sm transition-all bg-white"
-      style={{
-        // Border tint on hover — matches accent color
-        borderColor: undefined,
-      }}
-      onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${pillar.accent}66`; }}
+      onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${m.accent}66`; }}
       onMouseLeave={(e) => { e.currentTarget.style.borderColor = ""; }}
-      data-testid={`hero-pillar-${pillar.id}`}
+      data-testid={`hero-pillar-${m.id}`}
     >
       <div
         className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-        style={{ backgroundColor: `${pillar.accent}1A` }}
+        style={{ backgroundColor: `${m.accent}1A` }}
       >
-        <Icon className="w-4 h-4" style={{ color: pillar.accent }} />
+        <Icon className="w-4 h-4" style={{ color: m.accent }} />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline gap-2">
-          <span className="text-[12px] font-bold text-slate-900 leading-tight">{pillar.title}</span>
-          <span className="text-[8.5px] font-semibold text-slate-400 uppercase tracking-wider">{pillar.number}</span>
+          <span className="text-[12px] font-bold text-slate-900 leading-tight">{m.title}</span>
+          <span className="text-[8.5px] font-semibold text-slate-400 uppercase tracking-wider">{m.number}</span>
         </div>
-        <div className="text-[10.5px] text-slate-500 mt-0.5 leading-tight">{pillar.subtitle}</div>
+        <div className="text-[10.5px] text-slate-500 mt-0.5 leading-tight">{m.subtitle}</div>
       </div>
     </div>
   );
@@ -137,23 +107,25 @@ const HeroSection = () => {
               data-testid="hero-logo"
             />
 
-            {/* Made-in-India ribbon */}
+            {/* Made-in-India ribbon — proper 3:2 flag proportions */}
             <div
-              className="inline-flex items-stretch rounded-md overflow-hidden ring-1 ring-slate-200 shadow-sm mb-6"
+              className="inline-flex items-center gap-2.5 rounded-md px-3 py-2 bg-slate-50 ring-1 ring-slate-200 shadow-sm mb-6"
               data-testid="hero-made-in-india-badge"
             >
-              <span className="flex flex-col w-[24px] flex-shrink-0">
+              {/* Proper 3:2 India flag (24 × 16) */}
+              <span
+                className="flex flex-col w-[24px] h-[16px] rounded-[2px] overflow-hidden ring-1 ring-slate-200/70 shadow-[0_1px_2px_rgba(0,0,0,0.08)] flex-shrink-0"
+                aria-hidden="true"
+              >
                 <span className="block flex-1 bg-[#FF9933]" />
                 <span className="block flex-1 bg-white relative">
-                  <span className="absolute inset-0 m-auto w-[9px] h-[9px] rounded-full border border-[#000080]/70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[4px] h-[4px] rounded-full border-[0.5px] border-[#000080]" />
                 </span>
                 <span className="block flex-1 bg-[#138808]" />
               </span>
-              <span className="flex items-center px-3 py-1.5 bg-slate-50">
-                <span className="text-[10.5px] font-bold text-[#0A2A6B] uppercase tracking-[0.14em] mr-2">Made in India</span>
-                <span className="w-px h-3 bg-slate-300 mr-2" />
-                <span className="text-[10.5px] font-medium text-slate-600 tracking-wide">Engineered by Bosch to the World</span>
-              </span>
+              <span className="text-[10.5px] font-bold text-[#0A2A6B] uppercase tracking-[0.14em]">Made in India</span>
+              <span className="w-px h-3 bg-slate-300" />
+              <span className="text-[10.5px] font-medium text-slate-600 tracking-wide">Engineered by Bosch to the World</span>
             </div>
 
             {/* Headline */}
@@ -196,7 +168,7 @@ const HeroSection = () => {
                   className="h-11 px-6 text-[13.5px] font-semibold bg-[#0A2A6B] hover:bg-[#003262] text-white shadow-sm"
                   data-testid="hero-cta-primary"
                 >
-                  Talk to Engineers <ArrowRight className="ml-2 w-4 h-4" />
+                  Request a Demo <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
               <Link to="/product-suite">
@@ -254,7 +226,7 @@ const HeroSection = () => {
                 <div className="flex items-start justify-between mb-5">
                   <div>
                     <div className="text-[9.5px] font-bold uppercase tracking-[0.22em] text-[#0A2A6B]">TRUSTED-V Platform</div>
-                    <div className="text-[13px] font-bold text-slate-800 mt-1 leading-tight">Four pillars. One ecosystem.</div>
+                    <div className="text-[13px] font-bold text-slate-800 mt-1 leading-tight">Four modules. One integrated platform.</div>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -262,10 +234,10 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* Four pillar stack */}
+                {/* Four modules */}
                 <div className="space-y-2">
-                  {pillars.map((p) => (
-                    <PillarRow key={p.id} pillar={p} />
+                  {modules.map((m) => (
+                    <ModuleRow key={m.id} module={m} />
                   ))}
                 </div>
 

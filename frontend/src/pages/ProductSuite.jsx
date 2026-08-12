@@ -11,11 +11,11 @@ import {
 import PageHero from "@/components/PageHero";
 
 const ProductSuite = () => {
-  // Four pillars per PDF strategic recommendation
-  const pillars = [
+  // Four modules — per PDF strategic recommendation, Bosch-simple layout
+  const modules = [
     {
       id: "development-platform",
-      pillar: "Pillar 01",
+      moduleLabel: "Module 01",
       category: "RISC-V Development Platform",
       tagline: "The control-center of your RISC-V workflow.",
       description: "TRUSTED-V IDE orchestrates the entire lifecycle — from IP selection and virtual prototyping to on-chip debug and production deployment.",
@@ -65,25 +65,24 @@ const ProductSuite = () => {
     },
     {
       id: "virtualization",
-      pillar: "Pillar 02",
+      moduleLabel: "Module 02",
       category: "Virtualization & Simulation",
       tagline: "Virtualize RISC-V before you touch silicon.",
-      description: "Full CPU, SoC, memory and peripheral models with snapshots, trace and automated CI hooks. Ship 6–12 months ahead of hardware — with zero rework at silicon bring-up.",
+      description: "Full CPU, SoC, memory and peripheral models with snapshots, trace and automated CI hooks — validated for SiFive and Akeana IP portfolios. Ship 6–12 months ahead of hardware, with zero rework at silicon bring-up.",
       accent: "#00B4E0",
-      badgeNew: true,
       items: [
         {
           name: "TRUSTED-V Virtual Platform",
-          description: "Cycle-accurate RISC-V virtual hardware. Model any RVA23-class SoC — CPU, memory, virtual peripherals, virtual interrupts, storage and networking — with snapshot/rewind and full trace.",
+          description: "Cycle-accurate RISC-V virtual hardware. Pre-built virtual boards for SiFive Performance, Intelligence, Essential series and Akeana 100/1000/5100 — with snapshot/rewind and full trace.",
           icon: Zap,
           features: [
-            "CPU virtualization (RV32/RV64, H-ext)",
-            "SoC + virtual memory + peripherals",
+            "SiFive P550 / Performance / Essential virtual boards",
+            "Akeana 100 / 1000 / 5100 virtual boards",
             "Snapshots, rewind & trace viewer",
             "Automated CI / regression harness",
             "Device models & scripting API",
           ],
-          badge: "New",
+          badge: "Virtualization",
           link: "/product-suite",
         },
         {
@@ -96,7 +95,7 @@ const ProductSuite = () => {
             "Memory-safe Rust core",
             "Deterministic real-time guest",
           ],
-          badge: "New",
+          badge: "Hypervisor",
         },
         {
           name: "RISC-V Simulator",
@@ -114,7 +113,7 @@ const ProductSuite = () => {
     },
     {
       id: "secure-rust",
-      pillar: "Pillar 03",
+      moduleLabel: "Module 03",
       category: "Secure Rust Software",
       tagline: "Rust-Native. RISC-V-Native. Production-Ready.",
       description: "A memory-safe foundation for RISC-V — from ROM-resident boot through hardware abstraction, RTOS, drivers, cryptography and application layers.",
@@ -200,7 +199,7 @@ const ProductSuite = () => {
     },
     {
       id: "silicon-signoff",
-      pillar: "Pillar 04",
+      moduleLabel: "Module 04",
       category: "Silicon SignOff & Trust",
       tagline: "From architecture requirements to production-ready silicon.",
       description: "AI-powered silicon pipeline plus the industry's only RISC-V-native 5-layer certification programme — Bronze to Platinum, cryptographically signed and independently verifiable.",
@@ -251,7 +250,8 @@ const ProductSuite = () => {
     const colors = {
       "Flagship": "bg-primary text-white",
       "Cloud": "bg-blue-500 text-white",
-      "New": "bg-[#00B4E0] text-white",
+      "Virtualization": "bg-cyan-100 text-cyan-800 border-cyan-200",
+      "Hypervisor": "bg-cyan-100 text-cyan-800 border-cyan-200",
       "Security": "bg-red-100 text-red-800 border-red-200",
       "Crypto": "bg-amber-100 text-amber-800 border-amber-200",
       "SDK": "bg-green-100 text-green-800 border-green-200",
@@ -270,77 +270,71 @@ const ProductSuite = () => {
       {/* Hero */}
       <PageHero
         eyebrow="Product Suite"
-        title={<>The Complete <span style={{ fontFamily: "'Georgia', serif" }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#00B4E0" }}>-V</span></span> Platform. Four pillars. One ecosystem.</>}
+        title={<>The Complete <span style={{ fontFamily: "'Georgia', serif" }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#00B4E0" }}>-V</span></span> Platform. Four modules. One integrated platform.</>}
         subtitle="From IP integration and virtualization to secure Rust software and trusted silicon certification — TRUSTED-V unifies every stage of the RISC-V development lifecycle."
       />
 
-      {/* Pillar navigator strip */}
+      {/* Module navigator strip */}
       <section className="bg-slate-50 border-b border-slate-200/60 py-6" data-testid="pillar-navigator">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.18em] mr-2">Explore</span>
-            {pillars.map((p) => (
+            {modules.map((m) => (
               <a
-                key={p.id}
-                href={`#${p.id}`}
+                key={m.id}
+                href={`#${m.id}`}
                 className="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-slate-300 rounded-full px-3.5 py-1.5 text-[12.5px] font-semibold text-slate-700 hover:shadow-sm transition-all"
-                style={{ borderLeftColor: p.accent, borderLeftWidth: "3px" }}
-                data-testid={`pillar-nav-${p.id}`}
+                style={{ borderLeftColor: m.accent, borderLeftWidth: "3px" }}
+                data-testid={`pillar-nav-${m.id}`}
               >
-                <span className="text-[10px] font-bold" style={{ color: p.accent }}>{p.pillar}</span>
-                {p.category}
+                <span className="text-[10px] font-bold" style={{ color: m.accent }}>{m.moduleLabel}</span>
+                {m.category}
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pillars */}
-      {pillars.map((pillar, pIndex) => (
+      {/* Modules */}
+      {modules.map((mod, mIndex) => (
         <section
-          key={pillar.id}
-          id={pillar.id}
-          className={`py-16 lg:py-20 ${pIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}
-          data-testid={`pillar-section-${pillar.id}`}
+          key={mod.id}
+          id={mod.id}
+          className={`py-16 lg:py-20 ${mIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}
+          data-testid={`pillar-section-${mod.id}`}
         >
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Pillar header */}
+            {/* Module header */}
             <div className="mb-10 max-w-3xl">
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: pillar.accent }}>{pillar.pillar}</span>
-                <span className="h-px flex-1 max-w-[80px]" style={{ backgroundColor: `${pillar.accent}55` }} />
-                {pillar.badgeNew && (
-                  <span className="text-[9.5px] font-bold text-white bg-[#00B4E0] px-2 py-0.5 rounded-full uppercase tracking-wider">New</span>
-                )}
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: mod.accent }}>{mod.moduleLabel}</span>
+                <span className="h-px flex-1 max-w-[80px]" style={{ backgroundColor: `${mod.accent}55` }} />
               </div>
               <h2 className="text-[26px] sm:text-[32px] lg:text-[36px] font-bold text-slate-900 tracking-tight leading-[1.1] mb-3">
-                {pillar.category}
+                {mod.category}
               </h2>
-              <p className="text-[15px] sm:text-[16px] font-medium mb-3" style={{ color: pillar.accent }}>{pillar.tagline}</p>
-              <p className="text-[14.5px] text-slate-600 leading-[1.7]">{pillar.description}</p>
-              <div className="w-16 h-1 mt-6" style={{ backgroundColor: pillar.accent }} />
+              <p className="text-[15px] sm:text-[16px] font-medium mb-3" style={{ color: mod.accent }}>{mod.tagline}</p>
+              <p className="text-[14.5px] text-slate-600 leading-[1.7]">{mod.description}</p>
+              <div className="w-16 h-1 mt-6" style={{ backgroundColor: mod.accent }} />
             </div>
 
-            {/* Products in this pillar */}
-            <div className={`grid gap-6 ${pillar.items.length <= 2 ? 'md:grid-cols-2 max-w-5xl' : pillar.items.length <= 3 ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
-              {pillar.items.map((product) => {
+            {/* Products in this module */}
+            <div className={`grid gap-6 ${mod.items.length <= 2 ? 'md:grid-cols-2 max-w-5xl' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
+              {mod.items.map((product) => {
                 const Icon = product.icon;
-                const isHighlight = product.badge === "Flagship" || product.badge === "Cloud" || product.badge === "New";
                 return (
                   <Card
                     key={product.name}
                     data-testid={`product-${product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                    className={`bg-white border-border hover:shadow-lg transition-all duration-300 group overflow-hidden flex flex-col ${isHighlight ? "border-2" : ""}`}
-                    style={isHighlight ? { borderColor: `${pillar.accent}30` } : {}}
+                    className="bg-white border-slate-200 hover:shadow-md transition-all duration-300 group overflow-hidden flex flex-col"
                   >
-                    {isHighlight && <div className="h-1.5" style={{ background: `linear-gradient(90deg, ${pillar.accent}, ${pillar.accent}80)` }} />}
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
                         <div
-                          className="w-11 h-11 rounded-lg flex items-center justify-center transition-colors"
-                          style={{ backgroundColor: `${pillar.accent}${isHighlight ? '' : '15'}`, color: isHighlight ? "#fff" : pillar.accent }}
+                          className="w-11 h-11 rounded-lg flex items-center justify-center"
+                          style={{ backgroundColor: `${mod.accent}15` }}
                         >
-                          <Icon className="w-5 h-5" style={{ color: isHighlight ? "#fff" : pillar.accent }} />
+                          <Icon className="w-5 h-5" style={{ color: mod.accent }} />
                         </div>
                         <Badge className={getBadgeColor(product.badge)}>{product.badge}</Badge>
                       </div>
@@ -353,7 +347,7 @@ const ProductSuite = () => {
                       <ul className="space-y-2 mb-4 flex-1">
                         {product.features.map((feature) => (
                           <li key={feature} className="flex items-start gap-2 text-[13px] text-muted-foreground">
-                            <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: pillar.accent }} />
+                            <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: mod.accent }} />
                             <span>{feature}</span>
                           </li>
                         ))}
@@ -362,9 +356,9 @@ const ProductSuite = () => {
                         <Link to={product.link}>
                           <Button
                             size="sm"
-                            className={`w-full mt-auto transition-all bg-transparent border text-slate-700 hover:text-white`}
-                            style={{ borderColor: `${pillar.accent}80` }}
-                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = pillar.accent; e.currentTarget.style.color = "#fff"; }}
+                            className="w-full mt-auto transition-all bg-transparent border text-slate-700 hover:text-white"
+                            style={{ borderColor: `${mod.accent}80` }}
+                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = mod.accent; e.currentTarget.style.color = "#fff"; }}
                             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = ""; }}
                           >
                             Learn More <ArrowRight className="w-4 h-4 ml-1" />
@@ -379,6 +373,145 @@ const ProductSuite = () => {
           </div>
         </section>
       ))}
+
+      {/* ══ STRATEGIC COLLABORATIONS — SiFive & Akeana ══ */}
+      <section className="py-16 lg:py-20 bg-white border-t border-slate-200/60" data-testid="collab-section">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-12">
+            <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#003262]">
+              <span className="w-7 h-px bg-[#003262]/45" /> Strategic Collaborations
+            </span>
+            <h2 className="text-[28px] sm:text-[34px] font-bold text-slate-900 tracking-tight leading-[1.12] mt-3 mb-4">
+              Deep integration with <span className="text-[#003262]">SiFive</span> and <span className="text-[#0F6E56]">Akeana</span>.
+            </h2>
+            <p className="text-[15.5px] text-slate-600 leading-[1.75] font-light">
+              TRUSTED-V is co-engineered with the two RISC-V IP portfolios shaping the future of embedded, edge and high-performance compute. Native virtual platforms, tuned toolchains, verified BSPs and a shared certification pipeline &mdash; out of the box.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-6" data-testid="collab-partner-cards">
+            {/* SiFive */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-7 lg:p-8 hover:shadow-md transition-shadow" data-testid="collab-sifive">
+              <div className="flex items-start gap-4 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#003262] to-[#1A4FA8] flex items-center justify-center text-white text-[16px] font-black flex-shrink-0">SF</div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#003262]">RISC-V IP Partner</div>
+                  <h3 className="text-[22px] font-bold text-slate-900 leading-tight mt-1">SiFive</h3>
+                  <p className="text-[13px] text-slate-500 mt-0.5">Global RISC-V IP leader &mdash; from IoT to data-center.</p>
+                </div>
+              </div>
+              <p className="text-[14px] text-slate-600 leading-[1.7] mb-5">
+                Full-stack support across SiFive Performance, Intelligence, Automotive and Essential series. TRUSTED-V ships virtual boards, tuned Rust HAL/PAC, verified BSPs and validated certification profiles for every SiFive family.
+              </p>
+              <div className="grid grid-cols-2 gap-2.5 mb-5">
+                {[
+                  "Performance P550 / P570 / P870",
+                  "Intelligence X280 / X390",
+                  "Essential E-series (RV32)",
+                  "Automotive AX45MP",
+                ].map((line) => (
+                  <div key={line} className="flex items-start gap-2 text-[12.5px] text-slate-700">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#003262] mt-0.5 flex-shrink-0" />
+                    <span>{line}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="pt-4 border-t border-slate-200/70 flex items-center gap-4 text-[11.5px] text-slate-500">
+                <span><span className="font-bold text-slate-800">4</span> virtual boards</span>
+                <span className="w-1 h-1 rounded-full bg-slate-300" />
+                <span><span className="font-bold text-slate-800">Tuned</span> Rust toolchain</span>
+                <span className="w-1 h-1 rounded-full bg-slate-300" />
+                <span><span className="font-bold text-slate-800">TRUSTED-V</span> Verified</span>
+              </div>
+            </div>
+
+            {/* Akeana */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-7 lg:p-8 hover:shadow-md transition-shadow" data-testid="collab-akeana">
+              <div className="flex items-start gap-4 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0F6E56] to-[#137d63] flex items-center justify-center text-white text-[16px] font-black flex-shrink-0">AK</div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#0F6E56]">RISC-V IP Partner</div>
+                  <h3 className="text-[22px] font-bold text-slate-900 leading-tight mt-1">Akeana</h3>
+                  <p className="text-[13px] text-slate-500 mt-0.5">Deeply embedded to server-class OoO cores.</p>
+                </div>
+              </div>
+              <p className="text-[14px] text-slate-600 leading-[1.7] mb-5">
+                End-to-end support for Akeana&apos;s 100, 1000 and 5100 series &mdash; from ultra-low-power controllers to Linux-capable out-of-order cores. TRUSTED-V provides matched virtual platforms, boot &amp; RTOS, and a certification-ready flow.
+              </p>
+              <div className="grid grid-cols-2 gap-2.5 mb-5">
+                {[
+                  "100 Series (embedded, RV32)",
+                  "1000 Series (mid-range, RV32/64)",
+                  "5100 Series (Linux, OoO)",
+                  "Vector + Matrix extensions",
+                ].map((line) => (
+                  <div key={line} className="flex items-start gap-2 text-[12.5px] text-slate-700">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#0F6E56] mt-0.5 flex-shrink-0" />
+                    <span>{line}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="pt-4 border-t border-slate-200/70 flex items-center gap-4 text-[11.5px] text-slate-500">
+                <span><span className="font-bold text-slate-800">3</span> virtual boards</span>
+                <span className="w-1 h-1 rounded-full bg-slate-300" />
+                <span><span className="font-bold text-slate-800">Rust</span> BSP + drivers</span>
+                <span className="w-1 h-1 rounded-full bg-slate-300" />
+                <span><span className="font-bold text-slate-800">TRUSTED-V</span> Verified</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Integration diagram — how SiFive/Akeana IP flows through TRUSTED-V */}
+          <div className="mt-10 bg-slate-50 rounded-2xl border border-slate-200/70 p-6 lg:p-8" data-testid="collab-flow">
+            <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">How it works</div>
+            <div className="grid md:grid-cols-5 gap-3 items-center">
+              {[
+                { title: "Select IP", sub: "SiFive · Akeana", accent: "#003262" },
+                { title: "Virtual Board", sub: "TRUSTED-V VP", accent: "#00B4E0" },
+                { title: "Rust Software", sub: "HAL · RTOS · Apps", accent: "#0F6E56" },
+                { title: "CI Validation", sub: "TVOTS suite", accent: "#7B3F00" },
+                { title: "Silicon Ready", sub: "TRUSTED-V Verified", accent: "#B45309" },
+              ].map((step, i, arr) => (
+                <div key={step.title} className="flex items-center gap-3">
+                  <div className="flex-1 bg-white rounded-lg border border-slate-200 p-3">
+                    <div className="text-[13px] font-bold text-slate-900 leading-tight">{step.title}</div>
+                    <div className="text-[11px] mt-0.5" style={{ color: step.accent }}>{step.sub}</div>
+                  </div>
+                  {i < arr.length - 1 && <ArrowRight className="w-4 h-4 text-slate-400 flex-shrink-0 hidden md:block" />}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ WHY TRUSTED-V (Bosch-style value bullets) ══ */}
+      <section className="py-14 lg:py-16 bg-slate-50 border-t border-slate-200/60" data-testid="why-trustedv-section">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-10">
+            <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#003262]">
+              <span className="w-7 h-px bg-[#003262]/45" /> Why TRUSTED-V?
+            </span>
+            <h2 className="text-[26px] sm:text-[32px] font-bold text-slate-900 tracking-tight leading-[1.12] mt-3">
+              Built for teams shipping <span className="text-[#003262]">production RISC-V products</span>.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { t: "IP Freedom", d: "Choose SiFive, Akeana or any RVA23-class core — one development environment." },
+              { t: "Virtual First", d: "Ship software 6–12 months before silicon exists. Zero rework at bring-up." },
+              { t: "Memory-Safe Rust", d: "Rust-native security stack — from ROM boot through RTOS to applications." },
+              { t: "Independent Trust", d: "5-layer TRUSTED-V Verified certification, cryptographically signed." },
+            ].map((v) => (
+              <div key={v.t} className="bg-white rounded-lg border border-slate-200 p-5 hover:border-slate-300 transition-colors" data-testid={`why-${v.t.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
+                <div className="w-8 h-1 bg-[#003262] mb-3" />
+                <div className="text-[15px] font-bold text-slate-900 mb-2 leading-tight">{v.t}</div>
+                <div className="text-[13px] text-slate-600 leading-[1.6]">{v.d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* RISC-V IP Integration section */}
       <section className="py-16 lg:py-20 bg-white border-t border-slate-200/60" data-testid="ip-integration-section">
@@ -490,9 +623,9 @@ const ProductSuite = () => {
       {/* CTA */}
       <section className="py-16 lg:py-20 bg-white border-t border-border">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-4">Start with any pillar. Grow into the platform.</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-4">Start with any module. Grow into the platform.</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Download the IDE, spin up the virtual platform, or talk to our engineers about a complete evaluation.
+            Download the IDE, spin up a SiFive or Akeana virtual board, or request a full evaluation.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/download-ide">
@@ -507,7 +640,7 @@ const ProductSuite = () => {
             </Link>
             <Link to="/contact">
               <Button size="lg" variant="outline" className="font-semibold" data-testid="cta-talk-sales">
-                Talk to Sales <ExternalLink className="w-4 h-4 ml-2" />
+                Request a Demo <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
             </Link>
           </div>

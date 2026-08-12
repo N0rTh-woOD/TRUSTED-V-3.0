@@ -1,0 +1,37 @@
+{
+  "summary": "Frontend-only verification of TRUSTED-V pillar->module rename, Virtualization no-NEW-badge, Made-in-India flag fix, 'Request a Demo' CTA, new Strategic Collaborations + Why TRUSTED-V sections. Logged in as admin and validated Landing (/) and ProductSuite (/product-suite). ALL 14 verification items PASS.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verification_results": {
+    "hero_made_in_india_badge": "PASS - horizontal 24x16 tricolor with saffron/white-with-Ashoka-dot/green stripes rendered correctly (bbox width 352 for whole badge, inner flag span 24x16)",
+    "hero_cta_primary": "PASS - text 'Request a Demo'",
+    "hero_ecosystem_card": "PASS - 'Four modules. One integrated platform.'; no 'pillar' occurrences",
+    "hero_pillar_virt": "PASS - uniform border-slate-200/80, no 'New' badge, subtitle 'Virtual Platform · SiFive & Akeana Ready'",
+    "landing_four_modules_section": "PASS - heading 'One platform. Four modules. RISC-V unified.'; Module 01/02/03/04 labels; no 'Pillar 0'; no border-2; 0 standalone 'New' badges; mentions SiFive P550 and Akeana 100/1000/5100",
+    "landing_bottom_cta": "PASS - 'Request a Demo' appears 2x on landing (hero + bottom CTA); 0 occurrences of 'Talk to Engineers'",
+    "product_suite_title": "PASS - 'The Complete RISC-V Platform' + 'Four modules. One integrated platform.'; no 'Four pillars'",
+    "pillar_navigator": "PASS - all 4 chips labeled Module 01..04; nav-virtualization chip has no 'New'",
+    "pillar_section_virtualization": "PASS - shows 'Module 02', no 'New' badge, description mentions 'SiFive and Akeana IP portfolios', features mention P550 and Akeana 100/5100",
+    "collab_section": "PASS - collab-section, collab-sifive, collab-akeana, collab-flow all present. SiFive lists P550/P570/P870/X280/X390/AX45MP. Akeana lists 100/1000/5100/Vector. Flow: Select IP -> Virtual Board -> Rust Software -> CI Validation -> Silicon Ready",
+    "why_trustedv_section": "PASS - all 4 cards present (why-ip-freedom, why-virtual-first, why-memory-safe-rust, why-independent-trust)",
+    "product_suite_cta": "PASS - heading 'Start with any module. Grow into the platform.'; cta-talk-sales text 'Request a Demo'; no 'Talk to Sales' anywhere",
+    "no_new_badges_for_virtualization": "PASS - 0 standalone 'New' text nodes on both pages",
+    "console_errors": "PASS - no console errors/warnings captured during load or navigation"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor observation: hero-cta-primary rendered with no href attribute (likely a react-router <Link>/button). Text content and testid are correct; nav behavior was not click-tested but no functional regression expected."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not tested per request)", "frontend": "100%"},
+  "test_credentials": "admin@trusted-v.com / bosch@2425 (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All pillar->module rename, flag, and new collab/why sections verified. data-testids intentionally still contain 'pillar-*' while visible text says 'Module NN' - this is by design. Frontend clean."
+}

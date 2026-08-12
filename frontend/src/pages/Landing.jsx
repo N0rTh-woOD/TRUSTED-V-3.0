@@ -115,7 +115,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* ══ FOUR PILLARS — PRODUCT ARCHITECTURE ══ */}
+      {/* ══ FOUR MODULES — PRODUCT ARCHITECTURE ══ */}
       <section className="py-20 bg-white relative" data-testid="four-pillars-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14 max-w-3xl mx-auto">
@@ -123,18 +123,18 @@ const Landing = () => {
               <span className="w-6 h-px bg-[#003262]/40" /> The TRUSTED-V Platform <span className="w-6 h-px bg-[#003262]/40" />
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4 tracking-tight">
-              One platform. <span className="text-[#003262]">Four pillars.</span> <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#00B4E0" }}>-V</span></span> unified.
+              One platform. <span className="text-[#003262]">Four modules.</span> <span className="whitespace-nowrap" style={{ fontFamily: "'Georgia', serif" }}><span style={{ color: "#003262" }}>RISC</span><span style={{ color: "#00B4E0" }}>-V</span></span> unified.
             </h2>
             <p className="text-slate-600 leading-relaxed">
-              An integrated ecosystem that connects processor IP, virtualization, secure Rust software, silicon signoff and trusted certification into one continuous development lifecycle.
+              An integrated platform that connects processor IP, virtualization, secure Rust software, silicon signoff and trusted certification into one continuous development lifecycle.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {/* Pillar 1 — RISC-V Development Platform */}
+            {/* Module 01 — Development Platform */}
             <RevealItem>
-              <div className="bg-white rounded-xl border-2 border-[#003262]/15 p-6 hover:shadow-xl transition-all hover:border-[#003262]/35 h-full flex flex-col" data-testid="pillar-development-platform">
-                <span className="text-[10px] font-bold text-[#003262] uppercase tracking-[0.18em] mb-3">Pillar 01</span>
+              <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:border-[#003262]/35 transition-all h-full flex flex-col" data-testid="pillar-development-platform">
+                <span className="text-[10px] font-bold text-[#003262] uppercase tracking-[0.18em] mb-3">Module 01</span>
                 <div className="w-12 h-12 rounded-xl bg-[#003262]/10 flex items-center justify-center mb-4">
                   <Terminal className="w-6 h-6 text-[#003262]" />
                 </div>
@@ -154,21 +154,20 @@ const Landing = () => {
               </div>
             </RevealItem>
 
-            {/* Pillar 2 — Virtualization & Simulation (NEW) */}
+            {/* Module 02 — Virtualization & Simulation */}
             <RevealItem delay={100}>
-              <div className="bg-white rounded-xl border-2 border-[#00B4E0]/25 p-6 hover:shadow-xl transition-all hover:border-[#00B4E0]/45 h-full flex flex-col relative overflow-hidden" data-testid="pillar-virtualization">
-                <span className="absolute top-4 right-4 text-[9px] font-bold bg-[#00B4E0] text-white px-2 py-0.5 rounded-full uppercase tracking-wider">New</span>
-                <span className="text-[10px] font-bold text-[#00B4E0] uppercase tracking-[0.18em] mb-3">Pillar 02</span>
+              <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:border-[#00B4E0]/45 transition-all h-full flex flex-col" data-testid="pillar-virtualization">
+                <span className="text-[10px] font-bold text-[#00B4E0] uppercase tracking-[0.18em] mb-3">Module 02</span>
                 <div className="w-12 h-12 rounded-xl bg-[#00B4E0]/10 flex items-center justify-center mb-4">
                   <Zap className="w-6 h-6 text-[#00B4E0]" />
                 </div>
                 <h3 className="text-[17px] font-bold text-slate-900 mb-2 leading-tight">Virtualization &amp; Simulation</h3>
-                <p className="text-[12.5px] text-slate-500 uppercase tracking-wider font-semibold mb-3">Virtual Platform · Hypervisor</p>
+                <p className="text-[12.5px] text-slate-500 uppercase tracking-wider font-semibold mb-3">SiFive · Akeana Ready</p>
                 <p className="text-[13.5px] text-slate-600 leading-[1.65] mb-4">
-                  Virtualize RISC-V before you touch silicon. Full CPU, SoC, memory and peripheral models with snapshots, trace, and automated CI test hooks.
+                  Virtualize RISC-V before you touch silicon. Full CPU, SoC, memory and peripheral models &mdash; validated for SiFive and Akeana IP portfolios.
                 </p>
                 <ul className="space-y-1.5 mb-5 flex-1">
-                  {["CPU + SoC virtualization", "Virtual peripherals & interrupts", "RISC-V Hypervisor (H-extension)", "Snapshots, trace, CI test runner"].map((f) => (
+                  {["SiFive P550 / Performance / Essential virtual boards", "Akeana 100 / 1000 / 5100 virtual boards", "RISC-V Hypervisor (H-extension)", "Snapshots, trace, CI test runner"].map((f) => (
                     <li key={f} className="flex items-start gap-2 text-[12px] text-slate-600 leading-snug"><CheckCircle2 className="w-3.5 h-3.5 text-[#00B4E0] mt-0.5 flex-shrink-0" />{f}</li>
                   ))}
                 </ul>
@@ -178,10 +177,10 @@ const Landing = () => {
               </div>
             </RevealItem>
 
-            {/* Pillar 3 — Secure Rust Software */}
+            {/* Module 03 — Secure Rust Software */}
             <RevealItem delay={200}>
-              <div className="bg-white rounded-xl border-2 border-[#0F6E56]/20 p-6 hover:shadow-xl transition-all hover:border-[#0F6E56]/40 h-full flex flex-col" data-testid="pillar-secure-rust">
-                <span className="text-[10px] font-bold text-[#0F6E56] uppercase tracking-[0.18em] mb-3">Pillar 03</span>
+              <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:border-[#0F6E56]/40 transition-all h-full flex flex-col" data-testid="pillar-secure-rust">
+                <span className="text-[10px] font-bold text-[#0F6E56] uppercase tracking-[0.18em] mb-3">Module 03</span>
                 <div className="w-12 h-12 rounded-xl bg-[#0F6E56]/10 flex items-center justify-center mb-4">
                   <Shield className="w-6 h-6 text-[#0F6E56]" />
                 </div>
@@ -201,10 +200,10 @@ const Landing = () => {
               </div>
             </RevealItem>
 
-            {/* Pillar 4 — Silicon SignOff & Trust */}
+            {/* Module 04 — Silicon SignOff & Trust */}
             <RevealItem delay={300}>
-              <div className="bg-white rounded-xl border-2 border-[#B45309]/15 p-6 hover:shadow-xl transition-all hover:border-[#B45309]/35 h-full flex flex-col" data-testid="pillar-silicon-signoff">
-                <span className="text-[10px] font-bold text-[#B45309] uppercase tracking-[0.18em] mb-3">Pillar 04</span>
+              <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:border-[#B45309]/35 transition-all h-full flex flex-col" data-testid="pillar-silicon-signoff">
+                <span className="text-[10px] font-bold text-[#B45309] uppercase tracking-[0.18em] mb-3">Module 04</span>
                 <div className="w-12 h-12 rounded-xl bg-[#B45309]/10 flex items-center justify-center mb-4">
                   <BadgeCheck className="w-6 h-6 text-[#B45309]" />
                 </div>
@@ -525,7 +524,7 @@ const Landing = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/contact">
                 <Button size="lg" className="h-12 px-8 text-base font-semibold bg-white text-[#003262] hover:bg-white/90" data-testid="cta-talk-engineers">
-                  Talk to Engineers <ArrowRight className="ml-2 w-5 h-5" />
+                  Request a Demo <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
               <Link to="/download-ide">
