@@ -6,6 +6,7 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { ProtectedRoute, AdminRoute } from "@/components/ProtectedRoute";
 import { Toaster } from "@/components/ui/sonner";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { Loader2 } from "lucide-react";
 
 // Scroll to top on route change
@@ -88,6 +89,7 @@ const AppContent = () => {
     <BrowserRouter>
       <ScrollToTop />
       <Navigation />
+      <main>
       <Routes>
         {/* Public Routes - accessible when site lock is disabled or user is authenticated */}
         <Route path="/" element={<Landing />} />
@@ -224,6 +226,8 @@ const AppContent = () => {
           }
         />
       </Routes>
+      </main>
+      <Footer />
       <Toaster />
     </BrowserRouter>
   );

@@ -1,196 +1,135 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { 
-  Shield, ArrowRight, CheckCircle2, ExternalLink, 
-  GitBranch, Lock, Cpu, ArrowLeft, Zap, RefreshCw, Key
-} from "lucide-react";
+import { ArrowUpRight, ExternalLink, ArrowLeft } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
 const SecureBootPage = () => {
+  const loaders = [
+    {
+      name: "rBoot",
+      role: "First-stage bootloader",
+      color: "#B7410E",
+      desc: "Minimal, fast, security-critical first-stage. Initializes hardware, establishes chain of trust and hands off to the main firmware.",
+      features: [
+        "~8 KB flash footprint",
+        "First-stage hardware init for RISC-V",
+        "Verified boot with ECDSA / EdDSA / ML-DSA",
+        "Anti-rollback counters",
+        "Secure key provisioning",
+      ],
+      repo: "https://github.com/",
+    },
+    {
+      name: "rustBoot",
+      role: "Second-stage & OTA",
+      color: "#003262",
+      desc: "Full-featured Rust bootloader. Handles A/B updates, OTA, over-the-air recovery and application-layer attestation.",
+      features: [
+        "A/B partition & rollback",
+        "OTA update pipeline with signed manifests",
+        "PQC-ready signature verification",
+        "Recovery mode & fail-safe partitions",
+        "Full Rust memory safety",
+      ],
+      repo: "https://github.com/",
+    },
+  ];
+
+  const chain = [
+    { step: "01", label: "Silicon RoT", desc: "Immutable root of trust in ROM / OTP" },
+    { step: "02", label: "rBoot", desc: "First-stage verifies rustBoot" },
+    { step: "03", label: "rustBoot", desc: "Second-stage verifies the application" },
+    { step: "04", label: "Application", desc: "Attested, signed, PQC-ready firmware" },
+  ];
+
   return (
-    <div className="min-h-screen bg-white" data-testid="secure-boot-page">
-      {/* Hero */}
+    <div className="bg-white text-[#0A0A0A]" data-testid="secure-boot-page">
       <PageHero
-        eyebrow="Security · Secure Boot"
-        title="Secure Boot: rboot & rustBoot"
-        subtitle="Hardware root of trust with verified boot chain for RISC-V. Two complementary bootloaders designed for different stages and use cases."
+        eyebrow="Secure Boot"
+        title={
+          <>
+            A verified chain,<br />from ROM to app.
+          </>
+        }
+        subtitle="rBoot and rustBoot form a complete, Rust-native secure-boot chain for RISC-V — certifiable against CC EAL4+, PSA L3 and ISO 26262."
       >
-        <div className="flex flex-col gap-3">
-          <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-[#003262] transition-colors">
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Products
-          </Link>
-          <div className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-5">
-            <div className="w-12 h-12 rounded-xl bg-[#003262]/10 flex items-center justify-center">
-              <Shield className="w-6 h-6 text-[#003262]" />
-            </div>
-            <div>
-              <Badge className="bg-[#003262]/10 text-[#003262] border-[#003262]/20">Security · Bootloader</Badge>
-              <div className="text-[12.5px] text-slate-600 mt-1.5">rBoot + rustBoot &middot; Rust-native</div>
-            </div>
-          </div>
-        </div>
+        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <ArrowLeft className="w-3.5 h-3.5" /> Back to products
+        </Link>
       </PageHero>
 
-      {/* Two bootloaders side by side */}
-      <section className="py-16">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* rboot */}
-            <Card className="border-border overflow-hidden" data-testid="rboot-card">
-              <div className="h-1.5 bg-gradient-to-r from-orange-400 to-orange-600" />
-              <CardContent className="p-6 lg:p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center">
-                    <Zap className="w-5 h-5 text-orange-600" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-foreground">rboot</h2>
-                    <p className="text-xs text-muted-foreground">Lightweight First-Stage Bootloader</p>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  Minimal, fast, and secure first-stage bootloader for RISC-V. rboot handles the initial 
-                  hardware initialization and chain-of-trust verification before handing off to the main firmware.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  {[
-                    "Minimal footprint (~8KB flash)",
-                    "First-stage hardware init for RISC-V",
-                    "Signature verification of next-stage image",
-                    "Written in Rust, no unsafe C dependencies",
-                    "Support for SPI/QSPI flash boot",
-                    "Watchdog timer integration",
-                  ].map((f, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a href="https://github.com/niclas-plog/rboot" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="sm" className="w-full">
-                    <GitBranch className="w-4 h-4 mr-2" /> View rboot on GitHub <ExternalLink className="w-3 h-3 ml-2" />
-                  </Button>
-                </a>
-              </CardContent>
-            </Card>
-
-            {/* rustBoot */}
-            <Card className="border-border overflow-hidden" data-testid="rustboot-card">
-              <div className="h-1.5 bg-gradient-to-r from-primary to-red-600" />
-              <CardContent className="p-6 lg:p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Shield className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-foreground">rustBoot</h2>
-                    <p className="text-xs text-muted-foreground">Rust-Native Secure Bootloader</p>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  Full-featured secure bootloader written entirely in Rust. rustBoot provides A/B firmware updates, 
-                  anti-rollback protection, and cryptographic signature verification for production deployments.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  {[
-                    "A/B firmware update with automatic rollback",
-                    "Anti-rollback counter protection",
-                    "Ed25519 / ECDSA signature verification",
-                    "Encrypted firmware images (AES-256)",
-                    "Key management and secure provisioning",
-                    "Support for RISC-V, ARM Cortex-M, and more",
-                    "Production-tested, safety-critical grade",
-                  ].map((f, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a href="https://github.com/niclas-plog/rustBoot" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="sm" className="w-full">
-                    <GitBranch className="w-4 h-4 mr-2" /> View rustBoot on GitHub <ExternalLink className="w-3 h-3 ml-2" />
-                  </Button>
-                </a>
-              </CardContent>
-            </Card>
+      {/* Chain diagram */}
+      <section className="tv-section-tight border-b border-[#E7E5E0] bg-[#FAFAF7]" data-testid="boot-chain">
+        <div className="tv-container">
+          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            The boot chain
           </div>
-        </div>
-      </section>
-
-      {/* Boot Chain Diagram */}
-      <section className="py-16 bg-slate-50 border-t border-border">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-2xl font-bold text-foreground text-center mb-10">Verified Boot Chain</h3>
-          <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
-            {[
-              { label: "Power On", sub: "Hardware Reset", color: "bg-slate-200 text-slate-700" },
-              { label: "rboot", sub: "First-Stage Loader", color: "bg-orange-100 text-orange-800 border border-orange-200" },
-              { label: "Signature Check", sub: "Ed25519 / ECDSA", color: "bg-red-50 text-red-700 border border-red-200" },
-              { label: "rustBoot", sub: "Secure Bootloader", color: "bg-primary/10 text-primary border border-primary/20" },
-              { label: "Firmware", sub: "A or B Slot", color: "bg-green-100 text-green-800 border border-green-200" },
-              { label: "Application", sub: "User Code", color: "bg-blue-100 text-blue-800 border border-blue-200" },
-            ].map((step, i, arr) => (
-              <div key={i} className="flex items-center gap-3 lg:gap-4">
-                <div className={`px-4 py-3 rounded-lg text-center min-w-[110px] ${step.color}`}>
-                  <div className="text-sm font-bold">{step.label}</div>
-                  <div className="text-[10px] opacity-75 mt-0.5">{step.sub}</div>
+          <div className="grid md:grid-cols-4 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
+            {chain.map((c) => (
+              <div key={c.step} className="bg-[#FAFAF7] p-6 md:p-8 min-h-[160px]">
+                <div className="text-[12px] font-mono tracking-widest text-[#003262]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  / {c.step}
                 </div>
-                {i < arr.length - 1 && <ArrowRight className="w-5 h-5 text-muted-foreground hidden sm:block" />}
+                <h3 className="mt-2 text-[22px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                  {c.label}
+                </h3>
+                <p className="mt-2 text-[13px] leading-[1.55] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                  {c.desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features grid */}
-      <section className="py-16">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-2xl font-bold text-foreground text-center mb-10">Security Features</h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Lock, title: "Hardware Root of Trust", desc: "Chain of trust starting from immutable ROM, through bootloader stages to application code." },
-              { icon: RefreshCw, title: "A/B Updates", desc: "Dual firmware slots enable seamless over-the-air updates with automatic fallback on failure." },
-              { icon: Key, title: "Key Management", desc: "Secure provisioning, key rotation, and revocation for firmware signing and encryption." },
-              { icon: Shield, title: "Anti-Rollback", desc: "Monotonic counter prevents downgrade attacks by enforcing minimum firmware version." },
-            ].map((feat, i) => {
-              const Icon = feat.icon;
-              return (
-                <Card key={i} className="border-border hover:shadow-md transition-shadow">
-                  <CardContent className="p-5">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                      <Icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <h4 className="font-semibold text-foreground mb-1.5">{feat.title}</h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{feat.desc}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
+      {/* Two bootloaders */}
+      <section className="tv-section border-b border-[#E7E5E0]" data-testid="boot-loaders">
+        <div className="tv-container">
+          <div className="grid md:grid-cols-2 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
+            {loaders.map((l) => (
+              <div key={l.name} className="bg-white p-8 md:p-12 border-t-[3px]" style={{ borderTopColor: l.color }} data-testid={`loader-${l.name.toLowerCase()}`}>
+                <div className="text-[11px] font-semibold tracking-[0.22em] uppercase" style={{ color: l.color, fontFamily: "'Space Grotesk', sans-serif" }}>
+                  {l.role}
+                </div>
+                <h2 className="mt-2 text-[36px] md:text-[48px] tracking-[-0.025em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                  {l.name}
+                </h2>
+                <p className="mt-4 text-[15.5px] leading-[1.65] text-[#3A3A3A] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                  {l.desc}
+                </p>
+                <ul className="mt-6 space-y-3 border-t border-[#E7E5E0] pt-6">
+                  {l.features.map((f) => (
+                    <li key={f} className="text-[14px] text-[#0A0A0A] flex items-start gap-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                      <span className="w-1 h-1 mt-2 rounded-full flex-shrink-0" style={{ background: l.color }} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={l.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-8 inline-flex items-center gap-1.5 text-[12px] font-medium tracking-[0.12em] uppercase text-[#0A0A0A] border-b border-[#0A0A0A] pb-0.5 hover:text-[#003262] hover:border-[#003262] transition-colors"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  GitHub <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-14 bg-primary">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">Integrate Secure Boot into Your Project</h3>
-          <p className="text-primary-foreground/80 mb-6 max-w-xl mx-auto text-sm">
-            Get started with rboot and rustBoot in your RISC-V Rust project. 
-          </p>
-          <div className="flex justify-center gap-4 flex-wrap">
-            <Link to="/contact-sales?plan=pro">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">
-                Talk to Sales <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+      <section className="tv-section-tight" data-testid="secboot-cta">
+        <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <h2 className="tv-display text-[36px] md:text-[52px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+            Ship the chip. Ship the certificate.
+          </h2>
+          <div className="flex gap-3">
+            <Link to="/contact" className="tv-btn tv-btn-primary" data-testid="secboot-cta-contact">
+              Certify with us <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <Link to="/developer-portal">
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold">
-                Documentation
-              </Button>
+            <Link to="/product/crypto-stack" className="tv-btn tv-btn-outline" data-testid="secboot-cta-crypto">
+              Crypto Stack
             </Link>
           </div>
         </div>

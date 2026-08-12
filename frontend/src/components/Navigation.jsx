@@ -1,238 +1,202 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { 
-  Zap, FolderGit2, LogOut, Shield, Menu, X, 
-  Settings, Users, Info, Home, Layers, Code, Cpu, UsersRound, Store
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, X, ArrowUpRight, Shield, LogOut, Settings } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import TrustedVLogo from "@/components/TrustedVLogo";
 
 const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, isAuthenticated, isAdmin, logout } = useAuth();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  // Main navigation items - visible to all
-  const mainNavItems = [
-    { path: "/", label: "Home", icon: Home },
-    { path: "/about", label: "About", icon: Info },
-    { path: "/product-suite", label: "Products", icon: Layers },
-    { path: "/developer-portal", label: "Developers", icon: Code },
-    { path: "/marketplace", label: "Marketplace", icon: Store },
-    { path: "/partners", label: "Partners", icon: UsersRound },
-    { path: "/contact", label: "Contact", icon: Info },
+  const { isAuthenticated, isAdmin, logout } = useAuth();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const nav = [
+    { path: "/product-suite", label: "Products" },
+    { path: "/marketplace", label: "Marketplace" },
+    { path: "/developer-portal", label: "Developers" },
+    { path: "/download-ide", label: "IDE" },
+    { path: "/partners", label: "Partners" },
+    { path: "/about", label: "About" },
   ];
-  
-  // Authenticated user items
-  const authNavItems = [
-    { path: "/projects", label: "My Projects", icon: FolderGit2 },
-  ];
-  
-  const navItems = isAuthenticated ? [...mainNavItems, ...authNavItems] : mainNavItems;
-  
+
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
-  
+
   return (
     <>
-      {/* Thin Berkeley Blue brand strip */}
-      <div className="h-[2px] bg-[#003262] w-full" />
-      
-      {/* Main Navigation */}
-      <nav className="border-b border-slate-200 bg-white sticky top-0 z-50 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-18">
-            
-            {/* Left: Logo */}
-            <Link to="/" className="flex items-center group flex-shrink-0">
-              <TrustedVLogo size="md" showPoweredBy={true} />
+      <header
+        data-testid="site-nav"
+        className={`sticky top-0 z-50 bg-white transition-[border,box-shadow] duration-200 ${
+          scrolled ? "border-b border-[#E7E5E0] shadow-[0_1px_0_rgba(0,0,0,0.02)]" : "border-b border-transparent"
+        }`}
+      >
+        <div className="tv-container">
+          <div className="flex items-center justify-between h-[72px]">
+            {/* Brand */}
+            <Link to="/" className="flex items-center flex-shrink-0" data-testid="nav-brand">
+              <TrustedVLogo size="sm" />
             </Link>
-            
-            {/* Center: Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1 flex-1 justify-center max-w-3xl">
-              {mainNavItems.map((item) => {
-                const isActive = location.pathname === item.path;
+
+            {/* Desktop nav */}
+            <nav className="hidden lg:flex items-center gap-8">
+              {nav.map((item) => {
+                const isActive =
+                  item.path === "/"
+                    ? location.pathname === "/"
+                    : location.pathname.startsWith(item.path);
                 return (
                   <Link
                     key={item.path}
                     to={item.path}
-                    data-testid={`nav-${item.label.toLowerCase().replace(' ', '-')}`}
-                    className={`
-                      px-3 py-2 text-sm font-medium transition-all duration-200 whitespace-nowrap
-                      ${
-                        isActive
-                          ? "text-primary border-b-2 border-primary"
-                          : "text-muted-foreground hover:text-foreground"
-                      }
-                    `}
+                    data-testid={`nav-${item.label.toLowerCase()}`}
+                    className={`relative text-[13.5px] font-medium tracking-[0.01em] transition-colors duration-200 py-2 ${
+                      isActive ? "text-[#003262]" : "text-[#1F1F1F] hover:text-[#003262]"
+                    }`}
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                   >
                     {item.label}
+                    {isActive && (
+                      <span className="absolute left-0 right-0 -bottom-[1px] h-[2px] bg-[#003262]" />
+                    )}
                   </Link>
                 );
               })}
-            </div>
-            
-            {/* Right: Auth + Bosch Logo */}
-            <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
-              {isAuthenticated && (
-                <Link
-                  to="/projects"
-                  data-testid="nav-projects"
-                  className={`
-                    px-3 py-2 text-sm font-medium transition-all duration-200
-                    ${location.pathname === '/projects' 
-                      ? "text-primary" 
-                      : "text-muted-foreground hover:text-foreground"
-                    }
-                  `}
-                >
-                  My Projects
-                </Link>
-              )}
-              
+            </nav>
+
+            {/* Right */}
+            <div className="hidden lg:flex items-center gap-5">
               {isAdmin && (
                 <Link
                   to="/admin"
                   data-testid="nav-admin"
-                  className={`
-                    px-3 py-2 text-sm font-medium flex items-center gap-1 transition-all duration-200
-                    ${location.pathname.startsWith('/admin') 
-                      ? "text-primary" 
-                      : "text-muted-foreground hover:text-foreground"
-                    }
-                  `}
+                  className="text-[13.5px] font-medium text-[#1F1F1F] hover:text-[#003262] flex items-center gap-1.5"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                  <Shield className="w-4 h-4" />
+                  <Shield className="w-3.5 h-3.5" />
                   Admin
                 </Link>
               )}
-              
-              <div className="w-px h-6 bg-border" />
-              
+
               {isAuthenticated ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                   <Link
                     to="/account"
-                    className="text-sm text-muted-foreground hover:text-foreground p-2"
+                    className="text-[#6B6B6B] hover:text-[#003262] transition-colors"
+                    aria-label="Account settings"
+                    data-testid="nav-account"
                   >
                     <Settings className="w-4 h-4" />
                   </Link>
-                  <Button
-                    data-testid="logout-btn"
+                  <button
                     onClick={handleLogout}
-                    variant="ghost"
-                    size="sm"
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground"
+                    data-testid="nav-logout"
+                    className="text-[13.5px] font-medium text-[#1F1F1F] hover:text-[#003262] flex items-center gap-1.5"
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                   >
-                    <LogOut className="w-4 h-4 mr-1" />
-                    Logout
-                  </Button>
+                    <LogOut className="w-3.5 h-3.5" />
+                    Log out
+                  </button>
                 </div>
               ) : (
-                <Button
-                  data-testid="login-btn"
-                  onClick={() => navigate("/login")}
-                  size="sm"
-                  className="px-4 py-2 text-sm font-medium bg-primary hover:bg-primary/90"
+                <Link
+                  to="/login"
+                  data-testid="nav-login"
+                  className="text-[13.5px] font-medium text-[#1F1F1F] hover:text-[#003262]"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                  Sign In
-                </Button>
+                  Sign in
+                </Link>
               )}
-              
-              {/* Bosch Logo - Far Right */}
-              <div className="pl-4 border-l border-border">
-                <img 
-                  src="/bosch-logo.png" 
-                  alt="" 
-                  className="h-6 opacity-70 hover:opacity-100 transition-opacity"
-                />
-              </div>
-            </div>
 
-            {/* Mobile: Bosch Logo + Menu Button */}
-            <div className="flex lg:hidden items-center gap-3">
-              <img 
-                src="/bosch-logo.png" 
-                alt="" 
-                className="h-5 opacity-60"
-              />
-              <button
-                className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              <Link
+                to="/contact"
+                data-testid="nav-contact-cta"
+                className="tv-btn tv-btn-primary text-[13px]"
+                style={{ padding: "0.7rem 1.15rem" }}
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
+                Request a demo <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
+              </Link>
             </div>
-          </div>
 
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <div className="lg:hidden py-4 border-t border-border">
-              <div className="flex flex-col gap-1">
-                {navItems.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = location.pathname === item.path;
-                  return (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      data-testid={`mobile-nav-${item.label.toLowerCase().replace(' ', '-')}`}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`
-                        px-4 py-3 rounded-md text-sm font-medium
-                        flex items-center gap-3 transition-all duration-200
-                        ${
-                          isActive
-                            ? "bg-primary text-white"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                        }
-                      `}
-                    >
-                      <Icon className="w-4 h-4" />
-                      <span>{item.label}</span>
-                    </Link>
-                  );
-                })}
-                
-                {isAdmin && (
-                  <Link
-                    to="/admin"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="px-4 py-3 rounded-md text-sm font-medium flex items-center gap-3 text-muted-foreground hover:text-foreground hover:bg-muted"
-                  >
-                    <Shield className="w-4 h-4" />
-                    <span>Admin</span>
-                  </Link>
-                )}
-                
-                <div className="h-px bg-border my-2" />
-                
+            {/* Mobile toggle */}
+            <button
+              onClick={() => setMobileOpen((v) => !v)}
+              className="lg:hidden p-2 -mr-2 text-[#1F1F1F]"
+              aria-label="Toggle menu"
+              data-testid="nav-mobile-toggle"
+            >
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        {mobileOpen && (
+          <div className="lg:hidden border-t border-[#E7E5E0] bg-white">
+            <div className="tv-container py-6 flex flex-col gap-1">
+              {nav.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileOpen(false)}
+                  data-testid={`mobile-nav-${item.label.toLowerCase()}`}
+                  className="py-3 text-[15px] font-medium text-[#1F1F1F] hover:text-[#003262] border-b border-[#F3F3EE]"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  onClick={() => setMobileOpen(false)}
+                  className="py-3 text-[15px] font-medium text-[#1F1F1F] flex items-center gap-2 border-b border-[#F3F3EE]"
+                >
+                  <Shield className="w-4 h-4" /> Admin
+                </Link>
+              )}
+              <div className="pt-4 flex flex-col gap-2">
                 {isAuthenticated ? (
                   <button
-                    onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
-                    className="px-4 py-3 rounded-md text-sm font-medium flex items-center gap-3 text-muted-foreground hover:text-foreground hover:bg-muted w-full text-left"
+                    onClick={() => { handleLogout(); setMobileOpen(false); }}
+                    className="tv-btn tv-btn-outline w-full justify-center"
+                    data-testid="mobile-nav-logout"
                   >
-                    <LogOut className="w-4 h-4" />
-                    Logout
+                    Log out
                   </button>
                 ) : (
                   <Link
                     to="/login"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="px-4 py-3 rounded-md text-sm font-medium flex items-center gap-3 bg-primary text-white"
+                    onClick={() => setMobileOpen(false)}
+                    className="tv-btn tv-btn-outline w-full justify-center"
+                    data-testid="mobile-nav-login"
                   >
-                    Sign In
+                    Sign in
                   </Link>
                 )}
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="tv-btn tv-btn-primary w-full justify-center"
+                  data-testid="mobile-nav-contact-cta"
+                >
+                  Request a demo <ArrowUpRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
-          )}
-        </div>
-      </nav>
+          </div>
+        )}
+      </header>
     </>
   );
 };

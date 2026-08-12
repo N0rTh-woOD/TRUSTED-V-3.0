@@ -1,157 +1,216 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, CheckCircle2 } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
+import PageHero from "@/components/PageHero";
 import axios from "axios";
 import { toast } from "sonner";
-import PageHero from "@/components/PageHero";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const ContactPage = () => {
-  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", company: "", country: "", product: "", message: "" });
+  const [searchParams] = useSearchParams();
+  const prefillPlan = searchParams.get("plan") || "";
   const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    country: "",
+    interest: prefillPlan ? `Plan: ${prefillPlan}` : "",
+    message: "",
+  });
 
-  const handleSubmit = async (e) => {
+  const onChange = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+    if (!form.firstName || !form.email || !form.message) {
+      toast.error("Please fill in the required fields.");
+      return;
+    }
     setSubmitting(true);
     try {
-      await axios.post(`${BACKEND_URL}/api/applications/sales-inquiry`, {
-        type: "contact",
-        data: form,
+      await axios.post(`${API}/applications/sales-inquiry`, {
+        name: `${form.firstName} ${form.lastName}`.trim(),
+        email: form.email,
+        company: form.company,
+        country: form.country,
+        product_interest: form.interest,
+        message: form.message,
       });
-      setSubmitted(true);
-      toast.success("Message sent! We'll be in touch.");
-    } catch {
-      toast.error("Failed to send. Please try again.");
+      toast.success("Thank you. Our team will get back to you within 1 business day.");
+      setForm({ firstName: "", lastName: "", email: "", company: "", country: "", interest: "", message: "" });
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-white" data-testid="contact-page">
-      {/* Hero */}
+    <div className="bg-white text-[#0A0A0A]">
       <PageHero
-        eyebrow="Contact"
-        title="Get in Touch"
-        subtitle="Talk to our engineering team about RISC-V solutions, partnerships, or custom development."
+        eyebrow="Get in touch"
+        title={
+          <>
+            Let&apos;s build<br />on RISC-V, together.
+          </>
+        }
+        subtitle="Talk to our engineering team about IP integration, certification, commercial LTS, or partnership on TRUSTED-V."
       />
 
-      {/* Contact info + Form */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-[1fr_1.3fr] gap-10">
-            {/* Left: Info cards */}
-            <div className="space-y-5">
-              <Card className="border-border">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-foreground mb-1">Headquarters</h3>
-                      <p className="text-sm text-muted-foreground">Bosch Global Software Technologies</p>
-                      <p className="text-sm text-muted-foreground">Bangalore, India</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="border-border">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-foreground mb-1">Email</h3>
-                      <p className="text-sm text-muted-foreground">partnerships@trusted-v.com</p>
-                      <p className="text-sm text-muted-foreground">support@trusted-v.com</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="border-border">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-foreground mb-1">Global Offices</h3>
-                      <p className="text-sm text-muted-foreground">Bangalore | Coimbatore | Hyderabad</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+      <section className="border-b border-[#E7E5E0]" data-testid="contact-body">
+        <div className="tv-container py-16 md:py-24">
+          <div className="grid lg:grid-cols-12 gap-16">
+            {/* Left: Contact cards */}
+            <div className="lg:col-span-5 space-y-8">
+              <ContactCard
+                icon={<MapPin className="w-4 h-4" />}
+                label="Headquarters"
+                lines={["Bosch Global Software Technologies", "Bengaluru, India"]}
+              />
+              <ContactCard
+                icon={<Mail className="w-4 h-4" />}
+                label="Sales & partnerships"
+                lines={["sales@trusted-v.com", "partners@trusted-v.com"]}
+              />
+              <ContactCard
+                icon={<Mail className="w-4 h-4" />}
+                label="Engineering & support"
+                lines={["engineering@trusted-v.com", "support@trusted-v.com"]}
+              />
+              <ContactCard
+                icon={<Phone className="w-4 h-4" />}
+                label="Regional offices"
+                lines={["Stuttgart · Yokohama · Detroit · Bengaluru"]}
+              />
+
+              <div className="border-t border-[#E7E5E0] pt-8">
+                <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  Prefer a direct path?
+                </div>
+                <div className="flex flex-col gap-3">
+                  <Link to="/board-support" className="tv-link" data-testid="link-board-support">
+                    Request board support <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <Link to="/partner-registration" className="tv-link" data-testid="link-partner-reg">
+                    Apply as a partner <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
             </div>
 
             {/* Right: Form */}
-            <Card className="border-border">
-              <CardContent className="p-6 sm:p-8">
-                {submitted ? (
-                  <div className="text-center py-12">
-                    <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-foreground mb-2">Message Sent</h3>
-                    <p className="text-sm text-muted-foreground">Our engineering team will get back to you within 24 hours.</p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4" data-testid="contact-form">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium text-foreground mb-1 block">First Name *</label>
-                        <Input required value={form.firstName} onChange={e => setForm(p => ({ ...p, firstName: e.target.value }))} data-testid="contact-first-name" />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium text-foreground mb-1 block">Last Name *</label>
-                        <Input required value={form.lastName} onChange={e => setForm(p => ({ ...p, lastName: e.target.value }))} data-testid="contact-last-name" />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-foreground mb-1 block">Work Email *</label>
-                      <Input type="email" required value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} data-testid="contact-email" />
-                    </div>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium text-foreground mb-1 block">Company</label>
-                        <Input value={form.company} onChange={e => setForm(p => ({ ...p, company: e.target.value }))} />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium text-foreground mb-1 block">Country</label>
-                        <Input value={form.country} onChange={e => setForm(p => ({ ...p, country: e.target.value }))} />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-foreground mb-1 block">Product Interest</label>
-                      <select className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm" value={form.product} onChange={e => setForm(p => ({ ...p, product: e.target.value }))}>
-                        <option value="">Select a product</option>
-                        <option value="software-toolchain">TRUSTED-V Software & Toolchain</option>
-                        <option value="signoff-silicon">SignOff Silicon</option>
-                        <option value="ide-jarvyn">Jarvyn IDE</option>
-                        <option value="partnership">Partnership</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-foreground mb-1 block">Message *</label>
-                      <Textarea required rows={4} value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} data-testid="contact-message" />
-                    </div>
-                    <Button type="submit" className="w-full" disabled={submitting} data-testid="contact-submit">
-                      {submitting ? "Sending..." : <>Send Message <Send className="w-4 h-4 ml-2" /></>}
-                    </Button>
-                  </form>
-                )}
-              </CardContent>
-            </Card>
+            <div className="lg:col-span-7">
+              <form onSubmit={onSubmit} className="space-y-8" data-testid="contact-form">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <Field label="First name *" value={form.firstName} onChange={onChange("firstName")} testid="input-first-name" />
+                  <Field label="Last name" value={form.lastName} onChange={onChange("lastName")} testid="input-last-name" />
+                </div>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <Field label="Work email *" type="email" value={form.email} onChange={onChange("email")} testid="input-email" />
+                  <Field label="Company" value={form.company} onChange={onChange("company")} testid="input-company" />
+                </div>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <Field label="Country" value={form.country} onChange={onChange("country")} testid="input-country" />
+                  <SelectField
+                    label="Product interest"
+                    value={form.interest}
+                    onChange={onChange("interest")}
+                    testid="input-interest"
+                    options={[
+                      "", "Development Platform (IDE)", "Virtualization", "Secure Rust Software", "Silicon SignOff", "Certification", "Consortium / Partnership", "Plan: pro", "Plan: enterprise",
+                    ]}
+                  />
+                </div>
+                <Textarea label="Message *" value={form.message} onChange={onChange("message")} testid="input-message" />
+
+                <div className="pt-4 flex items-center gap-4">
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="tv-btn tv-btn-primary disabled:opacity-60"
+                    data-testid="contact-submit"
+                  >
+                    {submitting ? "Sending..." : "Send message"} <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                  <span className="text-[12px] text-[#6B6B6B] font-light" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                    We reply within 1 business day.
+                  </span>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </section>
     </div>
   );
 };
+
+const ContactCard = ({ icon, label, lines }) => (
+  <div className="border-t border-[#E7E5E0] pt-6">
+    <div className="flex items-center gap-3 text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+      <span className="text-[#003262]">{icon}</span>
+      {label}
+    </div>
+    {lines.map((l) => (
+      <div key={l} className="mt-2 text-[15px] text-[#0A0A0A]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+        {l}
+      </div>
+    ))}
+  </div>
+);
+
+const Field = ({ label, value, onChange, type = "text", testid }) => (
+  <label className="block">
+    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+      {label}
+    </span>
+    <input
+      type={type}
+      value={value}
+      onChange={onChange}
+      data-testid={testid}
+      className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] text-[#0A0A0A] focus:outline-none focus:border-[#003262] transition-colors"
+      style={{ fontFamily: "'Outfit', sans-serif" }}
+    />
+  </label>
+);
+
+const SelectField = ({ label, value, onChange, options, testid }) => (
+  <label className="block">
+    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+      {label}
+    </span>
+    <select
+      value={value}
+      onChange={onChange}
+      data-testid={testid}
+      className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] text-[#0A0A0A] focus:outline-none focus:border-[#003262] transition-colors"
+      style={{ fontFamily: "'Outfit', sans-serif" }}
+    >
+      {options.map((o) => (
+        <option key={o} value={o}>{o || "Select an option"}</option>
+      ))}
+    </select>
+  </label>
+);
+
+const Textarea = ({ label, value, onChange, testid }) => (
+  <label className="block">
+    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+      {label}
+    </span>
+    <textarea
+      rows={5}
+      value={value}
+      onChange={onChange}
+      data-testid={testid}
+      className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] text-[#0A0A0A] resize-none focus:outline-none focus:border-[#003262] transition-colors"
+      style={{ fontFamily: "'Outfit', sans-serif" }}
+    />
+  </label>
+);
 
 export default ContactPage;

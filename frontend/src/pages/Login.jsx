@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Loader2, LogIn } from "lucide-react";
+import { Loader2, ArrowUpRight } from "lucide-react";
 import { toast } from "sonner";
 import TrustedVLogo from "@/components/TrustedVLogo";
 
@@ -18,14 +15,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const result = await login(email, password);
       if (result && result.access_token) {
-        toast.success("Welcome back!");
-        setTimeout(() => {
-          navigate("/", { replace: true });
-        }, 100);
+        toast.success("Welcome back.");
+        setTimeout(() => navigate("/", { replace: true }), 100);
       }
     } catch (error) {
       toast.error(error.response?.data?.detail || "Invalid credentials");
@@ -34,76 +28,91 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Berkeley Blue brand strip */}
-      <div className="fixed top-0 left-0 right-0 h-[2px] bg-[#003262] z-50" />
-      
-      <Card className="w-full max-w-md bg-card border border-border shadow-2xl">
-        <CardHeader className="space-y-6 p-8 pb-6">
-          <div className="flex flex-col items-center justify-center gap-5">
-            <TrustedVLogo size="lg" showPoweredBy={true} className="flex justify-center" />
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-foreground">
-                Welcome Back
-              </h2>
-              <p className="text-sm text-muted-foreground mt-1">
-                Sign in to access the platform
-              </p>
-            </div>
+    <div className="min-h-screen grid lg:grid-cols-2 bg-white text-[#0A0A0A]" data-testid="login-page">
+      {/* Left: editorial brand pane */}
+      <div className="hidden lg:flex flex-col justify-between bg-[#00162B] text-white p-16">
+        <TrustedVLogo size="sm" />
+        <div>
+          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/50 mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            The complete RISC-V platform
           </div>
-        </CardHeader>
+          <h1
+            className="tv-display text-[48px] xl:text-[64px] leading-[0.98] text-white"
+            style={{ letterSpacing: "-0.035em" }}
+          >
+            Software to Silicon,<br />
+            <span className="text-[#FDB515]">Rust-Native RISC-V.</span>
+          </h1>
+          <p className="mt-6 text-[15px] leading-[1.7] text-white/60 font-light max-w-md" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+            An open, modular platform for building trustworthy edge silicon and mission-critical embedded software.
+          </p>
+        </div>
+        <div className="text-[11px] font-mono text-white/40" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          Powered by Bosch · Made in India
+        </div>
+      </div>
 
-        <CardContent className="p-8 pt-0">
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+      {/* Right: form pane */}
+      <div className="flex items-center justify-center p-8 md:p-16">
+        <div className="w-full max-w-md">
+          <div className="lg:hidden mb-10">
+            <TrustedVLogo size="sm" />
+          </div>
+          <span className="tv-eyebrow">Sign in</span>
+          <h2 className="tv-display mt-4 text-[36px] md:text-[44px] text-[#0A0A0A]" style={{ letterSpacing: "-0.03em", lineHeight: "1.05" }}>
+            Welcome back.
+          </h2>
+          <p className="mt-3 text-[15px] text-[#6B6B6B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+            Access the TRUSTED-V platform, your projects, and the marketplace.
+          </p>
+
+          <form onSubmit={handleSubmit} className="mt-10 space-y-6" data-testid="login-form">
+            <label className="block">
+              <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 Email
-              </label>
-              <Input
-                data-testid="email-input"
+              </span>
+              <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="Enter your email"
-                className="h-11"
+                data-testid="email-input"
+                className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] focus:outline-none focus:border-[#003262] transition-colors"
+                style={{ fontFamily: "'Outfit', sans-serif" }}
               />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+            </label>
+            <label className="block">
+              <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 Password
-              </label>
-              <Input
-                data-testid="password-input"
+              </span>
+              <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                placeholder="Enter your password"
-                className="h-11"
+                data-testid="password-input"
+                className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] focus:outline-none focus:border-[#003262] transition-colors"
+                style={{ fontFamily: "'Outfit', sans-serif" }}
               />
-            </div>
+            </label>
 
-            <Button
-              data-testid="login-btn"
+            <button
               type="submit"
               disabled={loading}
-              className="w-full h-11 text-base font-medium shadow-lg shadow-primary/25"
+              data-testid="login-btn"
+              className="tv-btn tv-btn-primary w-full justify-center disabled:opacity-60"
             >
-              {loading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
-                <>
-                  <LogIn className="w-4 h-4 mr-2" />
-                  Sign In
-                </>
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : (
+                <>Sign in <ArrowUpRight className="w-4 h-4" /></>
               )}
-            </Button>
+            </button>
           </form>
 
-        </CardContent>
-      </Card>
+          <div className="mt-10 text-[12px] text-[#6B6B6B] font-mono" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+            Access is invite-only during private preview.
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

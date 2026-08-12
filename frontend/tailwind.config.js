@@ -6,9 +6,7 @@ module.exports = {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
+      screens: { "2xl": "1400px" },
     },
     extend: {
       colors: {
@@ -45,6 +43,20 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // TRUSTED-V brand tokens
+        "tv-navy": "#003262",
+        "tv-navy-deep": "#001F3F",
+        "tv-navy-darkest": "#00162B",
+        "tv-cyan": "#00B4E0",
+        "tv-gold": "#FDB515",
+        "tv-green": "#0F6E56",
+        "tv-rust": "#B7410E",
+        "tv-surface": "#FAFAF7",
+        "tv-surface-2": "#F3F3EE",
+        "tv-border": "#E7E5E0",
+        "tv-ink": "#0A0A0A",
+        "tv-ink-2": "#1F1F1F",
+        "tv-muted": "#6B6B6B",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -52,18 +64,13 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['Source Code Pro', 'monospace'],
+        sans: ['Outfit', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       keyframes: {
-        "accordion-down": {
-          from: { height: 0 },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
-        },
+        "accordion-down": { from: { height: 0 }, to: { height: "var(--radix-accordion-content-height)" } },
+        "accordion-up": { from: { height: "var(--radix-accordion-content-height)" }, to: { height: 0 } },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

@@ -29,6 +29,33 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 12 — MIPS-Inspired Full Redesign (Completed — Feb 12, 2026)
+- Complete platform redesign inspired by mips.com editorial minimalism
+- New global theme: Space Grotesk (display) + Outfit (body) + JetBrains Mono; retained brand palette (Berkeley Blue #003262, Cyan #00B4E0, Gold #FDB515, SignOff Green #0F6E56)
+- New CSS design system in /app/frontend/src/index.css (tv-container, tv-eyebrow, tv-display, tv-btn variants, tv-section, tv-card, motion keyframes)
+- New global components:
+  - Navigation.jsx — sticky minimal top bar with underline-active nav, "Request a demo" primary CTA
+  - Footer.jsx — dark navy footer with big brand wordmark, 3 link columns, standards row
+  - PageHero.jsx — reusable large editorial header (up to 88px display)
+- 11 pages fully rewritten:
+  - Landing — 140px hero, partner marquee, mission editorial paragraph, 4 numbered module rows, industry grid, standards list, dark Bosch story, roadmap, final CTA
+  - About — mission (3 pillars), 8 structural gaps grid, roadmap + consortium tiers, Backed by Bosch
+  - ProductSuite — 4-module alternating rows, dark IP integration section (SiFive/Akeana/MIPS ARC-V + C-DAC/Mindgrove/Upbeat), sub-brands, pricing tiers
+  - Contact — 2-col with contact cards + form (submits to /api/applications/sales-inquiry)
+  - Marketplace — sticky toolbar with Hardware/IP tabs + search
+  - Partners — numbered Indian partner rows + dark Global IP section
+  - DeveloperPortal — quick-start terminal + 6 expandable doc sections
+  - IDEDownloads — hero + 21-feature grid + comparison table
+  - WebIDEPage — hero with code window preview + 3 features
+  - SecureBootPage / CryptoStackPage / RTOSBenchmarkPage — sub-product pages
+  - Login — 2-column editorial (dark navy left pane + form right pane)
+- Testing (iteration_32.json): 21/21 checks PASS, 100% frontend success, zero console errors
+
+### Phase 11 — Ecosystem-First Strategy (Completed - Aug 2026)
+- Landing + Products pages restructured to 4-Module ecosystem architecture
+- HeroSection extracted; Indian flag fixed; Pillar → Module; SiFive/Akeana featured
+- Content aligned with competitor research (SiFive, Akeana, MIPS, Bosch)
+
 ### Phase 1-4 (Completed - Feb 2026)
 - Full-stack setup, JWT auth, admin dashboard, hardware catalog
 - Team page, Bosch branding, IDE rebranded to Jarvyn

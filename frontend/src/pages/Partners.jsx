@@ -1,203 +1,180 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { 
-  Cpu, CheckCircle2, ArrowRight, Building2, 
-  Globe, Wrench, Shield, Package, ExternalLink
-} from "lucide-react";
-import { PartnerLogo } from "@/components/PartnerLogos";
-import PageHero, { RiscV } from "@/components/PageHero";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
+import PageHero from "@/components/PageHero";
+
+const partners = [
+  {
+    num: "01",
+    name: "C-DAC",
+    fullName: "Centre for Development of Advanced Computing",
+    location: "Pune · Bengaluru · Trivandrum",
+    description: "India's premier R&D organization in IT and electronics. Pioneer of Indian RISC-V silicon with the VEGA and DHRUV processor families.",
+    products: ["VEGA ET1031 — 32-bit RISC-V MCU", "DHRUV64 — Dual-core 64-bit RISC-V", "ARIES development boards"],
+    website: "https://vegaprocessors.in",
+    accent: "#003262",
+  },
+  {
+    num: "02",
+    name: "Mindgrove",
+    fullName: "Mindgrove Technologies",
+    location: "Chennai — IIT Madras",
+    description: "Indian semiconductor startup building secure RISC-V SoCs for IoT, industrial automation and AI edge applications.",
+    products: ["Secure IoT SoC with hardware crypto", "Vision SoC with integrated NPU", "Industrial-grade ruggedized SoCs"],
+    website: "https://mindgrove.in",
+    accent: "#0F6E56",
+  },
+  {
+    num: "03",
+    name: "Upbeat Tech",
+    fullName: "Upbeat Technologies",
+    location: "Bengaluru",
+    description: "Emerging Indian RISC-V partner focused on edge AI and intelligent sensor platforms. Building next-gen RISC-V SoCs with integrated NPU.",
+    products: ["Edge AI accelerators", "Intelligent sensor platforms", "Custom RISC-V co-processors"],
+    website: "#",
+    accent: "#B7410E",
+  },
+];
+
+const globalIP = [
+  { name: "SiFive", note: "Performance RISC-V IP" },
+  { name: "Akeana", note: "Automotive-grade RISC-V" },
+  { name: "MIPS ARC-V", note: "eXtensible RISC-V platform" },
+];
 
 const Partners = () => {
-  const partners = [
-    {
-      name: "C-DAC",
-      fullName: "Centre for Development of Advanced Computing",
-      description: "India's premier R&D organization in IT and electronics. C-DAC has been at the forefront of RISC-V processor development in India with the VEGA and DHRUV series of processors.",
-      type: "Hardware Partner",
-      logo: null,
-      color: "primary",
-      website: "https://vegaprocessors.in",
-      contributions: [
-        "VEGA ET1031: 32-bit RISC-V microcontroller for IoT",
-        "DHRUV64: Dual-core 64-bit RISC-V processor",
-        "ARIES development boards with full BSP support",
-        "VEGA SDK and peripheral driver libraries",
-      ],
-      integration: [
-        "Pre-configured BSP for TRUSTED-V IDE Jarvyn",
-        "One-click build and flash support",
-        "Debugger integration via JTAG/SWD",
-        "Peripheral driver libraries in Rust",
-      ],
-    },
-    {
-      name: "Mindgrove Technologies",
-      fullName: "Mindgrove Technologies Pvt. Ltd.",
-      description: "Indian semiconductor startup building custom RISC-V SoCs for IoT, industrial automation, and AI edge applications. Pioneers in hardware security for RISC-V.",
-      type: "Hardware Partner",
-      logo: null,
-      color: "green",
-      website: "https://mindgrove.in",
-      contributions: [
-        "Secure IoT SoC: 32-bit with hardware crypto engine",
-        "Vision SoC: 64-bit with integrated NPU for AI inference",
-        "Industrial SoC: 32-bit ruggedized for harsh environments",
-        "Hardware security modules and TEE support",
-      ],
-      integration: [
-        "Pre-configured BSP for TRUSTED-V IDE Jarvyn",
-        "Secure boot chain configuration tool",
-        "AI model deployment via Vision SoC NPU",
-        "Hardware crypto acceleration APIs",
-      ],
-    },
-    {
-      name: "Upbeat Tech",
-      fullName: "Upbeat Technologies",
-      description: "Emerging Indian RISC-V partner specializing in edge AI and intelligent sensor platforms. Building next-generation RISC-V SoCs with integrated NPU for on-device inference.",
-      type: "Hardware Partner",
-      logo: null,
-      color: "orange",
-      website: "#",
-      contributions: [
-        "Edge AI SoC: RISC-V with integrated neural processing unit",
-        "Intelligent sensor fusion platform",
-        "Low-power edge inference accelerator",
-        "Smart industrial controller board",
-      ],
-      integration: [
-        "Pre-configured BSP for TRUSTED-V IDE Jarvyn",
-        "Edge AI model deployment pipeline",
-        "Sensor fusion SDK integration",
-        "Power-optimized firmware templates",
-      ],
-    },
-  ];
-
-  const partnerBenefits = [
-    { icon: Package, title: "BSP Integration", description: "Your boards ship with pre-configured Board Support Packages in TRUSTED-V IDE Jarvyn." },
-    { icon: Wrench, title: "Toolchain Support", description: "Full Rust toolchain optimization and testing for your RISC-V silicon." },
-    { icon: Globe, title: "Developer Reach", description: "Access to the TRUSTED-V developer community building with RISC-V and Rust." },
-    { icon: Shield, title: "Security Certification", description: "Joint security validation and certification for secure boot workflows." },
-  ];
-
   return (
-    <div className="min-h-screen bg-white" data-testid="partners-page">
-      {/* Hero */}
+    <div className="bg-white text-[#0A0A0A]">
       <PageHero
-        eyebrow="Hardware Partners"
-        title={<>Built with India's <RiscV /> pioneers</>}
-        subtitle="TRUSTED-V partners with Indian RISC-V hardware companies to deliver a native, integrated development experience for the Indian semiconductor ecosystem."
+        eyebrow="Partners & ecosystem"
+        title={
+          <>
+            An open network<br />of RISC-V builders.
+          </>
+        }
+        subtitle="TRUSTED-V is co-verified with the best of Indian and global RISC-V IP, silicon and system partners — from sovereign programmes to performance leaders."
       />
 
-      {/* Partner Cards */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-12">
-            {partners.map((partner, index) => (
-              <Card key={index} data-testid={`partner-card-${index}`} className="overflow-hidden border-border hover:shadow-xl transition-all duration-300">
-                <div className={`h-2 ${partner.color === "primary" ? "bg-primary" : partner.color === "green" ? "bg-green-500" : "bg-orange-500"}`} />
-                <CardContent className="p-8">
-                  <div className="grid lg:grid-cols-2 gap-8">
-                    {/* Partner Info */}
-                    <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-14 h-14 rounded-xl flex items-center justify-center bg-slate-50 border border-border">
-                          <PartnerLogo name={partner.name} className="h-7" />
-                        </div>
-                        <div>
-                          <h2 className="text-2xl font-bold text-foreground">{partner.name}</h2>
-                          <p className="text-sm text-muted-foreground">{partner.fullName}</p>
-                        </div>
-                      </div>
-                      
-                      <Badge className={`mb-4 ${partner.color === "primary" ? "bg-primary/10 text-primary border-primary/20" : partner.color === "green" ? "bg-green-100 text-green-800 border-green-200" : "bg-orange-100 text-orange-800 border-orange-200"}`}>
-                        {partner.type}
-                      </Badge>
-                      
-                      <p className="text-muted-foreground leading-relaxed mb-6">{partner.description}</p>
-                      
-                      <h3 className="font-semibold text-foreground mb-3">Hardware Products</h3>
-                      <ul className="space-y-2 mb-6">
-                        {partner.contributions.map((item, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${partner.color === "primary" ? "text-primary" : partner.color === "green" ? "text-green-500" : "text-orange-500"}`} />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                      
-                      <a href={partner.website} target="_blank" rel="noopener noreferrer">
-                        <Button variant="outline" size="sm">
-                          Visit Website <ExternalLink className="w-3.5 h-3.5 ml-1" />
-                        </Button>
-                      </a>
-                    </div>
-                    
-                    {/* Integration Details */}
-                    <div className="bg-slate-50 rounded-lg p-6">
-                      <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-                        <Wrench className="w-5 h-5 text-primary" />
-                        TRUSTED-V Integration
-                      </h3>
-                      <ul className="space-y-3">
-                        {partner.integration.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3 p-3 bg-white rounded-md border border-border">
-                            <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span className="text-sm text-muted-foreground">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+      {/* Indian partners */}
+      <section className="border-b border-[#E7E5E0]" data-testid="indian-partners">
+        <div className="tv-container tv-section">
+          <div className="mb-14 max-w-3xl">
+            <span className="tv-eyebrow">Indian silicon programme</span>
+            <h2
+              className="tv-display mt-4 text-[36px] md:text-[52px] lg:text-[64px] text-[#0A0A0A]"
+              style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
+            >
+              Made in India.<br />
+              <span className="text-[#003262]">Trusted globally.</span>
+            </h2>
+          </div>
+
+          <div className="border-t border-[#0A0A0A]">
+            {partners.map((p) => (
+              <div key={p.name} className="grid lg:grid-cols-12 gap-8 lg:gap-10 py-12 md:py-16 border-b border-[#E7E5E0]" data-testid={`partner-${p.name.toLowerCase()}`}>
+                <div className="lg:col-span-1">
+                  <span className="text-[13px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                    /{p.num}
+                  </span>
+                </div>
+                <div className="lg:col-span-4">
+                  <h3
+                    className="text-[36px] md:text-[48px] tracking-[-0.025em] text-[#0A0A0A]"
+                    style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
+                  >
+                    {p.name}
+                  </h3>
+                  <div className="mt-2 text-[13px] text-[#6B6B6B]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                    {p.fullName}
                   </div>
-                </CardContent>
-              </Card>
+                  <div
+                    className="mt-1 text-[11px] font-mono tracking-widest text-[#6B6B6B]"
+                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  >
+                    {p.location}
+                  </div>
+                </div>
+                <div className="lg:col-span-4">
+                  <p className="text-[15.5px] leading-[1.65] text-[#3A3A3A] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                    {p.description}
+                  </p>
+                </div>
+                <div className="lg:col-span-3">
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B] mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    Products
+                  </div>
+                  <ul className="space-y-2">
+                    {p.products.map((prod) => (
+                      <li key={prod} className="text-[13.5px] text-[#0A0A0A] flex items-start gap-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                        <span className="w-1 h-1 mt-2 rounded-full" style={{ background: p.accent }} />
+                        {prod}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={p.website}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 inline-flex items-center gap-1.5 text-[12px] font-medium tracking-[0.12em] uppercase text-[#0A0A0A] border-b border-[#0A0A0A] pb-0.5 hover:text-[#003262] hover:border-[#003262] transition-colors"
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                  >
+                    Website <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Partner Benefits */}
-      <section className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Partnership Benefits</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">What hardware partners get when they integrate with TRUSTED-V</p>
+      {/* Global IP partners */}
+      <section className="bg-[#00162B] text-white" data-testid="global-partners">
+        <div className="tv-container tv-section">
+          <div className="grid lg:grid-cols-12 gap-12 mb-12">
+            <div className="lg:col-span-7">
+              <span className="tv-eyebrow" style={{ color: "#FDB515" }}>
+                <span className="text-[#FDB515]">Global IP integration</span>
+              </span>
+              <h2
+                className="tv-display mt-4 text-[36px] md:text-[56px] lg:text-[72px] text-white leading-[0.98]"
+                style={{ letterSpacing: "-0.035em" }}
+              >
+                Co-verified with performance leaders.
+              </h2>
+            </div>
+            <div className="lg:col-span-4 lg:col-start-9 flex items-end">
+              <p className="text-[16px] leading-[1.6] text-white/70 font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                TRUSTED-V ships pre-integrated stacks for the world&apos;s leading RISC-V IP families.
+              </p>
+            </div>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {partnerBenefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <Card key={index} className="bg-white hover:shadow-lg transition-all">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
-                    <p className="text-sm text-muted-foreground">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
+
+          <div className="grid md:grid-cols-3 gap-px bg-white/10 border-y border-white/10">
+            {globalIP.map((g) => (
+              <div key={g.name} className="bg-[#00162B] p-8 md:p-12">
+                <h3 className="text-[32px] md:text-[40px] tracking-[-0.025em] text-white" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                  {g.name}
+                </h3>
+                <p className="mt-3 text-[14px] leading-[1.55] text-white/60" style={{ fontFamily: "'Outfit', sans-serif" }}>{g.note}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-primary">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Become a Hardware Partner</h2>
-          <p className="text-primary-foreground/80 mb-8">
-            If you are an Indian RISC-V hardware company, we'd love to integrate your boards into TRUSTED-V.
-          </p>
-          <Link to="/partner-registration">
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">
-              Apply for Partnership <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </Link>
+      <section className="tv-section-tight border-b border-[#E7E5E0]" data-testid="partners-cta">
+        <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <h2 className="tv-display text-[36px] md:text-[52px] text-[#0A0A0A] leading-[1] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+            Bring your board or IP to TRUSTED-V.
+          </h2>
+          <div className="flex gap-3">
+            <Link to="/partner-registration" className="tv-btn tv-btn-primary" data-testid="apply-partner">
+              Apply as a partner <ArrowUpRight className="w-4 h-4" />
+            </Link>
+            <Link to="/board-support" className="tv-btn tv-btn-outline" data-testid="request-board-support">
+              Board support
+            </Link>
+          </div>
         </div>
       </section>
     </div>

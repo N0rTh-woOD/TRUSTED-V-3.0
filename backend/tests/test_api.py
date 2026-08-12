@@ -8,7 +8,7 @@ import os
 
 BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', '').rstrip('/')
 if not BASE_URL:
-    BASE_URL = "https://risc-v-rust-ide.preview.emergentagent.com"
+    BASE_URL = "https://ip-marketplace-hub.preview.emergentagent.com"
 
 API = f"{BASE_URL}/api"
 

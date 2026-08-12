@@ -1,151 +1,217 @@
 {
-  "identity": {
-    "name": "E1: The Anti-AI Designer",
-    "archetype": "The Hard Tech Architect",
-    "vibe": "Industrial, Precision, Terminal-Chic, Rust-Centric",
-    "principles": [
-      "Fusion over Imitation: Mix Swiss Grid with Terminal Aesthetics.",
-      "Content is King: Data density is a feature, not a bug.",
-      "Contrast: High contrast for code readability; subtle contrast for hierarchy.",
-      "No Gradients: Use solid colors and 1px borders. Gradients are for marketing, not engineering."
-    ]
+  "theme_name": "TRUSTED-V Editorial Minimalist",
+  "colors": {
+    "primary": {
+      "berkeley_blue": "#003262",
+      "deep_navy": "#001F3F",
+      "darkest_navy": "#00162B"
+    },
+    "accent": {
+      "gold": "#FDB515",
+      "cyan": "#00B4E0",
+      "signoff_green": "#0F6E56",
+      "rust_orange": "#B7410E"
+    },
+    "neutral": {
+      "background": "#F8F9FA",
+      "surface": "#FFFFFF",
+      "border": "#E5E7EB",
+      "text_main": "#00162B",
+      "text_muted": "#4B5563"
+    }
   },
   "typography": {
-    "primary_font": "Inter",
-    "secondary_font": "JetBrains Mono",
-    "google_fonts_import": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap",
-    "usage": {
-      "headings": "font-mono tracking-tight font-bold uppercase text-foreground/90",
-      "body": "font-sans text-base leading-relaxed text-muted-foreground",
-      "code": "font-mono text-sm bg-muted/50 p-1 rounded-sm text-primary",
-      "labels": "font-mono text-xs uppercase tracking-widest text-muted-foreground/70"
+    "instructions": "Use Space Grotesk for all major headings. Never use Inter/Roboto for headings. Emphasize large, editorial typography with generous line-height for body text. Use Outfit for body to maintain a geometric clean tech look.",
+    "font_families": {
+      "headings": "Space Grotesk, sans-serif",
+      "body": "Outfit, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-5xl md:text-7xl font-light tracking-tighter leading-tight",
+      "h2": "text-4xl md:text-5xl font-medium tracking-tight",
+      "h3": "text-2xl md:text-3xl font-medium",
+      "body_large": "text-lg md:text-xl font-light leading-relaxed",
+      "body": "text-base leading-relaxed",
+      "overline": "text-xs font-bold uppercase tracking-[0.2em]"
     }
   },
-  "colors": {
-    "theme_strategy": "Dark Mode First (The 'Terminal' Look)",
-    "palette": {
-      "primary": {
-        "name": "Rust Oxide",
-        "hex": "#B7410E",
-        "tailwind": "bg-[#B7410E] text-white hover:bg-[#B7410E]/90"
-      },
-      "secondary": {
-        "name": "Electric Cyan",
-        "hex": "#00E5FF",
-        "tailwind": "text-[#00E5FF] border-[#00E5FF]/30"
-      },
-      "background": {
-        "name": "Deep Void",
-        "hex": "#0A0A0B",
-        "tailwind": "bg-[#0A0A0B]"
-      },
-      "surface": {
-        "name": "Panel Grey",
-        "hex": "#18181B",
-        "tailwind": "bg-[#18181B] border-[#27272A]"
-      }
-    },
-    "shadcn_variables": {
-      "dark": {
-        "--background": "240 10% 4%",
-        "--foreground": "0 0% 98%",
-        "--card": "240 10% 6%",
-        "--card-foreground": "0 0% 98%",
-        "--popover": "240 10% 6%",
-        "--popover-foreground": "0 0% 98%",
-        "--primary": "14 80% 40%",
-        "--primary-foreground": "0 0% 98%",
-        "--secondary": "190 90% 50%",
-        "--secondary-foreground": "240 10% 4%",
-        "--muted": "240 5% 15%",
-        "--muted-foreground": "240 5% 65%",
-        "--accent": "240 5% 15%",
-        "--accent-foreground": "0 0% 98%",
-        "--destructive": "0 62.8% 30.6%",
-        "--destructive-foreground": "0 0% 98%",
-        "--border": "240 5% 20%",
-        "--input": "240 5% 20%",
-        "--ring": "14 80% 40%",
-        "--radius": "0.25rem"
-      }
-    }
+  "spacing_and_layout": {
+    "philosophy": "Generous whitespace. Break out of the box. Use asymmetric grids.",
+    "section_padding": "py-20 md:py-32",
+    "grid_patterns": [
+      "Asymmetric 2-column: grid-cols-1 md:grid-cols-12 with content spanning col-span-5 and images/graphics col-span-7",
+      "Bento grids for features: tight gaps (gap-4), no shadows, 1px subtle borders",
+      "Editorial list: massive left padding, clear typography hierarchy, numbers as accents"
+    ]
   },
-  "layout_strategy": {
-    "container": "max-w-[1600px] mx-auto px-6 md:px-12",
-    "spacing": {
-      "section_gap": "py-24",
-      "element_gap": "gap-6"
-    },
-    "grid_system": {
-      "dashboard": "grid grid-cols-12 gap-4",
-      "card_grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-    },
-    "modes": {
-      "marketing": "Asymmetric 'Tetris' Grid. Use col-span-8 for hero, col-span-4 for details.",
-      "dashboard": "Dense 'Bento' Grid. 100% width utilization. No jagged bottoms."
-    }
-  },
-  "components": {
+  "component_patterns": {
     "buttons": {
-      "primary": "rounded-sm font-mono uppercase tracking-wider text-xs h-10 px-6 shadow-[0_0_10px_rgba(183,65,14,0.3)] hover:shadow-[0_0_20px_rgba(183,65,14,0.5)] transition-all duration-300",
-      "secondary": "rounded-sm font-mono border border-border hover:bg-muted/50 hover:text-foreground transition-colors"
+      "primary": "Pill-shaped (rounded-full), bg-[#003262] text-white hover:bg-[#003262]/90, px-8 py-4, transition-transform active:scale-95",
+      "secondary": "Ghost or subtle outline, text-[#003262] border-[#003262]/20 hover:bg-[#003262]/5",
+      "accent": "Pill-shaped, bg-[#FDB515] text-[#00162B] hover:bg-[#FDB515]/90 font-medium"
     },
-    "cards": {
-      "style": "bg-card border border-border/50 rounded-sm hover:border-primary/50 transition-colors duration-300",
-      "content": "p-6 flex flex-col gap-4"
-    },
-    "inputs": {
-      "style": "bg-muted/20 border-border/50 font-mono text-sm focus:ring-1 focus:ring-primary rounded-sm h-11"
-    },
-    "navigation": {
-      "style": "border-b border-border/40 bg-background/80 backdrop-blur-md sticky top-0 z-50"
-    }
+    "cards": "Barely-there borders (border-border/50), huge padding (p-8 md:p-12), flat (no shadow), subtle background shifts (bg-white to bg-gray-50).",
+    "navigation": "Sticky, backdrop-blur-xl bg-white/90, 1px bottom border. Clean links, active states highlighted with Cyan underline. Never use complete transparent background.",
+    "footer": "Dark theme (bg-[#00162B] text-white), massive brand wordmark, minimalistic link columns, standards row with opacity-50 logos."
   },
-  "visual_enhancers": {
-    "borders": "1px solid border-border/40. Use 'border-r' on grid items to create a technical table look.",
-    "shadows": "None or very subtle ambient glow for active states only.",
-    "textures": "Use a subtle 'scanline' or 'noise' overlay on the background to give it a hardware feel.",
-    "animations": {
-      "hover": "translate-y-[-2px] duration-200 ease-out",
-      "load": "animate-in fade-in slide-in-from-bottom-4 duration-500"
+  "pages": [
+    {
+      "name": "Home",
+      "sections": [
+        "Hero: Massive typography ('The Complete RISC-V Platform'), asymmetric layout, primary CTA, Made-in-India badge.",
+        "Partner Strip: Monochromatic logos (SiFive, Akeana, MIPS, C-DAC, Mindgrove) in a clean marquee or grid.",
+        "Ecosystem (4 Modules): Large sticky-scroll or staggered list. Deep dive into each module on scroll.",
+        "Industry Focus: Clean tabs or interactive accordion for Automotive, IoT, Industrial, etc.",
+        "Standards & Compliance: Grid of badges/certifications (CC EAL4+, FIPS, PSA L3).",
+        "Backed by Bosch: Dark navy section, big stats (130+ years, 400K+ associates).",
+        "CTA: Gold button, high contrast."
+      ]
+    },
+    {
+      "name": "About",
+      "sections": [
+        "Hero: 'Engineered by Bosch to the World'.",
+        "Mission: 3 pillars (Security, Performance, Time-to-Market) - text heavy, editorial.",
+        "Structural Gaps: 8 items in a dense bento grid.",
+        "Roadmap: Minimal vertical timeline.",
+        "Consortium: Tier cards, high padding, clean typography."
+      ]
+    },
+    {
+      "name": "Product Suite",
+      "sections": [
+        "Overview: The 4 modules in a visual matrix.",
+        "Sub-brands: Minimalist cards with 1px borders.",
+        "RISC-V IP Integration: Featuring SiFive, Akeana, MIPS ARC-V in a highlighted logo section."
+      ]
+    },
+    {
+      "name": "Sub-product Pages",
+      "sections": [
+        "Hero: Technical, precise (e.g., Secure Boot & Crypto Stack).",
+        "Features: Bento grid for 8 crypto algorithms.",
+        "Benchmarks: Clean data table for 4 RTOS comparison."
+      ]
+    },
+    {
+      "name": "Marketplace",
+      "sections": [
+        "Tabs: Hardware Boards vs IP Blocks.",
+        "Grid: Clean product cards featuring partner logos."
+      ]
+    },
+    {
+      "name": "Developer Portal",
+      "sections": [
+        "Layout: Left sidebar for docs, right side for content.",
+        "Quick Start: Dark mode code snippets (syntax highlighted), mono font."
+      ]
+    },
+    {
+      "name": "IDE Downloads",
+      "sections": [
+        "Hero: Jarvyn IDE visualization.",
+        "Features: 21 features in a 3-column list.",
+        "Comparison Table: vs General IDEs. Checkmarks and Xs."
+      ]
+    },
+    {
+      "name": "WebIDE",
+      "sections": [
+        "Hero: 'Code Anywhere'.",
+        "Preview: Full-width browser window mockup containing the WebIDE interface."
+      ]
+    },
+    {
+      "name": "Contact / Sales",
+      "sections": [
+        "Layout: 2-column. Left: Contact cards (HQ Bangalore, emails). Right: Inquiry form.",
+        "Form: Minimalist Shadcn form. Underline inputs or very light borders. No heavy boxes."
+      ]
+    },
+    {
+      "name": "Partners",
+      "sections": [
+        "Showcase: Large logo, short description, link. C-DAC, Mindgrove, Upbeat Tech."
+      ]
     }
+  ],
+  "motion": {
+    "philosophy": "Subtle, professional, intentional.",
+    "interactions": [
+      "Hover lifts: -translate-y-1 and subtle shadow on cards.",
+      "Fade-in up: Staggered reveal of list items (framer-motion).",
+      "Buttons: active:scale-95 for tactile feedback."
+    ]
   },
-  "image_urls": {
-    "hero_background": {
-      "url": "https://images.unsplash.com/photo-1762279388956-1c098163a2a8?crop=entropy&cs=srgb&fm=jpg&q=85",
-      "alt": "Abstract neon digital landscape",
-      "category": "background"
-    },
-    "hardware_showcase": {
-      "url": "https://images.unsplash.com/photo-1562408590-e32931084e23?crop=entropy&cs=srgb&fm=jpg&q=85",
-      "alt": "Blue circuit board macro",
-      "category": "hardware"
-    },
-    "ide_preview": {
-      "url": "https://images.unsplash.com/photo-1743862558369-5dcea79ccbff?crop=entropy&cs=srgb&fm=jpg&q=85",
-      "alt": "Mechanical keyboard and code",
-      "category": "developer"
-    },
-    "data_flow": {
-      "url": "https://images.unsplash.com/photo-1760112783563-514867b4c2ed?crop=entropy&cs=srgb&fm=jpg&q=85",
-      "alt": "Glowing neon streaks",
-      "category": "abstract"
-    }
+  "accessibility": {
+    "contrast": "Ensure APCA/WCAG AA contrast. Berkeley Blue text on Off-White is excellent.",
+    "focus": "focus-visible:ring-2 focus-visible:ring-[#00B4E0]",
+    "testing": "All interactive elements MUST include data-testid attributes (e.g., data-testid='home-cta-button')."
+  },
+  "media": {
+    "philosophy": "Use high-quality product abstract renders or clean UI mockups. No generic stock photos.",
+    "image_urls": [
+      {
+        "category": "Technology/Silicon",
+        "url": "https://images.unsplash.com/photo-1592659762303-90081d34b277?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwyfHxzaWxpY29uJTIwY2hpcCUyMG1hY3JvJTIwcGhvdG9ncmFwaHl8ZW58MHx8fHwxNzg2NTIwNTMwfDA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract dark blue circuit board for RISC-V IP backgrounds"
+      },
+      {
+        "category": "Automotive/Industry",
+        "url": "https://images.unsplash.com/photo-1773962359689-2397bf5eb9c3",
+        "description": "Modern digital dashboard for automotive industry context"
+      },
+      {
+        "category": "Security/Data Center",
+        "url": "https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxkYXRhJTIwY2VudGVyJTIwc2VydmVyJTIwcmFjayUyMHNlY3VyZXxlbnwwfHx8fDE3ODM2MDMyNDV8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Server rack for Virtualization & Security modules"
+      },
+      {
+        "category": "Brand Asset",
+        "url": "/make-in-india.jpg",
+        "description": "India globe with chip for Made in India section"
+      },
+      {
+        "category": "Brand Asset",
+        "url": "/trustedv-rocket-logo.png",
+        "description": "Rocket logo asset"
+      }
+    ]
+  },
+  "general_guidelines": {
+    "rules": [
+      "No AI slop: avoid generic glowing gradients, standard boxy card grids.",
+      "Never center-align large blocks of text. Stick to left-aligned for editorial feel.",
+      "Use 1px subtle borders (border-collapse style) for tech/data sections.",
+      "Do NOT use complete transparent background in header, overlays, any surface that has content under it. Use solid or blurred glass.",
+      "Use Shadcn UI but aggressively strip the 'Vercel default' look (replace Inter with Space Grotesk/Outfit, use pill buttons).",
+      "All interactive elements MUST include a data-testid attribute."
+    ]
   },
   "instructions_to_main_agent": [
-    "1. SETUP: Install 'JetBrains Mono' font immediately.",
-    "2. THEME: Force Dark Mode by default. The app should feel like a sophisticated IDE.",
-    "3. LAYOUT: Use the 'Bento' grid for the Hardware Selection Dashboard. It must look dense and data-rich.",
-    "4. COMPONENTS: Customize Shadcn components to have sharp edges (rounded-sm) and thinner borders.",
-    "5. COLOR: Use the Rust Orange (#B7410E) sparingly for primary actions (Generate, Download, Deploy). Do not overuse it.",
-    "6. DATA: When displaying hardware specs, use a monospace font in a table layout with visible grid lines.",
-    "7. MICRO-INTERACTIONS: Add hover states to every interactive element. Buttons should glow slightly on hover."
+    "Read this JSON thoroughly before implementing any page.",
+    "This project uses .js/.jsx files, NOT .tsx files. Write React components using JSX/JS.",
+    "Prioritize typography: Use Space Grotesk for headings and Outfit for body.",
+    "Implement a robust layout with 'sticky' elements where appropriate to emulate modern editorial sites (MIPS.com).",
+    "Ensure all color variables map to the brand's exact hex codes.",
+    "Apply 'data-testid' to every button, link, and form input.",
+    "Do NOT add emojis into your file creations unless specifically required by the design."
   ],
-  "universal_guidelines": [
-    "Do not use gradients for backgrounds. Use solid dark colors.",
-    "Ensure all text has sufficient contrast (WCAG AA).",
-    "Use 'sonner' for all toast notifications.",
-    "All interactive elements must have 'data-testid'.",
-    "Mobile responsiveness is mandatory. Stack grids on mobile."
-  ]
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": {
+    "design": [
+      "Create depth through layered design elements with z-index hierarchy.",
+      "Use glass-morphism effects with backdrop filters (12-24px blur) where necessary.",
+      "MUST NOT apply universal transition (e.g., transition: all). Add transitions for specific properties.",
+      "MUST NOT center align the app container (.App { text-align: center; } is forbidden).",
+      "Always use modern button styles (pill-shaped or sharp) relevant to the app style.",
+      "NEVER use AI assistant Emoji characters for icons."
+    ],
+    "components": [
+      "Prioritize using pre-existing components from src/components/ui when applicable.",
+      "Create new components that match the style and conventions of existing components when needed.",
+      "Use sonner for toasts."
+    ]
+  }
 }
