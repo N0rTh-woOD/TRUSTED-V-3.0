@@ -6,7 +6,7 @@ import pytest
 import requests
 import os
 
-BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://embedded-ai-builder.preview.emergentagent.com').rstrip('/')
+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://risc-v-rust-ide.preview.emergentagent.com').rstrip('/')
 
 # Test credentials
 DEMO_EMAIL = os.environ.get("TEST_DEMO_EMAIL", "demo@trusted-v.com")

@@ -154,18 +154,37 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 ### P1 — High
 - Refactor monolithic `server.py` into modular APIRouter modules
 - Complete "Solution Builder" AI code generation
+- Refactor `SmartProjectBuilder.jsx` (916 lines) into smaller components
 
 ### P2 — Medium
 - Admin panel: sales inquiries tab in AdminApplications.jsx
 - Customer testimonials/case studies section
+- Fix React "index as key" anti-patterns in SmartProjectBuilder, Marketplace, Partners, AdminSoftware
+- Add Python type hints across backend
 
 ### P3 — Future
 - Public release (remove auth lock)
 - Enhanced project versioning UI in "My Projects"
 - Email notifications for applications
+- Replace placeholder user avatar initials
 
 ## 3rd Party Integrations
 - Gemini 3 Flash via emergentintegrations (Emergent LLM Key)
 
+## Strategic Positioning (Aug 2026)
+Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform — From IP to Software to Silicon"** — a full integrated ecosystem, not just a Rust-based software platform.
+
+**Four Pillars Product Architecture:**
+1. **RISC-V Development Platform** — IDE (Jarvyn), WebIDE, Debugger/Programmer/Trace
+2. **Virtualization & Simulation** (NEW) — Virtual Platform, RISC-V Hypervisor, Simulator
+3. **Secure Rust Software** — rBoot, rustBoot, RTOS, HAL/PAC/HAM, Crypto Stack, SDKs
+4. **Silicon SignOff & Trust** — SignOff Silicon, TRUSTED-V Verified, TVOTS
+
+**Partner Ecosystem highlighted (SiFive, Akeana, MIPS ARC-V, C-DAC, Mindgrove)** across Landing + Products pages.
+
+## Recent Changes Log
+- **Aug 2026**: Landing.jsx + ProductSuite.jsx upgraded to reflect PDF's ecosystem-first positioning. Added: Partner Strip, "RISC-V Without Fragmentation" section, 4-pillar architecture (added Virtualization pillar), Virtual First workflow diagram, "Who is TRUSTED-V For?" audience segmentation, "RISC-V IP Integration" section on Products page featuring SiFive/Akeana/MIPS ARC-V/C-DAC/Mindgrove.
+- **Feb 2026**: Hero chip hover-reveal animation, standardized RISC-V colors (Navy #003262 + Cyan #00B4E0), unified PageHero component across secondary pages, updated tagline.
+
 ---
-*Last Updated: February 2026*
+*Last Updated: August 2026*
