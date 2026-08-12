@@ -22,6 +22,8 @@ const Landing = () => (
     <Hero />
     <PlatformIntro />
     <PlatformArchitecture />
+    <RiscVIPCollaboration />
+    <VirtualizationSpotlight />
     <CoreTechnologies />
     <ProductFamilies />
     <Ecosystem />
@@ -59,7 +61,7 @@ const Hero = () => {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <PrimaryCTA to="/product-suite" size="lg" data-testid="hero-cta-primary">Explore the platform</PrimaryCTA>
-              <SecondaryCTA to="/contact" size="lg" data-testid="hero-cta-secondary">Talk to an engineer</SecondaryCTA>
+              <SecondaryCTA to="/contact" size="lg" data-testid="hero-cta-secondary">Talk to our engineers</SecondaryCTA>
             </div>
           </div>
 
@@ -212,6 +214,160 @@ const PlatformArchitecture = () => {
 };
 
 /* ─────────────────────────────────────────────────────────────
+   RISC-V IP & COLLABORATIONS — featured section per spec
+   ───────────────────────────────────────────────────────────── */
+const RiscVIPCollaboration = () => {
+  const partners = [
+    {
+      name: "SiFive",
+      role: "Performance RISC-V IP",
+      note: "P550 · P870-A · U-series cores",
+      focus: "High-performance application-class cores co-verified with the TRUSTED-V boot chain, RTOS and Rust toolchain.",
+    },
+    {
+      name: "Akeana",
+      role: "Automotive-grade RISC-V",
+      note: "5100 series · ISO 26262 aligned",
+      focus: "Safety-oriented RISC-V IP pre-integrated with TRUSTED-V secure boot, attestation and Rust firmware stacks.",
+    },
+    {
+      name: "MIPS ARC-V",
+      role: "eXtensible RISC-V platform",
+      note: "Configurable data-plane cores",
+      focus: "Customisable RISC-V microarchitecture supported by TRUSTED-V simulators, hypervisor and developer tooling.",
+    },
+  ];
+  return (
+    <section className="tv-section border-t border-[#E5E4DF]" data-testid="riscv-ip">
+      <div className="tv-container">
+        <SectionHeader
+          eyebrow="RISC-V IP & collaborations"
+          title={<>Co-verified with the leaders of the <span className="text-[#003262]">open RISC-V ecosystem</span>.</>}
+          lede="TRUSTED-V is IP-agnostic by design. Our reference stack ships pre-integrated with the RISC-V IP families that power the industry — from performance cores to automotive-grade and eXtensible platforms."
+          action={<Link to="/partners" className="tv-arrow-link" data-testid="riscv-ip-partners">See all partners</Link>}
+        />
+        <div className="grid md:grid-cols-3 gap-6">
+          {partners.map((p) => (
+            <div
+              key={p.name}
+              className="border border-[#E5E4DF] rounded-md p-8 bg-white hover:border-[#003262] transition-colors flex flex-col"
+              data-testid={`riscv-ip-${p.name.toLowerCase().replace(/\W+/g, "-")}`}
+            >
+              <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472] mb-4">
+                {p.role}
+              </div>
+              <h3 className="tv-h3" style={{ fontSize: "26px" }}>{p.name}</h3>
+              <div className="mt-2 font-mono text-[12px] text-[#003262]">{p.note}</div>
+              <p className="mt-5 text-[14px] leading-[1.65] text-[#5A6472] flex-1">{p.focus}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-14 border-t border-[#E5E4DF] pt-10 grid lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-4">
+            <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472] mb-3">
+              Also supported
+            </div>
+            <p className="text-[14px] leading-[1.65] text-[#1A1F25]">
+              Indian sovereign silicon programmes — C-DAC (VEGA / DHRUV),
+              Mindgrove and Upbeat Tech — plus open cores such as CVA6, Ibex
+              and OpenTitan.
+            </p>
+          </div>
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
+            {["C-DAC · VEGA / DHRUV", "Mindgrove · IoT SoC", "Upbeat Tech · Edge AI", "CVA6 (Ariane)", "Ibex · lowRISC", "OpenTitan RoT"].map((n) => (
+              <div key={n} className="text-[13.5px] font-medium text-[#0B0F14]">{n}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   VIRTUALIZATION SPOTLIGHT
+   ───────────────────────────────────────────────────────────── */
+const VirtualizationSpotlight = () => (
+  <section className="tv-section border-t border-[#E5E4DF] bg-[#00162B] text-white" data-testid="virtualization-spotlight">
+    <div className="tv-container">
+      <div className="grid lg:grid-cols-12 gap-12 items-center">
+        <div className="lg:col-span-6">
+          <div className="mb-4">
+            <span className="tv-eyebrow" style={{ color: "#FDB515" }}>
+              <span style={{ color: "#FDB515" }}>Virtualization & simulation</span>
+            </span>
+          </div>
+          <h2 className="tv-h2 text-white">
+            Ship firmware before <span className="text-[#FDB515]">RTL freezes</span>.
+          </h2>
+          <p className="text-[16px] leading-[1.65] text-white/70 mt-6 max-w-xl">
+            The TRUSTED-V virtual platform, RISC-V hypervisor and cycle-approximate
+            simulator let firmware, OS and application teams boot the entire stack
+            on a virtual SoC — long before silicon, FPGA, or even final RTL is
+            available.
+          </p>
+          <ul className="mt-8 space-y-3">
+            {[
+              "Virtual RISC-V SoC with configurable core count and peripherals",
+              "Type-1 hypervisor for mixed-criticality workloads",
+              "Cycle-approximate simulator for performance and driver bring-up",
+              "Attestation and secure-boot testing in pure software",
+            ].map((f) => (
+              <li key={f} className="flex items-start gap-3 text-[14.5px] text-white/85">
+                <span className="w-1 h-1 rounded-full bg-[#FDB515] mt-2 flex-shrink-0" />
+                {f}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/product-suite#virtualization" className="tv-btn tv-btn-onDark" data-testid="virt-cta-primary">
+              Explore virtualization <ArrowUpRight className="w-4 h-4" />
+            </Link>
+            <Link to="/contact" className="tv-btn tv-btn-outline-onDark" data-testid="virt-cta-secondary">
+              Book a technical deep-dive
+            </Link>
+          </div>
+        </div>
+
+        <div className="lg:col-span-6">
+          <div className="relative border border-white/15 rounded-md bg-white/[0.02] p-6 md:p-8">
+            <div className="absolute inset-0 tv-grid-bg-dark opacity-40 rounded-md pointer-events-none" />
+            <div className="relative space-y-2">
+              {[
+                { host: "Host: TRUSTED-V Hypervisor", tag: "TYPE-1" },
+                { host: "VM 1 · Zephyr RTOS", tag: "SAFETY" },
+                { host: "VM 2 · Rust async runtime", tag: "REAL-TIME" },
+                { host: "VM 3 · Linux user-space (CVA6)", tag: "GENERAL" },
+                { host: "Virtual RISC-V SoC (RV64GC + RVV)", tag: "GUEST HW" },
+              ].map((r, i) => (
+                <div
+                  key={r.host}
+                  className={`flex items-center justify-between border border-white/15 rounded-md px-4 py-3 ${i === 0 ? "bg-[#FDB515]/10 border-[#FDB515]/40" : "bg-white/[0.03]"}`}
+                >
+                  <div>
+                    <div className="font-mono text-[10.5px] tracking-widest uppercase text-white/50">
+                      Layer {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <div className="mt-1 text-[13.5px] font-medium text-white">{r.host}</div>
+                  </div>
+                  <span className="font-mono text-[10px] tracking-widest uppercase text-[#FDB515] border border-[#FDB515]/40 px-2 py-1 rounded-sm">
+                    {r.tag}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 font-mono text-[10px] tracking-widest uppercase text-white/40 text-right">
+              Illustrative topology · TRUSTED-V/1.0
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+/* ─────────────────────────────────────────────────────────────
    CORE TECHNOLOGIES
    ───────────────────────────────────────────────────────────── */
 const CoreTechnologies = () => {
@@ -274,38 +430,23 @@ const ProductFamilies = () => {
    ───────────────────────────────────────────────────────────── */
 const Ecosystem = () => {
   const silicon = [
-    { name: "SiFive", note: "Performance RISC-V IP" },
-    { name: "Akeana", note: "Automotive RISC-V" },
-    { name: "MIPS ARC-V", note: "eXtensible RISC-V" },
     { name: "C-DAC", note: "VEGA sovereign silicon" },
     { name: "Mindgrove", note: "Secure IoT SoCs" },
     { name: "Upbeat Tech", note: "Edge-AI SoCs" },
+    { name: "SiFive", note: "Performance RISC-V IP" },
+    { name: "Akeana", note: "Automotive RISC-V" },
+    { name: "MIPS ARC-V", note: "eXtensible RISC-V" },
   ];
   return (
-    <section className="tv-section border-t border-white/0 bg-[#00162B] text-white" data-testid="ecosystem">
+    <section className="tv-section border-t border-white/0 bg-[#F7F7F5]" data-testid="ecosystem">
       <div className="tv-container">
-        <div className="grid lg:grid-cols-12 gap-8 mb-10 md:mb-14">
-          <div className="lg:col-span-7">
-            <div className="mb-4">
-              <span className="tv-eyebrow" style={{ color: "#FDB515" }}>
-                <span style={{ color: "#FDB515" }}>An open RISC-V ecosystem</span>
-              </span>
-            </div>
-            <h2 className="tv-h2 text-white">Bring your IP. We bring the stack.</h2>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
-            <p className="text-[15px] leading-[1.65] text-white/70">
-              TRUSTED-V is co-verified with the leading RISC-V IP families — from performance
-              cores to Indian sovereign silicon programmes.
-            </p>
-          </div>
-        </div>
-        <PartnerGrid partners={silicon} onDark />
-        <div className="mt-10">
-          <Link to="/partners" className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-white border-b border-white/40 pb-0.5 hover:border-[#FDB515] hover:text-[#FDB515] transition-colors" data-testid="ecosystem-explore">
-            Meet the partners <ArrowUpRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
+        <SectionHeader
+          eyebrow="A growing partner network"
+          title="Silicon, software and academic partners."
+          lede="TRUSTED-V spans the RISC-V value chain — from Indian sovereign silicon programmes to global performance IP, university research and secure open-source cores."
+          action={<Link to="/partners" className="tv-arrow-link" data-testid="ecosystem-explore">Meet the partners</Link>}
+        />
+        <PartnerGrid partners={silicon} />
       </div>
     </section>
   );
@@ -421,7 +562,7 @@ const FinalCTA = () => (
           </h2>
         </div>
         <div className="lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
-          <PrimaryCTA to="/contact" data-testid="final-cta-primary">Talk to an engineer</PrimaryCTA>
+          <PrimaryCTA to="/contact" data-testid="final-cta-primary">Start a project</PrimaryCTA>
           <SecondaryCTA to="/product-suite" data-testid="final-cta-secondary">Read the docs</SecondaryCTA>
         </div>
       </div>

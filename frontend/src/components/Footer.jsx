@@ -70,7 +70,7 @@ const Footer = () => {
               className="mt-7 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-white/90 border-b border-white/40 pb-1 hover:border-[#FDB515] hover:text-[#FDB515] transition-colors"
               data-testid="footer-cta"
             >
-              Talk to an engineer <ArrowUpRight className="w-3.5 h-3.5" />
+              Contact us <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 

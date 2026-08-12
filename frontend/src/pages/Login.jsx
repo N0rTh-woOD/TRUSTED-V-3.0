@@ -31,7 +31,7 @@ const Login = () => {
     <div className="min-h-screen grid lg:grid-cols-2 bg-white text-[#0A0A0A]" data-testid="login-page">
       {/* Left: editorial brand pane */}
       <div className="hidden lg:flex flex-col justify-between bg-[#00162B] text-white p-16">
-        <TrustedVLogo size="sm" />
+        <TrustedVLogo size="md" dark />
         <div>
           <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/50 mb-6" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
             The complete RISC-V platform

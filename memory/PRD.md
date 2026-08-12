@@ -29,6 +29,22 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 13b — User Feedback Fixes (Feb 12, 2026)
+Verified by testing_agent (iteration_33.json): 13/13 PASS.
+- Removed the "Now in private preview" announcement bar entirely
+- Added explicit **Home** link in the main nav (data-testid `nav-home`)
+- Diversified CTAs to eliminate "Talk to an engineer" repetition:
+  - Nav → "Request a demo"
+  - Landing hero secondary → "Talk to our engineers"
+  - Landing final CTA → "Start a project"
+  - Footer → "Contact us"
+  - Virtualization section → "Book a technical deep-dive"
+- Rebuilt `TrustedVLogo` sizing scale (xs 24 / sm 34 / md 40 / lg 56 / xl 88) — consistent across nav, footer and login
+- Homepage expanded with two new sections:
+  1. **RISC-V IP & Collaborations** — SiFive · Akeana · MIPS ARC-V featured cards plus "Also supported" strip (C-DAC, Mindgrove, Upbeat Tech, CVA6, Ibex, OpenTitan)
+  2. **Virtualization Spotlight** — dark section with 5-layer hypervisor topology diagram and dedicated CTAs
+- Reordered homepage sections for stronger narrative: Hero → Intro → Architecture → RISC-V IP → Virtualization → Core Tech → Products → Ecosystem → Markets → Developer Experience → CTA
+
 ### Phase 13 — Enterprise Semiconductor Design System (Feb 12, 2026)
 Design authority: user-supplied Design Specification PDF. Executed as an intelligent adaptation (not a MIPS clone, not a blind spec copy).
 

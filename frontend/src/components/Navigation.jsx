@@ -42,6 +42,7 @@ const Navigation = () => {
   };
 
   const items = [
+    { label: "Home", to: "/" },
     { label: "Products", key: "products", hasMega: true },
     { label: "Marketplace", to: "/marketplace" },
     { label: "Developers", to: "/developer-portal" },
@@ -56,19 +57,6 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Announcement bar */}
-      <div className="bg-[#00162B] text-white/90" data-testid="announcement-bar">
-        <div className="tv-container h-9 flex items-center justify-between text-[12px]">
-          <span className="font-mono tracking-[0.12em] uppercase text-[10.5px] flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FDB515] tv-pulse-dot" />
-            Now in private preview — RISC-V + Rust, powered by Bosch
-          </span>
-          <Link to="/contact" className="hidden sm:inline-flex items-center gap-1.5 text-[11.5px] text-white/70 hover:text-white transition-colors" data-testid="announcement-cta">
-            Request access <ArrowUpRight className="w-3 h-3" />
-          </Link>
-        </div>
-      </div>
-
       {/* Main nav */}
       <header
         data-testid="site-nav"
@@ -140,7 +128,7 @@ const Navigation = () => {
                 </Link>
               )}
               <Link to="/contact" data-testid="nav-contact-cta" className="tv-btn tv-btn-primary tv-btn-sm">
-                Talk to an engineer <ArrowUpRight className="w-3.5 h-3.5" />
+                Request a demo <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
@@ -217,7 +205,7 @@ const Navigation = () => {
                   <Link to="/login" className="tv-btn tv-btn-outline w-full" data-testid="mobile-nav-login">Sign in</Link>
                 )}
                 <Link to="/contact" className="tv-btn tv-btn-primary w-full" data-testid="mobile-nav-contact-cta">
-                  Talk to an engineer <ArrowUpRight className="w-4 h-4" />
+                  Request a demo <ArrowUpRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>

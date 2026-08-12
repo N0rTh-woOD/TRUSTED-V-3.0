@@ -1,0 +1,38 @@
+{
+  "summary": "Frontend-only verification of the 13 targeted bug-fix items from user report. Logged in as admin@trusted-v.com and validated homepage + 11 secondary pages. All 13 items PASS.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verification_results": {
+    "1_announcement_bar_removed": "PASS - [data-testid=announcement-bar] not present on /login, / (home), and all 11 secondary pages",
+    "2_nav_home_link": "PASS - [data-testid=nav-home] exists with text 'Home' and active color rgb(0,50,98) (Berkeley Blue) on /",
+    "3_nav_cta_request_demo": "PASS - [data-testid=nav-contact-cta] reads 'Request a demo' on home + all 11 secondary pages",
+    "4_hero_cta_secondary": "PASS - [data-testid=hero-cta-secondary] reads 'Talk to our engineers'",
+    "5_final_cta_primary": "PASS - [data-testid=final-cta-primary] reads 'Start a project'",
+    "6_footer_cta": "PASS - [data-testid=footer-cta] reads 'CONTACT US' (uppercase styling but text = 'Contact us')",
+    "7_virt_cta_secondary": "PASS - [data-testid=virt-cta-secondary] reads 'Book a technical deep-dive'; virt-cta-primary reads 'Explore virtualization'",
+    "8_talk_to_engineer_phrase_removed": "PASS - Zero occurrences of exact phrase 'Talk to an engineer' anywhere on rendered homepage body innerText (was previously repeated)",
+    "9_trustedv_logo_sizes": "PASS - nav logo height=34px, footer logo height=40px, login left-pane logo height=40px (larger than the 34px nav logo, matches md size). Logo present in nav on every page.",
+    "10_riscv_ip_section": "PASS - [data-testid=riscv-ip] present with heading 'Co-verified with the leaders of the open RISC-V ecosystem.' Cards riscv-ip-sifive (P550/P870-A/U-series), riscv-ip-akeana (5100 series, ISO 26262), riscv-ip-mips-arc-v (configurable data-plane) all render role/note/focus text. Also-supported names verified in section: C-DAC, Mindgrove, Upbeat Tech, CVA6, Ibex, OpenTitan.",
+    "11_virtualization_spotlight": "PASS - [data-testid=virtualization-spotlight] present. Headline contains 'Ship firmware before' + 'RTL freezes'. Four bullet features rendered. 5-layer topology diagram present (LAYER 01 Host: TRUSTED-V Hypervisor / LAYER 02 VM 1 Zephyr / LAYER 03 VM 2 Rust async / LAYER 04 VM 3 Linux user-space (CVA6) / LAYER 05 Virtual RISC-V SoC RV64GC+RVV). Both CTAs visible.",
+    "12_homepage_section_order": "PASS - Verified section order via bounding rects: platform-architecture(1258) -> riscv-ip(2628) -> virtualization-spotlight(~) -> core-technologies -> product-families -> ecosystem -> application-markets -> developer-experience -> final-cta -> site-footer, strictly increasing y positions with no overlap. Zero console errors captured during full scroll.",
+    "13_login_flow": "PASS - Login page: left dark pane logo renders at md (40px) larger than 34px nav; right pane has 'Welcome back.' heading, email + password inputs, 'Sign in' button; admin@trusted-v.com / bosch@2425 signs in and redirects to /.",
+    "14_secondary_pages_shared_layout": "PASS - /product-suite, /about, /marketplace, /developer-portal, /download-ide, /webide, /partners, /contact, /product/secure-boot, /product/crypto-stack, /product/rtos-benchmark all show: no announcement bar, nav-home present, nav-contact-cta = 'Request a demo', site-footer present.",
+    "15_page_hero_font_size": "PASS - h1 font-size = 56px on every secondary page tested (within the requested 36-56px range on 1920x900 desktop)."
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor: The literal 'Layer 01..05' labels are rendered as 'LAYER 01..05' (uppercase via CSS or content). Any downstream test that greps case-sensitively for 'Layer 0X' would miss them; consider standardising or documenting the casing. Non-blocking - visually correct."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "test_credentials": "admin@trusted-v.com / bosch@2425 (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All 13 targeted bug-fix items from iteration 33's review are verified PASS. Announcement bar fully removed, Home nav link added with active blue state, CTAs are properly varied (Request a demo / Talk to our engineers / Start a project / Contact us / Book a technical deep-dive), TrustedV logo sizes are consistent (nav 34px, footer/login 40px), new riscv-ip and virtualization-spotlight sections render correctly with all required content, homepage section order valid, no console errors."
+}
