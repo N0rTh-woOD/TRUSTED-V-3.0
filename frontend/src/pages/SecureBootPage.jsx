@@ -10,8 +10,8 @@ const SecureBootPage = () => {
       color: "#B7410E",
       desc: "Minimal, fast, security-critical first-stage. Initializes hardware, establishes chain of trust and hands off to the main firmware.",
       features: [
-        "~8 KB flash footprint",
-        "First-stage hardware init for RISC-V",
+        "Minimal, security-critical first stage",
+        "Hardware initialization for RISC-V targets",
         "Verified boot with ECDSA / EdDSA / ML-DSA",
         "Anti-rollback counters",
         "Secure key provisioning",
@@ -90,7 +90,7 @@ const SecureBootPage = () => {
                 <div className="text-[11px] font-semibold tracking-[0.22em] uppercase" style={{ color: l.color, fontFamily: "'Space Grotesk', sans-serif" }}>
                   {l.role}
                 </div>
-                <h2 className="mt-2 text-[36px] md:text-[48px] tracking-[-0.025em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                <h2 className="mt-2 text-[26px] md:text-[34px] tracking-[-0.025em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
                   {l.name}
                 </h2>
                 <p className="mt-4 text-[15.5px] leading-[1.65] text-[#3A3A3A] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
@@ -121,7 +121,7 @@ const SecureBootPage = () => {
 
       <section className="tv-section-tight" data-testid="secboot-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[36px] md:text-[52px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
             Ship the chip. Ship the certificate.
           </h2>
           <div className="flex gap-3">

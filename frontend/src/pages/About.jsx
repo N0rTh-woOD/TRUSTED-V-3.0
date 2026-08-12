@@ -28,7 +28,7 @@ const Mission = () => {
   const pillars = [
     { k: "01", title: "Security", desc: "Rust memory-safety, PQC-ready cryptography, certifiable boot chain and vendor-neutral silicon attestation." },
     { k: "02", title: "Performance", desc: "Hardware-aware tooling, deterministic RTOS and virtualization tuned for real-time, mission-critical workloads." },
-    { k: "03", title: "Time-to-Market", desc: "Pre-integrated IP, virtual platforms and 48-hour certification turnaround — ship the certificate, not just the chip." },
+    { k: "03", title: "Time-to-Market", desc: "Pre-integrated IP, virtual platforms and shift-left development flows — ship firmware before RTL freezes." },
   ];
   return (
     <section className="tv-section border-b border-[#E7E5E0]" data-testid="about-mission">
@@ -37,7 +37,7 @@ const Mission = () => {
           <div className="lg:col-span-5">
             <span className="tv-eyebrow">Our mission</span>
             <h2
-              className="tv-display mt-6 text-[36px] md:text-[52px] lg:text-[64px] text-[#0A0A0A]"
+              className="tv-display mt-6 text-[28px] md:text-[38px] lg:text-[46px] text-[#0A0A0A]"
               style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
             >
               Close the trust gap in RISC-V.
@@ -99,7 +99,7 @@ const StructuralGaps = () => {
     { n: "02", title: "Unified security framework", problem: "No consistent root-of-trust, boot chain or attestation model across RISC-V vendors.", answer: "rBoot + rustBoot + Crypto Stack form a single, certifiable security posture from ROM up." },
     { n: "03", title: "Supply-chain integrity", problem: "SBOMs, signed artifacts and reproducible builds are not the default in embedded RISC-V.", answer: "SLSA L3 build pipelines and signed toolchains are baked into Jarvyn from day one." },
     { n: "04", title: "SW-HW co-integration", problem: "Silicon teams and firmware teams debug in different worlds, weeks apart.", answer: "Virtual platforms and RISC-V simulators let firmware ship before RTL freezes." },
-    { n: "05", title: "Certification pathway", problem: "Automotive, industrial and IoT certifications require months of retrofitting.", answer: "48-hour certification turnaround with pre-mapped evidence for CC, PSA, ISO 26262 and IEC 62443." },
+    { n: "05", title: "Certification pathway", problem: "Automotive, industrial and IoT certifications require months of retrofitting.", answer: "Evidence collection and compliance mapping baked into the toolchain — CC, PSA, ISO 26262 and IEC 62443 aligned from day one." },
     { n: "06", title: "Enterprise adoption", problem: "Enterprises need commercial support, LTS and indemnification — not GitHub goodwill.", answer: "TRUSTED-V is backed by Bosch, with commercial LTS, SLAs and enterprise support tiers." },
     { n: "07", title: "Platform security layer", problem: "PSA and equivalent frameworks were built for Arm, leaving RISC-V behind.", answer: "TRUSTED-V ships a PSA L3-aligned platform security layer native to RISC-V." },
     { n: "08", title: "Ecosystem coordination", problem: "IP, silicon, EDA and software vendors optimize locally, not for the whole stack.", answer: "The TRUSTED-V Consortium aligns partners around a shared, open, production-hardened reference." },
@@ -111,7 +111,7 @@ const StructuralGaps = () => {
         <div className="mb-16 max-w-3xl">
           <span className="tv-eyebrow">Why TRUSTED-V</span>
           <h2
-            className="tv-display mt-6 text-[36px] md:text-[52px] lg:text-[64px] text-[#0A0A0A]"
+            className="tv-display mt-6 text-[28px] md:text-[38px] lg:text-[46px] text-[#0A0A0A]"
             style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
           >
             Eight structural gaps we close.
@@ -169,7 +169,7 @@ const RoadmapAndConsortium = () => {
         <div className="lg:col-span-5">
           <span className="tv-eyebrow">Roadmap</span>
           <h2
-            className="tv-display mt-6 text-[32px] md:text-[44px] lg:text-[52px] text-[#0A0A0A]"
+            className="tv-display mt-6 text-[22px] md:text-[28px] lg:text-[34px] text-[#0A0A0A]"
             style={{ letterSpacing: "-0.03em", lineHeight: "1.05" }}
           >
             Where we&apos;re heading.
@@ -199,7 +199,7 @@ const RoadmapAndConsortium = () => {
         <div className="lg:col-span-6 lg:col-start-7">
           <span className="tv-eyebrow">The consortium</span>
           <h2
-            className="tv-display mt-6 text-[32px] md:text-[44px] lg:text-[52px] text-[#0A0A0A]"
+            className="tv-display mt-6 text-[22px] md:text-[28px] lg:text-[34px] text-[#0A0A0A]"
             style={{ letterSpacing: "-0.03em", lineHeight: "1.05" }}
           >
             Four tiers of partnership.
@@ -226,47 +226,28 @@ const RoadmapAndConsortium = () => {
 };
 
 const BackedByBosch = () => {
-  const stats = [
-    { k: "130+", label: "Years engineering" },
-    { k: "400K+", label: "Associates" },
-    { k: "60+", label: "Countries" },
-    { k: "#1", label: "Auto supplier" },
-  ];
   return (
     <section className="bg-[#00162B] text-white" data-testid="backed-by-bosch">
       <div className="tv-container tv-section">
-        <div className="grid lg:grid-cols-12 gap-12 items-end">
+        <div className="grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">
             <span className="tv-eyebrow" style={{ color: "#FDB515" }}>
-              <span className="text-[#FDB515]">Backed by Bosch</span>
+              <span className="text-[#FDB515]">Powered by Bosch</span>
             </span>
             <h2
-              className="tv-display mt-6 text-[40px] md:text-[64px] lg:text-[80px] text-white leading-[0.98]"
-              style={{ letterSpacing: "-0.035em" }}
+              className="tv-display mt-5 text-[24px] md:text-[32px] lg:text-[40px] text-white leading-[1.02]"
+              style={{ letterSpacing: "-0.025em" }}
             >
-              A century-and-a-half of<br />engineering discipline.
+              Engineering discipline meets<br />open-source velocity.
             </h2>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
-            <p className="text-[16px] leading-[1.65] text-white/70 font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+            <p className="text-[14.5px] leading-[1.7] text-white/70 font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
               Bosch Global Software Technologies leads the TRUSTED-V initiative,
-              bringing automotive-grade rigour, LTS commitments and worldwide
-              scale to open RISC-V.
+              bringing automotive-grade rigour and long-term support commitments
+              to open RISC-V.
             </p>
           </div>
-        </div>
-
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border-y border-white/10">
-          {stats.map((s) => (
-            <div key={s.label} className="bg-[#00162B] p-8 md:p-10">
-              <div className="text-[44px] md:text-[64px] leading-none text-[#FDB515] tracking-[-0.03em]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
-                {s.k}
-              </div>
-              <div className="mt-4 text-[11px] font-medium tracking-[0.2em] uppercase text-white/50" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                {s.label}
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -276,7 +257,7 @@ const BackedByBosch = () => {
 const CTA = () => (
   <section className="tv-section-tight border-b border-[#E7E5E0]" data-testid="about-cta">
     <div className="tv-container flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
-      <h2 className="tv-display text-[36px] md:text-[52px] lg:text-[64px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+      <h2 className="tv-display text-[28px] md:text-[38px] lg:text-[46px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
         Join the RISC-V decade.
       </h2>
       <div className="flex gap-3">

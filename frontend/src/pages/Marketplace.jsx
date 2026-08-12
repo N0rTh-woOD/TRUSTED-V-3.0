@@ -53,7 +53,7 @@ const Marketplace = () => {
       />
 
       {/* Tabs + search */}
-      <section className="border-b border-[#E7E5E0] sticky top-[72px] z-30 bg-white/95 backdrop-blur" data-testid="marketplace-toolbar">
+      <section className="border-b border-[#E7E5E0] sticky top-[64px] z-30 bg-white/95 backdrop-blur" data-testid="marketplace-toolbar">
         <div className="tv-container flex flex-col md:flex-row md:items-center justify-between gap-4 py-4">
           <div className="flex items-center gap-1">
             <TabBtn active={tab === "hardware"} onClick={() => setTab("hardware")} testid="tab-hardware">
@@ -106,7 +106,7 @@ const Marketplace = () => {
           <div className="lg:col-span-7">
             <span className="tv-eyebrow">Our hardware partners</span>
             <h2
-              className="tv-display mt-4 text-[32px] md:text-[44px] text-[#0A0A0A] leading-[1.02]"
+              className="tv-display mt-4 text-[24px] md:text-[32px] text-[#0A0A0A] leading-[1.02]"
               style={{ letterSpacing: "-0.03em" }}
             >
               Certified boards from C-DAC, Mindgrove, Upbeat Tech and more.

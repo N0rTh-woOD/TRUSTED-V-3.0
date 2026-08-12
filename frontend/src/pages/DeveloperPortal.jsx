@@ -47,7 +47,7 @@ const sections = [
   {
     title: "Certification",
     items: [
-      { name: "48-hour turnaround", desc: "Prepare your evidence bundle inside Jarvyn." },
+      { name: "Turnaround & evidence", desc: "Prepare your evidence bundle inside Jarvyn." },
       { name: "TRUSTED-V Verified", desc: "Vendor-neutral silicon certification programme." },
       { name: "Compliance mapping", desc: "CC, PSA, ISO 26262, IEC 62443 auto-mapped." },
     ],
@@ -79,7 +79,7 @@ const DeveloperPortal = () => {
 
       <section className="tv-section-tight" data-testid="dev-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[36px] md:text-[52px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
             Ready to write your first line of TRUSTED-V?
           </h2>
           <div className="flex gap-3">
@@ -105,7 +105,7 @@ const Section = ({ section }) => {
         className="w-full flex items-center justify-between py-8 md:py-10 group"
       >
         <h3
-          className="text-[28px] md:text-[36px] tracking-[-0.02em] text-[#0A0A0A] group-hover:text-[#003262] transition-colors text-left"
+          className="text-[22px] md:text-[28px] tracking-[-0.015em] text-[#0A0A0A] group-hover:text-[#003262] transition-colors text-left"
           style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
         >
           {section.title}

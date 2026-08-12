@@ -29,6 +29,21 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 12b — Content Cleanup & Font Rightsizing (Feb 12, 2026)
+- Reduced font scale platform-wide: Landing hero 140px → 56px; section headings 72px → 36-44px; body 21px → 15-17px
+- Tightened Navigation: 72px → 64px height, 13.5px → 13px font, tighter spacing
+- Reduced button padding and section vertical rhythm for a more balanced feel
+- **Removed ALL made-up numeric claims:**
+  - Landing data strip (4 / 48hr / 60+ / 10B+) — entire strip removed
+  - Landing "NOW SHIPPING v1.0" status badge — removed
+  - Landing dark section 4-stat grid (130+ / 400K+ / 60+ / #1) — removed, kept the story text only
+  - About "Backed by Bosch" 4-stat grid — same treatment
+  - RTOS benchmark table with specific ns numbers — removed
+  - "9× faster context switch", "12× faster task creation" claims on RTOS cards — removed
+  - Secure Boot "~8 KB flash footprint" specific size claim — removed
+  - "48-hour certification turnaround" mentions across About + Developer Portal — replaced with neutral language
+- Kept only factual/verifiable content: standards names, partner company names, module names, Bosch parent brand, Made in India
+
 ### Phase 12 — MIPS-Inspired Full Redesign (Completed — Feb 12, 2026)
 - Complete platform redesign inspired by mips.com editorial minimalism
 - New global theme: Space Grotesk (display) + Outfit (body) + JetBrains Mono; retained brand palette (Berkeley Blue #003262, Cyan #00B4E0, Gold #FDB515, SignOff Green #0F6E56)

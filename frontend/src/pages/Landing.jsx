@@ -30,7 +30,7 @@ const Hero = () => (
     className="relative bg-white overflow-hidden border-b border-[#E7E5E0]"
     data-testid="landing-hero"
   >
-    <div className="tv-container pt-28 md:pt-36 lg:pt-44 pb-20 md:pb-28 lg:pb-32">
+    <div className="tv-container pt-20 md:pt-24 lg:pt-28 pb-16 md:pb-20 lg:pb-24">
       <div className="tv-fade-up">
         <div className="mb-8 flex items-center gap-4 flex-wrap">
           <span className="tv-eyebrow">The complete RISC-V platform</span>
@@ -41,16 +41,16 @@ const Hero = () => (
         </div>
 
         <h1
-          className="tv-display text-[52px] sm:text-[72px] md:text-[104px] lg:text-[140px] leading-[0.92] tracking-[-0.045em] text-[#0A0A0A] max-w-[16ch]"
+          className="tv-display text-[30px] sm:text-[38px] md:text-[48px] lg:text-[56px] leading-[0.98] tracking-[-0.03em] text-[#0A0A0A] max-w-[18ch]"
           data-testid="landing-hero-title"
         >
           Software to Silicon,{" "}
           <span className="text-[#003262]">Rust‑Native RISC‑V.</span>
         </h1>
 
-        <div className="mt-12 grid lg:grid-cols-12 gap-10 items-end">
+        <div className="mt-10 grid lg:grid-cols-12 gap-10 items-end">
           <p
-            className="lg:col-span-6 text-[18px] md:text-[21px] leading-[1.55] text-[#3A3A3A] font-light"
+            className="lg:col-span-6 text-[15px] md:text-[17px] leading-[1.6] text-[#3A3A3A] font-light"
             style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
             data-testid="landing-hero-subtitle"
           >
@@ -67,43 +67,7 @@ const Hero = () => (
             <Link to="/contact" className="tv-btn tv-btn-outline" data-testid="hero-cta-secondary">
               Request a demo
             </Link>
-            <span
-              className="text-[12px] font-medium tracking-[0.16em] uppercase text-[#6B6B6B] flex items-center gap-2"
-              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-            >
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#0F6E56] tv-pulse-dot" />
-              Now shipping v1.0
-            </span>
           </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Data strip */}
-    <div className="border-t border-[#E7E5E0] bg-[#FAFAF7]">
-      <div className="tv-container">
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#E7E5E0]">
-          {[
-            { k: "4", label: "Core Modules" },
-            { k: "48hr", label: "Certification Turnaround" },
-            { k: "60+", label: "Countries Reached" },
-            { k: "10B+", label: "Devices Trusted" },
-          ].map((s) => (
-            <div key={s.label} className="px-4 md:px-8 py-8 md:py-10">
-              <div
-                className="text-[36px] md:text-[52px] leading-none text-[#003262] tracking-[-0.03em]"
-                style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
-              >
-                {s.k}
-              </div>
-              <div
-                className="mt-3 text-[12px] font-medium tracking-[0.14em] uppercase text-[#6B6B6B]"
-                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-              >
-                {s.label}
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>
@@ -159,8 +123,8 @@ const MissionStatement = () => (
         </div>
         <div className="lg:col-span-9">
           <p
-            className="tv-display text-[32px] md:text-[44px] lg:text-[56px] leading-[1.1] text-[#0A0A0A]"
-            style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 400, letterSpacing: "-0.025em" }}
+            className="tv-display text-[22px] md:text-[28px] lg:text-[34px] leading-[1.25] text-[#0A0A0A]"
+            style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 400, letterSpacing: "-0.02em" }}
           >
             The RISC-V ecosystem&apos;s next growth phase is gated by{" "}
             <span className="text-[#003262]">trust</span>, not silicon
@@ -219,15 +183,15 @@ const Modules = () => {
           <div className="lg:col-span-4">
             <span className="tv-eyebrow">The four modules</span>
             <h2
-              className="tv-display mt-6 text-[40px] md:text-[56px] lg:text-[72px] text-[#0A0A0A]"
-              style={{ letterSpacing: "-0.03em", lineHeight: "1" }}
+              className="tv-display mt-5 text-[24px] md:text-[30px] lg:text-[36px] text-[#0A0A0A]"
+              style={{ letterSpacing: "-0.025em", lineHeight: "1.05" }}
             >
               One brand.<br />Four modules.
             </h2>
           </div>
           <div className="lg:col-span-7 lg:col-start-6 flex items-end">
             <p
-              className="text-[17px] md:text-[19px] text-[#3A3A3A] font-light leading-[1.6]"
+              className="text-[15px] md:text-[16px] text-[#3A3A3A] font-light leading-[1.65]"
               style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
             >
               A modular architecture built around the workloads that define
@@ -256,15 +220,15 @@ const Modules = () => {
               </div>
               <div className="lg:col-span-5">
                 <h3
-                  className="text-[28px] md:text-[36px] lg:text-[44px] leading-[1.05] tracking-[-0.02em] text-[#0A0A0A] group-hover:text-[#003262] transition-colors"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 400 }}
+                  className="text-[22px] md:text-[26px] lg:text-[30px] leading-[1.1] tracking-[-0.015em] text-[#0A0A0A] group-hover:text-[#003262] transition-colors"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
                 >
                   {m.title}
                 </h3>
               </div>
               <div className="lg:col-span-4">
                 <p
-                  className="text-[15.5px] leading-[1.65] text-[#3A3A3A] font-light"
+                  className="text-[14.5px] leading-[1.65] text-[#3A3A3A] font-light"
                   style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
                 >
                   {m.lede}
@@ -311,15 +275,15 @@ const IndustryFocus = () => {
           <div className="lg:col-span-5">
             <span className="tv-eyebrow">Where TRUSTED-V ships</span>
             <h2
-              className="tv-display mt-6 text-[40px] md:text-[56px] lg:text-[72px] text-[#0A0A0A]"
-              style={{ letterSpacing: "-0.03em", lineHeight: "1" }}
+              className="tv-display mt-5 text-[24px] md:text-[30px] lg:text-[36px] text-[#0A0A0A]"
+              style={{ letterSpacing: "-0.025em", lineHeight: "1.05" }}
             >
               Built for<br />mission-critical.
             </h2>
           </div>
           <div className="lg:col-span-6 lg:col-start-7 flex items-end">
             <p
-              className="text-[17px] md:text-[19px] text-[#3A3A3A] font-light leading-[1.6]"
+              className="text-[15px] md:text-[16px] text-[#3A3A3A] font-light leading-[1.65]"
               style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
             >
               From safety-critical automotive ECUs to sovereign defence silicon,
@@ -340,14 +304,14 @@ const IndustryFocus = () => {
                   Vertical
                 </div>
                 <h3
-                  className="text-[24px] md:text-[28px] tracking-[-0.02em] text-[#0A0A0A]"
+                  className="text-[20px] md:text-[22px] tracking-[-0.015em] text-[#0A0A0A]"
                   style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
                 >
                   {ind.name}
                 </h3>
               </div>
               <p
-                className="mt-4 text-[14.5px] leading-[1.6] text-[#4B4B4B] font-light"
+                className="mt-4 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light"
                 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
               >
                 {ind.note}
@@ -381,18 +345,18 @@ const Standards = () => {
           <div className="lg:col-span-4 lg:sticky lg:top-28">
             <span className="tv-eyebrow">Standards & compliance</span>
             <h2
-              className="tv-display mt-6 text-[40px] md:text-[52px] text-[#0A0A0A]"
-              style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
+              className="tv-display mt-5 text-[28px] md:text-[36px] lg:text-[40px] text-[#0A0A0A]"
+              style={{ letterSpacing: "-0.025em", lineHeight: "1.05" }}
             >
               Certifiable by design.
             </h2>
             <p
-              className="mt-6 text-[16px] leading-[1.65] text-[#3A3A3A] font-light"
+              className="mt-5 text-[14.5px] leading-[1.7] text-[#3A3A3A] font-light"
               style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
             >
               Every module is architected against the standards that matter in
-              automotive, industrial, IoT, defence and medical. Bring your BOM.
-              Ship the certificate.
+              automotive, industrial, IoT, defence and medical. Certification
+              targets we build toward — not brag about.
             </p>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
@@ -400,7 +364,7 @@ const Standards = () => {
               {rows.map(([code, desc], i) => (
                 <div
                   key={code}
-                  className="grid grid-cols-12 gap-4 py-5 md:py-6 border-b border-[#E7E5E0] items-baseline"
+                  className="grid grid-cols-12 gap-4 py-4 md:py-5 border-b border-[#E7E5E0] items-baseline"
                 >
                   <span
                     className="col-span-1 text-[12px] text-[#6B6B6B]"
@@ -409,13 +373,13 @@ const Standards = () => {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span
-                    className="col-span-5 text-[18px] md:text-[22px] text-[#0A0A0A]"
+                    className="col-span-5 text-[16px] md:text-[18px] text-[#0A0A0A]"
                     style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500, letterSpacing: "-0.01em" }}
                   >
                     {code}
                   </span>
                   <span
-                    className="col-span-6 text-[14px] text-[#4B4B4B] font-light"
+                    className="col-span-6 text-[13.5px] text-[#4B4B4B] font-light"
                     style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
                   >
                     {desc}
@@ -431,63 +395,36 @@ const Standards = () => {
 };
 
 /* ─────────────────────────────────────────────────────────────
-   BOSCH STORY — dark section
+   BOSCH STORY — dark section (story only, no stat claims)
    ───────────────────────────────────────────────────────────── */
 const BoschStory = () => {
-  const stats = [
-    { k: "130+", label: "Years of engineering" },
-    { k: "400K+", label: "Associates worldwide" },
-    { k: "60+", label: "Countries reached" },
-    { k: "#1", label: "Global automotive supplier" },
-  ];
   return (
     <section className="bg-[#00162B] text-white" data-testid="bosch-story">
       <div className="tv-container tv-section">
-        <div className="grid lg:grid-cols-12 gap-12 mb-16">
-          <div className="lg:col-span-6">
-            <span
-              className="tv-eyebrow"
-              style={{ color: "#FDB515" }}
-            >
-              <span className="text-[#FDB515]">Backed by Bosch</span>
+        <div className="grid lg:grid-cols-12 gap-10">
+          <div className="lg:col-span-7">
+            <span className="tv-eyebrow" style={{ color: "#FDB515" }}>
+              <span className="text-[#FDB515]">Powered by Bosch</span>
             </span>
             <h2
-              className="tv-display mt-6 text-[44px] md:text-[64px] lg:text-[84px] leading-[0.98] text-white"
-              style={{ letterSpacing: "-0.035em" }}
+              className="tv-display mt-5 text-[22px] md:text-[28px] lg:text-[34px] leading-[1.02] text-white"
+              style={{ letterSpacing: "-0.025em" }}
             >
-              Made in India.<br />Engineered by<br />Bosch to the world.
+              Made in India.<br />Engineered by Bosch<br />to the world.
             </h2>
           </div>
           <div className="lg:col-span-5 lg:col-start-8 flex items-end">
             <p
-              className="text-[17px] md:text-[19px] leading-[1.6] text-white/70 font-light"
+              className="text-[15px] md:text-[16px] leading-[1.7] text-white/70 font-light"
               style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
             >
-              TRUSTED-V is a Bosch Global Software Technologies (BGSW) initiative
-              — built with the discipline of automotive-grade engineering and the
-              velocity of India&apos;s semiconductor mission. A neutral, open,
-              production-hardened stack for the RISC-V decade.
+              TRUSTED-V is a Bosch Global Software Technologies (BGSW)
+              initiative — built with the discipline of automotive-grade
+              engineering and the velocity of India&apos;s semiconductor
+              mission. A neutral, open, production-hardened stack for the
+              RISC-V decade.
             </p>
           </div>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border-y border-white/10">
-          {stats.map((s) => (
-            <div key={s.label} className="bg-[#00162B] p-8 md:p-10">
-              <div
-                className="text-[44px] md:text-[64px] leading-none text-[#FDB515] tracking-[-0.03em]"
-                style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
-              >
-                {s.k}
-              </div>
-              <div
-                className="mt-4 text-[11px] font-medium tracking-[0.2em] uppercase text-white/50"
-                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-              >
-                {s.label}
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -506,13 +443,13 @@ const Roadmap = () => {
   return (
     <section className="tv-section border-b border-[#E7E5E0]" data-testid="roadmap-section">
       <div className="tv-container">
-        <div className="mb-16 max-w-3xl">
+        <div className="mb-14 max-w-3xl">
           <span className="tv-eyebrow">Roadmap</span>
           <h2
-            className="tv-display mt-6 text-[40px] md:text-[56px] lg:text-[72px] text-[#0A0A0A]"
-            style={{ letterSpacing: "-0.03em", lineHeight: "1" }}
+            className="tv-display mt-5 text-[24px] md:text-[30px] lg:text-[36px] text-[#0A0A0A]"
+            style={{ letterSpacing: "-0.025em", lineHeight: "1.05" }}
           >
-            A five-year plan, in the open.
+            The plan, in the open.
           </h2>
         </div>
 
@@ -539,13 +476,13 @@ const Roadmap = () => {
                 </span>
               </div>
               <h3
-                className="mt-5 text-[28px] md:text-[34px] tracking-[-0.02em] text-[#0A0A0A]"
+                className="mt-5 text-[22px] md:text-[26px] tracking-[-0.015em] text-[#0A0A0A]"
                 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
               >
                 {p.title}
               </h3>
               <p
-                className="mt-4 text-[14.5px] leading-[1.6] text-[#4B4B4B] font-light"
+                className="mt-4 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light"
                 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
               >
                 {p.desc}
@@ -567,18 +504,18 @@ const CTA = () => (
       <div className="grid lg:grid-cols-12 gap-10 items-end">
         <div className="lg:col-span-8">
           <h2
-            className="tv-display text-[48px] md:text-[72px] lg:text-[104px] text-[#0A0A0A] leading-[0.95]"
-            style={{ letterSpacing: "-0.04em" }}
+            className="tv-display text-[26px] md:text-[36px] lg:text-[44px] text-[#0A0A0A] leading-[1]"
+            style={{ letterSpacing: "-0.03em" }}
           >
             Start on <span className="text-[#003262]">RISC-V.</span><br />
             Ship on <span className="text-[#003262]">TRUSTED-V.</span>
           </h2>
         </div>
-        <div className="lg:col-span-4 flex flex-col gap-4 items-start">
-          <Link to="/contact" className="tv-btn tv-btn-primary text-[15px]" style={{ padding: "1.05rem 1.75rem" }} data-testid="final-cta-primary">
+        <div className="lg:col-span-4 flex flex-col gap-3 items-start">
+          <Link to="/contact" className="tv-btn tv-btn-primary" data-testid="final-cta-primary">
             Talk to an engineer <ArrowUpRight className="w-4 h-4" />
           </Link>
-          <Link to="/product-suite" className="tv-btn tv-btn-outline text-[15px]" style={{ padding: "1.05rem 1.75rem" }} data-testid="final-cta-secondary">
+          <Link to="/product-suite" className="tv-btn tv-btn-outline" data-testid="final-cta-secondary">
             Read the docs <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

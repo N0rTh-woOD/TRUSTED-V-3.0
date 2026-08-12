@@ -12,7 +12,7 @@ const PageHero = ({
   "data-testid": testId = "page-hero",
 }) => {
   const isCenter = align === "center";
-  const py = size === "compact" ? "pt-24 pb-16 md:pt-32 md:pb-20" : "pt-28 pb-20 md:pt-36 md:pb-28 lg:pt-40 lg:pb-32";
+  const py = size === "compact" ? "pt-20 pb-14 md:pt-24 md:pb-16" : "pt-24 pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24";
 
   return (
     <section
@@ -57,7 +57,7 @@ const PageHeroContent = ({ eyebrow, title, subtitle, center }) => (
     )}
     {title && (
       <h1
-        className="tv-display text-[44px] sm:text-[56px] md:text-[72px] lg:text-[88px] text-[#0A0A0A] mb-8"
+        className="tv-display text-[26px] sm:text-[32px] md:text-[42px] lg:text-[48px] text-[#0A0A0A] mb-6"
         data-testid="page-hero-title"
       >
         {title}
@@ -65,7 +65,7 @@ const PageHeroContent = ({ eyebrow, title, subtitle, center }) => (
     )}
     {subtitle && (
       <p
-        className="text-[17px] md:text-[19px] text-[#4B4B4B] leading-[1.55] font-light max-w-2xl"
+        className="text-[15px] md:text-[17px] text-[#4B4B4B] leading-[1.6] font-light max-w-2xl"
         style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
         data-testid="page-hero-subtitle"
       >

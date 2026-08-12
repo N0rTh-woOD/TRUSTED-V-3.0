@@ -47,7 +47,7 @@ const Footer = () => {
         <div className="grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-6">
             <div
-              className="text-[52px] md:text-[72px] lg:text-[88px] leading-[0.95] tracking-[-0.03em]"
+              className="text-[36px] md:text-[52px] lg:text-[64px] leading-[0.95] tracking-[-0.03em]"
               style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 400 }}
             >
               <span className="text-white">TRUSTED</span>

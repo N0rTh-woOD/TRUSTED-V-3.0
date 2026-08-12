@@ -37,7 +37,7 @@ const Login = () => {
             The complete RISC-V platform
           </div>
           <h1
-            className="tv-display text-[48px] xl:text-[64px] leading-[0.98] text-white"
+            className="tv-display text-[34px] xl:text-[42px] leading-[0.98] text-white"
             style={{ letterSpacing: "-0.035em" }}
           >
             Software to Silicon,<br />
@@ -59,7 +59,7 @@ const Login = () => {
             <TrustedVLogo size="sm" />
           </div>
           <span className="tv-eyebrow">Sign in</span>
-          <h2 className="tv-display mt-4 text-[36px] md:text-[44px] text-[#0A0A0A]" style={{ letterSpacing: "-0.03em", lineHeight: "1.05" }}>
+          <h2 className="tv-display mt-4 text-[26px] md:text-[32px] text-[#0A0A0A]" style={{ letterSpacing: "-0.03em", lineHeight: "1.05" }}>
             Welcome back.
           </h2>
           <p className="mt-3 text-[15px] text-[#6B6B6B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>

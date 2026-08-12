@@ -41,14 +41,14 @@ const Navigation = () => {
         }`}
       >
         <div className="tv-container">
-          <div className="flex items-center justify-between h-[72px]">
+          <div className="flex items-center justify-between h-[64px]">
             {/* Brand */}
             <Link to="/" className="flex items-center flex-shrink-0" data-testid="nav-brand">
               <TrustedVLogo size="sm" />
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-7">
               {nav.map((item) => {
                 const isActive =
                   item.path === "/"
@@ -59,7 +59,7 @@ const Navigation = () => {
                     key={item.path}
                     to={item.path}
                     data-testid={`nav-${item.label.toLowerCase()}`}
-                    className={`relative text-[13.5px] font-medium tracking-[0.01em] transition-colors duration-200 py-2 ${
+                    className={`relative text-[13px] font-medium tracking-[0.005em] transition-colors duration-200 py-2 ${
                       isActive ? "text-[#003262]" : "text-[#1F1F1F] hover:text-[#003262]"
                     }`}
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
@@ -74,12 +74,12 @@ const Navigation = () => {
             </nav>
 
             {/* Right */}
-            <div className="hidden lg:flex items-center gap-5">
+            <div className="hidden lg:flex items-center gap-4">
               {isAdmin && (
                 <Link
                   to="/admin"
                   data-testid="nav-admin"
-                  className="text-[13.5px] font-medium text-[#1F1F1F] hover:text-[#003262] flex items-center gap-1.5"
+                  className="text-[13px] font-medium text-[#1F1F1F] hover:text-[#003262] flex items-center gap-1.5"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
                   <Shield className="w-3.5 h-3.5" />
@@ -88,7 +88,7 @@ const Navigation = () => {
               )}
 
               {isAuthenticated ? (
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3.5">
                   <Link
                     to="/account"
                     className="text-[#6B6B6B] hover:text-[#003262] transition-colors"
@@ -100,7 +100,7 @@ const Navigation = () => {
                   <button
                     onClick={handleLogout}
                     data-testid="nav-logout"
-                    className="text-[13.5px] font-medium text-[#1F1F1F] hover:text-[#003262] flex items-center gap-1.5"
+                    className="text-[13px] font-medium text-[#1F1F1F] hover:text-[#003262] flex items-center gap-1.5"
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                   >
                     <LogOut className="w-3.5 h-3.5" />
@@ -111,7 +111,7 @@ const Navigation = () => {
                 <Link
                   to="/login"
                   data-testid="nav-login"
-                  className="text-[13.5px] font-medium text-[#1F1F1F] hover:text-[#003262]"
+                  className="text-[13px] font-medium text-[#1F1F1F] hover:text-[#003262]"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
                   Sign in
@@ -121,8 +121,8 @@ const Navigation = () => {
               <Link
                 to="/contact"
                 data-testid="nav-contact-cta"
-                className="tv-btn tv-btn-primary text-[13px]"
-                style={{ padding: "0.7rem 1.15rem" }}
+                className="tv-btn tv-btn-primary"
+                style={{ padding: "0.55rem 0.95rem", fontSize: "12.5px" }}
               >
                 Request a demo <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
               </Link>

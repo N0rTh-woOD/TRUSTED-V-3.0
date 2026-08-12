@@ -155,10 +155,10 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.9rem 1.5rem;
+    padding: 0.75rem 1.25rem;
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.01em;
     border-radius: 2px;
     transition: background-color 200ms ease, color 200ms ease, transform 200ms ease, border-color 200ms ease;
@@ -213,12 +213,12 @@
 .tv-link:hover { color: var(--tv-navy); border-color: var(--tv-navy); gap: 0.65rem; }
 
 /* Section rhythm */
-.tv-section { padding-block: 6rem; }
-@media (min-width: 768px) { .tv-section { padding-block: 8rem; } }
-@media (min-width: 1280px) { .tv-section { padding-block: 10rem; } }
+.tv-section { padding-block: 4.5rem; }
+@media (min-width: 768px) { .tv-section { padding-block: 6rem; } }
+@media (min-width: 1280px) { .tv-section { padding-block: 7.5rem; } }
 
-.tv-section-tight { padding-block: 4rem; }
-@media (min-width: 768px) { .tv-section-tight { padding-block: 6rem; } }
+.tv-section-tight { padding-block: 3rem; }
+@media (min-width: 768px) { .tv-section-tight { padding-block: 4.5rem; } }
 
 /* Border */
 .tv-hr { border-top: 1px solid var(--tv-border); }

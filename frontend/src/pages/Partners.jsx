@@ -60,7 +60,7 @@ const Partners = () => {
           <div className="mb-14 max-w-3xl">
             <span className="tv-eyebrow">Indian silicon programme</span>
             <h2
-              className="tv-display mt-4 text-[36px] md:text-[52px] lg:text-[64px] text-[#0A0A0A]"
+              className="tv-display mt-4 text-[28px] md:text-[38px] lg:text-[46px] text-[#0A0A0A]"
               style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
             >
               Made in India.<br />
@@ -78,7 +78,7 @@ const Partners = () => {
                 </div>
                 <div className="lg:col-span-4">
                   <h3
-                    className="text-[36px] md:text-[48px] tracking-[-0.025em] text-[#0A0A0A]"
+                    className="text-[26px] md:text-[34px] tracking-[-0.025em] text-[#0A0A0A]"
                     style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
                   >
                     {p.name}
@@ -135,7 +135,7 @@ const Partners = () => {
                 <span className="text-[#FDB515]">Global IP integration</span>
               </span>
               <h2
-                className="tv-display mt-4 text-[36px] md:text-[56px] lg:text-[72px] text-white leading-[0.98]"
+                className="tv-display mt-4 text-[26px] md:text-[36px] lg:text-[44px] text-white leading-[0.98]"
                 style={{ letterSpacing: "-0.035em" }}
               >
                 Co-verified with performance leaders.
@@ -151,7 +151,7 @@ const Partners = () => {
           <div className="grid md:grid-cols-3 gap-px bg-white/10 border-y border-white/10">
             {globalIP.map((g) => (
               <div key={g.name} className="bg-[#00162B] p-8 md:p-12">
-                <h3 className="text-[32px] md:text-[40px] tracking-[-0.025em] text-white" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                <h3 className="text-[24px] md:text-[30px] tracking-[-0.02em] text-white" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
                   {g.name}
                 </h3>
                 <p className="mt-3 text-[14px] leading-[1.55] text-white/60" style={{ fontFamily: "'Outfit', sans-serif" }}>{g.note}</p>
@@ -164,7 +164,7 @@ const Partners = () => {
       {/* CTA */}
       <section className="tv-section-tight border-b border-[#E7E5E0]" data-testid="partners-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[36px] md:text-[52px] text-[#0A0A0A] leading-[1] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[1] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
             Bring your board or IP to TRUSTED-V.
           </h2>
           <div className="flex gap-3">

@@ -35,7 +35,7 @@ const WebIDEPage = () => {
 
       <section className="tv-section-tight" data-testid="webide-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[36px] md:text-[52px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
             Prefer the full IDE?
           </h2>
           <div className="flex gap-3">

@@ -86,7 +86,7 @@ const ModulesDetail = () => {
                   / MODULE {m.num}
                 </span>
                 <h2
-                  className="tv-display mt-6 text-[40px] md:text-[52px] lg:text-[64px] text-[#0A0A0A]"
+                  className="tv-display mt-6 text-[26px] md:text-[34px] lg:text-[40px] text-[#0A0A0A]"
                   style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
                 >
                   {m.title}
@@ -144,7 +144,7 @@ const IPIntegration = () => {
               <span className="text-[#FDB515]">RISC-V IP integration</span>
             </span>
             <h2
-              className="tv-display mt-6 text-[40px] md:text-[56px] lg:text-[72px] text-white leading-[0.98]"
+              className="tv-display mt-6 text-[22px] md:text-[28px] lg:text-[34px] text-white leading-[0.98]"
               style={{ letterSpacing: "-0.035em" }}
             >
               Bring your IP.<br />We&apos;ll bring the stack.
@@ -176,7 +176,7 @@ const IPIntegration = () => {
                 )}
               </div>
               <h3
-                className="text-[26px] md:text-[32px] tracking-[-0.02em] text-white"
+                className="text-[20px] md:text-[24px] tracking-[-0.02em] text-white"
                 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
               >
                 {p.name}
@@ -207,7 +207,7 @@ const SubBrands = () => {
         <div className="mb-16 max-w-3xl">
           <span className="tv-eyebrow">A growing portfolio</span>
           <h2
-            className="tv-display mt-6 text-[40px] md:text-[56px] text-[#0A0A0A]"
+            className="tv-display mt-6 text-[24px] md:text-[32px] text-[#0A0A0A]"
             style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
           >
             More than a toolchain. A trust framework.
@@ -244,7 +244,7 @@ const PricingCTA = () => (
               <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 {p.tier}
               </div>
-              <div className="mt-4 text-[36px] md:text-[44px] tracking-[-0.03em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+              <div className="mt-4 text-[26px] md:text-[32px] tracking-[-0.025em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
                 {p.price}
               </div>
               <p className="mt-4 text-[14.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>

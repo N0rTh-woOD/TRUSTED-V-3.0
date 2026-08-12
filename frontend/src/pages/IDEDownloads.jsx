@@ -96,7 +96,7 @@ const IDEDownloads = () => {
         <div className="tv-container">
           <div className="mb-14 max-w-3xl">
             <span className="tv-eyebrow">Twenty-one reasons</span>
-            <h2 className="tv-display mt-4 text-[36px] md:text-[52px] text-[#0A0A0A]" style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}>
+            <h2 className="tv-display mt-4 text-[28px] md:text-[38px] text-[#0A0A0A]" style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}>
               Purpose-built, not repurposed.
             </h2>
           </div>
@@ -124,7 +124,7 @@ const IDEDownloads = () => {
         <div className="tv-container">
           <div className="mb-12 max-w-3xl">
             <span className="tv-eyebrow">Jarvyn vs general-purpose IDEs</span>
-            <h2 className="tv-display mt-4 text-[32px] md:text-[48px] text-[#0A0A0A]" style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}>
+            <h2 className="tv-display mt-4 text-[24px] md:text-[32px] text-[#0A0A0A]" style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}>
               What only a purpose-built IDE can do.
             </h2>
           </div>
@@ -155,7 +155,7 @@ const IDEDownloads = () => {
       {/* CTA */}
       <section className="tv-section-tight" data-testid="ide-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[36px] md:text-[52px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
             Skip the fork. Ship the firmware.
           </h2>
           <div className="flex gap-3">
