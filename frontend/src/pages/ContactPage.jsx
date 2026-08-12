@@ -87,7 +87,7 @@ const ContactPage = () => {
               />
 
               <div className="border-t border-[#E7E5E0] pt-8">
-                <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-3" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                   Prefer a direct path?
                 </div>
                 <div className="flex flex-col gap-3">
@@ -135,7 +135,7 @@ const ContactPage = () => {
                   >
                     {submitting ? "Sending..." : "Send message"} <ArrowUpRight className="w-4 h-4" />
                   </button>
-                  <span className="text-[12px] text-[#6B6B6B] font-light" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                  <span className="text-[12px] text-[#6B6B6B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                     We reply within 1 business day.
                   </span>
                 </div>
@@ -150,12 +150,12 @@ const ContactPage = () => {
 
 const ContactCard = ({ icon, label, lines }) => (
   <div className="border-t border-[#E7E5E0] pt-6">
-    <div className="flex items-center gap-3 text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+    <div className="flex items-center gap-3 text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
       <span className="text-[#003262]">{icon}</span>
       {label}
     </div>
     {lines.map((l) => (
-      <div key={l} className="mt-2 text-[15px] text-[#0A0A0A]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+      <div key={l} className="mt-2 text-[15px] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
         {l}
       </div>
     ))}
@@ -164,7 +164,7 @@ const ContactCard = ({ icon, label, lines }) => (
 
 const Field = ({ label, value, onChange, type = "text", testid }) => (
   <label className="block">
-    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
       {label}
     </span>
     <input
@@ -173,14 +173,14 @@ const Field = ({ label, value, onChange, type = "text", testid }) => (
       onChange={onChange}
       data-testid={testid}
       className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] text-[#0A0A0A] focus:outline-none focus:border-[#003262] transition-colors"
-      style={{ fontFamily: "'Outfit', sans-serif" }}
+      style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
     />
   </label>
 );
 
 const SelectField = ({ label, value, onChange, options, testid }) => (
   <label className="block">
-    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
       {label}
     </span>
     <select
@@ -188,7 +188,7 @@ const SelectField = ({ label, value, onChange, options, testid }) => (
       onChange={onChange}
       data-testid={testid}
       className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] text-[#0A0A0A] focus:outline-none focus:border-[#003262] transition-colors"
-      style={{ fontFamily: "'Outfit', sans-serif" }}
+      style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
     >
       {options.map((o) => (
         <option key={o} value={o}>{o || "Select an option"}</option>
@@ -199,7 +199,7 @@ const SelectField = ({ label, value, onChange, options, testid }) => (
 
 const Textarea = ({ label, value, onChange, testid }) => (
   <label className="block">
-    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
       {label}
     </span>
     <textarea
@@ -208,7 +208,7 @@ const Textarea = ({ label, value, onChange, testid }) => (
       onChange={onChange}
       data-testid={testid}
       className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] text-[#0A0A0A] resize-none focus:outline-none focus:border-[#003262] transition-colors"
-      style={{ fontFamily: "'Outfit', sans-serif" }}
+      style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
     />
   </label>
 );

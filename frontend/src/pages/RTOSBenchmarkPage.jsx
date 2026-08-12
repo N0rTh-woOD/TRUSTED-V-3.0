@@ -42,7 +42,7 @@ const RTOSBenchmarkPage = () => {
         }
         subtitle="TRUSTED-V ships integration and reference project templates for four production RTOS options — pick the runtime your project actually needs."
       >
-        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
           <ArrowLeft className="w-3.5 h-3.5" /> Back to products
         </Link>
       </PageHero>
@@ -51,7 +51,7 @@ const RTOSBenchmarkPage = () => {
         <div className="tv-container">
           <div className="mb-10 max-w-3xl">
             <span className="tv-eyebrow">Supported RTOS</span>
-            <h2 className="tv-display mt-4 text-[24px] md:text-[32px] text-[#0A0A0A]" style={{ letterSpacing: "-0.025em", lineHeight: "1.05" }}>
+            <h2 className="tv-h2">
               Four runtimes. One toolchain.
             </h2>
           </div>
@@ -59,14 +59,14 @@ const RTOSBenchmarkPage = () => {
             {options.map((o) => (
               <div key={o.name} className={`bg-white p-8 md:p-10 min-h-[260px] ${o.featured ? "border-t-[3px] border-[#003262]" : ""}`}>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{o.tag}</span>
-                  {o.featured && <span className="text-[10px] font-mono text-[#003262] border border-[#003262]/40 px-2 py-0.5" style={{ fontFamily: "'JetBrains Mono', monospace" }}>native</span>}
+                  <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>{o.tag}</span>
+                  {o.featured && <span className="text-[10px] font-mono text-[#003262] border border-[#003262]/40 px-2 py-0.5" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>native</span>}
                 </div>
-                <h3 className="text-[20px] md:text-[24px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>{o.name}</h3>
-                <p className="mt-3 text-[13.5px] leading-[1.65] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>{o.desc}</p>
+                <h3 className="text-[20px] md:text-[24px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>{o.name}</h3>
+                <p className="mt-3 text-[13.5px] leading-[1.65] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>{o.desc}</p>
                 <ul className="mt-5 space-y-2 border-t border-[#E7E5E0] pt-5">
                   {o.features.map((f) => (
-                    <li key={f} className="text-[13px] text-[#0A0A0A] flex items-start gap-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                    <li key={f} className="text-[13px] text-[#0A0A0A] flex items-start gap-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                       <span className="w-1 h-1 mt-2 rounded-full bg-[#003262] flex-shrink-0" />
                       {f}
                     </li>
@@ -80,7 +80,7 @@ const RTOSBenchmarkPage = () => {
 
       <section className="tv-section-tight" data-testid="rtos-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <h2 className="tv-display text-[24px] md:text-[36px] text-[#0A0A0A] leading-[1.05] max-w-2xl" style={{ letterSpacing: "-0.025em" }}>
+          <h2 className="tv-h2">
             Not sure which runtime fits? Let&apos;s talk.
           </h2>
           <div className="flex gap-3">

@@ -60,8 +60,7 @@ const Partners = () => {
           <div className="mb-14 max-w-3xl">
             <span className="tv-eyebrow">Indian silicon programme</span>
             <h2
-              className="tv-display mt-4 text-[28px] md:text-[38px] lg:text-[46px] text-[#0A0A0A]"
-              style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
+              className="tv-h2"
             >
               Made in India.<br />
               <span className="text-[#003262]">Trusted globally.</span>
@@ -72,39 +71,39 @@ const Partners = () => {
             {partners.map((p) => (
               <div key={p.name} className="grid lg:grid-cols-12 gap-8 lg:gap-10 py-12 md:py-16 border-b border-[#E7E5E0]" data-testid={`partner-${p.name.toLowerCase()}`}>
                 <div className="lg:col-span-1">
-                  <span className="text-[13px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  <span className="text-[13px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                     /{p.num}
                   </span>
                 </div>
                 <div className="lg:col-span-4">
                   <h3
                     className="text-[26px] md:text-[34px] tracking-[-0.025em] text-[#0A0A0A]"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
+                    style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}
                   >
                     {p.name}
                   </h3>
-                  <div className="mt-2 text-[13px] text-[#6B6B6B]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                  <div className="mt-2 text-[13px] text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                     {p.fullName}
                   </div>
                   <div
                     className="mt-1 text-[11px] font-mono tracking-widest text-[#6B6B6B]"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
                   >
                     {p.location}
                   </div>
                 </div>
                 <div className="lg:col-span-4">
-                  <p className="text-[15.5px] leading-[1.65] text-[#3A3A3A] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                  <p className="text-[15.5px] leading-[1.65] text-[#3A3A3A] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                     {p.description}
                   </p>
                 </div>
                 <div className="lg:col-span-3">
-                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B] mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B] mb-3" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                     Products
                   </div>
                   <ul className="space-y-2">
                     {p.products.map((prod) => (
-                      <li key={prod} className="text-[13.5px] text-[#0A0A0A] flex items-start gap-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                      <li key={prod} className="text-[13.5px] text-[#0A0A0A] flex items-start gap-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                         <span className="w-1 h-1 mt-2 rounded-full" style={{ background: p.accent }} />
                         {prod}
                       </li>
@@ -115,7 +114,7 @@ const Partners = () => {
                     target="_blank"
                     rel="noreferrer"
                     className="mt-5 inline-flex items-center gap-1.5 text-[12px] font-medium tracking-[0.12em] uppercase text-[#0A0A0A] border-b border-[#0A0A0A] pb-0.5 hover:text-[#003262] hover:border-[#003262] transition-colors"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                   >
                     Website <ExternalLink className="w-3 h-3" />
                   </a>
@@ -135,14 +134,13 @@ const Partners = () => {
                 <span className="text-[#FDB515]">Global IP integration</span>
               </span>
               <h2
-                className="tv-display mt-4 text-[26px] md:text-[36px] lg:text-[44px] text-white leading-[0.98]"
-                style={{ letterSpacing: "-0.035em" }}
+                className="tv-h2"
               >
                 Co-verified with performance leaders.
               </h2>
             </div>
             <div className="lg:col-span-4 lg:col-start-9 flex items-end">
-              <p className="text-[16px] leading-[1.6] text-white/70 font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+              <p className="text-[16px] leading-[1.6] text-white/70 font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                 TRUSTED-V ships pre-integrated stacks for the world&apos;s leading RISC-V IP families.
               </p>
             </div>
@@ -151,10 +149,10 @@ const Partners = () => {
           <div className="grid md:grid-cols-3 gap-px bg-white/10 border-y border-white/10">
             {globalIP.map((g) => (
               <div key={g.name} className="bg-[#00162B] p-8 md:p-12">
-                <h3 className="text-[24px] md:text-[30px] tracking-[-0.02em] text-white" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                <h3 className="text-[24px] md:text-[30px] tracking-[-0.02em] text-white" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                   {g.name}
                 </h3>
-                <p className="mt-3 text-[14px] leading-[1.55] text-white/60" style={{ fontFamily: "'Outfit', sans-serif" }}>{g.note}</p>
+                <p className="mt-3 text-[14px] leading-[1.55] text-white/60" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>{g.note}</p>
               </div>
             ))}
           </div>
@@ -164,7 +162,7 @@ const Partners = () => {
       {/* CTA */}
       <section className="tv-section-tight border-b border-[#E7E5E0]" data-testid="partners-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[1] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-h2">
             Bring your board or IP to TRUSTED-V.
           </h2>
           <div className="flex gap-3">

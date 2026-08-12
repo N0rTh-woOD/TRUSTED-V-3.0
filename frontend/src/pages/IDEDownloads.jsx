@@ -59,11 +59,11 @@ const IDEDownloads = () => {
         subtitle="Jarvyn is the Rust-native RISC-V development environment. Purpose-built for embedded, mission-critical firmware from day one."
       >
         <div className="border border-[#E7E5E0] p-8" data-testid="ide-download-panel">
-          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-4" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
             Latest release
           </div>
           {builds.length === 0 ? (
-            <div className="text-[14px] text-[#6B6B6B]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <div className="text-[14px] text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
               Builds will appear here shortly.
             </div>
           ) : (
@@ -76,10 +76,10 @@ const IDEDownloads = () => {
                   data-testid={`download-${b.id}`}
                 >
                   <div>
-                    <div className="text-[15px] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                    <div className="text-[15px] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                       {b.platform || b.os} · v{b.version}
                     </div>
-                    <div className="text-[12px] text-[#6B6B6B] mt-0.5" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                    <div className="text-[12px] text-[#6B6B6B] mt-0.5" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                       {b.filename}
                     </div>
                   </div>
@@ -96,7 +96,7 @@ const IDEDownloads = () => {
         <div className="tv-container">
           <div className="mb-14 max-w-3xl">
             <span className="tv-eyebrow">Twenty-one reasons</span>
-            <h2 className="tv-display mt-4 text-[28px] md:text-[38px] text-[#0A0A0A]" style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}>
+            <h2 className="tv-h2">
               Purpose-built, not repurposed.
             </h2>
           </div>
@@ -104,13 +104,13 @@ const IDEDownloads = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
             {features.map((f) => (
               <div key={f.n} className="bg-white p-8 min-h-[200px]" data-testid={`ide-feature-${f.n}`}>
-                <div className="text-[12px] font-mono tracking-widest text-[#003262] mb-4" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <div className="text-[12px] font-mono tracking-widest text-[#003262] mb-4" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                   / {f.n}
                 </div>
-                <h3 className="text-[17px] tracking-[-0.015em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                <h3 className="text-[17px] tracking-[-0.015em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                   {f.title}
                 </h3>
-                <p className="mt-3 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                <p className="mt-3 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                   {f.desc}
                 </p>
               </div>
@@ -124,26 +124,26 @@ const IDEDownloads = () => {
         <div className="tv-container">
           <div className="mb-12 max-w-3xl">
             <span className="tv-eyebrow">Jarvyn vs general-purpose IDEs</span>
-            <h2 className="tv-display mt-4 text-[24px] md:text-[32px] text-[#0A0A0A]" style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}>
+            <h2 className="tv-h2">
               What only a purpose-built IDE can do.
             </h2>
           </div>
 
           <div className="border-t border-[#0A0A0A]">
-            <div className="grid grid-cols-12 gap-4 py-4 border-b border-[#0A0A0A] text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            <div className="grid grid-cols-12 gap-4 py-4 border-b border-[#0A0A0A] text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
               <div className="col-span-7">Capability</div>
               <div className="col-span-2 text-center text-[#003262]">Jarvyn</div>
               <div className="col-span-3 text-center">General IDE</div>
             </div>
             {comparison.map(([label, jarvyn, other]) => (
               <div key={label} className="grid grid-cols-12 gap-4 py-4 border-b border-[#E7E5E0] items-center">
-                <div className="col-span-7 text-[15px]" style={{ fontFamily: "'Outfit', sans-serif" }}>{label}</div>
+                <div className="col-span-7 text-[15px]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>{label}</div>
                 <div className="col-span-2 flex justify-center">
                   {jarvyn === true && <Check className="w-4 h-4 text-[#0F6E56]" />}
                 </div>
                 <div className="col-span-3 flex justify-center">
                   {other === true && <Check className="w-4 h-4 text-[#0F6E56]" />}
-                  {other === "partial" && <span className="text-[11px] font-mono text-[#6B6B6B]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>partial</span>}
+                  {other === "partial" && <span className="text-[11px] font-mono text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>partial</span>}
                   {other === false && <X className="w-4 h-4 text-[#B7410E]" />}
                 </div>
               </div>
@@ -155,7 +155,7 @@ const IDEDownloads = () => {
       {/* CTA */}
       <section className="tv-section-tight" data-testid="ide-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-h2">
             Skip the fork. Ship the firmware.
           </h2>
           <div className="flex gap-3">

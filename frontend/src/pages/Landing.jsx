@@ -1,321 +1,79 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight, Circle } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
+import {
+  Eyebrow,
+  SectionHeader,
+  ArchitectureDiagram,
+  TechnicalMetric,
+  ProductCard,
+  MarketCard,
+  PartnerGrid,
+  PrimaryCTA,
+  SecondaryCTA,
+} from "@/components/ui-kit";
 
 /**
- * Landing — TRUSTED-V home
- * MIPS-inspired: massive editorial hero, minimal iconography, generous whitespace,
- * asymmetric sections, dark accent block for gravitas.
+ * Landing — TRUSTED-V homepage.
+ * Story-driven, semiconductor-grade layout per attached design spec.
+ * Skips News/Videos/Whitepapers because that content doesn't exist yet.
  */
-const Landing = () => {
-  return (
-    <div className="bg-white text-[#0A0A0A]">
-      <Hero />
-      <PartnerStrip />
-      <MissionStatement />
-      <Modules />
-      <IndustryFocus />
-      <Standards />
-      <BoschStory />
-      <Roadmap />
-      <CTA />
-    </div>
-  );
-};
+const Landing = () => (
+  <div className="bg-white text-[#0B0F14]">
+    <Hero />
+    <PlatformIntro />
+    <PlatformArchitecture />
+    <CoreTechnologies />
+    <ProductFamilies />
+    <Ecosystem />
+    <ApplicationMarkets />
+    <DeveloperExperience />
+    <FinalCTA />
+  </div>
+);
 
 /* ─────────────────────────────────────────────────────────────
    HERO
    ───────────────────────────────────────────────────────────── */
-const Hero = () => (
-  <section
-    className="relative bg-white overflow-hidden border-b border-[#E7E5E0]"
-    data-testid="landing-hero"
-  >
-    <div className="tv-container pt-20 md:pt-24 lg:pt-28 pb-16 md:pb-20 lg:pb-24">
-      <div className="tv-fade-up">
-        <div className="mb-8 flex items-center gap-4 flex-wrap">
-          <span className="tv-eyebrow">The complete RISC-V platform</span>
-          <span className="inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.14em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            <IndiaFlag />
-            <span>Made in India · Engineered by Bosch</span>
-          </span>
-        </div>
-
-        <h1
-          className="tv-display text-[30px] sm:text-[38px] md:text-[48px] lg:text-[56px] leading-[0.98] tracking-[-0.03em] text-[#0A0A0A] max-w-[18ch]"
-          data-testid="landing-hero-title"
-        >
-          Software to Silicon,{" "}
-          <span className="text-[#003262]">Rust‑Native RISC‑V.</span>
-        </h1>
-
-        <div className="mt-10 grid lg:grid-cols-12 gap-10 items-end">
-          <p
-            className="lg:col-span-6 text-[15px] md:text-[17px] leading-[1.6] text-[#3A3A3A] font-light"
-            style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
-            data-testid="landing-hero-subtitle"
-          >
-            TRUSTED-V is an open, modular platform for building trustworthy edge
-            silicon and mission-critical embedded software — from IP integration
-            and virtual platforms to certified boot, cryptography, and RTOS,
-            unified under one brand.
-          </p>
-
-          <div className="lg:col-span-6 lg:col-start-7 flex flex-wrap items-center gap-4">
-            <Link to="/product-suite" className="tv-btn tv-btn-primary" data-testid="hero-cta-primary">
-              Explore the platform <ArrowUpRight className="w-4 h-4" />
-            </Link>
-            <Link to="/contact" className="tv-btn tv-btn-outline" data-testid="hero-cta-secondary">
-              Request a demo
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-/* ─────────────────────────────────────────────────────────────
-   PARTNER STRIP
-   ───────────────────────────────────────────────────────────── */
-const PartnerStrip = () => {
-  const partners = [
-    "SiFive", "Akeana", "MIPS ARC-V", "C-DAC", "Mindgrove", "Upbeat Tech",
-    "SiFive", "Akeana", "MIPS ARC-V", "C-DAC", "Mindgrove", "Upbeat Tech",
+const Hero = () => {
+  const proof = [
+    { k: "RISC-V native", v: "RV32 · RV64 · Vector" },
+    { k: "Language", v: "Rust-first, memory safe" },
+    { k: "Security", v: "PQC-ready root of trust" },
+    { k: "Deployment", v: "IP → SoC → firmware → apps" },
   ];
   return (
-    <section className="border-b border-[#E7E5E0]" data-testid="partner-strip">
-      <div className="tv-container py-10 md:py-14">
-        <div className="flex flex-col md:flex-row md:items-center gap-8">
-          <div
-            className="md:w-56 shrink-0 text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B]"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-          >
-            An open IP ecosystem
-          </div>
-          <div className="flex-1 overflow-hidden">
-            <div className="flex gap-14 md:gap-20 items-center whitespace-nowrap tv-marquee-slow">
-              {partners.map((p, i) => (
-                <span
-                  key={`${p}-${i}`}
-                  className="text-[22px] md:text-[26px] text-[#0A0A0A]/75 tracking-tight"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
-                >
-                  {p}
-                </span>
-              ))}
+    <section className="relative bg-white overflow-hidden" data-testid="landing-hero">
+      <div className="tv-container pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-20 lg:pb-24">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="lg:col-span-7 tv-fade-up">
+            <div className="mb-5"><Eyebrow>RISC-V compute platform</Eyebrow></div>
+            <h1 className="tv-h1" data-testid="landing-hero-title">
+              Build secure, software-defined
+              <br />
+              compute systems on <span className="text-[#003262]">RISC-V</span>.
+            </h1>
+            <p className="tv-lede mt-6" data-testid="landing-hero-subtitle">
+              TRUSTED-V is a Rust-native platform that unifies RISC-V IP integration,
+              virtualization, secure boot, cryptography and real-time software — engineered
+              for mission-critical silicon and shipped in the open.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <PrimaryCTA to="/product-suite" size="lg" data-testid="hero-cta-primary">Explore the platform</PrimaryCTA>
+              <SecondaryCTA to="/contact" size="lg" data-testid="hero-cta-secondary">Talk to an engineer</SecondaryCTA>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
-/* ─────────────────────────────────────────────────────────────
-   MISSION STATEMENT — big editorial paragraph
-   ───────────────────────────────────────────────────────────── */
-const MissionStatement = () => (
-  <section className="tv-section border-b border-[#E7E5E0]" data-testid="mission-statement">
-    <div className="tv-container">
-      <div className="grid lg:grid-cols-12 gap-12">
-        <div className="lg:col-span-3">
-          <span className="tv-eyebrow">Our thesis</span>
-        </div>
-        <div className="lg:col-span-9">
-          <p
-            className="tv-display text-[22px] md:text-[28px] lg:text-[34px] leading-[1.25] text-[#0A0A0A]"
-            style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 400, letterSpacing: "-0.02em" }}
-          >
-            The RISC-V ecosystem&apos;s next growth phase is gated by{" "}
-            <span className="text-[#003262]">trust</span>, not silicon
-            capability. TRUSTED-V closes the structural gaps between IP, software,
-            and silicon — so mission-critical systems can ship on RISC-V, safely,
-            at scale.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-/* ─────────────────────────────────────────────────────────────
-   4 MODULES — MIPS-style large numbered list
-   ───────────────────────────────────────────────────────────── */
-const Modules = () => {
-  const modules = [
-    {
-      num: "01",
-      title: "Development Platform",
-      lede: "Jarvyn IDE, WebIDE, debugger, programmer and trace — one Rust-native toolchain across every RISC-V target.",
-      links: [
-        { label: "Jarvyn IDE", to: "/download-ide" },
-        { label: "WebIDE", to: "/webide" },
-      ],
-    },
-    {
-      num: "02",
-      title: "Virtualization & Simulation",
-      lede: "Virtual platforms, RISC-V hypervisor and simulators. Evaluate IP, subsystems and full SoCs before silicon, FPGA or even RTL.",
-      links: [{ label: "Explore", to: "/product-suite#virtualization" }],
-    },
-    {
-      num: "03",
-      title: "Secure Rust Software",
-      lede: "rBoot, rustBoot, RTOS, HAL/PAC/HAM, Crypto Stack and SDKs. Memory-safe firmware, PQC-ready, certification-friendly.",
-      links: [
-        { label: "Secure Boot", to: "/product/secure-boot" },
-        { label: "Crypto Stack", to: "/product/crypto-stack" },
-        { label: "RTOS", to: "/product/rtos-benchmark" },
-      ],
-    },
-    {
-      num: "04",
-      title: "Silicon SignOff & Trust",
-      lede: "SignOff Silicon, TRUSTED-V Verified and TVOTS — an independent, vendor-neutral certification programme for RISC-V SoCs.",
-      links: [{ label: "Certification", to: "/product-suite#certification" }],
-    },
-  ];
-
-  return (
-    <section id="modules" className="tv-section border-b border-[#E7E5E0]" data-testid="modules-section">
-      <div className="tv-container">
-        <div className="grid lg:grid-cols-12 gap-8 mb-16 md:mb-24">
-          <div className="lg:col-span-4">
-            <span className="tv-eyebrow">The four modules</span>
-            <h2
-              className="tv-display mt-5 text-[24px] md:text-[30px] lg:text-[36px] text-[#0A0A0A]"
-              style={{ letterSpacing: "-0.025em", lineHeight: "1.05" }}
-            >
-              One brand.<br />Four modules.
-            </h2>
-          </div>
-          <div className="lg:col-span-7 lg:col-start-6 flex items-end">
-            <p
-              className="text-[15px] md:text-[16px] text-[#3A3A3A] font-light leading-[1.65]"
-              style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
-            >
-              A modular architecture built around the workloads that define
-              Physical AI, secure embedded and next-gen edge silicon. Each
-              module ships independently. Together, they form the complete
-              RISC-V development stack.
-            </p>
-          </div>
-        </div>
-
-        <div className="border-t border-[#E7E5E0]">
-          {modules.map((m) => (
-            <Link
-              key={m.num}
-              to={m.links[0].to}
-              className="group grid lg:grid-cols-12 gap-6 lg:gap-10 py-10 md:py-14 border-b border-[#E7E5E0] transition-colors duration-300 hover:bg-[#FAFAF7]"
-              data-testid={`module-${m.num}`}
-            >
-              <div className="lg:col-span-2">
-                <span
-                  className="text-[13px] font-mono tracking-widest text-[#6B6B6B]"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                >
-                  / {m.num}
-                </span>
-              </div>
-              <div className="lg:col-span-5">
-                <h3
-                  className="text-[22px] md:text-[26px] lg:text-[30px] leading-[1.1] tracking-[-0.015em] text-[#0A0A0A] group-hover:text-[#003262] transition-colors"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
-                >
-                  {m.title}
-                </h3>
-              </div>
-              <div className="lg:col-span-4">
-                <p
-                  className="text-[14.5px] leading-[1.65] text-[#3A3A3A] font-light"
-                  style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
-                >
-                  {m.lede}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
-                  {m.links.map((l) => (
-                    <span
-                      key={l.label}
-                      className="text-[12px] font-medium tracking-[0.14em] uppercase text-[#003262] border-b border-[#003262]/40 pb-0.5"
-                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                    >
-                      {l.label}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="lg:col-span-1 flex items-start justify-end">
-                <ArrowUpRight className="w-6 h-6 text-[#6B6B6B] group-hover:text-[#003262] group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300" />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-/* ─────────────────────────────────────────────────────────────
-   INDUSTRY FOCUS
-   ───────────────────────────────────────────────────────────── */
-const IndustryFocus = () => {
-  const industries = [
-    { name: "Automotive", note: "ISO 26262, ISO/SAE 21434 aligned. Safe firmware & bootchain." },
-    { name: "Industrial", note: "IEC 62443 certifiable. Deterministic RTOS." },
-    { name: "IoT", note: "PSA L3, ETSI EN 303 645. PQC-ready root of trust." },
-    { name: "Consumer Electronics", note: "Low-power RISC-V + Rust for connected devices." },
-    { name: "Defence & Aerospace", note: "Sovereign silicon path. Vendor-neutral certification." },
-    { name: "Data Center & Edge AI", note: "Virtualized RISC-V for Physical AI workloads." },
-  ];
-  return (
-    <section className="tv-section border-b border-[#E7E5E0] bg-[#FAFAF7]" data-testid="industry-focus">
-      <div className="tv-container">
-        <div className="grid lg:grid-cols-12 gap-12 mb-16">
           <div className="lg:col-span-5">
-            <span className="tv-eyebrow">Where TRUSTED-V ships</span>
-            <h2
-              className="tv-display mt-5 text-[24px] md:text-[30px] lg:text-[36px] text-[#0A0A0A]"
-              style={{ letterSpacing: "-0.025em", lineHeight: "1.05" }}
-            >
-              Built for<br />mission-critical.
-            </h2>
-          </div>
-          <div className="lg:col-span-6 lg:col-start-7 flex items-end">
-            <p
-              className="text-[15px] md:text-[16px] text-[#3A3A3A] font-light leading-[1.65]"
-              style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
-            >
-              From safety-critical automotive ECUs to sovereign defence silicon,
-              TRUSTED-V is architected for systems that cannot fail — and cannot
-              be untrusted.
-            </p>
+            <SiliconVisual />
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E7E5E0]">
-          {industries.map((ind) => (
-            <div key={ind.name} className="bg-[#FAFAF7] p-8 md:p-10 min-h-[220px] flex flex-col justify-between">
-              <div>
-                <div
-                  className="text-[11px] font-mono tracking-widest text-[#6B6B6B] mb-4"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                >
-                  Vertical
-                </div>
-                <h3
-                  className="text-[20px] md:text-[22px] tracking-[-0.015em] text-[#0A0A0A]"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
-                >
-                  {ind.name}
-                </h3>
-              </div>
-              <p
-                className="mt-4 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light"
-                style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
-              >
-                {ind.note}
-              </p>
+        {/* Proof strip — factual capability descriptors, not fabricated numbers */}
+        <div className="mt-14 md:mt-20 border-t border-[#E5E4DF] grid grid-cols-2 md:grid-cols-4">
+          {proof.map((p, i) => (
+            <div key={p.k} className={`py-6 pr-6 ${i > 0 ? "md:border-l md:border-[#E5E4DF] md:pl-6" : ""}`}>
+              <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#5A6472]">{p.k}</div>
+              <div className="mt-2 text-[14px] md:text-[15px] font-medium text-[#0B0F14]">{p.v}</div>
             </div>
           ))}
         </div>
@@ -324,106 +82,128 @@ const IndustryFocus = () => {
   );
 };
 
-/* ─────────────────────────────────────────────────────────────
-   STANDARDS
-   ───────────────────────────────────────────────────────────── */
-const Standards = () => {
-  const rows = [
-    ["CC EAL4+", "Common Criteria evaluation"],
-    ["FIPS 140-3", "Cryptographic module validation"],
-    ["PSA Level 3", "Arm Platform Security Architecture"],
-    ["ISO 26262", "Automotive functional safety"],
-    ["IEC 62443", "Industrial cybersecurity"],
-    ["SLSA L3", "Supply-chain integrity"],
-    ["ISO/SAE 21434", "Road vehicle cybersecurity"],
-    ["ETSI EN 303 645", "Consumer IoT security"],
-  ];
-  return (
-    <section className="tv-section border-b border-[#E7E5E0]" data-testid="standards-section">
-      <div className="tv-container">
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-4 lg:sticky lg:top-28">
-            <span className="tv-eyebrow">Standards & compliance</span>
-            <h2
-              className="tv-display mt-5 text-[28px] md:text-[36px] lg:text-[40px] text-[#0A0A0A]"
-              style={{ letterSpacing: "-0.025em", lineHeight: "1.05" }}
-            >
-              Certifiable by design.
-            </h2>
-            <p
-              className="mt-5 text-[14.5px] leading-[1.7] text-[#3A3A3A] font-light"
-              style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
-            >
-              Every module is architected against the standards that matter in
-              automotive, industrial, IoT, defence and medical. Certification
-              targets we build toward — not brag about.
-            </p>
-          </div>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <div className="border-t border-[#0A0A0A]">
-              {rows.map(([code, desc], i) => (
-                <div
-                  key={code}
-                  className="grid grid-cols-12 gap-4 py-4 md:py-5 border-b border-[#E7E5E0] items-baseline"
-                >
-                  <span
-                    className="col-span-1 text-[12px] text-[#6B6B6B]"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span
-                    className="col-span-5 text-[16px] md:text-[18px] text-[#0A0A0A]"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500, letterSpacing: "-0.01em" }}
-                  >
-                    {code}
-                  </span>
-                  <span
-                    className="col-span-6 text-[13.5px] text-[#4B4B4B] font-light"
-                    style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
-                  >
-                    {desc}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+/** SiliconVisual — a minimalist SoC-inspired SVG (no AI slop) */
+const SiliconVisual = () => (
+  <div className="relative aspect-[5/4] rounded-md border border-[#E5E4DF] bg-[#F7F7F5] overflow-hidden" data-testid="hero-visual">
+    <div className="absolute inset-0 tv-grid-bg opacity-70" />
+    <svg viewBox="0 0 500 400" className="absolute inset-0 w-full h-full" aria-hidden="true">
+      {/* Die outline */}
+      <rect x="80" y="60" width="340" height="280" rx="8" fill="#FFFFFF" stroke="#003262" strokeWidth="1.5" />
+      {/* Pins top */}
+      {Array.from({ length: 14 }).map((_, i) => (
+        <rect key={`t${i}`} x={95 + i * 22} y="45" width="10" height="15" fill="#003262" opacity="0.35" />
+      ))}
+      {/* Pins bottom */}
+      {Array.from({ length: 14 }).map((_, i) => (
+        <rect key={`b${i}`} x={95 + i * 22} y="340" width="10" height="15" fill="#003262" opacity="0.35" />
+      ))}
+      {/* Pins left */}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <rect key={`l${i}`} x="65" y={80 + i * 26} width="15" height="10" fill="#003262" opacity="0.35" />
+      ))}
+      {/* Pins right */}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <rect key={`r${i}`} x="420" y={80 + i * 26} width="15" height="10" fill="#003262" opacity="0.35" />
+      ))}
+      {/* Core blocks */}
+      <rect x="110" y="90" width="130" height="110" rx="4" fill="#E6F7FC" stroke="#003262" />
+      <text x="175" y="150" textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="12" fill="#003262" fontWeight="600">RISC-V CORE</text>
+      <text x="175" y="168" textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="10" fill="#5A6472">RV64GC</text>
+
+      <rect x="260" y="90" width="130" height="110" rx="4" fill="#FFFFFF" stroke="#003262" />
+      <text x="325" y="150" textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="12" fill="#003262" fontWeight="600">VECTOR</text>
+      <text x="325" y="168" textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="10" fill="#5A6472">RVV 1.0</text>
+
+      <rect x="110" y="220" width="80" height="90" rx="4" fill="#FFFFFF" stroke="#003262" />
+      <text x="150" y="270" textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="10" fill="#003262" fontWeight="600">RoT</text>
+
+      <rect x="205" y="220" width="80" height="90" rx="4" fill="#FFFFFF" stroke="#003262" />
+      <text x="245" y="270" textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="10" fill="#003262" fontWeight="600">HYPER</text>
+
+      <rect x="300" y="220" width="90" height="90" rx="4" fill="#FDF6E0" stroke="#B45309" />
+      <text x="345" y="265" textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="10" fill="#B45309" fontWeight="600">SECURE</text>
+      <text x="345" y="280" textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="10" fill="#B45309" fontWeight="600">SUBSYSTEM</text>
+
+      {/* Data-flow trace lines */}
+      <path d="M 240 145 L 260 145" stroke="#003262" strokeWidth="1.2" fill="none" />
+      <path d="M 190 265 L 205 265" stroke="#003262" strokeWidth="1.2" fill="none" />
+      <path d="M 285 265 L 300 265" stroke="#003262" strokeWidth="1.2" fill="none" />
+
+      {/* Coordinate label */}
+      <text x="90" y="76" fontFamily="IBM Plex Mono" fontSize="9" fill="#5A6472">0x0000</text>
+      <text x="380" y="76" fontFamily="IBM Plex Mono" fontSize="9" fill="#5A6472" textAnchor="end">TRUSTED-V/1.0</text>
+    </svg>
+    <div className="absolute bottom-3 left-4 font-mono text-[10px] tracking-widest uppercase text-[#5A6472]">
+      Reference SoC · illustrative
+    </div>
+  </div>
+);
 
 /* ─────────────────────────────────────────────────────────────
-   BOSCH STORY — dark section (story only, no stat claims)
+   PLATFORM INTRO
    ───────────────────────────────────────────────────────────── */
-const BoschStory = () => {
+const PlatformIntro = () => (
+  <section className="tv-section-tight border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="platform-intro">
+    <div className="tv-container">
+      <div className="grid lg:grid-cols-12 gap-10">
+        <div className="lg:col-span-3"><Eyebrow>What TRUSTED-V provides</Eyebrow></div>
+        <div className="lg:col-span-9">
+          <p className="text-[22px] md:text-[28px] leading-[1.3] font-normal text-[#0B0F14]" style={{ letterSpacing: "-0.01em" }}>
+            An open, modular platform for mission-critical RISC-V systems —
+            <span className="text-[#5A6472]"> spanning IP integration, virtualization,
+            secure boot, cryptography, real-time software and developer tooling. </span>
+            Engineered by Bosch. Built in India. Shipped in the open.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+/* ─────────────────────────────────────────────────────────────
+   FULL PLATFORM ARCHITECTURE — the centerpiece
+   ───────────────────────────────────────────────────────────── */
+const PlatformArchitecture = () => {
+  const layers = [
+    { label: "Applications", sub: "Automotive · Industrial · IoT · Robotics", badge: "L08" },
+    { label: "SDK & Runtime", sub: "Jarvyn IDE, WebIDE, cargo, LLVM, HAL/PAC", badge: "L07" },
+    { label: "Virtualization", sub: "RISC-V hypervisor & virtual platforms", badge: "L06" },
+    { label: "OS & RTOS", sub: "Zephyr · FreeRTOS · Embassy · TRUSTED-V RTOS" },
+    { label: "Secure Microkernel", sub: "Rust-native, memory-safe, deterministic" },
+    { label: "Crypto & Root of Trust", sub: "AES, SHA-3, ECDSA, ML-KEM, ML-DSA" },
+    { label: "rBoot / rustBoot", sub: "Verified boot chain, PQC-ready" },
+    { label: "RISC-V Processor IP", sub: "SiFive · Akeana · MIPS ARC-V · C-DAC · Mindgrove" },
+    { label: "Silicon Platform", sub: "SoC, boards, evaluation kits", badge: "L00" },
+  ];
   return (
-    <section className="bg-[#00162B] text-white" data-testid="bosch-story">
-      <div className="tv-container tv-section">
+    <section className="tv-section border-t border-[#E5E4DF]" data-testid="platform-architecture">
+      <div className="tv-container">
+        <SectionHeader
+          eyebrow="Platform architecture"
+          title={<>From <span className="text-[#003262]">silicon</span> to <span className="text-[#003262]">applications</span>, in one stack.</>}
+          lede="Every layer is designed to interoperate. Ship a reference SoC. Boot a certified firmware chain. Run a Rust-native application. All within TRUSTED-V."
+        />
         <div className="grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-7">
-            <span className="tv-eyebrow" style={{ color: "#FDB515" }}>
-              <span className="text-[#FDB515]">Powered by Bosch</span>
-            </span>
-            <h2
-              className="tv-display mt-5 text-[22px] md:text-[28px] lg:text-[34px] leading-[1.02] text-white"
-              style={{ letterSpacing: "-0.025em" }}
-            >
-              Made in India.<br />Engineered by Bosch<br />to the world.
-            </h2>
+          <div className="lg:col-span-8">
+            <ArchitectureDiagram layers={layers} />
           </div>
-          <div className="lg:col-span-5 lg:col-start-8 flex items-end">
-            <p
-              className="text-[15px] md:text-[16px] leading-[1.7] text-white/70 font-light"
-              style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
+          <div className="lg:col-span-4 lg:pt-2">
+            <TechnicalMetric rows={[
+              ["ISA", "RV32 · RV64 · Vector (RVV)"],
+              ["Language", "Rust — no_std, embedded HAL"],
+              ["Boot chain", "rBoot → rustBoot → App"],
+              ["Attestation", "Silicon RoT + firmware"],
+              ["Virtualization", "Type-1 hypervisor"],
+              ["OS Support", "RTOS + Linux (via CVA6)"],
+              ["Crypto", "Classical + Post-Quantum"],
+            ]} />
+            <Link
+              to="/product-suite"
+              className="tv-arrow-link mt-6"
+              data-testid="architecture-explore"
             >
-              TRUSTED-V is a Bosch Global Software Technologies (BGSW)
-              initiative — built with the discipline of automotive-grade
-              engineering and the velocity of India&apos;s semiconductor
-              mission. A neutral, open, production-hardened stack for the
-              RISC-V decade.
-            </p>
+              Explore the product suite
+            </Link>
           </div>
         </div>
       </div>
@@ -432,109 +212,221 @@ const BoschStory = () => {
 };
 
 /* ─────────────────────────────────────────────────────────────
-   ROADMAP — MIPS-style horizontal stages
+   CORE TECHNOLOGIES
    ───────────────────────────────────────────────────────────── */
-const Roadmap = () => {
-  const phases = [
-    { period: "2025 – 2026", title: "Foundation", state: "Active", desc: "Jarvyn IDE, WebIDE, Rust toolchain, rBoot, rustBoot, RTOS and Crypto Stack GA. First TRUSTED-V Verified silicon." },
-    { period: "2026 – 2027", title: "Ecosystem Growth", state: "Committed", desc: "Virtualization suite, hypervisor, SiFive/Akeana/MIPS ARC-V co-verified stacks, expanded certification labs." },
-    { period: "2027 – 2029", title: "Industry Adoption", state: "Planned", desc: "TRUSTED-V Consortium, sovereign silicon partnerships, automotive Tier-1 rollouts, ecosystem SDK marketplace." },
+const CoreTechnologies = () => {
+  const items = [
+    { title: "RISC-V native", desc: "First-class support for RV32, RV64 and RVV. Integration with SiFive, Akeana, MIPS ARC-V and Indian silicon programmes.", to: "/product-suite" },
+    { title: "Security by construction", desc: "Rust memory safety, verified boot with rBoot/rustBoot, a cryptographic library covering classical and post-quantum.", to: "/product/secure-boot" },
+    { title: "Virtualization", desc: "A RISC-V hypervisor and virtual platforms for mixed-criticality systems and pre-silicon firmware bring-up.", to: "/product-suite#virtualization" },
+    { title: "Real-time software", desc: "Deterministic scheduling, RTOS integration and Rust async runtimes. Zephyr, FreeRTOS, Embassy and TRUSTED-V RTOS.", to: "/product/rtos-benchmark" },
+    { title: "Cryptography", desc: "AES, SHA-3, ECDSA, EdDSA, ML-KEM, ML-DSA — mapped to NIST FIPS and international standards.", to: "/product/crypto-stack" },
+    { title: "Rust developer tooling", desc: "Jarvyn IDE and WebIDE, cargo-based cross-compilation, signed toolchain artifacts and SVD register views.", to: "/developer-portal" },
   ];
   return (
-    <section className="tv-section border-b border-[#E7E5E0]" data-testid="roadmap-section">
+    <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="core-technologies">
       <div className="tv-container">
-        <div className="mb-14 max-w-3xl">
-          <span className="tv-eyebrow">Roadmap</span>
-          <h2
-            className="tv-display mt-5 text-[24px] md:text-[30px] lg:text-[36px] text-[#0A0A0A]"
-            style={{ letterSpacing: "-0.025em", lineHeight: "1.05" }}
-          >
-            The plan, in the open.
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-px bg-[#E7E5E0] border-t border-[#0A0A0A]">
-          {phases.map((p) => (
-            <div key={p.title} className="bg-white p-8 md:p-10 min-h-[280px] flex flex-col">
-              <div className="flex items-center gap-3">
-                <span
-                  className="text-[11px] font-mono tracking-[0.18em] uppercase text-[#6B6B6B]"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                >
-                  {p.period}
-                </span>
-                <span
-                  className={`inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.18em] uppercase px-2 py-1 border ${
-                    p.state === "Active"
-                      ? "text-[#0F6E56] border-[#0F6E56]/40 bg-[#0F6E56]/5"
-                      : "text-[#6B6B6B] border-[#E7E5E0]"
-                  }`}
-                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                >
-                  {p.state === "Active" && <Circle className="w-1.5 h-1.5 fill-[#0F6E56] stroke-none" />}
-                  {p.state}
-                </span>
-              </div>
-              <h3
-                className="mt-5 text-[22px] md:text-[26px] tracking-[-0.015em] text-[#0A0A0A]"
-                style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
-              >
-                {p.title}
-              </h3>
-              <p
-                className="mt-4 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light"
-                style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
-              >
-                {p.desc}
-              </p>
-            </div>
+        <SectionHeader
+          eyebrow="Core technologies"
+          title="What the platform is made of."
+          lede="The engineering primitives that power TRUSTED-V — each shipped as a standalone module, and pre-integrated when combined."
+        />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((it) => (
+            <ProductCard key={it.title} title={it.title} description={it.desc} to={it.to} />
           ))}
         </div>
       </div>
     </section>
   );
 };
+
+/* ─────────────────────────────────────────────────────────────
+   PRODUCT FAMILIES
+   ───────────────────────────────────────────────────────────── */
+const ProductFamilies = () => {
+  const items = [
+    { eyebrow: "MODULE 01", title: "Development Platform", description: "Jarvyn IDE, WebIDE, debugger, programmer, trace — a single Rust-native environment across every RISC-V target.", bullets: ["Jarvyn IDE", "WebIDE (cloud)", "Debugger & programmer"], to: "/download-ide" },
+    { eyebrow: "MODULE 02", title: "Virtualization & Simulation", description: "Virtual platforms and a RISC-V hypervisor. Evaluate SoCs before silicon or FPGA freezes.", bullets: ["Virtual platform", "RISC-V hypervisor", "Cycle-approximate simulator"], to: "/product-suite#virtualization" },
+    { eyebrow: "MODULE 03", title: "Secure Rust Software", description: "rBoot, rustBoot, RTOS, HAL/PAC and Crypto Stack. Memory-safe, PQC-ready, certification-friendly.", bullets: ["rBoot & rustBoot", "Crypto Stack", "RTOS"], to: "/product/secure-boot" },
+    { eyebrow: "MODULE 04", title: "Silicon SignOff & Trust", description: "SignOff Silicon, TRUSTED-V Verified and TVOTS — vendor-neutral certification for RISC-V SoCs.", bullets: ["SignOff Silicon", "TRUSTED-V Verified", "TVOTS"], to: "/product-suite#certification" },
+  ];
+  return (
+    <section className="tv-section border-t border-[#E5E4DF]" data-testid="product-families">
+      <div className="tv-container">
+        <SectionHeader
+          eyebrow="Product families"
+          title="Four modules. One RISC-V platform."
+          action={<Link to="/product-suite" className="tv-arrow-link">See the full suite</Link>}
+        />
+        <div className="grid md:grid-cols-2 gap-6">
+          {items.map((p) => (
+            <ProductCard key={p.title} {...p} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   ECOSYSTEM
+   ───────────────────────────────────────────────────────────── */
+const Ecosystem = () => {
+  const silicon = [
+    { name: "SiFive", note: "Performance RISC-V IP" },
+    { name: "Akeana", note: "Automotive RISC-V" },
+    { name: "MIPS ARC-V", note: "eXtensible RISC-V" },
+    { name: "C-DAC", note: "VEGA sovereign silicon" },
+    { name: "Mindgrove", note: "Secure IoT SoCs" },
+    { name: "Upbeat Tech", note: "Edge-AI SoCs" },
+  ];
+  return (
+    <section className="tv-section border-t border-white/0 bg-[#00162B] text-white" data-testid="ecosystem">
+      <div className="tv-container">
+        <div className="grid lg:grid-cols-12 gap-8 mb-10 md:mb-14">
+          <div className="lg:col-span-7">
+            <div className="mb-4">
+              <span className="tv-eyebrow" style={{ color: "#FDB515" }}>
+                <span style={{ color: "#FDB515" }}>An open RISC-V ecosystem</span>
+              </span>
+            </div>
+            <h2 className="tv-h2 text-white">Bring your IP. We bring the stack.</h2>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
+            <p className="text-[15px] leading-[1.65] text-white/70">
+              TRUSTED-V is co-verified with the leading RISC-V IP families — from performance
+              cores to Indian sovereign silicon programmes.
+            </p>
+          </div>
+        </div>
+        <PartnerGrid partners={silicon} onDark />
+        <div className="mt-10">
+          <Link to="/partners" className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-white border-b border-white/40 pb-0.5 hover:border-[#FDB515] hover:text-[#FDB515] transition-colors" data-testid="ecosystem-explore">
+            Meet the partners <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   APPLICATION MARKETS
+   ───────────────────────────────────────────────────────────── */
+const ApplicationMarkets = () => {
+  const markets = [
+    { label: "AUTOMOTIVE", headline: "Secure compute for software-defined vehicles.", capabilities: ["Deterministic processing", "Secure execution", "ISO 26262 alignment"] },
+    { label: "INDUSTRIAL", headline: "Deterministic control for factories and grids.", capabilities: ["Real-time RTOS", "IEC 62443 alignment", "Rugged deployment"] },
+    { label: "IOT & CONSUMER", headline: "Root of trust for connected devices.", capabilities: ["PSA L3-aligned", "PQC-ready", "Low-power RISC-V"] },
+    { label: "ROBOTICS", headline: "Real-time compute for autonomous systems.", capabilities: ["Rust async runtime", "Hypervisor isolation", "Vision-capable RVV"] },
+    { label: "DEFENCE & AEROSPACE", headline: "Sovereign silicon for critical missions.", capabilities: ["Vendor-neutral certification", "Attestation", "Hardware-anchored trust"] },
+    { label: "EDGE AI", headline: "Physical AI on virtualized RISC-V.", capabilities: ["Virtual platforms", "RVV vector compute", "Deterministic scheduling"] },
+  ];
+  return (
+    <section className="tv-section border-t border-[#E5E4DF]" data-testid="application-markets">
+      <div className="tv-container">
+        <SectionHeader
+          eyebrow="Application markets"
+          title="Where TRUSTED-V ships."
+          lede="From safety-critical automotive ECUs to sovereign defence silicon, TRUSTED-V is architected for systems that cannot fail — and cannot be untrusted."
+        />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {markets.map((m) => (
+            <MarketCard key={m.label} {...m} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   DEVELOPER EXPERIENCE
+   ───────────────────────────────────────────────────────────── */
+const DeveloperExperience = () => (
+  <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="developer-experience">
+    <div className="tv-container">
+      <div className="grid lg:grid-cols-12 gap-10 items-center">
+        <div className="lg:col-span-6">
+          <div className="mb-4"><Eyebrow>Developer experience</Eyebrow></div>
+          <h2 className="tv-h2">Rust-native. RISC-V-first. Cargo everywhere.</h2>
+          <p className="tv-lede mt-6">
+            The Jarvyn IDE and cloud WebIDE give firmware and silicon engineers one
+            environment — with an SVD-driven register view, signed toolchain artifacts,
+            and pre-integrated Rust HAL/PAC crates for every certified board.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/download-ide" className="tv-btn tv-btn-primary" data-testid="dev-cta-ide">
+              Download Jarvyn <ArrowUpRight className="w-4 h-4" />
+            </Link>
+            <Link to="/webide" className="tv-btn tv-btn-outline" data-testid="dev-cta-webide">
+              Try WebIDE <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+        <div className="lg:col-span-6">
+          <CodeWindow />
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const CodeWindow = () => (
+  <div className="border border-[#E5E4DF] rounded-md bg-[#0B0F14] text-white overflow-hidden">
+    <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10">
+      <div className="flex items-center gap-1.5">
+        <span className="w-2 h-2 rounded-full bg-white/25" />
+        <span className="w-2 h-2 rounded-full bg-white/25" />
+        <span className="w-2 h-2 rounded-full bg-white/25" />
+      </div>
+      <span className="text-[11px] font-mono text-white/60">main.rs</span>
+      <span className="text-[10px] font-mono text-[#FDB515] tracking-widest">RV64GC</span>
+    </div>
+    <pre className="p-5 text-[12.5px] leading-[1.75] font-mono">
+      <code>
+        <span className="text-white/40">// TRUSTED-V — secure boot + attestation</span>{"\n"}
+        <span className="text-[#00B4E0]">use</span> <span className="text-white">trusted_v::rboot::verify_chain;</span>{"\n"}
+        <span className="text-[#00B4E0]">use</span> <span className="text-white">trusted_v::crypto::attest;</span>{"\n"}
+        <span className="text-[#00B4E0]">use</span> <span className="text-white">trusted_v::rtos::launch;</span>{"\n\n"}
+        <span className="text-[#FDB515]">#[no_std]</span>{"\n"}
+        <span className="text-[#FDB515]">#[no_main]</span>{"\n"}
+        <span className="text-[#00B4E0]">fn</span> <span className="text-white">main</span>() {"{"}{"\n"}
+        {"    "}<span className="text-white/60">let</span> chain = verify_chain(<span className="text-[#0F6E56]">&BOOT_KEY</span>);{"\n"}
+        {"    "}<span className="text-white/60">let</span> quote = attest(chain);{"\n"}
+        {"    "}launch(<span className="text-[#0F6E56]">&quot;rt_secure&quot;</span>, quote);{"\n"}
+        {"}"}
+      </code>
+    </pre>
+    <div className="flex items-center justify-between px-4 py-2 border-t border-white/10 font-mono text-[11px]">
+      <span className="text-white/50">$ cargo build --release</span>
+      <span className="text-[#0F6E56]">✓ signed · verified</span>
+    </div>
+  </div>
+);
 
 /* ─────────────────────────────────────────────────────────────
    FINAL CTA
    ───────────────────────────────────────────────────────────── */
-const CTA = () => (
-  <section className="tv-section" data-testid="final-cta">
+const FinalCTA = () => (
+  <section className="tv-section-tight border-t border-[#E5E4DF]" data-testid="final-cta">
     <div className="tv-container">
-      <div className="grid lg:grid-cols-12 gap-10 items-end">
+      <div className="grid lg:grid-cols-12 gap-8 items-end">
         <div className="lg:col-span-8">
-          <h2
-            className="tv-display text-[26px] md:text-[36px] lg:text-[44px] text-[#0A0A0A] leading-[1]"
-            style={{ letterSpacing: "-0.03em" }}
-          >
-            Start on <span className="text-[#003262]">RISC-V.</span><br />
-            Ship on <span className="text-[#003262]">TRUSTED-V.</span>
+          <div className="mb-4"><Eyebrow>Start building</Eyebrow></div>
+          <h2 className="tv-h2">
+            Start on <span className="text-[#003262]">RISC-V</span>.
+            Ship on <span className="text-[#003262]">TRUSTED-V</span>.
           </h2>
         </div>
-        <div className="lg:col-span-4 flex flex-col gap-3 items-start">
-          <Link to="/contact" className="tv-btn tv-btn-primary" data-testid="final-cta-primary">
-            Talk to an engineer <ArrowUpRight className="w-4 h-4" />
-          </Link>
-          <Link to="/product-suite" className="tv-btn tv-btn-outline" data-testid="final-cta-secondary">
-            Read the docs <ArrowRight className="w-4 h-4" />
-          </Link>
+        <div className="lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
+          <PrimaryCTA to="/contact" data-testid="final-cta-primary">Talk to an engineer</PrimaryCTA>
+          <SecondaryCTA to="/product-suite" data-testid="final-cta-secondary">Read the docs</SecondaryCTA>
         </div>
       </div>
     </div>
   </section>
-);
-
-/* ─────────────────────────────────────────────────────────────
-   India flag
-   ───────────────────────────────────────────────────────────── */
-const IndiaFlag = () => (
-  <svg viewBox="0 0 30 20" width="20" height="14" className="rounded-[1.5px] shadow-[0_0_0_1px_rgba(0,0,0,0.08)]">
-    <rect width="30" height="6.67" y="0" fill="#FF9933" />
-    <rect width="30" height="6.66" y="6.67" fill="#FFFFFF" />
-    <rect width="30" height="6.67" y="13.33" fill="#138808" />
-    <circle cx="15" cy="10" r="1.9" fill="none" stroke="#000080" strokeWidth="0.35" />
-    <circle cx="15" cy="10" r="0.35" fill="#000080" />
-  </svg>
 );
 
 export default Landing;

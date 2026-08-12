@@ -29,6 +29,32 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 13 — Enterprise Semiconductor Design System (Feb 12, 2026)
+Design authority: user-supplied Design Specification PDF. Executed as an intelligent adaptation (not a MIPS clone, not a blind spec copy).
+
+**Design system rebuilt from the ground up:**
+- Type stack: **IBM Plex Sans** (body/UI), **IBM Plex Mono** (technical/code), **Sora** (selective display)
+- Type utilities: `.tv-h1` (H1 40-72px clamp), `.tv-h2` (30-48), `.tv-h3` (22-30), `.tv-h4` (20), `.tv-lede` (16-19)
+- Spacing scale + section rhythm (80/96/112 default, 96/120/140 lg, 56/72/80 tight)
+- Radii tokens 6/10/16, button height 48/54, 22-28 padding
+- Announcement bar (36px), Header (76px) w/ **Products mega-menu** (multi-column + featured item)
+- Full colour palette preserved (Berkeley Navy #003262, Cyan, Gold, SignOff Green)
+
+**Reusable component library (`/app/frontend/src/components/ui-kit.jsx`):**
+- Eyebrow, SectionHeader, PrimaryCTA, SecondaryCTA
+- **ArchitectureDiagram** — the platform stack, first-class visual with layer labels (L01…L09)
+- **TechnicalMetric** — spec-sheet style key/value list
+- ProductCard, MarketCard, PartnerGrid, ResourceCard, CTASection
+
+**Homepage restructured as a 9-section engineering story** (skipped News/Videos/Whitepapers per user "only add what we have real content for"):
+Announcement → Header → Hero (with **SoC SVG visual**) → Platform Intro → **Full Platform Architecture** (9-layer stack + spec table) → Core Technologies → Product Families → Ecosystem (dark, partner grid) → Application Markets → Developer Experience (with Rust code window) → Final CTA → Footer
+
+**All other pages restyled to the same system:**
+About, ProductSuite, ContactPage, Marketplace, Partners, DeveloperPortal, IDEDownloads, WebIDEPage, SecureBoot, CryptoStack, RTOSBenchmark, Login — all use `tv-h1/h2/h3/lede` classes and share the new nav/footer/eyebrow language.
+
+**Verified content — nothing fabricated:**
+Only real partners, real standards names, real modules. No fake stats, benchmarks, timelines or countries.
+
 ### Phase 12b — Content Cleanup & Font Rightsizing (Feb 12, 2026)
 - Reduced font scale platform-wide: Landing hero 140px → 56px; section headings 72px → 36-44px; body 21px → 15-17px
 - Tightened Navigation: 72px → 64px height, 13.5px → 13px font, tighter spacing

@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ============================================================
-   TRUSTED-V — Editorial Minimalist Theme (MIPS-inspired)
-   Retains brand palette: Berkeley Blue, Cyan, Gold, SignOff Green
+   TRUSTED-V — Enterprise Semiconductor Theme
+   Design authority: attached spec.
    ============================================================ */
 
 :root {
@@ -15,36 +15,60 @@
     --tv-navy-deep: #001F3F;
     --tv-navy-darkest: #00162B;
     --tv-cyan: #00B4E0;
+    --tv-cyan-soft: #E6F7FC;
     --tv-gold: #FDB515;
     --tv-green: #0F6E56;
     --tv-rust: #B7410E;
 
     /* Neutrals */
     --tv-bg: #FFFFFF;
-    --tv-surface: #FAFAF7;
-    --tv-surface-2: #F3F3EE;
-    --tv-border: #E7E5E0;
-    --tv-border-strong: #D4D2CC;
-    --tv-ink: #0A0A0A;
-    --tv-ink-2: #1F1F1F;
-    --tv-muted: #6B6B6B;
-    --tv-muted-2: #9A9A9A;
+    --tv-surface: #F7F7F5;
+    --tv-surface-2: #EFEEE9;
+    --tv-border: #E5E4DF;
+    --tv-border-strong: #CFCEC8;
+    --tv-ink: #0B0F14;
+    --tv-ink-2: #1A1F25;
+    --tv-muted: #5A6472;
+    --tv-muted-2: #8A94A0;
+
+    /* Spacing scale */
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-6: 24px;
+    --sp-8: 32px;
+    --sp-12: 48px;
+    --sp-16: 64px;
+    --sp-20: 80px;
+    --sp-24: 96px;
+    --sp-30: 120px;
+    --sp-40: 160px;
+
+    /* Radii */
+    --r-sm: 6px;
+    --r-md: 10px;
+    --r-lg: 16px;
+
+    /* Grid */
+    --grid-max: 1440px;
+    --grid-gutter: 24px;
 }
 
 @layer base {
     :root {
         --background: 0 0% 100%;
-        --foreground: 0 0% 4%;
+        --foreground: 214 34% 6%;
         --card: 0 0% 100%;
-        --card-foreground: 0 0% 4%;
+        --card-foreground: 214 34% 6%;
         --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 4%;
+        --popover-foreground: 214 34% 6%;
         --primary: 211 100% 19%;
         --primary-foreground: 0 0% 100%;
         --secondary: 45 6% 95%;
-        --secondary-foreground: 0 0% 12%;
+        --secondary-foreground: 214 20% 12%;
         --muted: 45 6% 95%;
-        --muted-foreground: 0 0% 42%;
+        --muted-foreground: 214 15% 40%;
         --accent: 197 100% 44%;
         --accent-foreground: 0 0% 100%;
         --destructive: 0 72% 51%;
@@ -54,22 +78,21 @@
         --ring: 211 100% 19%;
         --radius: 0.375rem;
     }
-
     .dark {
-        --background: 210 100% 4%;
+        --background: 210 60% 4%;
         --foreground: 0 0% 96%;
         --card: 210 60% 6%;
         --card-foreground: 0 0% 96%;
         --popover: 210 60% 6%;
         --popover-foreground: 0 0% 96%;
         --primary: 197 100% 44%;
-        --primary-foreground: 0 0% 4%;
+        --primary-foreground: 214 34% 6%;
         --secondary: 210 40% 12%;
         --secondary-foreground: 0 0% 96%;
         --muted: 210 40% 12%;
         --muted-foreground: 0 0% 65%;
         --accent: 197 100% 44%;
-        --accent-foreground: 0 0% 4%;
+        --accent-foreground: 214 34% 6%;
         --destructive: 0 62% 45%;
         --destructive-foreground: 0 0% 100%;
         --border: 210 40% 15%;
@@ -79,204 +102,278 @@
 }
 
 @layer base {
-    * {
-        @apply border-border;
-    }
+    * { @apply border-border; }
     html {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
     }
     body {
         margin: 0;
-        font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-        font-weight: 300;
+        font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 1.55;
         color: var(--tv-ink);
         background: var(--tv-bg);
-        letter-spacing: -0.005em;
     }
     h1, h2, h3, h4, h5, h6 {
-        font-family: 'Space Grotesk', 'Outfit', system-ui, sans-serif;
-        letter-spacing: -0.02em;
+        font-family: 'IBM Plex Sans', system-ui, sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.1;
+        color: var(--tv-ink);
     }
     code, pre, .font-mono {
-        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-family: 'IBM Plex Mono', ui-monospace, monospace;
     }
-    ::selection {
-        background: var(--tv-navy);
-        color: #fff;
-    }
+    ::selection { background: var(--tv-navy); color: #fff; }
 }
 
 /* ============================================================
-   Utility classes
+   Layout primitives
    ============================================================ */
 
 .tv-container {
     width: 100%;
+    max-width: var(--grid-max);
     margin-inline: auto;
-    padding-inline: 1.25rem;
-    max-width: 1440px;
+    padding-inline: 24px;
 }
-@media (min-width: 768px) { .tv-container { padding-inline: 2rem; } }
-@media (min-width: 1280px) { .tv-container { padding-inline: 3rem; } }
+@media (min-width: 768px) { .tv-container { padding-inline: 40px; } }
+@media (min-width: 1280px) { .tv-container { padding-inline: 56px; } }
 
-/* Overline / eyebrow */
+/* Section rhythm — per spec */
+.tv-section     { padding-block: 80px; }
+.tv-section-lg  { padding-block: 96px; }
+.tv-section-tight { padding-block: 56px; }
+@media (min-width: 768px) {
+    .tv-section     { padding-block: 96px; }
+    .tv-section-lg  { padding-block: 120px; }
+    .tv-section-tight { padding-block: 72px; }
+}
+@media (min-width: 1280px) {
+    .tv-section     { padding-block: 112px; }
+    .tv-section-lg  { padding-block: 140px; }
+    .tv-section-tight { padding-block: 80px; }
+}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+
+.tv-h1 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(40px, 6.2vw, 72px);
+    line-height: 1.03;
+    letter-spacing: -0.02em;
+    color: inherit;
+}
+.tv-h2 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: clamp(30px, 3.6vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    color: inherit;
+}
+.tv-h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: inherit;
+}
+.tv-h4 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    color: inherit;
+}
+.tv-lede {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    font-size: clamp(16px, 1.35vw, 19px);
+    line-height: 1.55;
+    color: var(--tv-muted);
+    max-width: 700px;
+}
+.tv-body { font-size: 16px; line-height: 1.6; color: var(--tv-ink-2); }
+.tv-small { font-size: 14px; line-height: 1.5; color: var(--tv-muted); }
+.tv-caption { font-size: 12px; line-height: 1.4; color: var(--tv-muted); }
+
+/* Eyebrow — technical, semiconductor voice */
 .tv-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--tv-navy);
 }
 .tv-eyebrow::before {
     content: '';
     display: inline-block;
-    width: 28px;
+    width: 22px;
     height: 1px;
     background: var(--tv-navy);
-    opacity: 0.55;
+}
+.tv-eyebrow-alt {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tv-muted);
 }
 
-/* Editorial display */
-.tv-display {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 400;
-    letter-spacing: -0.035em;
-    line-height: 0.98;
-}
-
-/* Buttons — MIPS-inspired, sharp minimal edges */
+/* ============================================================
+   Buttons (48–54px height, 22–30px H padding per spec)
+   ============================================================ */
 .tv-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.01em;
-    border-radius: 2px;
-    transition: background-color 200ms ease, color 200ms ease, transform 200ms ease, border-color 200ms ease;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 24px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, transform 150ms ease;
     cursor: pointer;
     line-height: 1;
     white-space: nowrap;
 }
-.tv-btn-primary {
-    background: var(--tv-navy);
-    color: #fff;
-    border: 1px solid var(--tv-navy);
-}
+.tv-btn-lg { height: 54px; padding: 0 28px; font-size: 16px; }
+.tv-btn-sm { height: 40px; padding: 0 16px; font-size: 14px; border-radius: 6px; }
+
+.tv-btn-primary { background: var(--tv-navy); color: #fff; border-color: var(--tv-navy); }
 .tv-btn-primary:hover { background: var(--tv-navy-deep); border-color: var(--tv-navy-deep); }
-.tv-btn-primary:active { transform: scale(0.98); }
+.tv-btn-primary:active { transform: scale(0.985); }
 
-.tv-btn-outline {
-    background: transparent;
-    color: var(--tv-ink);
-    border: 1px solid var(--tv-ink);
-}
-.tv-btn-outline:hover { background: var(--tv-ink); color: #fff; }
+.tv-btn-outline { background: transparent; color: var(--tv-ink); border-color: var(--tv-border-strong); }
+.tv-btn-outline:hover { border-color: var(--tv-navy); color: var(--tv-navy); background: var(--tv-cyan-soft); }
 
-.tv-btn-ghost {
-    background: transparent;
-    color: var(--tv-ink);
-    border: 1px solid transparent;
-    padding-inline: 0.25rem;
-}
-.tv-btn-ghost:hover { color: var(--tv-navy); }
+.tv-btn-ghost { background: transparent; color: var(--tv-navy); border-color: transparent; padding: 0 4px; }
+.tv-btn-ghost:hover { color: var(--tv-navy-deep); }
 
-.tv-btn-gold {
-    background: var(--tv-gold);
-    color: var(--tv-ink);
-    border: 1px solid var(--tv-gold);
-}
-.tv-btn-gold:hover { background: #E4A20E; border-color: #E4A20E; }
+.tv-btn-onDark { background: #fff; color: var(--tv-navy); border-color: #fff; }
+.tv-btn-onDark:hover { background: var(--tv-gold); border-color: var(--tv-gold); color: var(--tv-ink); }
 
-/* Link with subtle underline animation */
-.tv-link {
-    position: relative;
+.tv-btn-outline-onDark { background: transparent; color: #fff; border-color: rgba(255,255,255,0.35); }
+.tv-btn-outline-onDark:hover { border-color: #fff; }
+
+/* Tertiary text link with arrow */
+.tv-arrow-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    color: var(--tv-ink);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 500;
+    gap: 6px;
+    color: var(--tv-navy);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
     font-size: 14px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid var(--tv-ink);
-    transition: color 200ms ease, border-color 200ms ease, gap 200ms ease;
+    letter-spacing: 0.01em;
+    transition: gap 200ms ease, color 200ms ease;
 }
-.tv-link:hover { color: var(--tv-navy); border-color: var(--tv-navy); gap: 0.65rem; }
+.tv-arrow-link:hover { color: var(--tv-navy-deep); gap: 10px; }
+.tv-arrow-link::after {
+    content: '→';
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+}
 
-/* Section rhythm */
-.tv-section { padding-block: 4.5rem; }
-@media (min-width: 768px) { .tv-section { padding-block: 6rem; } }
-@media (min-width: 1280px) { .tv-section { padding-block: 7.5rem; } }
+/* ============================================================
+   Cards & surfaces
+   ============================================================ */
+.tv-card {
+    background: #fff;
+    border: 1px solid var(--tv-border);
+    border-radius: 10px;
+    padding: 32px;
+    transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+.tv-card:hover { border-color: var(--tv-navy); }
+.tv-card-lift:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -18px rgba(0,50,98,0.25); }
 
-.tv-section-tight { padding-block: 3rem; }
-@media (min-width: 768px) { .tv-section-tight { padding-block: 4.5rem; } }
+.tv-card-flat { background: var(--tv-surface); border-radius: 10px; padding: 32px; }
+.tv-surface { background: var(--tv-surface); }
+.tv-surface-2 { background: var(--tv-surface-2); }
 
-/* Border */
+/* Subtle grid backdrop (semiconductor motif) */
+.tv-grid-bg {
+    background-image:
+        linear-gradient(to right, rgba(11,15,20,0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(11,15,20,0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+.tv-grid-bg-dark {
+    background-image:
+        linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+/* Divider */
 .tv-hr { border-top: 1px solid var(--tv-border); }
 
-/* Grid lines helper (subtle vertical rule pattern) */
-.tv-grid-lines {
-    background-image:
-        linear-gradient(to right, rgba(10,10,10,0.04) 1px, transparent 1px);
-    background-size: calc(100% / 12) 100%;
-}
-
-/* Motion */
+/* ============================================================
+   Motion — subtle only
+   ============================================================ */
 @keyframes tv-fade-up {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-.tv-fade-up { animation: tv-fade-up 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.tv-fade-up { animation: tv-fade-up 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 
 @keyframes tv-marquee {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
 }
-.tv-marquee { animation: tv-marquee 40s linear infinite; }
-.tv-marquee-slow { animation: tv-marquee 60s linear infinite; }
+.tv-marquee { animation: tv-marquee 42s linear infinite; }
 
 @keyframes tv-pulse-dot {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: 0.5; transform: scale(1.4); }
+    50%      { opacity: 0.55; transform: scale(1.35); }
 }
-.tv-pulse-dot { animation: tv-pulse-dot 1.8s ease-in-out infinite; }
+.tv-pulse-dot { animation: tv-pulse-dot 2s ease-in-out infinite; }
 
-/* Cards: barely-there border */
-.tv-card {
-    background: #fff;
-    border: 1px solid var(--tv-border);
-    padding: 2rem;
-    transition: border-color 200ms ease, transform 200ms ease;
-}
-.tv-card:hover { border-color: var(--tv-ink); }
-.tv-card-lift:hover { transform: translateY(-2px); }
-
-/* Focus */
-*:focus-visible {
-    outline: 2px solid var(--tv-cyan);
-    outline-offset: 3px;
+@media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-/* Scrollbar */
+/* ============================================================
+   Focus & scrollbar
+   ============================================================ */
+*:focus-visible { outline: 2px solid var(--tv-cyan); outline-offset: 3px; border-radius: 2px; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--tv-border-strong); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--tv-muted); }
 
-/* Legacy compatibility ------- */
-.section-padding { @apply py-16 md:py-20 lg:py-24; }
-.card-hover { @apply transition-all duration-300 hover:-translate-y-0.5; }
-.link-primary { @apply text-primary hover:text-primary/80 transition-colors; }
+/* ============================================================
+   Legacy compatibility (kept minimal)
+   ============================================================ */
+.section-padding { @apply py-16 md:py-20; }
+.card-hover { @apply transition-all duration-300; }
+.link-primary { color: var(--tv-navy); }
+.link-primary:hover { color: var(--tv-navy-deep); }
 
+/* Legacy badges kept for older admin views */
 .badge-rtos { @apply bg-blue-50 text-blue-800 border-blue-200; }
 .badge-bsp { @apply bg-purple-50 text-purple-800 border-purple-200; }
 .badge-sdk { @apply bg-green-50 text-green-800 border-green-200; }
@@ -285,9 +382,6 @@
 .badge-library { @apply bg-cyan-50 text-cyan-800 border-cyan-200; }
 .badge-framework { @apply bg-indigo-50 text-indigo-800 border-indigo-200; }
 
-/* Legacy container FHD support */
-@media (min-width: 1536px) { .max-w-7xl { max-width: 1400px; } }
-@media (min-width: 1920px) { .max-w-7xl { max-width: 1600px; } }
 .container-fhd { @apply w-full mx-auto px-4 sm:px-6 lg:px-8; max-width: 1600px; }
 
 @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }

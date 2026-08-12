@@ -71,7 +71,7 @@ const Marketplace = () => {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               className="w-full pl-10 pr-3 py-2.5 text-[14px] bg-transparent border border-[#E7E5E0] focus:outline-none focus:border-[#003262]"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
+              style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
               data-testid="marketplace-search"
             />
           </div>
@@ -106,8 +106,7 @@ const Marketplace = () => {
           <div className="lg:col-span-7">
             <span className="tv-eyebrow">Our hardware partners</span>
             <h2
-              className="tv-display mt-4 text-[24px] md:text-[32px] text-[#0A0A0A] leading-[1.02]"
-              style={{ letterSpacing: "-0.03em" }}
+              className="tv-h2"
             >
               Certified boards from C-DAC, Mindgrove, Upbeat Tech and more.
             </h2>
@@ -130,7 +129,7 @@ const TabBtn = ({ active, onClick, children, testid }) => (
     className={`px-4 py-2 text-[13px] font-medium tracking-[0.05em] transition-colors border-b-2 ${
       active ? "border-[#003262] text-[#003262]" : "border-transparent text-[#6B6B6B] hover:text-[#0A0A0A]"
     }`}
-    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+    style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
   >
     {children}
   </button>
@@ -139,18 +138,18 @@ const TabBtn = ({ active, onClick, children, testid }) => (
 const HardwareCard = ({ board }) => (
   <div className="bg-white p-8 min-h-[240px] flex flex-col justify-between hover:bg-[#FAFAF7] transition-colors" data-testid={`hw-${board.id || board.name}`}>
     <div>
-      <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B] mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+      <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B] mb-3" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
         {board.manufacturer}
       </div>
-      <h3 className="text-[22px] tracking-[-0.015em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+      <h3 className="text-[22px] tracking-[-0.015em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
         {board.name}
       </h3>
-      <p className="mt-3 text-[13px] leading-[1.55] text-[#4B4B4B] font-light line-clamp-3" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+      <p className="mt-3 text-[13px] leading-[1.55] text-[#4B4B4B] font-light line-clamp-3" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
         {board.description || board.peripherals}
       </p>
     </div>
     <div className="mt-6 pt-6 border-t border-[#E7E5E0] flex items-center justify-between">
-      <span className="text-[12px] font-mono text-[#003262]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+      <span className="text-[12px] font-mono text-[#003262]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
         {board.core}
       </span>
       <ArrowUpRight className="w-4 h-4 text-[#6B6B6B]" />
@@ -162,27 +161,27 @@ const IPCard = ({ ip }) => (
   <div className="bg-white p-8 min-h-[240px] flex flex-col justify-between hover:bg-[#FAFAF7] transition-colors" data-testid={`ip-${ip.name.toLowerCase().replace(/\W+/g, "-")}`}>
     <div>
       <div className="flex items-center justify-between mb-3">
-        <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
           {ip.type}
         </span>
-        <span className="text-[10px] font-mono text-[#0F6E56] border border-[#0F6E56]/30 px-1.5 py-0.5" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+        <span className="text-[10px] font-mono text-[#0F6E56] border border-[#0F6E56]/30 px-1.5 py-0.5" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
           {ip.license}
         </span>
       </div>
-      <h3 className="text-[22px] tracking-[-0.015em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+      <h3 className="text-[22px] tracking-[-0.015em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
         {ip.name}
       </h3>
-      <div className="mt-1 text-[12px] text-[#6B6B6B]" style={{ fontFamily: "'Outfit', sans-serif" }}>{ip.provider}</div>
-      <p className="mt-3 text-[13px] leading-[1.55] text-[#4B4B4B] font-light line-clamp-3" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+      <div className="mt-1 text-[12px] text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>{ip.provider}</div>
+      <p className="mt-3 text-[13px] leading-[1.55] text-[#4B4B4B] font-light line-clamp-3" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
         {ip.description}
       </p>
     </div>
     <div className="mt-6 pt-6 border-t border-[#E7E5E0] flex items-center justify-between">
-      <span className="text-[12px] font-mono text-[#003262]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+      <span className="text-[12px] font-mono text-[#003262]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
         {ip.arch}
       </span>
       {ip.github ? (
-        <a href={ip.github} target="_blank" rel="noreferrer" className="text-[12px] text-[#0A0A0A] hover:text-[#003262] flex items-center gap-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <a href={ip.github} target="_blank" rel="noreferrer" className="text-[12px] text-[#0A0A0A] hover:text-[#003262] flex items-center gap-1" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
           GitHub <ExternalLink className="w-3 h-3" />
         </a>
       ) : (
@@ -194,7 +193,7 @@ const IPCard = ({ ip }) => (
 
 const EmptyState = ({ label }) => (
   <div className="py-24 text-center">
-    <p className="text-[15px] text-[#6B6B6B]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+    <p className="text-[15px] text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
       No {label} match your search.
     </p>
   </div>

@@ -82,12 +82,11 @@ const ModulesDetail = () => {
           <div className="tv-container py-16 md:py-24 lg:py-28">
             <div className="grid lg:grid-cols-12 gap-10">
               <div className="lg:col-span-4">
-                <span className="text-[13px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="text-[13px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                   / MODULE {m.num}
                 </span>
                 <h2
-                  className="tv-display mt-6 text-[26px] md:text-[34px] lg:text-[40px] text-[#0A0A0A]"
-                  style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
+                  className="tv-h2"
                 >
                   {m.title}
                 </h2>
@@ -95,7 +94,7 @@ const ModulesDetail = () => {
               <div className="lg:col-span-4">
                 <p
                   className="text-[17px] md:text-[19px] leading-[1.6] text-[#3A3A3A] font-light"
-                  style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
+                  style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}
                 >
                   {m.desc}
                 </p>
@@ -109,7 +108,7 @@ const ModulesDetail = () => {
                         className="group flex items-center justify-between py-4 border-b border-[#E7E5E0] hover:text-[#003262] transition-colors"
                         data-testid={`module-${m.num}-${it.name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
                       >
-                        <span className="text-[16px]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                        <span className="text-[16px]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                           {it.name}
                         </span>
                         <ArrowUpRight className="w-4 h-4 text-[#6B6B6B] group-hover:text-[#003262] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
@@ -144,8 +143,7 @@ const IPIntegration = () => {
               <span className="text-[#FDB515]">RISC-V IP integration</span>
             </span>
             <h2
-              className="tv-display mt-6 text-[22px] md:text-[28px] lg:text-[34px] text-white leading-[0.98]"
-              style={{ letterSpacing: "-0.035em" }}
+              className="tv-h2"
             >
               Bring your IP.<br />We&apos;ll bring the stack.
             </h2>
@@ -153,7 +151,7 @@ const IPIntegration = () => {
           <div className="lg:col-span-5 lg:col-start-8 flex items-end">
             <p
               className="text-[17px] leading-[1.6] text-white/70 font-light"
-              style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
+              style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}
             >
               TRUSTED-V is IP-agnostic by design. Our reference stack is
               co-verified with leading RISC-V IP vendors, from performance cores
@@ -169,7 +167,7 @@ const IPIntegration = () => {
                 {p.featured && (
                   <span
                     className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#FDB515] border border-[#FDB515]/40 px-2 py-0.5"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                   >
                     Featured
                   </span>
@@ -177,13 +175,13 @@ const IPIntegration = () => {
               </div>
               <h3
                 className="text-[20px] md:text-[24px] tracking-[-0.02em] text-white"
-                style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
+                style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}
               >
                 {p.name}
               </h3>
               <p
                 className="mt-3 text-[14px] leading-[1.55] text-white/60 font-light"
-                style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
+                style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}
               >
                 {p.note}
               </p>
@@ -207,8 +205,7 @@ const SubBrands = () => {
         <div className="mb-16 max-w-3xl">
           <span className="tv-eyebrow">A growing portfolio</span>
           <h2
-            className="tv-display mt-6 text-[24px] md:text-[32px] text-[#0A0A0A]"
-            style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
+            className="tv-h2"
           >
             More than a toolchain. A trust framework.
           </h2>
@@ -216,10 +213,10 @@ const SubBrands = () => {
         <div className="grid md:grid-cols-3 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
           {brands.map((b) => (
             <div key={b.name} className="bg-white p-8 md:p-10 min-h-[240px] border-t-[3px]" style={{ borderTopColor: b.accent }}>
-              <h3 className="text-[22px] md:text-[26px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+              <h3 className="text-[22px] md:text-[26px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                 {b.name}
               </h3>
-              <p className="mt-4 text-[14.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+              <p className="mt-4 text-[14.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                 {b.desc}
               </p>
             </div>
@@ -241,13 +238,13 @@ const PricingCTA = () => (
         ].map((p) => (
           <div key={p.tier} className="bg-white p-8 md:p-10 min-h-[300px] flex flex-col justify-between">
             <div>
-              <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                 {p.tier}
               </div>
-              <div className="mt-4 text-[26px] md:text-[32px] tracking-[-0.025em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+              <div className="mt-4 text-[26px] md:text-[32px] tracking-[-0.025em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                 {p.price}
               </div>
-              <p className="mt-4 text-[14.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+              <p className="mt-4 text-[14.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                 {p.desc}
               </p>
             </div>

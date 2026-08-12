@@ -78,7 +78,7 @@ const CryptoStackPage = () => {
         }
         subtitle="A curated, Rust-native cryptographic stack — classical, PQC and side-channel-hardened primitives, mapped to NIST FIPS and international standards."
       >
-        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
           <ArrowLeft className="w-3.5 h-3.5" /> Back to products
         </Link>
       </PageHero>
@@ -91,32 +91,32 @@ const CryptoStackPage = () => {
                 <div className="flex items-baseline justify-between py-6 border-b border-[#E7E5E0]">
                   <div className="flex items-baseline gap-3">
                     <span className="w-2 h-2 rounded-full" style={{ background: c.accent }} />
-                    <h2 className="text-[22px] md:text-[28px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                    <h2 className="text-[22px] md:text-[28px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                       {c.name}
                     </h2>
                   </div>
-                  <span className="text-[11px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  <span className="text-[11px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                     {String(c.items.length).padStart(2, "0")} items
                   </span>
                 </div>
                 {c.items.map((it) => (
                   <div key={it.algo} className="grid grid-cols-12 gap-4 py-5 border-b border-[#E7E5E0] items-baseline">
-                    <div className="col-span-12 md:col-span-3 text-[16px] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                    <div className="col-span-12 md:col-span-3 text-[16px] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                       {it.algo}
                     </div>
-                    <div className="col-span-12 md:col-span-4 text-[13px] font-mono text-[#0A0A0A]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                    <div className="col-span-12 md:col-span-4 text-[13px] font-mono text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                       {it.variants}
                     </div>
-                    <div className="col-span-12 md:col-span-4 text-[13.5px] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                    <div className="col-span-12 md:col-span-4 text-[13.5px] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                       {it.std}
                     </div>
                     {it.note && (
-                      <div className="col-span-12 md:col-span-1 md:justify-self-end text-[11px] text-[#B7410E] flex items-center gap-1" title={it.note} style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                      <div className="col-span-12 md:col-span-1 md:justify-self-end text-[11px] text-[#B7410E] flex items-center gap-1" title={it.note} style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                         <Info className="w-3.5 h-3.5" /> note
                       </div>
                     )}
                     {it.note && (
-                      <div className="col-span-12 text-[12px] text-[#B7410E] font-light pl-4 border-l-2 border-[#B7410E]/30" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                      <div className="col-span-12 text-[12px] text-[#B7410E] font-light pl-4 border-l-2 border-[#B7410E]/30" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                         {it.note}
                       </div>
                     )}
@@ -130,7 +130,7 @@ const CryptoStackPage = () => {
 
       <section className="tv-section-tight" data-testid="crypto-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-h2">
             Certified crypto, on your silicon.
           </h2>
           <div className="flex gap-3">

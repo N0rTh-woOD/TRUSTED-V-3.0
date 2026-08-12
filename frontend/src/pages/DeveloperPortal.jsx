@@ -79,7 +79,7 @@ const DeveloperPortal = () => {
 
       <section className="tv-section-tight" data-testid="dev-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-h2">
             Ready to write your first line of TRUSTED-V?
           </h2>
           <div className="flex gap-3">
@@ -106,7 +106,7 @@ const Section = ({ section }) => {
       >
         <h3
           className="text-[22px] md:text-[28px] tracking-[-0.015em] text-[#0A0A0A] group-hover:text-[#003262] transition-colors text-left"
-          style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
+          style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}
         >
           {section.title}
         </h3>
@@ -116,10 +116,10 @@ const Section = ({ section }) => {
         <div className="pb-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {section.items.map((it) => (
             <div key={it.name} className="border border-[#E7E5E0] p-6 hover:border-[#0A0A0A] transition-colors">
-              <h4 className="text-[16px] tracking-[-0.01em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+              <h4 className="text-[16px] tracking-[-0.01em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                 {it.name}
               </h4>
-              <p className="mt-2 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+              <p className="mt-2 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                 {it.desc}
               </p>
             </div>
@@ -133,12 +133,12 @@ const Section = ({ section }) => {
 const QuickStart = () => (
   <div className="border border-[#E7E5E0] bg-[#0A0A0A] text-white overflow-hidden" style={{ borderRadius: 4 }}>
     <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10">
-      <span className="text-[11px] text-white/60 font-mono" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+      <span className="text-[11px] text-white/60 font-mono" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
         quick-start.sh
       </span>
-      <span className="text-[10px] text-[#0F6E56] font-mono" style={{ fontFamily: "'JetBrains Mono', monospace" }}>ready</span>
+      <span className="text-[10px] text-[#0F6E56] font-mono" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>ready</span>
     </div>
-    <pre className="p-5 text-[12.5px] leading-[1.9]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+    <pre className="p-5 text-[12.5px] leading-[1.9]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
       <span className="text-white/40"># Install</span>{"\n"}
       <span className="text-[#00B4E0]">$</span> curl -fsSL trusted-v.com/install | sh{"\n"}
       {"\n"}

@@ -52,7 +52,7 @@ const SecureBootPage = () => {
         }
         subtitle="rBoot and rustBoot form a complete, Rust-native secure-boot chain for RISC-V — certifiable against CC EAL4+, PSA L3 and ISO 26262."
       >
-        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
           <ArrowLeft className="w-3.5 h-3.5" /> Back to products
         </Link>
       </PageHero>
@@ -60,19 +60,19 @@ const SecureBootPage = () => {
       {/* Chain diagram */}
       <section className="tv-section-tight border-b border-[#E7E5E0] bg-[#FAFAF7]" data-testid="boot-chain">
         <div className="tv-container">
-          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-6" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
             The boot chain
           </div>
           <div className="grid md:grid-cols-4 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
             {chain.map((c) => (
               <div key={c.step} className="bg-[#FAFAF7] p-6 md:p-8 min-h-[160px]">
-                <div className="text-[12px] font-mono tracking-widest text-[#003262]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <div className="text-[12px] font-mono tracking-widest text-[#003262]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                   / {c.step}
                 </div>
-                <h3 className="mt-2 text-[22px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                <h3 className="mt-2 text-[22px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                   {c.label}
                 </h3>
-                <p className="mt-2 text-[13px] leading-[1.55] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                <p className="mt-2 text-[13px] leading-[1.55] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                   {c.desc}
                 </p>
               </div>
@@ -87,18 +87,18 @@ const SecureBootPage = () => {
           <div className="grid md:grid-cols-2 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
             {loaders.map((l) => (
               <div key={l.name} className="bg-white p-8 md:p-12 border-t-[3px]" style={{ borderTopColor: l.color }} data-testid={`loader-${l.name.toLowerCase()}`}>
-                <div className="text-[11px] font-semibold tracking-[0.22em] uppercase" style={{ color: l.color, fontFamily: "'Space Grotesk', sans-serif" }}>
+                <div className="text-[11px] font-semibold tracking-[0.22em] uppercase" style={{ color: l.color, fontFamily: "'IBM Plex Sans', sans-serif" }}>
                   {l.role}
                 </div>
-                <h2 className="mt-2 text-[26px] md:text-[34px] tracking-[-0.025em] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                <h2 className="mt-2 text-[26px] md:text-[34px] tracking-[-0.025em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                   {l.name}
                 </h2>
-                <p className="mt-4 text-[15.5px] leading-[1.65] text-[#3A3A3A] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                <p className="mt-4 text-[15.5px] leading-[1.65] text-[#3A3A3A] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                   {l.desc}
                 </p>
                 <ul className="mt-6 space-y-3 border-t border-[#E7E5E0] pt-6">
                   {l.features.map((f) => (
-                    <li key={f} className="text-[14px] text-[#0A0A0A] flex items-start gap-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                    <li key={f} className="text-[14px] text-[#0A0A0A] flex items-start gap-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                       <span className="w-1 h-1 mt-2 rounded-full flex-shrink-0" style={{ background: l.color }} />
                       {f}
                     </li>
@@ -109,7 +109,7 @@ const SecureBootPage = () => {
                   target="_blank"
                   rel="noreferrer"
                   className="mt-8 inline-flex items-center gap-1.5 text-[12px] font-medium tracking-[0.12em] uppercase text-[#0A0A0A] border-b border-[#0A0A0A] pb-0.5 hover:text-[#003262] hover:border-[#003262] transition-colors"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                  style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                 >
                   GitHub <ExternalLink className="w-3 h-3" />
                 </a>
@@ -121,7 +121,7 @@ const SecureBootPage = () => {
 
       <section className="tv-section-tight" data-testid="secboot-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-display text-[28px] md:text-[38px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="tv-h2">
             Ship the chip. Ship the certificate.
           </h2>
           <div className="flex gap-3">

@@ -37,14 +37,13 @@ const Mission = () => {
           <div className="lg:col-span-5">
             <span className="tv-eyebrow">Our mission</span>
             <h2
-              className="tv-display mt-6 text-[28px] md:text-[38px] lg:text-[46px] text-[#0A0A0A]"
-              style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
+              className="tv-h2"
             >
               Close the trust gap in RISC-V.
             </h2>
             <p
               className="mt-8 text-[16.5px] leading-[1.7] text-[#3A3A3A] font-light"
-              style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
+              style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}
             >
               The RISC-V ecosystem&apos;s next growth phase is gated by trust, not
               silicon capability. Fragmentation across ISA extensions, unclear
@@ -53,7 +52,7 @@ const Mission = () => {
             </p>
             <p
               className="mt-5 text-[16.5px] leading-[1.7] text-[#3A3A3A] font-light"
-              style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
+              style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}
             >
               TRUSTED-V is our answer: a complete, opinionated stack that unifies
               IP integration, virtualization, secure Rust software and silicon
@@ -67,20 +66,20 @@ const Mission = () => {
                 <div className="flex items-baseline gap-4">
                   <span
                     className="text-[13px] font-mono tracking-widest text-[#6B6B6B]"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
                   >
                     / {p.k}
                   </span>
                   <h3
                     className="text-[24px] md:text-[28px] tracking-[-0.02em] text-[#0A0A0A]"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
+                    style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}
                   >
                     {p.title}
                   </h3>
                 </div>
                 <p
                   className="mt-3 text-[14.5px] leading-[1.65] text-[#4B4B4B] font-light pl-8"
-                  style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
+                  style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}
                 >
                   {p.desc}
                 </p>
@@ -111,8 +110,7 @@ const StructuralGaps = () => {
         <div className="mb-16 max-w-3xl">
           <span className="tv-eyebrow">Why TRUSTED-V</span>
           <h2
-            className="tv-display mt-6 text-[28px] md:text-[38px] lg:text-[46px] text-[#0A0A0A]"
-            style={{ letterSpacing: "-0.03em", lineHeight: "1.02" }}
+            className="tv-h2"
           >
             Eight structural gaps we close.
           </h2>
@@ -124,22 +122,22 @@ const StructuralGaps = () => {
               <div className="flex items-baseline gap-4 mb-3">
                 <span
                   className="text-[12px] font-mono tracking-widest text-[#003262]"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  style={{ fontFamily: "'IBM Plex Mono', monospace" }}
                 >
                   {g.n}
                 </span>
                 <h3
                   className="text-[20px] md:text-[24px] tracking-[-0.015em] text-[#0A0A0A]"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
+                  style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}
                 >
                   {g.title}
                 </h3>
               </div>
-              <p className="text-[14px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+              <p className="text-[14px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                 {g.problem}
               </p>
               <div className="mt-4 border-l-2 border-[#003262] pl-4">
-                <p className="text-[13.5px] leading-[1.6] text-[#0A0A0A]" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400 }}>
+                <p className="text-[13.5px] leading-[1.6] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                   {g.answer}
                 </p>
               </div>
@@ -169,25 +167,24 @@ const RoadmapAndConsortium = () => {
         <div className="lg:col-span-5">
           <span className="tv-eyebrow">Roadmap</span>
           <h2
-            className="tv-display mt-6 text-[22px] md:text-[28px] lg:text-[34px] text-[#0A0A0A]"
-            style={{ letterSpacing: "-0.03em", lineHeight: "1.05" }}
+            className="tv-h2"
           >
             Where we&apos;re heading.
           </h2>
           <ul className="mt-10 border-t border-[#0A0A0A]">
             {phases.map((p) => (
               <li key={p.title} className="grid grid-cols-12 gap-4 py-6 border-b border-[#E7E5E0] items-baseline">
-                <span className="col-span-4 text-[12px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="col-span-4 text-[12px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                   {p.period}
                 </span>
-                <span className="col-span-5 text-[19px] md:text-[22px] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                <span className="col-span-5 text-[19px] md:text-[22px] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                   {p.title}
                 </span>
                 <span
                   className={`col-span-3 justify-self-end text-[10px] font-semibold tracking-[0.2em] uppercase ${
                     p.state === "Active" ? "text-[#0F6E56]" : "text-[#6B6B6B]"
                   }`}
-                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                  style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                 >
                   {p.state}
                 </span>
@@ -199,8 +196,7 @@ const RoadmapAndConsortium = () => {
         <div className="lg:col-span-6 lg:col-start-7">
           <span className="tv-eyebrow">The consortium</span>
           <h2
-            className="tv-display mt-6 text-[22px] md:text-[28px] lg:text-[34px] text-[#0A0A0A]"
-            style={{ letterSpacing: "-0.03em", lineHeight: "1.05" }}
+            className="tv-h2"
           >
             Four tiers of partnership.
           </h2>
@@ -209,10 +205,10 @@ const RoadmapAndConsortium = () => {
               <div key={t.name} className="border border-[#E7E5E0] p-6 flex items-start gap-5">
                 <span className="w-2.5 h-2.5 mt-2 rounded-full flex-shrink-0" style={{ background: t.color }} />
                 <div>
-                  <h4 className="text-[17px] text-[#0A0A0A]" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
+                  <h4 className="text-[17px] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                     {t.name}
                   </h4>
-                  <p className="mt-1 text-[13.5px] leading-[1.55] text-[#4B4B4B] font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+                  <p className="mt-1 text-[13.5px] leading-[1.55] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                     {t.desc}
                   </p>
                 </div>
@@ -235,14 +231,13 @@ const BackedByBosch = () => {
               <span className="text-[#FDB515]">Powered by Bosch</span>
             </span>
             <h2
-              className="tv-display mt-5 text-[24px] md:text-[32px] lg:text-[40px] text-white leading-[1.02]"
-              style={{ letterSpacing: "-0.025em" }}
+              className="tv-h2"
             >
               Engineering discipline meets<br />open-source velocity.
             </h2>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
-            <p className="text-[14.5px] leading-[1.7] text-white/70 font-light" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
+            <p className="text-[14.5px] leading-[1.7] text-white/70 font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
               Bosch Global Software Technologies leads the TRUSTED-V initiative,
               bringing automotive-grade rigour and long-term support commitments
               to open RISC-V.
@@ -257,7 +252,7 @@ const BackedByBosch = () => {
 const CTA = () => (
   <section className="tv-section-tight border-b border-[#E7E5E0]" data-testid="about-cta">
     <div className="tv-container flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
-      <h2 className="tv-display text-[28px] md:text-[38px] lg:text-[46px] text-[#0A0A0A] leading-[0.98] max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
+      <h2 className="tv-h2">
         Join the RISC-V decade.
       </h2>
       <div className="flex gap-3">
