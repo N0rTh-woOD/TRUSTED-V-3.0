@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ArrowUpRight, Check, Download, X } from "lucide-react";
-import PageHero from "@/components/PageHero";
+import { Eyebrow, PrimaryCTA, SecondaryCTA } from "@/components/ui-kit";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const JARVYN_GIF = "https://customer-assets-m6fa6gv7.emergentagent.net/job_e0aa043e-675d-4863-909c-5d4926841718/artifacts/7kle5aa3_Jarvyn_newIde_1.gif";
 
 const features = [
   { n: "01", title: "Hardware-native platform", desc: "Built from the ground up for RISC-V and Rust — not a general-purpose editor fork." },
@@ -49,47 +50,108 @@ const IDEDownloads = () => {
 
   return (
     <div className="bg-white text-[#0A0A0A]">
-      <PageHero
-        eyebrow="Jarvyn IDE"
-        title={
-          <>
-            An IDE built for<br />RISC-V and Rust.
-          </>
-        }
-        subtitle="Jarvyn is the Rust-native RISC-V development environment. Purpose-built for embedded, mission-critical firmware from day one."
-      >
-        <div className="border border-[#E7E5E0] p-8" data-testid="ide-download-panel">
-          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-4" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-            Latest release
-          </div>
-          {builds.length === 0 ? (
-            <div className="text-[14px] text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-              Builds will appear here shortly.
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {builds.slice(0, 3).map((b) => (
-                <a
-                  key={b.id}
-                  href={`${BACKEND_URL}/api/ide-downloads/${b.id}/download`}
-                  className="group flex items-center justify-between py-3 border-b border-[#E7E5E0] last:border-b-0"
-                  data-testid={`download-${b.id}`}
+      {/* ── HERO ─────────────────────────────────────────── */}
+      <section className="relative bg-white border-b border-[#E5E4DF] overflow-hidden" data-testid="ide-hero">
+        <div className="absolute inset-0 tv-grid-bg opacity-60 pointer-events-none" />
+        <div className="absolute -top-32 -right-40 w-[520px] h-[520px] rounded-full bg-[#00B4E0]/8 blur-3xl pointer-events-none" />
+
+        <div className="tv-container relative pt-16 md:pt-20 pb-8 md:pb-12">
+          <div className="grid lg:grid-cols-12 gap-10 items-end">
+            <div className="lg:col-span-7">
+              <div className="mb-5"><Eyebrow>Jarvyn IDE</Eyebrow></div>
+              <h1 className="tv-h1" style={{ fontSize: "clamp(34px, 5vw, 56px)" }} data-testid="ide-hero-title">
+                An IDE built for<br />
+                <span className="text-[#003262]">RISC-V and Rust.</span>
+              </h1>
+              <p className="tv-lede mt-5" data-testid="ide-hero-subtitle">
+                Jarvyn is the Rust-native RISC-V development environment. Purpose-built
+                for embedded, mission-critical firmware — with a hardware-aware editor,
+                signed toolchain and integrated QEMU debug from day one.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PrimaryCTA
+                  href={builds[0] ? `${BACKEND_URL}/api/ide-downloads/${builds[0].id}/download` : "#downloads"}
+                  size="lg"
+                  data-testid="ide-hero-cta-primary"
                 >
-                  <div>
-                    <div className="text-[15px] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
-                      {b.platform || b.os} · v{b.version}
-                    </div>
-                    <div className="text-[12px] text-[#6B6B6B] mt-0.5" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
-                      {b.filename}
-                    </div>
-                  </div>
-                  <Download className="w-4 h-4 text-[#003262] group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              ))}
+                  Download Jarvyn
+                </PrimaryCTA>
+                <SecondaryCTA to="/webide" size="lg" data-testid="ide-hero-cta-secondary">
+                  Try WebIDE
+                </SecondaryCTA>
+              </div>
             </div>
-          )}
+
+            <div className="lg:col-span-5" id="downloads">
+              <div className="border border-[#E5E4DF] rounded-md p-6 md:p-7 bg-white shadow-[0_16px_40px_-24px_rgba(11,15,20,0.12)]" data-testid="ide-download-panel">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#5A6472]">
+                    Latest release
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] tracking-widest uppercase text-[#0F6E56]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0F6E56] tv-pulse-dot" />
+                    stable
+                  </span>
+                </div>
+                {builds.length === 0 ? (
+                  <div className="text-[14px] text-[#5A6472]">Builds will appear here shortly.</div>
+                ) : (
+                  <div className="space-y-1">
+                    {builds.slice(0, 3).map((b) => (
+                      <a
+                        key={b.id}
+                        href={`${BACKEND_URL}/api/ide-downloads/${b.id}/download`}
+                        className="group flex items-center justify-between py-3 border-b border-[#E5E4DF] last:border-b-0 hover:text-[#003262] transition-colors"
+                        data-testid={`download-${b.id}`}
+                      >
+                        <div>
+                          <div className="text-[14.5px] font-medium">
+                            {b.platform || b.os} · v{b.version}
+                          </div>
+                          <div className="font-mono text-[11.5px] text-[#5A6472] mt-0.5 truncate max-w-[240px]">
+                            {b.filename}
+                          </div>
+                        </div>
+                        <Download className="w-4 h-4 text-[#003262] group-hover:-translate-y-0.5 transition-transform" />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </PageHero>
+
+        {/* ── Jarvyn IDE preview (real product screenshot) ── */}
+        <div className="tv-container pb-16 md:pb-24">
+          <figure className="relative rounded-lg border border-[#E5E4DF] bg-[#0B0F14] overflow-hidden shadow-[0_40px_80px_-40px_rgba(11,15,20,0.35)]" data-testid="ide-hero-screenshot">
+            {/* window chrome */}
+            <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10 bg-[#0B0F14]">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+              </div>
+              <span className="font-mono text-[11px] text-white/60 truncate">
+                Jarvyn IDE — qemu-hello / src / main.rs
+              </span>
+              <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#00B4E0]">
+                RV32
+              </span>
+            </div>
+            <img
+              src={JARVYN_GIF}
+              alt="Jarvyn IDE — building, running and debugging a RISC-V Rust project in QEMU"
+              className="block w-full h-auto"
+              loading="lazy"
+              data-testid="ide-hero-gif"
+            />
+            <figcaption className="absolute bottom-3 left-4 font-mono text-[10px] tracking-widest uppercase text-white/50">
+              Live · Build → Run → Debug (QEMU)
+            </figcaption>
+          </figure>
+        </div>
+      </section>
 
       {/* 21 Features */}
       <section className="tv-section border-b border-[#E7E5E0]" data-testid="ide-features">
