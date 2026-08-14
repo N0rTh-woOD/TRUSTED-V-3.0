@@ -81,16 +81,20 @@ const Navigation = () => {
                     onMouseEnter={() => it.hasMega && openMegaMenu(it.key)}
                   >
                     {it.hasMega ? (
-                      <button
-                        onClick={() => setOpenMega(openMega === it.key ? null : it.key)}
-                        data-testid={`nav-${it.label.toLowerCase()}`}
-                        className={`px-3.5 py-2 text-[14px] font-medium flex items-center gap-1 transition-colors ${
-                          active ? "text-[#003262]" : "text-[#1A1F25] hover:text-[#003262]"
-                        }`}
-                      >
-                        {it.label}
-                        <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openMega === it.key ? "rotate-180" : ""}`} />
-                      </button>
+                      <>
+                        <Link
+                          to="/product-suite"
+                          onMouseEnter={() => openMegaMenu(it.key)}
+                          onClick={() => setOpenMega(null)}
+                          data-testid={`nav-${it.label.toLowerCase()}`}
+                          className={`px-3.5 py-2 text-[14px] font-medium flex items-center gap-1 transition-colors ${
+                            active ? "text-[#003262]" : "text-[#1A1F25] hover:text-[#003262]"
+                          }`}
+                        >
+                          {it.label}
+                          <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openMega === it.key ? "rotate-180" : ""}`} />
+                        </Link>
+                      </>
                     ) : (
                       <Link
                         to={it.to}
@@ -168,11 +172,11 @@ const Navigation = () => {
                     { label: "Ecosystem", to: "/partners", note: "SiFive, Akeana, C-DAC" },
                   ]} />
                   <div className="col-span-3 border-l border-[#E5E4DF] pl-8">
-                    <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472] mb-3">Featured</div>
+                    <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472] mb-3">All products</div>
                     <h4 className="tv-h4" style={{ fontSize: "18px" }}>The complete RISC-V platform</h4>
                     <p className="mt-2 text-[13px] text-[#5A6472] leading-relaxed">From IP integration and virtual platforms to certified boot, cryptography and RTOS — unified as TRUSTED-V.</p>
                     <Link to="/product-suite" className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#003262] hover:gap-2.5 transition-all" data-testid="mega-featured-cta">
-                      Explore the suite <ArrowUpRight className="w-3.5 h-3.5" />
+                      View all products <ArrowUpRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
                 </div>

@@ -3,7 +3,6 @@ import { ArrowUpRight, ArrowRight } from "lucide-react";
 import {
   Eyebrow,
   SectionHeader,
-  ArchitectureDiagram,
   TechnicalMetric,
   ProductCard,
   MarketCard,
@@ -21,9 +20,9 @@ const Landing = () => (
   <div className="bg-white text-[#0B0F14]">
     <Hero />
     <PlatformIntro />
-    <PlatformArchitecture />
     <RiscVIPCollaboration />
     <VirtualizationSpotlight />
+    <PlatformArchitecture />
     <CoreTechnologies />
     <ProductFamilies />
     <Ecosystem />
@@ -45,10 +44,14 @@ const Hero = () => {
   ];
   return (
     <section className="relative bg-white overflow-hidden" data-testid="landing-hero">
-      <div className="tv-container pt-16 md:pt-20 lg:pt-24 pb-14 md:pb-20 lg:pb-24">
+      {/* subtle backdrop */}
+      <div className="absolute inset-0 tv-grid-bg opacity-60 pointer-events-none" />
+      <div className="absolute top-24 right-[-160px] w-[520px] h-[520px] rounded-full bg-[#00B4E0]/8 blur-3xl pointer-events-none" />
+
+      <div className="tv-container relative pt-14 md:pt-20 lg:pt-24 pb-14 md:pb-20 lg:pb-24">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-7 tv-fade-up">
-            <div className="mb-5"><Eyebrow>RISC-V compute platform</Eyebrow></div>
+            <div className="mb-5"><Eyebrow>RISC-V compute platform · v1.0</Eyebrow></div>
             <h1 className="tv-h1" data-testid="landing-hero-title">
               Build secure, software-defined
               <br />
@@ -63,6 +66,16 @@ const Hero = () => {
               <PrimaryCTA to="/product-suite" size="lg" data-testid="hero-cta-primary">Explore the platform</PrimaryCTA>
               <SecondaryCTA to="/contact" size="lg" data-testid="hero-cta-secondary">Talk to our engineers</SecondaryCTA>
             </div>
+
+            {/* Inline partner strip */}
+            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
+              <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#5A6472]">
+                Co-verified with
+              </span>
+              {["SiFive", "Akeana", "MIPS ARC-V", "C-DAC", "Mindgrove"].map((p) => (
+                <span key={p} className="text-[13.5px] font-semibold text-[#0B0F14]/80">{p}</span>
+              ))}
+            </div>
           </div>
 
           <div className="lg:col-span-5">
@@ -70,7 +83,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Proof strip — factual capability descriptors, not fabricated numbers */}
         <div className="mt-14 md:mt-20 border-t border-[#E5E4DF] grid grid-cols-2 md:grid-cols-4">
           {proof.map((p, i) => (
             <div key={p.k} className={`py-6 pr-6 ${i > 0 ? "md:border-l md:border-[#E5E4DF] md:pl-6" : ""}`}>
@@ -166,30 +178,145 @@ const PlatformIntro = () => (
    FULL PLATFORM ARCHITECTURE — the centerpiece
    ───────────────────────────────────────────────────────────── */
 const PlatformArchitecture = () => {
-  const layers = [
-    { label: "Applications", sub: "Automotive · Industrial · IoT · Robotics", badge: "L08" },
-    { label: "SDK & Runtime", sub: "Jarvyn IDE, WebIDE, cargo, LLVM, HAL/PAC", badge: "L07" },
-    { label: "Virtualization", sub: "RISC-V hypervisor & virtual platforms", badge: "L06" },
-    { label: "OS & RTOS", sub: "Zephyr · FreeRTOS · Embassy · TRUSTED-V RTOS" },
-    { label: "Secure Microkernel", sub: "Rust-native, memory-safe, deterministic" },
-    { label: "Crypto & Root of Trust", sub: "AES, SHA-3, ECDSA, ML-KEM, ML-DSA" },
-    { label: "rBoot / rustBoot", sub: "Verified boot chain, PQC-ready" },
-    { label: "RISC-V Processor IP", sub: "SiFive · Akeana · MIPS ARC-V · C-DAC · Mindgrove" },
-    { label: "Silicon Platform", sub: "SoC, boards, evaluation kits", badge: "L00" },
+  const groups = [
+    {
+      band: "Application",
+      color: "#003262",
+      tag: "L05",
+      items: [
+        { name: "Automotive", note: "ISO 26262 aligned" },
+        { name: "Industrial", note: "IEC 62443" },
+        { name: "IoT & Consumer", note: "PSA L3" },
+        { name: "Robotics & Edge AI", note: "Real-time" },
+      ],
+    },
+    {
+      band: "Developer Toolchain",
+      color: "#00B4E0",
+      tag: "L04",
+      items: [
+        { name: "Jarvyn IDE", note: "Rust + RISC-V native" },
+        { name: "WebIDE", note: "Zero-install cloud" },
+        { name: "SDK · cargo · LLVM", note: "Signed toolchain" },
+        { name: "Debugger · Trace", note: "SVD register view" },
+      ],
+    },
+    {
+      band: "Rust Runtime & OS",
+      color: "#0F6E56",
+      tag: "L03",
+      items: [
+        { name: "TRUSTED-V RTOS", note: "Memory-safe" },
+        { name: "Zephyr · FreeRTOS", note: "Ecosystem" },
+        { name: "Embassy (async)", note: "Cooperative" },
+        { name: "HAL · PAC · HAM", note: "Peripheral access" },
+      ],
+    },
+    {
+      band: "Virtualization",
+      color: "#5B21B6",
+      tag: "L02",
+      items: [
+        { name: "Type-1 Hypervisor", note: "Mixed-criticality" },
+        { name: "Virtual Platform", note: "Pre-silicon SoC" },
+        { name: "Cycle-approx Simulator", note: "Bring-up" },
+      ],
+    },
+    {
+      band: "Secure Boot & Crypto",
+      color: "#B45309",
+      tag: "L01",
+      items: [
+        { name: "rBoot", note: "First stage" },
+        { name: "rustBoot", note: "A/B · OTA · PQC" },
+        { name: "Crypto Stack", note: "Classical + PQC" },
+        { name: "Attestation", note: "TVOTS quote" },
+      ],
+    },
+    {
+      band: "RISC-V IP & Silicon",
+      color: "#0B0F14",
+      tag: "L00",
+      items: [
+        { name: "SiFive · Akeana", note: "Perf + Automotive" },
+        { name: "MIPS ARC-V", note: "eXtensible" },
+        { name: "C-DAC · Mindgrove", note: "Indian silicon" },
+        { name: "Reference SoC", note: "Boards & kits" },
+      ],
+    },
   ];
+
   return (
-    <section className="tv-section border-t border-[#E5E4DF]" data-testid="platform-architecture">
+    <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="platform-architecture">
       <div className="tv-container">
         <SectionHeader
           eyebrow="Platform architecture"
-          title={<>From <span className="text-[#003262]">silicon</span> to <span className="text-[#003262]">applications</span>, in one stack.</>}
-          lede="Every layer is designed to interoperate. Ship a reference SoC. Boot a certified firmware chain. Run a Rust-native application. All within TRUSTED-V."
+          title={<>Six layers. <span className="text-[#003262]">One coherent stack</span>.</>}
+          lede="TRUSTED-V is a full-stack RISC-V platform. Every layer is designed to interoperate — swap the IP, keep the toolchain; add an RTOS, keep the boot chain. Ship real silicon, real firmware, real applications."
+          action={<Link to="/product-suite" className="tv-arrow-link" data-testid="architecture-explore">Explore the suite</Link>}
         />
-        <div className="grid lg:grid-cols-12 gap-10">
+
+        <div className="grid lg:grid-cols-12 gap-8">
+          {/* Left: Stack visualization */}
           <div className="lg:col-span-8">
-            <ArchitectureDiagram layers={layers} />
+            <div className="relative">
+              {/* Left rail with vertical annotation */}
+              <div className="hidden md:block absolute left-0 top-0 bottom-0 w-[52px] pointer-events-none">
+                <div className="absolute inset-x-0 top-4 bottom-4 border-l border-[#CFCEC8]" />
+                <div className="absolute left-1/2 -translate-x-1/2 top-4 -rotate-90 origin-left translate-y-8 font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#5A6472] whitespace-nowrap">
+                  Software ↑
+                </div>
+                <div className="absolute left-1/2 -translate-x-1/2 bottom-4 -rotate-90 origin-left -translate-y-8 font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#5A6472] whitespace-nowrap">
+                  Silicon ↓
+                </div>
+              </div>
+
+              <div className="md:pl-[52px] flex flex-col gap-2.5">
+                {groups.map((g, idx) => (
+                  <div
+                    key={g.band}
+                    className="group relative bg-white border border-[#E5E4DF] rounded-md overflow-hidden hover:border-[#003262] transition-colors"
+                    data-testid={`arch-band-${idx}`}
+                  >
+                    {/* Colored side strip */}
+                    <div className="absolute top-0 left-0 bottom-0 w-1" style={{ background: g.color }} />
+                    <div className="pl-5 pr-4 py-4 md:py-5">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#5A6472]">
+                            {g.tag}
+                          </span>
+                          <h3
+                            className="text-[15px] md:text-[17px] font-semibold text-[#0B0F14]"
+                            style={{ letterSpacing: "-0.005em" }}
+                          >
+                            {g.band}
+                          </h3>
+                        </div>
+                        <span
+                          className="hidden sm:inline-flex font-mono text-[10px] tracking-[0.14em] uppercase px-2 py-0.5 rounded-sm"
+                          style={{ color: g.color, borderColor: g.color, border: `1px solid ${g.color}30`, background: `${g.color}0d` }}
+                        >
+                          {g.items.length} components
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        {g.items.map((it) => (
+                          <div key={it.name} className="border border-[#EDEBE5] rounded-sm px-3 py-2 bg-[#FAFAF7]">
+                            <div className="text-[12.5px] font-medium text-[#0B0F14] leading-tight">{it.name}</div>
+                            <div className="mt-0.5 font-mono text-[10px] text-[#5A6472]">{it.note}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="lg:col-span-4 lg:pt-2">
+
+          {/* Right: technical spec + flow annotation */}
+          <div className="lg:col-span-4">
             <TechnicalMetric rows={[
               ["ISA", "RV32 · RV64 · Vector (RVV)"],
               ["Language", "Rust — no_std, embedded HAL"],
@@ -199,13 +326,26 @@ const PlatformArchitecture = () => {
               ["OS Support", "RTOS + Linux (via CVA6)"],
               ["Crypto", "Classical + Post-Quantum"],
             ]} />
-            <Link
-              to="/product-suite"
-              className="tv-arrow-link mt-6"
-              data-testid="architecture-explore"
-            >
-              Explore the product suite
-            </Link>
+
+            <div className="mt-6 border border-[#E5E4DF] rounded-md p-5 bg-white">
+              <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#5A6472] mb-3">
+                Data flow
+              </div>
+              <div className="space-y-2 font-mono text-[12px] text-[#0B0F14]">
+                {[
+                  "01 · Silicon boots ROM RoT",
+                  "02 · ROM verifies rBoot",
+                  "03 · rBoot verifies rustBoot",
+                  "04 · rustBoot verifies App",
+                  "05 · Attestation quote sent",
+                ].map((s) => (
+                  <div key={s} className="flex items-start gap-2">
+                    <span className="w-1 h-1 rounded-full bg-[#003262] mt-2 flex-shrink-0" />
+                    <span>{s}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

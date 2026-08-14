@@ -29,6 +29,24 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 13c — Homepage & Login Redesign (Feb 14, 2026)
+Verified visually across 6 flows (login → landing → IP → virtualization → new architecture → products navigation).
+
+**Homepage reorder + new architecture visual:**
+- New section order: Hero → Intro → **RISC-V IP & Collaborations** → **Virtualization Spotlight** → **Platform Architecture** → Core Tech → Products → Ecosystem → Markets → Developer Exp → CTA
+- Enhanced Hero with subtle grid backdrop, cyan ambient blur and inline "Co-verified with SiFive · Akeana · MIPS ARC-V · C-DAC · Mindgrove" partner strip
+- **Redesigned Platform Architecture** as a coloured-band block diagram (6 grouped bands with side accent strip, component tiles inside each band, vertical "SOFTWARE ↑ / SILICON ↓" axis annotation, side Data Flow narrative)
+
+**Products navigation:**
+- `nav-products` is now a real Link — hovering opens the mega-menu, clicking navigates to `/product-suite`
+- Mega-menu "Featured" card replaced with "All products" tile + "View all products" CTA to `/product-suite`
+
+**Login page fully redesigned:**
+- Bigger brand pane with lg-size logo, ambient navy gradient + subtle grid, "v1.0" version tag
+- Four-feature trust grid (RISC-V native, Secure by design, Full stack, Attestable) with mono captions
+- Form now on a white card (border + soft shadow), grey field surface, Forgot? link, "Request access" CTA in card footer
+- Footer status: "All systems operational" pulse dot + "Powered by Bosch · Made in India"
+
 ### Phase 13b — User Feedback Fixes (Feb 12, 2026)
 Verified by testing_agent (iteration_33.json): 13/13 PASS.
 - Removed the "Now in private preview" announcement bar entirely
