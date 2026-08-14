@@ -129,10 +129,10 @@ const IPIntegration = () => {
   const partners = [
     { name: "SiFive", note: "Performance RISC-V cores — P550, P870-A", featured: true },
     { name: "Akeana", note: "Automotive-grade RISC-V — 5100 series", featured: true },
-    { name: "MIPS ARC-V", note: "eXtensible RISC-V platform", featured: true },
     { name: "C-DAC", note: "VEGA processors — Indian sovereign silicon" },
     { name: "Mindgrove", note: "Secure IoT SoCs from IIT Madras" },
     { name: "Upbeat Tech", note: "Custom RISC-V accelerators" },
+    { name: "OpenTitan", note: "Silicon root of trust · open source" },
   ];
   return (
     <section className="tv-section border-b border-[#E7E5E0] bg-[#00162B] text-white" id="ip" data-testid="ip-integration">

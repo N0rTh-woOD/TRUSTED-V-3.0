@@ -38,7 +38,6 @@ const partners = [
 const globalIP = [
   { name: "SiFive", note: "Performance RISC-V IP" },
   { name: "Akeana", note: "Automotive-grade RISC-V" },
-  { name: "MIPS ARC-V", note: "eXtensible RISC-V platform" },
 ];
 
 const Partners = () => {

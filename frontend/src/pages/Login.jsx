@@ -37,10 +37,7 @@ const Login = () => {
         <div className="absolute -bottom-56 -right-40 w-[520px] h-[520px] rounded-full bg-[#00B4E0]/10 blur-3xl pointer-events-none" />
 
         <div className="relative p-14 xl:p-16">
-          <TrustedVLogo size="lg" dark />
-          <div className="mt-3 font-mono text-[10.5px] tracking-[0.22em] uppercase text-white/50">
-            v1.0 · Rust-native RISC-V platform
-          </div>
+          <TrustedVLogo size="2xl" dark />
         </div>
 
         <div className="relative px-14 xl:px-16">
@@ -95,9 +92,8 @@ const Login = () => {
       {/* Right — form pane */}
       <div className="flex items-center justify-center bg-[#F7F7F5] px-6 py-16 md:px-10 md:py-24">
         <div className="w-full max-w-[440px]">
-          <div className="lg:hidden mb-10 flex items-center justify-between">
-            <TrustedVLogo size="sm" />
-            <span className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#5A6472]">v1.0</span>
+          <div className="lg:hidden mb-10">
+            <TrustedVLogo size="md" />
           </div>
 
           <div className="bg-white border border-[#E5E4DF] rounded-lg shadow-[0_20px_50px_-30px_rgba(11,15,20,0.15)] p-8 md:p-10">

@@ -29,6 +29,19 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 13d — Content Correction & Login Logo (Feb 14, 2026)
+- **Removed all MIPS ARC-V references** — TRUSTED-V's real IP partnerships are SiFive and Akeana only. Cleaned:
+  - Landing hero co-verified partner strip (now: SiFive · Akeana · C-DAC · Mindgrove)
+  - RISC-V IP & Collaborations section (now 2 wide cards: SiFive + Akeana; MIPS ARC-V card deleted)
+  - Platform Architecture "RISC-V IP & Silicon" band tiles (replaced MIPS ARC-V with individual SiFive + Akeana tiles)
+  - Core Technologies "RISC-V native" description
+  - Ecosystem section silicon list (added OpenTitan RoT in place)
+  - Partners page globalIP list (down to 2 partners)
+  - ProductSuite IPIntegration grid (added OpenTitan, dropped MIPS ARC-V)
+  - Deleted the unused legacy `/app/frontend/src/components/HeroSection.jsx` (contained the last MIPS ARC-V reference)
+- **Removed the "v1.0" / "v1.0 · Rust-native RISC-V platform" tags** from Login page (desktop + mobile) and from Landing hero eyebrow
+- **Enlarged the Login page logo** — TrustedVLogo bumped to size `2xl` (120px height); mobile view uses `md` (40px) — now proportionally dominant against the trust feature strip
+
 ### Phase 13c — Homepage & Login Redesign (Feb 14, 2026)
 Verified visually across 6 flows (login → landing → IP → virtualization → new architecture → products navigation).
 

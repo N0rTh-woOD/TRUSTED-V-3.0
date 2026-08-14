@@ -51,7 +51,7 @@ const Hero = () => {
       <div className="tv-container relative pt-14 md:pt-20 lg:pt-24 pb-14 md:pb-20 lg:pb-24">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-7 tv-fade-up">
-            <div className="mb-5"><Eyebrow>RISC-V compute platform · v1.0</Eyebrow></div>
+            <div className="mb-5"><Eyebrow>RISC-V compute platform</Eyebrow></div>
             <h1 className="tv-h1" data-testid="landing-hero-title">
               Build secure, software-defined
               <br />
@@ -72,7 +72,7 @@ const Hero = () => {
               <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#5A6472]">
                 Co-verified with
               </span>
-              {["SiFive", "Akeana", "MIPS ARC-V", "C-DAC", "Mindgrove"].map((p) => (
+              {["SiFive", "Akeana", "C-DAC", "Mindgrove"].map((p) => (
                 <span key={p} className="text-[13.5px] font-semibold text-[#0B0F14]/80">{p}</span>
               ))}
             </div>
@@ -238,8 +238,8 @@ const PlatformArchitecture = () => {
       color: "#0B0F14",
       tag: "L00",
       items: [
-        { name: "SiFive · Akeana", note: "Perf + Automotive" },
-        { name: "MIPS ARC-V", note: "eXtensible" },
+        { name: "SiFive", note: "Performance IP" },
+        { name: "Akeana", note: "Automotive-grade IP" },
         { name: "C-DAC · Mindgrove", note: "Indian silicon" },
         { name: "Reference SoC", note: "Boards & kits" },
       ],
@@ -370,12 +370,6 @@ const RiscVIPCollaboration = () => {
       note: "5100 series · ISO 26262 aligned",
       focus: "Safety-oriented RISC-V IP pre-integrated with TRUSTED-V secure boot, attestation and Rust firmware stacks.",
     },
-    {
-      name: "MIPS ARC-V",
-      role: "eXtensible RISC-V platform",
-      note: "Configurable data-plane cores",
-      focus: "Customisable RISC-V microarchitecture supported by TRUSTED-V simulators, hypervisor and developer tooling.",
-    },
   ];
   return (
     <section className="tv-section border-t border-[#E5E4DF]" data-testid="riscv-ip">
@@ -383,10 +377,10 @@ const RiscVIPCollaboration = () => {
         <SectionHeader
           eyebrow="RISC-V IP & collaborations"
           title={<>Co-verified with the leaders of the <span className="text-[#003262]">open RISC-V ecosystem</span>.</>}
-          lede="TRUSTED-V is IP-agnostic by design. Our reference stack ships pre-integrated with the RISC-V IP families that power the industry — from performance cores to automotive-grade and eXtensible platforms."
+          lede="TRUSTED-V is IP-agnostic by design. Our reference stack ships pre-integrated with performance-class and automotive-grade RISC-V IP — with room to extend to any RISC-V family."
           action={<Link to="/partners" className="tv-arrow-link" data-testid="riscv-ip-partners">See all partners</Link>}
         />
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {partners.map((p) => (
             <div
               key={p.name}
@@ -512,7 +506,7 @@ const VirtualizationSpotlight = () => (
    ───────────────────────────────────────────────────────────── */
 const CoreTechnologies = () => {
   const items = [
-    { title: "RISC-V native", desc: "First-class support for RV32, RV64 and RVV. Integration with SiFive, Akeana, MIPS ARC-V and Indian silicon programmes.", to: "/product-suite" },
+    { title: "RISC-V native", desc: "First-class support for RV32, RV64 and RVV. Integration with SiFive, Akeana and Indian silicon programmes.", to: "/product-suite" },
     { title: "Security by construction", desc: "Rust memory safety, verified boot with rBoot/rustBoot, a cryptographic library covering classical and post-quantum.", to: "/product/secure-boot" },
     { title: "Virtualization", desc: "A RISC-V hypervisor and virtual platforms for mixed-criticality systems and pre-silicon firmware bring-up.", to: "/product-suite#virtualization" },
     { title: "Real-time software", desc: "Deterministic scheduling, RTOS integration and Rust async runtimes. Zephyr, FreeRTOS, Embassy and TRUSTED-V RTOS.", to: "/product/rtos-benchmark" },
@@ -570,12 +564,12 @@ const ProductFamilies = () => {
    ───────────────────────────────────────────────────────────── */
 const Ecosystem = () => {
   const silicon = [
+    { name: "SiFive", note: "Performance RISC-V IP" },
+    { name: "Akeana", note: "Automotive RISC-V" },
     { name: "C-DAC", note: "VEGA sovereign silicon" },
     { name: "Mindgrove", note: "Secure IoT SoCs" },
     { name: "Upbeat Tech", note: "Edge-AI SoCs" },
-    { name: "SiFive", note: "Performance RISC-V IP" },
-    { name: "Akeana", note: "Automotive RISC-V" },
-    { name: "MIPS ARC-V", note: "eXtensible RISC-V" },
+    { name: "OpenTitan", note: "Silicon root of trust" },
   ];
   return (
     <section className="tv-section border-t border-white/0 bg-[#F7F7F5]" data-testid="ecosystem">
