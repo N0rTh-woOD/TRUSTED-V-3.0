@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, status, UploadFile, File, Form
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from fastapi.responses import StreamingResponse, FileResponse
+from fastapi.responses import StreamingResponse, FileResponse, Response
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -18,6 +18,7 @@ from passlib.context import CryptContext
 import zipfile
 import io
 import asyncio
+from storage import init_storage, put_object, get_object, STORAGE_PREFIX
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -1205,6 +1206,11 @@ async def init_sample_data():
 @app.on_event("startup")
 async def startup_event():
     await init_sample_data()
+    try:
+        init_storage()
+        logging.info("Object storage initialized")
+    except Exception as e:
+        logging.error(f"Storage init failed: {e}")
 
 # Auth endpoints
 @api_router.post("/auth/register", response_model=Token)
@@ -2056,9 +2062,6 @@ async def delete_ide_download(ide_id: str, current_user: dict = Depends(get_curr
     return {"message": "IDE download deleted successfully"}
 
 # IDE Binary Upload Endpoint (Admin Only)
-UPLOAD_DIR = ROOT_DIR / "uploads" / "ide"
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-
 @api_router.post("/admin/ide-downloads/{ide_id}/upload")
 async def upload_ide_binary(
     ide_id: str,
@@ -2085,16 +2088,14 @@ async def upload_ide_binary(
             detail=f"Invalid file type. Allowed: {', '.join(allowed_extensions)}"
         )
     
-    # Generate unique filename
+    # Generate unique object path
     safe_filename = f"{ide_id}_{file.filename.replace(' ', '_')}"
-    file_path = UPLOAD_DIR / safe_filename
-    
-    # Save the file
+    storage_path = f"{STORAGE_PREFIX}/ide/{safe_filename}"
+
     try:
         contents = await file.read()
-        with open(file_path, 'wb') as f:
-            f.write(contents)
-        
+        result = put_object(storage_path, contents, file.content_type or "application/octet-stream")
+
         # Calculate file size
         file_size = len(contents)
         if file_size > 1024 * 1024 * 1024:  # GB
@@ -2112,6 +2113,7 @@ async def upload_ide_binary(
                 "download_url": download_url,
                 "size": size_str,
                 "filename": safe_filename,
+                "storage_path": result["path"],
                 "uploaded_at": datetime.now(timezone.utc).isoformat()
             }}
         )
@@ -2134,13 +2136,16 @@ async def download_ide_binary(ide_id: str):
         raise HTTPException(status_code=404, detail="IDE download not found")
     
     filename = ide_entry.get("filename")
-    if not filename:
+    storage_path = ide_entry.get("storage_path")
+    if not filename or not storage_path:
         raise HTTPException(status_code=404, detail="No binary file uploaded for this platform")
-    
-    file_path = UPLOAD_DIR / filename
-    if not file_path.exists():
-        raise HTTPException(status_code=404, detail="Binary file not found on server")
-    
+
+    try:
+        contents, _ = get_object(storage_path)
+    except Exception as e:
+        logging.error(f"IDE binary download error: {e}")
+        raise HTTPException(status_code=404, detail="Binary file not found in storage")
+
     # Determine content type
     content_type = "application/octet-stream"
     if filename.endswith('.exe'):
@@ -2155,16 +2160,16 @@ async def download_ide_binary(ide_id: str):
         content_type = "application/gzip"
     
     def iterfile():
-        with open(file_path, 'rb') as f:
-            while chunk := f.read(1024 * 1024):  # 1MB chunks
-                yield chunk
-    
+        stream = io.BytesIO(contents)
+        while chunk := stream.read(1024 * 1024):  # 1MB chunks
+            yield chunk
+
     return StreamingResponse(
         iterfile(),
         media_type=content_type,
         headers={
             "Content-Disposition": f"attachment; filename={filename}",
-            "Content-Length": str(file_path.stat().st_size)
+            "Content-Length": str(len(contents))
         }
     )
 
@@ -2273,9 +2278,6 @@ async def get_admin_notifications(current_user: dict = Depends(get_current_admin
     }
 
 # Hardware Image Upload
-HW_IMAGE_DIR = ROOT_DIR / "uploads" / "hardware"
-HW_IMAGE_DIR.mkdir(parents=True, exist_ok=True)
-
 @api_router.post("/admin/hardware/{hw_id}/upload-image")
 async def upload_hardware_image(
     hw_id: str,
@@ -2296,26 +2298,33 @@ async def upload_hardware_image(
         raise HTTPException(status_code=400, detail=f"Allowed: {', '.join(allowed)}")
     
     safe_name = f"{hw_id}{ext}"
-    file_path = HW_IMAGE_DIR / safe_name
     contents = await file.read()
-    with open(file_path, 'wb') as f:
-        f.write(contents)
-    
+    result = put_object(
+        f"{STORAGE_PREFIX}/hardware/{safe_name}",
+        contents,
+        file.content_type or "application/octet-stream",
+    )
+
     image_url = f"/api/hardware-images/{safe_name}"
-    await db.hardware.update_one({"id": hw_id}, {"$set": {"image_url": image_url}})
+    await db.hardware.update_one(
+        {"id": hw_id},
+        {"$set": {"image_url": image_url, "image_storage_path": result["path"]}},
+    )
     return {"message": "Image uploaded", "image_url": image_url}
 
 @api_router.get("/hardware-images/{filename}")
 async def serve_hardware_image(filename: str):
-    file_path = HW_IMAGE_DIR / filename
-    if not file_path.exists():
+    try:
+        contents, ct = get_object(f"{STORAGE_PREFIX}/hardware/{filename}")
+    except Exception:
         raise HTTPException(status_code=404, detail="Image not found")
-    ct = "image/png"
     if filename.endswith('.jpg') or filename.endswith('.jpeg'):
         ct = "image/jpeg"
     elif filename.endswith('.webp'):
         ct = "image/webp"
-    return FileResponse(str(file_path), media_type=ct)
+    elif filename.endswith('.png'):
+        ct = "image/png"
+    return Response(content=contents, media_type=ct)
 
 # Include the router in the main app
 app.include_router(api_router)

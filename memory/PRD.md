@@ -295,9 +295,16 @@ Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform —
 3. **Secure Rust Software** — rBoot, rustBoot, RTOS, HAL/PAC/HAM, Crypto Stack, SDKs
 4. **Silicon SignOff & Trust** — SignOff Silicon, TRUSTED-V Verified, TVOTS
 
-**Partner Ecosystem highlighted (SiFive, Akeana, MIPS ARC-V, C-DAC, Mindgrove)** across Landing + Products pages.
+**Partner Ecosystem highlighted (SiFive, Akeana, C-DAC, Mindgrove, Upbeat Tech)** across Landing + Products pages.
+> CORRECTION (Jun 2026): There is NO MIPS / MIPS ARC-V tie-up. IP partners are **SiFive and Akeana only**. Any earlier mention above is void.
 
 ## Recent Changes Log
+- **Jun 2026 — Rebuild Kit + Object Storage**
+  - Authored `/app/docs/rebuild-kit/` — full-fidelity rebuild documentation set: `00_MASTER_PROMPT.md` (941 lines: stack, routes, models, API contract, page-by-section specs with copy, data-testid map, 9-phase build plan, acceptance tests), `01_PHILOSOPHY_AND_STORY.md` (core philosophy, 8 structural gaps, 6-layer block story, homepage narrative arc, voice & tone, past mistakes), `02_DESIGN_SYSTEM.md` (exact tokens, type scale, layout rhythm, ui-kit contracts, forbidden patterns), `README.md`.
+  - Zipped to `/app/docs/TRUSTED-V_Rebuild_Kit.zip` and published at `/TRUSTED-V_Rebuild_Kit.zip` (frontend/public) for download.
+  - **Migrated all file uploads from pod-local disk to Emergent managed object storage** (`/app/backend/storage.py`). Affects IDE binary upload/download and hardware image upload/serve. Removed `uploads/ide` and `uploads/hardware` dirs and the `FileResponse` disk reads. Mongo now stores `storage_path` / `image_storage_path`. Verified end-to-end via curl (upload → download byte-identical; image serves as image/png). Fixes the deployment blocker where uploads vanished on pod restart.
+  - Note: the API key must be read *lazily inside* `init_storage()` — reading it at module import time fails because `storage.py` is imported before `load_dotenv()`.
+
 - **Aug 2026**: Landing.jsx + ProductSuite.jsx upgraded to reflect PDF's ecosystem-first positioning. Added: Partner Strip, "RISC-V Without Fragmentation" section, 4-pillar architecture (added Virtualization pillar), Virtual First workflow diagram, "Who is TRUSTED-V For?" audience segmentation, "RISC-V IP Integration" section on Products page featuring SiFive/Akeana/MIPS ARC-V/C-DAC/Mindgrove.
 - **Feb 2026**: Hero chip hover-reveal animation, standardized RISC-V colors (Navy #003262 + Cyan #00B4E0), unified PageHero component across secondary pages, updated tagline.
 
