@@ -1,82 +1,123 @@
 /**
- * StackVisual — animated isometric "silicon → software" stack.
- * Pulses travel up the attestation rail; each layer lights a verification mark.
- * Pure SVG + SMIL, brand blue gradation only.
+ * StackVisual — isometric "silicon → software" stack.
+ * Motion is CSS-only (transform + opacity), so it stays smooth and never re-layouts.
  */
-const CX = 250, W = 300, H = 150, D = 16;
-const RAIL_X = 440, RAIL_TOP = 80, RAIL_BOTTOM = 400;
-const DUR = "3.6s";
+const CX = 246;
+const W = 286;
+const H = 126;
+const D = 18;
+const GAP = 92;
+const BASE_Y = 386;
+const RAIL_X = 436;
 
 const LAYERS = [
-  { cy: 380, top: "#003262", side: "#00162B", ink: "#fff", sub: "rgba(255,255,255,0.65)", title: "RISC-V SILICON", note: "SiFive · Akeana · C-DAC", die: true },
-  { cy: 289, top: "#004A7F", side: "#003262", ink: "#fff", sub: "rgba(255,255,255,0.65)", title: "ROOT OF TRUST", note: "rBoot · rustBoot · Crypto" },
-  { cy: 198, top: "#2486C7", side: "#004A7F", ink: "#fff", sub: "rgba(255,255,255,0.75)", title: "RUST RUNTIME", note: "RTOS · HAL · Hypervisor" },
-  { cy: 107, top: "#E6F1F9", side: "#9DC8E8", ink: "#003262", sub: "#004A7F", title: "APPLICATION", note: "Automotive · Industrial · IoT", stroke: "#2486C7" },
+  { label: "RISC-V SILICON", note: "SiFive · Akeana · C-DAC", top: "#00294F", side: "#001B36", ink: "#FFFFFF", sub: "rgba(255,255,255,0.58)", die: true },
+  { label: "ROOT OF TRUST", note: "rBoot · rustBoot · crypto", top: "#004A7F", side: "#003262", ink: "#FFFFFF", sub: "rgba(255,255,255,0.62)" },
+  { label: "RUST RUNTIME", note: "RTOS · HAL · hypervisor", top: "#2486C7", side: "#14669D", ink: "#FFFFFF", sub: "rgba(255,255,255,0.75)" },
+  { label: "APPLICATION", note: "automotive · industrial · IoT", top: "#E4EFF8", side: "#AFCEE6", ink: "#003262", sub: "#0F6497", outline: "#7FB3DA" },
 ];
 
+const y = (i) => BASE_Y - i * GAP;
 const rhombus = (cy, w = W, h = H) => `${CX},${cy - h / 2} ${CX + w / 2},${cy} ${CX},${cy + h / 2} ${CX - w / 2},${cy}`;
 const leftFace = (cy) => `${CX - W / 2},${cy} ${CX},${cy + H / 2} ${CX},${cy + H / 2 + D} ${CX - W / 2},${cy + D}`;
 const rightFace = (cy) => `${CX},${cy + H / 2} ${CX + W / 2},${cy} ${CX + W / 2},${cy + D} ${CX},${cy + H / 2 + D}`;
-const frac = (cy) => (RAIL_BOTTOM - cy) / (RAIL_BOTTOM - RAIL_TOP);
 
-const Plate = ({ l }) => {
-  const t0 = frac(l.cy).toFixed(3);
-  const t1 = (frac(l.cy) + 0.05).toFixed(3);
+const Plate = ({ l, i }) => {
+  const cy = y(i);
+  const delay = `${(3 - i) * 1.4}s`;
   return (
     <g>
-      <polygon points={leftFace(l.cy)} fill={l.side} />
-      <polygon points={rightFace(l.cy)} fill={l.side} opacity="0.85" />
-      <polygon points={rhombus(l.cy)} fill={l.top} stroke={l.stroke || "none"} strokeWidth="1" />
-      {l.die && <polygon points={rhombus(l.cy, 120, 60)} fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1" transform={`translate(0,-${H / 2 - 36})`} />}
-      {/* activation glow */}
-      <polygon points={rhombus(l.cy)} fill="none" stroke="#00B4E0" strokeWidth="2" opacity="0">
-        <animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes={`0;${t0};${t1};${Math.min(+t1 + 0.08, 0.99).toFixed(3)};1`} dur={DUR} repeatCount="indefinite" />
-      </polygon>
-      <text x={CX} y={l.cy + 20} textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="11.5" fontWeight="600" letterSpacing="1.5" fill={l.ink}>{l.title}</text>
-      <text x={CX} y={l.cy + 36} textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="9" fill={l.sub}>{l.note}</text>
-      {/* connector + verification mark */}
-      <line x1={CX + W / 2} y1={l.cy} x2={RAIL_X} y2={l.cy} stroke="#CFCEC8" strokeWidth="1" strokeDasharray="3 3" />
-      <circle cx={RAIL_X} cy={l.cy} r="3" fill="#fff" stroke="#003262" strokeWidth="1.2" />
-      <path d={`M${RAIL_X + 12},${l.cy} l4,4 l9,-10`} fill="none" stroke="#0F6E56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="22" strokeDashoffset="22">
-        <animate attributeName="stroke-dashoffset" values="22;22;0;0;22" keyTimes={`0;${t0};${t1};0.985;1`} dur={DUR} repeatCount="indefinite" />
-      </path>
+      <polygon points={leftFace(cy)} fill={l.side} />
+      <polygon points={rightFace(cy)} fill={l.side} opacity="0.82" />
+      <polygon points={rhombus(cy)} fill={l.top} stroke={l.outline || "rgba(255,255,255,0.10)"} strokeWidth="1" />
+
+      {l.die && (
+        <g opacity="0.28">
+          {[-0.5, 0.5].map((a) =>
+            [-0.5, 0.5].map((b) => (
+              <polygon
+                key={`${a}-${b}`}
+                points={rhombus(cy, 124, 56)}
+                transform={`translate(${(a + b) * 68},${(a - b) * 30})`}
+                fill="none"
+                stroke="rgba(255,255,255,0.5)"
+                strokeWidth="0.8"
+              />
+            ))
+          )}
+        </g>
+      )}
+
+      {/* activation edge — CSS flash, no layout impact */}
+      <polygon
+        points={rhombus(cy)}
+        fill="none"
+        stroke="#7FD2F0"
+        strokeWidth="2.5"
+        className="tv-plate-flash"
+        style={{ animationDelay: delay }}
+      />
+
+      <text x={CX} y={cy + 1} textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="11.5" fontWeight="600" letterSpacing="1.6" fill={l.ink}>
+        {l.label}
+      </text>
+      <text x={CX} y={cy + 18} textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="9.5" fill={l.sub}>
+        {l.note}
+      </text>
+
+      {/* attestation tap */}
+      <line x1={CX + W / 2 - 6} y1={cy} x2={RAIL_X} y2={cy} stroke="#CFCEC8" strokeWidth="1" strokeDasharray="3 4" />
+      <circle cx={RAIL_X} cy={cy} r="3.2" fill="#FFFFFF" stroke="#003262" strokeWidth="1.3" />
+      <g className="tv-check-in" style={{ animationDelay: delay }}>
+        <circle cx={RAIL_X + 22} cy={cy} r="9" fill="#0F6E56" opacity="0.12" />
+        <path d={`M${RAIL_X + 18},${cy} l3.2,3.4 l7,-7.6`} fill="none" stroke="#0F6E56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
     </g>
   );
 };
 
 const StackVisual = () => (
   <div className="relative aspect-[26/25] rounded-md border border-[#E5E4DF] bg-[#F7F7F5] overflow-hidden" data-testid="hero-visual">
-    <div className="absolute inset-0 tv-grid-bg opacity-70" />
+    <div className="absolute inset-0 tv-grid-bg opacity-60" />
     <svg viewBox="0 0 520 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
-      <g className="tv-float">
-        {/* attestation rail */}
-        <line x1={RAIL_X} y1={RAIL_BOTTOM} x2={RAIL_X} y2={RAIL_TOP} stroke="#003262" strokeWidth="1.2" opacity="0.35" />
-        <text x={RAIL_X} y={RAIL_BOTTOM + 18} textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="8.5" letterSpacing="1.5" fill="#5A6472">ATTEST</text>
+      <defs>
+        <radialGradient id="tv-stack-glow" cx="50%" cy="55%" r="55%">
+          <stop offset="0%" stopColor="#2486C7" stopOpacity="0.16" />
+          <stop offset="100%" stopColor="#2486C7" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="tv-rail-grad" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stopColor="#003262" stopOpacity="0.1" />
+          <stop offset="50%" stopColor="#2486C7" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#003262" stopOpacity="0.1" />
+        </linearGradient>
+      </defs>
 
-        {LAYERS.map((l) => <Plate key={l.title} l={l} />)}
+      <rect x="0" y="0" width="520" height="500" fill="url(#tv-stack-glow)" />
+      <ellipse cx={CX} cy={BASE_Y + 62} rx="150" ry="26" fill="#003262" opacity="0.07" />
 
-        {/* pulses */}
-        {[0, 1.8].map((delay) => (
-          <circle key={delay} r="4.5" fill="#00B4E0">
-            <animateMotion dur={DUR} begin={`${delay}s`} repeatCount="indefinite" path={`M${RAIL_X},${RAIL_BOTTOM} L${RAIL_X},${RAIL_TOP}`} />
-            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur={DUR} begin={`${delay}s`} repeatCount="indefinite" />
-          </circle>
-        ))}
+      <g className="tv-stack-drift">
+        <line x1={RAIL_X} y1={y(0) + 6} x2={RAIL_X} y2={y(3) - 44} stroke="url(#tv-rail-grad)" strokeWidth="1.5" />
+        {LAYERS.map((l, i) => <Plate key={l.label} l={l} i={i} />)}
 
-        {/* verified badge */}
-        <g opacity="0.3">
-          <animate attributeName="opacity" values="0.3;0.3;1;1;0.3" keyTimes="0;0.9;0.95;0.985;1" dur={DUR} repeatCount="indefinite" />
-          <rect x={RAIL_X - 44} y={RAIL_TOP - 34} width="88" height="22" rx="11" fill="#0F6E56" />
-          <text x={RAIL_X} y={RAIL_TOP - 19} textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="9" fontWeight="600" letterSpacing="1.5" fill="#fff">VERIFIED</text>
+        <g className="tv-rail-pulse">
+          <circle cx={RAIL_X} cy={y(0)} r="8" fill="#2486C7" opacity="0.18" />
+          <circle cx={RAIL_X} cy={y(0)} r="3.6" fill="#2486C7" />
+        </g>
+
+        <g className="tv-attest-badge">
+          <rect x={RAIL_X - 50} y={y(3) - 62} width="100" height="22" rx="4" fill="#0F6E56" />
+          <text x={RAIL_X} y={y(3) - 47} textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="9" fontWeight="600" letterSpacing="1.6" fill="#FFFFFF">
+            ATTESTED
+          </text>
         </g>
       </g>
 
-      {/* axis annotation */}
-      <text x="24" y="120" fontFamily="IBM Plex Mono" fontSize="9" letterSpacing="2" fill="#5A6472" transform="rotate(-90 24 120)">SOFTWARE ↑</text>
-      <text x="24" y="470" fontFamily="IBM Plex Mono" fontSize="9" letterSpacing="2" fill="#5A6472" transform="rotate(-90 24 470)">SILICON ↓</text>
+      <text x="26" y="150" fontFamily="'IBM Plex Mono', monospace" fontSize="9" letterSpacing="2.2" fill="#5A6472" transform="rotate(-90 26 150)">SOFTWARE ↑</text>
+      <text x="26" y="432" fontFamily="'IBM Plex Mono', monospace" fontSize="9" letterSpacing="2.2" fill="#5A6472" transform="rotate(-90 26 432)">SILICON ↓</text>
+      <line x1="34" y1="100" x2="34" y2="440" stroke="#CFCEC8" strokeWidth="1" />
     </svg>
-    <div className="absolute bottom-3 left-4 font-mono text-[10px] tracking-widest uppercase text-[#5A6472]">
-      Attested at every layer · illustrative
+    <div className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[#5A6472]">
+      Verified at every layer · illustrative
     </div>
   </div>
 );

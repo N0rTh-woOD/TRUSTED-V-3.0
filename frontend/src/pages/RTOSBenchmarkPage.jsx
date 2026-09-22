@@ -32,7 +32,7 @@ const RTOSBenchmarkPage = () => {
   ];
 
   return (
-    <div className="bg-white text-[#0A0A0A]" data-testid="rtos-benchmark-page">
+    <div className="bg-white text-[#0B0F14]" data-testid="rtos-benchmark-page">
       <PageHero
         crumbs={[{ label: "Products", to: "/product-suite" }, { label: "RTOS Options" }]}
         eyebrow="RTOS choices"
@@ -44,7 +44,7 @@ const RTOSBenchmarkPage = () => {
         subtitle="TRUSTED-V ships integration and reference project templates for four production RTOS options — pick the runtime your project actually needs."
       />
 
-      <section className="tv-section border-b border-[#E7E5E0]" data-testid="rtos-options">
+      <section className="tv-section border-b border-[#E5E4DF]" data-testid="rtos-options">
         <div className="tv-container">
           <div className="mb-10 max-w-3xl">
             <span className="tv-eyebrow">Supported RTOS</span>
@@ -52,18 +52,18 @@ const RTOSBenchmarkPage = () => {
               Four runtimes. One toolchain.
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
+          <div className="grid md:grid-cols-2 gap-4">
             {options.map((o) => (
-              <div key={o.name} className={`bg-white p-8 md:p-10 min-h-[260px] ${o.featured ? "border-t-[3px] border-[#003262]" : ""}`}>
+              <div key={o.name} className={`tv-panel p-7 md:p-8 min-h-[250px] ${o.featured ? "border-[#2486C7]" : ""}`}>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>{o.tag}</span>
+                  <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#5A6472]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>{o.tag}</span>
                   {o.featured && <span className="text-[10px] font-mono text-[#003262] border border-[#003262]/40 px-2 py-0.5" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>native</span>}
                 </div>
-                <h3 className="text-[20px] md:text-[24px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>{o.name}</h3>
-                <p className="mt-3 text-[13.5px] leading-[1.65] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>{o.desc}</p>
-                <ul className="mt-5 space-y-2 border-t border-[#E7E5E0] pt-5">
+                <h3 className="text-[20px] md:text-[24px] tracking-[-0.02em] text-[#0B0F14]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>{o.name}</h3>
+                <p className="mt-3 text-[13.5px] leading-[1.65] text-[#5A6472] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>{o.desc}</p>
+                <ul className="mt-5 space-y-2 border-t border-[#E5E4DF] pt-5">
                   {o.features.map((f) => (
-                    <li key={f} className="text-[13px] text-[#0A0A0A] flex items-start gap-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                    <li key={f} className="text-[13px] text-[#0B0F14] flex items-start gap-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                       <span className="w-1 h-1 mt-2 rounded-full bg-[#003262] flex-shrink-0" />
                       {f}
                     </li>

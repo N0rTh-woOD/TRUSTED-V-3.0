@@ -3,7 +3,7 @@
  * Import: import { Eyebrow, SectionHeader, ArchitectureDiagram, TechnicalMetric, ... } from "@/components/ui-kit";
  */
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight, ChevronRight, Check, X, Minus } from "lucide-react";
+import { ArrowUpRight, ChevronRight, Check, X, Minus } from "lucide-react";
 import { BLUE_STEPS } from "@/components/TrustedVLogo";
 
 const slug = (s) => String(s).toLowerCase().replace(/\W+/g, "-");
@@ -28,31 +28,58 @@ export const Breadcrumbs = ({ items = [], className = "" }) => (
   </nav>
 );
 
-/* ─── GradientCard — Bosch blue gradation, light → dark by step ─── */
-export const GradientCard = ({ step = 0, index, title, description, to }) => {
-  const bg = BLUE_STEPS[step % BLUE_STEPS.length];
-  const onDark = step % BLUE_STEPS.length >= 2;
-  const ink = onDark ? "#FFFFFF" : "#0B0F14";
-  const muted = onDark ? "rgba(255,255,255,0.72)" : "#3A4A5A";
-  return (
-    <Link
-      to={to || "#"}
-      className="group relative flex flex-col justify-between rounded-md p-7 md:p-8 min-h-[220px] transition-transform duration-200 hover:-translate-y-1 hover:shadow-[0_18px_40px_-24px_rgba(0,50,98,0.45)]"
-      style={{ background: bg }}
-      data-testid={`gradient-card-${slug(title)}`}
-    >
-      <div className="flex items-center justify-between">
-        <span className="font-mono text-[11px] tracking-[0.16em]" style={{ color: onDark ? "rgba(255,255,255,0.6)" : "#004A7F" }}>
-          {String((index ?? step) + 1).padStart(2, "0")}
-        </span>
-        <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" style={{ color: ink }} />
-      </div>
-      <div className="mt-10">
-        <h3 className="text-[20px] md:text-[22px] font-semibold tracking-tight" style={{ color: ink }}>{title}</h3>
-        {description && <p className="mt-2 text-[14px] leading-[1.6]" style={{ color: muted }}>{description}</p>}
-      </div>
-    </Link>
+/* ─── TVCard — THE shared card primitive for the whole platform ───
+   Light surface · 1px border · mono eyebrow · hover lift + blue accent rule. */
+export const TVCard = ({
+  to, href, eyebrow, title, description, bullets = [], meta, footer, children,
+  muted = false, dark = false, arrow = true, size = "md", className = "", "data-testid": testId,
+}) => {
+  const pad = size === "sm" ? "p-6" : size === "lg" ? "p-8 md:p-10" : "p-7 md:p-8";
+  const interactive = Boolean(to || href);
+  const cls = [
+    "tv-panel relative flex flex-col overflow-hidden group",
+    muted && "tv-panel-muted",
+    dark && "tv-panel-dark",
+    interactive && "tv-panel-link tv-panel-accent",
+    pad,
+    className,
+  ].filter(Boolean).join(" ");
+  const ink = dark ? "text-white" : "text-[#0B0F14]";
+  const sub = dark ? "text-white/65" : "text-[#5A6472]";
+  const rule = dark ? "border-white/15" : "border-[#E5E4DF]";
+
+  const body = (
+    <>
+      {(eyebrow || arrow) && (
+        <div className="flex items-start justify-between gap-4 mb-4">
+          {eyebrow ? (
+            <span className={`font-mono text-[10.5px] tracking-[0.18em] uppercase ${dark ? "text-[#56A2D6]" : "text-[#004A7F]"}`}>{eyebrow}</span>
+          ) : <span />}
+          {interactive && arrow && (
+            <ArrowUpRight className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${dark ? "text-white/70" : "text-[#5A6472] group-hover:text-[#003262]"}`} />
+          )}
+        </div>
+      )}
+      {title && <h3 className={`text-[19px] md:text-[21px] font-semibold tracking-tight leading-snug ${ink}`}>{title}</h3>}
+      {description && <p className={`mt-2.5 text-[14px] leading-[1.65] ${sub}`}>{description}</p>}
+      {bullets.length > 0 && (
+        <ul className={`mt-5 pt-5 border-t space-y-2 ${rule}`}>
+          {bullets.map((b) => (
+            <li key={b} className={`flex items-start gap-2.5 text-[13.5px] ${dark ? "text-white/80" : "text-[#1A1F25]"}`}>
+              <span className="w-1 h-1 rounded-full bg-[#2486C7] mt-2 flex-shrink-0" />{b}
+            </li>
+          ))}
+        </ul>
+      )}
+      {children}
+      {meta && <div className={`mt-4 font-mono text-[11.5px] ${dark ? "text-[#9DC8E8]" : "text-[#004A7F]"}`}>{meta}</div>}
+      {footer && <div className={`mt-auto pt-5 border-t ${rule}`}>{footer}</div>}
+    </>
   );
+
+  if (href) return <a href={href} className={cls} data-testid={testId}>{body}</a>;
+  if (to) return <Link to={to} className={cls} data-testid={testId}>{body}</Link>;
+  return <div className={cls} data-testid={testId}>{body}</div>;
 };
 
 /* ─── StepRail — numbered vertical flow (engagement models) ─── */
@@ -207,70 +234,71 @@ export const TechnicalMetric = ({ rows = [], className = "" }) => (
   </div>
 );
 
-/* ─── ProductCard ─── */
+/* ─── CardShell — link when a destination exists, plain panel otherwise (no dead links) ─── */
+const CardShell = ({ to, href, className = "", testId, children }) => {
+  const interactive = Boolean(to || href);
+  const cls = `tv-panel relative overflow-hidden group flex flex-col ${interactive ? "tv-panel-link tv-panel-accent" : ""} ${className}`;
+  if (href) return <a href={href} className={cls} data-testid={testId}>{children}</a>;
+  if (to) return <Link to={to} className={cls} data-testid={testId}>{children}</Link>;
+  return <div className={cls} data-testid={testId}>{children}</div>;
+};
+
+/* ─── ProductCard — TVCard language, larger title ─── */
 export const ProductCard = ({ eyebrow, title, description, bullets = [], to, className = "" }) => (
-  <Link
-    to={to || "#"}
-    className={`group block border border-[#E5E4DF] rounded-md p-8 bg-white hover:border-[#003262] transition-colors ${className}`}
-    data-testid={`product-card-${(title || "").toLowerCase().replace(/\W+/g, "-")}`}
-  >
-    {eyebrow && <div className="mb-3"><Eyebrow alt>{eyebrow}</Eyebrow></div>}
-    <div className="flex items-start justify-between gap-4">
-      <h3 className="tv-h3" style={{ fontSize: "24px" }}>{title}</h3>
-      <ArrowUpRight className="w-5 h-5 text-[#5A6472] group-hover:text-[#003262] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
+  <CardShell to={to} className={`p-7 md:p-8 ${className}`} testId={`product-card-${slug(title || "")}`}>
+    <div className="flex items-start justify-between gap-4 mb-4">
+      <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">{eyebrow}</span>
+      {to && <ArrowUpRight className="w-4 h-4 text-[#5A6472] group-hover:text-[#003262] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />}
     </div>
-    {description && <p className="tv-body mt-3 text-[15px] text-[#5A6472]">{description}</p>}
+    <h3 className="text-[22px] md:text-[24px] font-semibold tracking-tight leading-snug text-[#0B0F14]">{title}</h3>
+    {description && <p className="mt-2.5 text-[14px] leading-[1.65] text-[#5A6472]">{description}</p>}
     {bullets.length > 0 && (
-      <ul className="mt-5 space-y-2 pt-4 border-t border-[#E5E4DF]">
+      <ul className="mt-5 space-y-2 pt-5 border-t border-[#E5E4DF]">
         {bullets.map((b) => (
           <li key={b} className="flex items-start gap-2.5 text-[13.5px] text-[#1A1F25]">
-            <span className="w-1 h-1 rounded-full bg-[#003262] mt-2 flex-shrink-0" /> {b}
+            <span className="w-1 h-1 rounded-full bg-[#2486C7] mt-2 flex-shrink-0" /> {b}
           </li>
         ))}
       </ul>
     )}
-  </Link>
+  </CardShell>
 );
 
 /* ─── MarketCard ─── */
 export const MarketCard = ({ label, headline, capabilities = [], to, className = "" }) => (
-  <Link
-    to={to || "#"}
-    className={`group block border border-[#E5E4DF] rounded-md p-8 bg-white hover:border-[#003262] transition-colors ${className}`}
-  >
-    <div className="mb-4 font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472]">{label}</div>
-    <h3 className="tv-h3" style={{ fontSize: "22px" }}>{headline}</h3>
+  <CardShell to={to} className={`p-7 md:p-8 ${className}`} testId={`market-card-${slug(label || "")}`}>
+    <div className="flex items-start justify-between gap-4 mb-4">
+      <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">{label}</span>
+      {to && <ArrowUpRight className="w-4 h-4 text-[#5A6472] group-hover:text-[#003262] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />}
+    </div>
+    <h3 className="text-[19px] md:text-[21px] font-semibold tracking-tight leading-snug text-[#0B0F14]">{headline}</h3>
     {capabilities.length > 0 && (
-      <ul className="mt-5 space-y-1.5">
+      <ul className="mt-5 space-y-2 pt-5 border-t border-[#E5E4DF]">
         {capabilities.map((c) => (
-          <li key={c} className="text-[13.5px] text-[#1A1F25] flex items-start gap-2">
-            <span className="text-[#003262] font-mono">›</span> {c}
+          <li key={c} className="text-[13.5px] text-[#1A1F25] flex items-start gap-2.5">
+            <span className="w-1 h-1 rounded-full bg-[#2486C7] mt-2 flex-shrink-0" /> {c}
           </li>
         ))}
       </ul>
     )}
-    <div className="mt-6 inline-flex items-center gap-1.5 text-[13px] text-[#003262] font-semibold group-hover:gap-2.5 transition-all">
-      Explore <ArrowRight className="w-3.5 h-3.5" />
-    </div>
-  </Link>
+  </CardShell>
 );
 
-/* ─── PartnerGrid ─── */
+/* ─── PartnerGrid — same card language, tiled ─── */
 export const PartnerGrid = ({ partners = [], onDark = false }) => (
-  <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px ${onDark ? "bg-white/10" : "bg-[#E5E4DF]"}`}>
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3" data-testid="partner-grid">
     {partners.map((p) => (
       <div
         key={p.name}
-        className={`${onDark ? "bg-[#00162B]" : "bg-white"} px-6 py-8 flex flex-col items-start justify-between min-h-[112px]`}
+        className={`tv-panel ${onDark ? "tv-panel-dark" : ""} relative overflow-hidden px-5 py-6 flex flex-col items-start justify-between min-h-[118px]`}
       >
-        <div className={`text-[18px] md:text-[20px] font-semibold tracking-tight ${onDark ? "text-white" : "text-[#0B0F14]"}`}>
-          {p.name}
+        <span className={`font-mono text-[10px] tracking-[0.18em] uppercase ${onDark ? "text-[#56A2D6]" : "text-[#004A7F]"}`}>Partner</span>
+        <div>
+          <div className={`text-[17px] font-semibold tracking-tight ${onDark ? "text-white" : "text-[#0B0F14]"}`}>{p.name}</div>
+          {p.note && (
+            <div className={`mt-1 text-[12px] ${onDark ? "text-white/60" : "text-[#5A6472]"}`}>{p.note}</div>
+          )}
         </div>
-        {p.note && (
-          <div className={`mt-2 text-[11px] font-mono tracking-widest uppercase ${onDark ? "text-white/60" : "text-[#5A6472]"}`}>
-            {p.note}
-          </div>
-        )}
       </div>
     ))}
   </div>
@@ -278,17 +306,14 @@ export const PartnerGrid = ({ partners = [], onDark = false }) => (
 
 /* ─── ResourceCard ─── */
 export const ResourceCard = ({ category, title, description, to }) => (
-  <Link
-    to={to || "#"}
-    className="group block border border-[#E5E4DF] rounded-md p-6 bg-white hover:border-[#003262] transition-colors"
-  >
-    <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472] mb-3">{category}</div>
-    <h4 className="tv-h4">{title}</h4>
-    {description && <p className="mt-2 text-[13.5px] text-[#5A6472] leading-relaxed">{description}</p>}
-    <div className="mt-5 text-[13px] text-[#003262] font-semibold inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
-      Read <ArrowRight className="w-3.5 h-3.5" />
+  <CardShell to={to} className="p-6" testId={`resource-card-${slug(title || "")}`}>
+    <div className="flex items-start justify-between gap-4 mb-4">
+      <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">{category}</span>
+      {to && <ArrowUpRight className="w-4 h-4 text-[#5A6472] group-hover:text-[#003262] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />}
     </div>
-  </Link>
+    <h4 className="text-[17px] font-semibold tracking-tight text-[#0B0F14]">{title}</h4>
+    {description && <p className="mt-2 text-[13.5px] text-[#5A6472] leading-relaxed">{description}</p>}
+  </CardShell>
 );
 
 /* ─── CTASection ─── */

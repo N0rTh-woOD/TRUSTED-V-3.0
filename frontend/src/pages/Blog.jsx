@@ -29,8 +29,8 @@ const Blog = () => {
       icon: Code,
     },
     {
-      title: "Comparing RISC-V RTOS Options: Zephyr vs FreeRTOS",
-      excerpt: "An in-depth comparison of the two most popular real-time operating systems for RISC-V development.",
+      title: "Comparing RISC-V RTOS Options for Real-Time Workloads",
+      excerpt: "An in-depth comparison of real-time operating system choices for RISC-V development.",
       author: "Lisa Wang",
       date: "Dec 10, 2025",
       readTime: "10 min read",

@@ -31,8 +31,8 @@ const sections = [
   {
     title: "RTOS & runtime",
     items: [
-      { name: "Zephyr integration", desc: "First-class Zephyr project templates and drivers." },
-      { name: "FreeRTOS on RISC-V", desc: "Deterministic scheduling and inter-task communication." },
+      { name: "TRUSTED-V RTOS", desc: "Memory-safe Rust RTOS with first-class project templates and drivers." },
+      { name: "Embassy async runtime", desc: "Cooperative async scheduling for Rust firmware on RISC-V." },
       { name: "Tock & RIOT", desc: "Memory-safe RTOS choices for security-critical firmware." },
     ],
   },
@@ -56,7 +56,7 @@ const sections = [
 
 const DeveloperPortal = () => {
   return (
-    <div className="bg-white text-[#0A0A0A]">
+    <div className="bg-white text-[#0B0F14]">
       <PageHero
         crumbs={[{ label: "Developers" }]}
         eyebrow="Developer portal"
@@ -70,9 +70,9 @@ const DeveloperPortal = () => {
         <QuickStart />
       </PageHero>
 
-      <section className="tv-section border-b border-[#E7E5E0]" data-testid="dev-sections">
+      <section className="tv-section border-b border-[#E5E4DF]" data-testid="dev-sections">
         <div className="tv-container">
-          <div className="border-t border-[#0A0A0A]">
+          <div className="border-t border-[#0B0F14]">
             {sections.map((s) => <Section key={s.title} section={s} />)}
           </div>
         </div>
@@ -100,27 +100,27 @@ const DeveloperPortal = () => {
 const Section = ({ section }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-[#E7E5E0]" data-testid={`dev-section-${section.title.toLowerCase().replace(/\s+/g, "-")}`}>
+    <div className="border-b border-[#E5E4DF]" data-testid={`dev-section-${section.title.toLowerCase().replace(/\s+/g, "-")}`}>
       <button
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center justify-between py-8 md:py-10 group"
       >
         <h3
-          className="text-[22px] md:text-[28px] tracking-[-0.015em] text-[#0A0A0A] group-hover:text-[#003262] transition-colors text-left"
+          className="text-[22px] md:text-[28px] tracking-[-0.015em] text-[#0B0F14] group-hover:text-[#003262] transition-colors text-left"
           style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}
         >
           {section.title}
         </h3>
-        <ChevronDown className={`w-6 h-6 text-[#6B6B6B] transition-transform ${open ? "rotate-180 text-[#003262]" : ""}`} />
+        <ChevronDown className={`w-6 h-6 text-[#5A6472] transition-transform ${open ? "rotate-180 text-[#003262]" : ""}`} />
       </button>
       {open && (
         <div className="pb-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {section.items.map((it) => (
-            <div key={it.name} className="border border-[#E7E5E0] p-6 hover:border-[#0A0A0A] transition-colors">
-              <h4 className="text-[16px] tracking-[-0.01em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
+            <div key={it.name} className="border border-[#E5E4DF] p-6 hover:border-[#0B0F14] transition-colors">
+              <h4 className="text-[16px] tracking-[-0.01em] text-[#0B0F14]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                 {it.name}
               </h4>
-              <p className="mt-2 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
+              <p className="mt-2 text-[13.5px] leading-[1.6] text-[#5A6472] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                 {it.desc}
               </p>
             </div>
@@ -132,7 +132,7 @@ const Section = ({ section }) => {
 };
 
 const QuickStart = () => (
-  <div className="border border-[#E7E5E0] bg-[#0A0A0A] text-white overflow-hidden" style={{ borderRadius: 4 }}>
+  <div className="border border-[#E5E4DF] bg-[#0B0F14] text-white overflow-hidden" style={{ borderRadius: 4 }}>
     <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10">
       <span className="text-[11px] text-white/60 font-mono" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
         quick-start.sh

@@ -22,7 +22,7 @@ const MEGA = [
   { title: "Software & Security", items: [
     { label: "Secure Boot", to: "/product/secure-boot", note: "rBoot & rustBoot" },
     { label: "Crypto Stack", to: "/product/crypto-stack", note: "Classical + PQC" },
-    { label: "RTOS Options", to: "/product/rtos-benchmark", note: "Rust-native, Zephyr, FreeRTOS" },
+    { label: "RTOS Options", to: "/product/rtos-benchmark", note: "Rust-native RTOS & benchmarks" },
   ] },
   { title: "Silicon & IP", items: [
     { label: "Product Suite Overview", to: "/product-suite", note: "The full platform" },

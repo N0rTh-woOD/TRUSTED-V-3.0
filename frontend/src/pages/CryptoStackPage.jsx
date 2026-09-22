@@ -60,7 +60,7 @@ const CryptoStackPage = () => {
     },
     {
       name: "Future / Advanced",
-      accent: "#6B6B6B",
+      accent: "#5A6472",
       items: [
         { algo: "Side-Channel Protections", variants: "Masking, blinding, constant-time impls", std: "Roadmap" },
       ],
@@ -68,7 +68,7 @@ const CryptoStackPage = () => {
   ];
 
   return (
-    <div className="bg-white text-[#0A0A0A]" data-testid="crypto-stack-page">
+    <div className="bg-white text-[#0B0F14]" data-testid="crypto-stack-page">
       <PageHero
         crumbs={[{ label: "Products", to: "/product-suite" }, { label: "Crypto Stack" }]}
         eyebrow="Crypto Stack"
@@ -80,31 +80,31 @@ const CryptoStackPage = () => {
         subtitle="A curated, Rust-native cryptographic stack — classical, PQC and side-channel-hardened primitives, mapped to NIST FIPS and international standards."
       />
 
-      <section className="tv-section-tight border-b border-[#E7E5E0]" data-testid="crypto-categories">
+      <section className="tv-section-tight border-b border-[#E5E4DF]" data-testid="crypto-categories">
         <div className="tv-container">
           <div className="space-y-10">
             {categories.map((c) => (
-              <div key={c.name} className="border-t border-[#0A0A0A]" data-testid={`crypto-cat-${c.name.toLowerCase().replace(/\s+/g, "-")}`}>
-                <div className="flex items-baseline justify-between py-6 border-b border-[#E7E5E0]">
+              <div key={c.name} className="border-t border-[#0B0F14]" data-testid={`crypto-cat-${c.name.toLowerCase().replace(/\s+/g, "-")}`}>
+                <div className="flex items-baseline justify-between py-6 border-b border-[#E5E4DF]">
                   <div className="flex items-baseline gap-3">
                     <span className="w-2 h-2 rounded-full" style={{ background: c.accent }} />
-                    <h2 className="text-[22px] md:text-[28px] tracking-[-0.02em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
+                    <h2 className="text-[22px] md:text-[28px] tracking-[-0.02em] text-[#0B0F14]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                       {c.name}
                     </h2>
                   </div>
-                  <span className="text-[11px] font-mono tracking-widest text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+                  <span className="text-[11px] font-mono tracking-widest text-[#5A6472]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                     {String(c.items.length).padStart(2, "0")} items
                   </span>
                 </div>
                 {c.items.map((it) => (
-                  <div key={it.algo} className="grid grid-cols-12 gap-4 py-5 border-b border-[#E7E5E0] items-baseline">
-                    <div className="col-span-12 md:col-span-3 text-[16px] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
+                  <div key={it.algo} className="grid grid-cols-12 gap-4 py-5 border-b border-[#E5E4DF] items-baseline">
+                    <div className="col-span-12 md:col-span-3 text-[16px] text-[#0B0F14]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
                       {it.algo}
                     </div>
-                    <div className="col-span-12 md:col-span-4 text-[13px] font-mono text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+                    <div className="col-span-12 md:col-span-4 text-[13px] font-mono text-[#0B0F14]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                       {it.variants}
                     </div>
-                    <div className="col-span-12 md:col-span-4 text-[13.5px] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
+                    <div className="col-span-12 md:col-span-4 text-[13.5px] text-[#5A6472] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
                       {it.std}
                     </div>
                     {it.note && (

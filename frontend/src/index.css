@@ -298,8 +298,42 @@
 }
 
 /* ============================================================
-   Cards & surfaces
+   Cards & surfaces — ONE card language across the platform
    ============================================================ */
+/* Base panel: every card on the site starts here. */
+.tv-panel {
+    background: #fff;
+    border: 1px solid var(--tv-border);
+    border-radius: var(--r-sm);
+    transition: border-color 200ms ease, transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 200ms ease;
+}
+.tv-panel-muted { background: var(--tv-surface); }
+.tv-panel-dark { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.14); }
+
+/* Interactive panel (links / clickable cards) */
+.tv-panel-link { cursor: pointer; }
+.tv-panel-link:hover {
+    border-color: var(--tv-blue-500);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px -24px rgba(0, 50, 98, 0.38);
+}
+.tv-panel-dark.tv-panel-link:hover { border-color: var(--tv-blue-500); box-shadow: 0 18px 38px -22px rgba(0, 0, 0, 0.6); }
+
+/* Accent rule that slides in on hover — shared card signature */
+.tv-panel-accent::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--tv-blue-500);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.tv-panel-accent:hover::before { transform: scaleY(1); }
+
 .tv-card {
     background: #fff;
     border: 1px solid var(--tv-border);
@@ -370,6 +404,52 @@
     50%      { transform: translateY(-7px); }
 }
 .tv-float { animation: tv-float 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+/* Hero stack — GPU-friendly transform/opacity only */
+@keyframes tv-stack-drift {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50%      { transform: translate3d(0, -6px, 0); }
+}
+.tv-stack-drift {
+    animation: tv-stack-drift 9s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes tv-rail-pulse {
+    0%       { transform: translate3d(0, 0, 0); opacity: 0; }
+    6%       { opacity: 1; }
+    70%      { opacity: 1; }
+    75%      { transform: translate3d(0, -276px, 0); opacity: 0; }
+    100%     { transform: translate3d(0, -276px, 0); opacity: 0; }
+}
+.tv-rail-pulse {
+    animation: tv-rail-pulse 5.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes tv-plate-flash {
+    0%   { opacity: 0; }
+    4%   { opacity: 0.9; }
+    18%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+.tv-plate-flash { animation: tv-plate-flash 5.6s linear infinite; }
+
+@keyframes tv-check-in {
+    0%   { opacity: 0; }
+    5%   { opacity: 1; }
+    86%  { opacity: 1; }
+    94%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+.tv-check-in { animation: tv-check-in 5.6s linear infinite; }
+
+@keyframes tv-attest-badge {
+    0%, 72%   { opacity: 0.22; }
+    78%, 92%  { opacity: 1; }
+    100%      { opacity: 0.22; }
+}
+.tv-attest-badge { animation: tv-attest-badge 5.6s ease-in-out infinite; }
 
 @keyframes tv-spin { to { transform: rotate(360deg); } }
 .tv-spin-slow { animation: tv-spin 22s linear infinite; transform-box: fill-box; transform-origin: center; }

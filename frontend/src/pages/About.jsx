@@ -6,7 +6,7 @@ import { Eyebrow } from "@/components/ui-kit";
 import { ArrowUpRight } from "lucide-react";
 
 const About = () => (
-  <div className="bg-white text-[#0A0A0A]">
+  <div className="bg-white text-[#0B0F14]">
     <PageHero
       crumbs={[{ label: "About" }]}
       eyebrow="About TRUSTED-V"
@@ -28,7 +28,7 @@ const Mission = () => {
     { k: "03", title: "Time-to-Market", desc: "Pre-integrated IP and virtual platforms — ship firmware before RTL freezes." },
   ];
   return (
-    <section className="tv-section border-b border-[#E7E5E0]" data-testid="about-mission">
+    <section className="tv-section border-b border-[#E5E4DF]" data-testid="about-mission">
       <div className="tv-container">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5">
@@ -45,14 +45,17 @@ const Mission = () => {
             </p>
           </div>
           <div className="lg:col-span-3 lg:col-start-6 hidden lg:block"><TrustRing /></div>
-          <div className="lg:col-span-4 lg:col-start-9 space-y-px bg-[#E7E5E0]">
+          <div className="lg:col-span-4 lg:col-start-9 space-y-3">
             {pillars.map((p, i) => (
-              <div key={p.k} className="bg-white p-6 md:p-7 border-l-[3px]" style={{ borderColor: BLUE_STEPS[i + 3] }}>
-                <div className="flex items-baseline gap-3">
-                  <span className="text-[12px] font-mono tracking-widest text-[#6B6B6B]">/ {p.k}</span>
-                  <h3 className="text-[22px] tracking-[-0.02em] text-[#0A0A0A] font-medium">{p.title}</h3>
+              <div key={p.k} className="tv-panel relative overflow-hidden p-6 md:p-7">
+                <span className="absolute top-0 left-0 bottom-0 w-[3px]" style={{ background: BLUE_STEPS[i + 3] }} />
+                <div className="pl-3">
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">/ {p.k}</span>
+                    <h3 className="text-[20px] font-semibold tracking-tight text-[#0B0F14]">{p.title}</h3>
+                  </div>
+                  <p className="mt-2 text-[14px] leading-[1.65] text-[#5A6472]">{p.desc}</p>
                 </div>
-                <p className="mt-2 text-[14px] leading-[1.6] text-[#4B4B4B]">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -74,22 +77,22 @@ const StructuralGaps = () => {
     { n: "08", title: "Ecosystem coordination", problem: "Vendors optimise locally, not for the whole stack.", answer: "The TRUSTED-V Consortium aligns partners on one open reference." },
   ];
   return (
-    <section className="tv-section border-b border-[#E7E5E0] bg-[#FAFAF7]" data-testid="structural-gaps">
+    <section className="tv-section border-b border-[#E5E4DF] bg-[#F7F7F5]" data-testid="structural-gaps">
       <div className="tv-container">
         <div className="mb-14 max-w-3xl">
           <Eyebrow>Why TRUSTED-V</Eyebrow>
           <h2 className="tv-h2 mt-4">Eight structural gaps we close.</h2>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {gaps.map((g) => (
-            <div key={g.n} className="bg-[#FAFAF7] p-7">
+            <div key={g.n} className="tv-panel p-6 md:p-7">
               <div className="flex items-baseline gap-3 mb-3">
-                <span className="text-[12px] font-mono tracking-widest text-[#003262]">{g.n}</span>
-                <h3 className="text-[18px] tracking-[-0.015em] text-[#0A0A0A] font-medium">{g.title}</h3>
+                <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">{g.n}</span>
+                <h3 className="text-[17px] font-semibold tracking-tight text-[#0B0F14]">{g.title}</h3>
               </div>
-              <p className="text-[13.5px] leading-[1.6] text-[#4B4B4B]">{g.problem}</p>
-              <div className="mt-4 border-l-2 border-[#003262] pl-3">
-                <p className="text-[13px] leading-[1.6] text-[#0A0A0A]">{g.answer}</p>
+              <p className="text-[13.5px] leading-[1.65] text-[#5A6472]">{g.problem}</p>
+              <div className="mt-4 border-l-2 border-[#2486C7] pl-3">
+                <p className="text-[13px] leading-[1.6] text-[#0B0F14]">{g.answer}</p>
               </div>
             </div>
           ))}
@@ -112,17 +115,17 @@ const RoadmapAndConsortium = () => {
     { name: "Academic & Research", desc: "Universities and labs contributing open reference implementations." },
   ];
   return (
-    <section className="tv-section border-b border-[#E7E5E0]" data-testid="roadmap-consortium">
+    <section className="tv-section border-b border-[#E5E4DF]" data-testid="roadmap-consortium">
       <div className="tv-container grid lg:grid-cols-12 gap-16">
         <div className="lg:col-span-5">
           <Eyebrow>Roadmap</Eyebrow>
           <h2 className="tv-h2 mt-4">Where we&apos;re heading.</h2>
-          <ul className="mt-10 border-t border-[#0A0A0A]">
+          <ul className="mt-10 border-t border-[#0B0F14]">
             {phases.map((p) => (
-              <li key={p.title} className="grid grid-cols-12 gap-4 py-6 border-b border-[#E7E5E0] items-baseline">
-                <span className="col-span-4 text-[12px] font-mono tracking-widest text-[#6B6B6B]">{p.period}</span>
-                <span className="col-span-5 text-[19px] md:text-[22px] text-[#0A0A0A] font-medium">{p.title}</span>
-                <span className={`col-span-3 justify-self-end text-[10px] font-semibold tracking-[0.2em] uppercase ${p.state === "Active" ? "text-[#0F6E56]" : "text-[#6B6B6B]"}`}>{p.state}</span>
+              <li key={p.title} className="grid grid-cols-12 gap-4 py-6 border-b border-[#E5E4DF] items-baseline">
+                <span className="col-span-4 text-[12px] font-mono tracking-widest text-[#5A6472]">{p.period}</span>
+                <span className="col-span-5 text-[19px] md:text-[22px] text-[#0B0F14] font-medium">{p.title}</span>
+                <span className={`col-span-3 justify-self-end text-[10px] font-semibold tracking-[0.2em] uppercase ${p.state === "Active" ? "text-[#0F6E56]" : "text-[#5A6472]"}`}>{p.state}</span>
               </li>
             ))}
           </ul>
@@ -132,13 +135,13 @@ const RoadmapAndConsortium = () => {
           <h2 className="tv-h2 mt-4">Four tiers of partnership.</h2>
           <div className="mt-10 space-y-3">
             {tiers.map((t, i) => (
-              <div key={t.name} className="border border-[#E7E5E0] rounded-md p-5 flex items-start gap-5" data-testid={`tier-${t.name.toLowerCase().replace(/\W+/g, "-")}`}>
+              <div key={t.name} className="border border-[#E5E4DF] rounded-md p-5 flex items-start gap-5" data-testid={`tier-${t.name.toLowerCase().replace(/\W+/g, "-")}`}>
                 <span className="w-9 h-9 rounded-md flex-shrink-0 flex items-center justify-center font-mono text-[11px] font-semibold text-white" style={{ background: BLUE_STEPS[5 - i] }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h4 className="text-[17px] text-[#0A0A0A] font-medium">{t.name}</h4>
-                  <p className="mt-1 text-[13.5px] leading-[1.55] text-[#4B4B4B]">{t.desc}</p>
+                  <h4 className="text-[17px] text-[#0B0F14] font-medium">{t.name}</h4>
+                  <p className="mt-1 text-[13.5px] leading-[1.55] text-[#5A6472]">{t.desc}</p>
                 </div>
               </div>
             ))}
@@ -168,7 +171,7 @@ const BackedByBosch = () => (
 );
 
 const CTA = () => (
-  <section className="tv-section-tight border-b border-[#E7E5E0]" data-testid="about-cta">
+  <section className="tv-section-tight border-b border-[#E5E4DF]" data-testid="about-cta">
     <div className="tv-container flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
       <h2 className="tv-h2">Join the RISC-V decade.</h2>
       <div className="flex gap-3">

@@ -254,7 +254,7 @@ const PIPELINE_HTML = `
     </div>
     <div class="card-body">Rust firmware auto-generated from hardware abstraction map. Full software stack built against the SoC register definition.</div>
     <div class="mini-grid">
-      <div class="mini" style="background:#FFF0EB;border-color:#F0997B"><div class="mini-t" style="color:#712B13">Middleware</div><ul class="mini-l"><li style="color:#993C1D">FreeRTOS port</li><li style="color:#993C1D">HAL + drivers</li><li style="color:#993C1D">Sensor fusion</li></ul></div>
+      <div class="mini" style="background:#FFF0EB;border-color:#F0997B"><div class="mini-t" style="color:#712B13">Middleware</div><ul class="mini-l"><li style="color:#993C1D">RTOS port</li><li style="color:#993C1D">HAL + drivers</li><li style="color:#993C1D">Sensor fusion</li></ul></div>
       <div class="mini" style="background:#FFF0EB;border-color:#F0997B"><div class="mini-t" style="color:#712B13">Application API</div><ul class="mini-l"><li style="color:#993C1D">REST endpoints</li><li style="color:#993C1D">OTA + telemetry SDK</li><li style="color:#993C1D">MQTT cloud bridge</li></ul></div>
     </div>
     <div style="margin-top:6px">

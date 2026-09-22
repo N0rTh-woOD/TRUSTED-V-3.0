@@ -213,7 +213,7 @@ const AdminMiddleware = () => {
                   <Input
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="FreeRTOS"
+                    placeholder="TRUSTED-V RTOS"
                   />
                 </div>
                 <div className="space-y-2">

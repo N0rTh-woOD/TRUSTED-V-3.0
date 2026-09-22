@@ -35,6 +35,7 @@ import CryptoStackPage from "@/pages/CryptoStackPage";
 import RTOSBenchmarkPage from "@/pages/RTOSBenchmarkPage";
 import WebIDEPage from "@/pages/WebIDEPage";
 import EngagementModels from "@/pages/EngagementModels";
+import NotFound from "@/pages/NotFound";
 
 // Auth Pages
 import Login from "@/pages/Login";
@@ -227,6 +228,9 @@ const AppContent = () => {
             </AdminRoute>
           }
         />
+
+        {/* Catch-all — no dead links */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       </main>
       <Footer />

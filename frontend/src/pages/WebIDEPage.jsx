@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 
 const WebIDEPage = () => {
   return (
-    <div className="bg-white text-[#0A0A0A]">
+    <div className="bg-white text-[#0B0F14]">
       <PageHero
         crumbs={[{ label: "Products", to: "/product-suite" }, { label: "WebIDE" }]}
         eyebrow="WebIDE — Cloud edition"
@@ -18,17 +18,17 @@ const WebIDEPage = () => {
         <CodeWindow />
       </PageHero>
 
-      <section className="tv-section border-b border-[#E7E5E0]" data-testid="webide-features">
-        <div className="tv-container grid md:grid-cols-3 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
+      <section className="tv-section border-b border-[#E5E4DF]" data-testid="webide-features">
+        <div className="tv-container grid md:grid-cols-3 gap-4">
           {[
             { n: "01", title: "Cloud toolchain", desc: "Rust nightly, LLVM, cargo, gcc-riscv — pre-warmed, always current." },
             { n: "02", title: "Simulator-backed", desc: "Boot your firmware inside the TRUSTED-V simulator without hardware." },
             { n: "03", title: "Live collaboration", desc: "Pair-program on RISC-V firmware with cursors and shared debug sessions." },
           ].map((f) => (
-            <div key={f.n} className="bg-white p-8 md:p-10">
+            <div key={f.n} className="tv-panel p-7 md:p-8">
               <div className="text-[12px] font-mono tracking-widest text-[#003262]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>/ {f.n}</div>
-              <h3 className="mt-3 text-[22px] tracking-[-0.015em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>{f.title}</h3>
-              <p className="mt-3 text-[14px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>{f.desc}</p>
+              <h3 className="mt-3 text-[22px] tracking-[-0.015em] text-[#0B0F14]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>{f.title}</h3>
+              <p className="mt-3 text-[14px] leading-[1.6] text-[#5A6472] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>{f.desc}</p>
             </div>
           ))}
         </div>
@@ -54,7 +54,7 @@ const WebIDEPage = () => {
 };
 
 const CodeWindow = () => (
-  <div className="border border-[#E7E5E0] bg-[#0A0A0A] text-white overflow-hidden" style={{ borderRadius: 4 }}>
+  <div className="border border-[#E5E4DF] bg-[#0B0F14] text-white overflow-hidden" style={{ borderRadius: 4 }}>
     <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
       <div className="flex items-center gap-1.5">
         <span className="w-2.5 h-2.5 rounded-full bg-white/20" />

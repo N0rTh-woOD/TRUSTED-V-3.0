@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import {
   Eyebrow, SectionHeader, TechnicalMetric, ProductCard, MarketCard, PartnerGrid,
-  PrimaryCTA, SecondaryCTA, GradientCard,
+  PrimaryCTA, SecondaryCTA, TVCard,
 } from "@/components/ui-kit";
 import StackVisual from "@/components/StackVisual";
 import { ENGAGEMENT_MODELS } from "@/data/engagement";
@@ -96,23 +96,24 @@ const PlatformIntro = () => (
 
 /* ───────────── PLATFORM ARCHITECTURE ───────────── */
 const PlatformArchitecture = () => {
+  /* One blue gradation, application (lightest) → silicon (deepest). */
   const groups = [
-    { band: "Application", color: "#2486C7", tag: "L05", items: [
+    { band: "Application", accent: "#9DC8E8", tag: "L05", items: [
       { name: "Automotive", note: "ISO 26262 aligned" }, { name: "Industrial", note: "IEC 62443" },
       { name: "IoT & Consumer", note: "PSA L3" }, { name: "Robotics & Edge AI", note: "Real-time" } ] },
-    { band: "Developer Toolchain", color: "#56A2D6", tag: "L04", items: [
+    { band: "Developer Toolchain", accent: "#56A2D6", tag: "L04", items: [
       { name: "Jarvyn IDE", note: "Rust + RISC-V native" }, { name: "WebIDE", note: "Zero-install cloud" },
       { name: "SDK · cargo · LLVM", note: "Signed toolchain" }, { name: "Debugger · Trace", note: "SVD register view" } ] },
-    { band: "Rust Runtime & OS", color: "#0F6E56", tag: "L03", items: [
-      { name: "TRUSTED-V RTOS", note: "Memory-safe" }, { name: "Zephyr · FreeRTOS", note: "Ecosystem" },
-      { name: "Embassy (async)", note: "Cooperative" }, { name: "HAL · PAC · HAM", note: "Peripheral access" } ] },
-    { band: "Virtualization", color: "#004A7F", tag: "L02", items: [
+    { band: "Rust Runtime & OS", accent: "#2486C7", tag: "L03", items: [
+      { name: "TRUSTED-V RTOS", note: "Memory-safe" }, { name: "Embassy (async)", note: "Cooperative" },
+      { name: "HAL · PAC · HAM", note: "Peripheral access" }, { name: "Linux (via CVA6)", note: "Rich OS" } ] },
+    { band: "Virtualization", accent: "#004A7F", tag: "L02", items: [
       { name: "Type-1 Hypervisor", note: "Mixed-criticality" }, { name: "Virtual Platform", note: "Pre-silicon SoC" },
       { name: "Cycle-approx Simulator", note: "Bring-up" } ] },
-    { band: "Secure Boot & Crypto", color: "#003262", tag: "L01", items: [
+    { band: "Secure Boot & Crypto", accent: "#003262", tag: "L01", items: [
       { name: "rBoot", note: "First stage" }, { name: "rustBoot", note: "A/B · OTA · PQC" },
       { name: "Crypto Stack", note: "Classical + PQC" }, { name: "Attestation", note: "TVOTS quote" } ] },
-    { band: "RISC-V IP & Silicon", color: "#00162B", tag: "L00", items: [
+    { band: "RISC-V IP & Silicon", accent: "#00162B", tag: "L00", items: [
       { name: "SiFive", note: "Performance IP" }, { name: "Akeana", note: "Automotive-grade IP" },
       { name: "C-DAC · Mindgrove", note: "Indian silicon" }, { name: "Reference SoC", note: "Boards & kits" } ] },
   ];
@@ -128,31 +129,37 @@ const PlatformArchitecture = () => {
         />
         <div className="grid lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8">
-            <div className="relative">
-              <div className="hidden md:block absolute left-0 top-0 bottom-0 w-[52px] pointer-events-none">
-                <div className="absolute inset-x-0 top-4 bottom-4 border-l border-[#CFCEC8]" />
-                <div className="absolute left-1/2 -translate-x-1/2 top-4 -rotate-90 origin-left translate-y-8 font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#5A6472] whitespace-nowrap">Software ↑</div>
-                <div className="absolute left-1/2 -translate-x-1/2 bottom-4 -rotate-90 origin-left -translate-y-8 font-mono text-[10.5px] tracking-[0.22em] uppercase text-[#5A6472] whitespace-nowrap">Silicon ↓</div>
+            <div className="flex items-stretch gap-4">
+              {/* axis */}
+              <div className="hidden md:flex flex-col items-center justify-between w-[26px] flex-shrink-0 py-1">
+                <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#5A6472] whitespace-nowrap [writing-mode:vertical-rl] rotate-180">Software</span>
+                <span className="flex-1 w-px bg-[#CFCEC8] my-3" />
+                <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#5A6472] whitespace-nowrap [writing-mode:vertical-rl] rotate-180">Silicon</span>
               </div>
-              <div className="md:pl-[52px] flex flex-col gap-2.5">
+
+              <div className="flex-1 flex flex-col gap-3">
                 {groups.map((g, idx) => (
-                  <div key={g.band} className="group relative bg-white border border-[#E5E4DF] rounded-md overflow-hidden hover:border-[#003262] transition-colors" data-testid={`arch-band-${idx}`}>
-                    <div className="absolute top-0 left-0 bottom-0 w-1" style={{ background: g.color }} />
-                    <div className="pl-5 pr-4 py-4 md:py-5">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                          <span className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#5A6472]">{g.tag}</span>
-                          <h3 className="text-[15px] md:text-[17px] font-semibold text-[#0B0F14]">{g.band}</h3>
+                  <div
+                    key={g.band}
+                    className="tv-panel relative overflow-hidden hover:border-[#2486C7] hover:shadow-[0_14px_32px_-24px_rgba(0,50,98,0.35)]"
+                    data-testid={`arch-band-${idx}`}
+                  >
+                    <span className="absolute top-0 left-0 bottom-0 w-[3px]" style={{ background: g.accent }} />
+                    <div className="pl-6 pr-5 py-5">
+                      <div className="flex items-center justify-between gap-4 mb-4">
+                        <div className="flex items-baseline gap-3">
+                          <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">{g.tag}</span>
+                          <h3 className="text-[16px] md:text-[17px] font-semibold tracking-tight text-[#0B0F14]">{g.band}</h3>
                         </div>
-                        <span className="hidden sm:inline-flex font-mono text-[10px] tracking-[0.14em] uppercase px-2 py-0.5 rounded-sm" style={{ color: g.color, border: `1px solid ${g.color}30`, background: `${g.color}0d` }}>
-                          {g.items.length} components
+                        <span className="hidden sm:inline-block font-mono text-[10px] tracking-[0.16em] uppercase text-[#5A6472]">
+                          {g.items.length} modules
                         </span>
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                         {g.items.map((it) => (
-                          <div key={it.name} className="border border-[#EDEBE5] rounded-sm px-3 py-2 bg-[#FAFAF7]">
+                          <div key={it.name} className="tv-panel tv-panel-muted px-3 py-2.5">
                             <div className="text-[12.5px] font-medium text-[#0B0F14] leading-tight">{it.name}</div>
-                            <div className="mt-0.5 font-mono text-[10px] text-[#5A6472]">{it.note}</div>
+                            <div className="mt-1 font-mono text-[9.5px] tracking-wide uppercase text-[#5A6472]">{it.note}</div>
                           </div>
                         ))}
                       </div>
@@ -172,11 +179,11 @@ const PlatformArchitecture = () => {
               ["OS Support", "RTOS + Linux (via CVA6)"],
               ["Crypto", "Classical + Post-Quantum"],
             ]} />
-            <div className="mt-6 border border-[#E5E4DF] rounded-md p-5 bg-white">
-              <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#5A6472] mb-3">Boot flow</div>
-              <div className="space-y-2 font-mono text-[12px] text-[#0B0F14]">
+            <div className="tv-panel mt-4 p-6">
+              <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F] mb-4">Boot flow</div>
+              <div className="space-y-2.5 font-mono text-[12px] text-[#0B0F14]">
                 {["01 · ROM RoT boots", "02 · verifies rBoot", "03 · verifies rustBoot", "04 · verifies App", "05 · attestation quote"].map((s) => (
-                  <div key={s} className="flex items-start gap-2"><span className="w-1 h-1 rounded-full bg-[#003262] mt-2 flex-shrink-0" /><span>{s}</span></div>
+                  <div key={s} className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-[#2486C7] mt-2 flex-shrink-0" /><span>{s}</span></div>
                 ))}
               </div>
             </div>
@@ -202,14 +209,18 @@ const RiscVIPCollaboration = () => {
           lede="IP-agnostic by design — pre-integrated with performance-class and automotive-grade RISC-V IP."
           action={<Link to="/partners" className="tv-arrow-link" data-testid="riscv-ip-partners">See all partners</Link>}
         />
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4">
           {partners.map((p) => (
-            <div key={p.name} className="border border-[#E5E4DF] rounded-md p-8 bg-white hover:border-[#003262] transition-colors flex flex-col" data-testid={`riscv-ip-${p.name.toLowerCase()}`}>
-              <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472] mb-4">{p.role}</div>
-              <h3 className="tv-h3" style={{ fontSize: "26px" }}>{p.name}</h3>
-              <div className="mt-2 font-mono text-[12px] text-[#003262]">{p.note}</div>
-              <p className="mt-5 text-[14px] leading-[1.65] text-[#5A6472] flex-1">{p.focus}</p>
-            </div>
+            <TVCard
+              key={p.name}
+              eyebrow={p.role}
+              title={p.name}
+              description={p.focus}
+              meta={p.note}
+              to="/partners"
+              className="min-h-[220px]"
+              data-testid={`riscv-ip-${p.name.toLowerCase()}`}
+            />
           ))}
         </div>
         <div className="mt-12 border-t border-[#E5E4DF] pt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
@@ -245,17 +256,17 @@ const VirtualizationSpotlight = () => (
           </div>
         </div>
         <div className="lg:col-span-6">
-          <div className="relative border border-white/15 rounded-md bg-white/[0.02] p-6 md:p-8">
+          <div className="relative tv-panel tv-panel-dark p-6 md:p-8">
             <div className="absolute inset-0 tv-grid-bg-dark opacity-40 rounded-md pointer-events-none" />
             <div className="relative space-y-2">
               {[
                 { host: "Host: TRUSTED-V Hypervisor", tag: "TYPE-1" },
-                { host: "VM 1 · Zephyr RTOS", tag: "SAFETY" },
+                { host: "VM 1 · TRUSTED-V RTOS", tag: "SAFETY" },
                 { host: "VM 2 · Rust async runtime", tag: "REAL-TIME" },
                 { host: "VM 3 · Linux user-space (CVA6)", tag: "GENERAL" },
                 { host: "Virtual RISC-V SoC (RV64GC + RVV)", tag: "GUEST HW" },
               ].map((r, i) => (
-                <div key={r.host} className={`flex items-center justify-between border rounded-md px-4 py-3 ${i === 0 ? "bg-[#2486C7]/15 border-[#2486C7]/50" : "bg-white/[0.03] border-white/15"}`}>
+                <div key={r.host} className={`tv-panel ${i === 0 ? "" : "tv-panel-dark"} flex items-center justify-between px-4 py-3`} style={i === 0 ? { background: "rgba(36,134,199,0.15)", borderColor: "rgba(36,134,199,0.5)" } : undefined}>
                   <div>
                     <div className="font-mono text-[10.5px] tracking-widest uppercase text-white/50">Layer {String(i + 1).padStart(2, "0")}</div>
                     <div className="mt-1 text-[13.5px] font-medium text-white">{r.host}</div>
@@ -271,22 +282,32 @@ const VirtualizationSpotlight = () => (
   </section>
 );
 
-/* ───────────── CORE TECHNOLOGIES — Bosch blue gradation ───────────── */
+/* ───────────── CORE TECHNOLOGIES ───────────── */
 const CoreTechnologies = () => {
   const items = [
-    { title: "RISC-V native", desc: "RV32, RV64 and RVV. SiFive, Akeana and Indian silicon.", to: "/product-suite" },
-    { title: "Security by construction", desc: "Rust memory safety, verified boot, classical + PQC crypto.", to: "/product/secure-boot" },
-    { title: "Virtualization", desc: "Hypervisor and virtual platforms for pre-silicon bring-up.", to: "/product-suite#virtualization" },
-    { title: "Real-time software", desc: "TRUSTED-V RTOS, Zephyr, FreeRTOS and Rust async runtimes.", to: "/product/rtos-benchmark" },
-    { title: "Cryptography", desc: "AES, SHA-3, ECDSA, ML-KEM, ML-DSA — NIST FIPS mapped.", to: "/product/crypto-stack" },
-    { title: "Rust developer tooling", desc: "Jarvyn IDE, WebIDE, signed toolchain, SVD register views.", to: "/developer-portal" },
+    { eyebrow: "ISA", title: "RISC-V native", desc: "RV32, RV64 and RVV. SiFive, Akeana and Indian silicon.", to: "/product-suite" },
+    { eyebrow: "Security", title: "Security by construction", desc: "Rust memory safety, verified boot, classical + PQC crypto.", to: "/product/secure-boot" },
+    { eyebrow: "Pre-silicon", title: "Virtualization", desc: "Hypervisor and virtual platforms for pre-silicon bring-up.", to: "/product-suite#virtualization" },
+    { eyebrow: "Runtime", title: "Real-time software", desc: "TRUSTED-V RTOS, Embassy async runtimes and Rust HAL crates.", to: "/product/rtos-benchmark" },
+    { eyebrow: "Crypto", title: "Cryptography", desc: "AES, SHA-3, ECDSA, ML-KEM, ML-DSA — NIST FIPS mapped.", to: "/product/crypto-stack" },
+    { eyebrow: "Tooling", title: "Rust developer tooling", desc: "Jarvyn IDE, WebIDE, signed toolchain, SVD register views.", to: "/developer-portal" },
   ];
   return (
     <section className="tv-section border-t border-[#E5E4DF]" data-testid="core-technologies">
       <div className="tv-container">
         <SectionHeader eyebrow="Core technologies" title="What the platform is made of." />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {items.map((it, i) => <GradientCard key={it.title} step={i} index={i} title={it.title} description={it.desc} to={it.to} />)}
+          {items.map((it) => (
+            <TVCard
+              key={it.title}
+              eyebrow={it.eyebrow}
+              title={it.title}
+              description={it.desc}
+              to={it.to}
+              className="min-h-[196px]"
+              data-testid={`core-tech-${it.title.toLowerCase().replace(/\W+/g, "-")}`}
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -303,31 +324,25 @@ const EngagementTeaser = () => (
         action={<Link to="/engagement-models" className="tv-arrow-link" data-testid="engagement-teaser-link">Compare engagement models</Link>}
       />
       <div className="grid md:grid-cols-2 gap-4">
-        {ENGAGEMENT_MODELS.map((m, idx) => {
-          const dark = idx === 0;
-          return (
-            <Link
-              key={m.id}
-              to={`/engagement-models#${m.id}`}
-              className={`group rounded-md p-8 flex flex-col transition-transform duration-200 hover:-translate-y-1 ${dark ? "bg-[#003262] text-white" : "bg-white border border-[#E5E4DF]"}`}
-              data-testid={`engagement-teaser-${m.id}`}
-            >
-              <div className="flex items-center justify-between">
-                <span className={`font-mono text-[11px] tracking-[0.16em] uppercase ${dark ? "text-[#56A2D6]" : "text-[#004A7F]"}`}>{m.code} · {m.label}</span>
-                <ArrowUpRight className={`w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${dark ? "text-white" : "text-[#003262]"}`} />
-              </div>
-              <h3 className={`mt-5 text-[24px] md:text-[28px] font-semibold tracking-tight ${dark ? "text-white" : "text-[#0B0F14]"}`}>{m.tagline}</h3>
-              <p className={`mt-3 text-[14.5px] leading-[1.6] ${dark ? "text-white/70" : "text-[#5A6472]"}`}>{m.hook}</p>
-              <ol className={`mt-7 pt-6 border-t flex flex-wrap gap-x-5 gap-y-2 ${dark ? "border-white/15" : "border-[#E5E4DF]"}`}>
+        {ENGAGEMENT_MODELS.map((m) => (
+          <TVCard
+            key={m.id}
+            eyebrow={`${m.code} · ${m.label}`}
+            title={m.tagline}
+            description={m.hook}
+            to={`/engagement-models#${m.id}`}
+            data-testid={`engagement-teaser-${m.id}`}
+            footer={
+              <ol className="flex flex-wrap gap-x-5 gap-y-2">
                 {m.steps.map((s, i) => (
-                  <li key={s.title} className={`flex items-center gap-2 text-[12.5px] ${dark ? "text-white/85" : "text-[#1A1F25]"}`}>
-                    <span className={`font-mono text-[10px] ${dark ? "text-[#56A2D6]" : "text-[#2486C7]"}`}>{String(i + 1).padStart(2, "0")}</span>{s.title}
+                  <li key={s.title} className="flex items-center gap-2 text-[12.5px] text-[#1A1F25]">
+                    <span className="font-mono text-[10px] text-[#2486C7]">{String(i + 1).padStart(2, "0")}</span>{s.title}
                   </li>
                 ))}
               </ol>
-            </Link>
-          );
-        })}
+            }
+          />
+        ))}
       </div>
     </div>
   </section>
@@ -345,7 +360,7 @@ const ProductFamilies = () => {
     <section className="tv-section border-t border-[#E5E4DF]" data-testid="product-families">
       <div className="tv-container">
         <SectionHeader eyebrow="Product families" title="Four modules. One RISC-V platform." action={<Link to="/product-suite" className="tv-arrow-link">See the full suite</Link>} />
-        <div className="grid md:grid-cols-2 gap-6">{items.map((p) => <ProductCard key={p.title} {...p} />)}</div>
+        <div className="grid md:grid-cols-2 gap-4">{items.map((p) => <ProductCard key={p.title} {...p} />)}</div>
       </div>
     </section>
   );
@@ -379,7 +394,7 @@ const ApplicationMarkets = () => {
     <section className="tv-section border-t border-[#E5E4DF]" data-testid="application-markets">
       <div className="tv-container">
         <SectionHeader eyebrow="Application markets" title="Where TRUSTED-V ships." />
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">{markets.map((m) => <MarketCard key={m.label} {...m} />)}</div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">{markets.map((m) => <MarketCard key={m.label} {...m} />)}</div>
       </div>
     </section>
   );

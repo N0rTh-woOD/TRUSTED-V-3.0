@@ -30,7 +30,7 @@ const features = [
   { n: "10", title: "Signed toolchain", desc: "SLSA L3 supply-chain guarantees — reproducible, signed artifacts." },
   { n: "11", title: "Secure Boot integration", desc: "One-click rBoot / rustBoot signing and provisioning." },
   { n: "12", title: "Crypto Stack browser", desc: "AES, SHA-3, ML-KEM, ML-DSA at your fingertips." },
-  { n: "13", title: "RTOS project templates", desc: "Zephyr, FreeRTOS, Tock and RIOT starter kits." },
+  { n: "13", title: "RTOS project templates", desc: "TRUSTED-V RTOS, Embassy, Tock and RIOT starter kits." },
   { n: "14", title: "Trace & profiling", desc: "Cycle-accurate trace and Rust-aware flame graphs." },
   { n: "15", title: "Remote pair sessions", desc: "Live collaborative debugging with your team." },
   { n: "16", title: "Version-aware refactors", desc: "Refactor Rust code across HAL versions safely." },
@@ -59,7 +59,7 @@ const IDEDownloads = () => {
   }, []);
 
   return (
-    <div className="bg-white text-[#0A0A0A]">
+    <div className="bg-white text-[#0B0F14]">
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className="relative bg-white border-b border-[#E5E4DF] overflow-hidden" data-testid="ide-hero">
         <div className="absolute inset-0 tv-grid-bg opacity-60 pointer-events-none" />
@@ -164,7 +164,7 @@ const IDEDownloads = () => {
       </section>
 
       {/* 21 Features */}
-      <section className="tv-section border-b border-[#E7E5E0]" data-testid="ide-features">
+      <section className="tv-section border-b border-[#E5E4DF]" data-testid="ide-features">
         <div className="tv-container">
           <div className="mb-14 max-w-3xl">
             <span className="tv-eyebrow">Twenty-one reasons</span>
@@ -181,17 +181,17 @@ const IDEDownloads = () => {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((f) => {
               const cat = categoryOf(f.n);
               return (
-                <div key={f.n} className="bg-white p-7 min-h-[180px]" data-testid={`ide-feature-${f.n}`}>
+                <div key={f.n} className="tv-panel p-6 min-h-[175px]" data-testid={`ide-feature-${f.n}`}>
                   <div className="flex items-center justify-between mb-4">
                     <span className="inline-flex items-center justify-center w-8 h-8 rounded-sm font-mono text-[11px] font-semibold text-white" style={{ background: cat.color }}>{f.n}</span>
                     <span className="font-mono text-[9.5px] tracking-[0.14em] uppercase" style={{ color: cat.color }}>{cat.name}</span>
                   </div>
-                  <h3 className="text-[17px] tracking-[-0.015em] text-[#0A0A0A] font-medium">{f.title}</h3>
-                  <p className="mt-2 text-[13.5px] leading-[1.6] text-[#4B4B4B]">{f.desc}</p>
+                  <h3 className="text-[17px] tracking-[-0.015em] text-[#0B0F14] font-medium">{f.title}</h3>
+                  <p className="mt-2 text-[13.5px] leading-[1.6] text-[#5A6472]">{f.desc}</p>
                 </div>
               );
             })}
@@ -200,7 +200,7 @@ const IDEDownloads = () => {
       </section>
 
       {/* Comparison table */}
-      <section className="tv-section border-b border-[#E7E5E0] bg-[#FAFAF7]" data-testid="ide-comparison">
+      <section className="tv-section border-b border-[#E5E4DF] bg-[#F7F7F5]" data-testid="ide-comparison">
         <div className="tv-container">
           <div className="mb-12 max-w-3xl">
             <span className="tv-eyebrow">Jarvyn vs general-purpose IDEs</span>
@@ -209,21 +209,21 @@ const IDEDownloads = () => {
             </h2>
           </div>
 
-          <div className="border-t border-[#0A0A0A]">
-            <div className="grid grid-cols-12 gap-4 py-4 border-b border-[#0A0A0A] text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+          <div className="border-t border-[#0B0F14]">
+            <div className="grid grid-cols-12 gap-4 py-4 border-b border-[#0B0F14] text-[11px] font-semibold tracking-[0.2em] uppercase text-[#5A6472]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
               <div className="col-span-7">Capability</div>
               <div className="col-span-2 text-center text-[#003262]">Jarvyn</div>
               <div className="col-span-3 text-center">General IDE</div>
             </div>
             {comparison.map(([label, jarvyn, other]) => (
-              <div key={label} className="grid grid-cols-12 gap-4 py-4 border-b border-[#E7E5E0] items-center">
+              <div key={label} className="grid grid-cols-12 gap-4 py-4 border-b border-[#E5E4DF] items-center">
                 <div className="col-span-7 text-[15px]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>{label}</div>
                 <div className="col-span-2 flex justify-center">
                   {jarvyn === true && <Check className="w-4 h-4 text-[#0F6E56]" />}
                 </div>
                 <div className="col-span-3 flex justify-center">
                   {other === true && <Check className="w-4 h-4 text-[#0F6E56]" />}
-                  {other === "partial" && <span className="text-[11px] font-mono text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>partial</span>}
+                  {other === "partial" && <span className="text-[11px] font-mono text-[#5A6472]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>partial</span>}
                   {other === false && <X className="w-4 h-4 text-[#B7410E]" />}
                 </div>
               </div>

@@ -49,7 +49,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="bg-white text-[#0A0A0A]">
+    <div className="bg-white text-[#0B0F14]">
       <PageHero
         crumbs={[{ label: "Contact" }]}
         eyebrow="Get in touch"
@@ -61,7 +61,7 @@ const ContactPage = () => {
         subtitle="Talk to our engineering team about IP integration, certification, commercial LTS, or partnership on TRUSTED-V."
       />
 
-      <section className="border-b border-[#E7E5E0]" data-testid="contact-body">
+      <section className="border-b border-[#E5E4DF]" data-testid="contact-body">
         <div className="tv-container py-16 md:py-24">
           <div className="grid lg:grid-cols-12 gap-16">
             {/* Left: Contact cards */}
@@ -87,8 +87,8 @@ const ContactPage = () => {
                 lines={["Stuttgart · Yokohama · Detroit · Bengaluru"]}
               />
 
-              <div className="border-t border-[#E7E5E0] pt-8">
-                <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B] mb-3" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+              <div className="border-t border-[#E5E4DF] pt-8">
+                <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#5A6472] mb-3" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                   Prefer a direct path?
                 </div>
                 <div className="flex flex-col gap-3">
@@ -136,7 +136,7 @@ const ContactPage = () => {
                   >
                     {submitting ? "Sending..." : "Send message"} <ArrowUpRight className="w-4 h-4" />
                   </button>
-                  <span className="text-[12px] text-[#6B6B6B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                  <span className="text-[12px] text-[#5A6472] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                     We reply within 1 business day.
                   </span>
                 </div>
@@ -150,13 +150,13 @@ const ContactPage = () => {
 };
 
 const ContactCard = ({ icon, label, lines }) => (
-  <div className="border-t border-[#E7E5E0] pt-6">
-    <div className="flex items-center gap-3 text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+  <div className="border-t border-[#E5E4DF] pt-6">
+    <div className="flex items-center gap-3 text-[11px] font-semibold tracking-[0.22em] uppercase text-[#5A6472]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
       <span className="text-[#003262]">{icon}</span>
       {label}
     </div>
     {lines.map((l) => (
-      <div key={l} className="mt-2 text-[15px] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+      <div key={l} className="mt-2 text-[15px] text-[#0B0F14]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
         {l}
       </div>
     ))}
@@ -165,7 +165,7 @@ const ContactCard = ({ icon, label, lines }) => (
 
 const Field = ({ label, value, onChange, type = "text", testid }) => (
   <label className="block">
-    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5A6472] mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
       {label}
     </span>
     <input
@@ -173,7 +173,7 @@ const Field = ({ label, value, onChange, type = "text", testid }) => (
       value={value}
       onChange={onChange}
       data-testid={testid}
-      className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] text-[#0A0A0A] focus:outline-none focus:border-[#003262] transition-colors"
+      className="w-full bg-transparent border-b border-[#0B0F14] py-3 text-[16px] text-[#0B0F14] focus:outline-none focus:border-[#003262] transition-colors"
       style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
     />
   </label>
@@ -181,14 +181,14 @@ const Field = ({ label, value, onChange, type = "text", testid }) => (
 
 const SelectField = ({ label, value, onChange, options, testid }) => (
   <label className="block">
-    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5A6472] mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
       {label}
     </span>
     <select
       value={value}
       onChange={onChange}
       data-testid={testid}
-      className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] text-[#0A0A0A] focus:outline-none focus:border-[#003262] transition-colors"
+      className="w-full bg-transparent border-b border-[#0B0F14] py-3 text-[16px] text-[#0B0F14] focus:outline-none focus:border-[#003262] transition-colors"
       style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
     >
       {options.map((o) => (
@@ -200,7 +200,7 @@ const SelectField = ({ label, value, onChange, options, testid }) => (
 
 const Textarea = ({ label, value, onChange, testid }) => (
   <label className="block">
-    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#6B6B6B] mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
+    <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5A6472] mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
       {label}
     </span>
     <textarea
@@ -208,7 +208,7 @@ const Textarea = ({ label, value, onChange, testid }) => (
       value={value}
       onChange={onChange}
       data-testid={testid}
-      className="w-full bg-transparent border-b border-[#0A0A0A] py-3 text-[16px] text-[#0A0A0A] resize-none focus:outline-none focus:border-[#003262] transition-colors"
+      className="w-full bg-transparent border-b border-[#0B0F14] py-3 text-[16px] text-[#0B0F14] resize-none focus:outline-none focus:border-[#003262] transition-colors"
       style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
     />
   </label>

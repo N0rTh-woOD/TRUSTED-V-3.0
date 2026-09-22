@@ -6,7 +6,7 @@ import { BLUE_STEPS } from "@/components/TrustedVLogo";
 import { ENGAGEMENT_MODELS } from "@/data/engagement";
 
 const ProductSuite = () => (
-  <div className="bg-white text-[#0A0A0A]">
+  <div className="bg-white text-[#0B0F14]">
     <PageHero
       crumbs={[{ label: "Products" }]}
       eyebrow="Product suite"
@@ -38,11 +38,11 @@ const ModulesDetail = () => {
   ];
 
   return (
-    <section className="border-b border-[#E7E5E0]" data-testid="modules-detail">
+    <section className="border-b border-[#E5E4DF]" data-testid="modules-detail">
       {modules.map((m, idx) => {
         const color = MODULE_COLORS[idx];
         return (
-          <div key={m.num} id={m.id} className={`border-b border-[#E7E5E0] ${idx % 2 === 1 ? "bg-[#FAFAF7]" : "bg-white"}`}>
+          <div key={m.num} id={m.id} className={`border-b border-[#E5E4DF] ${idx % 2 === 1 ? "bg-[#F7F7F5]" : "bg-white"}`}>
             <div className="tv-container py-16 md:py-20 lg:py-24">
               <div className="grid lg:grid-cols-12 gap-10">
                 <div className="lg:col-span-4">
@@ -58,11 +58,11 @@ const ModulesDetail = () => {
                   <ul className="border-t" style={{ borderColor: color }}>
                     {m.items.map((it) => (
                       <li key={it.name}>
-                        <Link to={it.to} className="group flex items-center justify-between py-4 border-b border-[#E7E5E0] hover:text-[#003262] transition-colors" data-testid={`module-${m.num}-${it.name.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
+                        <Link to={it.to} className="group flex items-center justify-between py-4 border-b border-[#E5E4DF] hover:text-[#003262] transition-colors" data-testid={`module-${m.num}-${it.name.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
                           <span className="flex items-center gap-3 text-[16px] font-medium">
                             <span className="w-2 h-2 rounded-sm flex-shrink-0" style={{ background: color }} />{it.name}
                           </span>
-                          <ArrowUpRight className="w-4 h-4 text-[#6B6B6B] group-hover:text-[#003262] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                          <ArrowUpRight className="w-4 h-4 text-[#5A6472] group-hover:text-[#003262] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                         </Link>
                       </li>
                     ))}
@@ -87,7 +87,7 @@ const IPIntegration = () => {
     { name: "OpenTitan", note: "Silicon root of trust · open source" },
   ];
   return (
-    <section className="tv-section border-b border-[#E7E5E0] bg-[#00162B] text-white" id="ip" data-testid="ip-integration">
+    <section className="tv-section border-b border-[#E5E4DF] bg-[#00162B] text-white" id="ip" data-testid="ip-integration">
       <div className="tv-container">
         <div className="grid lg:grid-cols-12 gap-12 mb-14">
           <div className="lg:col-span-6">
@@ -98,9 +98,9 @@ const IPIntegration = () => {
             <p className="text-[17px] leading-[1.6] text-white/70">IP-agnostic by design — co-verified with performance cores and sovereign silicon programmes.</p>
           </div>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border-y border-white/10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {partners.map((p) => (
-            <div key={p.name} className="bg-[#00162B] p-8 md:p-10">
+            <div key={p.name} className="tv-panel tv-panel-dark p-7 md:p-8">
               {p.featured && <span className="inline-block mb-4 text-[10px] font-semibold tracking-[0.2em] uppercase text-[#56A2D6] border border-[#2486C7]/50 px-2 py-0.5">Featured</span>}
               <h3 className="text-[20px] md:text-[24px] tracking-[-0.02em] text-white font-medium">{p.name}</h3>
               <p className="mt-3 text-[14px] leading-[1.55] text-white/60">{p.note}</p>
@@ -113,7 +113,7 @@ const IPIntegration = () => {
 };
 
 const Comparison = () => (
-  <section className="tv-section border-b border-[#E7E5E0]" data-testid="platform-comparison">
+  <section className="tv-section border-b border-[#E5E4DF]" data-testid="platform-comparison">
     <div className="tv-container">
       <div className="mb-10 max-w-2xl">
         <Eyebrow>TRUSTED-V vs alternatives</Eyebrow>
@@ -142,17 +142,21 @@ const SubBrands = () => {
     { name: "TRUSTED Certification", accent: BLUE_STEPS[5], desc: "Independent third-party programme for systems built on TRUSTED-V." },
   ];
   return (
-    <section id="certification" className="tv-section border-b border-[#E7E5E0] bg-[#FAFAF7]" data-testid="sub-brands">
+    <section id="certification" className="tv-section border-b border-[#E5E4DF] bg-[#F7F7F5]" data-testid="sub-brands">
       <div className="tv-container">
         <div className="mb-14 max-w-3xl">
           <Eyebrow>A growing portfolio</Eyebrow>
           <h2 className="tv-h2 mt-4">More than a toolchain. A trust framework.</h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
+        <div className="grid md:grid-cols-3 gap-4">
           {brands.map((b) => (
-            <div key={b.name} className="bg-white p-8 md:p-10 min-h-[220px] border-t-[3px]" style={{ borderTopColor: b.accent }}>
-              <h3 className="text-[22px] md:text-[26px] tracking-[-0.02em] text-[#0A0A0A] font-medium">{b.name}</h3>
-              <p className="mt-4 text-[14.5px] leading-[1.6] text-[#4B4B4B]">{b.desc}</p>
+            <div key={b.name} className="tv-panel relative overflow-hidden p-7 md:p-8 min-h-[200px]">
+              <span className="absolute top-0 left-0 bottom-0 w-[3px]" style={{ background: b.accent }} />
+              <div className="pl-3">
+                <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">Programme</div>
+                <h3 className="mt-3 text-[21px] md:text-[23px] font-semibold tracking-tight text-[#0B0F14]">{b.name}</h3>
+                <p className="mt-2.5 text-[14px] leading-[1.65] text-[#5A6472]">{b.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -162,7 +166,7 @@ const SubBrands = () => {
 };
 
 const EngagementBlock = () => (
-  <section className="tv-section-tight border-b border-[#E7E5E0]" data-testid="products-engagement">
+  <section className="tv-section-tight border-b border-[#E5E4DF]" data-testid="products-engagement">
     <div className="tv-container grid lg:grid-cols-12 gap-10 items-center">
       <div className="lg:col-span-4">
         <Eyebrow>Engagement models</Eyebrow>
@@ -170,14 +174,14 @@ const EngagementBlock = () => (
         <Link to="/engagement-models" className="tv-arrow-link mt-5" data-testid="products-engagement-link">Compare models</Link>
       </div>
       <div className="lg:col-span-8 grid md:grid-cols-2 gap-4">
-        {ENGAGEMENT_MODELS.map((m, i) => (
-          <Link key={m.id} to={`/engagement-models#${m.id}`} className={`group rounded-md p-6 flex items-start justify-between gap-4 transition-transform hover:-translate-y-0.5 ${i === 0 ? "bg-[#003262] text-white" : "bg-[#E6F1F9] text-[#0B0F14]"}`} data-testid={`products-engagement-${m.id}`}>
+        {ENGAGEMENT_MODELS.map((m) => (
+          <Link key={m.id} to={`/engagement-models#${m.id}`} className="tv-panel tv-panel-link tv-panel-accent relative overflow-hidden group p-6 flex items-start justify-between gap-4" data-testid={`products-engagement-${m.id}`}>
             <div>
-              <div className={`font-mono text-[10.5px] tracking-[0.16em] uppercase ${i === 0 ? "text-[#56A2D6]" : "text-[#004A7F]"}`}>{m.code}</div>
-              <div className="mt-2 text-[18px] font-semibold tracking-tight">{m.tagline}</div>
-              <div className={`mt-1.5 text-[13px] ${i === 0 ? "text-white/70" : "text-[#3A4A5A]"}`}>{m.steps.map((s) => s.title).join(" → ")}</div>
+              <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">{m.code}</div>
+              <div className="mt-2 text-[18px] font-semibold tracking-tight text-[#0B0F14]">{m.tagline}</div>
+              <div className="mt-1.5 text-[13px] text-[#5A6472]">{m.steps.map((s) => s.title).join(" → ")}</div>
             </div>
-            <ArrowUpRight className="w-4 h-4 flex-shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            <ArrowUpRight className="w-4 h-4 flex-shrink-0 text-[#5A6472] group-hover:text-[#003262] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>
         ))}
       </div>
@@ -188,17 +192,17 @@ const EngagementBlock = () => (
 const PricingCTA = () => (
   <section className="tv-section-tight" data-testid="pricing-cta">
     <div className="tv-container">
-      <div className="grid md:grid-cols-3 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
+      <div className="grid md:grid-cols-3 gap-4">
         {[
           { tier: "Developer", price: "Free", desc: "Jarvyn IDE, WebIDE, community RTOS and Rust toolchain.", cta: "Download", to: "/download-ide" },
           { tier: "Pro", price: "Talk to sales", desc: "Commercial LTS, certified crypto stack, priority support.", cta: "Contact sales", to: "/contact?plan=pro" },
           { tier: "Enterprise", price: "Talk to sales", desc: "Silicon sign-off, custom certification, dedicated engineering.", cta: "Contact sales", to: "/contact?plan=enterprise" },
         ].map((p) => (
-          <div key={p.tier} className="bg-white p-8 md:p-10 min-h-[280px] flex flex-col justify-between">
+          <div key={p.tier} className="tv-panel p-7 md:p-8 min-h-[260px] flex flex-col justify-between">
             <div>
-              <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B6B6B]">{p.tier}</div>
-              <div className="mt-4 text-[26px] md:text-[32px] tracking-[-0.025em] text-[#0A0A0A] font-medium">{p.price}</div>
-              <p className="mt-4 text-[14.5px] leading-[1.6] text-[#4B4B4B]">{p.desc}</p>
+              <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">{p.tier}</div>
+              <div className="mt-4 text-[26px] md:text-[30px] tracking-[-0.025em] text-[#0B0F14] font-semibold">{p.price}</div>
+              <p className="mt-3 text-[14px] leading-[1.65] text-[#5A6472]">{p.desc}</p>
             </div>
             <Link to={p.to} className="tv-btn tv-btn-outline mt-8 w-fit" data-testid={`plan-${p.tier.toLowerCase()}`}>{p.cta} <ArrowRight className="w-4 h-4" /></Link>
           </div>

@@ -356,7 +356,7 @@ const AdminSoftware = () => {
                 <Input
                   value={Array.isArray(formData.features) ? formData.features.join(", ") : formData.features}
                   onChange={(e) => setFormData({ ...formData, features: e.target.value })}
-                  placeholder="WiFi stack, BLE support, FreeRTOS integration"
+                  placeholder="WiFi stack, BLE support, RTOS integration"
                 />
               </div>
 

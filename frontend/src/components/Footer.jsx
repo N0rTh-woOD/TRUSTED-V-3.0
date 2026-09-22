@@ -45,6 +45,7 @@ const Footer = () => {
     {
       title: "Company",
       links: [
+        { label: "Home", to: "/" },
         { label: "About", to: "/about" },
         { label: "Engagement Models", to: "/engagement-models" },
         { label: "Contact", to: "/contact" },
