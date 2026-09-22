@@ -30,7 +30,7 @@ const Plate = ({ l }) => {
       {l.die && <polygon points={rhombus(l.cy, 120, 60)} fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1" transform={`translate(0,-${H / 2 - 36})`} />}
       {/* activation glow */}
       <polygon points={rhombus(l.cy)} fill="none" stroke="#00B4E0" strokeWidth="2" opacity="0">
-        <animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes={`0;${t0};${t1};${(+t1 + 0.08).toFixed(3)};1`} dur={DUR} repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes={`0;${t0};${t1};${Math.min(+t1 + 0.08, 0.99).toFixed(3)};1`} dur={DUR} repeatCount="indefinite" />
       </polygon>
       <text x={CX} y={l.cy + 20} textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="11.5" fontWeight="600" letterSpacing="1.5" fill={l.ink}>{l.title}</text>
       <text x={CX} y={l.cy + 36} textAnchor="middle" fontFamily="IBM Plex Mono" fontSize="9" fill={l.sub}>{l.note}</text>

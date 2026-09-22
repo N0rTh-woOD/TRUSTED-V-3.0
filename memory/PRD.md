@@ -29,6 +29,15 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 14 — Engagement Models, Reviewer UI Suggestions, Animated Hero (Jun 2026)
+Verified by testing_agent (iteration_34.json): 15/15 PASS.
+- **Business models** (from `website_updates_models.pdf`): shared data `/frontend/src/data/engagement.js`; new `/engagement-models` page (SaaS "Let's build it for you" · PaaS "Your code, our ecosystem", 5-step `StepRail` each, fit table, CTAs → `/contact?plan=saas|paas`); homepage `EngagementTeaser`; Products page `EngagementBlock`; nav item "Engagement" + footer link.
+- **Reviewer suggestions (all 11 applied)**: account dropdown (`nav-account-menu` → Admin / Account settings / Log out), Home nav link removed (logo underline `nav-brand-active` on `/`), active nav pill (`tv-nav-pill`), `Breadcrumbs` on all PageHero pages (replaced "Back to products"), Bosch blue gradation `GradientCard`s on homepage Core Technologies, mega-menu hover bar (`tv-mega-row`), IDE features colour-coded by 4 categories + legend, Products module tags on gradation, unified blue accents (removed teal/yellow/rust tier dots, gold eyebrows on dark sections → #2486C7), `TrustRing` animated illustration on About, `ComparisonModule` ("TRUSTED-V vs alternatives") on Products.
+- **Hero**: new `StackVisual.jsx` — animated isometric silicon→software stack (SMIL pulses up an attestation rail, per-layer verification checks, VERIFIED badge, float).
+- **Brand colours**: `BOSCH_BLUE` (#004A7F / #2486C7) + `BLUE_STEPS` scale + `PoweredByBosch` lockup used in Footer, Login, About.
+- **Text reduction** across Landing, About, ProductSuite, IDE, Marketplace, Partners.
+- Deferred by user: ChatGPT/OpenAI model integration (next round).
+
 ### Phase 13d — Content Correction & Login Logo (Feb 14, 2026)
 - **Removed all MIPS ARC-V references** — TRUSTED-V's real IP partnerships are SiFive and Akeana only. Cleaned:
   - Landing hero co-verified partner strip (now: SiFive · Akeana · C-DAC · Mindgrove)
@@ -246,6 +255,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 | `/product/secure-boot` | Secure Boot | rboot + rustBoot, GitHub, boot chain |
 | `/product/crypto-stack` | Crypto Stack | 8-category algorithm reference tables |
 | `/product/rtos-benchmark` | RTOS Benchmarks | 4 RTOS options, comparison table |
+| `/engagement-models` | Engagement Models | SaaS / PaaS 5-step flows, fit table, CTAs |
 | `/marketplace` | Marketplace | Hardware + IP tabs with logos |
 | `/developer-portal` | Developers | SDK docs, expandable sections |
 | `/download-ide` | IDE Download | 21 features, comparison, benefits |
@@ -267,6 +277,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 
 ## Prioritized Backlog
 ### P1 — High
+- **ChatGPT / OpenAI model integration** (user-requested, deferred from Jun 2026 round — call integration_expert first)
 - Refactor monolithic `server.py` into modular APIRouter modules
 - Complete "Solution Builder" AI code generation
 - Refactor `SmartProjectBuilder.jsx` (916 lines) into smaller components

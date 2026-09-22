@@ -1,0 +1,44 @@
+{
+  "summary": "Frontend-only regression for engagement-models + 11 reviewer UI suggestions. Logged in as admin, exercised homepage hero+nav+account dropdown+mega menu, /marketplace active pill, /engagement-models (SaaS/PaaS StepRails + comparison + CTAs), /product-suite (module tags + comparison + engagement links), /about (illustration + tier badges + powered-by-bosch), /download-ide (legend + 21 feature cards), /partners (rows + blue eyebrow), breadcrumbs on 11 sub-pages, mobile drawer at 390px, footer, logout redirect to /login. All 15 review items PASS with 1 minor console warning (non-blocking SVG animate keyTimes).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verification_results": {
+    "1_login_and_hero": "PASS - admin login redirects to /. landing-hero-title = 'Secure RISC-V, silicon to software.'. hero-visual SVG contains all 4 plate labels (RISC-V SILICON / ROOT OF TRUST / RUST RUNTIME / APPLICATION) + VERIFIED badge.",
+    "2_nav_structure": "PASS - nav-home absent (count 0). nav-products/marketplace/developers/ecosystem/engagement/about all present. On / nav-brand-active present (count 1). On /marketplace nav-marketplace has class containing 'tv-nav-pill' with aria-current=page; nav-brand-active disappears (count 0).",
+    "3_mega_menu": "PASS - hover nav-products opens mega-products; 9 rows have class tv-mega-row; mega-secure-boot present and navigates to /product/secure-boot.",
+    "4_account_dropdown": "PASS - single nav-account-menu button in header (no separate admin/logout in header). Opens nav-account-dropdown containing nav-admin, nav-account, nav-logout. Each item row height ~37px (single-line inline icon+label - not stacked). Click outside closes dropdown. nav-logout redirects to /login.",
+    "5_breadcrumbs": "PASS - /product/secure-boot shows 'Home > Products > Secure Boot' via [data-testid=breadcrumbs]; breadcrumb-home -> /, breadcrumb-products -> /product-suite. No 'Back to products' text on any tested page. Breadcrumbs present on /product/crypto-stack, /product/rtos-benchmark, /webide, /download-ide (Home>Products>Jarvyn IDE), /about, /marketplace, /partners, /developer-portal, /contact, /engagement-models.",
+    "6_core_technologies_cards": "PASS - core-technologies section renders 6 gradient-card-* cards; gradient-card-cryptography links resolve correctly.",
+    "7_engagement_teaser": "PASS - engagement-teaser with engagement-teaser-saas + engagement-teaser-paas; engagement-teaser-link href=/engagement-models.",
+    "8_engagement_models_page": "PASS - engagement-page renders engagement-saas + engagement-paas each with a step-rail (2 rails). All 5 SaaS steps and 5 PaaS steps verified in text. engagement-saas-cta href=/contact?plan=saas, engagement-paas-cta href=/contact?plan=paas. engagement-compare present. footer-engagement-models present.",
+    "9_product_suite": "PASS - module-tag-01..04 render with progressively darker blues rgb(36,134,199) -> rgb(0,74,127) -> rgb(0,50,98) -> rgb(0,22,43). comparison-module with 7 comparison-row-*. products-engagement-saas -> /engagement-models#saas, products-engagement-paas -> /engagement-models#paas.",
+    "10_about": "PASS - about-illustration SVG present on 1920 desktop. tier-founding/principal/associate/academic-research all render. powered-by-bosch lockup present (2 instances - hero + backed-by-bosch).",
+    "11_ide_downloads": "PASS - ide-feature-legend present; feature cards ide-feature-01, 10, 21 present (21 cards total + legend = 22 matches for ide-feature-*).",
+    "12_partners": "PASS - partner-c-dac, partner-mindgrove, 'partner-upbeat tech' (space, matches review spec) all render. 'Global IP integration'-adjacent eyebrows are blue rgb(36,134,199); zero elements with #FDB515 gold color.",
+    "13_footer_and_login_lockup": "PASS - site-footer contains powered-by-bosch. Login left dark pane contains powered-by-bosch; zero elements colored #FDB515.",
+    "14_mobile_drawer_390": "PASS - nav-mobile-toggle opens drawer with mobile-nav-engagement, mobile-nav-account, mobile-nav-logout. mobile-nav-home absent.",
+    "15_regression": "PASS - /marketplace loads with active pill. /contact form renders (breadcrumb present). /engagement-models routes correctly. Logout returns to /login."
+  },
+  "console_warnings": [
+    "Non-blocking SVG animation warning (repeats on pages containing StackVisual): 'Error: <animate> attribute keyTimes: Invalid value, \"0;0.916;0.966;1.046;1.\"'. Root cause: keyTimes values include a value >1 (1.046) which violates SVG SMIL spec (must be in [0,1] monotonically). Animation still runs in Chromium but the console error is emitted on every render. File: /app/frontend/src/components/StackVisual.jsx."
+  ],
+  "test_report_links": [],
+  "action_items": [
+    "Optional: Fix keyTimes attribute in StackVisual.jsx SVG <animate> - clamp values to [0,1] (e.g., replace '1.046' with '1') to silence recurring Chromium console error."
+  ],
+  "critical_code_review_comments": [
+    "StackVisual.jsx keyTimes list has 1.046 which is invalid per SVG SMIL spec; browsers accept but emit console error each mount. Trivial fix.",
+    "Partner testid 'partner-upbeat tech' contains a space (generated via name.toLowerCase()) - works but is unusual; consider slugifying with hyphen for consistency with 'partner-c-dac'."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "test_credentials": "admin@trusted-v.com / bosch@2425",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All 15 review items PASS at 1920x1080 (desktop) and 390x844 (mobile). Only observation is a non-blocking SVG keyTimes warning from StackVisual.jsx. Partner testid convention uses raw lowercased name (space preserved for 'upbeat tech')."
+}
