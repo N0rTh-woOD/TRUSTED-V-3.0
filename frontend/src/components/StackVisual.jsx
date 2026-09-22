@@ -24,7 +24,7 @@ const rightFace = (cy) => `${CX},${cy + H / 2} ${CX + W / 2},${cy} ${CX + W / 2}
 
 const Plate = ({ l, i }) => {
   const cy = y(i);
-  const delay = `${(3 - i) * 1.4}s`;
+  const delay = `${(3 - i) * 1.8}s`;
   return (
     <g>
       <polygon points={leftFace(cy)} fill={l.side} />
@@ -48,7 +48,7 @@ const Plate = ({ l, i }) => {
         </g>
       )}
 
-      {/* activation edge — CSS flash, no layout impact */}
+      {/* Soft activation edge — opacity only, with no abrupt movement. */}
       <polygon
         points={rhombus(cy)}
         fill="none"
@@ -65,7 +65,7 @@ const Plate = ({ l, i }) => {
         {l.note}
       </text>
 
-      {/* attestation tap */}
+      {/* Attestation tap */}
       <line x1={CX + W / 2 - 6} y1={cy} x2={RAIL_X} y2={cy} stroke="#CFCEC8" strokeWidth="1" strokeDasharray="3 4" />
       <circle cx={RAIL_X} cy={cy} r="3.2" fill="#FFFFFF" stroke="#003262" strokeWidth="1.3" />
       <g className="tv-check-in" style={{ animationDelay: delay }}>
@@ -79,7 +79,8 @@ const Plate = ({ l, i }) => {
 const StackVisual = () => (
   <div className="relative aspect-[26/25] rounded-md border border-[#E5E4DF] bg-[#F7F7F5] overflow-hidden" data-testid="hero-visual">
     <div className="absolute inset-0 tv-grid-bg opacity-60" />
-    <svg viewBox="0 0 520 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
+    <div className="absolute inset-0 tv-stack-scene">
+    <svg viewBox="0 0 520 500" className="w-full h-full" aria-hidden="true">
       <defs>
         <radialGradient id="tv-stack-glow" cx="50%" cy="55%" r="55%">
           <stop offset="0%" stopColor="#2486C7" stopOpacity="0.16" />
@@ -95,28 +96,27 @@ const StackVisual = () => (
       <rect x="0" y="0" width="520" height="500" fill="url(#tv-stack-glow)" />
       <ellipse cx={CX} cy={BASE_Y + 62} rx="150" ry="26" fill="#003262" opacity="0.07" />
 
-      <g className="tv-stack-drift">
-        <line x1={RAIL_X} y1={y(0) + 6} x2={RAIL_X} y2={y(3) - 44} stroke="url(#tv-rail-grad)" strokeWidth="1.5" />
-        {LAYERS.map((l, i) => <Plate key={l.label} l={l} i={i} />)}
+      <line x1={RAIL_X} y1={y(0) + 6} x2={RAIL_X} y2={y(3) - 44} stroke="url(#tv-rail-grad)" strokeWidth="1.5" />
+      {LAYERS.map((l, i) => <Plate key={l.label} l={l} i={i} />)}
 
-        <g className="tv-rail-pulse">
-          <circle cx={RAIL_X} cy={y(0)} r="8" fill="#2486C7" opacity="0.18" />
-          <circle cx={RAIL_X} cy={y(0)} r="3.6" fill="#2486C7" />
-        </g>
+      <g className="tv-rail-pulse">
+        <circle cx={RAIL_X} cy={y(0)} r="8" fill="#2486C7" opacity="0.18" />
+        <circle cx={RAIL_X} cy={y(0)} r="3.6" fill="#2486C7" />
+      </g>
 
-        <g className="tv-attest-badge">
-          <rect x={RAIL_X - 50} y={y(3) - 62} width="100" height="22" rx="4" fill="#0F6E56" />
-          <text x={RAIL_X} y={y(3) - 47} textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="9" fontWeight="600" letterSpacing="1.6" fill="#FFFFFF">
-            ATTESTED
-          </text>
-        </g>
+      <g className="tv-attest-badge">
+        <rect x={RAIL_X - 50} y={y(3) - 62} width="100" height="22" rx="4" fill="#0F6E56" />
+        <text x={RAIL_X} y={y(3) - 47} textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="9" fontWeight="600" letterSpacing="1.6" fill="#FFFFFF">
+          ATTESTED
+        </text>
       </g>
 
       <text x="26" y="150" fontFamily="'IBM Plex Mono', monospace" fontSize="9" letterSpacing="2.2" fill="#5A6472" transform="rotate(-90 26 150)">SOFTWARE ↑</text>
       <text x="26" y="432" fontFamily="'IBM Plex Mono', monospace" fontSize="9" letterSpacing="2.2" fill="#5A6472" transform="rotate(-90 26 432)">SILICON ↓</text>
       <line x1="34" y1="100" x2="34" y2="440" stroke="#CFCEC8" strokeWidth="1" />
     </svg>
-    <div className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[#5A6472]">
+    </div>
+    <div className="absolute bottom-3 left-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[#5A6472]" data-testid="hero-visual-caption">
       Verified at every layer · illustrative
     </div>
   </div>

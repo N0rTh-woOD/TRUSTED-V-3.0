@@ -324,6 +324,10 @@ Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform —
 > CORRECTION (Jun 2026): There is NO MIPS / MIPS ARC-V tie-up. IP partners are **SiFive and Akeana only**. Any earlier mention above is void.
 
 ## Recent Changes Log
+- **Jun 2026 — Hero animation smoothing**
+  - Refined `StackVisual.jsx` and its CSS motion contract after user feedback that the hero was visually jerky. Removed the fast moving rail traversal and abrupt opacity transitions. The complete visual now moves as one low-amplitude scene over 12 seconds, while the rail, attestation badge, layer outlines and checks use long, eased opacity-only cycles.
+  - Verified manually in the external preview: authenticated with the admin test account, confirmed the homepage hero renders without console errors or layout shifts.
+
 - **Jun 2026 — Rebuild Kit + Object Storage**
   - Authored `/app/docs/rebuild-kit/` — full-fidelity rebuild documentation set: `00_MASTER_PROMPT.md` (941 lines: stack, routes, models, API contract, page-by-section specs with copy, data-testid map, 9-phase build plan, acceptance tests), `01_PHILOSOPHY_AND_STORY.md` (core philosophy, 8 structural gaps, 6-layer block story, homepage narrative arc, voice & tone, past mistakes), `02_DESIGN_SYSTEM.md` (exact tokens, type scale, layout rhythm, ui-kit contracts, forbidden patterns), `README.md`.
   - Zipped to `/app/docs/TRUSTED-V_Rebuild_Kit.zip` and published at `/TRUSTED-V_Rebuild_Kit.zip` (frontend/public) for download.
