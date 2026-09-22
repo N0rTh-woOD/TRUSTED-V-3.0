@@ -1,0 +1,32 @@
+{
+  "summary": "Frontend-only regression for TRUSTED-V design system overhaul round. Logged in as admin. Verified all 9 review items: hero visual, unnumbered core-technologies cards, platform-architecture 6 bands, Zephyr/FreeRTOS purge (except allowed rtos-benchmark page), uniform .tv-panel card language across 8 pages, no dead links from nav+footer+mega, home reachable from 3 deep pages via nav-brand and footer-home, /this-does-not-exist renders NotFound page with CTA + 3 suggestions, regression items (marketplace tabs+search, engagement SaaS/PaaS, admin dashboard).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verification_results": {
+    "1_login_and_hero": "PASS - admin login lands on /. [data-testid=hero-visual] renders the isometric silicon->software stack (APPLICATION / RUST RUNTIME / ROOT OF TRUST / RISC-V SILICON) with green check rail and ATTESTED badge. No layout shift; no blocking console errors.",
+    "2_core_technologies_no_numbers": "PASS - [data-testid=core-technologies] renders 6 [data-testid=core-tech-*] cards (risc-v-native, security-by-construction, virtualization, real-time-software, cryptography, rust-developer-tooling). No leading 01-06 numbering. Each has uppercase mono eyebrow (ISA, SECURITY, PRE-SILICON, RUNTIME, CRYPTO, TOOLING) + title + description.",
+    "3_platform_architecture_bands": "PASS - [data-testid=platform-architecture] renders 6 [data-testid=arch-band-0..5] with uniform blue-gradation styling.",
+    "4_zephyr_freertos_purge": "PASS - Rendered text scan on /, /product-suite, /developer-portal, /download-ide, /webide, /marketplace, /partners, /about, /engagement-models, /blog: ZERO occurrences of 'Zephyr' or 'FreeRTOS'. /product/rtos-benchmark still contains both (allowed).",
+    "5_card_uniformity": "PASS - .tv-panel/.tv-panel-muted/.tv-panel-dark/.tv-panel-link/.tv-panel-accent counts: / (62), /product-suite (14), /marketplace (6), /about (11), /download-ide (21), /webide (3), /partners (2), /product/secure-boot (6). ZERO legacy gradient-card elements anywhere. Visual inspection: uniform white/#F7F7F5 surface, thin border, small radius, mono eyebrow, blue left-accent on hover.",
+    "6_no_dead_links": "PASS - Crawled 15 unique internal href targets from top nav + mega-menu + footer (/product-suite, /marketplace, /developer-portal, /partners, /engagement-models, /about, /download-ide, /webide, /product/secure-boot, /product/crypto-stack, /product/rtos-benchmark, /contact, /board-support, /partner-registration, /). None land on NotFound.",
+    "7_home_reachable_everywhere": "PASS - nav-brand click from /about, /marketplace and /product/secure-boot all return to '/'. footer-home link present with href='/'.",
+    "8_notfound_page": "PASS - /this-does-not-exist renders [data-testid=notfound-page] with [data-testid=notfound-home-cta] and 3 [data-testid=notfound-suggest*] cards.",
+    "9_regression": "PASS - /marketplace has 2 tab elements + search input works. /engagement-models renders engagement-saas + engagement-paas. Admin dashboard reachable: nav-account-menu -> nav-admin -> lands on /admin."
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Optional carry-over from iter_34: StackVisual keyTimes may still contain a value >1 (1.046) which browsers accept but emits a console warning; low priority."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped per request)", "frontend": "100% (9/9 review items pass)"},
+  "test_credentials": "admin@trusted-v.com / bosch@2425",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Design-system overhaul verified end-to-end. All cards now use the shared .tv-panel primitive; no gradient-card remnants. Only /product/rtos-benchmark retains Zephyr/FreeRTOS references by design. Site auth-lock is on — always login at /login first before crawling."
+}

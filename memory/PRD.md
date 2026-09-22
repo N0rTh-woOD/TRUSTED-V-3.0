@@ -29,6 +29,19 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 15 — Unified Card Design System, Hero Rebuild, Zephyr Purge (Jun 2026)
+Verified by testing_agent (iteration_35.json): 9/9 PASS, 100% frontend.
+- **Hero visual rebuilt** (`StackVisual.jsx`): cleaner isometric silicon→software stack (proportions W286/H126/gap92, die grid on the silicon plate, soft radial glow, base shadow, attestation rail with per-layer check marks + ATTESTED badge). **All SMIL removed** (`animateMotion`/`animate`/`keyTimes` gone) — motion is now CSS `transform`/`opacity` only: `tv-stack-drift`, `tv-rail-pulse`, `tv-plate-flash`, `tv-check-in`, `tv-attest-badge`. Fixes the jerky animation.
+- **ONE card design system** — new `.tv-panel` family in `index.css`: `.tv-panel` (white, 1px #E5E4DF, 6px radius), `.tv-panel-muted` (#F7F7F5), `.tv-panel-dark`, `.tv-panel-link` (hover lift + #2486C7 border + shadow), `.tv-panel-accent` (left blue rule scales in on hover).
+  - New shared primitive `TVCard` + internal `CardShell` in `ui-kit.jsx`. `GradientCard` **deleted**.
+  - `ProductCard`, `MarketCard`, `ResourceCard`, `PartnerGrid` rebuilt on `.tv-panel`. `CardShell` renders a plain `div` when no destination — **no more `to="#"` dead links**.
+  - All legacy `gap-px bg-[#E5E4DF] border-y` tiled grids converted to `gap-4` + `.tv-panel` cards across ProductSuite, Marketplace, About, SecureBoot, WebIDE, IDEDownloads, Partners, RTOSBenchmark.
+  - Palette normalised site-wide: `#0A0A0A→#0B0F14`, `#4B4B4B`/`#6B6B6B→#5A6472`, `#FAFAF7→#F7F7F5`, `#E7E5E0→#E5E4DF`. Inline `font-family` overrides stripped from card bodies.
+- **Platform Architecture restyled**: single blue gradation accent strips (`#9DC8E8 → #00162B`, application→silicon) instead of 6 unrelated colours; uniform `.tv-panel-muted` module tiles; cleaner vertical SOFTWARE/SILICON axis.
+- **Core Technologies**: numbering removed, no icons — mono eyebrow (ISA / SECURITY / PRE-SILICON / RUNTIME / CRYPTO / TOOLING) + title + description + hover arrow.
+- **Zephyr · FreeRTOS removed platform-wide** (Landing, Navigation mega-menu, DeveloperPortal, IDEDownloads, Blog, BuildPipelineViz, admin form placeholders) — replaced with TRUSTED-V RTOS / Embassy async / Tock. **Only `/product/rtos-benchmark` retains them by design** (kept as a comparison). Backend middleware seed catalog untouched.
+- **Navigation hardening**: new `NotFound.jsx` 404 page wired as `path="*"` catch-all in `App.js` (no more blank screens); `Home` link added to the footer Company column; logo returns home from every page.
+
 ### Phase 14 — Engagement Models, Reviewer UI Suggestions, Animated Hero (Jun 2026)
 Verified by testing_agent (iteration_34.json): 15/15 PASS.
 - **Business models** (from `website_updates_models.pdf`): shared data `/frontend/src/data/engagement.js`; new `/engagement-models` page (SaaS "Let's build it for you" · PaaS "Your code, our ecosystem", 5-step `StepRail` each, fit table, CTAs → `/contact?plan=saas|paas`); homepage `EngagementTeaser`; Products page `EngagementBlock`; nav item "Engagement" + footer link.
@@ -256,6 +269,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 | `/product/crypto-stack` | Crypto Stack | 8-category algorithm reference tables |
 | `/product/rtos-benchmark` | RTOS Benchmarks | 4 RTOS options, comparison table |
 | `/engagement-models` | Engagement Models | SaaS / PaaS 5-step flows, fit table, CTAs |
+| `*` | NotFound (404) | Catch-all — brand 404 with home CTA + 3 suggestion cards |
 | `/marketplace` | Marketplace | Hardware + IP tabs with logos |
 | `/developer-portal` | Developers | SDK docs, expandable sections |
 | `/download-ide` | IDE Download | 21 features, comparison, benefits |
