@@ -6,6 +6,7 @@ const WebIDEPage = () => {
   return (
     <div className="bg-white text-[#0A0A0A]">
       <PageHero
+        crumbs={[{ label: "Products", to: "/product-suite" }, { label: "WebIDE" }]}
         eyebrow="WebIDE — Cloud edition"
         title={
           <>

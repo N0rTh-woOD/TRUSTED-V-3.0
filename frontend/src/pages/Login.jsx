@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2, ArrowUpRight, Shield, Cpu, KeyRound, Layers } from "lucide-react";
 import { toast } from "sonner";
-import TrustedVLogo from "@/components/TrustedVLogo";
+import TrustedVLogo, { PoweredByBosch } from "@/components/TrustedVLogo";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -41,15 +41,15 @@ const Login = () => {
         </div>
 
         <div className="relative px-14 xl:px-16">
-          <div className="tv-eyebrow" style={{ color: "#FDB515" }}>
-            <span style={{ color: "#FDB515" }}>The complete RISC-V platform</span>
+          <div className="tv-eyebrow" style={{ color: "#2486C7" }}>
+            <span style={{ color: "#2486C7" }}>The complete RISC-V platform</span>
           </div>
           <h1
             className="tv-h1 mt-5 text-white"
             style={{ fontSize: "clamp(34px, 3.6vw, 48px)", lineHeight: 1.05 }}
           >
             Software to Silicon,<br />
-            <span className="text-[#FDB515]">Rust-Native RISC-V.</span>
+            <span className="text-[#56A2D6]">Rust-Native RISC-V.</span>
           </h1>
           <p className="mt-5 text-[15px] leading-[1.7] text-white/65 max-w-md">
             An open, modular platform for building trustworthy edge silicon
@@ -66,7 +66,7 @@ const Login = () => {
               { Icon: KeyRound, label: "Attestable", sub: "TVOTS quote-based trust" },
             ].map((f) => (
               <div key={f.label} className="flex items-start gap-3">
-                <span className="mt-0.5 w-8 h-8 rounded-md bg-white/[0.06] border border-white/10 flex items-center justify-center text-[#FDB515]">
+                <span className="mt-0.5 w-8 h-8 rounded-md bg-white/[0.06] border border-white/10 flex items-center justify-center text-[#56A2D6]">
                   <f.Icon className="w-4 h-4" strokeWidth={1.6} />
                 </span>
                 <div>
@@ -80,7 +80,7 @@ const Login = () => {
 
         <div className="relative p-14 xl:p-16 pt-8 flex items-center justify-between">
           <div className="font-mono text-[10.5px] tracking-[0.22em] uppercase text-white/40">
-            Powered by Bosch · Made in India
+            <PoweredByBosch dark className="normal-case tracking-normal text-[12px]" /> · Made in India
           </div>
           <div className="flex items-center gap-2 font-mono text-[10.5px] text-white/50">
             <span className="w-1.5 h-1.5 rounded-full bg-[#0F6E56] tv-pulse-dot" />

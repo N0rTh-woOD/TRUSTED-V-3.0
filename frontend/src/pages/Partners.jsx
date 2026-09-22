@@ -21,7 +21,7 @@ const partners = [
     description: "Indian semiconductor startup building secure RISC-V SoCs for IoT, industrial automation and AI edge applications.",
     products: ["Secure IoT SoC with hardware crypto", "Vision SoC with integrated NPU", "Industrial-grade ruggedized SoCs"],
     website: "https://mindgrove.in",
-    accent: "#0F6E56",
+    accent: "#004A7F",
   },
   {
     num: "03",
@@ -31,7 +31,7 @@ const partners = [
     description: "Emerging Indian RISC-V partner focused on edge AI and intelligent sensor platforms. Building next-gen RISC-V SoCs with integrated NPU.",
     products: ["Edge AI accelerators", "Intelligent sensor platforms", "Custom RISC-V co-processors"],
     website: "#",
-    accent: "#B7410E",
+    accent: "#2486C7",
   },
 ];
 
@@ -44,13 +44,14 @@ const Partners = () => {
   return (
     <div className="bg-white text-[#0A0A0A]">
       <PageHero
+        crumbs={[{ label: "Ecosystem" }]}
         eyebrow="Partners & ecosystem"
         title={
           <>
             An open network<br />of RISC-V builders.
           </>
         }
-        subtitle="TRUSTED-V is co-verified with the best of Indian and global RISC-V IP, silicon and system partners — from sovereign programmes to performance leaders."
+        subtitle="Co-verified with the best of Indian and global RISC-V IP, silicon and system partners."
       />
 
       {/* Indian partners */}
@@ -129,8 +130,8 @@ const Partners = () => {
         <div className="tv-container tv-section">
           <div className="grid lg:grid-cols-12 gap-12 mb-12">
             <div className="lg:col-span-7">
-              <span className="tv-eyebrow" style={{ color: "#FDB515" }}>
-                <span className="text-[#FDB515]">Global IP integration</span>
+              <span className="tv-eyebrow" style={{ color: "#2486C7" }}>
+                <span className="text-[#2486C7]">Global IP integration</span>
               </span>
               <h2
                 className="tv-h2"

@@ -332,6 +332,50 @@
 .tv-hr { border-top: 1px solid var(--tv-border); }
 
 /* ============================================================
+   Bosch blue gradation (logo: #004A7F / #2486C7)
+   ============================================================ */
+:root {
+    --tv-blue-100: #E6F1F9;
+    --tv-blue-300: #9DC8E8;
+    --tv-blue-400: #56A2D6;
+    --tv-blue-500: #2486C7;
+    --tv-blue-700: #004A7F;
+    --tv-blue-800: #003262;
+    --tv-blue-900: #00162B;
+}
+
+/* Nav active pill */
+.tv-nav-pill {
+    background: var(--tv-blue-100);
+    color: var(--tv-blue-800);
+    border-radius: 999px;
+}
+
+/* Mega-menu hover bar (Bosch brand guide pattern) */
+.tv-mega-row {
+    display: block;
+    margin-inline: -12px;
+    padding: 8px 12px 8px 10px;
+    border-left: 2px solid transparent;
+    border-radius: 0 4px 4px 0;
+    transition: background-color 150ms ease, border-color 150ms ease;
+}
+.tv-mega-row:hover { background: var(--tv-blue-100); border-left-color: var(--tv-blue-500); }
+
+/* ============================================================
+   Motion — illustrations
+   ============================================================ */
+@keyframes tv-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-7px); }
+}
+.tv-float { animation: tv-float 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+@keyframes tv-spin { to { transform: rotate(360deg); } }
+.tv-spin-slow { animation: tv-spin 22s linear infinite; transform-box: fill-box; transform-origin: center; }
+.tv-spin-rev  { animation: tv-spin 14s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+
+/* ============================================================
    Motion — subtle only
    ============================================================ */
 @keyframes tv-fade-up {

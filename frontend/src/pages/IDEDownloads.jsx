@@ -2,10 +2,20 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ArrowUpRight, Check, Download, X } from "lucide-react";
-import { Eyebrow, PrimaryCTA, SecondaryCTA } from "@/components/ui-kit";
+import { Eyebrow, PrimaryCTA, SecondaryCTA, Breadcrumbs } from "@/components/ui-kit";
+import { BLUE_STEPS } from "@/components/TrustedVLogo";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const JARVYN_GIF = "https://customer-assets-m6fa6gv7.emergentagent.net/job_e0aa043e-675d-4863-909c-5d4926841718/artifacts/7kle5aa3_Jarvyn_newIde_1.gif";
+
+/* Feature categories — each takes one step on the blue gradation */
+const CATEGORIES = [
+  { name: "Editor & AI", color: BLUE_STEPS[3] },
+  { name: "Build & Security", color: BLUE_STEPS[4] },
+  { name: "Runtime & Collaboration", color: BLUE_STEPS[5] },
+  { name: "Ecosystem", color: "#00162B" },
+];
+const categoryOf = (n) => CATEGORIES[Math.min(Math.floor((Number(n) - 1) / 6), 3)];
 
 const features = [
   { n: "01", title: "Hardware-native platform", desc: "Built from the ground up for RISC-V and Rust — not a general-purpose editor fork." },
@@ -55,7 +65,8 @@ const IDEDownloads = () => {
         <div className="absolute inset-0 tv-grid-bg opacity-60 pointer-events-none" />
         <div className="absolute -top-32 -right-40 w-[520px] h-[520px] rounded-full bg-[#00B4E0]/8 blur-3xl pointer-events-none" />
 
-        <div className="tv-container relative pt-16 md:pt-20 pb-8 md:pb-12">
+        <div className="tv-container relative pt-8 md:pt-10 pb-8 md:pb-12">
+          <Breadcrumbs items={[{ label: "Products", to: "/product-suite" }, { label: "Jarvyn IDE" }]} className="mb-10" />
           <div className="grid lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-7">
               <div className="mb-5"><Eyebrow>Jarvyn IDE</Eyebrow></div>
@@ -64,9 +75,8 @@ const IDEDownloads = () => {
                 <span className="text-[#003262]">RISC-V and Rust.</span>
               </h1>
               <p className="tv-lede mt-5" data-testid="ide-hero-subtitle">
-                Jarvyn is the Rust-native RISC-V development environment. Purpose-built
-                for embedded, mission-critical firmware — with a hardware-aware editor,
-                signed toolchain and integrated QEMU debug from day one.
+                The Rust-native RISC-V environment — hardware-aware editor, signed toolchain
+                and integrated QEMU debug from day one.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryCTA
@@ -135,7 +145,7 @@ const IDEDownloads = () => {
               <span className="font-mono text-[11px] text-white/60 truncate">
                 Jarvyn IDE — qemu-hello / src / main.rs
               </span>
-              <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#00B4E0]">
+              <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#56A2D6]">
                 RV32
               </span>
             </div>
@@ -163,20 +173,28 @@ const IDEDownloads = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
-            {features.map((f) => (
-              <div key={f.n} className="bg-white p-8 min-h-[200px]" data-testid={`ide-feature-${f.n}`}>
-                <div className="text-[12px] font-mono tracking-widest text-[#003262] mb-4" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
-                  / {f.n}
-                </div>
-                <h3 className="text-[17px] tracking-[-0.015em] text-[#0A0A0A]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>
-                  {f.title}
-                </h3>
-                <p className="mt-3 text-[13.5px] leading-[1.6] text-[#4B4B4B] font-light" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 400 }}>
-                  {f.desc}
-                </p>
-              </div>
+          <div className="mb-8 flex flex-wrap gap-x-6 gap-y-2" data-testid="ide-feature-legend">
+            {CATEGORIES.map((c) => (
+              <span key={c.name} className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.12em] uppercase text-[#5A6472]">
+                <span className="w-2.5 h-2.5 rounded-sm" style={{ background: c.color }} />{c.name}
+              </span>
             ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E7E5E0] border-y border-[#E7E5E0]">
+            {features.map((f) => {
+              const cat = categoryOf(f.n);
+              return (
+                <div key={f.n} className="bg-white p-7 min-h-[180px]" data-testid={`ide-feature-${f.n}`}>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-sm font-mono text-[11px] font-semibold text-white" style={{ background: cat.color }}>{f.n}</span>
+                    <span className="font-mono text-[9.5px] tracking-[0.14em] uppercase" style={{ color: cat.color }}>{cat.name}</span>
+                  </div>
+                  <h3 className="text-[17px] tracking-[-0.015em] text-[#0A0A0A] font-medium">{f.title}</h3>
+                  <p className="mt-2 text-[13.5px] leading-[1.6] text-[#4B4B4B]">{f.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

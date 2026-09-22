@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ExternalLink, ArrowLeft } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
 const SecureBootPage = () => {
@@ -44,6 +44,7 @@ const SecureBootPage = () => {
   return (
     <div className="bg-white text-[#0A0A0A]" data-testid="secure-boot-page">
       <PageHero
+        crumbs={[{ label: "Products", to: "/product-suite" }, { label: "Secure Boot" }]}
         eyebrow="Secure Boot"
         title={
           <>
@@ -51,11 +52,7 @@ const SecureBootPage = () => {
           </>
         }
         subtitle="rBoot and rustBoot form a complete, Rust-native secure-boot chain for RISC-V — certifiable against CC EAL4+, PSA L3 and ISO 26262."
-      >
-        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-          <ArrowLeft className="w-3.5 h-3.5" /> Back to products
-        </Link>
-      </PageHero>
+      />
 
       {/* Chain diagram */}
       <section className="tv-section-tight border-b border-[#E7E5E0] bg-[#FAFAF7]" data-testid="boot-chain">

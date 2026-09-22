@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowLeft } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
 const RTOSBenchmarkPage = () => {
@@ -34,6 +34,7 @@ const RTOSBenchmarkPage = () => {
   return (
     <div className="bg-white text-[#0A0A0A]" data-testid="rtos-benchmark-page">
       <PageHero
+        crumbs={[{ label: "Products", to: "/product-suite" }, { label: "RTOS Options" }]}
         eyebrow="RTOS choices"
         title={
           <>
@@ -41,11 +42,7 @@ const RTOSBenchmarkPage = () => {
           </>
         }
         subtitle="TRUSTED-V ships integration and reference project templates for four production RTOS options — pick the runtime your project actually needs."
-      >
-        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-          <ArrowLeft className="w-3.5 h-3.5" /> Back to products
-        </Link>
-      </PageHero>
+      />
 
       <section className="tv-section border-b border-[#E7E5E0]" data-testid="rtos-options">
         <div className="tv-container">

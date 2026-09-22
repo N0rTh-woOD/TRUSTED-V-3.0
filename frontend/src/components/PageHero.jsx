@@ -1,11 +1,14 @@
+import { Breadcrumbs } from "@/components/ui-kit";
+
 /**
  * PageHero — the reusable page header for secondary pages.
- * Matches type scale from the design spec.
+ * `crumbs` renders breadcrumb navigation (Home is prepended automatically).
  */
 const PageHero = ({
   eyebrow,
   title,
   subtitle,
+  crumbs,
   align = "left",
   children,
   size = "default",
@@ -14,12 +17,13 @@ const PageHero = ({
   const isCenter = align === "center";
   const py =
     size === "compact"
-      ? "pt-16 pb-12 md:pt-20 md:pb-16"
-      : "pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24";
+      ? "pt-10 pb-12 md:pt-12 md:pb-16"
+      : "pt-10 pb-16 md:pt-12 md:pb-20 lg:pt-14 lg:pb-24";
 
   return (
     <section className="relative bg-white border-b border-[#E5E4DF]" data-testid={testId}>
       <div className={`tv-container ${py}`}>
+        {crumbs && <Breadcrumbs items={crumbs} className={`mb-10 md:mb-12 ${isCenter ? "justify-center" : ""}`} />}
         {children ? (
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-end">
             <div className="lg:col-span-7">
@@ -45,11 +49,7 @@ const PageHeroContent = ({ eyebrow, title, subtitle, center }) => (
       </div>
     )}
     {title && (
-      <h1
-        className="tv-h1"
-        style={{ fontSize: "clamp(34px, 5vw, 56px)" }}
-        data-testid="page-hero-title"
-      >
+      <h1 className="tv-h1" style={{ fontSize: "clamp(34px, 5vw, 56px)" }} data-testid="page-hero-title">
         {title}
       </h1>
     )}

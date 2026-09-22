@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowLeft, Info } from "lucide-react";
+import { ArrowUpRight, Info } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
 const CryptoStackPage = () => {
@@ -70,6 +70,7 @@ const CryptoStackPage = () => {
   return (
     <div className="bg-white text-[#0A0A0A]" data-testid="crypto-stack-page">
       <PageHero
+        crumbs={[{ label: "Products", to: "/product-suite" }, { label: "Crypto Stack" }]}
         eyebrow="Crypto Stack"
         title={
           <>
@@ -77,11 +78,7 @@ const CryptoStackPage = () => {
           </>
         }
         subtitle="A curated, Rust-native cryptographic stack — classical, PQC and side-channel-hardened primitives, mapped to NIST FIPS and international standards."
-      >
-        <Link to="/product-suite" className="inline-flex items-center gap-1.5 text-[13px] text-[#6B6B6B] hover:text-[#003262] transition-colors" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-          <ArrowLeft className="w-3.5 h-3.5" /> Back to products
-        </Link>
-      </PageHero>
+      />
 
       <section className="tv-section-tight border-b border-[#E7E5E0]" data-testid="crypto-categories">
         <div className="tv-container">

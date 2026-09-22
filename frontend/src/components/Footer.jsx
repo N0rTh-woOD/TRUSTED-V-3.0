@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import TrustedVLogo from "@/components/TrustedVLogo";
+import TrustedVLogo, { PoweredByBosch } from "@/components/TrustedVLogo";
 
 /**
  * Footer — structured multi-column (spec §8).
@@ -46,6 +46,7 @@ const Footer = () => {
       title: "Company",
       links: [
         { label: "About", to: "/about" },
+        { label: "Engagement Models", to: "/engagement-models" },
         { label: "Contact", to: "/contact" },
       ],
     },
@@ -67,7 +68,7 @@ const Footer = () => {
             </p>
             <Link
               to="/contact"
-              className="mt-7 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-white/90 border-b border-white/40 pb-1 hover:border-[#FDB515] hover:text-[#FDB515] transition-colors"
+              className="mt-7 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-white/90 border-b border-white/40 pb-1 hover:border-[#2486C7] hover:text-[#56A2D6] transition-colors"
               data-testid="footer-cta"
             >
               Contact us <ArrowUpRight className="w-3.5 h-3.5" />
@@ -115,7 +116,7 @@ const Footer = () => {
       <div className="tv-container py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         <p className="text-[11.5px] text-white/50">© {year} TRUSTED-V. A Bosch initiative. All rights reserved.</p>
         <div className="flex items-center gap-6 text-[11.5px] text-white/50">
-          <span>Powered by Bosch</span>
+          <PoweredByBosch dark className="text-[12px]" />
           <span className="inline-flex items-center gap-1.5">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#0F6E56] tv-pulse-dot" />
             All systems operational

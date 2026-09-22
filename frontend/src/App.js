@@ -34,6 +34,7 @@ import SecureBootPage from "@/pages/SecureBootPage";
 import CryptoStackPage from "@/pages/CryptoStackPage";
 import RTOSBenchmarkPage from "@/pages/RTOSBenchmarkPage";
 import WebIDEPage from "@/pages/WebIDEPage";
+import EngagementModels from "@/pages/EngagementModels";
 
 // Auth Pages
 import Login from "@/pages/Login";
@@ -109,6 +110,7 @@ const AppContent = () => {
         <Route path="/board-support" element={<BoardSupportRequest />} />
         <Route path="/contact-sales" element={<ContactSales />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/engagement-models" element={<EngagementModels />} />
         
         {/* Legacy routes - redirect to new paths */}
         <Route path="/hardware" element={<HardwareCatalog />} />

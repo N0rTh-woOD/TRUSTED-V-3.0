@@ -58,6 +58,7 @@ const DeveloperPortal = () => {
   return (
     <div className="bg-white text-[#0A0A0A]">
       <PageHero
+        crumbs={[{ label: "Developers" }]}
         eyebrow="Developer portal"
         title={
           <>

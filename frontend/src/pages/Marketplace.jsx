@@ -43,13 +43,14 @@ const Marketplace = () => {
   return (
     <div className="bg-white text-[#0A0A0A]">
       <PageHero
+        crumbs={[{ label: "Marketplace" }]}
         eyebrow="Marketplace"
         title={
           <>
             Boards, IP,<br />and everything between.
           </>
         }
-        subtitle="A curated catalog of RISC-V development boards from Indian and global partners, plus a growing library of processor cores, security IP and peripherals."
+        subtitle="RISC-V development boards from Indian and global partners, plus processor cores, security IP and peripherals."
       />
 
       {/* Tabs + search */}
