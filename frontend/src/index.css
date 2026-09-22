@@ -405,44 +405,6 @@
 }
 .tv-float { animation: tv-float 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 
-/* Hero stack — long, low-amplitude movement avoids visible reset points. */
-@keyframes tv-stack-scene {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-4px); }
-}
-.tv-stack-scene {
-    animation: tv-stack-scene 12s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-    will-change: transform;
-}
-
-@keyframes tv-rail-pulse {
-    0%, 100% { opacity: 0.55; }
-    50%      { opacity: 1; }
-}
-.tv-rail-pulse {
-    animation: tv-rail-pulse 6.8s ease-in-out infinite;
-}
-
-@keyframes tv-plate-flash {
-    0%, 100% { opacity: 0; }
-    18%      { opacity: 0; }
-    35%      { opacity: 0.58; }
-    55%      { opacity: 0; }
-}
-.tv-plate-flash { animation: tv-plate-flash 7.2s ease-in-out infinite; }
-
-@keyframes tv-check-in {
-    0%, 100% { opacity: 0.4; }
-    35%, 65% { opacity: 1; }
-}
-.tv-check-in { animation: tv-check-in 7.2s ease-in-out infinite; }
-
-@keyframes tv-attest-badge {
-    0%, 100% { opacity: 0.76; }
-    50%      { opacity: 1; }
-}
-.tv-attest-badge { animation: tv-attest-badge 6.8s ease-in-out infinite; }
-
 @keyframes tv-spin { to { transform: rotate(360deg); } }
 .tv-spin-slow { animation: tv-spin 22s linear infinite; transform-box: fill-box; transform-origin: center; }
 .tv-spin-rev  { animation: tv-spin 14s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
