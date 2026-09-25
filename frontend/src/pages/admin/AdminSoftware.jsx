@@ -37,6 +37,7 @@ const typeColors = {
   Framework: "bg-teal-100 text-teal-700",
   Library: "bg-yellow-100 text-yellow-700",
 };
+const typeLabel = (type) => (type === "SDK" ? "AI Engines" : type);
 
 const AdminSoftware = () => {
   const { token } = useAuth();
@@ -169,7 +170,7 @@ const AdminSoftware = () => {
               Software Components
             </h1>
             <p className="text-muted-foreground">
-              Manage BSPs, SDKs, Drivers, Bootloaders, and Libraries
+              Manage BSPs, AI Engines, Drivers, Bootloaders, and Libraries
             </p>
           </div>
           <Button
@@ -192,7 +193,7 @@ const AdminSoftware = () => {
             <SelectContent>
               <SelectItem value="all">All Types</SelectItem>
               {COMPONENT_TYPES.map((type) => (
-                <SelectItem key={type} value={type}>{type}</SelectItem>
+                <SelectItem key={type} value={type}>{typeLabel(type)}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -220,7 +221,7 @@ const AdminSoftware = () => {
                           v{component.version}
                         </Badge>
                         <Badge className={`text-xs ${typeColors[component.type] || 'bg-gray-100 text-gray-700'}`}>
-                          {component.type}
+                          {typeLabel(component.type)}
                         </Badge>
                       </div>
                       <p className="text-sm text-muted-foreground mb-3">
@@ -303,7 +304,7 @@ const AdminSoftware = () => {
                   <Input
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="ESP-IDF SDK"
+                    placeholder="Code Engine"
                   />
                 </div>
                 <div className="space-y-2">
@@ -317,7 +318,7 @@ const AdminSoftware = () => {
                     </SelectTrigger>
                     <SelectContent>
                       {COMPONENT_TYPES.map((type) => (
-                        <SelectItem key={type} value={type}>{type}</SelectItem>
+                        <SelectItem key={type} value={type}>{typeLabel(type)}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

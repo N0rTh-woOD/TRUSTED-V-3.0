@@ -13,7 +13,7 @@ const CATEGORIES = [
   { name: "Editor & AI", color: BLUE_STEPS[3] },
   { name: "Build & Security", color: BLUE_STEPS[4] },
   { name: "Runtime & Collaboration", color: BLUE_STEPS[5] },
-  { name: "Ecosystem", color: "#00162B" },
+  { name: "Platform", color: "#00162B" },
 ];
 const categoryOf = (n) => CATEGORIES[Math.min(Math.floor((Number(n) - 1) / 6), 3)];
 

@@ -8,8 +8,8 @@ const NAV_ITEMS = [
   { label: "Products", key: "products", to: "/product-suite", hasMega: true, match: ["/product-suite", "/product/", "/download-ide", "/webide"] },
   { label: "Marketplace", to: "/marketplace" },
   { label: "Developers", to: "/developer-portal" },
-  { label: "Ecosystem", to: "/partners" },
-  { label: "Engagement", to: "/engagement-models" },
+  { label: "Platform", to: "/partners" },
+  { label: "Services", to: "/services" },
   { label: "About", to: "/about" },
 ];
 
@@ -17,7 +17,8 @@ const MEGA = [
   { title: "Development Platform", items: [
     { label: "Jarvyn IDE", to: "/download-ide", note: "Rust-native RISC-V IDE" },
     { label: "WebIDE", to: "/webide", note: "Zero-install cloud IDE" },
-    { label: "Developer Portal", to: "/developer-portal", note: "SDK, docs, quickstarts" },
+    { label: "Code Engine", to: "/product/code-engine", note: "AI-assisted project planning" },
+    { label: "Developer Portal", to: "/developer-portal", note: "AI Engines, docs, quickstarts" },
   ] },
   { title: "Software & Security", items: [
     { label: "Secure Boot", to: "/product/secure-boot", note: "rBoot & rustBoot" },
@@ -27,7 +28,7 @@ const MEGA = [
   { title: "Silicon & IP", items: [
     { label: "Product Suite Overview", to: "/product-suite", note: "The full platform" },
     { label: "Marketplace", to: "/marketplace", note: "Boards & IP blocks" },
-    { label: "Ecosystem", to: "/partners", note: "SiFive, Akeana, C-DAC" },
+    { label: "Platform", to: "/partners", note: "Build with SiFive and TRUSTED-V" },
   ] },
 ];
 
@@ -139,14 +140,15 @@ const Navigation = () => {
               { label: "Product suite", to: "/product-suite" },
               { label: "Jarvyn IDE", to: "/download-ide" },
               { label: "WebIDE", to: "/webide" },
+              { label: "Code Engine", to: "/product/code-engine" },
               { label: "Secure Boot", to: "/product/secure-boot" },
               { label: "Crypto Stack", to: "/product/crypto-stack" },
               { label: "RTOS", to: "/product/rtos-benchmark" },
             ]} />
             <MobileLink label="Marketplace" to="/marketplace" testid="mobile-nav-marketplace" />
             <MobileLink label="Developers" to="/developer-portal" testid="mobile-nav-developers" />
-            <MobileLink label="Ecosystem" to="/partners" testid="mobile-nav-ecosystem" />
-            <MobileLink label="Engagement models" to="/engagement-models" testid="mobile-nav-engagement" />
+            <MobileLink label="Platform" to="/partners" testid="mobile-nav-platform" />
+            <MobileLink label="Services" to="/services" testid="mobile-nav-services" />
             <MobileLink label="About" to="/about" testid="mobile-nav-about" />
             {isAdmin && <MobileLink label="Admin" to="/admin" testid="mobile-nav-admin" />}
             {isAuthenticated && <MobileLink label="Account settings" to="/account" testid="mobile-nav-account" />}

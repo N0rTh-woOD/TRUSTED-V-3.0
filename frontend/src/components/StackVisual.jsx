@@ -11,7 +11,7 @@ const BASE_Y = 386;
 const RAIL_X = 436;
 
 const LAYERS = [
-  { label: "RISC-V SILICON", note: "SiFive · Akeana · C-DAC", top: "#00294F", side: "#001B36", ink: "#FFFFFF", sub: "rgba(255,255,255,0.58)", die: true },
+  { label: "RISC-V SILICON", note: "SiFive · trusted platform", top: "#00294F", side: "#001B36", ink: "#FFFFFF", sub: "rgba(255,255,255,0.58)", die: true },
   { label: "ROOT OF TRUST", note: "rBoot · rustBoot · crypto", top: "#004A7F", side: "#003262", ink: "#FFFFFF", sub: "rgba(255,255,255,0.62)" },
   { label: "RUST RUNTIME", note: "RTOS · HAL · hypervisor", top: "#2486C7", side: "#14669D", ink: "#FFFFFF", sub: "rgba(255,255,255,0.75)" },
   { label: "APPLICATION", note: "automotive · industrial · IoT", top: "#E4EFF8", side: "#AFCEE6", ink: "#003262", sub: "#0F6497", outline: "#7FB3DA" },

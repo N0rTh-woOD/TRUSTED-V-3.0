@@ -29,6 +29,14 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 16 — SiFive-only Platform, AI Engines & Homepage Narrative (Sep 2026)
+Verified by testing_agent (iteration_36.json): 100% frontend pass.
+- **SiFive-only positioning:** removed every public Akeana reference across landing, products, Platform, navigation, 404 suggestions, and the legacy hero visual. The former Partners page is now the **Platform** page, centered on “Build with SiFive and TRUSTED-V.”
+- **AI Engines:** added a first-class **Code Engine** information page at `/product/code-engine`; added Code Engine to the product suite, development platform module, navigation mega-menu, developer portal, homepage, and architecture layer L04.
+- **Homepage rebuilt in requested sequence:** Hero with a large TRUSTED-V lockup at left and narrative/CTAs at right → AI Engines → Build with SiFive and TRUSTED-V → Virtualization & Simulation → Platform Architecture → Application Markets → remaining product, services, and developer sections. The growing partner-network section was removed.
+- **Terminology:** public “Ecosystem” is now **Platform** and “Engagement” is now **Services**. Services lives at `/services`; legacy `/engagement-models` redirects there. Public SDK wording was replaced with AI Engines / Code Engine; admin API-compatible `SDK` values are displayed as “AI Engines.”
+
+
 ### Phase 15 — Unified Card Design System, Hero Rebuild, Zephyr Purge (Jun 2026)
 Verified by testing_agent (iteration_35.json): 9/9 PASS, 100% frontend.
 - **Hero visual rebuilt** (`StackVisual.jsx`): cleaner isometric silicon→software stack (proportions W286/H126/gap92, die grid on the silicon plate, soft radial glow, base shadow, attestation rail with per-layer check marks + ATTESTED badge). **All SMIL removed** (`animateMotion`/`animate`/`keyTimes` gone) — motion is now CSS `transform`/`opacity` only: `tv-stack-drift`, `tv-rail-pulse`, `tv-plate-flash`, `tv-check-in`, `tv-attest-badge`. Fixes the jerky animation.
@@ -268,7 +276,8 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 | `/product/secure-boot` | Secure Boot | rboot + rustBoot, GitHub, boot chain |
 | `/product/crypto-stack` | Crypto Stack | 8-category algorithm reference tables |
 | `/product/rtos-benchmark` | RTOS Benchmarks | 4 RTOS options, comparison table |
-| `/engagement-models` | Engagement Models | SaaS / PaaS 5-step flows, fit table, CTAs |
+| `/product/code-engine` | Code Engine | AI Engine information and Solution Builder handoff |
+| `/services` | Services | SaaS / PaaS 5-step flows, fit table, CTAs |
 | `*` | NotFound (404) | Catch-all — brand 404 with home CTA + 3 suggestion cards |
 | `/marketplace` | Marketplace | Hardware + IP tabs with logos |
 | `/developer-portal` | Developers | SDK docs, expandable sections |

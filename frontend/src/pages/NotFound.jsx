@@ -3,7 +3,7 @@ import { Eyebrow, PrimaryCTA, SecondaryCTA, TVCard } from "@/components/ui-kit";
 const SUGGESTIONS = [
   { eyebrow: "Platform", title: "Product suite", description: "IP integration, virtualization, secure boot, crypto and RTOS.", to: "/product-suite" },
   { eyebrow: "Tools", title: "Jarvyn IDE", description: "The Rust-native RISC-V development environment.", to: "/download-ide" },
-  { eyebrow: "Ecosystem", title: "Partners", description: "SiFive, Akeana, C-DAC, Mindgrove and more.", to: "/partners" },
+  { eyebrow: "Platform", title: "Build with SiFive", description: "Explore the SiFive-aligned TRUSTED-V platform.", to: "/partners" },
 ];
 
 const NotFound = () => (

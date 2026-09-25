@@ -1,24 +1,23 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import {
-  Eyebrow, SectionHeader, TechnicalMetric, ProductCard, MarketCard, PartnerGrid,
+  Eyebrow, SectionHeader, TechnicalMetric, ProductCard, MarketCard,
   PrimaryCTA, SecondaryCTA, TVCard,
 } from "@/components/ui-kit";
-import StackVisual from "@/components/StackVisual";
-import { ENGAGEMENT_MODELS } from "@/data/engagement";
+import TrustedVLogo from "@/components/TrustedVLogo";
+import { SERVICE_MODELS } from "@/data/services";
 
 const Landing = () => (
   <div className="bg-white text-[#0B0F14]">
     <Hero />
-    <PlatformIntro />
+    <AIEnginesPreview />
     <RiscVIPCollaboration />
     <VirtualizationSpotlight />
     <PlatformArchitecture />
-    <CoreTechnologies />
-    <EngagementTeaser />
-    <ProductFamilies />
-    <Ecosystem />
     <ApplicationMarkets />
+    <CoreTechnologies />
+    <ServicesTeaser />
+    <ProductFamilies />
     <DeveloperExperience />
     <FinalCTA />
   </div>
@@ -38,7 +37,14 @@ const Hero = () => {
       <div className="absolute top-24 right-[-160px] w-[520px] h-[520px] rounded-full bg-[#2486C7]/10 blur-3xl pointer-events-none" />
 
       <div className="tv-container relative pt-14 md:pt-20 lg:pt-24 pb-14 md:pb-20 lg:pb-24">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="lg:col-span-5" data-testid="hero-brand-lockup">
+            <div className="border-l-[3px] border-[#2486C7] pl-6 md:pl-8 py-4">
+              <TrustedVLogo size="2xl" className="w-fit" />
+              <div className="mt-6 font-mono text-[11px] tracking-[0.2em] uppercase text-[#5A6472]">The complete RISC-V platform</div>
+              <div className="mt-3 max-w-sm text-[18px] md:text-[21px] leading-[1.35] text-[#003262] font-medium">From IP to software to silicon.</div>
+            </div>
+          </div>
           <div className="lg:col-span-7 tv-fade-up">
             <div className="mb-5"><Eyebrow>RISC-V compute platform</Eyebrow></div>
             <h1 className="tv-h1" style={{ fontSize: "clamp(38px, 5vw, 64px)" }} data-testid="landing-hero-title">
@@ -53,14 +59,7 @@ const Hero = () => {
               <PrimaryCTA to="/product-suite" size="lg" data-testid="hero-cta-primary">Explore the platform</PrimaryCTA>
               <SecondaryCTA to="/contact" size="lg" data-testid="hero-cta-secondary">Talk to our engineers</SecondaryCTA>
             </div>
-            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#5A6472]">Co-verified with</span>
-              {["SiFive", "Akeana", "C-DAC", "Mindgrove"].map((p) => (
-                <span key={p} className="text-[13.5px] font-semibold text-[#0B0F14]/80">{p}</span>
-              ))}
-            </div>
           </div>
-          <div className="lg:col-span-5"><StackVisual /></div>
         </div>
 
         <div className="mt-14 md:mt-20 border-t border-[#E5E4DF] grid grid-cols-2 md:grid-cols-4">
@@ -76,20 +75,28 @@ const Hero = () => {
   );
 };
 
-/* ───────────── PLATFORM INTRO ───────────── */
-const PlatformIntro = () => (
-  <section className="tv-section-tight border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="platform-intro">
+/* ───────────── AI ENGINES ───────────── */
+const AIEnginesPreview = () => (
+  <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="ai-engines-preview">
     <div className="tv-container">
-      <div className="grid lg:grid-cols-12 gap-10">
-        <div className="lg:col-span-3"><Eyebrow>What TRUSTED-V provides</Eyebrow></div>
-        <div className="lg:col-span-9">
-          <p className="text-[22px] md:text-[28px] leading-[1.3] text-[#0B0F14]" style={{ letterSpacing: "-0.01em" }}>
-            One open, modular platform for mission-critical RISC-V —
-            <span className="text-[#5A6472]"> IP, virtualization, secure boot, crypto, RTOS and tooling. </span>
-            Engineered by Bosch. Built in India.
-          </p>
+      <div className="grid lg:grid-cols-12 gap-10 items-end mb-10 md:mb-14">
+        <div className="lg:col-span-7">
+          <Eyebrow>AI Engines</Eyebrow>
+          <h2 className="tv-h2 mt-4">A focused AI layer for <span className="text-[#003262]">RISC-V engineering</span>.</h2>
+        </div>
+        <div className="lg:col-span-4 lg:col-start-9">
+          <p className="text-[15px] leading-[1.65] text-[#5A6472]">Code Engine brings target, runtime and security context into a structured starting point for embedded projects.</p>
         </div>
       </div>
+      <TVCard
+        eyebrow="AI Engine 01"
+        title="Code Engine"
+        description="Start with the system context, shape a project plan, and take reviewable work into the TRUSTED-V development workflow."
+        bullets={["RISC-V target and board context", "Runtime and security requirements", "Reviewable project planning"]}
+        to="/product/code-engine"
+        className="min-h-[230px]"
+        data-testid="ai-engines-code-engine"
+      />
     </div>
   </section>
 );
@@ -101,9 +108,9 @@ const PlatformArchitecture = () => {
     { band: "Application", accent: "#9DC8E8", tag: "L05", items: [
       { name: "Automotive", note: "ISO 26262 aligned" }, { name: "Industrial", note: "IEC 62443" },
       { name: "IoT & Consumer", note: "PSA L3" }, { name: "Robotics & Edge AI", note: "Real-time" } ] },
-    { band: "Developer Toolchain", accent: "#56A2D6", tag: "L04", items: [
+    { band: "AI Engines", accent: "#56A2D6", tag: "L04", items: [
       { name: "Jarvyn IDE", note: "Rust + RISC-V native" }, { name: "WebIDE", note: "Zero-install cloud" },
-      { name: "SDK · cargo · LLVM", note: "Signed toolchain" }, { name: "Debugger · Trace", note: "SVD register view" } ] },
+      { name: "Code Engine", note: "AI-assisted project planning" }, { name: "Debugger · Trace", note: "SVD register view" } ] },
     { band: "Rust Runtime & OS", accent: "#2486C7", tag: "L03", items: [
       { name: "TRUSTED-V RTOS", note: "Memory-safe" }, { name: "Embassy (async)", note: "Cooperative" },
       { name: "HAL · PAC · HAM", note: "Peripheral access" }, { name: "Linux (via CVA6)", note: "Rich OS" } ] },
@@ -114,8 +121,8 @@ const PlatformArchitecture = () => {
       { name: "rBoot", note: "First stage" }, { name: "rustBoot", note: "A/B · OTA · PQC" },
       { name: "Crypto Stack", note: "Classical + PQC" }, { name: "Attestation", note: "TVOTS quote" } ] },
     { band: "RISC-V IP & Silicon", accent: "#00162B", tag: "L00", items: [
-      { name: "SiFive", note: "Performance IP" }, { name: "Akeana", note: "Automotive-grade IP" },
-      { name: "C-DAC · Mindgrove", note: "Indian silicon" }, { name: "Reference SoC", note: "Boards & kits" } ] },
+      { name: "SiFive", note: "Performance RISC-V IP" }, { name: "Reference SoC", note: "Boards & kits" },
+      { name: "RISC-V integration", note: "IP to firmware" }, { name: "Silicon trust", note: "Attestation-ready" } ] },
   ];
 
   return (
@@ -194,41 +201,26 @@ const PlatformArchitecture = () => {
   );
 };
 
-/* ───────────── RISC-V IP & COLLABORATIONS ───────────── */
+/* ───────────── SIFIVE COLLABORATION ───────────── */
 const RiscVIPCollaboration = () => {
-  const partners = [
-    { name: "SiFive", role: "Performance RISC-V IP", note: "P550 · P870-A · U-series", focus: "Application-class cores co-verified with the TRUSTED-V boot chain, RTOS and Rust toolchain." },
-    { name: "Akeana", role: "Automotive-grade RISC-V", note: "5100 series · ISO 26262 aligned", focus: "Safety-oriented IP pre-integrated with secure boot, attestation and Rust firmware." },
-  ];
   return (
     <section className="tv-section border-t border-[#E5E4DF]" data-testid="riscv-ip">
       <div className="tv-container">
         <SectionHeader
-          eyebrow="RISC-V IP & collaborations"
-          title={<>Co-verified with leaders of the <span className="text-[#003262]">open RISC-V ecosystem</span>.</>}
-          lede="IP-agnostic by design — pre-integrated with performance-class and automotive-grade RISC-V IP."
-          action={<Link to="/partners" className="tv-arrow-link" data-testid="riscv-ip-partners">See all partners</Link>}
+          eyebrow="RISC-V IP collaboration"
+          title={<>Build with <span className="text-[#003262]">SiFive and TRUSTED-V</span>.</>}
+          lede="Bring SiFive RISC-V IP together with the TRUSTED-V software, security and virtualization platform."
+          action={<Link to="/partners" className="tv-arrow-link" data-testid="riscv-ip-platform">See platform alignment</Link>}
         />
-        <div className="grid md:grid-cols-2 gap-4">
-          {partners.map((p) => (
-            <TVCard
-              key={p.name}
-              eyebrow={p.role}
-              title={p.name}
-              description={p.focus}
-              meta={p.note}
-              to="/partners"
-              className="min-h-[220px]"
-              data-testid={`riscv-ip-${p.name.toLowerCase()}`}
-            />
-          ))}
-        </div>
-        <div className="mt-12 border-t border-[#E5E4DF] pt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-          <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472]">Also supported</span>
-          {["C-DAC · VEGA / DHRUV", "Mindgrove", "Upbeat Tech", "CVA6", "Ibex", "OpenTitan"].map((n) => (
-            <span key={n} className="text-[13.5px] font-medium text-[#0B0F14]">{n}</span>
-          ))}
-        </div>
+        <TVCard
+          eyebrow="SiFive RISC-V IP"
+          title="A coherent path from IP to trusted software."
+          description="TRUSTED-V aligns the development workflow around SiFive RISC-V IP, so the virtual platform, toolchain, secure boot and application work share one technical foundation."
+          bullets={["RISC-V software and toolchain alignment", "Virtualization and pre-silicon workflow", "Secure boot, crypto and attestation context"]}
+          to="/partners"
+          className="min-h-[230px]"
+          data-testid="riscv-ip-sifive"
+        />
       </div>
     </section>
   );
@@ -285,7 +277,7 @@ const VirtualizationSpotlight = () => (
 /* ───────────── CORE TECHNOLOGIES ───────────── */
 const CoreTechnologies = () => {
   const items = [
-    { eyebrow: "ISA", title: "RISC-V native", desc: "RV32, RV64 and RVV. SiFive, Akeana and Indian silicon.", to: "/product-suite" },
+    { eyebrow: "ISA", title: "RISC-V native", desc: "RV32, RV64 and RVV, aligned with SiFive RISC-V IP.", to: "/product-suite" },
     { eyebrow: "Security", title: "Security by construction", desc: "Rust memory safety, verified boot, classical + PQC crypto.", to: "/product/secure-boot" },
     { eyebrow: "Pre-silicon", title: "Virtualization", desc: "Hypervisor and virtual platforms for pre-silicon bring-up.", to: "/product-suite#virtualization" },
     { eyebrow: "Runtime", title: "Real-time software", desc: "TRUSTED-V RTOS, Embassy async runtimes and Rust HAL crates.", to: "/product/rtos-benchmark" },
@@ -314,24 +306,24 @@ const CoreTechnologies = () => {
   );
 };
 
-/* ───────────── ENGAGEMENT TEASER ───────────── */
-const EngagementTeaser = () => (
-  <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="engagement-teaser">
+/* ───────────── SERVICES TEASER ───────────── */
+const ServicesTeaser = () => (
+  <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="services-teaser">
     <div className="tv-container">
       <SectionHeader
         eyebrow="How you work with us"
         title={<>Hand us the blueprint — <span className="text-[#003262]">or bring your team</span>.</>}
-        action={<Link to="/engagement-models" className="tv-arrow-link" data-testid="engagement-teaser-link">Compare engagement models</Link>}
+        action={<Link to="/services" className="tv-arrow-link" data-testid="services-teaser-link">Compare services</Link>}
       />
       <div className="grid md:grid-cols-2 gap-4">
-        {ENGAGEMENT_MODELS.map((m) => (
+        {SERVICE_MODELS.map((m) => (
           <TVCard
             key={m.id}
             eyebrow={`${m.code} · ${m.label}`}
             title={m.tagline}
             description={m.hook}
-            to={`/engagement-models#${m.id}`}
-            data-testid={`engagement-teaser-${m.id}`}
+            to={`/services#${m.id}`}
+            data-testid={`services-teaser-${m.id}`}
             footer={
               <ol className="flex flex-wrap gap-x-5 gap-y-2">
                 {m.steps.map((s, i) => (
@@ -351,7 +343,7 @@ const EngagementTeaser = () => (
 /* ───────────── PRODUCT FAMILIES ───────────── */
 const ProductFamilies = () => {
   const items = [
-    { eyebrow: "MODULE 01", title: "Development Platform", description: "Jarvyn IDE, WebIDE, debugger and trace — one Rust-native environment.", bullets: ["Jarvyn IDE", "WebIDE (cloud)", "Debugger & programmer"], to: "/download-ide" },
+    { eyebrow: "MODULE 01", title: "Development Platform", description: "Jarvyn IDE, WebIDE, Code Engine, debugger and trace in one Rust-native environment.", bullets: ["Jarvyn IDE", "WebIDE (cloud)", "Code Engine"], to: "/product/code-engine" },
     { eyebrow: "MODULE 02", title: "Virtualization & Simulation", description: "Virtual platforms and a RISC-V hypervisor for pre-silicon work.", bullets: ["Virtual platform", "RISC-V hypervisor", "Cycle-approximate simulator"], to: "/product-suite#virtualization" },
     { eyebrow: "MODULE 03", title: "Secure Rust Software", description: "rBoot, rustBoot, RTOS, HAL/PAC and Crypto Stack. PQC-ready.", bullets: ["rBoot & rustBoot", "Crypto Stack", "RTOS"], to: "/product/secure-boot" },
     { eyebrow: "MODULE 04", title: "Silicon SignOff & Trust", description: "Vendor-neutral certification for RISC-V SoCs.", bullets: ["SignOff Silicon", "TRUSTED-V Verified", "TVOTS"], to: "/product-suite#certification" },
@@ -365,20 +357,6 @@ const ProductFamilies = () => {
     </section>
   );
 };
-
-/* ───────────── ECOSYSTEM ───────────── */
-const Ecosystem = () => (
-  <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="ecosystem">
-    <div className="tv-container">
-      <SectionHeader eyebrow="A growing partner network" title="Silicon, software and academic partners." action={<Link to="/partners" className="tv-arrow-link" data-testid="ecosystem-explore">Meet the partners</Link>} />
-      <PartnerGrid partners={[
-        { name: "SiFive", note: "Performance RISC-V IP" }, { name: "Akeana", note: "Automotive RISC-V" },
-        { name: "C-DAC", note: "VEGA sovereign silicon" }, { name: "Mindgrove", note: "Secure IoT SoCs" },
-        { name: "Upbeat Tech", note: "Edge-AI SoCs" }, { name: "OpenTitan", note: "Silicon root of trust" },
-      ]} />
-    </div>
-  </section>
-);
 
 /* ───────────── APPLICATION MARKETS ───────────── */
 const ApplicationMarkets = () => {
@@ -458,7 +436,7 @@ const FinalCTA = () => (
         </div>
         <div className="lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
           <PrimaryCTA to="/contact" data-testid="final-cta-primary">Start a project</PrimaryCTA>
-          <SecondaryCTA to="/engagement-models" data-testid="final-cta-secondary">Engagement models</SecondaryCTA>
+          <SecondaryCTA to="/services" data-testid="final-cta-secondary">Services</SecondaryCTA>
         </div>
       </div>
     </div>

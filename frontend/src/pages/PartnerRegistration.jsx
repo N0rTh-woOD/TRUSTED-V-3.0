@@ -44,7 +44,7 @@ const PartnerRegistration = () => {
     "SoCs / Processors",
     "RTOS / OS",
     "Development Tools",
-    "SDKs / Libraries",
+    "AI Engines / Libraries",
     "Debug Tools",
     "Security Solutions",
     "AI / ML Accelerators",

@@ -74,7 +74,7 @@ const StructuralGaps = () => {
     { n: "05", title: "Certification pathway", problem: "Certifications require months of retrofitting.", answer: "Evidence collection mapped to CC, PSA, ISO 26262, IEC 62443." },
     { n: "06", title: "Enterprise adoption", problem: "Enterprises need LTS and indemnification.", answer: "Backed by Bosch — commercial LTS, SLAs, support tiers." },
     { n: "07", title: "Platform security layer", problem: "PSA was built for Arm, leaving RISC-V behind.", answer: "A PSA L3-aligned security layer native to RISC-V." },
-    { n: "08", title: "Ecosystem coordination", problem: "Vendors optimise locally, not for the whole stack.", answer: "The TRUSTED-V Consortium aligns partners on one open reference." },
+    { n: "08", title: "Platform coordination", problem: "Vendors optimise locally, not for the whole stack.", answer: "The TRUSTED-V platform aligns the engineering layers on one open reference." },
   ];
   return (
     <section className="tv-section border-b border-[#E5E4DF] bg-[#F7F7F5]" data-testid="structural-gaps">
@@ -105,7 +105,7 @@ const StructuralGaps = () => {
 const RoadmapAndConsortium = () => {
   const phases = [
     { period: "2025 – 2026", title: "Foundation", state: "Active" },
-    { period: "2026 – 2027", title: "Ecosystem Growth", state: "Committed" },
+    { period: "2026 – 2027", title: "Platform Growth", state: "Committed" },
     { period: "2027 – 2029", title: "Industry Adoption", state: "Planned" },
   ];
   const tiers = [

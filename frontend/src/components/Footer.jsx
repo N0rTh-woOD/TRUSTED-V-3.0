@@ -36,9 +36,10 @@ const Footer = () => {
       ],
     },
     {
-      title: "Ecosystem",
+      title: "Platform",
       links: [
-        { label: "Partners", to: "/partners" },
+        { label: "Build with SiFive", to: "/partners" },
+        { label: "Code Engine", to: "/product/code-engine" },
         { label: "Partner Registration", to: "/partner-registration" },
       ],
     },
@@ -47,7 +48,7 @@ const Footer = () => {
       links: [
         { label: "Home", to: "/" },
         { label: "About", to: "/about" },
-        { label: "Engagement Models", to: "/engagement-models" },
+        { label: "Services", to: "/services" },
         { label: "Contact", to: "/contact" },
       ],
     },

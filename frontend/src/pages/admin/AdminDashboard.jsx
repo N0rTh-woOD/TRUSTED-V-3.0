@@ -62,7 +62,7 @@ const AdminDashboard = () => {
     },
     {
       title: "Software Components",
-      description: "Manage BSPs, SDKs, Drivers, Bootloaders, and Libraries",
+      description: "Manage BSPs, AI Engines, Drivers, Bootloaders, and Libraries",
       icon: Database,
       link: "/admin/software",
       count: stats?.software_components || 0,

@@ -34,7 +34,8 @@ import SecureBootPage from "@/pages/SecureBootPage";
 import CryptoStackPage from "@/pages/CryptoStackPage";
 import RTOSBenchmarkPage from "@/pages/RTOSBenchmarkPage";
 import WebIDEPage from "@/pages/WebIDEPage";
-import EngagementModels from "@/pages/EngagementModels";
+import Services from "@/pages/Services";
+import CodeEnginePage from "@/pages/CodeEnginePage";
 import NotFound from "@/pages/NotFound";
 
 // Auth Pages
@@ -103,6 +104,7 @@ const AppContent = () => {
         <Route path="/product/secure-boot" element={<SecureBootPage />} />
         <Route path="/product/crypto-stack" element={<CryptoStackPage />} />
         <Route path="/product/rtos-benchmark" element={<RTOSBenchmarkPage />} />
+        <Route path="/product/code-engine" element={<CodeEnginePage />} />
         <Route path="/partners" element={<Partners />} />
         <Route path="/partner-registration" element={<PartnerRegistration />} />
         <Route path="/download-ide" element={<IDEDownloads />} />
@@ -111,7 +113,8 @@ const AppContent = () => {
         <Route path="/board-support" element={<BoardSupportRequest />} />
         <Route path="/contact-sales" element={<ContactSales />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/engagement-models" element={<EngagementModels />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/engagement-models" element={<Navigate to="/services" replace />} />
         
         {/* Legacy routes - redirect to new paths */}
         <Route path="/hardware" element={<HardwareCatalog />} />

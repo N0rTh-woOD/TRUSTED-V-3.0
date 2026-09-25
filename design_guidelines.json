@@ -1,217 +1,86 @@
 {
-  "theme_name": "TRUSTED-V Editorial Minimalist",
-  "colors": {
-    "primary": {
-      "berkeley_blue": "#003262",
-      "deep_navy": "#001F3F",
-      "darkest_navy": "#00162B"
-    },
-    "accent": {
-      "gold": "#FDB515",
-      "cyan": "#00B4E0",
-      "signoff_green": "#0F6E56",
-      "rust_orange": "#B7410E"
-    },
-    "neutral": {
-      "background": "#F8F9FA",
-      "surface": "#FFFFFF",
-      "border": "#E5E7EB",
-      "text_main": "#00162B",
-      "text_muted": "#4B5563"
-    }
-  },
+  "project_name": "TrusteD-V Semiconductor Developer Platform",
+  "design_archetype": "THE PERFORMANCE PRO / SWISS HIGH-CONTRAST",
+  "context_type": "MARKETING_AND_DEVELOPER_PLATFORM",
+  "theme": "dark",
   "typography": {
-    "instructions": "Use Space Grotesk for all major headings. Never use Inter/Roboto for headings. Emphasize large, editorial typography with generous line-height for body text. Use Outfit for body to maintain a geometric clean tech look.",
-    "font_families": {
-      "headings": "Space Grotesk, sans-serif",
-      "body": "Outfit, sans-serif",
-      "mono": "JetBrains Mono, monospace"
-    },
-    "scale": {
-      "h1": "text-5xl md:text-7xl font-light tracking-tighter leading-tight",
-      "h2": "text-4xl md:text-5xl font-medium tracking-tight",
-      "h3": "text-2xl md:text-3xl font-medium",
-      "body_large": "text-lg md:text-xl font-light leading-relaxed",
-      "body": "text-base leading-relaxed",
-      "overline": "text-xs font-bold uppercase tracking-[0.2em]"
+    "font_family_heading": "Outfit, Clash Display, sans-serif",
+    "font_family_body": "Inter, system-ui, sans-serif",
+    "font_family_code": "JetBrains Mono, Source Code Pro, monospace",
+    "hierarchy": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+      "h3_subsection": "text-xl sm:text-2xl font-semibold",
+      "h4_card": "text-lg sm:text-xl font-medium",
+      "body": "text-base text-slate-300 leading-relaxed",
+      "caption_label": "text-xs font-mono uppercase tracking-widest text-emerald-400"
     }
   },
-  "spacing_and_layout": {
-    "philosophy": "Generous whitespace. Break out of the box. Use asymmetric grids.",
-    "section_padding": "py-20 md:py-32",
-    "grid_patterns": [
-      "Asymmetric 2-column: grid-cols-1 md:grid-cols-12 with content spanning col-span-5 and images/graphics col-span-7",
-      "Bento grids for features: tight gaps (gap-4), no shadows, 1px subtle borders",
-      "Editorial list: massive left padding, clear typography hierarchy, numbers as accents"
-    ]
+  "colors": {
+    "background_primary": "#0A0D14",
+    "background_secondary": "#111622",
+    "background_card": "#161C2B",
+    "border_color": "rgba(255, 255, 255, 0.1)",
+    "primary_accent": "#00E5FF",
+    "secondary_accent": "#FF3B30",
+    "emerald_highlight": "#10B981",
+    "text_primary": "#FFFFFF",
+    "text_muted": "#94A3B8"
   },
-  "component_patterns": {
-    "buttons": {
-      "primary": "Pill-shaped (rounded-full), bg-[#003262] text-white hover:bg-[#003262]/90, px-8 py-4, transition-transform active:scale-95",
-      "secondary": "Ghost or subtle outline, text-[#003262] border-[#003262]/20 hover:bg-[#003262]/5",
-      "accent": "Pill-shaped, bg-[#FDB515] text-[#00162B] hover:bg-[#FDB515]/90 font-medium"
-    },
-    "cards": "Barely-there borders (border-border/50), huge padding (p-8 md:p-12), flat (no shadow), subtle background shifts (bg-white to bg-gray-50).",
-    "navigation": "Sticky, backdrop-blur-xl bg-white/90, 1px bottom border. Clean links, active states highlighted with Cyan underline. Never use complete transparent background.",
-    "footer": "Dark theme (bg-[#00162B] text-white), massive brand wordmark, minimalistic link columns, standards row with opacity-50 logos."
+  "branding_and_partners": {
+    "partners_allowed": ["SiFive"],
+    "partners_forbidden": ["Akeana"],
+    "collaboration_title": "Build with SiFive and TrusteD-V",
+    "renaming_mapping": {
+      "Ecosystem": "Platform",
+      "Engagement": "Services",
+      "SDK (L04 Layer)": "AI Engines (Code Engine)"
+    }
   },
-  "pages": [
+  "homepage_layout_sequence": [
     {
-      "name": "Home",
-      "sections": [
-        "Hero: Massive typography ('The Complete RISC-V Platform'), asymmetric layout, primary CTA, Made-in-India badge.",
-        "Partner Strip: Monochromatic logos (SiFive, Akeana, MIPS, C-DAC, Mindgrove) in a clean marquee or grid.",
-        "Ecosystem (4 Modules): Large sticky-scroll or staggered list. Deep dive into each module on scroll.",
-        "Industry Focus: Clean tabs or interactive accordion for Automotive, IoT, Industrial, etc.",
-        "Standards & Compliance: Grid of badges/certifications (CC EAL4+, FIPS, PSA L3).",
-        "Backed by Bosch: Dark navy section, big stats (130+ years, 400K+ associates).",
-        "CTA: Gold button, high contrast."
-      ]
+      "step": 1,
+      "section_name": "Hero Section",
+      "spec": "Asymmetric hero with Big TrusteD-V Logo on the left side and narrative copy/CTAs on the right side. Ensure proper vertical alignment and visual contrast."
     },
     {
-      "name": "About",
-      "sections": [
-        "Hero: 'Engineered by Bosch to the World'.",
-        "Mission: 3 pillars (Security, Performance, Time-to-Market) - text heavy, editorial.",
-        "Structural Gaps: 8 items in a dense bento grid.",
-        "Roadmap: Minimal vertical timeline.",
-        "Consortium: Tier cards, high padding, clean typography."
-      ]
+      "step": 2,
+      "section_name": "AI Engines (Code Engine)",
+      "spec": "Glimpse & feature preview of Code Engine, highlighting AI acceleration for RISC-V."
     },
     {
-      "name": "Product Suite",
-      "sections": [
-        "Overview: The 4 modules in a visual matrix.",
-        "Sub-brands: Minimalist cards with 1px borders.",
-        "RISC-V IP Integration: Featuring SiFive, Akeana, MIPS ARC-V in a highlighted logo section."
-      ]
+      "step": 3,
+      "section_name": "Build with SiFive and TrusteD-V",
+      "spec": "Highlight collaboration exclusively with SiFive and TrusteD-V IP."
     },
     {
-      "name": "Sub-product Pages",
-      "sections": [
-        "Hero: Technical, precise (e.g., Secure Boot & Crypto Stack).",
-        "Features: Bento grid for 8 crypto algorithms.",
-        "Benchmarks: Clean data table for 4 RTOS comparison."
-      ]
+      "step": 4,
+      "section_name": "Virtualization & Simulation",
+      "spec": "Emulators, Renode/QEMU integration, virtual hardware execution environment."
     },
     {
-      "name": "Marketplace",
-      "sections": [
-        "Tabs: Hardware Boards vs IP Blocks.",
-        "Grid: Clean product cards featuring partner logos."
-      ]
+      "step": 5,
+      "section_name": "Platform Architecture",
+      "spec": "Interactive architectural stack where Layer L04 prominently features 'AI Engines (Code Engine)'."
     },
     {
-      "name": "Developer Portal",
-      "sections": [
-        "Layout: Left sidebar for docs, right side for content.",
-        "Quick Start: Dark mode code snippets (syntax highlighted), mono font."
-      ]
+      "step": 6,
+      "section_name": "Application Markets",
+      "spec": "Showcase target domains where TrusteD-V ships (Automotive, Aerospace, Industrial IoT, Cyber-Physical Systems)."
     },
     {
-      "name": "IDE Downloads",
-      "sections": [
-        "Hero: Jarvyn IDE visualization.",
-        "Features: 21 features in a 3-column list.",
-        "Comparison Table: vs General IDEs. Checkmarks and Xs."
-      ]
-    },
-    {
-      "name": "WebIDE",
-      "sections": [
-        "Hero: 'Code Anywhere'.",
-        "Preview: Full-width browser window mockup containing the WebIDE interface."
-      ]
-    },
-    {
-      "name": "Contact / Sales",
-      "sections": [
-        "Layout: 2-column. Left: Contact cards (HQ Bangalore, emails). Right: Inquiry form.",
-        "Form: Minimalist Shadcn form. Underline inputs or very light borders. No heavy boxes."
-      ]
-    },
-    {
-      "name": "Partners",
-      "sections": [
-        "Showcase: Large logo, short description, link. C-DAC, Mindgrove, Upbeat Tech."
-      ]
+      "step": 7,
+      "section_name": "Other Sections & Footer",
+      "spec": "Developer tools, hardware catalog, news/blog, and footer navigation."
     }
   ],
-  "motion": {
-    "philosophy": "Subtle, professional, intentional.",
-    "interactions": [
-      "Hover lifts: -translate-y-1 and subtle shadow on cards.",
-      "Fade-in up: Staggered reveal of list items (framer-motion).",
-      "Buttons: active:scale-95 for tactile feedback."
-    ]
+  "testing_requirements": {
+    "data_testid_rule": "Every interactive element (button, link, input, toggle, select) and major metric container MUST include data-testid attributes formatted in kebab-case."
   },
-  "accessibility": {
-    "contrast": "Ensure APCA/WCAG AA contrast. Berkeley Blue text on Off-White is excellent.",
-    "focus": "focus-visible:ring-2 focus-visible:ring-[#00B4E0]",
-    "testing": "All interactive elements MUST include data-testid attributes (e.g., data-testid='home-cta-button')."
-  },
-  "media": {
-    "philosophy": "Use high-quality product abstract renders or clean UI mockups. No generic stock photos.",
-    "image_urls": [
-      {
-        "category": "Technology/Silicon",
-        "url": "https://images.unsplash.com/photo-1592659762303-90081d34b277?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwyfHxzaWxpY29uJTIwY2hpcCUyMG1hY3JvJTIwcGhvdG9ncmFwaHl8ZW58MHx8fHwxNzg2NTIwNTMwfDA&ixlib=rb-4.1.0&q=85",
-        "description": "Abstract dark blue circuit board for RISC-V IP backgrounds"
-      },
-      {
-        "category": "Automotive/Industry",
-        "url": "https://images.unsplash.com/photo-1773962359689-2397bf5eb9c3",
-        "description": "Modern digital dashboard for automotive industry context"
-      },
-      {
-        "category": "Security/Data Center",
-        "url": "https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxkYXRhJTIwY2VudGVyJTIwc2VydmVyJTIwcmFjayUyMHNlY3VyZXxlbnwwfHx8fDE3ODM2MDMyNDV8MA&ixlib=rb-4.1.0&q=85",
-        "description": "Server rack for Virtualization & Security modules"
-      },
-      {
-        "category": "Brand Asset",
-        "url": "/make-in-india.jpg",
-        "description": "India globe with chip for Made in India section"
-      },
-      {
-        "category": "Brand Asset",
-        "url": "/trustedv-rocket-logo.png",
-        "description": "Rocket logo asset"
-      }
-    ]
-  },
-  "general_guidelines": {
-    "rules": [
-      "No AI slop: avoid generic glowing gradients, standard boxy card grids.",
-      "Never center-align large blocks of text. Stick to left-aligned for editorial feel.",
-      "Use 1px subtle borders (border-collapse style) for tech/data sections.",
-      "Do NOT use complete transparent background in header, overlays, any surface that has content under it. Use solid or blurred glass.",
-      "Use Shadcn UI but aggressively strip the 'Vercel default' look (replace Inter with Space Grotesk/Outfit, use pill buttons).",
-      "All interactive elements MUST include a data-testid attribute."
-    ]
-  },
-  "instructions_to_main_agent": [
-    "Read this JSON thoroughly before implementing any page.",
-    "This project uses .js/.jsx files, NOT .tsx files. Write React components using JSX/JS.",
-    "Prioritize typography: Use Space Grotesk for headings and Outfit for body.",
-    "Implement a robust layout with 'sticky' elements where appropriate to emulate modern editorial sites (MIPS.com).",
-    "Ensure all color variables map to the brand's exact hex codes.",
-    "Apply 'data-testid' to every button, link, and form input.",
-    "Do NOT add emojis into your file creations unless specifically required by the design."
-  ],
-  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": {
-    "design": [
-      "Create depth through layered design elements with z-index hierarchy.",
-      "Use glass-morphism effects with backdrop filters (12-24px blur) where necessary.",
-      "MUST NOT apply universal transition (e.g., transition: all). Add transitions for specific properties.",
-      "MUST NOT center align the app container (.App { text-align: center; } is forbidden).",
-      "Always use modern button styles (pill-shaped or sharp) relevant to the app style.",
-      "NEVER use AI assistant Emoji characters for icons."
-    ],
-    "components": [
-      "Prioritize using pre-existing components from src/components/ui when applicable.",
-      "Create new components that match the style and conventions of existing components when needed.",
-      "Use sonner for toasts."
-    ]
-  }
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Never bring back Akeana anywhere in the code or UI.",
+    "Ensure 'Ecosystem' is replaced with 'Platform' and 'Engagement' with 'Services' across all navigation and content files.",
+    "Ensure L04 layer in architecture stack displays 'AI Engines' (with Code Engine preview).",
+    "Use data-testid on every interactive button, menu item, link, and form input."
+  ]
 }
