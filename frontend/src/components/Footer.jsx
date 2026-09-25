@@ -14,8 +14,8 @@ const Footer = () => {
       title: "Products",
       links: [
         { label: "Product Suite", to: "/product-suite" },
-        { label: "Jarvyn IDE", to: "/download-ide" },
-        { label: "WebIDE", to: "/webide" },
+        { label: "Jarvyn IDE · Coming soon", to: "/download-ide" },
+        { label: "WebIDE · Coming soon", to: "/webide" },
         { label: "Marketplace", to: "/marketplace" },
       ],
     },
@@ -31,7 +31,7 @@ const Footer = () => {
       title: "Developers",
       links: [
         { label: "Developer Portal", to: "/developer-portal" },
-        { label: "Download IDE", to: "/download-ide" },
+        { label: "IDE status · Coming soon", to: "/download-ide" },
         { label: "Board Support", to: "/board-support" },
       ],
     },

@@ -27,8 +27,8 @@ const MODULE_COLORS = [BLUE_STEPS[3], BLUE_STEPS[4], BLUE_STEPS[5], "#00162B"];
 
 const ModulesDetail = () => {
   const modules = [
-    { num: "01", id: "development", title: "Development Platform", desc: "Jarvyn IDE, WebIDE, debugger, programmer and trace — one Rust-native environment for every target.",
-      items: [{ name: "Jarvyn IDE", to: "/download-ide" }, { name: "WebIDE", to: "/webide" }, { name: "Code Engine", to: "/product/code-engine" }] },
+    { num: "01", id: "development", title: "Development Platform", desc: "Jarvyn IDE and WebIDE are coming soon, alongside Code Engine, debugger, programmer and trace for RISC-V work.",
+      items: [{ name: "Jarvyn IDE · Coming soon", to: "/download-ide" }, { name: "WebIDE · Coming soon", to: "/webide" }, { name: "Code Engine", to: "/product/code-engine" }] },
     { num: "02", id: "virtualization", title: "Virtualization & Simulation", desc: "Virtual platforms, RISC-V hypervisor and cycle-approximate simulators. Ship firmware before RTL freezes.",
       items: [{ name: "Virtual Platform", to: "/product-suite#virtualization" }, { name: "RISC-V Hypervisor", to: "/product-suite#virtualization" }, { name: "Simulator", to: "/product-suite#virtualization" }] },
     { num: "03", id: "secure-software", title: "Secure Rust Software", desc: "rBoot, rustBoot, RTOS, HAL/PAC/HAM and Crypto Stack — memory-safe, PQC-ready, certification-friendly.",
@@ -200,7 +200,7 @@ const PricingCTA = () => (
     <div className="tv-container">
       <div className="grid md:grid-cols-3 gap-4">
         {[
-          { tier: "Developer", price: "Free", desc: "Jarvyn IDE, WebIDE, community RTOS and Rust toolchain.", cta: "Download", to: "/download-ide" },
+          { tier: "Developer", price: "Coming soon", desc: "Jarvyn IDE and WebIDE are in development. Explore the planned development platform.", cta: "View status", to: "/download-ide" },
           { tier: "Pro", price: "Talk to sales", desc: "Commercial LTS, certified crypto stack, priority support.", cta: "Contact sales", to: "/contact?plan=pro" },
           { tier: "Enterprise", price: "Talk to sales", desc: "Silicon sign-off, custom certification, dedicated engineering.", cta: "Contact sales", to: "/contact?plan=enterprise" },
         ].map((p) => (

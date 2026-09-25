@@ -388,8 +388,8 @@ const DeveloperExperience = () => (
           <h2 className="tv-h2">Rust-native. RISC-V-first. Cargo everywhere.</h2>
           <p className="tv-lede mt-6">One environment for firmware and silicon engineers — SVD register view, signed toolchain, pre-integrated HAL/PAC crates.</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/download-ide" className="tv-btn tv-btn-primary" data-testid="dev-cta-ide">Download Jarvyn <ArrowUpRight className="w-4 h-4" /></Link>
-            <Link to="/webide" className="tv-btn tv-btn-outline" data-testid="dev-cta-webide">Try WebIDE <ArrowRight className="w-4 h-4" /></Link>
+            <Link to="/download-ide" className="tv-btn tv-btn-primary" data-testid="dev-cta-ide">Jarvyn IDE · Coming soon <ArrowUpRight className="w-4 h-4" /></Link>
+            <Link to="/webide" className="tv-btn tv-btn-outline" data-testid="dev-cta-webide">WebIDE · Coming soon <ArrowRight className="w-4 h-4" /></Link>
           </div>
         </div>
         <div className="lg:col-span-6"><CodeWindow /></div>

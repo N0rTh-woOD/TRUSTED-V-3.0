@@ -15,9 +15,9 @@ const sections = [
   {
     title: "Getting started",
     items: [
-      { name: "Installing Jarvyn", desc: "Step-by-step guide for macOS, Linux and Windows." },
+      { name: "Jarvyn IDE preview", desc: "Jarvyn IDE is coming soon. Release details will be shared on the product page." },
       { name: "Your first RISC-V project", desc: "From `cargo new` to blinking an LED on a certified board." },
-      { name: "WebIDE quickstart", desc: "Zero-install cloud path — code, build, simulate." },
+      { name: "WebIDE preview", desc: "WebIDE is coming soon. The browser workflow is currently in development." },
     ],
   },
   {
@@ -93,10 +93,10 @@ const DeveloperPortal = () => {
           </h2>
           <div className="flex gap-3">
             <Link to="/download-ide" className="tv-btn tv-btn-primary" data-testid="dev-cta-ide">
-              Download Jarvyn <ArrowUpRight className="w-4 h-4" />
+              Jarvyn IDE · Coming soon <ArrowUpRight className="w-4 h-4" />
             </Link>
             <Link to="/webide" className="tv-btn tv-btn-outline" data-testid="dev-cta-webide">
-              Open WebIDE
+              WebIDE · Coming soon
             </Link>
           </div>
         </div>

@@ -36,6 +36,7 @@ Verified by testing_agent (iteration_36.json): 100% frontend pass.
 - **Homepage rebuilt in requested sequence:** Hero with a large TRUSTED-V lockup at left and narrative/CTAs at right → AI Engines → Build with SiFive and TRUSTED-V → Virtualization & Simulation → Platform Architecture → Application Markets → remaining product, services, and developer sections. The growing partner-network section was removed.
 - **Terminology:** public “Ecosystem” is now **Platform** and “Engagement” is now **Services**. Services lives at `/services`; legacy `/engagement-models` redirects there. Public SDK wording was replaced with AI Engines / Code Engine; admin API-compatible `SDK` values are displayed as “AI Engines.”
 - **Navigation cleanup:** removed Marketplace and Platform from the Products mega-menu because both have dedicated primary-navigation tabs. The two remaining product groups and “View all products” action now fill the dropdown evenly.
+- **Release-status clarity:** Jarvyn IDE and WebIDE are now consistently marked **Coming soon**. Removed Jarvyn’s Latest release/download list and all public download links; replaced them with non-interactive status labels and launch-update contact CTAs across the product pages, navigation, footer, developer portal, homepage, product suite, and sales resources.
 
 
 ### Phase 15 — Unified Card Design System, Hero Rebuild, Zephyr Purge (Jun 2026)

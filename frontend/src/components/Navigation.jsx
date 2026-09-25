@@ -15,8 +15,8 @@ const NAV_ITEMS = [
 
 const MEGA = [
   { title: "Development Platform", items: [
-    { label: "Jarvyn IDE", to: "/download-ide", note: "Rust-native RISC-V IDE" },
-    { label: "WebIDE", to: "/webide", note: "Zero-install cloud IDE" },
+    { label: "Jarvyn IDE", to: "/download-ide", note: "Coming soon" },
+    { label: "WebIDE", to: "/webide", note: "Coming soon" },
     { label: "Code Engine", to: "/product/code-engine", note: "AI-assisted project planning" },
     { label: "Developer Portal", to: "/developer-portal", note: "AI Engines, docs, quickstarts" },
   ] },
@@ -133,8 +133,8 @@ const Navigation = () => {
           <div className="tv-container py-6 flex flex-col">
             <MobileGroup title="Products" links={[
               { label: "Product suite", to: "/product-suite" },
-              { label: "Jarvyn IDE", to: "/download-ide" },
-              { label: "WebIDE", to: "/webide" },
+              { label: "Jarvyn IDE · Coming soon", to: "/download-ide" },
+              { label: "WebIDE · Coming soon", to: "/webide" },
               { label: "Code Engine", to: "/product/code-engine" },
               { label: "Secure Boot", to: "/product/secure-boot" },
               { label: "Crypto Stack", to: "/product/crypto-stack" },

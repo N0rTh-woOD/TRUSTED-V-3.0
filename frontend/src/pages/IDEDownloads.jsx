@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { ArrowUpRight, Check, Download, X } from "lucide-react";
-import { Eyebrow, PrimaryCTA, SecondaryCTA, Breadcrumbs } from "@/components/ui-kit";
+import { ArrowUpRight, Check, X } from "lucide-react";
+import { Eyebrow, Breadcrumbs } from "@/components/ui-kit";
 import { BLUE_STEPS } from "@/components/TrustedVLogo";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const JARVYN_GIF = "https://customer-assets-m6fa6gv7.emergentagent.net/job_e0aa043e-675d-4863-909c-5d4926841718/artifacts/7kle5aa3_Jarvyn_newIde_1.gif";
 
 /* Feature categories — each takes one step on the blue gradation */
@@ -53,11 +50,6 @@ const comparison = [
 ];
 
 const IDEDownloads = () => {
-  const [builds, setBuilds] = useState([]);
-  useEffect(() => {
-    axios.get(`${BACKEND_URL}/api/ide-downloads`).then(r => setBuilds(r.data.filter(b => b.filename))).catch(() => {});
-  }, []);
-
   return (
     <div className="bg-white text-[#0B0F14]">
       {/* ── HERO ─────────────────────────────────────────── */}
@@ -75,58 +67,20 @@ const IDEDownloads = () => {
                 <span className="text-[#003262]">RISC-V and Rust.</span>
               </h1>
               <p className="tv-lede mt-5" data-testid="ide-hero-subtitle">
-                The Rust-native RISC-V environment — hardware-aware editor, signed toolchain
-                and integrated QEMU debug from day one.
+                Jarvyn IDE is currently in development. Follow the platform for release updates
+                and early-access information.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryCTA
-                  href={builds[0] ? `${BACKEND_URL}/api/ide-downloads/${builds[0].id}/download` : "#downloads"}
-                  size="lg"
-                  data-testid="ide-hero-cta-primary"
-                >
-                  Download Jarvyn
-                </PrimaryCTA>
-                <SecondaryCTA to="/webide" size="lg" data-testid="ide-hero-cta-secondary">
-                  Try WebIDE
-                </SecondaryCTA>
+                <span className="tv-btn tv-btn-primary tv-btn-lg cursor-default opacity-65" data-testid="ide-hero-coming-soon">Jarvyn IDE · Coming soon</span>
+                <Link to="/contact" className="tv-btn tv-btn-outline tv-btn-lg" data-testid="ide-hero-contact-cta">Request launch updates</Link>
               </div>
             </div>
 
-            <div className="lg:col-span-5" id="downloads">
+            <div className="lg:col-span-5">
               <div className="border border-[#E5E4DF] rounded-md p-6 md:p-7 bg-white shadow-[0_16px_40px_-24px_rgba(11,15,20,0.12)]" data-testid="ide-download-panel">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#5A6472]">
-                    Latest release
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] tracking-widest uppercase text-[#0F6E56]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#0F6E56] tv-pulse-dot" />
-                    stable
-                  </span>
-                </div>
-                {builds.length === 0 ? (
-                  <div className="text-[14px] text-[#5A6472]">Builds will appear here shortly.</div>
-                ) : (
-                  <div className="space-y-1">
-                    {builds.slice(0, 3).map((b) => (
-                      <a
-                        key={b.id}
-                        href={`${BACKEND_URL}/api/ide-downloads/${b.id}/download`}
-                        className="group flex items-center justify-between py-3 border-b border-[#E5E4DF] last:border-b-0 hover:text-[#003262] transition-colors"
-                        data-testid={`download-${b.id}`}
-                      >
-                        <div>
-                          <div className="text-[14.5px] font-medium">
-                            {b.platform || b.os} · v{b.version}
-                          </div>
-                          <div className="font-mono text-[11.5px] text-[#5A6472] mt-0.5 truncate max-w-[240px]">
-                            {b.filename}
-                          </div>
-                        </div>
-                        <Download className="w-4 h-4 text-[#003262] group-hover:-translate-y-0.5 transition-transform" />
-                      </a>
-                    ))}
-                  </div>
-                )}
+                <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">Coming soon</div>
+                <h2 className="mt-3 text-[22px] font-semibold text-[#0B0F14]">Jarvyn IDE</h2>
+                <p className="mt-3 text-[14px] leading-[1.6] text-[#5A6472]">The public download is not available yet. Release details will be shared here when Jarvyn is ready.</p>
               </div>
             </div>
           </div>
@@ -235,15 +189,11 @@ const IDEDownloads = () => {
       {/* CTA */}
       <section className="tv-section-tight" data-testid="ide-cta">
         <div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="tv-h2">
-            Skip the fork. Ship the firmware.
-          </h2>
+          <h2 className="tv-h2">Jarvyn IDE is <span className="text-[#003262]">coming soon</span>.</h2>
           <div className="flex gap-3">
-            <Link to="/webide" className="tv-btn tv-btn-primary" data-testid="ide-cta-webide">
-              Try WebIDE <ArrowUpRight className="w-4 h-4" />
-            </Link>
+            <span className="tv-btn tv-btn-primary cursor-default opacity-65" data-testid="ide-cta-coming-soon">Coming soon</span>
             <Link to="/contact" className="tv-btn tv-btn-outline" data-testid="ide-cta-contact">
-              Talk to sales
+              Request launch updates <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
