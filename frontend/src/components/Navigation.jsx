@@ -25,11 +25,6 @@ const MEGA = [
     { label: "Crypto Stack", to: "/product/crypto-stack", note: "Classical + PQC" },
     { label: "RTOS Options", to: "/product/rtos-benchmark", note: "Rust-native RTOS & benchmarks" },
   ] },
-  { title: "Silicon & IP", items: [
-    { label: "Product Suite Overview", to: "/product-suite", note: "The full platform" },
-    { label: "Marketplace", to: "/marketplace", note: "Boards & IP blocks" },
-    { label: "Platform", to: "/partners", note: "Build with SiFive and TRUSTED-V" },
-  ] },
 ];
 
 const Navigation = () => {
@@ -119,7 +114,7 @@ const Navigation = () => {
             <div className="tv-container py-10">
               <div className="grid grid-cols-12 gap-10">
                 {MEGA.map((col) => <MegaCol key={col.title} {...col} />)}
-                <div className="col-span-3 border-l border-[#E5E4DF] pl-8">
+                <div className="col-span-4 border-l border-[#E5E4DF] pl-8">
                   <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472] mb-3">All products</div>
                   <h4 className="tv-h4" style={{ fontSize: "18px" }}>The complete RISC-V platform</h4>
                   <p className="mt-2 text-[13px] text-[#5A6472] leading-relaxed">IP integration, virtual platforms, certified boot, cryptography and RTOS — unified.</p>
@@ -215,7 +210,7 @@ const MenuItem = ({ to, Icon, label, testid }) => (
 );
 
 const MegaCol = ({ title, items }) => (
-  <div className="col-span-3">
+  <div className="col-span-4">
     <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#5A6472] mb-4">{title}</div>
     <ul className="space-y-1">
       {items.map((it) => (
