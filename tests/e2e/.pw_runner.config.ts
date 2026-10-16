@@ -11,7 +11,7 @@ export default defineConfig({
     ['json', { outputFile: '/root/.emergent/automation_output/20260305_061400/results.json' }],
   ],
   use: {
-    baseURL: 'https://ip-marketplace-hub.preview.emergentagent.com',
+    baseURL: 'https://trv-platform-preview.preview.emergentagent.com',
     screenshot: 'only-on-failure',
     trace: 'off',
     headless: true,

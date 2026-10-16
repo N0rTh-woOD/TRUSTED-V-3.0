@@ -46,6 +46,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { toast } from "sonner";
+import { AIModelPicker } from "@/components/AIModelPicker";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -141,10 +142,20 @@ const SmartProjectBuilder = () => {
   const [generating, setGenerating] = useState(false);
   const [generationProgress, setGenerationProgress] = useState(0);
   const [generatedProject, setGeneratedProject] = useState(null);
+  const [aiModels, setAiModels] = useState([]);
+  const [aiModel, setAiModel] = useState("gemini");
 
   useEffect(() => {
     loadData();
   }, []);
+
+  useEffect(() => {
+    if (!token) return;
+    axios
+      .get(`${API}/ai-models`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => setAiModels(res.data.models))
+      .catch(() => setAiModels([]));
+  }, [token]);
 
   const loadData = async () => {
     try {
@@ -325,6 +336,7 @@ const SmartProjectBuilder = () => {
           software_component_ids: selectedSoftware,
           peripherals: selectedPeripherals,
           additional_requirements: additionalRequirements,
+          ai_model: aiModel,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -893,6 +905,10 @@ const SmartProjectBuilder = () => {
                       </span>
                     </div>
                   </div>
+
+                  {aiModels.length > 1 && (
+                    <AIModelPicker models={aiModels} value={aiModel} onChange={setAiModel} />
+                  )}
 
                   {/* Validation Messages */}
                   {!projectName && (

@@ -29,6 +29,12 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 17 — ChatGPT (GPT 5.6 Terra) in Solution Builder (Jun 2026)
+Self-tested (curl + screenshot).
+- Backend: `ProjectGenerationRequest.ai_model` ("gemini" | "openai"). OpenAI path uses the official `openai` SDK Responses API (`AsyncOpenAI`, model from `OPENAI_MODEL=gpt-5.6-terra`), user's own `OPENAI_API_KEY` in backend/.env (currently EMPTY → returns 400 "OpenAI API key not configured"). Non-admins get 403. Provider failures return 502 (no silent fallback). `ai_model` stored on each project version.
+- New `GET /api/ai-models`: Gemini for everyone; GPT 5.6 Terra listed only for admins with `available`/`status`.
+- Frontend: `components/AIModelPicker.jsx` in Solution Builder sidebar (admins only); OpenAI option disabled with status text until key is set.
+
 ### Phase 16 — SiFive-only Platform, AI Engines & Homepage Narrative (Sep 2026)
 Verified by testing_agent (iteration_36.json): 100% frontend pass.
 - **SiFive-only positioning:** removed every public Akeana reference across landing, products, Platform, navigation, 404 suggestions, and the legacy hero visual. The former Partners page is now the **Platform** page, centered on “Build with SiFive and TRUSTED-V.”
