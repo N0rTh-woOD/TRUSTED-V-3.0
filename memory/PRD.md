@@ -29,6 +29,12 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 18 — Developer Navigation and Homepage Cleanup (Oct 2026)
+Verified with authenticated desktop and mobile Playwright smoke checks.
+- Removed the global **Developers** navigation tab from the desktop and mobile menus.
+- Removed the standalone **Developer Experience** section, its development-tool calls to action, and embedded code preview from the homepage.
+- The Developer Portal route remains available for existing direct links; only the requested navigation and homepage exposure were removed.
+
 ### Phase 17 — ChatGPT (GPT 5.6 Terra) in Solution Builder (Jun 2026)
 Self-tested (curl + screenshot).
 - Backend: `ProjectGenerationRequest.ai_model` ("gemini" | "openai"). OpenAI path uses the official `openai` SDK Responses API (`AsyncOpenAI`, model from `OPENAI_MODEL=gpt-5.6-terra`), user's own `OPENAI_API_KEY` in backend/.env (currently EMPTY → returns 400 "OpenAI API key not configured"). Non-admins get 403. Provider failures return 502 (no silent fallback). `ai_model` stored on each project version.
@@ -308,7 +314,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 
 ## Prioritized Backlog
 ### P1 — High
-- **ChatGPT / OpenAI model integration** (user-requested, deferred from Jun 2026 round — call integration_expert first)
+- **Verify ChatGPT / OpenAI model integration** end-to-end with the testing agent: Admin BYOK configuration, model selection, standard-user access block, and unconfigured-key error states.
 - Refactor monolithic `server.py` into modular APIRouter modules
 - Complete "Solution Builder" AI code generation
 - Refactor `SmartProjectBuilder.jsx` (916 lines) into smaller components

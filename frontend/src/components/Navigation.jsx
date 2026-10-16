@@ -7,7 +7,6 @@ import TrustedVLogo from "@/components/TrustedVLogo";
 const NAV_ITEMS = [
   { label: "Products", key: "products", to: "/product-suite", hasMega: true, match: ["/product-suite", "/product/", "/download-ide", "/webide"] },
   { label: "Marketplace", to: "/marketplace" },
-  { label: "Developers", to: "/developer-portal" },
   { label: "Platform", to: "/partners" },
   { label: "Services", to: "/services" },
   { label: "About", to: "/about" },
@@ -141,7 +140,6 @@ const Navigation = () => {
               { label: "RTOS", to: "/product/rtos-benchmark" },
             ]} />
             <MobileLink label="Marketplace" to="/marketplace" testid="mobile-nav-marketplace" />
-            <MobileLink label="Developers" to="/developer-portal" testid="mobile-nav-developers" />
             <MobileLink label="Platform" to="/partners" testid="mobile-nav-platform" />
             <MobileLink label="Services" to="/services" testid="mobile-nav-services" />
             <MobileLink label="About" to="/about" testid="mobile-nav-about" />

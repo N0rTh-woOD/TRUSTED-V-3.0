@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import {
   Eyebrow, SectionHeader, TechnicalMetric, ProductCard, MarketCard,
   PrimaryCTA, SecondaryCTA, TVCard,
@@ -18,7 +18,6 @@ const Landing = () => (
     <CoreTechnologies />
     <ServicesTeaser />
     <ProductFamilies />
-    <DeveloperExperience />
     <FinalCTA />
   </div>
 );
@@ -377,53 +376,6 @@ const ApplicationMarkets = () => {
     </section>
   );
 };
-
-/* ───────────── DEVELOPER EXPERIENCE ───────────── */
-const DeveloperExperience = () => (
-  <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="developer-experience">
-    <div className="tv-container">
-      <div className="grid lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-6">
-          <div className="mb-4"><Eyebrow>Developer experience</Eyebrow></div>
-          <h2 className="tv-h2">Rust-native. RISC-V-first. Cargo everywhere.</h2>
-          <p className="tv-lede mt-6">One environment for firmware and silicon engineers — SVD register view, signed toolchain, pre-integrated HAL/PAC crates.</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/download-ide" className="tv-btn tv-btn-primary" data-testid="dev-cta-ide">Jarvyn IDE · Coming soon <ArrowUpRight className="w-4 h-4" /></Link>
-            <Link to="/webide" className="tv-btn tv-btn-outline" data-testid="dev-cta-webide">WebIDE · Coming soon <ArrowRight className="w-4 h-4" /></Link>
-          </div>
-        </div>
-        <div className="lg:col-span-6"><CodeWindow /></div>
-      </div>
-    </div>
-  </section>
-);
-
-const CodeWindow = () => (
-  <div className="border border-[#E5E4DF] rounded-md bg-[#0B0F14] text-white overflow-hidden">
-    <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10">
-      <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-white/25" /><span className="w-2 h-2 rounded-full bg-white/25" /><span className="w-2 h-2 rounded-full bg-white/25" /></div>
-      <span className="text-[11px] font-mono text-white/60">main.rs</span>
-      <span className="text-[10px] font-mono text-[#56A2D6] tracking-widest">RV64GC</span>
-    </div>
-    <pre className="p-5 text-[12.5px] leading-[1.75] font-mono"><code>
-      <span className="text-white/40">// TRUSTED-V — secure boot + attestation</span>{"\n"}
-      <span className="text-[#56A2D6]">use</span> <span className="text-white">trusted_v::rboot::verify_chain;</span>{"\n"}
-      <span className="text-[#56A2D6]">use</span> <span className="text-white">trusted_v::crypto::attest;</span>{"\n"}
-      <span className="text-[#56A2D6]">use</span> <span className="text-white">trusted_v::rtos::launch;</span>{"\n\n"}
-      <span className="text-[#9DC8E8]">#[no_std]</span>{"\n"}
-      <span className="text-[#9DC8E8]">#[no_main]</span>{"\n"}
-      <span className="text-[#56A2D6]">fn</span> <span className="text-white">main</span>() {"{"}{"\n"}
-      {"    "}<span className="text-white/60">let</span> chain = verify_chain(<span className="text-[#0F6E56]">&BOOT_KEY</span>);{"\n"}
-      {"    "}<span className="text-white/60">let</span> quote = attest(chain);{"\n"}
-      {"    "}launch(<span className="text-[#0F6E56]">&quot;rt_secure&quot;</span>, quote);{"\n"}
-      {"}"}
-    </code></pre>
-    <div className="flex items-center justify-between px-4 py-2 border-t border-white/10 font-mono text-[11px]">
-      <span className="text-white/50">$ cargo build --release</span>
-      <span className="text-[#0F6E56]">✓ signed · verified</span>
-    </div>
-  </div>
-);
 
 /* ───────────── FINAL CTA ───────────── */
 const FinalCTA = () => (
