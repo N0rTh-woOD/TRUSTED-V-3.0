@@ -29,6 +29,20 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 19 — Design-team Homepage Redesign (2026-10-16)
+Verified by testing_agent (`iteration_37.json`): **100% frontend pass**, plus authenticated visual smoke check, production build and external asset HTTP checks. No mocked integrations or backend/auth changes.
+- Implemented the supplied **TrusteDV-HomePage-DesignChanges-1.pdf** and mapped all **18 illustrations** in **Raw-Images.zip**. Full source-to-section mapping and interpretation are in `/app/docs/homepage-design-mapping.md`.
+- Replaced text-only AI Engines and SiFive previews with image-led feature sections using the exact Code Engine (`image 65`) and SiFive (`image 39`) images; preserved brand, content, existing product/contact destinations and the RISC-V context.
+- Six illustrated market panels: automotive, industrial, IoT/consumer, robotics, defence/aerospace, Edge AI. PDF page 4 is a continuation of these cards, not a separate section.
+- Four-module interactive showcase with accessible tabs and previous/next controls; Secure Rust Software is selected initially as in PDF page 5, correctly using `image 15`. Chip engineer (`image 14`) maps to Development, cloud engineer (`image 16`) to Virtualization and wafer technician (`image 17`) to Silicon SignOff. Main images remain uncropped; offset neighbor images are decorative.
+- Replaced the static Core Technologies grid with **one visitor-controlled carousel** from PDF pages 6–9: 3 cards desktop, 2 tablet, 1 mobile; single-card advancement, arrows, swipe, keyboard, range counter/progress, disabled boundary buttons, reduced-motion support and offscreen link focus handling. **No autoplay**, per explicit user selection.
+- Retained hero, virtualization, architecture, services and final CTA. Homepage sequence: Hero → AI Engines → SiFive → Virtualization → Architecture → Markets → Product families → Core technologies → Services → Final CTA. Developer navigation and standalone Developer Experience stay hidden; Jarvyn IDE/WebIDE remain **Coming soon**.
+- Added modular components in `frontend/src/components/homepage/`, scoped stylesheet, editable `frontend/src/data/homepage.js`, image manifest and reusable responsive image component. Existing Shadcn/Embla/Radix controls used; no new app dependencies.
+- Extracted raster content from the supplied SVG wrappers into 640px/1200px WebPs: all 36 variants total approximately **1.8 MB**, replacing 52 MB of original SVG payload. Static bundled assets live in `frontend/public/images/homepage/`; regeneration script is `scripts/prepare_homepage_assets.py`. Original analysis files remain local in ignored `/app/design-input/`; source URLs are documented.
+- Product links with URL fragments now scroll to the intended section below the fixed header. Removed a lingering carousel resize-listener cleanup omission.
+- Tested at **320 / 768 / 1024 / 1440 px**, plus 1920px smoke: no horizontal overflow, broken images, runtime errors, or failing homepage interactions. Build passes with pre-existing hook-dependency and Browserslist warnings outside this scope.
+- Next: user/design-team visual review. Existing OpenAI model verification and backend/Solution Builder refactors remain deferred, unchanged by this task.
+
 ### Phase 18 — Developer Navigation and Homepage Cleanup (Oct 2026)
 Verified with authenticated desktop and mobile Playwright smoke checks.
 - Removed the global **Developers** navigation tab from the desktop and mobile menus.
@@ -313,6 +327,9 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 - `POST /api/applications/partnership` — Partnership application
 
 ## Prioritized Backlog
+### P0 — Current scope
+- Homepage redesign implementation and responsive/interaction testing complete. Await user/design-team visual review; no known blocking homepage defects.
+
 ### P1 — High
 - **Verify ChatGPT / OpenAI model integration** end-to-end with the testing agent: Admin BYOK configuration, model selection, standard-user access block, and unconfigured-key error states.
 - Refactor monolithic `server.py` into modular APIRouter modules
@@ -361,4 +378,4 @@ Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform —
 - **Feb 2026**: Hero chip hover-reveal animation, standardized RISC-V colors (Navy #003262 + Cyan #00B4E0), unified PageHero component across secondary pages, updated tagline.
 
 ---
-*Last Updated: August 2026*
+*Last Updated: 2026-10-16*

@@ -11,8 +11,20 @@ import { Loader2 } from "lucide-react";
 
 // Scroll to top on route change
 function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const target = hash ? document.getElementById(hash.slice(1)) : null;
+      if (target) {
+        const navigation = document.querySelector("header");
+        const offset = (navigation?.getBoundingClientRect().height || 76) + 24;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: "instant" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname, hash]);
   return null;
 }
 

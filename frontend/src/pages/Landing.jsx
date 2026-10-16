@@ -1,23 +1,28 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import {
-  Eyebrow, SectionHeader, TechnicalMetric, ProductCard, MarketCard,
+  Eyebrow, SectionHeader, TechnicalMetric,
   PrimaryCTA, SecondaryCTA, TVCard,
 } from "@/components/ui-kit";
 import TrustedVLogo from "@/components/TrustedVLogo";
 import { SERVICE_MODELS } from "@/data/services";
+import { AIEnginesPreview, RiscVIPCollaboration } from "@/components/homepage/FeatureSections";
+import { ApplicationMarkets } from "@/components/homepage/ApplicationMarkets";
+import { TechnologyCarousel } from "@/components/homepage/TechnologyCarousel";
+import { ProductShowcase } from "@/components/homepage/ProductShowcase";
+import "@/components/homepage/homepage.css";
 
 const Landing = () => (
-  <div className="bg-white text-[#0B0F14]">
+  <div className="home-refresh bg-white text-[#0B0F14]" data-testid="homepage">
     <Hero />
     <AIEnginesPreview />
     <RiscVIPCollaboration />
     <VirtualizationSpotlight />
     <PlatformArchitecture />
     <ApplicationMarkets />
-    <CoreTechnologies />
+    <ProductShowcase />
+    <TechnologyCarousel />
     <ServicesTeaser />
-    <ProductFamilies />
     <FinalCTA />
   </div>
 );
@@ -33,7 +38,6 @@ const Hero = () => {
   return (
     <section className="relative bg-white overflow-hidden" data-testid="landing-hero">
       <div className="absolute inset-0 tv-grid-bg opacity-60 pointer-events-none" />
-      <div className="absolute top-24 right-[-160px] w-[520px] h-[520px] rounded-full bg-[#2486C7]/10 blur-3xl pointer-events-none" />
 
       <div className="tv-container relative pt-14 md:pt-20 lg:pt-24 pb-14 md:pb-20 lg:pb-24">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -73,32 +77,6 @@ const Hero = () => {
     </section>
   );
 };
-
-/* ───────────── AI ENGINES ───────────── */
-const AIEnginesPreview = () => (
-  <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="ai-engines-preview">
-    <div className="tv-container">
-      <div className="grid lg:grid-cols-12 gap-10 items-end mb-10 md:mb-14">
-        <div className="lg:col-span-7">
-          <Eyebrow>AI Engines</Eyebrow>
-          <h2 className="tv-h2 mt-4">A focused AI layer for <span className="text-[#003262]">RISC-V engineering</span>.</h2>
-        </div>
-        <div className="lg:col-span-4 lg:col-start-9">
-          <p className="text-[15px] leading-[1.65] text-[#5A6472]">Code Engine brings target, runtime and security context into a structured starting point for embedded projects.</p>
-        </div>
-      </div>
-      <TVCard
-        eyebrow="AI Engine 01"
-        title="Code Engine"
-        description="Start with the system context, shape a project plan, and take reviewable work into the TRUSTED-V development workflow."
-        bullets={["RISC-V target and board context", "Runtime and security requirements", "Reviewable project planning"]}
-        to="/product/code-engine"
-        className="min-h-[230px]"
-        data-testid="ai-engines-code-engine"
-      />
-    </div>
-  </section>
-);
 
 /* ───────────── PLATFORM ARCHITECTURE ───────────── */
 const PlatformArchitecture = () => {
@@ -200,31 +178,6 @@ const PlatformArchitecture = () => {
   );
 };
 
-/* ───────────── SIFIVE COLLABORATION ───────────── */
-const RiscVIPCollaboration = () => {
-  return (
-    <section className="tv-section border-t border-[#E5E4DF]" data-testid="riscv-ip">
-      <div className="tv-container">
-        <SectionHeader
-          eyebrow="RISC-V IP collaboration"
-          title={<>Build with <span className="text-[#003262]">SiFive and TRUSTED-V</span>.</>}
-          lede="Bring SiFive RISC-V IP together with the TRUSTED-V software, security and virtualization platform."
-          action={<Link to="/partners" className="tv-arrow-link" data-testid="riscv-ip-platform">See platform alignment</Link>}
-        />
-        <TVCard
-          eyebrow="SiFive RISC-V IP"
-          title="A coherent path from IP to trusted software."
-          description="TRUSTED-V aligns the development workflow around SiFive RISC-V IP, so the virtual platform, toolchain, secure boot and application work share one technical foundation."
-          bullets={["RISC-V software and toolchain alignment", "Virtualization and pre-silicon workflow", "Secure boot, crypto and attestation context"]}
-          to="/partners"
-          className="min-h-[230px]"
-          data-testid="riscv-ip-sifive"
-        />
-      </div>
-    </section>
-  );
-};
-
 /* ───────────── VIRTUALIZATION ───────────── */
 const VirtualizationSpotlight = () => (
   <section className="tv-section border-t border-[#E5E4DF] bg-[#00162B] text-white" data-testid="virtualization-spotlight">
@@ -273,38 +226,6 @@ const VirtualizationSpotlight = () => (
   </section>
 );
 
-/* ───────────── CORE TECHNOLOGIES ───────────── */
-const CoreTechnologies = () => {
-  const items = [
-    { eyebrow: "ISA", title: "RISC-V native", desc: "RV32, RV64 and RVV, aligned with SiFive RISC-V IP.", to: "/product-suite" },
-    { eyebrow: "Security", title: "Security by construction", desc: "Rust memory safety, verified boot, classical + PQC crypto.", to: "/product/secure-boot" },
-    { eyebrow: "Pre-silicon", title: "Virtualization", desc: "Hypervisor and virtual platforms for pre-silicon bring-up.", to: "/product-suite#virtualization" },
-    { eyebrow: "Runtime", title: "Real-time software", desc: "TRUSTED-V RTOS, Embassy async runtimes and Rust HAL crates.", to: "/product/rtos-benchmark" },
-    { eyebrow: "Crypto", title: "Cryptography", desc: "AES, SHA-3, ECDSA, ML-KEM, ML-DSA — NIST FIPS mapped.", to: "/product/crypto-stack" },
-    { eyebrow: "Tooling", title: "Rust developer tooling", desc: "Jarvyn IDE, WebIDE, signed toolchain, SVD register views.", to: "/developer-portal" },
-  ];
-  return (
-    <section className="tv-section border-t border-[#E5E4DF]" data-testid="core-technologies">
-      <div className="tv-container">
-        <SectionHeader eyebrow="Core technologies" title="What the platform is made of." />
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {items.map((it) => (
-            <TVCard
-              key={it.title}
-              eyebrow={it.eyebrow}
-              title={it.title}
-              description={it.desc}
-              to={it.to}
-              className="min-h-[196px]"
-              data-testid={`core-tech-${it.title.toLowerCase().replace(/\W+/g, "-")}`}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 /* ───────────── SERVICES TEASER ───────────── */
 const ServicesTeaser = () => (
   <section className="tv-section border-t border-[#E5E4DF] bg-[#F7F7F5]" data-testid="services-teaser">
@@ -338,44 +259,6 @@ const ServicesTeaser = () => (
     </div>
   </section>
 );
-
-/* ───────────── PRODUCT FAMILIES ───────────── */
-const ProductFamilies = () => {
-  const items = [
-    { eyebrow: "MODULE 01", title: "Development Platform", description: "Jarvyn IDE, WebIDE, Code Engine, debugger and trace in one Rust-native environment.", bullets: ["Jarvyn IDE", "WebIDE (cloud)", "Code Engine"], to: "/product/code-engine" },
-    { eyebrow: "MODULE 02", title: "Virtualization & Simulation", description: "Virtual platforms and a RISC-V hypervisor for pre-silicon work.", bullets: ["Virtual platform", "RISC-V hypervisor", "Cycle-approximate simulator"], to: "/product-suite#virtualization" },
-    { eyebrow: "MODULE 03", title: "Secure Rust Software", description: "rBoot, rustBoot, RTOS, HAL/PAC and Crypto Stack. PQC-ready.", bullets: ["rBoot & rustBoot", "Crypto Stack", "RTOS"], to: "/product/secure-boot" },
-    { eyebrow: "MODULE 04", title: "Silicon SignOff & Trust", description: "Vendor-neutral certification for RISC-V SoCs.", bullets: ["SignOff Silicon", "TRUSTED-V Verified", "TVOTS"], to: "/product-suite#certification" },
-  ];
-  return (
-    <section className="tv-section border-t border-[#E5E4DF]" data-testid="product-families">
-      <div className="tv-container">
-        <SectionHeader eyebrow="Product families" title="Four modules. One RISC-V platform." action={<Link to="/product-suite" className="tv-arrow-link">See the full suite</Link>} />
-        <div className="grid md:grid-cols-2 gap-4">{items.map((p) => <ProductCard key={p.title} {...p} />)}</div>
-      </div>
-    </section>
-  );
-};
-
-/* ───────────── APPLICATION MARKETS ───────────── */
-const ApplicationMarkets = () => {
-  const markets = [
-    { label: "AUTOMOTIVE", headline: "Software-defined vehicles.", capabilities: ["Deterministic processing", "Secure execution", "ISO 26262 alignment"] },
-    { label: "INDUSTRIAL", headline: "Factories and grids.", capabilities: ["Real-time RTOS", "IEC 62443 alignment", "Rugged deployment"] },
-    { label: "IOT & CONSUMER", headline: "Connected devices.", capabilities: ["PSA L3-aligned", "PQC-ready", "Low-power RISC-V"] },
-    { label: "ROBOTICS", headline: "Autonomous systems.", capabilities: ["Rust async runtime", "Hypervisor isolation", "Vision-capable RVV"] },
-    { label: "DEFENCE & AEROSPACE", headline: "Sovereign missions.", capabilities: ["Vendor-neutral certification", "Attestation", "Hardware-anchored trust"] },
-    { label: "EDGE AI", headline: "Physical AI on RISC-V.", capabilities: ["Virtual platforms", "RVV vector compute", "Deterministic scheduling"] },
-  ];
-  return (
-    <section className="tv-section border-t border-[#E5E4DF]" data-testid="application-markets">
-      <div className="tv-container">
-        <SectionHeader eyebrow="Application markets" title="Where TRUSTED-V ships." />
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">{markets.map((m) => <MarketCard key={m.label} {...m} />)}</div>
-      </div>
-    </section>
-  );
-};
 
 /* ───────────── FINAL CTA ───────────── */
 const FinalCTA = () => (

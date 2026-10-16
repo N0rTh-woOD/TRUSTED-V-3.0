@@ -1,5 +1,7 @@
 # TRUSTED-V — Design Guidelines
 
+> **Current authority (2026-10-16):** The homepage follows the supplied design-team PDF and `/app/design_guidelines.json`, with its implementation mapping in `/app/docs/homepage-design-mapping.md`. Current established typography is IBM Plex Sans / IBM Plex Mono (Sora selectively elsewhere), and current surface/border tokens are `#F7F7F5` / `#E5E4DF`. The historical notes below predate the enterprise design-system revisions; do not use their older type scale or partner-era structure to override the current code.
+
 **Theme:** Editorial Minimalist (MIPS-inspired)
 **Applied:** Feb 2026
 

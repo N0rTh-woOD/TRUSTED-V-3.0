@@ -1,86 +1,226 @@
 {
-  "project_name": "TrusteD-V Semiconductor Developer Platform",
-  "design_archetype": "THE PERFORMANCE PRO / SWISS HIGH-CONTRAST",
-  "context_type": "MARKETING_AND_DEVELOPER_PLATFORM",
-  "theme": "dark",
-  "typography": {
-    "font_family_heading": "Outfit, Clash Display, sans-serif",
-    "font_family_body": "Inter, system-ui, sans-serif",
-    "font_family_code": "JetBrains Mono, Source Code Pro, monospace",
-    "hierarchy": {
-      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight",
-      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
-      "h3_subsection": "text-xl sm:text-2xl font-semibold",
-      "h4_card": "text-lg sm:text-xl font-medium",
-      "body": "text-base text-slate-300 leading-relaxed",
-      "caption_label": "text-xs font-mono uppercase tracking-widest text-emerald-400"
+  "project_title": "TrusteD-V Homepage Redesign Blueprint",
+  "design_archetype": "Swiss & High-Contrast Semiconductor / Performance Tech",
+  "theme_and_palette": {
+    "primary_fonts": {
+      "heading": "IBM Plex Sans",
+      "body": "IBM Plex Sans",
+      "mono": "IBM Plex Mono"
+    },
+    "colors": {
+      "tv_navy": "#003262",
+      "tv_navy_deep": "#001F3F",
+      "tv_navy_darkest": "#00162B",
+      "tv_cyan": "#00B4E0",
+      "tv_cyan_soft": "#E6F7FC",
+      "tv_gold": "#FDB515",
+      "tv_green": "#0F6E56",
+      "tv_rust": "#B7410E",
+      "tv_bg": "#FFFFFF",
+      "tv_surface": "#F7F7F5",
+      "tv_surface_2": "#EFEEE9",
+      "tv_border": "#E5E4DF",
+      "tv_border_strong": "#CFCEC8",
+      "tv_ink": "#0B0F14",
+      "tv_ink_2": "#1A1F25",
+      "tv_muted": "#5A6472",
+      "tv_blue_gradation": {
+        "100": "#E6F1F9",
+        "300": "#9DC8E8",
+        "400": "#56A2D6",
+        "500": "#2486C7",
+        "700": "#004A7F",
+        "800": "#003262",
+        "900": "#00162B"
+      }
+    },
+    "surfaces": {
+      "card_style": "tv-panel (1px border #E5E4DF, rounded 6px/10px, subtle hover lift -3px)",
+      "dark_section": "#00162B with glassmorphism overlays and grid background pattern",
+      "active_border_accent": "#2486C7 hover accent bar"
     }
   },
-  "colors": {
-    "background_primary": "#0A0D14",
-    "background_secondary": "#111622",
-    "background_card": "#161C2B",
-    "border_color": "rgba(255, 255, 255, 0.1)",
-    "primary_accent": "#00E5FF",
-    "secondary_accent": "#FF3B30",
-    "emerald_highlight": "#10B981",
-    "text_primary": "#FFFFFF",
-    "text_muted": "#94A3B8"
+  "image_mappings": {
+    "ai_code_engine": {
+      "description": "Code Engine AI Layer for RISC-V Engineering",
+      "path": "/design-input/extracted/image 65.png",
+      "alt_text": "Code Engine AI Interface and Workflow"
+    },
+    "sifive_collaboration": {
+      "description": "Build with SiFive and TRUSTED-V IP Alignment",
+      "path": "/design-input/extracted/image 39.png",
+      "alt_text": "SiFive RISC-V IP Hardware Integration"
+    },
+    "market_cards": [
+      {
+        "market": "Automotive",
+        "headline": "Software-defined vehicles.",
+        "path": "/design-input/extracted/ChatGPT Image Sep 24, 2026, 02_37_39 PM 2.png",
+        "capabilities": ["Deterministic processing", "Secure execution", "ISO 26262 alignment"]
+      },
+      {
+        "market": "Industrial",
+        "headline": "Factories and grids.",
+        "path": "/design-input/extracted/factories_and_grids_high_resolution 2.png",
+        "capabilities": ["Real-time RTOS", "IEC 62443 alignment", "Rugged deployment"]
+      },
+      {
+        "market": "IoT & Consumer",
+        "headline": "Connected devices.",
+        "path": "/design-input/extracted/connected_devices_exact_HD 2.png",
+        "capabilities": ["PSA L3-aligned", "PQC-ready", "Low-power RISC-V"]
+      },
+      {
+        "market": "Robotics",
+        "headline": "Autonomous systems.",
+        "path": "/design-input/extracted/autonomous_systems_exact_HD 2.png",
+        "capabilities": ["Rust async runtime", "Hypervisor isolation", "Vision-capable RVV"]
+      },
+      {
+        "market": "Defence & Aerospace",
+        "headline": "Sovereign missions.",
+        "path": "/design-input/extracted/ChatGPT Image Sep 24, 2026, 02_55_05 PM 2.png",
+        "capabilities": ["Vendor-neutral certification", "Attestation", "Hardware-anchored trust"]
+      },
+      {
+        "market": "Edge AI",
+        "headline": "Physical AI on RISC-V.",
+        "path": "/design-input/extracted/ChatGPT Image Sep 24, 2026, 02_58_54 PM 2.png",
+        "capabilities": ["Virtual platforms", "RVV vector compute", "Deterministic scheduling"]
+      }
+    ],
+    "four_module_showcase": [
+      {
+        "module_id": "MODULE 01",
+        "title": "Development Platform",
+        "badge": "Coming Soon (Jarvyn IDE & WebIDE)",
+        "description": "Jarvyn IDE, WebIDE, Code Engine, debugger and trace in one Rust-native environment.",
+        "path": "/design-input/extracted/image 14.png",
+        "bullets": ["Jarvyn IDE (Coming soon)", "WebIDE (cloud - Coming soon)", "Code Engine"]
+      },
+      {
+        "module_id": "MODULE 02",
+        "title": "Secure Rust Software",
+        "badge": "Core Software Stack",
+        "description": "rBoot, rustBoot, RTOS, HAL/PAC and Crypto Stack, PQC-ready.",
+        "path": "/design-input/extracted/image 15.png",
+        "bullets": ["rBoot & rustBoot", "Crypto Stack", "RTOS"]
+      },
+      {
+        "module_id": "MODULE 03",
+        "title": "Virtualization & Simulation",
+        "badge": "Pre-Silicon Workflow",
+        "description": "Virtual platforms and a RISC-V hypervisor for pre-silicon work.",
+        "path": "/design-input/extracted/image 16.png",
+        "bullets": ["Virtual platform", "RISC-V hypervisor", "Cycle-approximate simulator"]
+      },
+      {
+        "module_id": "MODULE 04",
+        "title": "Silicon SignOff & Trust",
+        "badge": "Verification & Certification",
+        "description": "Vendor-neutral certification for RISC-V SoCs.",
+        "path": "/design-input/extracted/image 17.png",
+        "bullets": ["SignOff Silicon", "TRUSTED-V Verified", "TVOTS"]
+      }
+    ],
+    "six_technology_carousel": [
+      {
+        "tech_id": "tech-01",
+        "category": "ISA",
+        "title": "RISC-V Native",
+        "description": "RV32, RV64 AND RVV, aligned with SiFive RISC-V IP.",
+        "image_path": "/design-input/extracted/Futuristic RISC-V Chip Stack 1.png"
+      },
+      {
+        "tech_id": "tech-02",
+        "category": "SECURITY",
+        "title": "Security by construction",
+        "description": "Rust memory safety, verified boot, classical + PQC crypto.",
+        "image_path": "/design-input/extracted/Glowing Glass Shield Lock 1.png"
+      },
+      {
+        "tech_id": "tech-03",
+        "category": "PRE-SILICON",
+        "title": "Virtualization",
+        "description": "Hypervisor and virtual platforms for pre-silicon bring-up.",
+        "image_path": "/design-input/extracted/Layered Glass Platform with Holographic UI 1.png"
+      },
+      {
+        "tech_id": "tech-04",
+        "category": "RUNTIME",
+        "title": "Real-time software",
+        "description": "TRUSTED-V RTOS, Embassy async runtimes and Rust HAL crates.",
+        "image_path": "/design-input/extracted/Futuristic Blue Gauge with Orange Warning Ring 1.png"
+      },
+      {
+        "tech_id": "tech-05",
+        "category": "CRYPTO",
+        "title": "Cryptography",
+        "description": "AES, SHA-3, ECDSA, ML-KEM, ML-DSA — NIST FIPS mapped.",
+        "image_path": "/design-input/extracted/Neon Glass Security Cube 1.png"
+      },
+      {
+        "tech_id": "tech-06",
+        "category": "TOOLING",
+        "title": "Rust developer tooling",
+        "description": "Jarvyn IDE, WebIDE, signed toolchain, SVD register views.",
+        "image_path": "/design-input/extracted/Futuristic Glass Code Workspace 1.png"
+      }
+    ]
   },
-  "branding_and_partners": {
-    "partners_allowed": ["SiFive"],
-    "partners_forbidden": ["Akeana"],
-    "collaboration_title": "Build with SiFive and TrusteD-V",
-    "renaming_mapping": {
-      "Ecosystem": "Platform",
-      "Engagement": "Services",
-      "SDK (L04 Layer)": "AI Engines (Code Engine)"
+  "carousel_behavior": {
+    "mode": "Visitor-controlled only",
+    "autoplay": false,
+    "controls": ["Next / Previous Chevron Buttons", "Keyboard Navigation (ArrowLeft / ArrowRight)", "Touch Swipe"],
+    "visible_cards_desktop": 3,
+    "visible_cards_tablet": 2,
+    "visible_cards_mobile": 1,
+    "slide_step": 1
+  },
+  "module_showcase_behavior": {
+    "layout": "Interactive 4-module tabbed showcase with neighbor image stacking",
+    "active_default": "MODULE 02 (Secure Rust Software)",
+    "image_stacking_rule": "Large active feature image with offset background cards representing adjacent modules"
+  },
+  "component_structure": {
+    "page": "/app/frontend/src/pages/Landing.jsx",
+    "styling": "/app/frontend/src/index.css",
+    "format": "JavaScript React (.js / .jsx)",
+    "nav_rules": {
+      "developer_tab_hidden": true,
+      "developer_experience_removed": true,
+      "navigation_links": ["Product Suite", "Hardware", "Services", "Partners", "About"]
     }
   },
-  "homepage_layout_sequence": [
-    {
-      "step": 1,
-      "section_name": "Hero Section",
-      "spec": "Asymmetric hero with Big TrusteD-V Logo on the left side and narrative copy/CTAs on the right side. Ensure proper vertical alignment and visual contrast."
-    },
-    {
-      "step": 2,
-      "section_name": "AI Engines (Code Engine)",
-      "spec": "Glimpse & feature preview of Code Engine, highlighting AI acceleration for RISC-V."
-    },
-    {
-      "step": 3,
-      "section_name": "Build with SiFive and TrusteD-V",
-      "spec": "Highlight collaboration exclusively with SiFive and TrusteD-V IP."
-    },
-    {
-      "step": 4,
-      "section_name": "Virtualization & Simulation",
-      "spec": "Emulators, Renode/QEMU integration, virtual hardware execution environment."
-    },
-    {
-      "step": 5,
-      "section_name": "Platform Architecture",
-      "spec": "Interactive architectural stack where Layer L04 prominently features 'AI Engines (Code Engine)'."
-    },
-    {
-      "step": 6,
-      "section_name": "Application Markets",
-      "spec": "Showcase target domains where TrusteD-V ships (Automotive, Aerospace, Industrial IoT, Cyber-Physical Systems)."
-    },
-    {
-      "step": 7,
-      "section_name": "Other Sections & Footer",
-      "spec": "Developer tools, hardware catalog, news/blog, and footer navigation."
-    }
-  ],
-  "testing_requirements": {
-    "data_testid_rule": "Every interactive element (button, link, input, toggle, select) and major metric container MUST include data-testid attributes formatted in kebab-case."
+  "testing_attributes": {
+    "requirement": "All interactive elements and key text nodes MUST include explicit data-testid attributes",
+    "key_test_ids": [
+      "landing-hero",
+      "ai-engines-preview",
+      "ai-engines-code-engine",
+      "riscv-ip-sifive",
+      "virtualization-spotlight",
+      "platform-architecture",
+      "application-markets",
+      "market-card-automotive",
+      "market-card-industrial",
+      "market-card-iot-consumer",
+      "market-card-robotics",
+      "market-card-defence-aerospace",
+      "market-card-edge-ai",
+      "product-families-showcase",
+      "core-technologies-carousel",
+      "carousel-btn-prev",
+      "carousel-btn-next",
+      "services-teaser",
+      "final-cta"
+    ]
   },
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "Never bring back Akeana anywhere in the code or UI.",
-    "Ensure 'Ecosystem' is replaced with 'Platform' and 'Engagement' with 'Services' across all navigation and content files.",
-    "Ensure L04 layer in architecture stack displays 'AI Engines' (with Code Engine preview).",
-    "Use data-testid on every interactive button, menu item, link, and form input."
+  "universal_guidelines_for_main_agent": [
+    "Do NOT use transparent header/dropdown backgrounds without proper blur/backdrop filter.",
+    "Do NOT introduce invented stats or metrics. Mark Jarvyn IDE and WebIDE as 'Coming Soon'.",
+    "Preserve IBM Plex Sans / Mono font system and the .tv-panel ui-kit language.",
+    "Ensure all 18 mapped raw illustrations and renders are rendered cleanly in their assigned sections.",
+    "Ensure strict adherence to visitor-controlled carousel mechanics (no auto-scroll interval)."
   ]
 }
