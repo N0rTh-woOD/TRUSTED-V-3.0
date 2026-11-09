@@ -29,6 +29,10 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 21 — MP4 Hero Animation (2026-10-16)
+- Replaced the homepage GIF playback source with the user-supplied `hero-platform.mp4`. The hero video is autoplayed, muted, inline and continuously looped, including for visitors who prefer reduced motion as explicitly requested. The existing poster fallback and user Pause/Play control remain available.
+- Verified in the authenticated external preview: the MP4 is served as `video/mp4`, renders in the existing responsive hero frame, advances during playback, and the Pause/Play control pauses and resumes it. Video duration is 6.04 seconds; its `loop` property is enabled.
+
 ### Phase 20 — Uploaded Hero Animation & Minimalist Login (2026-10-16)
 Verified by testing_agent (`iteration_38.json`): **all executed frontend checks passed**. Production build and authenticated screenshot smoke passed; existing unrelated build warnings remain.
 - Removed the homepage hero's four-column specification strip (RISC-V native, Language, Security, Deployment) entirely. Equivalent technical content elsewhere remains unchanged.
@@ -389,4 +393,4 @@ Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform —
 - **Feb 2026**: Hero chip hover-reveal animation, standardized RISC-V colors (Navy #003262 + Cyan #00B4E0), unified PageHero component across secondary pages, updated tagline.
 
 ---
-*Last Updated: 2026-10-16*
+*Last Updated: 2026-11-09*
