@@ -12,5 +12,5 @@
 
 ### Notes
 - Public registration is **disabled** (returns 403)
-- Demo credentials are displayed on the login page
+- Test credentials are not displayed on the login page. Both existing accounts verified after the minimalist login redesign (2026-10-16); passwords/roles unchanged.
 - Login page is at `/login`

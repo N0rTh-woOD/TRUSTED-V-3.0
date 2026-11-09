@@ -56,3 +56,10 @@ The SVG files wrap embedded raster images. `scripts/prepare_homepage_assets.py` 
 - `/app/test_reports/iteration_37.json`: 100% frontend pass. Validated all 18 mappings, carousel arrows/keyboard/swipe/no-autoplay/boundaries/offscreen focus, all four module tabs and links, fragment scrolling, retained sections, and Developer visibility constraints.
 - Responsive checks at 320, 768, 1024 and 1440px passed without horizontal overflow. Authenticated screenshot smoke also passed at 1920px.
 - Final build log: `/app/test_reports/homepage-build.log`. External homepage and representative 640px/1200px assets returned HTTP 200 with correct image/webp content types.
+
+## Follow-up: uploaded hero animation and login simplification (2026-10-16)
+- User explicitly removed the four-column hero proof strip. Replaced the older logo-left/narrative-right composition with logo and narrative left, uploaded animation right. All mapped sections below the hero remain unchanged.
+- [Original Hero Section Animation.gif](https://customer-assets-jai6qajn.emergentagent.net/job_d1e988b1-d100-4516-b9f2-513b6ce1f2fa/artifacts/4b98b9b0ccff7438_Hero%20Section%20Animation.gif) is bundled without re-encoding at `/images/homepage/hero-platform.gif`.
+- 400×283, 91 frames, 6.07-second loop. First-frame `/images/homepage/hero-platform-poster.webp` is used when paused or reduced motion is preferred. Animation has a keyboard-accessible Pause/Play control; desktop is two columns and mobile stacks without image cropping.
+- Login is now a minimal single-column form with a prominent logo. This is a presentation-only change; original sign-in logic, provider, credentials, session behavior and APIs are unchanged.
+- Verified by `/app/test_reports/iteration_38.json`: both roles, login error/retry/session/logout, original GIF animation/looping, pause/reduced motion, 320/768/1024/1440 layouts, CTAs and retained sections. Build log: `/app/test_reports/hero-login-build.log`.

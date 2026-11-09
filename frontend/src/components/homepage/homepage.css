@@ -4,8 +4,6 @@
 .home-refresh .tv-h2 { font-size: 30px; line-height: 1.16; }
 .home-refresh .tv-lede { font-size: 16px; }
 .home-refresh .tv-btn { max-width: 100%; white-space: normal; text-align: center; }
-.home-refresh [data-testid="hero-brand-lockup"] img { max-width: 100%; height: auto !important; max-height: 120px; object-fit: contain; }
-.home-refresh [data-testid="landing-hero-title"] { font-size: 38px !important; }
 .home-refresh a:focus-visible, .home-refresh button:focus-visible, .home-tech-carousel:focus-visible { outline: 3px solid var(--home-blue); outline-offset: 5px; }
 .home-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px 48px; margin-bottom: 48px; }
 .home-section-heading > div { min-width: 0; max-width: 880px; }
@@ -78,10 +76,6 @@
 .home-module-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; }
 @media (min-width: 768px) {
   .home-refresh .tv-h2 { font-size: 36px; }
-  .home-refresh [data-testid="landing-hero-title"] { font-size: 48px !important; }
-}
-@media (min-width: 1280px) {
-  .home-refresh [data-testid="landing-hero-title"] { font-size: 60px !important; }
 }
 @media (max-width: 1023px) {
   .home-feature-layout { gap: 32px; }
@@ -106,10 +100,6 @@
 }
 @media (max-width: 639px) {
   .home-market-grid { grid-template-columns: minmax(0, 1fr); }
-  .home-refresh [data-testid="landing-hero"] .tv-container { padding-top: 40px; }
-  .home-refresh [data-testid="hero-brand-lockup"] img { max-height: 85px; }
-  .home-refresh [data-testid="landing-hero"] .lg\:grid-cols-12 { gap: 32px; }
-  .home-refresh [data-testid="landing-hero-title"] { font-size: 38px !important; }
   .home-tech-copy { padding: 22px 20px 26px; }
 }
 @media (prefers-reduced-motion: reduce) {

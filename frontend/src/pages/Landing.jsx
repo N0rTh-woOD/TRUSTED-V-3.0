@@ -4,8 +4,8 @@ import {
   Eyebrow, SectionHeader, TechnicalMetric,
   PrimaryCTA, SecondaryCTA, TVCard,
 } from "@/components/ui-kit";
-import TrustedVLogo from "@/components/TrustedVLogo";
 import { SERVICE_MODELS } from "@/data/services";
+import { HomeHero } from "@/components/homepage/HomeHero";
 import { AIEnginesPreview, RiscVIPCollaboration } from "@/components/homepage/FeatureSections";
 import { ApplicationMarkets } from "@/components/homepage/ApplicationMarkets";
 import { TechnologyCarousel } from "@/components/homepage/TechnologyCarousel";
@@ -14,7 +14,7 @@ import "@/components/homepage/homepage.css";
 
 const Landing = () => (
   <div className="home-refresh bg-white text-[#0B0F14]" data-testid="homepage">
-    <Hero />
+    <HomeHero />
     <AIEnginesPreview />
     <RiscVIPCollaboration />
     <VirtualizationSpotlight />
@@ -26,57 +26,6 @@ const Landing = () => (
     <FinalCTA />
   </div>
 );
-
-/* ───────────── HERO ───────────── */
-const Hero = () => {
-  const proof = [
-    { k: "RISC-V native", v: "RV32 · RV64 · Vector" },
-    { k: "Language", v: "Rust-first, memory safe" },
-    { k: "Security", v: "PQC-ready root of trust" },
-    { k: "Deployment", v: "IP → SoC → firmware → apps" },
-  ];
-  return (
-    <section className="relative bg-white overflow-hidden" data-testid="landing-hero">
-      <div className="absolute inset-0 tv-grid-bg opacity-60 pointer-events-none" />
-
-      <div className="tv-container relative pt-14 md:pt-20 lg:pt-24 pb-14 md:pb-20 lg:pb-24">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <div className="lg:col-span-5" data-testid="hero-brand-lockup">
-            <div className="border-l-[3px] border-[#2486C7] pl-6 md:pl-8 py-4">
-              <TrustedVLogo size="2xl" className="w-fit" />
-              <div className="mt-6 font-mono text-[11px] tracking-[0.2em] uppercase text-[#5A6472]">The complete RISC-V platform</div>
-              <div className="mt-3 max-w-sm text-[18px] md:text-[21px] leading-[1.35] text-[#003262] font-medium">From IP to software to silicon.</div>
-            </div>
-          </div>
-          <div className="lg:col-span-7 tv-fade-up">
-            <div className="mb-5"><Eyebrow>RISC-V compute platform</Eyebrow></div>
-            <h1 className="tv-h1" style={{ fontSize: "clamp(38px, 5vw, 64px)" }} data-testid="landing-hero-title">
-              Secure <span className="text-[#003262]">RISC-V</span>,
-              <br />silicon to software.
-            </h1>
-            <p className="tv-lede mt-6" data-testid="landing-hero-subtitle">
-              A Rust-native platform that unifies RISC-V IP, virtualization, secure boot,
-              cryptography and real-time software.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <PrimaryCTA to="/product-suite" size="lg" data-testid="hero-cta-primary">Explore the platform</PrimaryCTA>
-              <SecondaryCTA to="/contact" size="lg" data-testid="hero-cta-secondary">Talk to our engineers</SecondaryCTA>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-14 md:mt-20 border-t border-[#E5E4DF] grid grid-cols-2 md:grid-cols-4">
-          {proof.map((p, i) => (
-            <div key={p.k} className={`py-6 pr-6 ${i > 0 ? "md:border-l md:border-[#E5E4DF] md:pl-6" : ""}`}>
-              <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#5A6472]">{p.k}</div>
-              <div className="mt-2 text-[14px] md:text-[15px] font-medium text-[#0B0F14]">{p.v}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 /* ───────────── PLATFORM ARCHITECTURE ───────────── */
 const PlatformArchitecture = () => {

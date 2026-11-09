@@ -29,6 +29,17 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## What's Been Implemented
 
+### Phase 20 — Uploaded Hero Animation & Minimalist Login (2026-10-16)
+Verified by testing_agent (`iteration_38.json`): **all executed frontend checks passed**. Production build and authenticated screenshot smoke passed; existing unrelated build warnings remain.
+- Removed the homepage hero's four-column specification strip (RISC-V native, Language, Security, Deployment) entirely. Equivalent technical content elsewhere remains unchanged.
+- Rebuilt the hero with the prominent TRUSTED-V logo, existing narrative and working product/contact CTAs on the left, and the user's original **Hero Section Animation.gif** on the right. Responsive single-column arrangement below 900px; full illustration retained without cropping.
+- Original uploaded GIF is bundled at `frontend/public/images/homepage/hero-platform.gif` (400×283, 91 frames, 6.07-second infinite loop). Added a derived static WebP poster, keyboard-accessible Pause/Play control and automatic reduced-motion preference handling. The original GIF itself is not re-encoded or replaced with a different visual.
+- Extracted `HomeHero.jsx`, `HeroAnimation.jsx` and `HomeHero.css`; removed superseded hero overrides from homepage stylesheet. All below-hero sections and prior PDF/image mappings remain intact.
+- Redesigned login as an uncluttered, single-column logo-first form. Removed the marketing pane, fake system-health status and nonfunctional Forgot/Request access links. Kept the original `handleSubmit`, `useAuth`, credentials, auth provider, role behavior, error/retry flow and navigation unchanged. Existing Shadcn fields/buttons, accessible labels and password-manager autocomplete retained/added as presentational improvements only.
+- Tests covered both existing demo/admin accounts, invalid login and retry, keyboard validation, session refresh/logout, responsive login/hero at 320/768/1024/1440, GIF pixel changes and looping, pause/poster, fresh-context reduced motion and live preference changes. Hero CTAs, retained homepage sections, module tabs, manual technology carousel and hidden Developer navigation also passed.
+- Test artifacts: `/app/test_reports/iteration_38.json`, `/app/test_reports/artifacts_iter38/`, `/app/test_reports/hero-login-build.log`, reusable `/app/tests/frontend/hero_login_spotcheck.py`. No accounts, passwords, backend business logic or integrations changed; no mocks.
+- Next: visual review of hero/login. Optional polish: use a higher-resolution source animation if supplied, for sharper diagram labels on large screens. Existing model verification/refactor backlog is unchanged.
+
 ### Phase 19 — Design-team Homepage Redesign (2026-10-16)
 Verified by testing_agent (`iteration_37.json`): **100% frontend pass**, plus authenticated visual smoke check, production build and external asset HTTP checks. No mocked integrations or backend/auth changes.
 - Implemented the supplied **TrusteDV-HomePage-DesignChanges-1.pdf** and mapped all **18 illustrations** in **Raw-Images.zip**. Full source-to-section mapping and interpretation are in `/app/docs/homepage-design-mapping.md`.
@@ -328,7 +339,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 
 ## Prioritized Backlog
 ### P0 — Current scope
-- Homepage redesign implementation and responsive/interaction testing complete. Await user/design-team visual review; no known blocking homepage defects.
+- Homepage redesign, uploaded animated hero and minimalist login complete and verified. Await user/design-team visual review; no known blocking homepage/login defects.
 
 ### P1 — High
 - **Verify ChatGPT / OpenAI model integration** end-to-end with the testing agent: Admin BYOK configuration, model selection, standard-user access block, and unconfigured-key error states.

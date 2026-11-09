@@ -1,226 +1,104 @@
 {
-  "project_title": "TrusteD-V Homepage Redesign Blueprint",
-  "design_archetype": "Swiss & High-Contrast Semiconductor / Performance Tech",
-  "theme_and_palette": {
-    "primary_fonts": {
-      "heading": "IBM Plex Sans",
-      "body": "IBM Plex Sans",
-      "mono": "IBM Plex Mono"
-    },
-    "colors": {
-      "tv_navy": "#003262",
-      "tv_navy_deep": "#001F3F",
-      "tv_navy_darkest": "#00162B",
-      "tv_cyan": "#00B4E0",
-      "tv_cyan_soft": "#E6F7FC",
-      "tv_gold": "#FDB515",
-      "tv_green": "#0F6E56",
-      "tv_rust": "#B7410E",
-      "tv_bg": "#FFFFFF",
-      "tv_surface": "#F7F7F5",
-      "tv_surface_2": "#EFEEE9",
-      "tv_border": "#E5E4DF",
-      "tv_border_strong": "#CFCEC8",
-      "tv_ink": "#0B0F14",
-      "tv_ink_2": "#1A1F25",
-      "tv_muted": "#5A6472",
-      "tv_blue_gradation": {
-        "100": "#E6F1F9",
-        "300": "#9DC8E8",
-        "400": "#56A2D6",
-        "500": "#2486C7",
-        "700": "#004A7F",
-        "800": "#003262",
-        "900": "#00162B"
-      }
-    },
-    "surfaces": {
-      "card_style": "tv-panel (1px border #E5E4DF, rounded 6px/10px, subtle hover lift -3px)",
-      "dark_section": "#00162B with glassmorphism overlays and grid background pattern",
-      "active_border_accent": "#2486C7 hover accent bar"
+  "project_name": "TrusteD-V Landing & Login Refinement",
+  "scope_note": "Hero and login follow-up only. Preserve all earlier PDF-mapped homepage sections documented in /app/docs/homepage-design-mapping.md. Implemented login is an unframed single-column form; hero GIF is unframed and uncropped.",
+  "theme": "Light / Dark hybrid aligned with Bosch & TrusteD-V brand palette (Navy #003262, Bosch Blue #004A7F, Light Blue #2486C7, Off-White #F7F7F5)",
+  "typography": {
+    "heading_font": "IBM Plex Sans, sans-serif",
+    "mono_font": "IBM Plex Mono, monospace",
+    "body_font": "IBM Plex Sans, sans-serif",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#0B0F14]",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-[#0B0F14]",
+      "h3": "text-xl sm:text-2xl font-semibold text-[#0B0F14]",
+      "eyebrow": "font-mono text-[11px] tracking-[0.2em] uppercase text-[#004A7F]",
+      "body": "text-base text-[#5A6472] leading-relaxed"
     }
   },
-  "image_mappings": {
-    "ai_code_engine": {
-      "description": "Code Engine AI Layer for RISC-V Engineering",
-      "path": "/design-input/extracted/image 65.png",
-      "alt_text": "Code Engine AI Interface and Workflow"
+  "colors": {
+    "primary_navy": "#003262",
+    "bosch_blue": "#004A7F",
+    "accent_blue": "#2486C7",
+    "light_accent": "#56A2D6",
+    "pale_blue": "#E8F4FC",
+    "background_light": "#FFFFFF",
+    "surface_muted": "#F7F7F5",
+    "dark_bg": "#00162B",
+    "border_light": "#E5E4DF",
+    "text_dark": "#0B0F14",
+    "text_muted": "#5A6472"
+  },
+  "visual_enhancers": {
+    "grid_background": "tv-grid-bg opacity-60 pointer-events-none",
+    "hero_card_shadow": "shadow-[0_20px_50px_-30px_rgba(11,15,20,0.15)]",
+    "borders": "1px solid #E5E4DF with 3px accent bar #2486C7"
+  },
+  "layouts": {
+    "landing_hero": {
+      "structure": "2-column responsive flex/grid (Left: Brand Lockup, Headline, Lede, CTAs | Right: Hero GIF Container)",
+      "removal": "REMOVED the 4-column proof specification strip at the bottom of the hero (RISC-V native, Language, Security, Deployment)",
+      "left_column": {
+        "span": "lg:col-span-5 flex flex-col justify-center",
+        "elements": [
+          "Border-left lockup with TrustedVLogo (size '2xl')",
+          "Mono eyebrow: 'THE COMPLETE RISC-V PLATFORM'",
+          "Sub-headline: 'From IP to software to silicon.'",
+          "Eyebrow badge: 'RISC-V COMPUTE PLATFORM'",
+          "H1 Title: 'Secure RISC-V, silicon to software.'",
+          "Lede paragraph detailing Rust-native platform",
+          "PrimaryCTA ('Explore the platform') & SecondaryCTA ('Talk to our engineers')"
+        ]
+      },
+      "right_column": {
+        "span": "lg:col-span-7 flex items-center justify-center",
+        "image_asset": "/images/homepage/hero-platform.gif",
+        "fallback_asset": "/images/homepage/hero-platform-poster.webp",
+        "formatting": "W-full, h-auto, max-h-[520px], object-contain, rounded-lg border border-[#E5E4DF] shadow-md",
+        "accessibility": "Respect prefers-reduced-motion by rendering static WebP poster fallback when reduced motion is preferred"
+      }
     },
-    "sifive_collaboration": {
-      "description": "Build with SiFive and TRUSTED-V IP Alignment",
-      "path": "/design-input/extracted/image 39.png",
-      "alt_text": "SiFive RISC-V IP Hardware Integration"
-    },
-    "market_cards": [
-      {
-        "market": "Automotive",
-        "headline": "Software-defined vehicles.",
-        "path": "/design-input/extracted/ChatGPT Image Sep 24, 2026, 02_37_39 PM 2.png",
-        "capabilities": ["Deterministic processing", "Secure execution", "ISO 26262 alignment"]
+    "login_page": {
+      "concept": "Clean, minimalist, single-card focused layout centered around the TrusteD-V brand",
+      "structure": "Focused centered modal card on subtle background (#F7F7F5) or clean split layout without dead links or fake statuses",
+      "brand_section": {
+        "header": "Prominent TrustedVLogo (size 'xl' or '2xl') with 'Powered by Bosch' attribution",
+        "subheading": "Clean minimalist subtitle: 'Sign in to access the TRUSTED-V platform'"
       },
-      {
-        "market": "Industrial",
-        "headline": "Factories and grids.",
-        "path": "/design-input/extracted/factories_and_grids_high_resolution 2.png",
-        "capabilities": ["Real-time RTOS", "IEC 62443 alignment", "Rugged deployment"]
-      },
-      {
-        "market": "IoT & Consumer",
-        "headline": "Connected devices.",
-        "path": "/design-input/extracted/connected_devices_exact_HD 2.png",
-        "capabilities": ["PSA L3-aligned", "PQC-ready", "Low-power RISC-V"]
-      },
-      {
-        "market": "Robotics",
-        "headline": "Autonomous systems.",
-        "path": "/design-input/extracted/autonomous_systems_exact_HD 2.png",
-        "capabilities": ["Rust async runtime", "Hypervisor isolation", "Vision-capable RVV"]
-      },
-      {
-        "market": "Defence & Aerospace",
-        "headline": "Sovereign missions.",
-        "path": "/design-input/extracted/ChatGPT Image Sep 24, 2026, 02_55_05 PM 2.png",
-        "capabilities": ["Vendor-neutral certification", "Attestation", "Hardware-anchored trust"]
-      },
-      {
-        "market": "Edge AI",
-        "headline": "Physical AI on RISC-V.",
-        "path": "/design-input/extracted/ChatGPT Image Sep 24, 2026, 02_58_54 PM 2.png",
-        "capabilities": ["Virtual platforms", "RVV vector compute", "Deterministic scheduling"]
+      "form_section": {
+        "container": "bg-white border border-[#E5E4DF] rounded-xl p-8 md:p-10 shadow-lg max-w-md w-full",
+        "inputs": [
+          "Work Email input with focus state focus:border-[#003262] focus:ring-1 focus:ring-[#003262]",
+          "Password input without non-functional 'Forgot?' link"
+        ],
+        "action_button": "Full-width primary CTA 'Sign in' with submit state loading spinner",
+        "footer": "Simple helper text 'Need an account? Contact your platform administrator' replacing looping dead link"
       }
-    ],
-    "four_module_showcase": [
-      {
-        "module_id": "MODULE 01",
-        "title": "Development Platform",
-        "badge": "Coming Soon (Jarvyn IDE & WebIDE)",
-        "description": "Jarvyn IDE, WebIDE, Code Engine, debugger and trace in one Rust-native environment.",
-        "path": "/design-input/extracted/image 14.png",
-        "bullets": ["Jarvyn IDE (Coming soon)", "WebIDE (cloud - Coming soon)", "Code Engine"]
-      },
-      {
-        "module_id": "MODULE 02",
-        "title": "Secure Rust Software",
-        "badge": "Core Software Stack",
-        "description": "rBoot, rustBoot, RTOS, HAL/PAC and Crypto Stack, PQC-ready.",
-        "path": "/design-input/extracted/image 15.png",
-        "bullets": ["rBoot & rustBoot", "Crypto Stack", "RTOS"]
-      },
-      {
-        "module_id": "MODULE 03",
-        "title": "Virtualization & Simulation",
-        "badge": "Pre-Silicon Workflow",
-        "description": "Virtual platforms and a RISC-V hypervisor for pre-silicon work.",
-        "path": "/design-input/extracted/image 16.png",
-        "bullets": ["Virtual platform", "RISC-V hypervisor", "Cycle-approximate simulator"]
-      },
-      {
-        "module_id": "MODULE 04",
-        "title": "Silicon SignOff & Trust",
-        "badge": "Verification & Certification",
-        "description": "Vendor-neutral certification for RISC-V SoCs.",
-        "path": "/design-input/extracted/image 17.png",
-        "bullets": ["SignOff Silicon", "TRUSTED-V Verified", "TVOTS"]
-      }
-    ],
-    "six_technology_carousel": [
-      {
-        "tech_id": "tech-01",
-        "category": "ISA",
-        "title": "RISC-V Native",
-        "description": "RV32, RV64 AND RVV, aligned with SiFive RISC-V IP.",
-        "image_path": "/design-input/extracted/Futuristic RISC-V Chip Stack 1.png"
-      },
-      {
-        "tech_id": "tech-02",
-        "category": "SECURITY",
-        "title": "Security by construction",
-        "description": "Rust memory safety, verified boot, classical + PQC crypto.",
-        "image_path": "/design-input/extracted/Glowing Glass Shield Lock 1.png"
-      },
-      {
-        "tech_id": "tech-03",
-        "category": "PRE-SILICON",
-        "title": "Virtualization",
-        "description": "Hypervisor and virtual platforms for pre-silicon bring-up.",
-        "image_path": "/design-input/extracted/Layered Glass Platform with Holographic UI 1.png"
-      },
-      {
-        "tech_id": "tech-04",
-        "category": "RUNTIME",
-        "title": "Real-time software",
-        "description": "TRUSTED-V RTOS, Embassy async runtimes and Rust HAL crates.",
-        "image_path": "/design-input/extracted/Futuristic Blue Gauge with Orange Warning Ring 1.png"
-      },
-      {
-        "tech_id": "tech-05",
-        "category": "CRYPTO",
-        "title": "Cryptography",
-        "description": "AES, SHA-3, ECDSA, ML-KEM, ML-DSA — NIST FIPS mapped.",
-        "image_path": "/design-input/extracted/Neon Glass Security Cube 1.png"
-      },
-      {
-        "tech_id": "tech-06",
-        "category": "TOOLING",
-        "title": "Rust developer tooling",
-        "description": "Jarvyn IDE, WebIDE, signed toolchain, SVD register views.",
-        "image_path": "/design-input/extracted/Futuristic Glass Code Workspace 1.png"
-      }
-    ]
-  },
-  "carousel_behavior": {
-    "mode": "Visitor-controlled only",
-    "autoplay": false,
-    "controls": ["Next / Previous Chevron Buttons", "Keyboard Navigation (ArrowLeft / ArrowRight)", "Touch Swipe"],
-    "visible_cards_desktop": 3,
-    "visible_cards_tablet": 2,
-    "visible_cards_mobile": 1,
-    "slide_step": 1
-  },
-  "module_showcase_behavior": {
-    "layout": "Interactive 4-module tabbed showcase with neighbor image stacking",
-    "active_default": "MODULE 02 (Secure Rust Software)",
-    "image_stacking_rule": "Large active feature image with offset background cards representing adjacent modules"
-  },
-  "component_structure": {
-    "page": "/app/frontend/src/pages/Landing.jsx",
-    "styling": "/app/frontend/src/index.css",
-    "format": "JavaScript React (.js / .jsx)",
-    "nav_rules": {
-      "developer_tab_hidden": true,
-      "developer_experience_removed": true,
-      "navigation_links": ["Product Suite", "Hardware", "Services", "Partners", "About"]
     }
   },
-  "testing_attributes": {
-    "requirement": "All interactive elements and key text nodes MUST include explicit data-testid attributes",
-    "key_test_ids": [
-      "landing-hero",
-      "ai-engines-preview",
-      "ai-engines-code-engine",
-      "riscv-ip-sifive",
-      "virtualization-spotlight",
-      "platform-architecture",
-      "application-markets",
-      "market-card-automotive",
-      "market-card-industrial",
-      "market-card-iot-consumer",
-      "market-card-robotics",
-      "market-card-defence-aerospace",
-      "market-card-edge-ai",
-      "product-families-showcase",
-      "core-technologies-carousel",
-      "carousel-btn-prev",
-      "carousel-btn-next",
-      "services-teaser",
-      "final-cta"
-    ]
+  "media": {
+    "hero_gif": {
+      "path": "/images/homepage/hero-platform.gif",
+      "poster": "/images/homepage/hero-platform-poster.webp",
+      "alt": "TRUSTED-V RISC-V Platform Architecture Animation",
+      "rules": "Must preserve aspect ratio without cropping. Contain within right column of hero section."
+    }
   },
-  "universal_guidelines_for_main_agent": [
-    "Do NOT use transparent header/dropdown backgrounds without proper blur/backdrop filter.",
-    "Do NOT introduce invented stats or metrics. Mark Jarvyn IDE and WebIDE as 'Coming Soon'.",
-    "Preserve IBM Plex Sans / Mono font system and the .tv-panel ui-kit language.",
-    "Ensure all 18 mapped raw illustrations and renders are rendered cleanly in their assigned sections.",
-    "Ensure strict adherence to visitor-controlled carousel mechanics (no auto-scroll interval)."
+  "instructions_to_main_agent": [
+    "In /app/frontend/src/pages/Landing.jsx, update the Hero component:",
+    "1. Remove the proof array and the bottom 4-column border-t grid section containing 'RISC-V native', 'Language', 'Security', and 'Deployment'.",
+    "2. Restructure Hero layout into a 2-column grid (lg:grid-cols-12 gap-8 lg:gap-12 items-center):",
+    "   - Left side (lg:col-span-5 or 6): Keep the logo lockup, eyebrow, H1, description, and primary/secondary CTAs.",
+    "   - Right side (lg:col-span-7 or 6): Render the animated GIF at '/images/homepage/hero-platform.gif' with poster '/images/homepage/hero-platform-poster.webp', ensure no cropping (object-contain, max-h-[520px], w-full, rounded-md, border border-[#E5E4DF]).",
+    "3. Support reduced motion: if prefers-reduced-motion is enabled, show the webp static poster.",
+    "In /app/frontend/src/pages/Login.jsx, update the login page layout:",
+    "1. Simplify and clean up the page to prioritize minimalism and prominent logo visibility.",
+    "2. Remove dead interactions: remove the non-functional 'Forgot?' link, false 'All systems operational' status pulse dot, and loops in 'Request access'.",
+    "3. Center the sign-in form with a prominent TrustedVLogo (size 'xl' or '2xl') above the card or inside a clean header.",
+    "4. Retain exact form submit handler (login(email, password) from useAuth) and data-testid attributes (login-page, login-form, email-input, password-input, login-btn)."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Ensure all interactive elements maintain existing data-testid attributes for automated testing.",
+    "Do not break authentication state or API calls in Login.jsx.",
+    "Maintain accessibility contrast standards across light and dark elements.",
+    "Ensure responsive layout transitions smoothly from mobile (single column) to desktop (two column)."
   ]
 }

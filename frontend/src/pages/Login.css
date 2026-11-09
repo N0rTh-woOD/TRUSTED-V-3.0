@@ -1,0 +1,27 @@
+.login-minimal { min-height: 100vh; min-height: 100svh; display: flex; justify-content: center; align-items: center; padding: 56px 24px; background: #fcfdfe; color: var(--tv-ink); border-top: 3px solid #004a7f; }
+.login-minimal-content { width: 100%; max-width: 380px; }
+.login-minimal-brand { width: 340px; max-width: 100%; margin: 0 auto 48px; }
+.login-minimal-brand img { width: 100% !important; height: auto !important; max-width: 100%; }
+.login-minimal-heading { border-top: 1px solid #e5eaee; padding-top: 32px; margin-bottom: 32px; }
+.login-minimal-heading h1 { font-size: 28px; font-weight: 500; line-height: 1.2; letter-spacing: 0; }
+.login-minimal-heading p { font-size: 14px; line-height: 1.6; color: var(--tv-muted); margin-top: 10px; }
+.login-minimal-form { display: grid; gap: 24px; }
+.login-minimal-field { display: grid; gap: 10px; }
+.login-minimal-field label { font-size: 13px; font-weight: 500; color: #253748; }
+.login-minimal-field input { height: 50px; padding: 0 15px; background: white; border: 1px solid #cbd4dc; border-radius: 4px; box-shadow: none; font-size: 15px; transition: border-color 180ms, box-shadow 180ms; }
+.login-minimal-field input::placeholder { color: #7a8692; }
+.login-minimal-field input:focus-visible { border-color: #2486c7; outline: 2px solid #2486c7; outline-offset: 2px; box-shadow: none; }
+.login-minimal-submit { width: 100%; height: 50px; margin-top: 4px; gap: 12px; background: #003262; color: white; border-radius: 4px; box-shadow: none; font-size: 14px; font-weight: 500; transition: background-color 180ms; }
+.login-minimal-submit:hover { background: #004a7f; }
+.login-minimal-submit:focus-visible { outline: 3px solid #2486c7; outline-offset: 4px; box-shadow: none; }
+.login-minimal-submit:disabled { opacity: 0.6; cursor: wait; }
+.login-minimal-note { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 30px; color: #667785; font-size: 12px; }
+@media (max-width: 479px) {
+  .login-minimal { padding: 40px 24px; }
+  .login-minimal-brand { width: 290px; margin-bottom: 36px; }
+  .login-minimal-heading { padding-top: 28px; margin-bottom: 28px; }
+  .login-minimal-heading h1 { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .login-minimal * { transition: none !important; animation: none !important; }
+}

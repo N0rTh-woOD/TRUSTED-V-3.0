@@ -1,0 +1,58 @@
+yarn run v1.22.22
+$ craco build
+Creating an optimized production build...
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Compiled with warnings.
+
+[eslint] 
+src/contexts/AuthContext.jsx
+  Line 28:6:  React Hook useEffect has missing dependencies: 'checkAuth' and 'token'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/AccountSettings.jsx
+  Line 50:6:  React Hook useEffect has a missing dependency: 'loadStats'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/MyProjects.jsx
+  Line 30:6:  React Hook useEffect has a missing dependency: 'loadProjects'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/admin/AdminApplications.jsx
+  Line 34:36:  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/admin/AdminDashboard.jsx
+  Line 19:6:  React Hook useEffect has a missing dependency: 'loadStats'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/admin/AdminLLM.jsx
+  Line 37:6:  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/admin/AdminSoftware.jsx
+  Line 64:6:  React Hook useEffect has a missing dependency: 'loadComponents'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/pages/admin/AdminUsers.jsx
+  Line 21:6:  React Hook useEffect has a missing dependency: 'loadUsers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+File sizes after gzip:
+
+  222.76 kB (+145 B)  build/static/js/main.32b5a9cf.js
+  19.84 kB (+23 B)    build/static/css/main.265811b4.css
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  yarn global add serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+Done in 14.55s.
