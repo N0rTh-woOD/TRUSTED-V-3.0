@@ -24,7 +24,7 @@ const Register = () => {
       if (result && result.access_token) {
         toast.success("Account created successfully!");
         setTimeout(() => {
-          navigate("/builder", { replace: true });
+          navigate("/", { replace: true });
         }, 100);
       }
     } catch (error) {

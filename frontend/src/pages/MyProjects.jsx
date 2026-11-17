@@ -10,20 +10,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Loader2, Package, Download, Clock, FolderGit2, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import { Loader2, Package, Clock, FolderGit2, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const MyProjects = () => {
   const { token } = useAuth();
-  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedProject, setExpandedProject] = useState(null);
-  const [downloadingVersion, setDownloadingVersion] = useState(null);
 
   useEffect(() => {
     loadProjects();
@@ -39,34 +36,6 @@ const MyProjects = () => {
       toast.error("Failed to load projects");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleDownload = async (projectId, projectName, version) => {
-    setDownloadingVersion(`${projectId}-${version}`);
-    try {
-      const response = await axios.get(
-        `${API}/projects/${projectId}/download/${version}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-          responseType: "blob",
-        }
-      );
-
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", `${projectName.toLowerCase().replace(/\s+/g, "_")}_v${version}.zip`);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(url);
-
-      toast.success(`Downloaded version ${version}`);
-    } catch (error) {
-      toast.error("Download failed");
-    } finally {
-      setDownloadingVersion(null);
     }
   };
 
@@ -107,17 +76,9 @@ const MyProjects = () => {
               My Projects
             </h1>
             <p className="text-muted-foreground text-lg">
-              Manage your RISC-V projects and versions
+              View your historical RISC-V project records
             </p>
           </div>
-          <Button
-            data-testid="new-project-btn"
-            onClick={() => navigate("/builder")}
-            className="h-11 px-6 shadow-lg shadow-primary/25"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            New Project
-          </Button>
         </div>
 
         {projects.length === 0 ? (
@@ -130,15 +91,8 @@ const MyProjects = () => {
                 No Projects Yet
               </h3>
               <p className="text-muted-foreground mb-8 max-w-sm mx-auto">
-                Start building with the Smart Project Builder to create your first RISC-V project
+                Historical project records will appear here when available.
               </p>
-              <Button
-                data-testid="start-building-btn"
-                onClick={() => navigate("/builder")}
-                className="h-11 px-8 shadow-lg shadow-primary/25"
-              >
-                Start Building
-              </Button>
             </CardContent>
           </Card>
         ) : (
@@ -233,20 +187,6 @@ const MyProjects = () => {
                             </div>
                           </div>
 
-                          <Button
-                            data-testid={`download-btn-${index}`}
-                            onClick={() => handleDownload(project.id, project.name, version.version)}
-                            variant="outline"
-                            size="sm"
-                            disabled={downloadingVersion === `${project.id}-${version.version}`}
-                          >
-                            {downloadingVersion === `${project.id}-${version.version}` ? (
-                              <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                            ) : (
-                              <Download className="w-4 h-4 mr-2" />
-                            )}
-                            Download
-                          </Button>
                         </div>
                       ))}
                     </div>
@@ -261,28 +201,11 @@ const MyProjects = () => {
 
                 {expandedProject !== project.id && project.versions?.length > 0 && (
                   <CardContent className="p-4 pt-0">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Package className="w-4 h-4" />
                         <span>Latest: Version {project.versions[project.versions.length - 1]?.version}</span>
                       </div>
-                      <Button
-                        data-testid={`quick-download-btn-${project.id}`}
-                        onClick={() => handleDownload(
-                          project.id, 
-                          project.name, 
-                          project.versions[project.versions.length - 1]?.version
-                        )}
-                        size="sm"
-                        disabled={downloadingVersion === `${project.id}-${project.versions[project.versions.length - 1]?.version}`}
-                      >
-                        {downloadingVersion === `${project.id}-${project.versions[project.versions.length - 1]?.version}` ? (
-                          <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                        ) : (
-                          <Download className="w-4 h-4 mr-2" />
-                        )}
-                        Download Latest
-                      </Button>
                     </div>
                   </CardContent>
                 )}

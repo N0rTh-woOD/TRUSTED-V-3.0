@@ -27,5 +27,4 @@ const FeatureSection = ({ feature }) => (
   </section>
 );
 
-export const AIEnginesPreview = () => <FeatureSection feature={HOME_FEATURES[0]} />;
-export const RiscVIPCollaboration = () => <FeatureSection feature={HOME_FEATURES[1]} />;
+export const RiscVIPCollaboration = () => <FeatureSection feature={HOME_FEATURES[0]} />;

@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Loader2, Package, Layers, Download, Database, ArrowRight, Brain, Bell, Cpu, Building2, Users } from "lucide-react";
+import { Loader2, Package, Layers, Download, Database, ArrowRight, Bell } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -25,6 +26,7 @@ const AdminDashboard = () => {
       });
       setStats(response.data);
     } catch (error) {
+      toast.error("Unable to load dashboard statistics");
     } finally {
       setLoading(false);
     }
@@ -62,7 +64,7 @@ const AdminDashboard = () => {
     },
     {
       title: "Software Components",
-      description: "Manage BSPs, AI Engines, Drivers, Bootloaders, and Libraries",
+      description: "Manage BSPs, SDKs, Drivers, Bootloaders, and Libraries",
       icon: Database,
       link: "/admin/software",
       count: stats?.software_components || 0,
@@ -73,13 +75,6 @@ const AdminDashboard = () => {
       icon: Download,
       link: "/admin/ide",
       count: stats?.ide_downloads || 0,
-    },
-    {
-      title: "LLM Configuration",
-      description: "Configure AI model for code generation (provider, model, API key)",
-      icon: Brain,
-      link: "/admin/llm",
-      count: null,
     },
     {
       title: "Applications",
@@ -154,7 +149,7 @@ const AdminDashboard = () => {
           {adminSections.map((section) => {
             const Icon = section.icon;
             return (
-              <Link key={section.link} to={section.link}>
+            <Link key={section.link} to={section.link} data-testid={`admin-section-link-${section.title.toLowerCase().replace(/\s+/g, '-')}`}>
                 <Card
                   data-testid={`admin-section-${section.title.toLowerCase().replace(/\s+/g, '-')}`}
                   className="bg-card border border-border hover:border-primary/50 hover:shadow-lg transition-all h-full group"

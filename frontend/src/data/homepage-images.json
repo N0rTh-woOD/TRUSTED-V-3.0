@@ -12,7 +12,7 @@
   "market-automotive": {
     "width": 1731,
     "height": 909,
-    "source": "ChatGPT Image Sep 24, 2026, 02_37_39 PM 2.svg"
+    "source": "platform-architecture-illustration.svg"
   },
   "market-industrial": {
     "width": 2084,
@@ -32,12 +32,12 @@
   "market-aerospace": {
     "width": 1862,
     "height": 845,
-    "source": "ChatGPT Image Sep 24, 2026, 02_55_05 PM 2.svg"
+    "source": "module-development-illustration.svg"
   },
   "market-edge-ai": {
     "width": 1862,
     "height": 845,
-    "source": "ChatGPT Image Sep 24, 2026, 02_58_54 PM 2.svg"
+    "source": "module-virtualization-illustration.svg"
   },
   "module-development": {
     "width": 1844,

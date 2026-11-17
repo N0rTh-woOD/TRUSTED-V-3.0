@@ -158,16 +158,16 @@ export const SectionHeader = ({ eyebrow, title, lede, action, align = "left", cl
 };
 
 /* ─── CTA Button variants (short helpers) ─── */
-export const PrimaryCTA = ({ to, href, children, size = "md", ...rest }) => {
-  const cls = `tv-btn tv-btn-primary ${size === "lg" ? "tv-btn-lg" : ""}`;
+export const PrimaryCTA = ({ to, href, children, size = "md", className = "", ...rest }) => {
+  const cls = `tv-btn tv-btn-primary ${size === "lg" ? "tv-btn-lg" : ""} ${className}`;
   return href ? (
     <a href={href} className={cls} {...rest}>{children}<ArrowUpRight className="w-4 h-4" strokeWidth={2} /></a>
   ) : (
     <Link to={to || "#"} className={cls} {...rest}>{children}<ArrowUpRight className="w-4 h-4" strokeWidth={2} /></Link>
   );
 };
-export const SecondaryCTA = ({ to, href, children, size = "md", onDark = false, ...rest }) => {
-  const cls = `tv-btn ${onDark ? "tv-btn-outline-onDark" : "tv-btn-outline"} ${size === "lg" ? "tv-btn-lg" : ""}`;
+export const SecondaryCTA = ({ to, href, children, size = "md", onDark = false, className = "", ...rest }) => {
+  const cls = `tv-btn ${onDark ? "tv-btn-outline-onDark" : "tv-btn-outline"} ${size === "lg" ? "tv-btn-lg" : ""} ${className}`;
   return href ? (
     <a href={href} className={cls} {...rest}>{children}</a>
   ) : (

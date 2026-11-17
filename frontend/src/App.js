@@ -47,15 +47,14 @@ import CryptoStackPage from "@/pages/CryptoStackPage";
 import RTOSBenchmarkPage from "@/pages/RTOSBenchmarkPage";
 import WebIDEPage from "@/pages/WebIDEPage";
 import Services from "@/pages/Services";
-import CodeEnginePage from "@/pages/CodeEnginePage";
 import NotFound from "@/pages/NotFound";
+import RetiredFeature from "@/pages/RetiredFeature";
 
 // Auth Pages
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 
 // Protected Pages
-import SmartProjectBuilder from "@/pages/SmartProjectBuilder";
 import MyProjects from "@/pages/MyProjects";
 import AccountSettings from "@/pages/AccountSettings";
 
@@ -65,7 +64,6 @@ import AdminHardware from "@/pages/admin/AdminHardware";
 import AdminMiddleware from "@/pages/admin/AdminMiddleware";
 import AdminSoftware from "@/pages/admin/AdminSoftware";
 import AdminIDE from "@/pages/admin/AdminIDE";
-import AdminLLM from "@/pages/admin/AdminLLM";
 import AdminApplications from "@/pages/admin/AdminApplications";
 import AdminUsers from "@/pages/admin/AdminUsers";
 
@@ -93,6 +91,11 @@ const AppContent = () => {
         <ScrollToTop />
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/solution-builder" element={<RetiredFeature />} />
+          <Route path="/builder" element={<RetiredFeature />} />
+          <Route path="/chat" element={<RetiredFeature />} />
+          <Route path="/product/code-engine" element={<RetiredFeature />} />
+          <Route path="/admin/llm" element={<RetiredFeature />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
         <Toaster />
@@ -116,7 +119,7 @@ const AppContent = () => {
         <Route path="/product/secure-boot" element={<SecureBootPage />} />
         <Route path="/product/crypto-stack" element={<CryptoStackPage />} />
         <Route path="/product/rtos-benchmark" element={<RTOSBenchmarkPage />} />
-        <Route path="/product/code-engine" element={<CodeEnginePage />} />
+        <Route path="/product/code-engine" element={<RetiredFeature />} />
         <Route path="/partners" element={<Partners />} />
         <Route path="/partner-registration" element={<PartnerRegistration />} />
         <Route path="/download-ide" element={<IDEDownloads />} />
@@ -137,22 +140,9 @@ const AppContent = () => {
         <Route path="/register" element={<Navigate to="/" replace />} />
         
         {/* Protected Routes - require authentication (Projects, etc.) */}
-        <Route
-          path="/solution-builder"
-          element={
-            <ProtectedRoute>
-              <SmartProjectBuilder />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/builder"
-          element={
-            <ProtectedRoute>
-              <SmartProjectBuilder />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/solution-builder" element={<RetiredFeature />} />
+        <Route path="/builder" element={<RetiredFeature />} />
+        <Route path="/chat" element={<RetiredFeature />} />
         <Route
           path="/projects"
           element={
@@ -219,14 +209,7 @@ const AppContent = () => {
             </AdminRoute>
           }
         />
-        <Route
-          path="/admin/llm"
-          element={
-            <AdminRoute>
-              <AdminLLM />
-            </AdminRoute>
-          }
-        />
+        <Route path="/admin/llm" element={<RetiredFeature />} />
         <Route
           path="/admin/applications"
           element={

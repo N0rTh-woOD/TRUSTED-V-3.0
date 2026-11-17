@@ -1,7 +1,7 @@
 # TrusteD-V Platform — Product Requirements Document
 
 ## Original Problem Statement
-Build a highly professional "AI coding platform for Embedded systems with RISC-V centric using RUST language," branded as "TrusteD-V". The platform should feature Bosch-inspired professional UI, authentic content focused on Indian RISC-V companies (Mindgrove, C-DAC, Upbeat Tech), and comprehensive developer tools including IDE, WebIDE, hardware marketplace, IP marketplace, and AI-powered development.
+Build a highly professional RISC-V-centric embedded development platform using Rust, branded as "TrusteD-V". The platform features Bosch-inspired professional UI, authentic RISC-V content, IDE/WebIDE information, hardware and IP marketplace content, secure software, services, account access, and administration without AI-powered experiences.
 
 ## User Personas
 - **Embedded Engineers**: Primary users building firmware on RISC-V with Rust
@@ -11,7 +11,7 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 
 ## Core Requirements
 1. **Branding**: "TrusteD-V" — RISC-V Rust platform
-2. **IDE**: "TrusteD-V IDE — Jarvyn" with AI-native development features
+2. **IDE**: "TrusteD-V IDE — Jarvyn" development tooling information
 3. **WebIDE**: Cloud-capable counterpart with full compilation and collaboration features
 4. **Hardware + IP Marketplace**: Tabbed marketplace for development boards AND IP blocks
 5. **Auth Lock**: Entire site behind authentication while in development
@@ -25,13 +25,20 @@ Build a highly professional "AI coding platform for Embedded systems with RISC-V
 - **Backend**: FastAPI + MongoDB (motor async driver)
 - **Auth**: JWT-based with bcrypt hashing
 - **Deployment**: Docker + Docker Compose + Nginx (AWS ready)
-- **AI**: Gemini 3 Flash via emergentintegrations (Emergent LLM Key)
+- **Storage**: Emergent managed object storage for IDE and hardware uploads
 
 ## What's Been Implemented
 
 ### Phase 21 — MP4 Hero Animation (2026-10-16)
-- Replaced the homepage GIF playback source with the user-supplied `hero-platform.mp4`. The hero video is autoplayed, muted, inline and continuously looped, including for visitors who prefer reduced motion as explicitly requested. The existing poster fallback and user Pause/Play control remain available.
-- Verified in the authenticated external preview: the MP4 is served as `video/mp4`, renders in the existing responsive hero frame, advances during playback, and the Pause/Play control pauses and resumes it. Video duration is 6.04 seconds; its `loop` property is enabled.
+- Replaced the homepage GIF playback source with the user-supplied `hero-platform.mp4`. The hero video is autoplayed, muted, inline and continuously looped, including for visitors who prefer reduced motion as explicitly requested. The existing poster fallback remains available.
+- Verified in the authenticated external preview: the MP4 is served as `video/mp4`, renders in the existing responsive hero frame, advances during playback, and loops continuously. Video duration is 6.04 seconds.
+
+### Phase 22 — AI-Free Platform (2026-11-17)
+- Removed the Solution Builder, chat, model picker, Code Engine page, AI settings, AI-only navigation, calls to action and admin model controls. Legacy browser routes now show a safe unavailable page, including before sign-in.
+- Retired AI-only API routes with a consistent `410` unavailable response, including bodyless generation calls. Removed AI provider runtime packages and provider imports; preserved non-AI catalog, project-history, account, marketplace, services and admin behavior.
+- Removed the hero Pause/Play control while retaining the user-supplied looping MP4. Cleared obsolete provider language from public Services, product navigation and accessible hero labels.
+- Fixed mobile Services comparison/CTA overflow, made startup provisioning non-destructive, and require the securely configured JWT secret. Backend restart verification confirmed existing hardware records remain unchanged.
+- Verified by `iteration_39.json` plus follow-up self-tests: admin/demo login, non-AI routes, anonymous retired routes, mobile Services layout, MP4 behavior, legacy API 410s and hardware preservation across restart. No mocked flows.
 
 ### Phase 20 — Uploaded Hero Animation & Minimalist Login (2026-10-16)
 Verified by testing_agent (`iteration_38.json`): **all executed frontend checks passed**. Production build and authenticated screenshot smoke passed; existing unrelated build warnings remain.
@@ -343,18 +350,16 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 
 ## Prioritized Backlog
 ### P0 — Current scope
-- Homepage redesign, uploaded animated hero and minimalist login complete and verified. Await user/design-team visual review; no known blocking homepage/login defects.
+- AI feature and integration removal complete and verified. Await user review of the updated non-AI information architecture and supplied homepage-image batches.
 
 ### P1 — High
-- **Verify ChatGPT / OpenAI model integration** end-to-end with the testing agent: Admin BYOK configuration, model selection, standard-user access block, and unconfigured-key error states.
 - Refactor monolithic `server.py` into modular APIRouter modules
-- Complete "Solution Builder" AI code generation
-- Refactor `SmartProjectBuilder.jsx` (916 lines) into smaller components
+- Remove remaining unused legacy project-generation scaffolding from `server.py` during the router refactor.
 
 ### P2 — Medium
 - Admin panel: sales inquiries tab in AdminApplications.jsx
 - Customer testimonials/case studies section
-- Fix React "index as key" anti-patterns in SmartProjectBuilder, Marketplace, Partners, AdminSoftware
+- Fix React "index as key" anti-patterns in Marketplace, Partners and AdminSoftware
 - Add Python type hints across backend
 
 ### P3 — Future
@@ -364,7 +369,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 - Replace placeholder user avatar initials
 
 ## 3rd Party Integrations
-- Gemini 3 Flash via emergentintegrations (Emergent LLM Key)
+- Emergent managed object storage for IDE and hardware uploads
 
 ## Strategic Positioning (Aug 2026)
 Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform — From IP to Software to Silicon"** — a full integrated ecosystem, not just a Rust-based software platform.
@@ -393,4 +398,4 @@ Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform —
 - **Feb 2026**: Hero chip hover-reveal animation, standardized RISC-V colors (Navy #003262 + Cyan #00B4E0), unified PageHero component across secondary pages, updated tagline.
 
 ---
-*Last Updated: 2026-11-09*
+*Last Updated: 2026-11-17*

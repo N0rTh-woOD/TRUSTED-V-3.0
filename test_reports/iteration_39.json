@@ -1,0 +1,54 @@
+{
+  "summary": "Public-URL review: backend pytest 8/10 passed; browser core suite 41/43 passed. Admin/demo login, auth/me, catalog reads, project history, role-appropriate stats, all valid retired API calls, both roles' authenticated retired pages, desktop/mobile navigation and MP4 playback passed. No browser console/runtime errors. No mocked APIs. Bodyless generation, anonymous legacy-route behavior and Services mobile layout need attention.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "Application startup: server.py:698-741,1027-1029", "issue": "Pre-existing startup hook resets the existing admin password and deletes ALL hardware records before recreating them with new IDs. Writing the regression test triggered hot reload; logs confirm startup/admin password rewrite. This risks real catalog data and historical hardware references on every restart. No reset/seed command was intentionally executed by testing.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "POST /api/projects/generate", "issue": "Authenticated requests without a body return 422/Pydantic validation details rather than the required safe 410 unavailable response (both roles). Required Dict body validation runs before the retirement handler."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Retired browser routes /solution-builder, /builder, /chat, /product/code-engine, /admin/llm", "issue": "Anonymous visits redirect to /login, not unavailable; the site-lock catch-all executes before retired route mapping. Authenticated visits all pass. Confirm whether retirement must be visible before sign-in; do not remove the existing site lock globally.", "selector": "[data-testid=retired-feature-page]", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Services at 390px", "issues": ["Document width is 456px: services-cta-ide extends to x=456 because final CTA buttons use a nonwrapping flex row (Services.jsx:72). The second button is clipped off-screen.", "The fixed 12-column comparison grid overlaps row labels and values on mobile (Services.jsx:63-64)."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_ai_retirement.py",
+    "/app/test_reports/pytest/ai_retirement_results.xml",
+    "/app/tests/frontend/ai_retirement_review.py",
+    "/app/tests/frontend/ai_retirement_diagnostics.py"
+  ],
+  "action_items": [
+    "Remove destructive automatic startup seeding/password rewrites; use explicit non-destructive provisioning outside routine startup.",
+    "Make retired generation independent of request-body validation so bodyless requests return safe 410.",
+    "If unavailable screens are required anonymously, map only retired routes before the site-lock catch-all.",
+    "Wrap or stack Services final CTA buttons and redesign the comparison grid for mobile.",
+    "Remove obsolete generation claims in Services comparison and PaaS steps; generation is advertised despite being retired.",
+    "Remove stale AI engines accessibility labels in HeroAnimation while retaining the explicitly requested supplied MP4."
+  ],
+  "critical_code_review_comments": [
+    "server.py still exceeds 2000 lines, retaining hundreds of lines of unreachable generation/download implementation after immediate 410 raises and a generate_code_with_llm stub with a Gemini default. No live provider invocation found, but delete unreachable legacy implementation rather than retaining misleading runtime scaffolding.",
+    "requirements.txt still includes google-ai-generativelanguage, huggingface_hub, tiktoken and tokenizers; check and remove unused AI-only dependencies. Requested primary provider SDKs are absent.",
+    "Hero MP4 visibly contains AI ENGINES text and its aria-label repeats it. This is not an interactive entry point and retaining the supplied MP4 was explicitly requested; accessibility copy can still be corrected.",
+    "Services.jsx:55 and data/services.js:30 advertise code generation and generate-code tooling although no generation flow is active.",
+    "AdminSoftware filter/dialog controls and project expand/delete buttons lack data-testid attributes; existing tests use exact roles for the inspected dialog. AdminDashboard also silently swallows stats errors and displays zero counts.",
+    "JWT_SECRET still has an insecure hardcoded fallback (server.py:37); require configuration instead. Existing account provisioning credentials are hardcoded in startup code."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_ai_retirement.py",
+    "/app/tests/frontend/ai_retirement_review.py",
+    "/app/tests/frontend/ai_retirement_diagnostics.py",
+    "/app/test_reports/iteration_39.json"
+  ],
+  "success_rate": {"backend": "80% (8/10 pytest cases; all valid-body requested API checks passed)", "frontend": "95.3% (41/43 core checks); separate anonymous diagnostics found 5 login redirects"},
+  "seed_data_creation": "No test records created or changed intentionally. Existing startup hook automatically rewrote admin password and regenerated hardware when backend test creation triggered hot reload; this application defect is reported above. Neither existing account was manually modified.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Use existing credentials from memory file; never print passwords. Both accounts have zero historical projects, so history empty states were verified; populated historical card expansion was not executed. Both admin and demo GET/PUT llm-settings: admin gets 410; demo gets expected existing role-protection 403, not 410. If specification requires ALL authenticated roles to get 410 even on old admin paths, adjust the retired handler guard. MP4 attributes and advancing currentTime were verified, loop attribute present; no end-to-end full-duration loop wait. No CRUD mutations executed; broader unrelated APIs were not exhaustively regression-tested. Avoid restarting backend or writing inside backend until destructive startup hook is fixed. Browser scripts are runnable via importlib and await module.run(page).",
+  "rca of the issue": "422: required request Dict in generate_project causes FastAPI body validation before unconditional 410. Anonymous retired redirects: AppContent unauthenticated SITE_LOCK branch has only login and wildcard Navigate. Services overflow: nonwrapping FinalCTA flex gap-3 with nowrap buttons; services-cta-ide right=456 at viewport=390. Startup data risk: startup_event unconditionally calls init_sample_data, which resets admin password and delete_many({}) on hardware; startup execution is confirmed in backend logs. No production source modified by this testing run."
+}

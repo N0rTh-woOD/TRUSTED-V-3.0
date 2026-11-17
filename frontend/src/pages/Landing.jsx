@@ -6,7 +6,7 @@ import {
 } from "@/components/ui-kit";
 import { SERVICE_MODELS } from "@/data/services";
 import { HomeHero } from "@/components/homepage/HomeHero";
-import { AIEnginesPreview, RiscVIPCollaboration } from "@/components/homepage/FeatureSections";
+import { RiscVIPCollaboration } from "@/components/homepage/FeatureSections";
 import { ApplicationMarkets } from "@/components/homepage/ApplicationMarkets";
 import { TechnologyCarousel } from "@/components/homepage/TechnologyCarousel";
 import { ProductShowcase } from "@/components/homepage/ProductShowcase";
@@ -15,7 +15,6 @@ import "@/components/homepage/homepage.css";
 const Landing = () => (
   <div className="home-refresh bg-white text-[#0B0F14]" data-testid="homepage">
     <HomeHero />
-    <AIEnginesPreview />
     <RiscVIPCollaboration />
     <VirtualizationSpotlight />
     <PlatformArchitecture />
@@ -34,9 +33,9 @@ const PlatformArchitecture = () => {
     { band: "Application", accent: "#9DC8E8", tag: "L05", items: [
       { name: "Automotive", note: "ISO 26262 aligned" }, { name: "Industrial", note: "IEC 62443" },
       { name: "IoT & Consumer", note: "PSA L3" }, { name: "Robotics & Edge AI", note: "Real-time" } ] },
-    { band: "AI Engines", accent: "#56A2D6", tag: "L04", items: [
+    { band: "Development Toolchain", accent: "#56A2D6", tag: "L04", items: [
       { name: "Jarvyn IDE", note: "Rust + RISC-V native" }, { name: "WebIDE", note: "Zero-install cloud" },
-      { name: "Code Engine", note: "AI-assisted project planning" }, { name: "Debugger · Trace", note: "SVD register view" } ] },
+      { name: "Debugger · Trace", note: "SVD register view" }, { name: "Toolchain integration", note: "Build and flash workflow" } ] },
     { band: "Rust Runtime & OS", accent: "#2486C7", tag: "L03", items: [
       { name: "TRUSTED-V RTOS", note: "Memory-safe" }, { name: "Embassy (async)", note: "Cooperative" },
       { name: "HAL · PAC · HAM", note: "Peripheral access" }, { name: "Linux (via CVA6)", note: "Rich OS" } ] },

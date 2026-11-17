@@ -28,7 +28,7 @@ const Partners = () => (
         <div className="lg:col-span-7">
           <div className="tv-panel tv-panel-muted p-7 md:p-9" data-testid="platform-sifive-detail">
             <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">Build with SiFive and TRUSTED-V</div>
-            <p className="mt-4 text-[18px] leading-[1.55] text-[#0B0F14]">Align SiFive RISC-V IP with the TRUSTED-V virtual platform, Code Engine, Jarvyn tooling and trusted software layers.</p>
+            <p className="mt-4 text-[18px] leading-[1.55] text-[#0B0F14]">Align SiFive RISC-V IP with the TRUSTED-V virtual platform, Jarvyn tooling and trusted software layers.</p>
             <Link to="/contact" className="tv-arrow-link mt-6" data-testid="platform-sifive-contact">Discuss your platform</Link>
           </div>
         </div>
@@ -52,7 +52,7 @@ const Partners = () => (
         <h2 className="tv-h2">Bring the IP. Build the complete system.</h2>
         <div className="flex flex-wrap gap-3">
           <PrimaryCTA to="/contact" data-testid="platform-cta-contact">Start a technical discussion</PrimaryCTA>
-          <SecondaryCTA to="/product/code-engine" data-testid="platform-cta-code-engine">Explore Code Engine</SecondaryCTA>
+          <SecondaryCTA to="/product-suite" data-testid="platform-cta-products">Explore the product suite</SecondaryCTA>
         </div>
       </div>
     </section>

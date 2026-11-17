@@ -14,7 +14,6 @@ const ProductSuite = () => (
       subtitle="From IP integration to production silicon, with Rust-native software as the connective tissue."
     />
     <ModulesDetail />
-    <AIEngines />
     <Comparison />
     <SubBrands />
     <ServicesBlock />
@@ -27,8 +26,8 @@ const MODULE_COLORS = [BLUE_STEPS[3], BLUE_STEPS[4], BLUE_STEPS[5], "#00162B"];
 
 const ModulesDetail = () => {
   const modules = [
-    { num: "01", id: "development", title: "Development Platform", desc: "Jarvyn IDE and WebIDE are coming soon, alongside Code Engine, debugger, programmer and trace for RISC-V work.",
-      items: [{ name: "Jarvyn IDE · Coming soon", to: "/download-ide" }, { name: "WebIDE · Coming soon", to: "/webide" }, { name: "Code Engine", to: "/product/code-engine" }] },
+    { num: "01", id: "development", title: "Development Platform", desc: "Jarvyn IDE and WebIDE are coming soon, alongside debugger, programmer and trace for RISC-V work.",
+      items: [{ name: "Jarvyn IDE · Coming soon", to: "/download-ide" }, { name: "WebIDE · Coming soon", to: "/webide" }, { name: "Developer Portal", to: "/developer-portal" }] },
     { num: "02", id: "virtualization", title: "Virtualization & Simulation", desc: "Virtual platforms, RISC-V hypervisor and cycle-approximate simulators. Ship firmware before RTL freezes.",
       items: [{ name: "Virtual Platform", to: "/product-suite#virtualization" }, { name: "RISC-V Hypervisor", to: "/product-suite#virtualization" }, { name: "Simulator", to: "/product-suite#virtualization" }] },
     { num: "03", id: "secure-software", title: "Secure Rust Software", desc: "rBoot, rustBoot, RTOS, HAL/PAC/HAM and Crypto Stack — memory-safe, PQC-ready, certification-friendly.",
@@ -73,47 +72,6 @@ const ModulesDetail = () => {
           </div>
         );
       })}
-    </section>
-  );
-};
-
-const AIEngines = () => {
-  const engines = [
-    { name: "Code Engine", note: "Structured AI assistance for RISC-V project planning", featured: true, to: "/product/code-engine" },
-    { name: "Target context", note: "Bring board, RISC-V target and runtime requirements into the project conversation" },
-    { name: "Security context", note: "Keep secure boot, cryptography and attestation requirements visible from the start" },
-    { name: "Reviewable flow", note: "Move from a structured project plan into your engineering workflow" },
-  ];
-  return (
-    <section className="tv-section border-b border-[#E5E4DF] bg-[#00162B] text-white" id="ai-engines" data-testid="ai-engines">
-      <div className="tv-container">
-        <div className="grid lg:grid-cols-12 gap-12 mb-14">
-          <div className="lg:col-span-6">
-            <span className="tv-eyebrow" style={{ color: "#2486C7" }}><span style={{ color: "#2486C7" }}>AI Engines</span></span>
-            <h2 className="tv-h2 mt-4">Bring engineering context.<br />Start with a better plan.</h2>
-          </div>
-          <div className="lg:col-span-5 lg:col-start-8 flex items-end">
-            <p className="text-[17px] leading-[1.6] text-white/70">Code Engine is the first AI Engine in TRUSTED-V, designed to guide project framing around the target system.</p>
-          </div>
-        </div>
-        <div className="grid md:grid-cols-2 gap-4">
-          {engines.map((engine) => (
-            engine.to ? (
-              <Link key={engine.name} to={engine.to} className="tv-panel tv-panel-dark tv-panel-link tv-panel-accent relative overflow-hidden p-7 md:p-8" data-testid="ai-engine-code-engine">
-                {engine.featured && <span className="inline-block mb-4 text-[10px] font-semibold tracking-[0.2em] uppercase text-[#56A2D6] border border-[#2486C7]/50 px-2 py-0.5">Available now</span>}
-                <h3 className="text-[20px] md:text-[24px] tracking-[-0.02em] text-white font-medium">{engine.name}</h3>
-                <p className="mt-3 text-[14px] leading-[1.55] text-white/60">{engine.note}</p>
-                <ArrowUpRight className="mt-6 w-4 h-4 text-[#56A2D6]" />
-              </Link>
-            ) : (
-            <div key={engine.name} className="tv-panel tv-panel-dark p-7 md:p-8" data-testid={`ai-engine-${engine.name.toLowerCase().replace(/\W+/g, "-")}`}>
-              <h3 className="text-[20px] md:text-[24px] tracking-[-0.02em] text-white font-medium">{engine.name}</h3>
-              <p className="mt-3 text-[14px] leading-[1.55] text-white/60">{engine.note}</p>
-            </div>
-            )
-          ))}
-        </div>
-      </div>
     </section>
   );
 };

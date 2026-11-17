@@ -27,7 +27,7 @@ export const SERVICE_MODELS = [
       { title: "Platform subscription", desc: "Subscribe and access the complete development platform." },
       { title: "Free feature access", desc: "Start immediately with a curated set of complimentary tools." },
       { title: "Marketplace selection", desc: "Pick the exact boards and chips your project needs." },
-      { title: "Build, test & generate code", desc: "Develop in Jarvyn IDE with code generation and testing." },
+      { title: "Build & test", desc: "Develop in Jarvyn IDE with integrated build and testing tools." },
       { title: "Expert guidance", desc: "Connect directly with our engineers when you hit a roadblock." },
     ],
   },

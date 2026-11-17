@@ -11,8 +11,6 @@ from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from typing import List, Optional, Dict, Any
 import uuid
 from datetime import datetime, timezone, timedelta
-from emergentintegrations.llm.chat import LlmChat, UserMessage
-from openai import AsyncOpenAI
 import json
 import jwt
 from passlib.context import CryptContext
@@ -36,16 +34,11 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 # Security
-JWT_SECRET = os.environ.get('JWT_SECRET', 'your-secret-key-change-in-production')
+JWT_SECRET = os.environ['JWT_SECRET']
 JWT_ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
-
-# LLM Configuration
-EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY', '').strip()
-OPENAI_MODEL = os.environ['OPENAI_MODEL']
 
 # Auth Models
 class User(BaseModel):
@@ -205,15 +198,6 @@ class Project(BaseModel):
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-class ChatMessage(BaseModel):
-    model_config = ConfigDict(extra="ignore")
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    session_id: str
-    user_id: Optional[str] = None
-    role: str
-    content: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
 class IDEDownload(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -225,16 +209,6 @@ class IDEDownload(BaseModel):
     description: str
     filename: Optional[str] = None
     uploaded_at: Optional[str] = None
-
-class ChatRequest(BaseModel):
-    message: str
-    session_id: str
-
-class ChatResponse(BaseModel):
-    response: str
-    session_id: str
-    suggested_hardware: Optional[List[Dict[str, Any]]] = None
-    suggested_middleware: Optional[List[Dict[str, Any]]] = None
 
 # Application Models (Board Support Request & Partnership)
 class BoardSupportRequest(BaseModel):
@@ -289,44 +263,6 @@ class ProjectUpdate(BaseModel):
     sdk_id: Optional[str] = None
     requirements: Optional[str] = None
 
-# LLM Settings Model (Admin configurable)
-class LLMSettings(BaseModel):
-    model_config = ConfigDict(extra="ignore")
-    id: str = "llm_settings"  # Singleton
-    provider: str = "gemini"  # openai, anthropic, gemini
-    model: str = "gemini-3-flash-preview"
-    api_key_type: str = "emergent"  # emergent or custom
-    custom_api_key: Optional[str] = None
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_by: Optional[str] = None
-
-class LLMSettingsUpdate(BaseModel):
-    provider: str
-    model: str
-    api_key_type: str = "emergent"
-    custom_api_key: Optional[str] = None
-
-# Project Generation Models
-class ProjectGenerationRequest(BaseModel):
-    name: str
-    description: str
-    hardware_id: str
-    middleware_ids: List[str]
-    software_component_ids: List[str] = []
-    peripherals: List[str] = []
-    additional_requirements: str = ""
-    ai_model: str = Field(default="gemini", pattern="^(gemini|openai)$")
-
-class GeneratedFile(BaseModel):
-    path: str
-    content: str
-
-class ProjectGenerationResponse(BaseModel):
-    project_id: str
-    version: int
-    files: List[GeneratedFile]
-    message: str
-
 # Auth helper functions
 def create_access_token(data: dict):
     to_encode = data.copy()
@@ -362,43 +298,6 @@ async def get_current_admin_user(current_user: dict = Depends(get_current_user))
     if not current_user.get("is_admin", False):
         raise HTTPException(status_code=403, detail="Admin access required")
     return current_user
-
-# LLM Helper Functions
-async def get_llm_settings():
-    """Get current LLM settings from database or return defaults"""
-    settings = await db.llm_settings.find_one({"id": "llm_settings"}, {"_id": 0})
-    if not settings:
-        return {
-            "id": "llm_settings",
-            "provider": "gemini",
-            "model": "gemini-3-flash-preview",
-            "api_key_type": "emergent",
-            "custom_api_key": None
-        }
-    return settings
-
-async def get_llm_chat(session_id: str, system_message: str):
-    """Create LLM chat instance based on current settings"""
-    settings = await get_llm_settings()
-    
-    # Determine API key to use
-    if settings.get("api_key_type") == "custom" and settings.get("custom_api_key"):
-        api_key = settings["custom_api_key"]
-    else:
-        api_key = EMERGENT_LLM_KEY
-    
-    chat = LlmChat(
-        api_key=api_key,
-        session_id=session_id,
-        system_message=system_message
-    )
-    
-    # Configure provider and model
-    provider = settings.get("provider", "gemini")
-    model = settings.get("model", "gemini-3-flash-preview")
-    chat.with_model(provider, model)
-    
-    return chat
 
 # Code Generation Templates
 def get_cargo_toml_template(project_name: str, hardware: dict, middleware: list, software: list):
@@ -535,111 +434,10 @@ async def generate_code_with_llm(
     additional_requirements: str,
     ai_model: str = "gemini"
 ):
-    """Use LLM to generate main.rs and driver code"""
-    
-    system_prompt = """You are an expert embedded systems developer specializing in RISC-V architecture and Rust programming.
-You generate production-quality, well-documented Rust code for embedded systems.
-Always include proper error handling, safety comments, and follow Rust embedded best practices.
-Use #![no_std] and #![no_main] attributes for embedded projects.
-Include detailed comments explaining the code structure and hardware interactions."""
-    
-    # Build the prompt with all project details
-    peripheral_list = ", ".join(peripherals) if peripherals else "None specified"
-    middleware_names = ", ".join([m.get("name", "") for m in middleware]) if middleware else "None"
-    software_names = ", ".join([s.get("name", "") for s in software]) if software else "None"
-    
-    user_prompt = f"""Generate a complete Rust embedded project for RISC-V with the following specifications:
-
-**Project Name:** {project_name}
-**Description:** {description}
-
-**Hardware:**
-- Board: {hardware.get("name", "Unknown")}
-- Manufacturer: {hardware.get("manufacturer", "Unknown")}
-- Core: {hardware.get("core", "RISC-V")}
-- Clock Speed: {hardware.get("clock_speed", "Unknown")}
-- Memory: {hardware.get("memory", "Unknown")}
-- Flash: {hardware.get("flash", "Unknown")}
-
-**Middleware/RTOS:** {middleware_names}
-
-**Software Components:** {software_names}
-
-**Peripherals to Initialize:** {peripheral_list}
-
-**Additional Requirements:** {additional_requirements if additional_requirements else "None"}
-
-Please generate the following files in JSON format with this exact structure:
-{{
-    "files": [
-        {{"path": "src/main.rs", "content": "..."}},
-        {{"path": "src/lib.rs", "content": "..."}},
-        {{"path": "src/drivers/mod.rs", "content": "..."}},
-        {{"path": "src/drivers/gpio.rs", "content": "..."}},
-        {{"path": "src/drivers/uart.rs", "content": "..."}}
-    ]
-}}
-
-Requirements for the code:
-1. Use #![no_std] and #![no_main] for bare-metal
-2. Include proper panic handler using panic-halt
-3. Initialize all specified peripherals
-4. Add comprehensive documentation comments
-5. Include a main loop with example usage
-6. Create driver modules for each peripheral type
-7. Use embedded-hal traits where appropriate
-8. Include proper memory safety considerations
-
-Return ONLY the JSON object, no additional text or markdown formatting."""
-
-    if ai_model == "openai":
-        try:
-            client = AsyncOpenAI(api_key=OPENAI_API_KEY)
-            result = await client.responses.create(
-                model=OPENAI_MODEL,
-                instructions=system_prompt,
-                input=user_prompt,
-                store=False,
-            )
-            response = result.output_text
-        except Exception as e:
-            logging.error(f"OpenAI code generation failed: {type(e).__name__}")
-            raise HTTPException(status_code=502, detail="ChatGPT generation failed. Check the OpenAI API key and billing.")
-
-    try:
-        if ai_model != "openai":
-            chat = await get_llm_chat(
-                session_id=f"codegen-{uuid.uuid4()}",
-                system_message=system_prompt
-            )
-            response = await chat.send_message(UserMessage(text=user_prompt))
-        
-        # Parse the JSON response
-        # Clean up response if it has markdown code blocks
-        response_text = response.strip()
-        if response_text.startswith("```"):
-            # Remove markdown code blocks
-            lines = response_text.split("\n")
-            if lines[0].startswith("```"):
-                lines = lines[1:]
-            if lines[-1].strip() == "```":
-                lines = lines[:-1]
-            response_text = "\n".join(lines)
-        
-        try:
-            result = json.loads(response_text)
-            return result.get("files", [])
-        except json.JSONDecodeError:
-            # If JSON parsing fails, create a basic structure
-            logging.error(f"Failed to parse LLM response as JSON: {response_text[:500]}")
-            return get_fallback_code_files(project_name, hardware, peripherals)
-            
-    except Exception as e:
-        logging.error(f"LLM code generation failed: {str(e)}")
-        return get_fallback_code_files(project_name, hardware, peripherals)
+    return get_fallback_code_files(project_name, hardware, peripherals)
 
 def get_fallback_code_files(project_name: str, hardware: dict, peripherals: list):
-    """Generate basic code files if LLM fails"""
+    """Create deterministic legacy project files for archival compatibility."""
     
     peripheral_inits = ""
     for p in peripherals:
@@ -911,13 +709,6 @@ async def init_sample_data():
         admin_dict['created_at'] = admin_dict['created_at'].isoformat()
         await db.users.insert_one(admin_dict)
         logging.info("Admin user created")
-    else:
-        # Update existing admin password to new credentials
-        await db.users.update_one(
-            {"email": "admin@trusted-v.com"},
-            {"$set": {"password_hash": get_password_hash("bosch@2425")}}
-        )
-        logging.info("Admin password updated")
     
     # Create sample users (not displayed anywhere on the platform)
     sample_users = [
@@ -936,11 +727,8 @@ async def init_sample_data():
             user_dict['created_at'] = user_dict['created_at'].isoformat()
             await db.users.insert_one(user_dict)
     
-    # Check if data exists - Use ONLY Indian RISC-V hardware
+    # Seed hardware only when no catalog exists.
     hardware_count = await db.hardware.count_documents({})
-    # Clear existing hardware to replace with Indian boards only
-    if hardware_count > 0:
-        await db.hardware.delete_many({})
     
     # Indian RISC-V Hardware Only - Mindgrove and C-DAC chips only
     indian_hardware = [
@@ -1065,7 +853,8 @@ async def init_sample_data():
             "created_at": datetime.now(timezone.utc).isoformat()
         }
     ]
-    await db.hardware.insert_many(indian_hardware)
+    if hardware_count == 0:
+        await db.hardware.insert_many(indian_hardware)
     
     # Update middleware with Indian compatible data
     middleware_count = await db.middleware.count_documents({})
@@ -1130,7 +919,7 @@ async def init_sample_data():
                 "platform": "Windows",
                 "download_url": "#",
                 "size": "~450 MB",
-                "description": "AI-native IDE with Jarvyn assistant, Rust toolchain, integrated debugger, and RISC-V board support for Windows"
+                "description": "RISC-V IDE with Rust toolchain, integrated debugger, and board support for Windows"
             },
             {
                 "id": str(uuid.uuid4()),
@@ -1139,7 +928,7 @@ async def init_sample_data():
                 "platform": "macOS",
                 "download_url": "#",
                 "size": "~420 MB",
-                "description": "AI-native IDE with Jarvyn assistant, Rust toolchain, integrated debugger, and RISC-V board support for macOS"
+                "description": "RISC-V IDE with Rust toolchain, integrated debugger, and board support for macOS"
             },
             {
                 "id": str(uuid.uuid4()),
@@ -1148,10 +937,14 @@ async def init_sample_data():
                 "platform": "Linux",
                 "download_url": "#",
                 "size": "~380 MB",
-                "description": "AI-native IDE with Jarvyn assistant, Rust toolchain, integrated debugger, and RISC-V board support for Linux"
+                "description": "RISC-V IDE with Rust toolchain, integrated debugger, and board support for Linux"
             }
         ]
         await db.ide_downloads.insert_many(sample_ide)
+    await db.ide_downloads.update_many(
+        {"description": {"$regex": "AI-native IDE"}},
+        {"$set": {"description": "RISC-V IDE with Rust toolchain, integrated debugger, and board support"}}
+    )
     
     # Add software components
     software_count = await db.software_components.count_documents({})
@@ -1264,78 +1057,9 @@ async def get_me(current_user: dict = Depends(get_current_user)):
         "is_admin": current_user.get("is_admin", False)
     }
 
-# Chat endpoint with AI
-@api_router.post("/chat", response_model=ChatResponse)
-async def chat(request: ChatRequest, current_user: dict = Depends(get_current_user)):
-    try:
-        # Save user message
-        user_msg = ChatMessage(
-            session_id=request.session_id,
-            user_id=current_user["id"],
-            role="user",
-            content=request.message
-        )
-        user_msg_dict = user_msg.model_dump()
-        user_msg_dict['timestamp'] = user_msg_dict['timestamp'].isoformat()
-        await db.chat_messages.insert_one(user_msg_dict)
-        
-        # Get hardware and middleware data for AI context
-        hardware_list = await db.hardware.find({}, {"_id": 0}).to_list(100)
-        middleware_list = await db.middleware.find({}, {"_id": 0}).to_list(100)
-        
-        # Initialize LLM
-        system_message = f"""You are an expert AI assistant for RISC-V embedded systems development with Rust.
-Your role is to analyze user requirements and suggest the best hardware and middleware from our catalog.
-
-Available Hardware:
-{json.dumps([{"name": hw["name"], "core": hw["core"], "description": hw["description"]} for hw in hardware_list], indent=2)}
-
-Available Middleware:
-{json.dumps([{"name": mw["name"], "type": mw["type"], "description": mw["description"]} for mw in middleware_list], indent=2)}
-
-When user describes their project:
-1. Analyze their requirements (performance, peripherals, features)
-2. Recommend 1-3 most suitable hardware boards with clear reasoning
-3. Recommend compatible middleware options
-4. Be conversational and helpful
-5. Ask clarifying questions if needed
-
-Provide recommendations in a friendly, technical tone."""
-        
-        chat_instance = LlmChat(
-            api_key=EMERGENT_LLM_KEY,
-            session_id=request.session_id,
-            system_message=system_message
-        ).with_model("openai", "gpt-5.2")
-        
-        # Send message
-        user_message = UserMessage(text=request.message)
-        ai_response = await chat_instance.send_message(user_message)
-        
-        # Save AI response
-        ai_msg = ChatMessage(
-            session_id=request.session_id,
-            user_id=current_user["id"],
-            role="assistant",
-            content=ai_response
-        )
-        ai_msg_dict = ai_msg.model_dump()
-        ai_msg_dict['timestamp'] = ai_msg_dict['timestamp'].isoformat()
-        await db.chat_messages.insert_one(ai_msg_dict)
-        
-        # Detect hardware and middleware mentions
-        suggested_hw = [hw for hw in hardware_list if hw["name"].lower() in ai_response.lower()]
-        suggested_mw = [mw for mw in middleware_list if mw["name"].lower() in ai_response.lower()]
-        
-        return ChatResponse(
-            response=ai_response,
-            session_id=request.session_id,
-            suggested_hardware=suggested_hw[:3] if suggested_hw else None,
-            suggested_middleware=suggested_mw if suggested_mw else None
-        )
-    except Exception as e:
-        logging.error(f"Chat error: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+@api_router.post("/chat")
+async def retired_chat(current_user: dict = Depends(get_current_user)):
+    raise HTTPException(status_code=410, detail="This feature is no longer available")
 
 # Hardware endpoints
 @api_router.get("/hardware", response_model=List[Hardware])
@@ -1586,111 +1310,29 @@ async def get_admin_stats(current_user: dict = Depends(get_current_admin_user)):
         "pending_notifications": board_pending + partner_pending
     }
 
-# Chat history
 @api_router.get("/chat/history/{session_id}")
-async def get_chat_history(session_id: str, current_user: dict = Depends(get_current_user)):
-    messages = await db.chat_messages.find(
-        {"session_id": session_id, "user_id": current_user["id"]},
-        {"_id": 0}
-    ).sort("timestamp", 1).to_list(1000)
-    
-    for msg in messages:
-        if isinstance(msg.get('timestamp'), str):
-            msg['timestamp'] = datetime.fromisoformat(msg['timestamp'])
-    
-    return {"messages": messages}
+async def retired_chat_history(session_id: str, current_user: dict = Depends(get_current_user)):
+    raise HTTPException(status_code=410, detail="This feature is no longer available")
 
-# LLM Settings Management (Admin)
-@api_router.get("/admin/llm-settings")
-async def get_llm_settings_endpoint(current_user: dict = Depends(get_current_admin_user)):
-    settings = await get_llm_settings()
-    # Don't expose custom API key
-    if settings.get("custom_api_key"):
-        settings["custom_api_key"] = "***configured***"
-    return settings
-
-@api_router.put("/admin/llm-settings")
-async def update_llm_settings_endpoint(
-    settings_update: LLMSettingsUpdate,
-    current_user: dict = Depends(get_current_admin_user)
-):
-    update_data = settings_update.model_dump()
-    update_data["id"] = "llm_settings"
-    update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
-    update_data["updated_by"] = current_user["id"]
-    
-    await db.llm_settings.update_one(
-        {"id": "llm_settings"},
-        {"$set": update_data},
-        upsert=True
-    )
-    
-    # Return settings without exposing key
-    result = update_data.copy()
-    if result.get("custom_api_key"):
-        result["custom_api_key"] = "***configured***"
-    
-    return {"message": "LLM settings updated successfully", "settings": result}
+@api_router.api_route("/admin/llm-settings", methods=["GET", "PUT"])
+async def retired_model_settings(current_user: dict = Depends(get_current_user)):
+    raise HTTPException(status_code=410, detail="This feature is no longer available")
 
 @api_router.get("/llm-providers")
-async def get_available_llm_providers():
-    """Get list of available LLM providers and models"""
-    return {
-        "providers": [
-            {
-                "id": "gemini",
-                "name": "Google Gemini",
-                "models": [
-                    {"id": "gemini-3-flash-preview", "name": "Gemini 3 Flash (Recommended)"},
-                    {"id": "gemini-3-pro-preview", "name": "Gemini 3 Pro"},
-                    {"id": "gemini-2.5-pro", "name": "Gemini 2.5 Pro"},
-                    {"id": "gemini-2.5-flash", "name": "Gemini 2.5 Flash"},
-                ]
-            },
-            {
-                "id": "openai",
-                "name": "OpenAI",
-                "models": [
-                    {"id": "gpt-5.2", "name": "GPT-5.2"},
-                    {"id": "gpt-5.1", "name": "GPT-5.1"},
-                    {"id": "gpt-4o", "name": "GPT-4o"},
-                ]
-            },
-            {
-                "id": "anthropic",
-                "name": "Anthropic",
-                "models": [
-                    {"id": "claude-sonnet-4-5-20250929", "name": "Claude Sonnet 4.5"},
-                    {"id": "claude-4-sonnet-20250514", "name": "Claude 4 Sonnet"},
-                    {"id": "claude-opus-4-5-20251101", "name": "Claude Opus 4.5"},
-                ]
-            }
-        ]
-    }
+async def retired_model_providers(current_user: dict = Depends(get_current_user)):
+    raise HTTPException(status_code=410, detail="This feature is no longer available")
 
 @api_router.get("/ai-models")
-async def get_ai_models(current_user: dict = Depends(get_current_user)):
-    models = [{"id": "gemini", "name": "Gemini 3 Flash", "provider": "Google", "available": True}]
-    if current_user.get("is_admin", False):
-        models.append({
-            "id": "openai", "name": "GPT 5.6 Terra", "provider": "OpenAI",
-            "available": bool(OPENAI_API_KEY),
-            "status": None if OPENAI_API_KEY else "OpenAI API key not configured",
-        })
-    return {"models": models}
+async def retired_ai_models(current_user: dict = Depends(get_current_user)):
+    raise HTTPException(status_code=410, detail="This feature is no longer available")
 
 # Project Generation Endpoints
 @api_router.post("/projects/generate")
 async def generate_project(
-    request: ProjectGenerationRequest,
-    current_user: dict = Depends(get_current_user)
+    current_user: dict = Depends(get_current_user),
+    request: Optional[Dict[str, Any]] = None
 ):
-    """Generate a new RISC-V Rust project with AI-powered code generation"""
-    if request.ai_model == "openai":
-        if not current_user.get("is_admin", False):
-            raise HTTPException(status_code=403, detail="ChatGPT models are available to admins only")
-        if not OPENAI_API_KEY:
-            raise HTTPException(status_code=400, detail="OpenAI API key not configured")
+    raise HTTPException(status_code=410, detail="This feature is no longer available")
     
     # Fetch hardware details
     hardware = await db.hardware.find_one({"id": request.hardware_id}, {"_id": 0})
@@ -1863,7 +1505,7 @@ async def download_project(
     version: int,
     current_user: dict = Depends(get_current_user)
 ):
-    """Download a project version as a ZIP file"""
+    raise HTTPException(status_code=410, detail="This feature is no longer available")
     
     # Fetch project
     project = await db.projects.find_one({
@@ -1909,7 +1551,7 @@ async def get_project_versions(
     project_id: str,
     current_user: dict = Depends(get_current_user)
 ):
-    """Get all versions of a project"""
+    raise HTTPException(status_code=410, detail="This feature is no longer available")
     
     project = await db.projects.find_one({
         "id": project_id,

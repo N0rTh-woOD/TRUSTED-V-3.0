@@ -39,7 +39,7 @@ const Footer = () => {
       title: "Platform",
       links: [
         { label: "Build with SiFive", to: "/partners" },
-        { label: "Code Engine", to: "/product/code-engine" },
+        { label: "Services", to: "/services" },
         { label: "Partner Registration", to: "/partner-registration" },
       ],
     },

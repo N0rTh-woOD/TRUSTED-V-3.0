@@ -5,14 +5,6 @@ import PageHero from "@/components/PageHero";
 
 const sections = [
   {
-    title: "AI Engines",
-    items: [
-      { name: "Code Engine", desc: "Structured AI assistance for framing RISC-V project work around the target system." },
-      { name: "Project context", desc: "Bring board, runtime and security requirements into a single technical starting point." },
-      { name: "Reviewable plans", desc: "Use a clear project plan before taking changes into the engineering workflow." },
-    ],
-  },
-  {
     title: "Getting started",
     items: [
       { name: "Jarvyn IDE preview", desc: "Jarvyn IDE is coming soon. Release details will be shared on the product page." },
@@ -70,7 +62,7 @@ const DeveloperPortal = () => {
         eyebrow="Developer portal"
         title={
           <>
-            Docs, AI Engines and<br />reference builds.
+            Docs and<br />reference builds.
           </>
         }
         subtitle="Everything you need to ship on TRUSTED-V — from your first `cargo build` to a certified silicon tape-out."

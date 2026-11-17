@@ -37,7 +37,7 @@ const typeColors = {
   Framework: "bg-teal-100 text-teal-700",
   Library: "bg-yellow-100 text-yellow-700",
 };
-const typeLabel = (type) => (type === "SDK" ? "AI Engines" : type);
+const typeLabel = (type) => (type === "SDK" ? "Software Development Kit" : type);
 
 const AdminSoftware = () => {
   const { token } = useAuth();
@@ -162,7 +162,7 @@ const AdminSoftware = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3">
+            <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3" data-testid="admin-software-back-link">
               <ArrowLeft className="w-4 h-4" />
               Back to Admin
             </Link>
@@ -170,7 +170,7 @@ const AdminSoftware = () => {
               Software Components
             </h1>
             <p className="text-muted-foreground">
-              Manage BSPs, AI Engines, Drivers, Bootloaders, and Libraries
+              Manage BSPs, SDKs, Drivers, Bootloaders, and Libraries
             </p>
           </div>
           <Button
@@ -187,7 +187,7 @@ const AdminSoftware = () => {
         <div className="mb-6 flex items-center gap-3">
           <Filter className="w-4 h-4 text-muted-foreground" />
           <Select value={filterType} onValueChange={setFilterType}>
-            <SelectTrigger className="w-48">
+            <SelectTrigger className="w-48" data-testid="software-filter-select">
               <SelectValue placeholder="Filter by type" />
             </SelectTrigger>
             <SelectContent>
@@ -291,7 +291,7 @@ const AdminSoftware = () => {
 
         {/* Add/Edit Dialog */}
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="software-editor-dialog">
             <DialogHeader>
               <DialogTitle className="text-xl font-semibold">
                 {editingComponent ? "Edit Component" : "Add Component"}
@@ -302,9 +302,10 @@ const AdminSoftware = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground">Name *</label>
                   <Input
+                    data-testid="software-name-input"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Code Engine"
+                    placeholder="VEGA SDK"
                   />
                 </div>
                 <div className="space-y-2">
@@ -313,7 +314,7 @@ const AdminSoftware = () => {
                     value={formData.type} 
                     onValueChange={(value) => setFormData({ ...formData, type: value })}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger data-testid="software-type-select">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -328,6 +329,7 @@ const AdminSoftware = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Version *</label>
                 <Input
+                  data-testid="software-version-input"
                   value={formData.version}
                   onChange={(e) => setFormData({ ...formData, version: e.target.value })}
                   placeholder="5.1.2"
@@ -337,6 +339,7 @@ const AdminSoftware = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Description *</label>
                 <Input
+                  data-testid="software-description-input"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="IoT Development Framework for ESP32..."
@@ -346,6 +349,7 @@ const AdminSoftware = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Compatible Cores (comma-separated)</label>
                 <Input
+                  data-testid="software-compatible-cores-input"
                   value={Array.isArray(formData.compatible_cores) ? formData.compatible_cores.join(", ") : formData.compatible_cores}
                   onChange={(e) => setFormData({ ...formData, compatible_cores: e.target.value })}
                   placeholder="RISC-V E31, RISC-V Single Core 32-bit"
@@ -355,6 +359,7 @@ const AdminSoftware = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Features (comma-separated)</label>
                 <Input
+                  data-testid="software-features-input"
                   value={Array.isArray(formData.features) ? formData.features.join(", ") : formData.features}
                   onChange={(e) => setFormData({ ...formData, features: e.target.value })}
                   placeholder="WiFi stack, BLE support, RTOS integration"
@@ -365,6 +370,7 @@ const AdminSoftware = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground">Download URL</label>
                   <Input
+                    data-testid="software-download-url-input"
                     value={formData.download_url || ""}
                     onChange={(e) => setFormData({ ...formData, download_url: e.target.value })}
                     placeholder="https://github.com/..."
@@ -373,6 +379,7 @@ const AdminSoftware = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground">Documentation URL</label>
                   <Input
+                    data-testid="software-documentation-url-input"
                     value={formData.documentation_url || ""}
                     onChange={(e) => setFormData({ ...formData, documentation_url: e.target.value })}
                     placeholder="https://docs.example.com/..."
@@ -381,10 +388,10 @@ const AdminSoftware = () => {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setShowDialog(false)}>
+              <Button variant="outline" onClick={() => setShowDialog(false)} data-testid="software-editor-cancel-button">
                 Cancel
               </Button>
-              <Button onClick={handleSave}>
+              <Button onClick={handleSave} data-testid="software-editor-save-button">
                 Save
               </Button>
             </DialogFooter>

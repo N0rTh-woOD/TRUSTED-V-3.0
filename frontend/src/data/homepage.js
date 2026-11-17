@@ -1,14 +1,6 @@
 // Copy and imagery mapped to TrusteDV-HomePage-DesignChanges-1.pdf.
 export const HOME_FEATURES = [
   {
-    id: "ai-engines-preview", eyebrow: "AI Engines", heading: "A focused AI layer for",
-    highlight: "RISC-V engineering.", title: "Code Engine", image: "code-engine",
-    alt: "A code workspace connected to RISC-V hardware, project planning and cloud tools",
-    description: "Start with the system context, shape a project plan and take reviewable work into the TRUSTED-V development workflow.",
-    bullets: ["RISC-V target and board context", "Runtime and security requirements", "Reviewable project planning"],
-    to: "/product/code-engine", cta: "Explore Code Engine", linkId: "ai-engines-code-engine",
-  },
-  {
     id: "riscv-ip", eyebrow: "RISC-V IP collaboration", heading: "Build with",
     highlight: "SiFive and TRUSTED-V.", title: "A coherent path from IP to trusted software.", image: "sifive-platform",
     alt: "SiFive and TRUSTED-V connected through a layered RISC-V chip and software stack",
@@ -39,7 +31,7 @@ export const HOME_TECHNOLOGIES = [
 
 // Homepage presentation order follows PDF p.5; technical stack layers are unchanged.
 export const HOME_MODULES = [
-  { id: "development", number: "01", title: "Development Platform", image: "module-development", alt: "An engineer inspecting a chip design and development boards", description: "Jarvyn IDE, WebIDE, Code Engine, debugger and trace in one Rust-native environment.", bullets: ["Jarvyn IDE: Coming soon", "WebIDE: Coming soon", "Code Engine"], to: "/product/code-engine" },
+  { id: "development", number: "01", title: "Development Platform", image: "module-development", alt: "An engineer inspecting a chip design and development boards", description: "Jarvyn IDE, WebIDE, debugger and trace in one Rust-native environment.", bullets: ["Jarvyn IDE: Coming soon", "WebIDE: Coming soon", "Debugger and trace"], to: "/download-ide" },
   { id: "software", number: "02", title: "Secure Rust Software", image: "module-software", alt: "An engineer working on secure software with code and a digital system model", description: "rBoot, rustBoot, RTOS, HAL/PAC and Crypto Stack. PQC-ready.", bullets: ["rBoot & rustBoot", "Crypto Stack", "RTOS"], to: "/product/secure-boot" },
   { id: "virtualization", number: "03", title: "Virtualization & Simulation", image: "module-virtualization", alt: "An engineer working with a virtualized cloud and server platform", description: "Virtual platforms and a RISC-V hypervisor for pre-silicon work.", bullets: ["Virtual platform", "RISC-V hypervisor", "Cycle-approximate simulator"], to: "/product-suite#virtualization" },
   { id: "silicon", number: "04", title: "Silicon SignOff & Trust", image: "module-silicon", alt: "A cleanroom technician inspecting a silicon wafer", description: "Vendor-neutral certification for RISC-V SoCs.", bullets: ["SignOff Silicon", "TRUSTED-V Verified", "TVOTS"], to: "/product-suite#certification" },

@@ -17,7 +17,7 @@ const Team = () => {
     // Row 4 - Engineering
     { name: "Harika", role: "Crypto Engineer", category: "Engineering" },
     { name: "Shivam", role: "Crypto Engineer", category: "Engineering" },
-    { name: "Chandana", role: "AI Engineer", category: "Engineering" },
+    { name: "Chandana", role: "Embedded Systems Engineer", category: "Engineering" },
     // Row 5 - Security & Quality
     { name: "Pavan", role: "Cloud Engineer", category: "Security & Quality" },
     { name: "Reshma", role: "Security Manager", category: "Security & Quality" },
