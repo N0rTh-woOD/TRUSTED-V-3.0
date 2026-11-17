@@ -18,7 +18,7 @@ const MEGA = [
     { label: "WebIDE", to: "/webide", note: "Coming soon" },
     { label: "Developer Portal", to: "/developer-portal", note: "Docs and quickstarts" },
   ] },
-  { title: "Software & Security", items: [
+  { title: "Software and security", items: [
     { label: "Secure Boot", to: "/product/secure-boot", note: "rBoot & rustBoot" },
     { label: "Crypto Stack", to: "/product/crypto-stack", note: "Classical + PQC" },
     { label: "RTOS Options", to: "/product/rtos-benchmark", note: "Rust-native RTOS & benchmarks" },
@@ -93,7 +93,7 @@ const Navigation = () => {
               <Link to="/login" data-testid="nav-login" className="text-[13.5px] font-medium text-[#1A1F25] hover:text-[#003262]">Sign in</Link>
             )}
             <Link to="/contact" data-testid="nav-contact-cta" className="tv-btn tv-btn-primary tv-btn-sm">
-              Request a demo <ArrowUpRight className="w-3.5 h-3.5" />
+              Contact us <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
@@ -149,7 +149,7 @@ const Navigation = () => {
                 <Link to="/login" className="tv-btn tv-btn-outline w-full" data-testid="mobile-nav-login">Sign in</Link>
               )}
               <Link to="/contact" className="tv-btn tv-btn-primary w-full" data-testid="mobile-nav-contact-cta">
-                Request a demo <ArrowUpRight className="w-4 h-4" />
+                Contact us <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

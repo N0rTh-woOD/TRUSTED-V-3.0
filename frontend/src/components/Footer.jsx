@@ -31,7 +31,7 @@ const Footer = () => {
       title: "Developers",
       links: [
         { label: "Developer Portal", to: "/developer-portal" },
-        { label: "IDE status · Coming soon", to: "/download-ide" },
+        { label: "Jarvyn IDE · Coming soon", to: "/download-ide" },
         { label: "Board Support", to: "/board-support" },
       ],
     },
@@ -65,8 +65,8 @@ const Footer = () => {
               className="mt-6 text-[14px] leading-[1.65] text-white/60 max-w-sm"
             >
               The complete RISC-V platform. From IP to software to silicon.
-              Rust-native. Secure by design. Made in India, engineered by Bosch
-              to the world.
+              Rust-native. Secure by design. Made in India and engineered by Bosch
+              for the world.
             </p>
             <Link
               to="/contact"

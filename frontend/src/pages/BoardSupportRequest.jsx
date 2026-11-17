@@ -50,13 +50,13 @@ const BoardSupportRequest = () => {
           <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-8 h-8 text-green-600" />
           </div>
-          <h2 className="text-2xl font-bold text-foreground mb-4">Request Submitted</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-4">Request submitted.</h2>
           <p className="text-muted-foreground mb-8">
-            Thank you for your board support request. Our team will review it and get back to you within 3-5 business days.
+            Thank you for your board support request. Our team will review it and respond within 3–5 business days.
           </p>
           <div className="flex gap-4 justify-center">
-            <Link to="/hardware-catalog"><Button variant="outline">View Hardware Catalog</Button></Link>
-            <Link to="/"><Button>Back to Home</Button></Link>
+            <Link to="/hardware-catalog"><Button variant="outline" data-testid="board-success-catalog-button">View hardware catalog</Button></Link>
+            <Link to="/"><Button data-testid="board-success-home-button">Back to home</Button></Link>
           </div>
         </div>
       </div>
@@ -67,8 +67,8 @@ const BoardSupportRequest = () => {
     <div className="min-h-screen bg-white" data-testid="board-support-page">
       <section className="py-12 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link to="/hardware-catalog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8">
-            <ArrowLeft className="w-4 h-4" /> Back to Hardware Catalog
+          <Link to="/hardware-catalog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8" data-testid="board-back-link">
+            <ArrowLeft className="w-4 h-4" /> Back to hardware catalog
           </Link>
           
           <div className="flex items-center gap-3 mb-4">
@@ -77,21 +77,21 @@ const BoardSupportRequest = () => {
             </div>
             <div>
               <h1 className="text-3xl font-bold text-foreground">Request Board Support</h1>
-              <p className="text-muted-foreground">Submit a request to add support for your RISC-V board</p>
+              <p className="text-muted-foreground">Request support for your RISC-V board.</p>
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6 mt-8">
             <Card>
-              <CardHeader><h2 className="text-lg font-semibold text-foreground">Contact Information</h2></CardHeader>
+              <CardHeader><h2 className="text-lg font-semibold text-foreground">Contact information</h2></CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-foreground">Company Name *</label>
+                    <label className="text-sm font-medium text-foreground">Company name *</label>
                     <Input value={formData.company_name} onChange={(e) => setFormData(prev => ({...prev, company_name: e.target.value}))} placeholder="Your company" data-testid="board-company-input" />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground">Contact Name *</label>
+                    <label className="text-sm font-medium text-foreground">Contact name *</label>
                     <Input value={formData.contact_name} onChange={(e) => setFormData(prev => ({...prev, contact_name: e.target.value}))} placeholder="Your name" data-testid="board-contact-input" />
                   </div>
                 </div>
@@ -103,29 +103,29 @@ const BoardSupportRequest = () => {
             </Card>
 
             <Card>
-              <CardHeader><h2 className="text-lg font-semibold text-foreground">Board Details</h2></CardHeader>
+              <CardHeader><h2 className="text-lg font-semibold text-foreground">Board details</h2></CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-foreground">Board Name *</label>
+                    <label className="text-sm font-medium text-foreground">Board name *</label>
                     <Input value={formData.board_name} onChange={(e) => setFormData(prev => ({...prev, board_name: e.target.value}))} placeholder="e.g., MyBoard V2" data-testid="board-name-input" />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground">Board Manufacturer *</label>
+                    <label className="text-sm font-medium text-foreground">Board manufacturer *</label>
                     <Input value={formData.board_manufacturer} onChange={(e) => setFormData(prev => ({...prev, board_manufacturer: e.target.value}))} placeholder="e.g., C-DAC" data-testid="board-manufacturer-input" />
                   </div>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-foreground">Architecture</label>
-                  <Input value={formData.architecture} onChange={(e) => setFormData(prev => ({...prev, architecture: e.target.value}))} placeholder="RISC-V" />
+                  <Input value={formData.architecture} onChange={(e) => setFormData(prev => ({...prev, architecture: e.target.value}))} placeholder="RISC-V" data-testid="board-architecture-input" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-foreground">Board Description *</label>
+                    <label className="text-sm font-medium text-foreground">Board description *</label>
                   <Textarea value={formData.description} onChange={(e) => setFormData(prev => ({...prev, description: e.target.value}))} placeholder="Describe the board specs, processor, memory, peripherals..." rows={4} data-testid="board-description-input" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-foreground">Intended Use Case</label>
-                  <Textarea value={formData.use_case} onChange={(e) => setFormData(prev => ({...prev, use_case: e.target.value}))} placeholder="How do you plan to use this board with TRUSTED-V?" rows={3} />
+                    <label className="text-sm font-medium text-foreground">Intended use case</label>
+                  <Textarea value={formData.use_case} onChange={(e) => setFormData(prev => ({...prev, use_case: e.target.value}))} placeholder="How do you plan to use this board with TRUSTED-V?" rows={3} data-testid="board-use-case-input" />
                 </div>
               </CardContent>
             </Card>
@@ -134,7 +134,7 @@ const BoardSupportRequest = () => {
               {submitting ? (
                 <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />Submitting...</>
               ) : (
-                <><Send className="w-4 h-4 mr-2" />Submit Request</>
+                <><Send className="w-4 h-4 mr-2" />Submit request</>
               )}
             </Button>
           </form>

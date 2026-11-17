@@ -59,10 +59,10 @@ const CryptoStackPage = () => {
       ],
     },
     {
-      name: "Future / Advanced",
+      name: "Future and advanced",
       accent: "#5A6472",
       items: [
-        { algo: "Side-Channel Protections", variants: "Masking, blinding, constant-time impls", std: "Roadmap" },
+        { algo: "Side-channel protections", variants: "Masking, blinding, constant-time implementations", std: "Roadmap" },
       ],
     },
   ];

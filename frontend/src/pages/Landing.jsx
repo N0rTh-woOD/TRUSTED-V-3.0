@@ -41,7 +41,7 @@ const PlatformArchitecture = () => {
       { name: "HAL · PAC · HAM", note: "Peripheral access" }, { name: "Linux (via CVA6)", note: "Rich OS" } ] },
     { band: "Virtualization", accent: "#004A7F", tag: "L02", items: [
       { name: "Type-1 Hypervisor", note: "Mixed-criticality" }, { name: "Virtual Platform", note: "Pre-silicon SoC" },
-      { name: "Cycle-approx Simulator", note: "Bring-up" } ] },
+      { name: "Cycle-approximate simulator", note: "Bring-up" } ] },
     { band: "Secure Boot & Crypto", accent: "#003262", tag: "L01", items: [
       { name: "rBoot", note: "First stage" }, { name: "rustBoot", note: "A/B · OTA · PQC" },
       { name: "Crypto Stack", note: "Classical + PQC" }, { name: "Attestation", note: "TVOTS quote" } ] },
@@ -144,7 +144,7 @@ const VirtualizationSpotlight = () => (
           </ul>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/product-suite#virtualization" className="tv-btn tv-btn-onDark" data-testid="virt-cta-primary">Explore virtualization <ArrowUpRight className="w-4 h-4" /></Link>
-            <Link to="/contact" className="tv-btn tv-btn-outline-onDark" data-testid="virt-cta-secondary">Book a technical deep-dive</Link>
+            <Link to="/contact" className="tv-btn tv-btn-outline-onDark" data-testid="virt-cta-secondary">Book a technical deep dive</Link>
           </div>
         </div>
         <div className="lg:col-span-6">

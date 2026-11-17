@@ -7,7 +7,7 @@ const JARVYN_GIF = "https://customer-assets-m6fa6gv7.emergentagent.net/job_e0aa0
 
 /* Feature categories — each takes one step on the blue gradation */
 const CATEGORIES = [
-  { name: "Editor & AI", color: BLUE_STEPS[3] },
+  { name: "Editor and tooling", color: BLUE_STEPS[3] },
   { name: "Build & Security", color: BLUE_STEPS[4] },
   { name: "Runtime & Collaboration", color: BLUE_STEPS[5] },
   { name: "Platform", color: "#00162B" },
@@ -16,7 +16,7 @@ const categoryOf = (n) => CATEGORIES[Math.min(Math.floor((Number(n) - 1) / 6), 3
 
 const features = [
   { n: "01", title: "Hardware-native platform", desc: "Built from the ground up for RISC-V and Rust — not a general-purpose editor fork." },
-  { n: "02", title: "AI trained on embedded", desc: "Model tuned on GPIO, UART, device registers, HAL crates and peripheral modules." },
+  { n: "02", title: "Embedded-aware tooling", desc: "Purpose-built support for GPIO, UART, device registers, HAL crates and peripheral modules." },
   { n: "03", title: "Native Rust analyzer", desc: "Real-time diagnostics, borrow-checker hints, macro expansion — first-class Rust." },
   { n: "04", title: "SVD-driven register view", desc: "Peripheral memory maps visualized, editable at bit-field resolution." },
   { n: "05", title: "Checkpoint system", desc: "Bookmark firmware state and roll back without touching git." },
@@ -39,7 +39,7 @@ const features = [
 ];
 
 const comparison = [
-  ["Hardware-aware AI", true, false],
+  ["Hardware-aware tooling", true, false],
   ["Native Rust for embedded", true, "partial"],
   ["SVD register visualization", true, false],
   ["Checkpoints beyond git", true, false],
@@ -121,7 +121,7 @@ const IDEDownloads = () => {
       <section className="tv-section border-b border-[#E5E4DF]" data-testid="ide-features">
         <div className="tv-container">
           <div className="mb-14 max-w-3xl">
-            <span className="tv-eyebrow">Twenty-one reasons</span>
+            <span className="tv-eyebrow">Planned capabilities</span>
             <h2 className="tv-h2">
               Purpose-built, not repurposed.
             </h2>

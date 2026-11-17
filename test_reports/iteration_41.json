@@ -1,0 +1,42 @@
+{
+  "summary": "Public editorial regression: 13/13 backend cases passed. Demo login, all 10 requested informational pages, desktop/mega/mobile navigation, product terminology, Jarvyn non-AI copy, Coming soon labels, and 390px Services/Product Suite overflow checks passed. Contact, partner and board-support UI success states verified with database persistence. Sales UI requests also persisted, but browser tool timeouts prevented confirmation of its success screen. Three editorial consistency misses remain. No mocked APIs or confirmed broken API flows.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Homepage application markets", "issue": "Visible Defence & Aerospace remains UK English; use Defense & Aerospace while preserving the existing defence-aerospace id/routes.", "selector": "HOME_MARKETS in frontend/src/data/homepage.js:19", "priority": "LOW"},
+      {"component": "Services SaaS steps", "issue": "Custom PCB design helper copy still says Optimised for performance, reliability and scale. US English requires Optimized.", "selector": "[data-testid=service-saas]; frontend/src/data/services.js:13", "priority": "LOW"},
+      {"component": "Public forms and success CTAs", "issue": "Sentence case remains inconsistent: sales source labels Full Name/Work Email and CTA Submit Inquiry; rendered partner CTA Submit Application and success CTA Return Home; rendered board CTA Submit Request and success links View Hardware Catalog/Back to Home. Normalize these ordinary labels while preserving proper product names and CSS text-transform styling.", "selector": "[data-testid=sales-submit-btn], [data-testid=submit-partner-application-btn], [data-testid=partner-success-home-button], [data-testid=submit-board-request-btn], [data-testid=board-support-success]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_public_editorial.py",
+    "/app/test_reports/pytest/public_editorial_results.xml",
+    "/app/tests/frontend/public_editorial_review.py",
+    "/app/tests/verify_editorial_ui_records.py"
+  ],
+  "action_items": [
+    "Replace visible Defence with Defense and Optimised with Optimized without changing ids or routes.",
+    "Finish sentence-case normalization on public form labels and success CTAs; leave operational/validation/error messages unchanged.",
+    "Manually verify the sales success screen after a valid submission; this browser tool timed out despite persisted requests. Do not classify the timeout itself as an application defect."
+  ],
+  "critical_code_review_comments": [
+    "BoardSupportRequest architecture/use-case inputs, back/success links and ContactSales sidebar links still lack data-testid attributes. Partner success confirmation text has no dedicated data-testid, although its return-home button does.",
+    "The prior Contact persistence and empty-partner 500 defects are resolved: typed request models now return 422 for empty sales/partner/board payloads, and all valid flat form fields persist. No application source changes were made by testing."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_public_editorial.py",
+    "/app/tests/frontend/public_editorial_review.py",
+    "/app/tests/verify_editorial_ui_records.py",
+    "/app/test_reports/pytest/public_editorial_results.xml",
+    "/app/test_reports/iteration_41.json"
+  ],
+  "success_rate": {"backend": "100% (13/13)", "frontend": "Not percentage-scored: functional checks passed; sales success screen unverified and 3 editorial misses remain"},
+  "test_credentials": "Used the supplied demo account from /app/memory/test_credentials.md; existing account unchanged.",
+  "seed_data_creation": "No seed/reset commands. Four API test submissions were cleaned in fixture teardown. Eight browser-created records, including submissions from timed-out runs, were verified and deleted only by their exact ids with matching unique test emails; three collections had no remaining records from this run. No existing accounts or user records modified.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All ten requested pages rendered without console/runtime errors in the successful page sweep. Desktop nav's seven links, three product mega links, footer Contact CTA and mobile Services link worked. Mobile document width is exactly 390px on both requested routes; Services status button bounds x=24,width=342. Jarvyn legend, feature 02 and comparison retain the three expected non-AI phrases. Footer uppercase CONTACT US is intentional CSS styling, not a copy defect; an early strict-case test assertion was corrected. Several browser calls timed out; successful smaller calls supplied the actual UI results. The saved full browser runner is reusable but did not complete end-to-end in this tool; do not claim its final JSON output exists. Sales requests from those runs persisted, but its rendered success state was not directly observed. Avoid another repetitive sales-selector loop: manually inspect or use a fresh bounded runner. Optional auth checks: demo hash prefix and CORS passed, seed inserts only missing users by code review; no brute-force attempts against protected accounts and no claim of application auth cookies/lockout verification.",
+  "rca of the issue": "Editorial misses are unchanged strings in shared homepage/services data and partial sentence-case edits on older public form components. There is no associated routing/API failure. Browser timeout RCA is undetermined: requests reached the sales endpoint and stored expected content, so timeout alone does not prove failed UI rendering."
+}

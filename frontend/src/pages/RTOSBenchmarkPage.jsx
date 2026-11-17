@@ -8,7 +8,7 @@ const RTOSBenchmarkPage = () => {
       name: "TRUSTED-V RTOS",
       tag: "Rust-native",
       desc: "A custom Rust RTOS for RISC-V with memory-safe concurrency and deterministic scheduling.",
-      features: ["100% Rust — memory safe by construction", "Compile-time peripheral verification", "Deterministic scheduler", "First-class RISC-V support"],
+      features: ["100% Rust — memory-safe by construction", "Compile-time peripheral verification", "Deterministic scheduler", "First-class RISC-V support"],
       featured: true,
     },
     {

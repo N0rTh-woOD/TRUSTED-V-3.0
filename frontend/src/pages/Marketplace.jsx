@@ -47,7 +47,7 @@ const Marketplace = () => {
         eyebrow="Marketplace"
         title={
           <>
-            Boards, IP,<br />and everything between.
+            Boards, IP,<br />and the layers between.
           </>
         }
         subtitle="RISC-V development boards from Indian and global partners, plus processor cores, security IP and peripherals."

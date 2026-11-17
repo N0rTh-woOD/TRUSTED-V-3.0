@@ -25,7 +25,7 @@ const Mission = () => {
   const pillars = [
     { k: "01", title: "Security", desc: "Rust memory-safety, PQC-ready crypto, certifiable boot chain, vendor-neutral attestation." },
     { k: "02", title: "Performance", desc: "Hardware-aware tooling, deterministic RTOS and virtualization for real-time workloads." },
-    { k: "03", title: "Time-to-Market", desc: "Pre-integrated IP and virtual platforms — ship firmware before RTL freezes." },
+    { k: "03", title: "Time to market", desc: "Pre-integrated IP and virtual platforms — ship firmware before RTL freezes." },
   ];
   return (
     <section className="tv-section border-b border-[#E5E4DF]" data-testid="about-mission">
@@ -74,7 +74,7 @@ const StructuralGaps = () => {
     { n: "05", title: "Certification pathway", problem: "Certifications require months of retrofitting.", answer: "Evidence collection mapped to CC, PSA, ISO 26262, IEC 62443." },
     { n: "06", title: "Enterprise adoption", problem: "Enterprises need LTS and indemnification.", answer: "Backed by Bosch — commercial LTS, SLAs, support tiers." },
     { n: "07", title: "Platform security layer", problem: "PSA was built for Arm, leaving RISC-V behind.", answer: "A PSA L3-aligned security layer native to RISC-V." },
-    { n: "08", title: "Platform coordination", problem: "Vendors optimise locally, not for the whole stack.", answer: "The TRUSTED-V platform aligns the engineering layers on one open reference." },
+    { n: "08", title: "Platform coordination", problem: "Vendors optimize locally, not for the whole stack.", answer: "The TRUSTED-V platform aligns the engineering layers on one open reference." },
   ];
   return (
     <section className="tv-section border-b border-[#E5E4DF] bg-[#F7F7F5]" data-testid="structural-gaps">
@@ -112,7 +112,7 @@ const RoadmapAndConsortium = () => {
     { name: "Founding", desc: "IP vendors, Tier-1 OEMs and EDA leaders shaping the reference stack." },
     { name: "Principal", desc: "Silicon houses and software Tier-1s driving co-verified releases." },
     { name: "Associate", desc: "Integrators and OEMs building on TRUSTED-V Verified silicon." },
-    { name: "Academic & Research", desc: "Universities and labs contributing open reference implementations." },
+    { name: "Academic and research", desc: "Universities and labs contributing open reference implementations." },
   ];
   return (
     <section className="tv-section border-b border-[#E5E4DF]" data-testid="roadmap-consortium">
@@ -162,7 +162,7 @@ const BackedByBosch = () => (
         </div>
         <div className="lg:col-span-4 lg:col-start-9">
           <p className="text-[14.5px] leading-[1.7] text-white/70">
-            Bosch Global Software Technologies leads TRUSTED-V — automotive-grade rigour and long-term support for open RISC-V.
+            Bosch Global Software Technologies leads TRUSTED-V — automotive-grade rigor and long-term support for open RISC-V.
           </p>
         </div>
       </div>

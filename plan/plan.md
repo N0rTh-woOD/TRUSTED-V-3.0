@@ -1,58 +1,57 @@
-# Team-Gated Informational TRUSTED-V Website
+# Public Website Content Consistency Review
 
-TRUSTED-V will be a focused, informative website for exploring the RISC-V platform, products, services, marketplace, and partner ecosystem.
-During development, only the internal team can enter the website; once signed in, everyone sees the same finished-site experience.
+TRUSTED-V will receive a complete editorial review of its public informational website. The review will make the platform read as one confident, technically credible product story across every public page.
+
+The work will cover wording, punctuation, grammar, naming, capitalization, terminology, calls to action, headings, and related cross-page references. Sign-in, account, unavailable-route, admin-retirement, form-validation, and other gated or operational text are outside this review.
 
 ## Who it’s for
 
-- Internal TRUSTED-V team members reviewing pages, content, and design before public release.
-- Prospective embedded engineers, partners, and customers once the site is ready to be opened publicly.
+- Prospective embedded engineers evaluating the RISC-V platform.
+- Potential customers and partners exploring products, marketplace information, services, and contact paths.
+- Internal team members reviewing public-facing language ahead of launch.
 
 ## Core features and experience
 
-- Keep the sign-in gate as the sole development-phase restriction, so non-team visitors cannot browse the work-in-progress site.
-- Remove the Admin Dashboard and every administrative destination, control, shortcut, and navigation entry.
-- Remove administrative management screens for hardware, middleware, software components, IDE downloads, applications, users, and retired model settings.
-- Keep the public-facing informational pages: homepage, platform, product suite, secure software products, marketplace, services, partner information, contact, and supporting resource pages.
-- Keep existing product and marketplace information readable and browseable; there will be no private management interface behind the team login.
-- Direct links to former admin URLs will show the same clear unavailable screen used for retired features, rather than exposing a dashboard or a broken page.
+- Apply one consistent editorial style to all public pages, including headings, section labels, body copy, buttons, navigation, cards, captions, form labels, helper text, and public success states.
+- Standardize product, platform, partner, and technology names wherever the same concept appears on multiple pages.
+- Correct grammar, punctuation, spelling, sentence flow, capitalization, singular/plural agreement, and inconsistent abbreviations.
+- Make title case, sentence case, full stops, commas, colons, ampersands, hyphenation, and technical notation consistent according to a defined site-wide style.
+- Preserve factual claims, technical meaning, product availability labels, existing routes, and the established TRUSTED-V voice; no new claims, offers, features, or partner positioning will be invented.
+- Resolve duplicated or conflicting public descriptions so related pages reinforce the same platform narrative.
 
 ## User flow
 
-1. A visitor reaches the website and is asked to sign in while the development gate is active.
-2. An approved team member signs in and lands on the informational TRUSTED-V website.
-3. The team member browses the platform, products, marketplace, services, and contact information without encountering admin tools or management areas.
-4. A former admin link displays a simple unavailable page with links back to relevant public-facing sections.
-5. When the site is finalized, the sign-in gate can be removed in a separate release so visitors can browse the same website publicly.
+1. A signed-in reviewer explores any public page and encounters clear, consistent terminology and polished copy.
+2. Product, marketplace, platform, service, contact, and partner pages use the same names and descriptions for shared concepts.
+3. Calls to action and labels use a consistent tone and punctuation, making page-to-page movement feel deliberate.
+4. Public forms and their visible guidance remain understandable and professionally written without changing their underlying behavior.
 
 ## UI/UX feel
 
-- Preserve the existing TRUSTED-V editorial semiconductor visual language, typography, responsive layouts, and platform-focused navigation.
-- Keep the experience calm and product-led: no dashboard cards, operational counters, internal management controls, or development-only language.
-- Make unavailable legacy destinations clear and neutral, with an obvious route back to products or services.
+- Preserve the existing editorial semiconductor visual language, hierarchy, typography, layouts, and responsive behavior.
+- Keep copy concise, direct, and technically literate, with a calm B2B tone suited to RISC-V engineers and partners.
+- Retain the established visual emphasis of headings, labels, buttons, and product names; this is an editorial polish pass, not a redesign.
 
 ## Implementation phases
 
-### Phase 1 — Informational website only (build now)
-- Remove all admin pages, admin navigation, user-menu admin access, and related management controls from the active website.
-- Retire all former admin browser destinations with the clear unavailable screen.
-- Retire admin-only service requests safely so old links cannot reveal management functionality.
-- Retain the existing sign-in gate and send authenticated team members to the same informational site experience.
-- Verify that the platform, products, marketplace, services, contact flows, and responsive navigation remain intact.
+### Phase 1 — Public content consistency pass (build now)
+- Create and apply a public-site editorial style baseline.
+- Review all public page content and related shared navigation/footer text.
+- Correct grammar, punctuation, capitalization, terminology, CTA wording, and repeated product references.
+- Reconcile inconsistent descriptions and labels while preserving meaning and factual claims.
 
-### Phase 2 — Content and design completion (not built now)
-- Complete remaining page content, product positioning, imagery, and design-team homepage updates.
-- Review each informational page for launch-ready copy and remove any remaining development-era wording.
+### Phase 2 — Launch copy refinement (not built now)
+- Review public positioning for persuasive clarity, proof points, and audience-specific value propositions.
+- Identify public areas that need approved new product copy, partner messaging, or case-study material.
 
-### Phase 3 — Public launch preparation (not built now)
-- Define the approval criteria for opening the website publicly.
-- Remove the sign-in gate only after the pages and design are finalized.
-- Decide separately whether internal administration should return in a private, purpose-built workspace.
+### Phase 3 — Ongoing editorial governance (not built now)
+- Establish a reusable content style guide for future pages and updates.
+- Add a lightweight editorial review process before future public content changes are released.
 
 ## Assumptions
 
-- The current login remains available only to restrict access during development; it is not an admin portal.
-- All signed-in team members receive the same website access, with no role-specific dashboard or private landing page.
-- Existing informational pages and contact/partner submission flows remain available unless they are explicitly identified later as internal-only.
-- Former admin URLs should be unavailable rather than redirected to an unrelated page.
-- The future public release will be handled as a separate, deliberate change after the website is finalized.
+- The scope is limited to public pages only, as selected; gated, account, administrative, unavailable-route, validation, and operational text are excluded.
+- English remains the website language.
+- Existing product names, platform names, partner names, standards, technical specifications, and availability statements are treated as approved facts unless they conflict with another public page.
+- The review favors concise US English punctuation and sentence case for descriptive UI text, while preserving established all-caps product/brand marks and technical abbreviations where appropriate.
+- No public information architecture, page layout, route, functionality, or visual design changes are included unless a text correction requires a small label adjustment.

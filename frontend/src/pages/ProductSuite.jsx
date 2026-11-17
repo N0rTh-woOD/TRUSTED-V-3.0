@@ -32,7 +32,7 @@ const ModulesDetail = () => {
       items: [{ name: "Virtual Platform", to: "/product-suite#virtualization" }, { name: "RISC-V Hypervisor", to: "/product-suite#virtualization" }, { name: "Simulator", to: "/product-suite#virtualization" }] },
     { num: "03", id: "secure-software", title: "Secure Rust Software", desc: "rBoot, rustBoot, RTOS, HAL/PAC/HAM and Crypto Stack — memory-safe, PQC-ready, certification-friendly.",
       items: [{ name: "rBoot & rustBoot", to: "/product/secure-boot" }, { name: "Crypto Stack", to: "/product/crypto-stack" }, { name: "RTOS Benchmarks", to: "/product/rtos-benchmark" }] },
-    { num: "04", id: "signoff", title: "Silicon SignOff & Trust", desc: "SignOff Silicon, TRUSTED-V Verified and TVOTS — vendor-neutral certification for RISC-V SoCs.",
+    { num: "04", id: "signoff", title: "Silicon Sign-Off & Trust", desc: "SignOff Silicon, TRUSTED-V Verified and TVOTS — vendor-neutral certification for RISC-V SoCs.",
       items: [{ name: "SignOff Silicon", to: "/product-suite#signoff" }, { name: "TRUSTED-V Verified", to: "/product-suite#certification" }, { name: "TVOTS", to: "/product-suite#signoff" }] },
   ];
 
@@ -91,7 +91,7 @@ const Comparison = () => (
           ["Certifiable secure boot + PQC crypto", true, false, "partial"],
           ["Pre-silicon virtual platform & hypervisor", true, false, "partial"],
           ["Vendor-neutral silicon sign-off", true, false, false],
-          ["Hardware-aware IDE + cloud WebIDE", true, "partial", false],
+          ["Hardware-aware developer tooling", true, "partial", false],
           ["Backed by Bosch · commercial LTS", true, false, "partial"],
         ]}
       />
@@ -103,7 +103,7 @@ const SubBrands = () => {
   const brands = [
     { name: "TRUSTED-V Verified", accent: BLUE_STEPS[3], desc: "Reference certification for RISC-V silicon and firmware. Vendor-neutral, evidence-driven." },
     { name: "SignOff Silicon", accent: BLUE_STEPS[4], desc: "Silicon assurance — from RTL review to post-tapeout attestation." },
-    { name: "TRUSTED Certification", accent: BLUE_STEPS[5], desc: "Independent third-party programme for systems built on TRUSTED-V." },
+    { name: "TRUSTED Certification", accent: BLUE_STEPS[5], desc: "Independent third-party program for systems built on TRUSTED-V." },
   ];
   return (
     <section id="certification" className="tv-section border-b border-[#E5E4DF] bg-[#F7F7F5]" data-testid="sub-brands">
@@ -117,7 +117,7 @@ const SubBrands = () => {
             <div key={b.name} className="tv-panel relative overflow-hidden p-7 md:p-8 min-h-[200px]">
               <span className="absolute top-0 left-0 bottom-0 w-[3px]" style={{ background: b.accent }} />
               <div className="pl-3">
-                <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">Programme</div>
+                <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#004A7F]">Program</div>
                 <h3 className="mt-3 text-[21px] md:text-[23px] font-semibold tracking-tight text-[#0B0F14]">{b.name}</h3>
                 <p className="mt-2.5 text-[14px] leading-[1.65] text-[#5A6472]">{b.desc}</p>
               </div>

@@ -121,7 +121,7 @@ const ContactPage = () => {
                     onChange={onChange("interest")}
                     testid="input-interest"
                     options={[
-                      "", "Development Platform (IDE)", "Virtualization", "Secure Rust Software", "Silicon SignOff", "Certification", "Consortium / Partnership", "Plan: pro", "Plan: enterprise",
+                      "", "Development platform (IDE)", "Virtualization", "Secure Rust software", "Silicon Sign-Off & Trust", "Certification", "Consortium or partnership", "Plan: Pro", "Plan: Enterprise",
                     ]}
                   />
                 </div>

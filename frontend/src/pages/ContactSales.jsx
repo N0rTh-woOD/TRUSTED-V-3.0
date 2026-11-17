@@ -75,9 +75,9 @@ const ContactSales = () => {
           <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-8 h-8 text-green-600" />
           </div>
-          <h2 className="text-2xl font-bold text-foreground mb-3">Thank You!</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-3">Thank you.</h2>
           <p className="text-muted-foreground mb-2">
-            Your sales inquiry has been submitted. Our team will review your requirements and reach out within <strong>1-2 business days</strong>.
+            Your sales inquiry has been submitted. Our team will review your requirements and respond within <strong>1–2 business days</strong>.
           </p>
           <p className="text-sm text-muted-foreground">
             Selected plan: <span className="font-semibold capitalize">{form.plan}</span>
@@ -94,10 +94,10 @@ const ContactSales = () => {
           <div className="max-w-2xl mx-auto text-center mb-12">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Sales</span>
             <h1 className="text-3xl sm:text-4xl font-bold text-foreground mt-3 mb-4">
-              Talk to Our Sales Team
+              Talk to our sales team.
             </h1>
             <p className="text-base text-muted-foreground">
-              Tell us about your project requirements and team size. We'll help you find the right plan and get you started.
+              Tell us about your project requirements and team size. We&apos;ll help you find the right plan and get you started.
             </p>
           </div>
 
@@ -108,7 +108,7 @@ const ContactSales = () => {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="name" className="text-sm font-medium">Full Name *</Label>
+                      <Label htmlFor="name" className="text-sm font-medium">Full name *</Label>
                       <div className="relative mt-1.5">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                         <Input 
@@ -123,7 +123,7 @@ const ContactSales = () => {
                       </div>
                     </div>
                     <div>
-                      <Label htmlFor="email" className="text-sm font-medium">Work Email *</Label>
+                      <Label htmlFor="email" className="text-sm font-medium">Work email *</Label>
                       <div className="relative mt-1.5">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                         <Input 
@@ -174,7 +174,7 @@ const ContactSales = () => {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="plan" className="text-sm font-medium">Interested Plan</Label>
+                      <Label htmlFor="plan" className="text-sm font-medium">Plan of interest</Label>
                       <select 
                         id="plan"
                         data-testid="sales-plan"
@@ -188,7 +188,7 @@ const ContactSales = () => {
                       </select>
                     </div>
                     <div>
-                      <Label htmlFor="teamSize" className="text-sm font-medium">Team Size</Label>
+                      <Label htmlFor="teamSize" className="text-sm font-medium">Team size</Label>
                       <select 
                         id="teamSize"
                         data-testid="sales-team-size"
@@ -206,7 +206,7 @@ const ContactSales = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="message" className="text-sm font-medium">Project Details *</Label>
+                    <Label htmlFor="message" className="text-sm font-medium">Project details *</Label>
                     <textarea 
                       id="message"
                       data-testid="sales-message"
@@ -224,7 +224,7 @@ const ContactSales = () => {
                     className="w-full h-11 text-base font-semibold" 
                     disabled={submitting}
                   >
-                    {submitting ? "Submitting..." : "Submit Inquiry"}
+                    {submitting ? "Submitting..." : "Submit inquiry"}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </form>
@@ -235,7 +235,7 @@ const ContactSales = () => {
             <div className="lg:col-span-2 space-y-6">
               <Card className="border-primary/20 bg-primary/5">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-3">What happens next?</h3>
+                  <h3 className="font-semibold text-foreground mb-3">What happens next</h3>
                   <ol className="space-y-3 text-sm text-muted-foreground">
                     <li className="flex gap-3">
                       <span className="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center flex-shrink-0">1</span>
@@ -255,7 +255,7 @@ const ContactSales = () => {
 
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-3">Quick Contact</h3>
+                  <h3 className="font-semibold text-foreground mb-3">Direct contact</h3>
                   <div className="space-y-3 text-sm">
                     <div className="flex items-center gap-3 text-muted-foreground">
                       <Mail className="w-4 h-4 text-primary" />
@@ -272,9 +272,9 @@ const ContactSales = () => {
               <div className="bg-slate-50 rounded-lg p-5 border border-border">
                 <h4 className="font-semibold text-foreground text-sm mb-2">Looking for something else?</h4>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li><a href="/partner-registration" className="text-primary hover:underline">Become a Hardware Partner</a></li>
-                  <li><a href="/board-support" className="text-primary hover:underline">Request Board Support</a></li>
-                  <li><a href="/download-ide" className="text-primary hover:underline">Jarvyn IDE, coming soon</a></li>
+                  <li><a href="/partner-registration" className="text-primary hover:underline" data-testid="sales-partner-registration-link">Become a hardware partner</a></li>
+                  <li><a href="/board-support" className="text-primary hover:underline" data-testid="sales-board-support-link">Request board support</a></li>
+                  <li><a href="/download-ide" className="text-primary hover:underline" data-testid="sales-ide-status-link">Jarvyn IDE · Coming soon</a></li>
                 </ul>
               </div>
             </div>

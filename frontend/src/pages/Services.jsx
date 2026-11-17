@@ -54,7 +54,7 @@ const WhichFits = () => {
     ["You bring", "A specification or product idea", "An engineering team and codebase"],
     ["We provide", "Sourcing, PCB design, firmware, delivery", "IDE, marketplace and expert support"],
     ["You receive", "A ready-to-deploy hardware and software system", "A subscription to the full development platform"],
-    ["Typical start", "Discovery call with our engineers", "Free tier, build in Jarvyn today"],
+    ["Typical start", "Discovery call with our engineers", "Platform-access discussion and planned tooling updates"],
   ];
   return (
     <section className="tv-section border-b border-[#E5E4DF]" data-testid="services-compare">
@@ -69,7 +69,7 @@ const WhichFits = () => {
 };
 
 const FinalCTA = () => (
-  <section className="tv-section-tight" data-testid="services-cta"><div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8"><h2 className="tv-h2">Not sure which fits? <span className="text-[#003262]">Ask us.</span></h2><div className="flex w-full flex-col sm:w-auto sm:flex-row gap-3"><PrimaryCTA to="/contact" className="w-full sm:w-auto" data-testid="services-cta-contact">Talk to our engineers</PrimaryCTA><SecondaryCTA to="/download-ide" className="w-full sm:w-auto" data-testid="services-cta-ide">Start free with Jarvyn</SecondaryCTA></div></div></section>
+  <section className="tv-section-tight" data-testid="services-cta"><div className="tv-container flex flex-col md:flex-row md:items-end justify-between gap-8"><h2 className="tv-h2">Not sure which fits? <span className="text-[#003262]">Ask us.</span></h2><div className="flex w-full flex-col sm:w-auto sm:flex-row gap-3"><PrimaryCTA to="/contact" className="w-full sm:w-auto" data-testid="services-cta-contact">Talk to our engineers</PrimaryCTA><SecondaryCTA to="/download-ide" className="w-full sm:w-auto" data-testid="services-cta-ide">View Jarvyn IDE status</SecondaryCTA></div></div></section>
 );
 
 export default Services;

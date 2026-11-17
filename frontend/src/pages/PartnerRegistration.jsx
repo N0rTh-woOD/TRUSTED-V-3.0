@@ -104,15 +104,15 @@ const PartnerRegistration = () => {
           <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-8 h-8 text-green-600" />
           </div>
-          <h1 className="text-2xl font-bold text-foreground mb-4">Application Submitted!</h1>
-          <p className="text-muted-foreground mb-8">
+          <h1 className="text-2xl font-bold text-foreground mb-4">Application submitted.</h1>
+          <p className="text-muted-foreground mb-8" data-testid="partner-success-message">
             Thank you for your interest in partnering with TRUSTED-V. Our team will review your 
-            application and get back to you within 5 business days.
+            application and respond within five business days.
           </p>
           <Link to="/" data-testid="partner-success-home-link">
             <Button data-testid="partner-success-home-button">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Return Home
+              Return home
             </Button>
           </Link>
         </div>
@@ -132,11 +132,11 @@ const PartnerRegistration = () => {
             </Link>
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">Partner Registration</span>
             <h1 className="text-4xl font-bold text-foreground mt-2 mb-4">
-              Become a Partner
+              Become a partner
             </h1>
             <p className="text-lg text-muted-foreground">
-              Join our ecosystem and help shape the future of secure RISC-V development. 
-              Fill out the form below to apply for partnership.
+              Join the TRUSTED-V ecosystem and help shape the future of secure RISC-V development. 
+              Complete the form below to apply for partnership.
             </p>
           </div>
         </div>
@@ -149,7 +149,7 @@ const PartnerRegistration = () => {
             {/* Partner Type Selection */}
             <Card>
               <CardHeader>
-                <h2 className="text-lg font-semibold text-foreground">Partner Type *</h2>
+                <h2 className="text-lg font-semibold text-foreground">Partner type *</h2>
                 <p className="text-sm text-muted-foreground">Select the category that best describes your organization</p>
               </CardHeader>
               <CardContent>
@@ -190,13 +190,13 @@ const PartnerRegistration = () => {
             {/* Company Information */}
             <Card>
               <CardHeader>
-                <h2 className="text-lg font-semibold text-foreground">Company Information</h2>
+                <h2 className="text-lg font-semibold text-foreground">Company information</h2>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium text-foreground mb-1 block">
-                      Company / Organization Name *
+                      Company or organization name *
                     </label>
                     <Input
                       data-testid="partner-company-name-input"
@@ -224,7 +224,7 @@ const PartnerRegistration = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium text-foreground mb-1 block">
-                      Contact Name *
+                      Contact name *
                     </label>
                     <Input
                       data-testid="partner-contact-name-input"
@@ -237,7 +237,7 @@ const PartnerRegistration = () => {
                   </div>
                   <div>
                     <label className="text-sm font-medium text-foreground mb-1 block">
-                      Email Address *
+                      Email address *
                     </label>
                     <Input
                       data-testid="partner-email-input"
@@ -253,7 +253,7 @@ const PartnerRegistration = () => {
                 
                 <div>
                   <label className="text-sm font-medium text-foreground mb-1 block">
-                    Phone Number
+                      Phone number
                   </label>
                   <Input
                     data-testid="partner-phone-input"
@@ -269,7 +269,7 @@ const PartnerRegistration = () => {
             {/* Product Categories */}
             <Card>
               <CardHeader>
-                <h2 className="text-lg font-semibold text-foreground">Product Categories</h2>
+                <h2 className="text-lg font-semibold text-foreground">Product categories</h2>
                 <p className="text-sm text-muted-foreground">Select all that apply to your offerings</p>
               </CardHeader>
               <CardContent>
@@ -296,12 +296,12 @@ const PartnerRegistration = () => {
             {/* Description */}
             <Card>
               <CardHeader>
-                <h2 className="text-lg font-semibold text-foreground">About Your Organization</h2>
+                <h2 className="text-lg font-semibold text-foreground">About your organization</h2>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <label className="text-sm font-medium text-foreground mb-1 block">
-                    Company Description *
+                    Company description *
                   </label>
                   <Textarea
                     data-testid="partner-description-input"
@@ -333,7 +333,7 @@ const PartnerRegistration = () => {
             {/* Terms & Submit */}
             <Card>
               <CardHeader>
-                <h2 className="text-lg font-semibold text-foreground">Terms & Conditions</h2>
+                <h2 className="text-lg font-semibold text-foreground">Terms and conditions</h2>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="max-h-48 overflow-y-auto p-4 bg-slate-50 rounded-lg border border-border text-xs text-muted-foreground leading-relaxed space-y-3">
@@ -377,7 +377,7 @@ const PartnerRegistration = () => {
                   ) : (
                     <>
                       <Send className="w-4 h-4 mr-2" />
-                      Submit Application
+                      Submit application
                     </>
                   )}
                 </Button>

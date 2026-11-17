@@ -48,7 +48,7 @@ const sections = [
     title: "Certification",
     items: [
       { name: "Turnaround & evidence", desc: "Prepare your evidence bundle inside Jarvyn." },
-      { name: "TRUSTED-V Verified", desc: "Vendor-neutral silicon certification programme." },
+      { name: "TRUSTED-V Verified", desc: "Vendor-neutral silicon certification program." },
       { name: "Compliance mapping", desc: "CC, PSA, ISO 26262, IEC 62443 auto-mapped." },
     ],
   },

@@ -46,6 +46,12 @@ Build a highly professional, team-gated RISC-V platform information website usin
 - `iteration_40.json` passed all 45 browser checks and 12/14 backend checks for the team-gated release. Follow-up self-tests corrected the two public submission defects found in that run: typed contact, partnership and board-support request boundaries now return validation `422`s for malformed input and preserve all submitted fields.
 - Verified exact database persistence and cleanup for both ContactPage and ContactSales payload shapes plus partnership motivation; no permanent test records or credentials were changed. **No mocked flows.**
 
+### Phase 24 — Public Website Content Consistency Review (2026-11-17)
+- Completed an editorial-only consistency pass across public informational pages, shared navigation/footer, homepage and services data, product language, CTA labels, public form labels/helper copy, and public success states. No routes, layouts, behavior, factual claims, or technical specifications changed.
+- Standardized concise US English and public terminology, including **Silicon Sign-Off & Trust** as the module name while retaining **SignOff Silicon** as the distinct product name. Corrected US spellings such as Defense and Optimized, sentence-case form and success-state labels, and the shared header CTA to “Contact us.”
+- Reconciled public availability language: Jarvyn IDE and WebIDE consistently remain **Coming soon**. Removed outdated Jarvyn AI-capability copy in favor of planned embedded-aware tooling language; industry-use references to Edge AI and partner accelerator categories remain factual product-domain content.
+- Added missing test IDs to the board-support fields and links plus the sales sidebar links. Verified `iteration_41.json`: backend 13/13 passed; public routes, navigation, product terminology, availability labels, non-AI Jarvyn copy, form persistence, and mobile overflow checks passed. Follow-up manual authenticated check confirmed the sales success state and removed its one temporary verification record. **No mocked flows.**
+
 ### Phase 20 — Uploaded Hero Animation & Minimalist Login (2026-10-16)
 Verified by testing_agent (`iteration_38.json`): **all executed frontend checks passed**. Production build and authenticated screenshot smoke passed; existing unrelated build warnings remain.
 - Removed the homepage hero's four-column specification strip (RISC-V native, Language, Security, Deployment) entirely. Equivalent technical content elsewhere remains unchanged.
@@ -356,7 +362,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 
 ## Prioritized Backlog
 ### P0 — Current scope
-- Team-gated informational website complete and verified. Await user review of the informational content and supplied homepage-image batches.
+- Team-gated informational website and public editorial review are complete and verified. Await user review and the remaining homepage image batches.
 
 ### P1 — High
 - Refactor monolithic `server.py` into modular APIRouter modules
@@ -384,7 +390,7 @@ Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform —
 1. **RISC-V Development Platform** — IDE (Jarvyn), WebIDE, Debugger/Programmer/Trace
 2. **Virtualization & Simulation** (NEW) — Virtual Platform, RISC-V Hypervisor, Simulator
 3. **Secure Rust Software** — rBoot, rustBoot, RTOS, HAL/PAC/HAM, Crypto Stack, SDKs
-4. **Silicon SignOff & Trust** — SignOff Silicon, TRUSTED-V Verified, TVOTS
+4. **Silicon Sign-Off & Trust** — SignOff Silicon, TRUSTED-V Verified, TVOTS
 
 **Partner Ecosystem highlighted (SiFive, Akeana, C-DAC, Mindgrove, Upbeat Tech)** across Landing + Products pages.
 > CORRECTION (Jun 2026): There is NO MIPS / MIPS ARC-V tie-up. IP partners are **SiFive and Akeana only**. Any earlier mention above is void.
@@ -404,4 +410,4 @@ Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform —
 - **Feb 2026**: Hero chip hover-reveal animation, standardized RISC-V colors (Navy #003262 + Cyan #00B4E0), unified PageHero component across secondary pages, updated tagline.
 
 ---
-*Last Updated: 2026-11-17*
+*Last Updated: 2026-11-17 — Phase 24 verified*
