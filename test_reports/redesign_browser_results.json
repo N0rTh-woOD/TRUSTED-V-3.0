@@ -1,0 +1,250 @@
+{
+  "pages": {
+    "checks": [
+      {
+        "check": "demo login pages",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /about",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /product-suite",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /developer-portal",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /hardware-catalog",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /marketplace",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /product/secure-boot",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /product/crypto-stack",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /product/rtos-benchmark",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /partners",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /partner-registration",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /download-ide",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /webide",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /blog",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /board-support",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /contact-sales",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /contact",
+        "passed": true
+      },
+      {
+        "check": "1920px route/layout /services",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /about",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /product-suite",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /developer-portal",
+        "passed": false,
+        "issue": "{'width': 390, 'document': 478}"
+      },
+      {
+        "check": "390px route/layout /hardware-catalog",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /marketplace",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /product/secure-boot",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /product/crypto-stack",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /product/rtos-benchmark",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /partners",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /partner-registration",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /download-ide",
+        "passed": false,
+        "issue": "{'width': 390, 'document': 402}"
+      },
+      {
+        "check": "390px route/layout /webide",
+        "passed": false,
+        "issue": "{'width': 390, 'document': 402}"
+      },
+      {
+        "check": "390px route/layout /blog",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /board-support",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /contact-sales",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /contact",
+        "passed": true
+      },
+      {
+        "check": "390px route/layout /services",
+        "passed": true
+      },
+      {
+        "check": "Coming soon availability preserved",
+        "passed": true
+      }
+    ],
+    "browser_errors": []
+  },
+  "navigation": {
+    "checks": [
+      {
+        "check": "demo login navigation",
+        "passed": true
+      },
+      {
+        "check": "homepage header, hero frame and footer",
+        "passed": true
+      },
+      {
+        "check": "product menu opens on keyboard focus",
+        "passed": true
+      },
+      {
+        "check": "product menu Escape dismissal",
+        "passed": false,
+        "issue": "Escape does not dismiss products menu"
+      },
+      {
+        "check": "product menu keyboard tab sequence",
+        "passed": false,
+        "issue": "Tab goes to nav-marketplace instead of revealed product links"
+      },
+      {
+        "check": "desktop destination mega-jarvyn-ide",
+        "passed": true
+      },
+      {
+        "check": "desktop destination mega-webide",
+        "passed": true
+      },
+      {
+        "check": "desktop destination mega-developer-portal",
+        "passed": true
+      },
+      {
+        "check": "desktop destination mega-secure-boot",
+        "passed": true
+      },
+      {
+        "check": "desktop destination mega-crypto-stack",
+        "passed": true
+      },
+      {
+        "check": "desktop destination mega-rtos-options",
+        "passed": true
+      },
+      {
+        "check": "desktop destination mega-featured-cta",
+        "passed": true
+      },
+      {
+        "check": "desktop destination nav-contact-cta",
+        "passed": true
+      },
+      {
+        "check": "account settings navigation",
+        "passed": true
+      },
+      {
+        "check": "manual carousel, controls and keyboard",
+        "passed": true
+      },
+      {
+        "check": "carousel reduced motion interaction",
+        "passed": true
+      },
+      {
+        "check": "mobile accordion and persistent contact CTA",
+        "passed": true
+      },
+      {
+        "check": "mobile product destination and drawer closes",
+        "passed": false,
+        "issue": "Timeout 8000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"https://trv-platform-preview.preview.emergentagent.com/product/secure-boot\" until 'load'\n============================================================"
+      },
+      {
+        "check": "mobile carousel touch swipe",
+        "passed": true
+      },
+      {
+        "check": "logout clears session and restores gate",
+        "passed": true
+      }
+    ],
+    "browser_errors": []
+  }
+}

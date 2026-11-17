@@ -6,7 +6,7 @@ import { Eyebrow } from "@/components/ui-kit";
 import { ArrowUpRight } from "lucide-react";
 
 const About = () => (
-  <div className="bg-white text-[#0B0F14]">
+  <div className="editorial-page bg-white text-[#0B0F14]">
     <PageHero
       crumbs={[{ label: "About" }]}
       eyebrow="About TRUSTED-V"

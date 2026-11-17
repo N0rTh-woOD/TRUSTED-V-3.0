@@ -1,0 +1,16 @@
+[
+  {
+    "collection": "sales_inquiries",
+    "id": "29c0f20b-c139-41c6-9ac3-63558bd6f1fe",
+    "payload": {
+      "name": "TEST_Redesign42_f58b31e5c27a49778343042934eac6f8",
+      "email": "TEST_Redesign42_f58b31e5c27a49778343042934eac6f8@example.com",
+      "company": "TEST_Redesign42_f58b31e5c27a49778343042934eac6f8",
+      "phone": "+15555550100",
+      "country": "",
+      "product_interest": "Plan: enterprise",
+      "team_size": "6-20",
+      "message": "TEST_Redesign42_f58b31e5c27a49778343042934eac6f8"
+    }
+  }
+]

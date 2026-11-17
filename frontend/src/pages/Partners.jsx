@@ -10,7 +10,7 @@ const PLATFORM_FOUNDATIONS = [
 ];
 
 const Partners = () => (
-  <div className="bg-white text-[#0B0F14]" data-testid="platform-page">
+  <div className="editorial-page bg-white text-[#0B0F14]" data-testid="platform-page">
     <PageHero
       crumbs={[{ label: "Platform" }]}
       eyebrow="Platform"

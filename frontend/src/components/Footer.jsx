@@ -55,9 +55,9 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#00162B] text-white" data-testid="site-footer">
+    <footer className="site-footer bg-[#00162B] text-white" data-testid="site-footer">
       {/* Top: brand + link columns */}
-      <div className="tv-container pt-20 md:pt-24 pb-14 border-b border-white/10">
+      <div className="tv-container site-footer-top pt-20 md:pt-24 pb-14 border-b border-white/10">
         <div className="grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
             <TrustedVLogo size="md" dark />

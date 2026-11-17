@@ -31,6 +31,7 @@ const Navigation = () => {
   const { isAuthenticated, logout, user } = useAuth();
 
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openMega, setOpenMega] = useState(null);
   const megaTimer = useRef(null);
@@ -42,10 +43,23 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { setOpenMega(null); setMobileOpen(false); }, [location.pathname]);
+  useEffect(() => { setOpenMega(null); setMobileOpen(false); setMobileProductsOpen(false); }, [location.pathname]);
 
   const openMegaMenu = (name) => { clearTimeout(megaTimer.current); setOpenMega(name); };
   const scheduleClose = () => { clearTimeout(megaTimer.current); megaTimer.current = setTimeout(() => setOpenMega(null), 150); };
+  const closeMegaMenu = () => { clearTimeout(megaTimer.current); setOpenMega(null); };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") closeMegaMenu();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  const focusMegaMenu = () => {
+    window.requestAnimationFrame(() => document.querySelector('[data-testid="mega-jarvyn-ide"]')?.focus());
+  };
 
   const isActive = (it) => {
     const paths = it.match || [it.to];
@@ -74,12 +88,23 @@ const Navigation = () => {
                   <Link
                     to={it.to}
                     onClick={() => setOpenMega(null)}
+                    onFocus={() => it.hasMega && openMegaMenu(it.key)}
+                    onKeyDown={(event) => {
+                      if (it.hasMega && (event.key === "ArrowDown" || (event.key === "Tab" && !event.shiftKey))) {
+                        event.preventDefault();
+                        openMegaMenu(it.key);
+                        focusMegaMenu();
+                      }
+                    }}
                     data-testid={`nav-${it.label.toLowerCase()}`}
                     aria-current={isActive(it) ? "page" : undefined}
+                    aria-expanded={it.hasMega ? openMega === it.key : undefined}
+                    aria-controls={it.hasMega ? "products-mega-menu" : undefined}
                     className={`px-3.5 py-2 text-[14px] font-medium flex items-center gap-1 transition-colors ${active ? "tv-nav-pill" : "text-[#1A1F25] hover:text-[#003262]"}`}
+                    onFocusCapture={() => !it.hasMega && closeMegaMenu()}
                   >
                     {it.label}
-                    {it.hasMega && <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openMega === it.key ? "rotate-180" : ""}`} />}
+                    {it.hasMega && <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openMega === it.key ? "rotate-180" : ""}`} aria-hidden="true" />}
                   </Link>
                 </div>
               );
@@ -97,7 +122,7 @@ const Navigation = () => {
             </Link>
           </div>
 
-          <button onClick={() => setMobileOpen((v) => !v)} className="lg:hidden p-2 -mr-2 text-[#1A1F25]" aria-label="Toggle menu" data-testid="nav-mobile-toggle">
+          <button onClick={() => setMobileOpen((v) => !v)} className="lg:hidden p-2 -mr-2 text-[#1A1F25]" aria-label="Toggle menu" aria-expanded={mobileOpen} aria-controls="mobile-navigation" data-testid="nav-mobile-toggle">
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
@@ -107,6 +132,9 @@ const Navigation = () => {
             className="hidden lg:block absolute left-0 right-0 top-full bg-white border-b border-[#E5E4DF] shadow-[0_20px_40px_-24px_rgba(11,15,20,0.15)]"
             onMouseEnter={() => openMegaMenu("products")}
             onMouseLeave={scheduleClose}
+            id="products-mega-menu"
+            role="region"
+            aria-label="Products menu"
             data-testid="mega-products"
           >
             <div className="tv-container py-10">
@@ -127,9 +155,9 @@ const Navigation = () => {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-[#E5E4DF] bg-white">
+        <div id="mobile-navigation" className="lg:hidden border-t border-[#E5E4DF] bg-white" data-testid="mobile-navigation">
           <div className="tv-container py-6 flex flex-col">
-            <MobileGroup title="Products" links={[
+            <MobileGroup title="Products" open={mobileProductsOpen} onToggle={() => setMobileProductsOpen((value) => !value)} links={[
               { label: "Product suite", to: "/product-suite" },
               { label: "Jarvyn IDE · Coming soon", to: "/download-ide" },
               { label: "WebIDE · Coming soon", to: "/webide" },
@@ -176,6 +204,7 @@ const AccountMenu = ({ user, onLogout }) => {
         className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-full border border-[#E5E4DF] hover:border-[#2486C7] transition-colors"
         aria-haspopup="menu"
         aria-expanded={open}
+        aria-label="Account menu"
         data-testid="nav-account-menu"
       >
         <span className="w-7 h-7 rounded-full bg-[#004A7F] text-white text-[12px] font-semibold flex items-center justify-center">{initial}</span>
@@ -219,10 +248,19 @@ const MegaCol = ({ title, items }) => (
   </div>
 );
 
-const MobileGroup = ({ title, links }) => (
+const MobileGroup = ({ title, links, open, onToggle }) => (
   <div className="py-3 border-b border-[#E5E4DF]">
-    <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#5A6472] mb-2">{title}</div>
-    <div className="flex flex-col gap-2">
+    <button
+      type="button"
+      onClick={onToggle}
+      className="w-full flex items-center justify-between font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#5A6472]"
+      aria-expanded={open}
+      aria-controls="mobile-products-links"
+      data-testid="mobile-nav-products-toggle"
+    >
+      {title}<ChevronDown className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden="true" />
+    </button>
+    <div id="mobile-products-links" className={`${open ? "flex" : "hidden"} flex-col gap-2 pt-3`}>
       {links.map((l) => (
         <Link key={l.label} to={l.to} className="text-[15px] font-medium text-[#1A1F25]" data-testid={`mobile-nav-${l.label.toLowerCase().replace(/\W+/g, "-")}`}>
           {l.label}

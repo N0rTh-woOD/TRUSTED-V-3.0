@@ -5,7 +5,7 @@ import { Eyebrow, StepRail, PrimaryCTA, SecondaryCTA } from "@/components/ui-kit
 import { SERVICE_MODELS } from "@/data/services";
 
 const Services = () => (
-  <div className="bg-white text-[#0B0F14]" data-testid="services-page">
+  <div className="editorial-page bg-white text-[#0B0F14]" data-testid="services-page">
     <PageHero
       crumbs={[{ label: "Services" }]}
       eyebrow="Services"

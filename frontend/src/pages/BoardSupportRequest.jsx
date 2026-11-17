@@ -64,7 +64,7 @@ const BoardSupportRequest = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white" data-testid="board-support-page">
+    <div className="editorial-page editorial-form-page min-h-screen bg-white" data-testid="board-support-page">
       <section className="py-12 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/hardware-catalog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8" data-testid="board-back-link">

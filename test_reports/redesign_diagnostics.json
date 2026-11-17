@@ -1,0 +1,779 @@
+{
+  "desktop_menu": {
+    "bounds": {
+      "x": 0,
+      "y": 68,
+      "width": 1920,
+      "height": 149,
+      "top": 68,
+      "right": 1920,
+      "bottom": 217,
+      "left": 0
+    },
+    "inner": {
+      "x": 256,
+      "y": 108,
+      "width": 1408,
+      "height": 68,
+      "top": 108,
+      "right": 1664,
+      "bottom": 176,
+      "left": 256
+    },
+    "links": [
+      {
+        "tid": "mega-jarvyn-ide",
+        "bounds": {
+          "x": 244,
+          "y": 141.046875,
+          "width": 466.65625,
+          "height": 58.28125,
+          "top": 141.046875,
+          "right": 710.65625,
+          "bottom": 199.328125,
+          "left": 244
+        }
+      },
+      {
+        "tid": "mega-webide",
+        "bounds": {
+          "x": 244,
+          "y": 203.328125,
+          "width": 466.65625,
+          "height": 58.28125,
+          "top": 203.328125,
+          "right": 710.65625,
+          "bottom": 261.609375,
+          "left": 244
+        }
+      },
+      {
+        "tid": "mega-developer-portal",
+        "bounds": {
+          "x": 244,
+          "y": 265.609375,
+          "width": 466.65625,
+          "height": 58.28125,
+          "top": 265.609375,
+          "right": 710.65625,
+          "bottom": 323.890625,
+          "left": 244
+        }
+      },
+      {
+        "tid": "mega-secure-boot",
+        "bounds": {
+          "x": 726.65625,
+          "y": 141.046875,
+          "width": 466.671875,
+          "height": 58.28125,
+          "top": 141.046875,
+          "right": 1193.328125,
+          "bottom": 199.328125,
+          "left": 726.65625
+        }
+      },
+      {
+        "tid": "mega-crypto-stack",
+        "bounds": {
+          "x": 726.65625,
+          "y": 203.328125,
+          "width": 466.671875,
+          "height": 58.28125,
+          "top": 203.328125,
+          "right": 1193.328125,
+          "bottom": 261.609375,
+          "left": 726.65625
+        }
+      },
+      {
+        "tid": "mega-rtos-options",
+        "bounds": {
+          "x": 726.65625,
+          "y": 265.609375,
+          "width": 466.671875,
+          "height": 58.28125,
+          "top": 265.609375,
+          "right": 1193.328125,
+          "bottom": 323.890625,
+          "left": 726.65625
+        }
+      },
+      {
+        "tid": "mega-featured-cta",
+        "bounds": {
+          "x": 1254.328125,
+          "y": 225.796875,
+          "width": 125,
+          "height": 20.140625,
+          "top": 225.796875,
+          "right": 1379.328125,
+          "bottom": 245.9375,
+          "left": 1254.328125
+        }
+      }
+    ]
+  },
+  "menu_stays_open_after_focus_leaves": true,
+  "mobile_menu": {
+    "group": {
+      "x": 24,
+      "y": 93,
+      "width": 342,
+      "height": 68,
+      "top": 93,
+      "right": 366,
+      "bottom": 161,
+      "left": 24
+    },
+    "links": [
+      {
+        "tid": "mobile-nav-product-suite",
+        "bounds": {
+          "x": 24,
+          "y": 133.265625,
+          "width": 342,
+          "height": 23.25,
+          "top": 133.265625,
+          "right": 366,
+          "bottom": 156.515625,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-product-suite"
+      },
+      {
+        "tid": "mobile-nav-jarvyn-ide-coming-soon",
+        "bounds": {
+          "x": 24,
+          "y": 164.515625,
+          "width": 342,
+          "height": 23.25,
+          "top": 164.515625,
+          "right": 366,
+          "bottom": 187.765625,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-marketplace"
+      },
+      {
+        "tid": "mobile-nav-webide-coming-soon",
+        "bounds": {
+          "x": 24,
+          "y": 195.765625,
+          "width": 342,
+          "height": 23.25,
+          "top": 195.765625,
+          "right": 366,
+          "bottom": 219.015625,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-marketplace"
+      },
+      {
+        "tid": "mobile-nav-secure-boot",
+        "bounds": {
+          "x": 24,
+          "y": 227.015625,
+          "width": 342,
+          "height": 23.25,
+          "top": 227.015625,
+          "right": 366,
+          "bottom": 250.265625,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-platform"
+      },
+      {
+        "tid": "mobile-nav-crypto-stack",
+        "bounds": {
+          "x": 24,
+          "y": 258.265625,
+          "width": 342,
+          "height": 23.25,
+          "top": 258.265625,
+          "right": 366,
+          "bottom": 281.515625,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-services"
+      },
+      {
+        "tid": "mobile-nav-rtos",
+        "bounds": {
+          "x": 24,
+          "y": 289.515625,
+          "width": 342,
+          "height": 23.25,
+          "top": 289.515625,
+          "right": 366,
+          "bottom": 312.765625,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-services"
+      },
+      {
+        "tid": "mobile-nav-marketplace",
+        "bounds": {
+          "x": 24,
+          "y": 161,
+          "width": 342,
+          "height": 48.25,
+          "top": 161,
+          "right": 366,
+          "bottom": 209.25,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-marketplace"
+      },
+      {
+        "tid": "mobile-nav-platform",
+        "bounds": {
+          "x": 24,
+          "y": 209.25,
+          "width": 342,
+          "height": 48.25,
+          "top": 209.25,
+          "right": 366,
+          "bottom": 257.5,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-platform"
+      },
+      {
+        "tid": "mobile-nav-services",
+        "bounds": {
+          "x": 24,
+          "y": 257.5,
+          "width": 342,
+          "height": 48.25,
+          "top": 257.5,
+          "right": 366,
+          "bottom": 305.75,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-services"
+      },
+      {
+        "tid": "mobile-nav-about",
+        "bounds": {
+          "x": 24,
+          "y": 305.75,
+          "width": 342,
+          "height": 48.25,
+          "top": 305.75,
+          "right": 366,
+          "bottom": 354,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-about"
+      },
+      {
+        "tid": "mobile-nav-account",
+        "bounds": {
+          "x": 24,
+          "y": 354,
+          "width": 342,
+          "height": 48.25,
+          "top": 354,
+          "right": 366,
+          "bottom": 402.25,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-account"
+      },
+      {
+        "tid": "mobile-nav-contact-cta",
+        "bounds": {
+          "x": 24,
+          "y": 478.25,
+          "width": 342,
+          "height": 48,
+          "top": 478.25,
+          "right": 366,
+          "bottom": 526.25,
+          "left": 24
+        },
+        "centerHit": "mobile-nav-contact-cta"
+      }
+    ]
+  },
+  "secure_boot_click_actual_url": "https://trv-platform-preview.preview.emergentagent.com/partners",
+  "/developer-portal": {
+    "document": 478,
+    "width": 390,
+    "overflow": [
+      {
+        "tag": "DIV",
+        "tid": null,
+        "classes": "lg:col-span-7",
+        "text": "Developer portalDocs andreference builds.Everything you need to ship on TRUSTED-V \u2014 from your first ",
+        "bounds": {
+          "x": 24,
+          "y": 166.8125,
+          "width": 480.5,
+          "height": 191.640625,
+          "top": 166.8125,
+          "right": 504.5,
+          "bottom": 358.453125,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "DIV",
+        "tid": "page-hero-eyebrow",
+        "classes": " mb-5",
+        "text": "Developer portal",
+        "bounds": {
+          "x": 24,
+          "y": 166.8125,
+          "width": 480.5,
+          "height": 26.796875,
+          "top": 166.8125,
+          "right": 504.5,
+          "bottom": 193.609375,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "H1",
+        "tid": "page-hero-title",
+        "classes": "tv-h1",
+        "text": "Docs andreference builds.",
+        "bounds": {
+          "x": 24,
+          "y": 213.609375,
+          "width": 480.5,
+          "height": 72.0625,
+          "top": 213.609375,
+          "right": 504.5,
+          "bottom": 285.671875,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "P",
+        "tid": "page-hero-subtitle",
+        "classes": "tv-lede mt-5",
+        "text": "Everything you need to ship on TRUSTED-V \u2014 from your first `cargo build` to a certified silicon tape",
+        "bounds": {
+          "x": 24,
+          "y": 305.671875,
+          "width": 480.5,
+          "height": 52.78125,
+          "top": 305.671875,
+          "right": 504.5,
+          "bottom": 358.453125,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "DIV",
+        "tid": null,
+        "classes": "lg:col-span-5",
+        "text": "quick-start.shready# Install\n$ curl -fsSL trusted-v.com/install | sh\n\n# Create a project\n$ jarvyn ne",
+        "bounds": {
+          "x": 24,
+          "y": 398.453125,
+          "width": 480.5,
+          "height": 293.796875,
+          "top": 398.453125,
+          "right": 504.5,
+          "bottom": 692.25,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "DIV",
+        "tid": null,
+        "classes": "border border-[#E5E4DF] bg-[#0B0F14] text-white overflow-hidden",
+        "text": "quick-start.shready# Install\n$ curl -fsSL trusted-v.com/install | sh\n\n# Create a project\n$ jarvyn ne",
+        "bounds": {
+          "x": 24,
+          "y": 398.453125,
+          "width": 480.5,
+          "height": 293.796875,
+          "top": 398.453125,
+          "right": 504.5,
+          "bottom": 692.25,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "DIV",
+        "tid": null,
+        "classes": "flex items-center justify-between px-4 py-2.5 border-b border-white/10",
+        "text": "quick-start.shready",
+        "bounds": {
+          "x": 25,
+          "y": 399.453125,
+          "width": 478.5,
+          "height": 38.046875,
+          "top": 399.453125,
+          "right": 503.5,
+          "bottom": 437.5,
+          "left": 25
+        },
+        "display": "flex"
+      },
+      {
+        "tag": "SPAN",
+        "tid": null,
+        "classes": "text-[10px] text-[#0F6E56] font-mono",
+        "text": "ready",
+        "bounds": {
+          "x": 457.5,
+          "y": 410.21875,
+          "width": 30,
+          "height": 15.5,
+          "top": 410.21875,
+          "right": 487.5,
+          "bottom": 425.71875,
+          "left": 457.5
+        },
+        "display": "block"
+      },
+      {
+        "tag": "PRE",
+        "tid": null,
+        "classes": "p-5 text-[12.5px] leading-[1.9]",
+        "text": "# Install\n$ curl -fsSL trusted-v.com/install | sh\n\n# Create a project\n$ jarvyn new blink --board=veg",
+        "bounds": {
+          "x": 25,
+          "y": 437.5,
+          "width": 478.5,
+          "height": 253.75,
+          "top": 437.5,
+          "right": 503.5,
+          "bottom": 691.25,
+          "left": 25
+        },
+        "display": "block"
+      },
+      {
+        "tag": "SPAN",
+        "tid": null,
+        "classes": "text-[#0F6E56]",
+        "text": "\u2192 verified boot \u2713  signed  \u2713  flashed to /dev/ttyUSB0",
+        "bounds": {
+          "x": 45,
+          "y": 650.5,
+          "width": 438.5,
+          "height": 16,
+          "top": 650.5,
+          "right": 483.5,
+          "bottom": 666.5,
+          "left": 45
+        },
+        "display": "inline"
+      },
+      {
+        "tag": "A",
+        "tid": "dev-cta-webide",
+        "classes": "tv-btn tv-btn-outline",
+        "text": "WebIDE \u00b7 Coming soon",
+        "bounds": {
+          "x": 278.375,
+          "y": 1585,
+          "width": 199.8125,
+          "height": 48,
+          "top": 1585,
+          "right": 478.1875,
+          "bottom": 1633,
+          "left": 278.375
+        },
+        "display": "flex"
+      }
+    ]
+  },
+  "/download-ide": {
+    "document": 402,
+    "width": 390,
+    "overflow": [
+      {
+        "tag": "A",
+        "tid": "ide-cta-contact",
+        "classes": "tv-btn tv-btn-outline",
+        "text": "Request launch updates ",
+        "bounds": {
+          "x": 170.546875,
+          "y": 6265.71875,
+          "width": 231.09375,
+          "height": 48,
+          "top": 6265.71875,
+          "right": 401.640625,
+          "bottom": 6313.71875,
+          "left": 170.546875
+        },
+        "display": "flex"
+      }
+    ]
+  },
+  "/webide": {
+    "document": 402,
+    "width": 390,
+    "overflow": [
+      {
+        "tag": "DIV",
+        "tid": null,
+        "classes": "lg:col-span-7",
+        "text": "WebIDE \u00b7 Coming soonWebIDE iscoming soon.The browser-based TRUSTED-V development environment is in d",
+        "bounds": {
+          "x": 24,
+          "y": 166.8125,
+          "width": 474,
+          "height": 218.03125,
+          "top": 166.8125,
+          "right": 498,
+          "bottom": 384.84375,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "DIV",
+        "tid": "page-hero-eyebrow",
+        "classes": " mb-5",
+        "text": "WebIDE \u00b7 Coming soon",
+        "bounds": {
+          "x": 24,
+          "y": 166.8125,
+          "width": 474,
+          "height": 26.796875,
+          "top": 166.8125,
+          "right": 498,
+          "bottom": 193.609375,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "H1",
+        "tid": "page-hero-title",
+        "classes": "tv-h1",
+        "text": "WebIDE iscoming soon.",
+        "bounds": {
+          "x": 24,
+          "y": 213.609375,
+          "width": 474,
+          "height": 72.0625,
+          "top": 213.609375,
+          "right": 498,
+          "bottom": 285.671875,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "P",
+        "tid": "page-hero-subtitle",
+        "classes": "tv-lede mt-5",
+        "text": "The browser-based TRUSTED-V development environment is in development. Release and early-access deta",
+        "bounds": {
+          "x": 24,
+          "y": 305.671875,
+          "width": 474,
+          "height": 79.171875,
+          "top": 305.671875,
+          "right": 498,
+          "bottom": 384.84375,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "DIV",
+        "tid": null,
+        "classes": "lg:col-span-5",
+        "text": "WebIDE \u00b7 planned browser workspaceCOMING SOON// TRUSTED-V WebIDE\nstatus = coming_soon\n\n// Planned: b",
+        "bounds": {
+          "x": 24,
+          "y": 424.84375,
+          "width": 474,
+          "height": 224.34375,
+          "top": 424.84375,
+          "right": 498,
+          "bottom": 649.1875,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "DIV",
+        "tid": null,
+        "classes": "border border-[#E5E4DF] bg-[#0B0F14] text-white overflow-hidden",
+        "text": "WebIDE \u00b7 planned browser workspaceCOMING SOON// TRUSTED-V WebIDE\nstatus = coming_soon\n\n// Planned: b",
+        "bounds": {
+          "x": 24,
+          "y": 424.84375,
+          "width": 474,
+          "height": 224.34375,
+          "top": 424.84375,
+          "right": 498,
+          "bottom": 649.1875,
+          "left": 24
+        },
+        "display": "block"
+      },
+      {
+        "tag": "DIV",
+        "tid": null,
+        "classes": "flex items-center justify-between px-4 py-3 border-b border-white/10",
+        "text": "WebIDE \u00b7 planned browser workspaceCOMING SOON",
+        "bounds": {
+          "x": 25,
+          "y": 425.84375,
+          "width": 472,
+          "height": 42.046875,
+          "top": 425.84375,
+          "right": 497,
+          "bottom": 467.890625,
+          "left": 25
+        },
+        "display": "flex"
+      },
+      {
+        "tag": "SPAN",
+        "tid": null,
+        "classes": "text-[10px] text-[#FDB515] tracking-widest",
+        "text": "COMING SOON",
+        "bounds": {
+          "x": 402,
+          "y": 438.609375,
+          "width": 79,
+          "height": 15.5,
+          "top": 438.609375,
+          "right": 481,
+          "bottom": 454.109375,
+          "left": 402
+        },
+        "display": "block"
+      },
+      {
+        "tag": "PRE",
+        "tid": null,
+        "classes": "p-5 text-[12.5px] leading-[1.7] font-mono",
+        "text": "// TRUSTED-V WebIDE\nstatus = coming_soon\n\n// Planned: browser workspace, RISC-V tooling,\n// virtual ",
+        "bounds": {
+          "x": 25,
+          "y": 467.890625,
+          "width": 472,
+          "height": 146.25,
+          "top": 467.890625,
+          "right": 497,
+          "bottom": 614.140625,
+          "left": 25
+        },
+        "display": "block"
+      },
+      {
+        "tag": "CODE",
+        "tid": null,
+        "classes": "",
+        "text": "// TRUSTED-V WebIDE\nstatus = coming_soon\n\n// Planned: browser workspace, RISC-V tooling,\n// virtual ",
+        "bounds": {
+          "x": 45,
+          "y": 486.890625,
+          "width": 432,
+          "height": 107,
+          "top": 486.890625,
+          "right": 477,
+          "bottom": 593.890625,
+          "left": 45
+        },
+        "display": "inline"
+      },
+      {
+        "tag": "SPAN",
+        "tid": null,
+        "classes": "text-white/60",
+        "text": "// Planned: browser workspace, RISC-V tooling,",
+        "bounds": {
+          "x": 45,
+          "y": 552.640625,
+          "width": 368,
+          "height": 18,
+          "top": 552.640625,
+          "right": 413,
+          "bottom": 570.640625,
+          "left": 45
+        },
+        "display": "inline"
+      },
+      {
+        "tag": "SPAN",
+        "tid": null,
+        "classes": "text-white/60",
+        "text": "// virtual platform workflows and team collaboration.",
+        "bounds": {
+          "x": 45,
+          "y": 573.890625,
+          "width": 424,
+          "height": 18,
+          "top": 573.890625,
+          "right": 469,
+          "bottom": 591.890625,
+          "left": 45
+        },
+        "display": "inline"
+      },
+      {
+        "tag": "DIV",
+        "tid": null,
+        "classes": "flex items-center justify-between px-4 py-2 border-t border-white/10 text-[11px]",
+        "text": "Release statusin development",
+        "bounds": {
+          "x": 25,
+          "y": 614.140625,
+          "width": 472,
+          "height": 34.046875,
+          "top": 614.140625,
+          "right": 497,
+          "bottom": 648.1875,
+          "left": 25
+        },
+        "display": "flex"
+      },
+      {
+        "tag": "SPAN",
+        "tid": null,
+        "classes": "text-[#FDB515]",
+        "text": "in development",
+        "bounds": {
+          "x": 383,
+          "y": 623.140625,
+          "width": 98,
+          "height": 17.046875,
+          "top": 623.140625,
+          "right": 481,
+          "bottom": 640.1875,
+          "left": 383
+        },
+        "display": "block"
+      },
+      {
+        "tag": "A",
+        "tid": "webide-cta-contact",
+        "classes": "tv-btn tv-btn-outline",
+        "text": "Request launch updates ",
+        "bounds": {
+          "x": 170.546875,
+          "y": 1515.1875,
+          "width": 231.09375,
+          "height": 48,
+          "top": 1515.1875,
+          "right": 401.640625,
+          "bottom": 1563.1875,
+          "left": 170.546875
+        },
+        "display": "flex"
+      }
+    ]
+  },
+  "reduced_motion_html_scroll": "smooth"
+}

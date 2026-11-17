@@ -68,7 +68,7 @@ const CryptoStackPage = () => {
   ];
 
   return (
-    <div className="bg-white text-[#0B0F14]" data-testid="crypto-stack-page">
+    <div className="editorial-page bg-white text-[#0B0F14]" data-testid="crypto-stack-page">
       <PageHero
         crumbs={[{ label: "Products", to: "/product-suite" }, { label: "Crypto Stack" }]}
         eyebrow="Crypto Stack"

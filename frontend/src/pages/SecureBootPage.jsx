@@ -42,7 +42,7 @@ const SecureBootPage = () => {
   ];
 
   return (
-    <div className="bg-white text-[#0B0F14]" data-testid="secure-boot-page">
+    <div className="editorial-page bg-white text-[#0B0F14]" data-testid="secure-boot-page">
       <PageHero
         crumbs={[{ label: "Products", to: "/product-suite" }, { label: "Secure Boot" }]}
         eyebrow="Secure Boot"

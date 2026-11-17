@@ -1,11 +1,11 @@
 /* Scoped additions to the established TrusteD-V design system. */
-.home-refresh { --home-pale: #e8f4fc; --home-blue: #2486c7; }
+.home-refresh { --home-pale: #eaf5f9; --home-blue: #2486c7; }
 .home-refresh h1, .home-refresh h2, .home-refresh h3 { letter-spacing: 0; }
 .home-refresh .tv-h2 { font-size: 30px; line-height: 1.16; }
 .home-refresh .tv-lede { font-size: 16px; }
 .home-refresh .tv-btn { max-width: 100%; white-space: normal; text-align: center; }
 .home-refresh a:focus-visible, .home-refresh button:focus-visible, .home-tech-carousel:focus-visible { outline: 3px solid var(--home-blue); outline-offset: 5px; }
-.home-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px 48px; margin-bottom: 48px; }
+.home-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px 48px; margin-bottom: 64px; }
 .home-section-heading > div { min-width: 0; max-width: 880px; }
 .home-section-heading h2 { margin-top: 16px; }
 .home-section-heading p { margin-top: 20px; max-width: 740px; }
@@ -14,12 +14,14 @@
 .home-image { display: block; width: 100%; height: auto; object-fit: contain; }
 .home-feature { border-top: 1px solid var(--tv-border); }
 .home-feature-code-engine { background: var(--home-pale); }
-.home-feature-layout { display: grid; grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr); gap: 56px; align-items: center; }
+.home-feature-layout { display: grid; grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr); gap: clamp(40px, 6vw, 96px); align-items: center; }
 .home-feature-copy { max-width: 520px; }
-.home-feature-copy h3, .home-module-copy h3 { font-size: 28px; line-height: 1.2; font-weight: 600; color: var(--tv-navy); }
+.home-feature-copy h3, .home-module-copy h3 { font-family: 'Sora', 'IBM Plex Sans', sans-serif; font-size: clamp(26px, 2.5vw, 36px); line-height: 1.15; font-weight: 600; color: var(--tv-navy); }
 .home-feature-copy p, .home-module-copy p { font-size: 16px; line-height: 1.75; color: var(--tv-muted); margin-top: 20px; }
 .home-feature-visual { min-width: 0; }
-.home-feature-visual img { border-radius: 6px; }
+.home-feature-visual { position: relative; padding: 18px 0 18px 18px; }
+.home-feature-visual::before { content: ''; position: absolute; left: 0; top: 0; width: 38%; height: 100%; border-top: 2px solid var(--home-blue); border-left: 2px solid var(--home-blue); pointer-events: none; }
+.home-feature-visual img { position: relative; border-radius: 2px; box-shadow: 0 24px 50px -36px rgba(0,50,98,0.54); }
 .home-feature-link { margin-top: 28px; }
 .home-bullets { display: grid; gap: 12px; margin-top: 28px; }
 .home-bullets li { font-size: 14px; line-height: 1.55; display: flex; align-items: flex-start; gap: 12px; }
@@ -27,17 +29,19 @@
 .home-category { font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; font-size: 11px; line-height: 1.5; color: #004a7f; letter-spacing: 0; }
 .home-markets { border-top: 1px solid var(--tv-border); }
 .home-market-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.home-market { overflow: hidden; background: var(--home-pale); }
-.home-market-image { background: #dfeef6; aspect-ratio: 1.9; display: flex; align-items: center; }
+.home-market { overflow: hidden; background: #fff; }
+.home-market-image { background: #dfeef6; aspect-ratio: 1.65; display: flex; align-items: center; overflow: hidden; }
+.home-market-image img { transition: transform 300ms ease; }
+.home-market:hover .home-market-image img { transform: scale(1.035); }
 .home-market-image img { height: 100%; }
-.home-market-copy { padding: 26px 28px 30px; }
+.home-market-copy { padding: 28px 28px 32px; }
 .home-market h3 { font-size: 22px; line-height: 1.3; margin-top: 10px; }
 .home-market .home-bullets { border-top: 1px solid #cbdce8; padding-top: 20px; margin-top: 20px; gap: 9px; }
-.home-technologies { border-top: 1px solid #cbdce8; background: linear-gradient(180deg, #e1f0f9 0%, #f6fafc 100%); }
+.home-technologies { border-top: 1px solid #cbdce8; background: linear-gradient(180deg, #eef8fc 0%, #f7f7f5 100%); }
 .home-tech-carousel { min-width: 0; }
-.home-tech-card { height: 100%; display: flex; flex-direction: column; overflow: hidden; background: #003262; border-color: #194f7d; color: white; transition: border-color 180ms, box-shadow 180ms; }
+.home-tech-card { height: 100%; display: flex; flex-direction: column; overflow: hidden; background: #003262; border-color: #194f7d; color: white; transition: border-color 180ms, box-shadow 180ms, transform 180ms; }
 .home-tech-card:hover { border-color: var(--home-blue); box-shadow: 0 8px 20px -14px #003262; }
-.home-tech-image { aspect-ratio: 1.86; background: #043369; overflow: hidden; }
+.home-tech-image { aspect-ratio: 1.58; background: #043369; overflow: hidden; }
 .home-tech-image img { width: 100%; height: 100%; }
 .home-tech-copy { flex: 1; padding: 24px 26px 28px; background: #003262; }
 .home-tech-copy .home-category { color: #abd9f7; }
@@ -57,18 +61,18 @@
 .home-carousel-button:hover:not(:disabled) { background: white; border-color: var(--tv-navy); }
 .home-carousel-button:disabled { opacity: 0.35; }
 .home-products { border-top: 1px solid var(--tv-border); }
-.home-module-tabs { width: 100%; height: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding: 0; border-radius: 0; background: transparent; margin-bottom: 32px; }
-.home-module-tab { height: 72px; white-space: normal; justify-content: flex-start; gap: 12px; padding: 16px 20px; border: 0; border-bottom: 2px solid #d9e3e9; border-radius: 0; font-size: 13px; line-height: 1.5; text-align: left; color: var(--tv-muted); transition: color 180ms, background-color 180ms, border-color 180ms; }
+.home-module-tabs { width: 100%; height: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding: 0; border-radius: 0; background: transparent; margin-bottom: 40px; border-top: 1px solid var(--tv-border); }
+.home-module-tab { height: 78px; white-space: normal; justify-content: flex-start; gap: 12px; padding: 16px 20px; border: 0; border-bottom: 2px solid #d9e3e9; border-radius: 0; font-size: 13px; line-height: 1.5; text-align: left; color: var(--tv-muted); transition: color 180ms, background-color 180ms, border-color 180ms; }
 .home-module-tab > span { font-family: 'IBM Plex Mono', monospace; color: #6d8ba1; font-size: 11px; }
 .home-module-tab:hover { color: var(--tv-navy); background: #f5fafd; }
 .home-module-tab[data-state="active"] { box-shadow: none; background: var(--home-pale); color: var(--tv-navy); border-color: var(--home-blue); }
-.home-module-panel { margin-top: 0; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 56px; align-items: center; padding: 40px 32px; background: var(--home-pale); }
+.home-module-panel { margin-top: 0; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(32px, 6vw, 88px); align-items: center; padding: clamp(28px, 4vw, 56px); background: var(--home-pale); border: 1px solid #cfe2ed; }
 .home-module-panel[data-state="inactive"] { display: none; }
 .home-module-visual { position: relative; aspect-ratio: 1.55; min-width: 0; }
 .home-module-neighbor { position: absolute; width: 75%; height: 78%; top: 11%; object-fit: cover; border-radius: 6px; }
 .home-module-before { left: 0; }
 .home-module-after { right: 0; }
-.home-module-main-image { position: absolute; inset: 4% 8%; z-index: 1; display: flex; align-items: center; background: #deecf4; border: 1px solid #bfd4e2; border-radius: 6px; overflow: hidden; box-shadow: 0 12px 28px -22px #003262; }
+.home-module-main-image { position: absolute; inset: 4% 8%; z-index: 1; display: flex; align-items: center; background: #deecf4; border: 1px solid #bfd4e2; border-radius: 2px; overflow: hidden; box-shadow: 0 18px 36px -24px #003262; }
 .home-module-main-image img { height: 100%; }
 .home-module-copy { min-width: 0; }
 .home-module-copy h3 { margin-top: 12px; }

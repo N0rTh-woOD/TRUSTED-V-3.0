@@ -51,7 +51,7 @@ const comparison = [
 
 const IDEDownloads = () => {
   return (
-    <div className="bg-white text-[#0B0F14]">
+    <div className="editorial-page bg-white text-[#0B0F14]">
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className="relative bg-white border-b border-[#E5E4DF] overflow-hidden" data-testid="ide-hero">
         <div className="absolute inset-0 tv-grid-bg opacity-60 pointer-events-none" />

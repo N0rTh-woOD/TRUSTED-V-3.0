@@ -6,7 +6,7 @@ import { BLUE_STEPS } from "@/components/TrustedVLogo";
 import { SERVICE_MODELS } from "@/data/services";
 
 const ProductSuite = () => (
-  <div className="bg-white text-[#0B0F14]">
+  <div className="editorial-page bg-white text-[#0B0F14]">
     <PageHero
       crumbs={[{ label: "Products" }]}
       eyebrow="Product suite"

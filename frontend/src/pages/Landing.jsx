@@ -13,7 +13,7 @@ import { ProductShowcase } from "@/components/homepage/ProductShowcase";
 import "@/components/homepage/homepage.css";
 
 const Landing = () => (
-  <div className="home-refresh bg-white text-[#0B0F14]" data-testid="homepage">
+  <div className="home-refresh editorial-page bg-white text-[#0B0F14]" data-testid="homepage">
     <HomeHero />
     <RiscVIPCollaboration />
     <VirtualizationSpotlight />

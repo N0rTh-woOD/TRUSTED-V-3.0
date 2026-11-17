@@ -96,7 +96,7 @@ const Blog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="editorial-page resource-page min-h-screen bg-white">
       {/* Hero */}
       <section className="py-16 bg-gradient-to-b from-slate-50 to-white border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

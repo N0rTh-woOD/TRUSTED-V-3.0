@@ -52,6 +52,13 @@ Build a highly professional, team-gated RISC-V platform information website usin
 - Reconciled public availability language: Jarvyn IDE and WebIDE consistently remain **Coming soon**. Removed outdated Jarvyn AI-capability copy in favor of planned embedded-aware tooling language; industry-use references to Edge AI and partner accelerator categories remain factual product-domain content.
 - Added missing test IDs to the board-support fields and links plus the sales sidebar links. Verified `iteration_41.json`: backend 13/13 passed; public routes, navigation, product terminology, availability labels, non-AI Jarvyn copy, form persistence, and mobile overflow checks passed. Follow-up manual authenticated check confirmed the sales success state and removed its one temporary verification record. **No mocked flows.**
 
+### Phase 25 — Bosch SDS–Inspired Public Website Redesign (2026-11-17)
+- Redesigned the entire signed-in informational website with a light, spacious enterprise editorial system: strengthened IBM Plex/Sora hierarchy, restrained TRUSTED-V navy/cyan accents, precise dividers, technical grid motifs, structured surfaces, refreshed responsive form treatment, and consistent CTA, panel, carousel, and footer language.
+- Refreshed the global shell without changing authentication or backend behavior: compact high-clarity header, keyboard-aware Products mega menu, responsive mobile navigation with an accordion product group and persistent Contact us path, plus a structured footer. Existing product names, claims, routes, conversion paths, availability labels, and form contracts remain unchanged.
+- Updated the homepage composition with an asymmetrical statement-led hero, framed existing hero media, image-led stories, stronger technical card hierarchy, and controlled manual carousel presentation. Existing homepage images and the approved hero MP4 were reused; no Bosch logos, SDS copy, or proprietary Bosch visual assets were introduced.
+- Applied shared editorial-page/form styles across all current informational routes, including products, marketplace, platform, services, partners, developer/resource pages, contact, sales, partner, and board-support flows. Existing forms and success behavior are preserved.
+- `iteration_42.json` verified all 18 routes, all four public form successes/persistence with test-record cleanup, availability labels, desktop navigation, carousel manual/keyboard/touch controls, login/logout, and footer CTA; backend passed 13/13. It found shared-menu and mobile overflow regressions from the first styling pass. Follow-up source fixes and authenticated Playwright self-check verified mega-menu geometry, ArrowDown focus transfer, Escape dismissal, mobile product hit targets, Secure Boot routing, three affected mobile page widths, and reduced-motion scrolling. **No mocked flows.**
+
 ### Phase 20 — Uploaded Hero Animation & Minimalist Login (2026-10-16)
 Verified by testing_agent (`iteration_38.json`): **all executed frontend checks passed**. Production build and authenticated screenshot smoke passed; existing unrelated build warnings remain.
 - Removed the homepage hero's four-column specification strip (RISC-V native, Language, Security, Deployment) entirely. Equivalent technical content elsewhere remains unchanged.
@@ -362,7 +369,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 
 ## Prioritized Backlog
 ### P0 — Current scope
-- Team-gated informational website and public editorial review are complete and verified. Await user review and the remaining homepage image batches.
+- Team-gated informational website, public editorial review, and Phase 1 visual redesign are complete and verified. Await user visual review and the remaining homepage image batches.
 
 ### P1 — High
 - Refactor monolithic `server.py` into modular APIRouter modules
@@ -373,12 +380,14 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 - Customer testimonials/case studies section
 - Fix React "index as key" anti-patterns in Marketplace, Partners and AdminSoftware
 - Add Python type hints across backend
+- Add approved evidence-backed technical resources, case studies, recognition, or partner proof only when source material and ownership are confirmed.
 
 ### P3 — Future
 - Public release (remove auth lock)
 - Enhanced project versioning UI in "My Projects"
 - Email notifications for applications
 - Replace placeholder user avatar initials
+- Create concise visual/editorial governance guidance and complete launch-readiness review for accessibility, performance, legal/privacy links, and content ownership.
 
 ## 3rd Party Integrations
 - Emergent managed object storage for IDE and hardware uploads
@@ -410,4 +419,4 @@ Per strategic PDF: TRUSTED-V repositioned as **"The Complete RISC-V Platform —
 - **Feb 2026**: Hero chip hover-reveal animation, standardized RISC-V colors (Navy #003262 + Cyan #00B4E0), unified PageHero component across secondary pages, updated tagline.
 
 ---
-*Last Updated: 2026-11-17 — Phase 24 verified*
+*Last Updated: 2026-11-17 — Phase 25 visual and interaction checks verified*

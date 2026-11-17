@@ -1,0 +1,42 @@
+[
+  {
+    "kind": "sales",
+    "email": "TEST_Redesign42Single_6dfef6393a6c4efba7da52a0a5b2e35b@example.com",
+    "marker": "TEST_Redesign42Single_6dfef6393a6c4efba7da52a0a5b2e35b",
+    "collection": "sales_inquiries",
+    "ui_success": true,
+    "id": "4add0736-5cdf-4e34-93a8-3f7f37edadb7",
+    "persistence_verified": true,
+    "cleaned": true
+  },
+  {
+    "kind": "contact",
+    "email": "TEST_Redesign42Single_e906421907da44de8cb7116904a89c13@example.com",
+    "marker": "TEST_Redesign42Single_e906421907da44de8cb7116904a89c13",
+    "collection": "sales_inquiries",
+    "ui_success": true,
+    "id": "adcf1f3e-cb4f-4b56-af1e-9c83956b806d",
+    "persistence_verified": true,
+    "cleaned": true
+  },
+  {
+    "kind": "partner",
+    "email": "TEST_Redesign42Single_5feded08679341deae5ade9f995b82be@example.com",
+    "marker": "TEST_Redesign42Single_5feded08679341deae5ade9f995b82be",
+    "collection": "partnership_applications",
+    "ui_success": true,
+    "id": "c2a2235c-228b-4830-ba5d-651df81797b2",
+    "persistence_verified": true,
+    "cleaned": true
+  },
+  {
+    "kind": "board",
+    "email": "TEST_Redesign42Single_5164d34ea8ce47bf9314503bf347e55a@example.com",
+    "marker": "TEST_Redesign42Single_5164d34ea8ce47bf9314503bf347e55a",
+    "collection": "board_support_requests",
+    "ui_success": true,
+    "id": "3f0a353d-3c18-4fc0-b2a8-c5ffc7e1ee39",
+    "persistence_verified": true,
+    "cleaned": true
+  }
+]

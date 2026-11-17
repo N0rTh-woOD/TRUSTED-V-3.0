@@ -1,0 +1,15 @@
+[
+  {
+    "kind": "contact",
+    "id": "7f6c9c3b-ab21-42dc-9739-f5c6d257f3bb",
+    "collection": "sales_inquiries",
+    "payload": {
+      "name": "TEST_Redesign42_55572c7fe7b545dbb6d6c6995a5ec397 Review",
+      "email": "TEST_Redesign42_55572c7fe7b545dbb6d6c6995a5ec397@example.com",
+      "company": "TEST_Redesign42_55572c7fe7b545dbb6d6c6995a5ec397",
+      "country": "United States",
+      "product_interest": "Certification",
+      "message": "TEST_Redesign42_55572c7fe7b545dbb6d6c6995a5ec397"
+    }
+  }
+]

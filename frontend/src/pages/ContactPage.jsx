@@ -49,7 +49,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="bg-white text-[#0B0F14]">
+    <div className="editorial-page editorial-form-page bg-white text-[#0B0F14]">
       <PageHero
         crumbs={[{ label: "Contact" }]}
         eyebrow="Get in touch"

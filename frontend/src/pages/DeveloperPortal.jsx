@@ -56,7 +56,7 @@ const sections = [
 
 const DeveloperPortal = () => {
   return (
-    <div className="bg-white text-[#0B0F14]">
+    <div className="editorial-page bg-white text-[#0B0F14]">
       <PageHero
         crumbs={[{ label: "Developers" }]}
         eyebrow="Developer portal"
@@ -99,11 +99,15 @@ const DeveloperPortal = () => {
 
 const Section = ({ section }) => {
   const [open, setOpen] = useState(false);
+  const sectionId = `dev-section-content-${section.title.toLowerCase().replace(/\W+/g, "-")}`;
   return (
     <div className="border-b border-[#E5E4DF]" data-testid={`dev-section-${section.title.toLowerCase().replace(/\s+/g, "-")}`}>
       <button
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center justify-between py-8 md:py-10 group"
+        aria-expanded={open}
+        aria-controls={sectionId}
+        data-testid={`dev-section-toggle-${section.title.toLowerCase().replace(/\W+/g, "-")}`}
       >
         <h3
           className="text-[22px] md:text-[28px] tracking-[-0.015em] text-[#0B0F14] group-hover:text-[#003262] transition-colors text-left"
@@ -114,7 +118,7 @@ const Section = ({ section }) => {
         <ChevronDown className={`w-6 h-6 text-[#5A6472] transition-transform ${open ? "rotate-180 text-[#003262]" : ""}`} />
       </button>
       {open && (
-        <div className="pb-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id={sectionId} className="pb-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {section.items.map((it) => (
             <div key={it.name} className="border border-[#E5E4DF] p-6 hover:border-[#0B0F14] transition-colors">
               <h4 className="text-[16px] tracking-[-0.01em] text-[#0B0F14]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>

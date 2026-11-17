@@ -88,7 +88,7 @@ const ContactSales = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white" data-testid="contact-sales-page">
+    <div className="editorial-page editorial-form-page min-h-screen bg-white" data-testid="contact-sales-page">
       <section className="py-16 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center mb-12">

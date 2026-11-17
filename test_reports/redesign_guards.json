@@ -1,0 +1,22 @@
+[
+  {
+    "check": "visible focus outline",
+    "passed": true
+  },
+  {
+    "check": "footer contact CTA",
+    "passed": true
+  },
+  {
+    "check": "empty form blocked /contact",
+    "passed": true
+  },
+  {
+    "check": "empty form blocked /contact-sales",
+    "passed": true
+  },
+  {
+    "check": "empty form blocked /board-support",
+    "passed": true
+  }
+]

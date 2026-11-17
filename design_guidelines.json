@@ -1,104 +1,133 @@
 {
-  "project_name": "TrusteD-V Landing & Login Refinement",
-  "scope_note": "Hero and login follow-up only. Preserve all earlier PDF-mapped homepage sections documented in /app/docs/homepage-design-mapping.md. Implemented login is an unframed single-column form; hero GIF is unframed and uncropped.",
-  "theme": "Light / Dark hybrid aligned with Bosch & TrusteD-V brand palette (Navy #003262, Bosch Blue #004A7F, Light Blue #2486C7, Off-White #F7F7F5)",
-  "typography": {
-    "heading_font": "IBM Plex Sans, sans-serif",
-    "mono_font": "IBM Plex Mono, monospace",
-    "body_font": "IBM Plex Sans, sans-serif",
-    "hierarchy": {
-      "h1": "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#0B0F14]",
-      "h2": "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-[#0B0F14]",
-      "h3": "text-xl sm:text-2xl font-semibold text-[#0B0F14]",
-      "eyebrow": "font-mono text-[11px] tracking-[0.2em] uppercase text-[#004A7F]",
-      "body": "text-base text-[#5A6472] leading-relaxed"
+  "project_title": "TRUSTED-V Bosch SDS-Inspired Public Website Redesign",
+  "theme_strategy": {
+    "default_mode": "light",
+    "mode_justification": "Bosch SDS inspired editorial design requires a light, spacious, image-led canvas with generous whitespace, strong dark typography, and crisp technical borders.",
+    "tinted_neutrals": {
+      "light_background": "#FFFFFF",
+      "surface_soft": "#F7F7F5",
+      "surface_secondary": "#EFEEE9",
+      "border_default": "#E5E4DF",
+      "border_strong": "#CFCEC8",
+      "text_primary": "#0B0F14",
+      "text_secondary": "#1A1F25",
+      "text_muted": "#5A6472"
+    },
+    "brand_palette": {
+      "navy_primary": "#003262",
+      "navy_deep": "#001F3F",
+      "navy_darkest": "#00162B",
+      "cyan_accent": "#00B4E0",
+      "cyan_soft": "#E6F7FC",
+      "blue_100": "#E6F1F9",
+      "blue_300": "#9DC8E8",
+      "blue_500": "#2486C7",
+      "blue_700": "#004A7F",
+      "gold_accent": "#FDB515",
+      "green_status": "#0F6E56"
     }
   },
-  "colors": {
-    "primary_navy": "#003262",
-    "bosch_blue": "#004A7F",
-    "accent_blue": "#2486C7",
-    "light_accent": "#56A2D6",
-    "pale_blue": "#E8F4FC",
-    "background_light": "#FFFFFF",
-    "surface_muted": "#F7F7F5",
-    "dark_bg": "#00162B",
-    "border_light": "#E5E4DF",
-    "text_dark": "#0B0F14",
-    "text_muted": "#5A6472"
+  "typography": {
+    "font_family_heading": "IBM Plex Sans, system-ui, sans-serif",
+    "font_family_body": "IBM Plex Sans, system-ui, sans-serif",
+    "font_family_display": "Sora, IBM Plex Sans, sans-serif",
+    "font_family_mono": "IBM Plex Mono, ui-monospace, monospace",
+    "hierarchy": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-tv-ink leading-[1.05]",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-tv-ink leading-[1.1]",
+      "h3_card_heading": "text-xl sm:text-2xl font-semibold text-tv-ink leading-[1.2]",
+      "h4_subheading": "text-lg sm:text-xl font-semibold text-tv-ink",
+      "eyebrow_label": "font-mono text-xs font-medium uppercase tracking-[0.14em] text-tv-navy inline-flex items-center gap-2",
+      "body_lead": "text-base sm:text-lg text-tv-muted max-w-3xl leading-relaxed",
+      "body_regular": "text-base text-tv-ink-2 leading-normal",
+      "small_caption": "text-sm text-tv-muted leading-tight"
+    }
+  },
+  "spacing_and_layout": {
+    "grid_system": "The Swiss Grid / Tetris Bento Grid - grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8 lg:gap-12",
+    "container_max_width": "max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14",
+    "section_padding": {
+      "standard": "py-20 lg:py-28",
+      "large": "py-24 lg:py-36",
+      "tight": "py-14 lg:py-20"
+    },
+    "card_padding": "p-6 sm:p-8 lg:p-10",
+    "alignment_rules": "Left-aligned for narrative and technical clarity; explicit asymmetrical grid structures for feature story blocks."
+  },
+  "component_design_system": {
+    "header_nav": {
+      "position": "sticky top-0 z-50",
+      "surface": "bg-white/90 backdrop-blur-xl border-b border-tv-border",
+      "desktop_mega_menu": "Accessible grouped product mega-menu on hover/click with tv-mega-row hover states",
+      "mobile_drawer": "Responsive drawer with accordion groups and persistent Contact sales CTA"
+    },
+    "buttons": {
+      "primary": "tv-btn tv-btn-primary (height 48px/54px, bg #003262, text white, hover bg #001F3F, rounded 6px)",
+      "outline": "tv-btn tv-btn-outline (border #CFCEC8, text #0B0F14, hover border #003262, hover bg #E6F7FC)",
+      "arrow_link": "tv-arrow-link (text #003262, flex inline, gap 6px with animated arrow on hover)"
+    },
+    "cards": {
+      "standard_panel": "tv-panel bg-white border border-tv-border rounded-md p-8 hover:border-tv-navy transition-all duration-200",
+      "accent_panel": "tv-panel-accent relative overflow-hidden before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-tv-blue-500 before:scale-y-0 hover:before:scale-y-100",
+      "dark_hero_panel": "tv-panel-dark bg-tv-navy-darkest text-white border border-white/10 rounded-md p-8"
+    },
+    "carousels": {
+      "rule": "No automatic carousel rotation; standard explicit manual pagination, prev/next controls, keyboard & screen reader accessible"
+    },
+    "forms": {
+      "inputs": "Shadcn Input / Select / Checkbox styled with border-tv-border-strong focus:ring-2 focus:ring-tv-cyan text-tv-ink bg-white rounded-md",
+      "success_states": "Clean green status banner with clear confirmation, data testid indicators, and explicit next step action"
+    }
   },
   "visual_enhancers": {
-    "grid_background": "tv-grid-bg opacity-60 pointer-events-none",
-    "hero_card_shadow": "shadow-[0_20px_50px_-30px_rgba(11,15,20,0.15)]",
-    "borders": "1px solid #E5E4DF with 3px accent bar #2486C7"
+    "grid_background": "tv-grid-bg subtle 48px silicon mesh pattern",
+    "glassmorphism": "backdrop-blur-xl bg-white/80 border border-white/30",
+    "shadows": "shadow-sm and hover:shadow-xl hover:shadow-tv-navy/10"
   },
-  "layouts": {
-    "landing_hero": {
-      "structure": "2-column responsive flex/grid (Left: Brand Lockup, Headline, Lede, CTAs | Right: Hero GIF Container)",
-      "removal": "REMOVED the 4-column proof specification strip at the bottom of the hero (RISC-V native, Language, Security, Deployment)",
-      "left_column": {
-        "span": "lg:col-span-5 flex flex-col justify-center",
-        "elements": [
-          "Border-left lockup with TrustedVLogo (size '2xl')",
-          "Mono eyebrow: 'THE COMPLETE RISC-V PLATFORM'",
-          "Sub-headline: 'From IP to software to silicon.'",
-          "Eyebrow badge: 'RISC-V COMPUTE PLATFORM'",
-          "H1 Title: 'Secure RISC-V, silicon to software.'",
-          "Lede paragraph detailing Rust-native platform",
-          "PrimaryCTA ('Explore the platform') & SecondaryCTA ('Talk to our engineers')"
-        ]
-      },
-      "right_column": {
-        "span": "lg:col-span-7 flex items-center justify-center",
-        "image_asset": "/images/homepage/hero-platform.gif",
-        "fallback_asset": "/images/homepage/hero-platform-poster.webp",
-        "formatting": "W-full, h-auto, max-h-[520px], object-contain, rounded-lg border border-[#E5E4DF] shadow-md",
-        "accessibility": "Respect prefers-reduced-motion by rendering static WebP poster fallback when reduced motion is preferred"
-      }
+  "image_urls": {
+    "semiconductor_chip_macro": {
+      "url": "https://images.unsplash.com/photo-1562408590-e32931084e23?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxzZW1pY29uZHVjdG9yJTIwc2lsaWNvbiUyMGNoaXAlMjBtaWNyb2NoaXAlMjBjaXJjdWl0JTIwYm9hcmQlMjBjbG9zZSUyMHVwfGVufDB8fHx8MTc5NDg4NzYwNHww&ixlib=rb-4.1.0&q=85",
+      "category": "Hero / Product Suite / RISC-V Silicon",
+      "alt": "Blue circuit board with integrated circuits"
     },
-    "login_page": {
-      "concept": "Clean, minimalist, single-card focused layout centered around the TrusteD-V brand",
-      "structure": "Focused centered modal card on subtle background (#F7F7F5) or clean split layout without dead links or fake statuses",
-      "brand_section": {
-        "header": "Prominent TrustedVLogo (size 'xl' or '2xl') with 'Powered by Bosch' attribution",
-        "subheading": "Clean minimalist subtitle: 'Sign in to access the TRUSTED-V platform'"
-      },
-      "form_section": {
-        "container": "bg-white border border-[#E5E4DF] rounded-xl p-8 md:p-10 shadow-lg max-w-md w-full",
-        "inputs": [
-          "Work Email input with focus state focus:border-[#003262] focus:ring-1 focus:ring-[#003262]",
-          "Password input without non-functional 'Forgot?' link"
-        ],
-        "action_button": "Full-width primary CTA 'Sign in' with submit state loading spinner",
-        "footer": "Simple helper text 'Need an account? Contact your platform administrator' replacing looping dead link"
-      }
-    }
-  },
-  "media": {
-    "hero_gif": {
-      "path": "/images/homepage/hero-platform.gif",
-      "poster": "/images/homepage/hero-platform-poster.webp",
-      "alt": "TRUSTED-V RISC-V Platform Architecture Animation",
-      "rules": "Must preserve aspect ratio without cropping. Contain within right column of hero section."
+    "silicon_wafer_circuit": {
+      "url": "https://images.unsplash.com/photo-1592659762303-90081d34b277?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxzZW1pY29uZHVjdG9yJTIwc2lsaWNvbiUyMGNoaXAlMjBtaWNyb2NoaXAlMjBjaXJjdWl0JTIwYm9hcmQlMjBjbG9zZSUyMHVwfGVufDB8fHx8MTc5NDg4NzYwNHww&ixlib=rb-4.1.0&q=85",
+      "category": "Secure Boot / Hardware Architecture",
+      "alt": "Macro shot of microchip printed circuit board"
+    },
+    "circuit_gold_pathways": {
+      "url": "https://images.unsplash.com/photo-1617839625591-e5a789593135?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwzfHxzZW1pY29uZHVjdG9yJTIwc2lsaWNvbiUyMGNoaXAlMjBtaWNyb2NoaXAlMjBjaXJjdWl0JTIwYm9hcmQlMjBjbG9zZSUyMHVwfGVufDB8fHx8MTc5NDg4NzYwNHww&ixlib=rb-4.1.0&q=85",
+      "category": "Crypto Stack / Hardware Root of Trust",
+      "alt": "Gold conductive pathways on circuit board"
+    },
+    "electronics_lab_workbench": {
+      "url": "https://images.pexels.com/photos/19895784/pexels-photo-19895784.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "category": "Board Support / Hardware Catalog",
+      "alt": "Electronics engineering lab setup"
+    },
+    "soldering_microscope_lab": {
+      "url": "https://images.pexels.com/photos/7639432/pexels-photo-7639432.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "category": "Services / Hardware Engineering / Partners",
+      "alt": "Precision soldering and testing workstation"
+    },
+    "developer_coding_workspace": {
+      "url": "https://images.pexels.com/photos/5473299/pexels-photo-5473299.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "category": "Jarvyn WebIDE / Developer Portal",
+      "alt": "Programmer working with IDE on monitors"
     }
   },
   "instructions_to_main_agent": [
-    "In /app/frontend/src/pages/Landing.jsx, update the Hero component:",
-    "1. Remove the proof array and the bottom 4-column border-t grid section containing 'RISC-V native', 'Language', 'Security', and 'Deployment'.",
-    "2. Restructure Hero layout into a 2-column grid (lg:grid-cols-12 gap-8 lg:gap-12 items-center):",
-    "   - Left side (lg:col-span-5 or 6): Keep the logo lockup, eyebrow, H1, description, and primary/secondary CTAs.",
-    "   - Right side (lg:col-span-7 or 6): Render the animated GIF at '/images/homepage/hero-platform.gif' with poster '/images/homepage/hero-platform-poster.webp', ensure no cropping (object-contain, max-h-[520px], w-full, rounded-md, border border-[#E5E4DF]).",
-    "3. Support reduced motion: if prefers-reduced-motion is enabled, show the webp static poster.",
-    "In /app/frontend/src/pages/Login.jsx, update the login page layout:",
-    "1. Simplify and clean up the page to prioritize minimalism and prominent logo visibility.",
-    "2. Remove dead interactions: remove the non-functional 'Forgot?' link, false 'All systems operational' status pulse dot, and loops in 'Request access'.",
-    "3. Center the sign-in form with a prominent TrustedVLogo (size 'xl' or '2xl') above the card or inside a clean header.",
-    "4. Retain exact form submit handler (login(email, password) from useAuth) and data-testid attributes (login-page, login-form, email-input, password-input, login-btn)."
+    "Follow the Bosch SDS inspired light, spacious, editorial visual hierarchy with strong IBM Plex typography and generous whitespace.",
+    "Maintain all route definitions in /app/frontend/src/App.js (using .js files, not .tsx).",
+    "Ensure every page has a visible, stickied Header navigation and detailed structured Footer.",
+    "Ensure high visual contrast on all interactive states (hover, focus, active). Explicitly define text colors on hover (e.g., hover:bg-tv-navy hover:text-white).",
+    "All key interactive elements, buttons, inputs, links, tabs, and form submissions MUST have data-testid attributes (e.g. data-testid='contact-submit-btn').",
+    "Do NOT use automatic carousel rotation. Controls must respond to user click, keyboard, and touch.",
+    "Use real images provided in the image_urls block; NEVER use placeholder image URLs like via.placeholder.com or placehold.it."
   ],
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "Ensure all interactive elements maintain existing data-testid attributes for automated testing.",
-    "Do not break authentication state or API calls in Login.jsx.",
-    "Maintain accessibility contrast standards across light and dark elements.",
-    "Ensure responsive layout transitions smoothly from mobile (single column) to desktop (two column)."
-  ]
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
+    "anti_ai_slop": "Avoid standard Vercel dark mode templates or generic centered text. Deliver structured, authoritative, editorial semiconductor layouts with clear asymmetry and technical proof bands.",
+    "testing_attributes": "All interactive elements MUST include kebab-case data-testid attributes.",
+    "accessibility": "Full support for prefers-reduced-motion, keyboard focus rings (outline-2 outline-tv-cyan), WCAG AA contrast (4.5:1 minimum for body, 3:1 for large display text)."
+  }
 }

@@ -41,7 +41,7 @@ const Marketplace = () => {
   }, [q]);
 
   return (
-    <div className="bg-white text-[#0B0F14]">
+    <div className="editorial-page bg-white text-[#0B0F14]">
       <PageHero
         crumbs={[{ label: "Marketplace" }]}
         eyebrow="Marketplace"

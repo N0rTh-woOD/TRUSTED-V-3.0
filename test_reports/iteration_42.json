@@ -1,0 +1,69 @@
+{
+  "summary": "Redesign regression against the public preview: 13/13 backend tests passed; all 18 signed-in routes rendered at desktop/mobile without browser runtime or console errors. All four public forms reached their UI success states and persisted every submitted field; exact test records cleaned. Desktop destinations, account navigation/logout, availability labels and manual/keyboard/touch carousel passed. Blocking mobile menu overlap, desktop mega-menu overflow, keyboard dismissal gaps and three mobile overflow pages remain. No mocked APIs or confirmed failing API flows.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/auth/login (logs)", "issue": "Pre-existing nonblocking passlib/bcrypt warning: bcrypt.__about__ missing. Demo authentication still succeeds. Outside visual redesign scope."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Mobile product accordion", "issue": "Expanded product links overlap Marketplace/Platform/Services. Clicking Secure Boot actually navigates to /partners; Jarvyn/WebIDE centers hit Marketplace and Crypto/RTOS centers hit Services. Product destinations are not reliably reachable by touch.", "selector": "#mobile-products-links; [data-testid=mobile-nav-secure-boot]", "priority": "HIGH"},
+      {"component": "Desktop Products mega menu", "issue": "Menu background ends at y=217 while product rows extend to y=324. WebIDE/Developer Portal/Crypto/RTOS and featured CTA spill over homepage content, overlapping the hero brand/media.", "selector": "[data-testid=mega-products] .tv-container > div:first-child", "priority": "HIGH"},
+      {"component": "Products keyboard accessibility", "issue": "Escape does not dismiss the focus/hover panel; focusing About leaves it open. Tab after Products goes through unrelated navigation/account controls before the revealed product links. Navigation.jsx lacks Escape and focus-leave handlers; trigger has no aria-controls association.", "selector": "[data-testid=nav-products], [data-testid=mega-products]", "priority": "MEDIUM"},
+      {"component": "Mobile secondary-page CTAs", "issue": "At 390px, Developer Portal document width is 478px; Jarvyn IDE and WebIDE are 402px. Bottom CTA groups use nonwrapping flex rows with nowrap buttons. Contact CTA right edge is 401.64px on IDE/WebIDE; Developer WebIDE CTA ends at 478.19px.", "selector": "[data-testid=dev-cta], [data-testid=ide-cta], [data-testid=webide-cta]", "priority": "MEDIUM"},
+      {"component": "Mobile PageHero with children", "issue": "Developer Portal/WebIDE hero columns expand to 480.5px/474px despite a 342px content width. The overflow-hidden hero clips approved subtitle and terminal content off the right edge; WebIDE Coming soon terminal label disappears outside the viewport.", "selector": "[data-testid=page-hero] .lg\\:col-span-7, [data-testid=page-hero] .lg\\:col-span-5", "priority": "HIGH"},
+      {"component": "Reduced-motion scrolling", "issue": "With prefers-reduced-motion: reduce, the document still computes scroll-behavior: smooth. Global reduced-motion CSS changes animation/transition durations but never overrides html scrolling; homepage descendant rule cannot override the ancestor html element.", "selector": "html; frontend/src/index.css:106-110,598-600", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Desktop/mobile menus and mobile resource heroes", "issues": ["Menu overlap and clipped resource-page text documented above; representative homepage, product suite, services, contact and board-support screens otherwise showed no header overlap or horizontal overflow."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_public_editorial.py",
+    "/app/test_reports/pytest/redesign_results.xml",
+    "/app/tests/frontend/redesign_review.py",
+    "/app/tests/frontend/redesign_form_single.py",
+    "/app/tests/frontend/redesign_diagnostics.py",
+    "/app/tests/frontend/redesign_guards.py",
+    "/app/tests/verify_redesign_ui_records.py",
+    "/app/tests/verify_redesign_form_intents.py",
+    "/app/tests/audit_redesign_leftovers.py",
+    "/app/test_reports/redesign_browser_results.json",
+    "/app/test_reports/redesign_diagnostics.json",
+    "/app/test_reports/redesign_form_intents.json",
+    "/app/test_reports/redesign_guards.json"
+  ],
+  "action_items": [
+    "Narrow index.css:474 height selector to the actual top navigation row only. Allow desktop mega grid and mobile accordion groups to size to their contents; retest actual hit targets without bypassing overlays.",
+    "Add Products Escape dismissal, focus-leave handling and associated accessible disclosure semantics. Review keyboard tab order and mobile-toggle expanded/control attributes.",
+    "Stack or wrap CTA groups on Developer Portal, IDE and WebIDE at mobile widths.",
+    "Constrain PageHero children columns with min-width:0 and a minmax(0,1fr) mobile track. Wrap terminal content or provide an intentional contained scroll area rather than clipping content.",
+    "Override html scroll-behavior to auto for reduced motion. Preserve the carousel's already-working reduced-motion handling.",
+    "Retest menu geometry, all affected mobile routes and conversion links after fixes. No changes to backend/form contracts are needed for observed form workflows."
+  ],
+  "critical_code_review_comments": [
+    "RCA: #root > div > header .tv-container > div:first-child {height:68px} in index.css:474 matches not only the top header row but also the mega-menu grid and first mobile Products group. This causes both confirmed menu defects.",
+    "PageHero.jsx:29 uses an implicit auto mobile grid track and children lack min-width:0. Preformatted terminal lines dictate intrinsic width, expanding both hero columns; outer overflow-hidden hides the problem rather than making the content responsive.",
+    "DeveloperPortal accordion buttons lack data-testid and aria-expanded/aria-controls. nav-account-menu has no accessible name; nav-mobile-toggle lacks aria-expanded/aria-controls. Code-review accessibility/testability findings, not claimed interaction failures.",
+    "Optional auth checks: stored demo bcrypt hash starts with $2b$ and explicit-origin credentials CORS passed. Seed code inserts only missing admin/demo users. Application auth remains a localStorage bearer token with no application httpOnly cookie or failed-attempt lockout in code; these are pre-existing, outside redesign scope. No brute-force tests against protected accounts and no unavailable auth-playbook tool invocation were performed."
+  ],
+  "updated_files": [
+    "/app/tests/frontend/redesign_review.py",
+    "/app/tests/frontend/redesign_form_single.py",
+    "/app/tests/frontend/redesign_diagnostics.py",
+    "/app/tests/frontend/redesign_guards.py",
+    "/app/tests/verify_redesign_ui_records.py",
+    "/app/tests/verify_redesign_form_intents.py",
+    "/app/tests/audit_redesign_leftovers.py",
+    "/app/test_reports/iteration_42.json"
+  ],
+  "success_rate": {"backend": "100% (13/13)", "frontend": "91.0% (61/67 grouped checks: pages 35/38, navigation 17/20, forms 4/4, guards 5/5); additional diagnostic issues recorded above"},
+  "test_credentials": "Demo credentials read from /app/memory/test_credentials.md. Existing accounts unchanged.",
+  "seed_data_creation": "No seeds/resets executed. Four API submissions were cleaned by fixture teardown. Six browser submissions (including two from a timed-out combined runner) were removed only by exact ids with matching unique run emails; four bounded submissions had full field persistence verified. No existing records, accounts, passwords or roles modified.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "No application source edits. Public URL comes from frontend/.env. Run redesign_review.py pages/navigation, redesign_form_single.py for each form, and redesign_diagnostics.py for hit-target geometry. A combined forms browser call timed out after contact response capture and sales persistence; bounded single-form calls subsequently proved all success states, including the formerly unverified sales screen. All those records were cleaned. Initial programmatic focus check incorrectly lacked keyboard modality; corrected by pressing Tab first, then focus outline passed (2px solid). Do not count that selector/modality mistake as an app bug. Mobile visibility checks alone falsely look healthy despite overlapping hit targets: Secure Boot routes to /partners. Menu geometry and screenshot prove the defect. Carousel stayed unchanged for six seconds, responded to previous/next, Enter, ArrowRight and CDP touch swipe; no claim of a long-duration autoplay observation. Footer Contact CTA and empty-contact/sales/board guards passed; partner consent-disabled state passed. Browser errors were empty during completed route/navigation sweeps. Only scoped public/auth/catalog APIs tested, not unrelated retired/destructive features.",
+  "rca of the issue": "Shared header height rule incorrectly constrains nested menu containers; mobile links paint over later siblings whose hit targets win, while desktop rows extend beyond their background. Mobile CTA overflow comes from flex gap-3 without responsive stacking/wrapping plus nowrap buttons. Resource hero clipping comes from auto-grid intrinsic minimum sizing driven by pre text. Keyboard dismissal is unimplemented, not a backend problem. Reduced-motion smooth scrolling persists because html lacks an override."
+}
