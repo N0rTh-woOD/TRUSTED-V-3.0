@@ -1,56 +1,58 @@
-# AI-Free TRUSTED-V Platform
+# Team-Gated Informational TRUSTED-V Website
 
-TRUSTED-V will retain its secure RISC-V platform, products, marketplace, partner information, account access, and administration without any AI-powered experiences.
-Solution Builder and every other AI entry point will be removed so users encounter a focused, non-AI platform throughout.
+TRUSTED-V will be a focused, informative website for exploring the RISC-V platform, products, services, marketplace, and partner ecosystem.
+During development, only the internal team can enter the website; once signed in, everyone sees the same finished-site experience.
 
 ## Who it’s for
 
-- Embedded engineers exploring TRUSTED-V products, secure Rust capabilities, hardware, and services.
-- Platform administrators managing the non-AI platform content and operational records.
-- Prospective partners and customers evaluating the RISC-V platform.
+- Internal TRUSTED-V team members reviewing pages, content, and design before public release.
+- Prospective embedded engineers, partners, and customers once the site is ready to be opened publicly.
 
 ## Core features and experience
 
-- Remove the Solution Builder page, its navigation links, calls to action, project-generation controls, and related saved-generation experiences.
-- Remove the AI chat experience and all visible references to AI assistants, AI project guidance, model selection, or provider configuration.
-- Remove administrator-facing AI model settings and the existing OpenAI/Gemini model controls.
-- Remove inactive and active AI generation endpoints, provider-specific error messages, and AI-only stored data that is no longer needed.
-- Remove all AI provider packages and server configuration that exist only for these removed features.
-- Keep authentication, products, marketplace, platform architecture, services, contact flows, standard project/account features, and the existing non-AI visual language unchanged.
-- Replace any now-empty navigation or page destinations with sensible existing platform destinations so visitors do not reach dead ends.
+- Keep the sign-in gate as the sole development-phase restriction, so non-team visitors cannot browse the work-in-progress site.
+- Remove the Admin Dashboard and every administrative destination, control, shortcut, and navigation entry.
+- Remove administrative management screens for hardware, middleware, software components, IDE downloads, applications, users, and retired model settings.
+- Keep the public-facing informational pages: homepage, platform, product suite, secure software products, marketplace, services, partner information, contact, and supporting resource pages.
+- Keep existing product and marketplace information readable and browseable; there will be no private management interface behind the team login.
+- Direct links to former admin URLs will show the same clear unavailable screen used for retired features, rather than exposing a dashboard or a broken page.
 
 ## User flow
 
-1. A signed-in visitor navigates the platform without seeing Solution Builder, AI chat, model selection, or AI configuration controls.
-2. The visitor can continue to explore products, platform information, marketplace content, services, and contact options as before.
-3. Administrators manage the same non-AI platform records without AI provider settings or model controls.
-4. Requests to retired AI-only routes return a clear unavailable response rather than exposing implementation details.
+1. A visitor reaches the website and is asked to sign in while the development gate is active.
+2. An approved team member signs in and lands on the informational TRUSTED-V website.
+3. The team member browses the platform, products, marketplace, services, and contact information without encountering admin tools or management areas.
+4. A former admin link displays a simple unavailable page with links back to relevant public-facing sections.
+5. When the site is finalized, the sign-in gate can be removed in a separate release so visitors can browse the same website publicly.
 
 ## UI/UX feel
 
-- Preserve the established TRUSTED-V editorial semiconductor visual language, navigation structure, typography, and responsive behavior.
-- Avoid gaps in navigation, broken links, empty dashboard areas, or obsolete AI language.
-- Keep the removal invisible to unaffected workflows: no provider branding, technical migration notices, or replacement model interfaces.
+- Preserve the existing TRUSTED-V editorial semiconductor visual language, typography, responsive layouts, and platform-focused navigation.
+- Keep the experience calm and product-led: no dashboard cards, operational counters, internal management controls, or development-only language.
+- Make unavailable legacy destinations clear and neutral, with an obvious route back to products or services.
 
 ## Implementation phases
 
-### Phase 1 — AI feature and integration removal (build now)
-- Remove Solution Builder, AI chat, model picker, AI settings, associated navigation/routes, and AI-specific calls to action.
-- Retire AI generation and chat endpoints; preserve clear, safe unavailable responses for any remaining legacy requests.
-- Remove Gemini, OpenAI, and managed AI runtime dependencies and their live server configuration references when they are no longer used.
-- Verify that sign-in, navigation, non-AI platform pages, marketplace, services, and admin functions continue to work without AI-related console or server errors.
+### Phase 1 — Informational website only (build now)
+- Remove all admin pages, admin navigation, user-menu admin access, and related management controls from the active website.
+- Retire all former admin browser destinations with the clear unavailable screen.
+- Retire admin-only service requests safely so old links cannot reveal management functionality.
+- Retain the existing sign-in gate and send authenticated team members to the same informational site experience.
+- Verify that the platform, products, marketplace, services, contact flows, and responsive navigation remain intact.
 
-### Phase 2 — Content and information-architecture review (not built now)
-- Review all public product copy for AI claims and update positioning only where the business direction requires it.
-- Consider a non-AI project-planning resource or documentation path if users later need structured project guidance.
+### Phase 2 — Content and design completion (not built now)
+- Complete remaining page content, product positioning, imagery, and design-team homepage updates.
+- Review each informational page for launch-ready copy and remove any remaining development-era wording.
 
-### Phase 3 — Future capability decisions (not built now)
-- Decide whether a future builder should return as a fully deterministic, template-based configuration tool.
-- Define separate requirements and governance before introducing any new AI or external-generation capability.
+### Phase 3 — Public launch preparation (not built now)
+- Define the approval criteria for opening the website publicly.
+- Remove the sign-in gate only after the pages and design are finalized.
+- Decide separately whether internal administration should return in a private, purpose-built workspace.
 
 ## Assumptions
 
-- “Remove all AI features and integrations” includes Solution Builder, the AI chat experience, Gemini, OpenAI, the managed AI library, model selection, and admin model settings.
-- Existing generated project records may remain as historical account data, but no AI generation or download flow will be presented as an active capability.
-- All non-AI RISC-V platform pages, account access, marketplace content, services, contact flows, and non-AI administration should remain available.
-- Retired AI-only URLs should fail safely rather than redirecting users into an unrelated workflow.
+- The current login remains available only to restrict access during development; it is not an admin portal.
+- All signed-in team members receive the same website access, with no role-specific dashboard or private landing page.
+- Existing informational pages and contact/partner submission flows remain available unless they are explicitly identified later as internal-only.
+- Former admin URLs should be unavailable rather than redirected to an unrelated page.
+- The future public release will be handled as a separate, deliberate change after the website is finalized.

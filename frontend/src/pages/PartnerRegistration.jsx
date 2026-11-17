@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { 
   ArrowRight, CheckCircle2, Building2, Cpu, Code, 
@@ -82,9 +81,10 @@ const PartnerRegistration = () => {
         email: formData.email,
         phone: formData.phone,
         website: formData.website,
-        company_type: formData.companySize,
+        company_type: formData.partnerType,
         partnership_type: formData.partnerType,
         description: formData.description,
+        motivation: formData.motivation,
         products: formData.productCategory.join(", "),
         agree_terms: formData.agreeTerms,
       });
@@ -109,8 +109,8 @@ const PartnerRegistration = () => {
             Thank you for your interest in partnering with TRUSTED-V. Our team will review your 
             application and get back to you within 5 business days.
           </p>
-          <Link to="/">
-            <Button>
+          <Link to="/" data-testid="partner-success-home-link">
+            <Button data-testid="partner-success-home-button">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Return Home
             </Button>
@@ -126,7 +126,7 @@ const PartnerRegistration = () => {
       <section className="py-16 bg-gradient-to-b from-slate-50 to-white border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <Link to="/partners" className="text-sm text-primary hover:underline flex items-center gap-1 mb-4">
+            <Link to="/partners" className="text-sm text-primary hover:underline flex items-center gap-1 mb-4" data-testid="partner-back-link">
               <ArrowLeft className="w-4 h-4" />
               Back to Partners
             </Link>
@@ -145,7 +145,7 @@ const PartnerRegistration = () => {
       {/* Form */}
       <section className="py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-8" data-testid="partner-registration-form">
             {/* Partner Type Selection */}
             <Card>
               <CardHeader>
@@ -158,9 +158,11 @@ const PartnerRegistration = () => {
                     const Icon = type.icon;
                     const isSelected = formData.partnerType === type.id;
                     return (
-                      <div
+                      <button
+                        type="button"
                         key={type.id}
                         onClick={() => setFormData(prev => ({ ...prev, partnerType: type.id }))}
+                        data-testid={`partner-type-${type.id}`}
                         className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                           isSelected 
                             ? "border-primary bg-primary/5" 
@@ -178,7 +180,7 @@ const PartnerRegistration = () => {
                             <p className="text-sm text-muted-foreground">{type.description}</p>
                           </div>
                         </div>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -197,6 +199,7 @@ const PartnerRegistration = () => {
                       Company / Organization Name *
                     </label>
                     <Input
+                      data-testid="partner-company-name-input"
                       name="companyName"
                       value={formData.companyName}
                       onChange={handleInputChange}
@@ -209,6 +212,7 @@ const PartnerRegistration = () => {
                       Website
                     </label>
                     <Input
+                      data-testid="partner-website-input"
                       name="website"
                       value={formData.website}
                       onChange={handleInputChange}
@@ -223,6 +227,7 @@ const PartnerRegistration = () => {
                       Contact Name *
                     </label>
                     <Input
+                      data-testid="partner-contact-name-input"
                       name="contactName"
                       value={formData.contactName}
                       onChange={handleInputChange}
@@ -235,6 +240,7 @@ const PartnerRegistration = () => {
                       Email Address *
                     </label>
                     <Input
+                      data-testid="partner-email-input"
                       name="email"
                       type="email"
                       value={formData.email}
@@ -250,6 +256,7 @@ const PartnerRegistration = () => {
                     Phone Number
                   </label>
                   <Input
+                    data-testid="partner-phone-input"
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
@@ -270,15 +277,16 @@ const PartnerRegistration = () => {
                   {productCategories.map((category) => {
                     const isSelected = formData.productCategory.includes(category);
                     return (
-                      <Badge
+                      <button
+                        type="button"
                         key={category}
-                        variant={isSelected ? "default" : "outline"}
-                        className="cursor-pointer px-3 py-1.5"
+                        data-testid={`partner-category-${category.toLowerCase().replace(/\W+/g, "-")}`}
+                        className={`inline-flex items-center rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors ${isSelected ? "bg-primary text-primary-foreground border-primary" : "border-border text-foreground hover:bg-muted"}`}
                         onClick={() => handleCategoryToggle(category)}
                       >
                         {isSelected && <CheckCircle2 className="w-3 h-3 mr-1" />}
                         {category}
-                      </Badge>
+                      </button>
                     );
                   })}
                 </div>
@@ -296,6 +304,7 @@ const PartnerRegistration = () => {
                     Company Description *
                   </label>
                   <Textarea
+                    data-testid="partner-description-input"
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
@@ -310,6 +319,7 @@ const PartnerRegistration = () => {
                     Why do you want to partner with TRUSTED-V?
                   </label>
                   <Textarea
+                    data-testid="partner-motivation-input"
                     name="motivation"
                     value={formData.motivation}
                     onChange={handleInputChange}

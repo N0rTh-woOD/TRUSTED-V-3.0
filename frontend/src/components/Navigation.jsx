@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { Menu, X, ArrowUpRight, Shield, LogOut, ChevronDown, Settings } from "lucide-react";
+import { Menu, X, ArrowUpRight, LogOut, ChevronDown, Settings } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import TrustedVLogo from "@/components/TrustedVLogo";
 
@@ -28,7 +28,7 @@ const MEGA = [
 const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, isAdmin, logout, user } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -88,7 +88,7 @@ const Navigation = () => {
 
           <div className="hidden lg:flex items-center gap-4">
             {isAuthenticated ? (
-              <AccountMenu user={user} isAdmin={isAdmin} onLogout={handleLogout} />
+              <AccountMenu user={user} onLogout={handleLogout} />
             ) : (
               <Link to="/login" data-testid="nav-login" className="text-[13.5px] font-medium text-[#1A1F25] hover:text-[#003262]">Sign in</Link>
             )}
@@ -141,7 +141,6 @@ const Navigation = () => {
             <MobileLink label="Platform" to="/partners" testid="mobile-nav-platform" />
             <MobileLink label="Services" to="/services" testid="mobile-nav-services" />
             <MobileLink label="About" to="/about" testid="mobile-nav-about" />
-            {isAdmin && <MobileLink label="Admin" to="/admin" testid="mobile-nav-admin" />}
             {isAuthenticated && <MobileLink label="Account settings" to="/account" testid="mobile-nav-account" />}
             <div className="pt-5 flex flex-col gap-2">
               {isAuthenticated ? (
@@ -160,7 +159,7 @@ const Navigation = () => {
   );
 };
 
-const AccountMenu = ({ user, isAdmin, onLogout }) => {
+const AccountMenu = ({ user, onLogout }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   useEffect(() => {
@@ -188,7 +187,6 @@ const AccountMenu = ({ user, isAdmin, onLogout }) => {
             <div className="text-[13px] font-semibold text-[#0B0F14] truncate">{user?.username || "Account"}</div>
             <div className="text-[11.5px] text-[#5A6472] truncate">{user?.email}</div>
           </div>
-          {isAdmin && <MenuItem to="/admin" Icon={Shield} label="Admin" testid="nav-admin" />}
           <MenuItem to="/account" Icon={Settings} label="Account settings" testid="nav-account" />
           <button onClick={onLogout} role="menuitem" className="w-full text-left flex items-center gap-2.5 px-4 py-2 text-[13.5px] text-[#1A1F25] border-l-2 border-transparent hover:bg-[#E6F1F9] hover:border-[#2486C7] transition-colors" data-testid="nav-logout">
             <LogOut className="w-3.5 h-3.5" /> Log out

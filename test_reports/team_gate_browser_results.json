@@ -1,0 +1,185 @@
+{
+  "checks": [
+    {
+      "check": "anonymous marketplace sign-in gate",
+      "passed": true
+    },
+    {
+      "check": "admin same informational homepage",
+      "passed": true
+    },
+    {
+      "check": "admin desktop navigation and account access",
+      "passed": true
+    },
+    {
+      "check": "admin visible looping MP4 without pause",
+      "passed": true
+    },
+    {
+      "check": "admin mobile navigation no admin",
+      "passed": true
+    },
+    {
+      "check": "admin unavailable /admin",
+      "passed": true
+    },
+    {
+      "check": "admin unavailable /admin/hardware",
+      "passed": true
+    },
+    {
+      "check": "admin unavailable /admin/middleware",
+      "passed": true
+    },
+    {
+      "check": "admin unavailable /admin/software",
+      "passed": true
+    },
+    {
+      "check": "admin unavailable /admin/ide",
+      "passed": true
+    },
+    {
+      "check": "admin unavailable /admin/applications",
+      "passed": true
+    },
+    {
+      "check": "admin unavailable /admin/users",
+      "passed": true
+    },
+    {
+      "check": "admin unavailable /admin/llm",
+      "passed": true
+    },
+    {
+      "check": "admin unavailable /admin/users/TEST_deep/edit",
+      "passed": true
+    },
+    {
+      "check": "admin informational /product-suite",
+      "passed": true
+    },
+    {
+      "check": "admin informational /partners",
+      "passed": true
+    },
+    {
+      "check": "admin informational /services",
+      "passed": true
+    },
+    {
+      "check": "admin informational /contact",
+      "passed": true
+    },
+    {
+      "check": "admin informational /partner-registration",
+      "passed": true
+    },
+    {
+      "check": "admin marketplace catalog search and tabs",
+      "passed": true
+    },
+    {
+      "check": "admin contact inputs and partner terms gate (no submission)",
+      "passed": true
+    },
+    {
+      "check": "admin mobile services layout",
+      "passed": true
+    },
+    {
+      "check": "admin logout",
+      "passed": true
+    },
+    {
+      "check": "demo same informational homepage",
+      "passed": true
+    },
+    {
+      "check": "demo desktop navigation and account access",
+      "passed": true
+    },
+    {
+      "check": "demo visible looping MP4 without pause",
+      "passed": true
+    },
+    {
+      "check": "demo mobile navigation no admin",
+      "passed": true
+    },
+    {
+      "check": "demo unavailable /admin",
+      "passed": true
+    },
+    {
+      "check": "demo unavailable /admin/hardware",
+      "passed": true
+    },
+    {
+      "check": "demo unavailable /admin/middleware",
+      "passed": true
+    },
+    {
+      "check": "demo unavailable /admin/software",
+      "passed": true
+    },
+    {
+      "check": "demo unavailable /admin/ide",
+      "passed": true
+    },
+    {
+      "check": "demo unavailable /admin/applications",
+      "passed": true
+    },
+    {
+      "check": "demo unavailable /admin/users",
+      "passed": true
+    },
+    {
+      "check": "demo unavailable /admin/llm",
+      "passed": true
+    },
+    {
+      "check": "demo unavailable /admin/users/TEST_deep/edit",
+      "passed": true
+    },
+    {
+      "check": "demo informational /product-suite",
+      "passed": true
+    },
+    {
+      "check": "demo informational /partners",
+      "passed": true
+    },
+    {
+      "check": "demo informational /services",
+      "passed": true
+    },
+    {
+      "check": "demo informational /contact",
+      "passed": true
+    },
+    {
+      "check": "demo informational /partner-registration",
+      "passed": true
+    },
+    {
+      "check": "demo marketplace catalog search and tabs",
+      "passed": true
+    },
+    {
+      "check": "demo contact inputs and partner terms gate (no submission)",
+      "passed": true
+    },
+    {
+      "check": "demo mobile services layout",
+      "passed": true
+    },
+    {
+      "check": "demo logout",
+      "passed": true
+    }
+  ],
+  "console_errors": []
+}

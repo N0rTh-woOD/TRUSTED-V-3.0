@@ -46,8 +46,13 @@ const ContactSales = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: "sales_inquiry",
-          data: { ...form },
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          phone: form.phone,
+          product_interest: `Plan: ${form.plan}`,
+          team_size: form.teamSize,
+          message: form.message,
         }),
       });
       if (res.ok) {

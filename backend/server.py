@@ -216,7 +216,7 @@ class BoardSupportRequest(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     company_name: str
     contact_name: str
-    email: str
+    email: EmailStr
     board_name: str
     board_manufacturer: str
     architecture: str = "RISC-V"
@@ -232,18 +232,29 @@ class PartnershipApplication(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     company_name: str
     contact_name: str
-    email: str
+    email: EmailStr
     phone: str = ""
     website: str = ""
     company_type: str = ""
     partnership_type: str = ""
     description: str
+    motivation: str = ""
     products: str = ""
     agree_terms: bool = False
     status: str = "pending"
     submitted_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     reviewed_at: Optional[str] = None
     admin_notes: str = ""
+
+class SalesInquiry(BaseModel):
+    name: str = Field(min_length=1, max_length=200)
+    email: EmailStr
+    company: str = Field(default="", max_length=200)
+    phone: str = Field(default="", max_length=80)
+    country: str = Field(default="", max_length=120)
+    product_interest: str = Field(default="", max_length=200)
+    team_size: str = Field(default="", max_length=80)
+    message: str = Field(min_length=1, max_length=5000)
 
 class ProjectCreate(BaseModel):
     name: str
@@ -295,9 +306,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
         raise HTTPException(status_code=401, detail="Invalid token")
 
 async def get_current_admin_user(current_user: dict = Depends(get_current_user)):
-    if not current_user.get("is_admin", False):
-        raise HTTPException(status_code=403, detail="Admin access required")
-    return current_user
+    raise HTTPException(status_code=410, detail="This feature is no longer available")
 
 # Code Generation Templates
 def get_cargo_toml_template(project_name: str, hardware: dict, middleware: list, software: list):
@@ -1043,8 +1052,7 @@ async def login(credentials: UserLogin):
         user={
             "id": user["id"],
             "email": user["email"],
-            "username": user["username"],
-            "is_admin": user.get("is_admin", False)
+            "username": user["username"]
         }
     )
 
@@ -1053,8 +1061,7 @@ async def get_me(current_user: dict = Depends(get_current_user)):
     return {
         "id": current_user["id"],
         "email": current_user["email"],
-        "username": current_user["username"],
-        "is_admin": current_user.get("is_admin", False)
+        "username": current_user["username"]
     }
 
 @api_router.post("/chat")
@@ -1864,27 +1871,24 @@ async def get_component_types():
 
 # Public: Submit Board Support Request
 @api_router.post("/applications/board-support")
-async def submit_board_support_request(data: dict):
-    req = BoardSupportRequest(**data)
-    req_dict = req.model_dump()
+async def submit_board_support_request(data: BoardSupportRequest):
+    req_dict = data.model_dump()
     await db.board_support_requests.insert_one(req_dict)
-    return {"message": "Board support request submitted successfully", "id": req.id}
+    return {"message": "Board support request submitted successfully", "id": data.id}
 
 # Public: Submit Partnership Application
 @api_router.post("/applications/partnership")
-async def submit_partnership_application(data: dict):
-    app_obj = PartnershipApplication(**data)
-    app_dict = app_obj.model_dump()
+async def submit_partnership_application(data: PartnershipApplication):
+    app_dict = data.model_dump()
     await db.partnership_applications.insert_one(app_dict)
-    return {"message": "Partnership application submitted successfully", "id": app_obj.id}
+    return {"message": "Partnership application submitted successfully", "id": data.id}
 
 @api_router.post("/applications/sales-inquiry")
-async def submit_sales_inquiry(data: dict):
-    from datetime import datetime, timezone
+async def submit_sales_inquiry(data: SalesInquiry):
     inquiry = {
         "id": str(uuid.uuid4()),
-        "type": data.get("type", "sales_inquiry"),
-        "data": data.get("data", {}),
+        "type": "sales_inquiry",
+        "data": data.model_dump(),
         "status": "new",
         "created_at": datetime.now(timezone.utc).isoformat(),
     }

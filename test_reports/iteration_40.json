@@ -1,0 +1,52 @@
+{
+  "summary": "Public-URL team-gate regression: 12/14 backend pytest cases and 45/45 browser checks passed. Both accounts receive the same informational homepage, role-neutral login/me, no admin navigation, unavailable admin/deep routes and safe 410 on representative admin read/write APIs. MP4 playback advances with looping enabled and no pause control. Two pre-existing submission defects remain; no mocked APIs.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/applications/sales-inquiry", "issue": "The ContactPage-shaped payload returns success but discards name/email/company/country/product_interest/message. Database verification found data={} for the created inquiry. Contact messages cannot be recovered from the saved record.", "priority": "HIGH"},
+      {"endpoint": "POST /api/applications/partnership", "issue": "An empty JSON object returns HTTP 500 instead of a validation response. Backend logs confirm an uncaught Pydantic ValidationError at server.py:1872. Valid partner submission persists correctly.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "POST /api/auth/login (backend logs)", "issue": "Nonblocking passlib/bcrypt metadata warning: bcrypt.__about__ is absent. Both accounts authenticate successfully; migrate to a maintained compatible password-verification implementation rather than downgrading blindly."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Contact form submission", "issue": "ContactPage.jsx:34-41 sends flat fields, but server.py:1883 saves only data.get('data', {}). The UI success message would incorrectly imply the submitted contact details were retained. Reproduced with exactly the UI request shape through the public endpoint, not a duplicate UI submission.", "affected_selectors": ["[data-testid=contact-form]", "[data-testid=contact-submit]"]}
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_team_gate.py",
+    "/app/test_reports/pytest/team_gate_results.xml",
+    "/app/tests/frontend/team_gate_review.py",
+    "/app/test_reports/team_gate_browser_results.json"
+  ],
+  "action_items": [
+    "Align contact request and sales-inquiry storage shapes, add explicit validation, and verify all submitted fields persist.",
+    "Use a typed Pydantic request model at the partner endpoint boundary so invalid inputs return 422 instead of 500; review the same pattern in board-support.",
+    "Update older regression suites and credential documentation that still expect is_admin, active admin stats or demo 403 responses.",
+    "Address the nonblocking passlib/bcrypt compatibility warning in a separate dependency/security change."
+  ],
+  "critical_code_review_comments": [
+    "AuthContext stores a seven-day bearer token in localStorage; server login sets no application auth cookie and has no failed-attempt counter/lockout. The optional security playbook's cookie/5-failure lockout expectations are not implemented in application code. Infrastructure Set-Cookie headers contained HttpOnly, but this does not establish an application auth cookie. No brute-force attempts were made against protected existing accounts.",
+    "Both stored password hashes start with $2b$. Current seed code only inserts missing users and no longer rewrites existing passwords or deletes the hardware catalog. Startup still embeds provisioning passwords instead of obtaining them from configuration.",
+    "CORS preflight passed with the explicit public origin and credentials enabled; code still falls back to wildcard origins if CORS_ORIGINS is absent.",
+    "server.py exceeds 2000 lines and retains unreachable admin-management and generation implementation; split focused modules and remove dead functionality when practical.",
+    "PartnerRegistration inputs/type/category selectors and links largely lack data-testid. Its motivation field is never included in the request and company_type references nonexistent formData.companySize; these are code-review findings, not tested successful UI submissions.",
+    "Existing test_ai_retirement.py expects is_admin and active admin stats/demo 403, conflicting with the new behavior. It was not run as a current-contract suite."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_team_gate.py",
+    "/app/tests/frontend/team_gate_review.py",
+    "/app/test_reports/pytest/team_gate_results.xml",
+    "/app/test_reports/team_gate_browser_results.json",
+    "/app/test_reports/iteration_40.json"
+  ],
+  "success_rate": {"backend": "85.7% (12/14)", "frontend": "100% (45/45 browser checks; contact persistence defect separately reproduced through API)"},
+  "seed_data_creation": "No seed/reset commands executed. Exactly one unique TEST_ contact inquiry and one unique TEST_ partnership record created through public APIs; each deleted from its exact collection using only its returned id. No existing account, password, role or user records modified. Writing the backend test triggered normal hot reload; current startup is non-destructive.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Use credentials from memory without printing passwords. Browser script is executable via importlib and await module.run(page). Checks cover desktop 1920x1080/mobile 390x844, both account menus/logout/account access, nine admin routes including a deep edit URL, informational pages, marketplace search/tabs, contact field input and partner terms gate. No successful UI form submission was executed to avoid duplicate records; API persistence was verified with direct DB reads and exact-id cleanup because retired admin APIs cannot retrieve submissions. Full-duration video loop rollover was not waited for; loop=true and advancing playback were verified. Board-support submissions, destructive management methods and five-failure auth lockout were not executed. Initial quick browser probe used the wrong login testid; corrected to the code's login-btn in the saved suite. No production source changed; no console/runtime browser errors.",
+  "rca of the issue": "Contact loss: flat frontend payload versus backend nested data contract; success returns despite empty saved content. Partnership 500: route accepts raw dict and constructs PartnershipApplication inside the handler, so validation errors escape FastAPI request validation and become unhandled server errors. Backend log traceback confirms this exact location. No product fixes applied; report back for main-agent changes."
+}

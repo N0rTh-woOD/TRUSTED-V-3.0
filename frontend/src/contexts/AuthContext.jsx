@@ -82,7 +82,6 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     isAuthenticated: !!token && !!user,
-    isAdmin: user?.is_admin || false,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

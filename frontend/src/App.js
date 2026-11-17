@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { useEffect } from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
-import { ProtectedRoute, AdminRoute } from "@/components/ProtectedRoute";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Toaster } from "@/components/ui/sonner";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -58,15 +58,6 @@ import Register from "@/pages/Register";
 import MyProjects from "@/pages/MyProjects";
 import AccountSettings from "@/pages/AccountSettings";
 
-// Admin Pages
-import AdminDashboard from "@/pages/admin/AdminDashboard";
-import AdminHardware from "@/pages/admin/AdminHardware";
-import AdminMiddleware from "@/pages/admin/AdminMiddleware";
-import AdminSoftware from "@/pages/admin/AdminSoftware";
-import AdminIDE from "@/pages/admin/AdminIDE";
-import AdminApplications from "@/pages/admin/AdminApplications";
-import AdminUsers from "@/pages/admin/AdminUsers";
-
 // Site-wide authentication lock - requires any authenticated user
 const SITE_LOCK_ENABLED = true; // Set to false to make site publicly accessible
 
@@ -95,7 +86,7 @@ const AppContent = () => {
           <Route path="/builder" element={<RetiredFeature />} />
           <Route path="/chat" element={<RetiredFeature />} />
           <Route path="/product/code-engine" element={<RetiredFeature />} />
-          <Route path="/admin/llm" element={<RetiredFeature />} />
+          <Route path="/admin/*" element={<RetiredFeature />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
         <Toaster />
@@ -168,64 +159,7 @@ const AppContent = () => {
           }
         />
         
-        {/* Admin Routes - require admin role */}
-        <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <AdminDashboard />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/hardware"
-          element={
-            <AdminRoute>
-              <AdminHardware />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/middleware"
-          element={
-            <AdminRoute>
-              <AdminMiddleware />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/software"
-          element={
-            <AdminRoute>
-              <AdminSoftware />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/ide"
-          element={
-            <AdminRoute>
-              <AdminIDE />
-            </AdminRoute>
-          }
-        />
-        <Route path="/admin/llm" element={<RetiredFeature />} />
-        <Route
-          path="/admin/applications"
-          element={
-            <AdminRoute>
-              <AdminApplications />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/users"
-          element={
-            <AdminRoute>
-              <AdminUsers />
-            </AdminRoute>
-          }
-        />
+        <Route path="/admin/*" element={<RetiredFeature />} />
 
         {/* Catch-all — no dead links */}
         <Route path="*" element={<NotFound />} />

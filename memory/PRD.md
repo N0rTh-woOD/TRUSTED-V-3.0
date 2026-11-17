@@ -1,13 +1,13 @@
 # TrusteD-V Platform — Product Requirements Document
 
 ## Original Problem Statement
-Build a highly professional RISC-V-centric embedded development platform using Rust, branded as "TrusteD-V". The platform features Bosch-inspired professional UI, authentic RISC-V content, IDE/WebIDE information, hardware and IP marketplace content, secure software, services, account access, and administration without AI-powered experiences.
+Build a highly professional, team-gated RISC-V platform information website using Rust, branded as "TrusteD-V". The platform features Bosch-inspired professional UI, authentic RISC-V content, IDE/WebIDE information, hardware and IP marketplace content, secure software, services, partner/contact flows and account access without AI-powered or administrative management experiences.
 
 ## User Personas
 - **Embedded Engineers**: Primary users building firmware on RISC-V with Rust
 - **Hardware Partners**: C-DAC, Mindgrove, and Upbeat Tech teams integrating their boards
 - **SoC Designers**: Engineers looking for RISC-V IP blocks for their custom chips
-- **Platform Admins**: Managing IDE binaries, hardware catalog, partners, and applications
+- **Internal Team Members**: Reviewing the informational website before public release
 
 ## Core Requirements
 1. **Branding**: "TrusteD-V" — RISC-V Rust platform
@@ -15,7 +15,7 @@ Build a highly professional RISC-V-centric embedded development platform using R
 3. **WebIDE**: Cloud-capable counterpart with full compilation and collaboration features
 4. **Hardware + IP Marketplace**: Tabbed marketplace for development boards AND IP blocks
 5. **Auth Lock**: Entire site behind authentication while in development
-6. **Admin Panel**: Manage IDE binaries, hardware catalog, applications, sales inquiries
+6. **Development Gate**: Signed-in team access only until the informational website is ready to open publicly
 7. **Made in India**: Subtle "Designed in India" angle — present but not dominant
 8. **Dedicated Product Pages**: Secure Boot, Crypto Stack, RTOS Benchmarks with GitHub links
 9. **Partner Logos**: SVG logos for C-DAC, Mindgrove, Upbeat Tech used throughout
@@ -39,6 +39,12 @@ Build a highly professional RISC-V-centric embedded development platform using R
 - Removed the hero Pause/Play control while retaining the user-supplied looping MP4. Cleared obsolete provider language from public Services, product navigation and accessible hero labels.
 - Fixed mobile Services comparison/CTA overflow, made startup provisioning non-destructive, and require the securely configured JWT secret. Backend restart verification confirmed existing hardware records remain unchanged.
 - Verified by `iteration_39.json` plus follow-up self-tests: admin/demo login, non-AI routes, anonymous retired routes, mobile Services layout, MP4 behavior, legacy API 410s and hardware preservation across restart. No mocked flows.
+
+### Phase 23 — Team-Gated Informational Website (2026-11-17)
+- Removed all active admin screens, role-specific navigation/user-menu shortcuts and frontend admin route protection. Every former `/admin/*` browser path now uses the neutral unavailable page; the existing sign-in gate remains in place for informational pages.
+- Retired former `/api/admin/*` management requests with a safe `410` response for either signed-in team account. Login and `/auth/me` responses are role-neutral, so both existing team accounts receive the same website experience.
+- `iteration_40.json` passed all 45 browser checks and 12/14 backend checks for the team-gated release. Follow-up self-tests corrected the two public submission defects found in that run: typed contact, partnership and board-support request boundaries now return validation `422`s for malformed input and preserve all submitted fields.
+- Verified exact database persistence and cleanup for both ContactPage and ContactSales payload shapes plus partnership motivation; no permanent test records or credentials were changed. **No mocked flows.**
 
 ### Phase 20 — Uploaded Hero Animation & Minimalist Login (2026-10-16)
 Verified by testing_agent (`iteration_38.json`): **all executed frontend checks passed**. Production build and authenticated screenshot smoke passed; existing unrelated build warnings remain.
@@ -326,7 +332,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 | `/product/secure-boot` | Secure Boot | rboot + rustBoot, GitHub, boot chain |
 | `/product/crypto-stack` | Crypto Stack | 8-category algorithm reference tables |
 | `/product/rtos-benchmark` | RTOS Benchmarks | 4 RTOS options, comparison table |
-| `/product/code-engine` | Code Engine | AI Engine information and Solution Builder handoff |
+| `/product/code-engine` | Retired | Unavailable page |
 | `/services` | Services | SaaS / PaaS 5-step flows, fit table, CTAs |
 | `*` | NotFound (404) | Catch-all — brand 404 with home CTA + 3 suggestion cards |
 | `/marketplace` | Marketplace | Hardware + IP tabs with logos |
@@ -336,7 +342,7 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 | `/partner-registration` | Partner Registration | Partnership application |
 | `/board-support` | Board Support | Board support request |
 | `/partners` | Partners | C-DAC, Mindgrove, Upbeat Tech |
-| `/admin/*` | Admin | Dashboard, Hardware, IDE, Applications |
+| `/admin/*` | Retired | Unavailable page |
 
 ## Key API Endpoints
 - `POST /api/auth/login` — User login
@@ -344,20 +350,20 @@ Only real partners, real standards names, real modules. No fake stats, benchmark
 - `GET /api/hardware` — Hardware catalog
 - `GET /api/ide-downloads` — IDE listings
 - `POST /api/applications/sales-inquiry` — Sales inquiry
-- `GET /api/admin/applications/sales-inquiries` — Admin: view inquiries
+- `GET|POST|PUT|DELETE /api/admin/*` — Retired (returns 410 after sign-in)
 - `POST /api/applications/board-support` — Board support request
 - `POST /api/applications/partnership` — Partnership application
 
 ## Prioritized Backlog
 ### P0 — Current scope
-- AI feature and integration removal complete and verified. Await user review of the updated non-AI information architecture and supplied homepage-image batches.
+- Team-gated informational website complete and verified. Await user review of the informational content and supplied homepage-image batches.
 
 ### P1 — High
 - Refactor monolithic `server.py` into modular APIRouter modules
 - Remove remaining unused legacy project-generation scaffolding from `server.py` during the router refactor.
+- Remove unreachable retired admin endpoint implementations during the backend router refactor.
 
 ### P2 — Medium
-- Admin panel: sales inquiries tab in AdminApplications.jsx
 - Customer testimonials/case studies section
 - Fix React "index as key" anti-patterns in Marketplace, Partners and AdminSoftware
 - Add Python type hints across backend
